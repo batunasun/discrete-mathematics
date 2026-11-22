@@ -16,6 +16,7 @@ book:
     - index.qmd
    
     - part: "2 Графын онол"
+      chapters:
        - 8-1.qmd
        - 8-2.qmd
        - 8-3.qmd
