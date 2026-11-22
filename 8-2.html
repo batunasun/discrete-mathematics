@@ -1,0 +1,1866 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Бүлэг 8.2: Матриц ба тусгай графууд – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./8-4.html" rel="next">
+<link href="./8-1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8-2.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Бүлэг 8.2: Матриц ба тусгай графууд</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Графын онолын үндэс</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Бүлэг 0: Тоонуудыг дүрслэх нь</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Бүлэг 8: Графын онолын үндэс</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Бүлэг 8.2: Матриц ба тусгай графууд</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Бүлэг 8.4: Инвариантууд</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Бүлэг 8.5: Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Бүлэг 8: Давтлагын бодлогууд</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#матриц-ба-тусгай-графууд" id="toc-матриц-ба-тусгай-графууд" class="nav-link active" data-scroll-target="#матриц-ба-тусгай-графууд"><span class="header-section-number">4.1</span> 8.2 Матриц ба тусгай графууд</a>
+  <ul class="collapse">
+  <li><a href="#матрицууд" id="toc-матрицууд" class="nav-link" data-scroll-target="#матрицууд"><span class="header-section-number">4.1.1</span> Матрицууд</a></li>
+  <li><a href="#тусгай-графууд" id="toc-тусгай-графууд" class="nav-link" data-scroll-target="#тусгай-графууд"><span class="header-section-number">4.1.2</span> Тусгай графууд</a></li>
+  </ul></li>
+  <li><a href="#хэсгийн-дасгалууд" id="toc-хэсгийн-дасгалууд" class="nav-link" data-scroll-target="#хэсгийн-дасгалууд"><span class="header-section-number">4.2</span> 8.2 Хэсгийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Бүлэг 8.2: Матриц ба тусгай графууд</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="матриц-ба-тусгай-графууд" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="матриц-ба-тусгай-графууд"><span class="header-section-number">4.1</span> 8.2 Матриц ба тусгай графууд</h2>
+<section id="матрицууд" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="матрицууд"><span class="header-section-number">4.1.1</span> Матрицууд</h3>
+<p>Матриц бол бодит тоонуудын тэгш өнцөгт массив гэдгийг санаарай. 5.1-р хэсэгт бид тэг-нэг матрицыг төгсгөлөг хамаарлыг дүрслэхэд ашиглаж болохыг үзсэн. Үүнтэй адилаар матрицыг графыг дүрслэхэд ашиглаж болно. Түүнчлэн, матрицууд нь графын бүтцийг компьютерт хадгалахад ашигтай байдаг. Гэхдээ бидний харахын адил, матрицын үнэ цэнэ нь зөвхөн зэргэлдээ байдлыг хадгалахаас давдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.6</strong></p>
+<p><span class="math inline">\(n\)</span> оройтой <span class="math inline">\(G\)</span> графын <strong>зэргэлдийн матриц</strong> (adjacency matrix) гэдэг нь оройнуудыг <span class="math inline">\(v_1, v_2, \dots, v_n\)</span> гэж эрэмбэлж, <span class="math inline">\(1 \le i \le n\)</span> ба <span class="math inline">\(1 \le j \le n\)</span> бүрийн хувьд <span class="math inline">\(a_{i,j}\)</span>-ийг <span class="math inline">\(v_i\)</span>-г <span class="math inline">\(v_j\)</span>-тэй холбосон ирмэгүүдийн тоо гэж авахад үүсэх <span class="math inline">\(n \times n\)</span> хэмжээтэй <span class="math inline">\(A = [a_{i,j}]\)</span> матриц юм.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.9</strong></p>
+<p>Хэрэв графын хувьд</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_9_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.9-ийн граф</figcaption>
+</figure>
+</div>
+<p>бид оройнуудын дарааллыг 1, 2, 3, 4, 5 гэж авбал олдох зэргэлдийн матриц нь</p>
+<p><span class="math display">\[
+\begin{array}{c}
+\begin{matrix} &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \end{matrix} \\
+\begin{matrix} 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{matrix}
+\begin{bmatrix}
+0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 \\
+2 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix}
+\end{array} \quad \text{(8.1)}
+\]</span></p>
+<p>Илүү тодорхой болгохын тулд мөр, багануудад шошго хавсаргасан. Харин оронд нь 3, 2, 5, 1, 4 гэсэн дарааллыг авбал өөр зэргэлдийн матриц олдоно.</p>
+<p><span class="math display">\[
+\begin{array}{c}
+\begin{matrix} &amp; 3 &amp; 2 &amp; 5 &amp; 1 &amp; 4 \end{matrix} \\
+\begin{matrix} 3 \\ 2 \\ 5 \\ 1 \\ 4 \end{matrix}
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 2 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+1 &amp; 2 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 1 &amp; 0 &amp; 0
+\end{bmatrix}
+\end{array} \quad \text{(8.2)}
+\]</span></p>
+<p>Гэхдээ эдгээр хоёр матрицын хооронд чухал хамаарал байна.</p>
+<p>Оройн жагсаалт 3, 2, 5, 1, 4 нь 1, 2, 3, 4, 5 анхны жагсаалтын пермутаци юм. Түүнчлэн, 3, 2, 5, 1, 4 пермутацийг 3 нь 1-р байрлалд, 2 нь 2-р байрлалд, 5 нь 3-р байрлалд, 1 нь 4-р байрлалд, 4 нь 5-р байрлалд очно гэж тайлбарлаж болно. Бид үүнийг</p>
+<p><span class="math display">\[
+\begin{array}{ccccc}
+3 &amp; 2 &amp; 5 &amp; 1 &amp; 4 \\
+\downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow \\
+1 &amp; 2 &amp; 3 &amp; 4 &amp; 5
+\end{array}
+\]</span></p>
+<p>гэж бичнэ. Үнэндээ, хэрэв бид эхлээд (8.1) матрицын мөрүүдийг энэ пермутацийн дагуу, дараа нь гарсан матрицын багануудыг мөн адил энэ пермутацийн дагуу сэлгэвэл (8.2) матрицыг олж авна.</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 \\
+2 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix}
+\begin{matrix}
+\text{Мөрүүдийг} \\ \text{3, 2, 5, 1, 4} \\ \text{-ээр сэлгэх} \\ \longrightarrow \end{matrix}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 2 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix}
+\begin{matrix}
+\text{Баганыг} \\ \text{3, 2, 5, 1, 4} \\ \text{-ээр сэлгэх} \\ \longrightarrow \end{matrix}
+\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 2 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+1 &amp; 2 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 1 &amp; 0 &amp; 0
+\end{bmatrix}
+\]</span></p>
+</blockquote>
+<p>8.9-р жишээнээс бидний гаргаж болох ерөнхий дүгнэлт бол оройнуудын өөр өөр дараалал нь өөр өөр зэргэлдийн матрицуудыг өгч болох юм. Гэхдээ хоёр нь зөвхөн мөр болон багануудад адилхан хэрэглэгдсэн тогтмол пермутациар л ялгаатай байдаг. Графуудын зэргэлдийн матрицууд үргэлж тэгш хэмтэй байдаг (өөрөөр хэлбэл, <span class="math inline">\(\forall i, j, a_{i,j} = a_{j,i}\)</span>) гэдгийг анхаарна уу, учир нь <span class="math inline">\(v_i\)</span>-г <span class="math inline">\(v_j\)</span>-тэй холбосон ирмэгүүдийн тоо нь <span class="math inline">\(v_j\)</span>-г <span class="math inline">\(v_i\)</span>-тэй холбосон ирмэгүүдийн тоотой ижил байдаг.</p>
+<p>Матрицын үржүүлэх талаарх мэдлэгээр бид зэргэлдийн матрицуудын талаар илүү сайн ойлголттой болж чадна.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.7 Матрицын үржвэр</strong></p>
+<p><span class="math inline">\(m \times n\)</span> хэмжээтэй <span class="math inline">\(A = [a_{i,j}]\)</span> матриц ба <span class="math inline">\(n \times p\)</span> хэмжээтэй <span class="math inline">\(B = [b_{i,j}]\)</span> матриц өгөгдсөн үед тэдгээрийн үржвэр <span class="math inline">\(AB\)</span> гэдэг нь <span class="math inline">\(1 \le i \le m\)</span> ба <span class="math inline">\(1 \le j \le p\)</span> бүрийн хувьд <span class="math inline">\(c_{i,j} = \sum_{k=1}^n a_{i,k} b_{k,j}\)</span> байх <span class="math inline">\(m \times p\)</span> хэмжээтэй <span class="math inline">\(C = [c_{i,j}]\)</span> матриц юм.</p>
+</blockquote>
+<p>Бидний сонирхол нь хоёр квадрат матрицыг үржүүлэхэд чиглэгддэг. Зарим <span class="math inline">\(n\)</span>-ийн хувьд хоёр хүчин зүйл нь хоёулаа <span class="math inline">\(n \times n\)</span> матрицууд байх бөгөөд улмаар тэдгээрийн үржвэр нь мөн <span class="math inline">\(n \times n\)</span> матриц байна.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.10</strong></p>
+<p><strong>(a)</strong></p>
+<p><span class="math display">\[
+\begin{bmatrix} 2 &amp; 4 \\ 6 &amp; 8 \end{bmatrix}
+\begin{bmatrix} 3 &amp; 7 \\ 5 &amp; 9 \end{bmatrix} =
+\begin{bmatrix} 26 &amp; 50 \\ 58 &amp; 114 \end{bmatrix}
+\]</span></p>
+<p>учир нь</p>
+<p><span class="math display">\[
+\begin{array}{ll}
+2 \cdot 3 + 4 \cdot 5 = 26, &amp; 2 \cdot 7 + 4 \cdot 9 = 50 \\
+6 \cdot 3 + 8 \cdot 5 = 58, &amp; 6 \cdot 7 + 8 \cdot 9 = 114.
+\end{array}
+\]</span></p>
+<p><strong>(b)</strong></p>
+<p><span class="math display">\[
+\begin{bmatrix}
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix}
+\begin{bmatrix}
+0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 \\
+2 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix} =
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+2 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 \\
+0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>Жишээлбэл, үржвэрийн 4-р мөр ба 2-р баганын элемент нь 2, учир нь</p>
+<p><span class="math display">\[
+1 \cdot 2 + 0 \cdot 0 + 0 \cdot 0 + 0 \cdot 1 + 0 \cdot 1 = 2.
+\]</span></p>
+</blockquote>
+<p>Математик програм хангамж нь ялангуяа матрицууд том үед матрицын үржвэрийг тооцоолоход тустай байж болно. <em>Mathematica</em>-д матрицуудыг жагсаалтад мөрүүдийг нь жагсаах замаар оруулдаг ба үржүүлэхэд цэг ашигладаг. Жишээлбэл, 8.10(a)-г дараах байдлаар шийдвэрлэнэ.</p>
+<p><code>In[1] := A = {{2,4}, {6,8}}</code> <code>In[2] := B = {{3,7}, {5,9}}</code> <code>In[3] := A . B</code> <code>Out[3] = {{26,50}, {58,114}}</code></p>
+<p><code>MatrixForm</code> функцийг матрицыг мөр, баганатай массив хэлбэрээр харуулахад ашиглаж болно. <em>Maple</em>-д 8.10(a) жишээг дараах байдлаар шийдвэрлэнэ.</p>
+<p><code>&gt; A := Matrix([[2,4], [6,8]]);</code> <code>&gt; B := Matrix([[3,7], [5,9]]);</code> <code>&gt; A . B ;</code></p>
+<p><span class="math display">\[
+\begin{bmatrix} 26 &amp; 50 \\ 58 &amp; 114 \end{bmatrix}
+\]</span></p>
+<p>Энэ тохиолдолд матрицууд автоматаар массив хэлбэрээр харагдана.</p>
+<p>8.10(b) жишээн дэх үржвэрийн зүүн гар тал дахь матриц нь матрицын ашигтай ангийн жишээ юм.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.8</strong></p>
+<p><span class="math inline">\(n \in \mathbb{Z}^+\)</span> гэе.</p>
+<p><strong>(a)</strong> <span class="math inline">\(n \times n\)</span> хэмжээтэй <strong>нэгж матриц</strong> (identity matrix) <span class="math inline">\(I_n = [a_{i,j}]\)</span> нь дараах байдалтай байна:</p>
+<p><span class="math display">\[
+a_{i,j} = \begin{cases} 1 &amp; \text{хэрэв } i = j, \\ 0 &amp; \text{бусад тохиолдолд.} \end{cases}
+\]</span></p>
+<p><strong>(b)</strong> <span class="math inline">\(1, 2, \dots, n\)</span> тоонуудын <span class="math inline">\(p_1, p_2, \dots, p_n\)</span> пермутаци өгөгдсөн үед харгалзах <strong>пермутацийн матриц</strong> (permutation matrix) <span class="math inline">\(P = [a_{i,j}]\)</span> нь <span class="math inline">\(n \times n\)</span> матриц байх бөгөөд:</p>
+<p><span class="math display">\[
+a_{i,j} = \begin{cases} 1 &amp; \text{хэрэв } p_i = j, \\ 0 &amp; \text{бусад тохиолдолд.} \end{cases}
+\]</span></p>
+<p>Өөрөөр хэлбэл, <span class="math inline">\(P\)</span> нь <span class="math inline">\(p_1, p_2, \dots, p_n\)</span> пермутацийн дагуу мөрүүдийг нь сэлгэснээр <span class="math inline">\(I_n\)</span>-ээс гарган авдаг.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.11</strong></p>
+<p><strong>(a)</strong></p>
+<p><span class="math display">\[
+I_2 = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
+\]</span></p>
+<p><strong>(b)</strong> 3, 2, 5, 1, 4 пермутацид харгалзах пермутацийн матриц нь</p>
+<p><span class="math display">\[
+P = \begin{bmatrix}
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p>байна.</p>
+</blockquote>
+<p>8.9-р жишээний (8.1) зэргэлдийн матрицыг <span class="math inline">\(A\)</span> гэе. 8.10(b) жишээнээс харвал <span class="math inline">\(PA\)</span> үржвэрийн үр дүн нь <span class="math inline">\(A\)</span>-ийн мөрүүдийг 3, 2, 5, 1, 4 пермутацийн дагуу сэлгэсэн байна.</p>
+<p><span class="math inline">\(P^T\)</span> матрицын транспоз нь <span class="math inline">\(I_5\)</span>-ийн багануудыг 3, 2, 5, 1, 4 пермутацийн дагуу сэлгэснээр гарсан матрицтай ижил болохыг ажиглаарай. Түүнчлэн, дурын <span class="math inline">\(5 \times 5\)</span> хэмжээтэй <span class="math inline">\(B\)</span> матрицын хувьд <span class="math inline">\(BP^T\)</span> үржвэрийн үр дүн нь <span class="math inline">\(B\)</span>-ийн багануудыг 3, 2, 5, 1, 4 пермутацийн дагуу сэлгэсэн байна. Үүнийг бидний өмнөх тооцоололтой нэгтгэвэл <span class="math inline">\(PAP^T\)</span> үржвэрийн үр дүн нь <span class="math inline">\(A\)</span>-ийн мөр болон багануудыг хоёуланг нь 3, 2, 5, 1, 4 пермутацийн дагуу сэлгэсэн байх болно. Үр дүн нь оройнуудын 3, 2, 5, 1, 4 эрэмбээр байгуулагдсан (8.2) зэргэлдийн матриц юм.</p>
+<p>8.11(b) жишээнээс авах ерөнхий дүгнэлт бол хэрэв <span class="math inline">\(A\)</span> нь оройнуудын зарим нэг эрэмбээр өгөгдсөн графын зэргэлдийн матриц бөгөөд <span class="math inline">\(P\)</span> нь энэ эрэмбийг өөр эрэмбэ рүү шилжүүлэх пермутацид харгалзах пермутацийн матриц бол <span class="math inline">\(PAP^T\)</span> нь өөр эрэмбээр өгөгдсөн графын зэргэлдийн матриц болно. Дахин хэлэхэд, <span class="math inline">\(A\)</span>-ийн мөр, багануудыг <span class="math inline">\(P\)</span>-ийн дагуу энгийнээр сэлгэсэн байна.</p>
+<p>Матрицын үржүүлэлтийн өөр нэг хэрэглээ болгон, зэргэлдийн матрицын зэрэгтүүдийг авч үзэхэд гайхалтай үр дүн гардаг.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.12</strong></p>
+<p>8.9-р жишээн дээрх графын хувьд оройнууд нь 1, 2, 3, 4, 5 эрэмбэтэй байх <span class="math inline">\(A\)</span> зэргэлдийн матрицыг авъя.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_12_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.12-ын граф</figcaption>
+</figure>
+</div>
+<p><span class="math display">\[
+\begin{array}{c}
+\begin{matrix} &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \end{matrix} \\
+\begin{matrix} 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{matrix}
+\begin{bmatrix}
+0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 \\
+2 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix} = A
+\end{array}
+\]</span></p>
+<p>Дараахь зүйлийг ажиглаарай</p>
+<p><span class="math display">\[
+A^2 = \begin{bmatrix}
+0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 \\
+2 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix}
+\begin{bmatrix}
+0 &amp; 2 &amp; 1 &amp; 0 &amp; 0 \\
+2 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix} =
+\begin{bmatrix}
+5 &amp; 0 &amp; 0 &amp; 3 &amp; 2 \\
+0 &amp; 6 &amp; 3 &amp; 1 &amp; 2 \\
+0 &amp; 3 &amp; 2 &amp; 0 &amp; 1 \\
+3 &amp; 1 &amp; 0 &amp; 3 &amp; 2 \\
+2 &amp; 2 &amp; 1 &amp; 2 &amp; 3
+\end{bmatrix}.
+\]</span></p>
+<p><span class="math inline">\(A^2 = [b_{i,j}]\)</span> гэвэл <span class="math inline">\(b_{i,j}\)</span> нь <span class="math inline">\(i\)</span>-ээс <span class="math inline">\(j\)</span> хүртэлх граф дахь 2 урттай алхалтын тоо гэдгийг шалгахад хялбар юм. Жишээлбэл, <span class="math inline">\(b_{2,3} = 3\)</span> ба</p>
+<p><span class="math display">\[
+\begin{array}{l}
+2, a, 1, c, 3 \\
+2, b, 1, c, 3 \\
+2, d, 4, f, 3
+\end{array}
+\]</span></p>
+<p>нь 2-р оройноос 3-р орой хүртэлх 2 урттай алхалтууд юм.</p>
+</blockquote>
+<p>8.12-р жишээ нь ерөнхий үр дүнгийн тодорхой нэг тохиолдлыг харуулж байна.</p>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 8.1</strong></p>
+<p><span class="math inline">\(A\)</span> нь оройнууд нь <span class="math inline">\(v_1, v_2, \dots, v_n\)</span> гэж эрэмбэлэгдсэн <span class="math inline">\(G\)</span> графын зэргэлдийн матриц ба <span class="math inline">\(m \in \mathbb{N}\)</span> гэе. Тэгвэл <span class="math inline">\(A\)</span>-ийн <span class="math inline">\(m\)</span>-р зэрэг <span class="math inline">\(A^m = [b_{i,j}]\)</span> матрицын хувьд <span class="math inline">\(1 \le i \le n\)</span> ба <span class="math inline">\(1 \le j \le n\)</span> бүрийн хувьд <span class="math inline">\(b_{i,j}\)</span> нь <span class="math inline">\(G\)</span> граф дотор <span class="math inline">\(v_i\)</span>-ээс <span class="math inline">\(v_j\)</span> хүртэлх <span class="math inline">\(m\)</span> урттай алхалтын тоо болно.</p>
+<p><strong>Баталгаа</strong></p>
+<p>Бид <span class="math inline">\(m\)</span> дээр индукцээр батална. <span class="math inline">\(m = 0\)</span> үед <span class="math inline">\(A^0 = I\)</span> буюу <span class="math inline">\(n \times n\)</span> нэгж матриц (диагональ дээр нэгж, бусад нь тэг) байна. Энэ нь 0 урттай алхалт нь зөвхөн оройгоос өөр рүүгээ л байх боломжтой гэдгийг илэрхийлнэ. Тэгэхээр <span class="math inline">\(m \ge 0\)</span> ба <span class="math inline">\(A^m\)</span> нь дээрх шинж чанартай гэж үзье. <span class="math inline">\(A = [a_{i,j}], A^m = [b_{i,j}]\)</span> ба <span class="math inline">\(A^{m+1} = [c_{i,j}]\)</span> гэе. <span class="math inline">\(1 \le i, j \le n\)</span> гэж үзье. <span class="math inline">\(v_i\)</span>-ээс <span class="math inline">\(v_j\)</span> хүртэлх <span class="math inline">\(m+1\)</span> урттай зам бүрийн хувьд <span class="math inline">\(v_k\)</span> нь хамгийн түрүүнд очих орой гэвэл <span class="math inline">\(a_{i,k} b_{k,j}\)</span> байна. Иймээс <span class="math inline">\(\sum_{k=1}^n a_{i,k} b_{k,j}\)</span> нь <span class="math inline">\(v_i\)</span>-ээс <span class="math inline">\(v_j\)</span> хүртэлх <span class="math inline">\(m+1\)</span> урттай алхалтын нийт тоо болно. <span class="math inline">\(A^{m+1} = A \cdot A^m\)</span> тул <span class="math inline">\(c_{i,j}\)</span> нь энэ тоотой тэнцүү байна. <span class="math inline">\(\square\)</span></p>
+</blockquote>
+<p>Матрицын зэрэгтийг тооцоолох нь уйтгартай байж болох тул математик програм хангамж маш хэрэгтэй байж чадна. <em>Mathematica</em>-д <span class="math inline">\(A\)</span> матрицын <span class="math inline">\(m\)</span>-р зэрэгтийг <code>MatrixPower[A, m]</code> функцээр тооцоолно. <em>Maple</em>-д бид <code>LinearAlgebra[MatrixPower] (A, m)</code> функцийг ашиглана.</p>
+<p>Графын бүтцийг хадгалах зэргэлдийн матрицыг үзсэний дараа бид хадгалах өөр нэг аргыг авч үзье. Энэ нь илүү үр ашигтай боловч Теорем 8.1-тэй адил гайхалтай үр дагаваргүй юм.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.9</strong></p>
+<p>Олон ирмэггүй графын оройнууд нь <span class="math inline">\(v_1, v_2, \dots, v_n\)</span> гэе. <span class="math inline">\(1 \le i \le n\)</span> бүрийн хувьд <span class="math inline">\(v_i\)</span> оройн <strong>зэргэлдийн жагсаалт</strong> (adjacency list) гэдэг нь түүний бүх хөрш <span class="math inline">\(v_j\)</span>-үүдийн жагсаалт юм. <span class="math inline">\(G\)</span>-ийн хувьд орой бүрийн зэргэлдийн жагсаалтаас бүрдэх олонлогийг <strong>зэргэлдийн жагсаалтууд</strong> гэнэ.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.13</strong></p>
+<p>Графын зэргэлдийн жагсаалтууд нь</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_13_graph.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.13-ын граф</figcaption>
+</figure>
+</div>
+<p><span class="math display">\[
+\begin{array}{ll}
+1 : &amp; 2, 3, 5 \\
+2 : &amp; 1, 4, 5 \\
+3 : &amp; 1, 4 \\
+4 : &amp; 2, 3, 5 \\
+5 : &amp; 1, 2, 4, 5.
+\end{array}
+\]</span></p>
+<p>Илүү тодорхой болгохын тулд мөр бүрийг зэргэлдийн жагсаалтыг дагаж буй оройгоор тэмдэглэсэн.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Тайлбар 8.2</strong></p>
+<p>Графын зэргэлдийн жагсаалтыг компьютерт граф хадгалах холбосон жагсаалт (linked list) үүсгэхэд ашиглаж болно. Орой бүрийн хувьд зэргэлдийн жагсаалт нь заагчуудыг чиглүүлэх ёстой оройнуудыг тодорхойлдог.</p>
+</blockquote>
+</section>
+<section id="тусгай-графууд" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="тусгай-графууд"><span class="header-section-number">4.1.2</span> Тусгай графууд</h3>
+<p>Бид дараагийн хэсгүүдэд шинэ ойлголтуудыг судлахдаа санаж явахад хэрэгтэй хэд хэдэн графын жишээ байдаг. Зарим нь ерөнхий үр дүнгийн онцгой тохиолдлуудыг өгдөг. Зарим нь бусад графуудын дэд граф хэлбэрээр тохиолдоход онцгой чухал байдаг. Зарим нь өөрсдөө сонирхолтой байдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.10</strong></p>
+<p><span class="math inline">\(n \in \mathbb{Z}^+\)</span> ба <span class="math inline">\(V = \{1, 2, \dots, n\}\)</span> гэе.</p>
+<p><strong>(a)</strong> <span class="math inline">\(V\)</span> оройн олонлог ба <span class="math inline">\(E = \{\{1, 2\}, \{2, 3\}, \dots, \{n-1, n\}\}\)</span> ирмэгийн олонлогтой графыг <span class="math inline">\(n\)</span> оройтой <strong>зам</strong> (path) <span class="math inline">\(P_n\)</span> гэнэ.</p>
+<p><strong>(b)</strong> <span class="math inline">\(V\)</span> оройн олонлог ба <span class="math inline">\(E = \{\{1, 2\}, \{2, 3\}, \dots, \{n-1, n\}, \{n, 1\}\}\)</span> ирмэгийн олонлогтой графыг <span class="math inline">\(n\)</span> оройтой <strong>эргэлт</strong> (cycle) <span class="math inline">\(C_n\)</span> гэнэ. <span class="math inline">\(n = 2\)</span> үед <span class="math inline">\(C_2\)</span> нь хоёр паралел ирмэгтэй байх ёстой.</p>
+</blockquote>
+<p><span class="math inline">\(C_1\)</span> ба <span class="math inline">\(C_2\)</span> графууд нь энгийн бус цорын ганц эргэлтүүд юм.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.14</strong></p>
+<p>Зам ба эргэлтүүдийн жишээг дүрслэв.</p>
+<p><strong>(a)</strong> <span class="math inline">\(P_1\)</span>, <span class="math inline">\(P_5\)</span></p>
+<p><strong>(b)</strong> <span class="math inline">\(C_1\)</span>, <span class="math inline">\(C_2\)</span>, <span class="math inline">\(C_3\)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_14.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.14-ийн графууд</figcaption>
+</figure>
+</div>
+</blockquote>
+<p>8.12-р зурагт үзүүлсэн хотын метроны шугамын газрын зургийг <span class="math inline">\(P_7\)</span> нэртэй зам болох графаар дүрсэлж болно. 8.13-р зурагт тохируулсан компьютерний сүлжээний тохиргоог <span class="math inline">\(C_4\)</span> нэртэй эргэлтээр тусгасан. <span class="math inline">\(P_n\)</span> нь <span class="math inline">\(n-1\)</span> урттай байдаг нь бага зэрэг хачирхалтай санагдаж болохыг анхаарна уу. Гэхдээ хэрэв бид <span class="math inline">\(C_n\)</span>-ийг тодорхой нэг оройноос эхэлж, төгсдөг мөр (trail) хэлбэрээр илэрхийлбэл <span class="math inline">\(n\)</span> урттай байдаг.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_8_12.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 8.12 Метроны шугам</figcaption>
+</figure>
+</div>
+<p><em>Зураг 8.12 Метроны шугам</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_8_13.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 8.13 Цикл компьютерний сүлжээ</figcaption>
+</figure>
+</div>
+<p><em>Зураг 8.13 Цикл компьютерний сүлжээ</em></p>
+<p>Зам ба эргэлтүүд нь харьцангуй цөөн ирмэг агуулдаг, ялангуяа холбогдсон графуудын дунд. <span class="math inline">\(n\)</span> оройтой энгийн граф хамгийн ихдээ <span class="math inline">\(\binom{n}{2}\)</span> ирмэгтэй байж болно.</p>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 8.2</strong></p>
+<p><span class="math inline">\(G = (V, E)\)</span> энгийн граф өгөгдсөн үед</p>
+<p><strong>(a)</strong> хэрэв <span class="math inline">\(|V| \le 1\)</span> бол <span class="math inline">\(|E| = 0\)</span>,</p>
+<p><strong>(b)</strong> хэрэв <span class="math inline">\(|V| \ge 2\)</span> бол <span class="math inline">\(0 \le |E| \le \binom{|V|}{2}\)</span>.</p>
+<p><strong>Баталгаа</strong></p>
+<p>Хэрэв <span class="math inline">\(|V| \le 1\)</span> бол <span class="math inline">\(P_2(V) = \emptyset\)</span>. Хэрэв <span class="math inline">\(|V| \ge 2\)</span> бол <span class="math inline">\(|P_2(V)| = \binom{|V|}{2}\)</span>. <span class="math inline">\(E \subseteq P_2(V)\)</span> гэдгээс үр дүн гарна. <span class="math inline">\(\square\)</span></p>
+</blockquote>
+<p>Нэг туйлшралд, бүх боломжит ирмэгүүдийг агуулсан энгийн графуудыг авч үзнэ.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.11</strong></p>
+<p><span class="math inline">\(n \ge 1\)</span> бүхэл тоо өгөгдсөн үед <span class="math inline">\(n\)</span> оройтой <strong>бүрэн граф</strong> (complete graph) <span class="math inline">\(K_n\)</span> гэдэг нь <span class="math inline">\(V = \{1, 2, \dots, n\}\)</span> оройн олонлог ба <span class="math inline">\(E = P_2(V)\)</span> ирмэгийн олонлогтой энгийн граф юм. Оройн аль ч хос нь зэргэлдээ байх аливаа графыг <strong>бүрэн</strong> гэнэ.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.15</strong></p>
+<p><span class="math inline">\(K_5\)</span> графыг дүрслэв.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_15.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.15-ын граф</figcaption>
+</figure>
+</div>
+</blockquote>
+<p><span class="math inline">\(K_n\)</span> граф нь компьютер бүр нэг нэгэнтэйгээ шууд холбогдсон компьютерний сүлжээг дүрсэлж болно. Жишээлбэл, хэрэв бүх компьютерүүд хоорондоо хангалттай ойрхон байвал утасгүй сүлжээ ийм шинж чанартай байж болно. 8.14-р зурагт үзүүлсэн утасгүй компьютерний сүлжээний тохиргоог <span class="math inline">\(K_4\)</span> нэртэй бүрэн графаар тусгасан болно.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_8_14.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 8.14 Утасгүй компьютерний сүлжээ</figcaption>
+</figure>
+</div>
+<p><em>Зураг 8.14 Утасгүй компьютерний сүлжээ</em></p>
+<p>Ямар ч ирмэггүй графуудыг тэмдэглэхэд мөн тохиромжтой.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.12</strong></p>
+<p>Аливаа <span class="math inline">\(n \in \mathbb{N}\)</span> өгөгдсөн үед <span class="math inline">\(n\)</span> оройтой <strong>хоосон граф</strong> (empty graph) <span class="math inline">\(\Phi_n\)</span> гэдэг нь <span class="math inline">\(V = \{1, 2, \dots, n\}\)</span> оройн олонлог ба <span class="math inline">\(E = \emptyset\)</span> ирмэгийн олонлогтой граф юм. Ямар ч хос орой нь зэргэлдээ бус аливаа графыг <strong>хоосон</strong> гэнэ.</p>
+</blockquote>
+<p>Зарим графуудад оройн олонлог нь хоёр олонлогийн салангид нэгдэл болж байгалиасаа хуваагддаг.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.13</strong></p>
+<p><span class="math inline">\(G = (V, E)\)</span> граф нь <span class="math inline">\(V = V_1 \cup V_2\)</span> гэж салангид нэгдэл хэлбэрээр илэрхийлэгдэх ба <span class="math inline">\(G\)</span>-ийн ирмэг бүрийн нэг төгсгөл <span class="math inline">\(V_1\)</span>-д, нөгөө төгсгөл нь <span class="math inline">\(V_2\)</span>-д байвал <strong>хоёр хэсэгт граф</strong> (bipartite graph) гэнэ. Энэ тохиолдолд <span class="math inline">\((V_1, V_2)\)</span> хосыг <span class="math inline">\(G\)</span>-ийн <strong>бүрэлдэхүүн хэсгүүд</strong> (bipartition) гэнэ. <span class="math inline">\(i = 1\)</span> эсвэл <span class="math inline">\(2\)</span> үед <span class="math inline">\(V_i\)</span>-ээр индукцлагдсан дэд граф хоосон байна.</p>
+</blockquote>
+<p>Хоёр хэсэгт графууд нь оройнууд нь “тааруулах” шаардлагатай хоёр төрлийн объектыг тусгасан хэрэглээнд үүсдэг. Жишээлбэл, зарим оройнууд ажилчдыг, бусад нь даалгавруудыг төлөөлдөг графыг загварчилж болно. Ирмэг нь ажилтан тухайн даалгаврыг гүйцэтгэх чадвартай бол зөвхөн тухайн ажилтан ба даалгаврыг холбодог. Энэ графыг ажиллах хүчийг хамгийн үр ашигтай ашиглахын зэрэгцээ бүх даалгаврыг гүйцэтгэхийн тулд аль ажилтнуудад ямар даалгавар оноох ёстойг тодорхойлоход ашиглаж болно. Компьютер тоглоом зохиодог жижиг компанийн ийм жишээг 8.15-р зурагт үзүүлэв. Тааруулалт ба гэрлэлтийн төрлийн асуудлуудын судалгааг [11] ба [14]-өөс олж болно.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_8_15.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 8.15 Боломжит даалгаврын оноолт</figcaption>
+</figure>
+</div>
+<p><em>Зураг 8.15 Боломжит даалгаврын оноолт</em></p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.16</strong></p>
+<p>Граф</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_16.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.16-ын граф</figcaption>
+</figure>
+</div>
+<p>нь хоёр хэсэгт граф юм. Түүний бүрэлдэхүүн хэсгүүд нь <span class="math inline">\(V_1 = \{v, x, z\}\)</span> ба <span class="math inline">\(V_2 = \{w, y\}\)</span> байна. Ирмэг бүр <span class="math inline">\(V_1\)</span>-ийн оройг <span class="math inline">\(V_2\)</span>-ийн оройтой холбож байгааг ажиглаарай.</p>
+</blockquote>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_8_16.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 8.16 Хоёр хэсэгт графын стандарт дүрслэл</figcaption>
+</figure>
+</div>
+<p><em>Зураг 8.16 Хоёр хэсэгт графын стандарт дүрслэл</em></p>
+<p>8.16-р жишээн дээрх графын өөр нэг зургийг 8.16-р зурагт үзүүлэв. Тэнд бүрэлдэхүүн хэсгүүдийг зүүн гар талд, нөгөөг нь баруун гар талд дүрсэлсэн байна. Ирмэгүүд зөвхөн эсрэг талын оройнуудыг холбодог нь графыг хоёр хэсэгт болгодог.</p>
+<p>Мэдээж хэрэг, граф бүр хоёр хэсэгт байдаггүй.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.17</strong></p>
+<p><span class="math inline">\(C_3\)</span> нь хоёр хэсэгт биш.</p>
+<p><strong>Баталгаа</strong></p>
+<p>Энд <span class="math inline">\(V = \{1, 2, 3\}\)</span>. <span class="math inline">\(C_3\)</span> нь <span class="math inline">\((V_1, V_2)\)</span> бүрэлдэхүүн хэсэгтэй хоёр хэсэгт граф гэж эсрэгээс нь бодъё. <span class="math inline">\(1 \in V_1\)</span> гэж үзье. <span class="math inline">\(\{1, 2\}\)</span> ба <span class="math inline">\(\{1, 3\}\)</span> ирмэгүүд байгаа тул <span class="math inline">\(2, 3 \in V_2\)</span> байх ёстой. Гэхдээ <span class="math inline">\(\{2, 3\}\)</span> нь мөн ирмэг юм. Тэгэхээр 2 ба 3 нь нэг <span class="math inline">\(V_2\)</span> олонлогт байж болохгүй. Энэ зөрчил нь <span class="math inline">\(C_3\)</span> хоёр хэсэгт байж болохгүйг харуулж байна. <span class="math inline">\(\square\)</span></p>
+</blockquote>
+<p>8.17-р жишээн дээрх үр дүн нь дараах теоремын онцгой тохиолдол юм.</p>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 8.3</strong></p>
+<p><span class="math inline">\(G\)</span> нь аливаа граф гэе. Тэгвэл <span class="math inline">\(G\)</span> нь зөвхөн <span class="math inline">\(G\)</span>-ийн эргэлт бүр тэгш урттай байх тохиолдолд л хоёр хэсэгт граф болно.</p>
+<p><strong>Баталгаа</strong></p>
+<p>Зөвхөн холбогдсон энгийн графуудыг авч үзэхэд хангалттай.</p>
+<p>(<span class="math inline">\(\rightarrow\)</span>) <span class="math inline">\(G\)</span> нь <span class="math inline">\((V_1, V_2)\)</span> бүрэлдэхүүн хэсэгтэй хоёр хэсэгт граф гэж үзье.</p>
+<p><span class="math display">\[v_0, v_1, \dots, v_{n-1}, v_0\]</span></p>
+<p>нь <span class="math inline">\(n\)</span> урттай эргэлт гэе. <span class="math inline">\(v_0 \in V_2\)</span> гэж үзье. Хоёр хэсэгт графын тодорхойлолтоор оройнууд <span class="math inline">\(V_2\)</span> ба <span class="math inline">\(V_1\)</span>-ийн хооронд ээлжлэн байх ёстой. <span class="math inline">\(v_0\)</span> нь <span class="math inline">\(v_{n-1}\)</span>-ийг дагаж байгаа тул <span class="math inline">\(v_{n-1} \in V_1\)</span> байх ёстой. Энэ нь <span class="math inline">\(n - 1\)</span> нь сондгой, <span class="math inline">\(n\)</span> нь тэгш гэдгийг илэрхийлнэ.</p>
+<p>(<span class="math inline">\(\leftarrow\)</span>) <span class="math inline">\(G = (V, E)\)</span>-ийн эргэлт бүр тэгш урттай гэж үзье. <span class="math inline">\(v_0\)</span> оройг сонгоод <span class="math inline">\(V_1 = \{v \in V : dist(v_0, v) \text{ нь тэгш}\}\)</span> ба <span class="math inline">\(V_2 = V \setminus V_1\)</span> гэж тодорхойлъё. Мэдээж <span class="math inline">\(V = V_1 \cup V_2\)</span> нь салангид нэгдэл юм. <span class="math inline">\(V_1\)</span>-ийн ижил олонлогоос хоёр оройг холбосон ирмэг байхгүй гэдгийг харуулахад л үлдлээ.</p>
+<p>Эсрэгээс нь <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span> нь <span class="math inline">\(V_1\)</span> ижил олонлогт байх ба <span class="math inline">\((u, v)\)</span> нь ирмэг гэж үзье. <span class="math inline">\(P\)</span> нь <span class="math inline">\(v_0\)</span>-оос <span class="math inline">\(u\)</span> хүртэлх хамгийн богино зам, <span class="math inline">\(Q\)</span> нь <span class="math inline">\(v_0\)</span>-оос <span class="math inline">\(v\)</span> хүртэлх <span class="math inline">\(P\)</span>-тэй хамгийн олон нийтлэг оройтой хамгийн богино зам гэе. Тэгэхээр <span class="math inline">\(P\)</span> ба <span class="math inline">\(Q\)</span> нь <span class="math inline">\(v_0\)</span>-оос <span class="math inline">\(w\)</span> хүртэл ижил байх ба <span class="math inline">\(w\)</span>-ээс хойш ялгаатай байх <span class="math inline">\(w\)</span> орой байх ёстой.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_thm_8_3_proof.png" class="img-fluid figure-img"></p>
+<figcaption>Теорем 8.3-ийн баталгааны зураг</figcaption>
+</figure>
+</div>
+<p>Дараах хоёр тэгшитгэлийн зүүн гар талууд</p>
+<p><span class="math display">\[
+\begin{array}{l}
+dist(v_0, u) = dist(v_0, w) + dist(w, u) \\
+dist(v_0, v) = dist(v_0, w) + dist(w, v)
+\end{array}
+\]</span></p>
+<p>ижил паритеттай (тэгш эсвэл сондгой) байна, тиймээс тэдгээрийн нийлбэр нь тэгш байна. Тиймээс энэ хоёр тэгшитгэлийг нэмснээр <span class="math inline">\(dist(w, u) + dist(w, v)\)</span> нь тэгш байх ёстойг бид харж байна. Тиймээс <span class="math inline">\(P\)</span>-ийг <span class="math inline">\(w\)</span>-ээс <span class="math inline">\(u\)</span> хүртэл дагаж, <span class="math inline">\((u, v)\)</span> ирмэгийг авч, <span class="math inline">\(Q\)</span>-г <span class="math inline">\(v\)</span>-ээс <span class="math inline">\(w\)</span> хүртэл буцаан дагах цикл нь сондгой урттай байна.</p>
+<p><span class="math display">\[dist(w, u) + 1 + dist(w, v).\]</span></p>
+<p>Энэ зөрчил нь бидний үр дүнг тогтоож байна. <span class="math inline">\(\square\)</span></p>
+</blockquote>
+<p>Бүх боломжит ирмэгүүдийг агуулсан энгийн хоёр хэсэгт графуудын дунд туйлшрал байдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.14</strong></p>
+<p><span class="math inline">\(m, n \ge 1\)</span> бүхэл тоонууд ба</p>
+<p><span class="math display">\[V_1 = \{(1, 1), (1, 2), \dots, (1, m)\} \text{ ба } V_2 = \{(2, 1), (2, 2), \dots, (2, n)\}\]</span></p>
+<p>олонлогуудыг өгье. <span class="math inline">\(V = V_1 \cup V_2\)</span> оройн олонлог ба <span class="math inline">\(E = \{\{v_1, v_2\} : v_1 \in V_1 \text{ ба } v_2 \in V_2\}\)</span> ирмэгийн олонлогтой <strong>бүрэн хоёр хэсэгт граф</strong> (complete bipartite graph) <span class="math inline">\(K_{m,n}\)</span> нь <span class="math inline">\(V = V_1 \cup V_2\)</span> оройн олонлогтой байна.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.18</strong></p>
+<p><span class="math inline">\(K_{3,4}\)</span> графыг дүрслэв.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_18.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.18-ын граф</figcaption>
+</figure>
+</div>
+</blockquote>
+<p>Бүрэн хоёр хэсэгт граф нь 8.15-р зурагт үзүүлсэн шиг ажилтан бүр даалгавар бүрийг гүйцэтгэх чадвартай жишээнд үүсэх болно. Тэр тохиолдолд зарим жингууд нь даалгаврыг гүйцэтгэх сонголт эсвэл харьцангуй чадварыг тусгахын тулд ирмэгүүдэд нэмэгдэж болно. Жинтэй графуудыг 10.5-р хэсэгт авч үзнэ.</p>
+<p>Бидний үндсэн жишээнүүд геометрээс гаралтай.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.19</strong></p>
+<p>(Платоны биетүүд). Нүүр бүр нь тогтмол олон өнцөгт, орой бүр дээр ижил тооны нүүр нийлдэг яг таван биет байдаг. Эдгээр биетүүдийг <strong>Платоны биетүүд</strong> (Platonic solids) гэнэ. Ийм биет бүрийн хувьд түүний орой, ирмэгүүдээс үүссэн графыг тухайн биетийн нэрээр нэрлэдэг. Эдгээр графуудын зургийг биетүүдтэй холбоог хамгийн сайн тусгах үүднээс 8.17-р зурагт үзүүлэв. Өөр зургуудыг дараа таарах болно.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_8_17.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 8.17 Платоны биетүүдийн графууд</figcaption>
+</figure>
+</div>
+<p><em>Зураг 8.17 Платоны биетүүдийн графууд</em></p>
+</blockquote>
+<p>Шоо нь 3 хэмжээст шоонуудын бүлгийн жишээ бөгөөд бид үүнийг одоо тодорхойлно.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.15</strong></p>
+<p><span class="math inline">\(n\)</span>-хэмжээст шоо <span class="math inline">\(Q_n\)</span> гэдэг нь оройн олонлог нь <span class="math inline">\(n\)</span> урттай хоёртын дарааллуудын олонлогоос бүрдэх ба зөвхөн нэг координатаараа л ялгаатай бол хоёр оройг холбосон ирмэгтэй энгийн граф юм.</p>
+</blockquote>
+<p>8.18-р зурагт үзүүлсэн 3 хэмжээст шоо <span class="math inline">\(Q_3\)</span>-ийн зургийг оройнуудыг <span class="math inline">\(\mathbb{R}^3\)</span> дахь цэгүүд гэж үзэж гаргаж авсан. Энэ зураг нь 8.17-р зураг дахь шооны зурагтай санаа нэгдэж байна. Бид 3-аас дээш хэмжээтэй объектуудыг зурж чадахгүй. Гэхдээ <span class="math inline">\(Q_n\)</span> граф бүрийг хавтгай дээр зурж болно. Мэдээж ийм зураг нь харгалзах биетийг тусгахгүй байж магадгүй, эсвэл гоо зүйн хувьд таатай биш байж магадгүй. <span class="math inline">\(Q_4\)</span>-ийн стандарт зургийг 8.19-р зурагт үзүүлэв.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_8_18.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 8.18 <span class="math inline">\(Q_3\)</span> граф</figcaption>
+</figure>
+</div>
+<p><em>Зураг 8.18 <span class="math inline">\(Q_3\)</span> граф</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_8_19.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 8.19 <span class="math inline">\(Q_4\)</span> граф</figcaption>
+</figure>
+</div>
+<p><em>Зураг 8.19 <span class="math inline">\(Q_4\)</span> граф</em></p>
+<p><strong>Хоёртын шугаман код</strong>-уудыг 3.2-р хэсэгт танилцуулсан. Жишээлбэл, 3.18-р жишээнд 8.1-р хүснэгтэд үзүүлсэн хоёртын шугаман кодыг авч үзсэн. Ерөнхийдөө тодорхой <span class="math inline">\(k\)</span> урттай хоёртын дарааллаар илэрхийлэгдсэн мессеж бүрийг <strong>код үг</strong> (code word) гэнэ. Код үг нь <span class="math inline">\(n &gt; k\)</span> урттай тогтмол хоёртын дараалал бөгөөд эхний <span class="math inline">\(k\)</span> цифртээ мессежийг агуулдаг. Цифрүүдийн нийлбэрийг 2-т хуваасан үлдэгдлээс авсан хавсаргасан цифрүүд нэмэгддэг. Чухал ажиглалт бол код үгс нь <span class="math inline">\(Q_n\)</span> дахь оройнууд бөгөөд тэдгээрийн зай нь дамжуулалтад орсон алдааг засах чадварыг тодорхойлдог явдал юм. Тодорхой хэлбэл, код үг <span class="math inline">\(c\)</span>-ийн <strong>жин</strong> (weight) <span class="math inline">\(w\)</span> гэдэг нь код үгсэд харгалзах <span class="math inline">\(Q_n\)</span> дахь хоёр оройн хоорондын хамгийн бага зай юм. <span class="math inline">\(n\)</span> урттай хүлээн авсан үг нь мөн <span class="math inline">\(Q_n\)</span>-ийн <span class="math inline">\(v\)</span> оройтой харгалзана. Хэрэв <span class="math inline">\(v\)</span> нь код үг <span class="math inline">\(c\)</span>-ээс <span class="math inline">\([\frac{w-1}{2}]\)</span>-ээс ихгүй зайд оршвол <span class="math inline">\(c\)</span> нь <span class="math inline">\(Q_n\)</span> дахь <span class="math inline">\(v\)</span>-тэй хамгийн ойр байх цорын ганц орой болно. <strong>Хамгийн ойрын хөршийн декодчилол</strong> (nearest neighbor decoding) арга нь <span class="math inline">\(v\)</span> оройг ашиглан <span class="math inline">\(c\)</span> код үгийг тайлдаг. Өөрөөр хэлбэл, дамжуулсан мессежийг <span class="math inline">\(c\)</span>-ийн эхний <span class="math inline">\(k\)</span> цифр гэж ойлгодог. Жишээлбэл, 010110 үгийг хүлээн авсан бөгөөд 8.1-р хүснэгтэд байгаа хоёртын шугаман кодыг ашиглаж байгаа бол 011110 нь түүнд хамгийн ойр код үг болохыг харж болно. Тиймээс 011 мессежийг зориудын гэж ойлгоно.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Мессеж</th>
+<th style="text-align: center;">Код үг</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">000</td>
+<td style="text-align: center;">000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">001</td>
+<td style="text-align: center;">001011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">010</td>
+<td style="text-align: center;">010101</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">011</td>
+<td style="text-align: center;">011110</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">100111</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">101</td>
+<td style="text-align: center;">101100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">110010</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">111</td>
+<td style="text-align: center;">111001</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 8.1 3 оронтой мессежийн хоёртын шугаман код</em></p>
+</section>
+</section>
+<section id="хэсгийн-дасгалууд" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="хэсгийн-дасгалууд"><span class="header-section-number">4.2</span> 8.2 Хэсгийн дасгалууд</h2>
+<ol type="1">
+<li>8.1-р хэсгийн 3-р дасгал дахь хичээлийн хуваарийн графын зэргэлдийн матрицыг ол. Тэнд үзүүлсэн хүснэгт болон энд байгуулсан зэргэлдийн матрицын хоорондын тодорхой холбоог анхаар.</li>
+<li>8.1-р хэсгийн 4-р дасгал дахь ахлах сургуулийн хорооны хуваарийн графын зэргэлдийн матрицыг ол. Тэнд үзүүлсэн хүснэгт болон энд байгуулсан зэргэлдийн матрицын хоорондын тодорхой холбоог анхаар.</li>
+</ol>
+<p>Дараах графуудыг үлдсэн дасгалуудын туршид иш татах болно.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_3_6.png" class="img-fluid figure-img"></p>
+<figcaption>Дасгал 3-6-ын графууд</figcaption>
+</figure>
+</div>
+<p>3-аас 6 хүртэлх дасгалуудад өгөгдсөн графын хувьд түүний оройнуудын байгалийн 1, 2, 3, … эрэмбийг ашиглан зэргэлдийн матриц <span class="math inline">\(A\)</span>-г ол.</p>
+<ol start="3" type="1">
+<li><p>Граф (a).</p></li>
+<li><p>Граф (b).</p></li>
+<li><p>Граф (c).</p></li>
+<li><p>Граф (d).</p></li>
+<li><p>Граф (a)-ийн хувьд оройнуудын 2, 5, 1, 4, 6, 3 эрэмбийг ашиглан зэргэлдийн матрицыг ол.</p></li>
+<li><p>Граф (b)-ийн хувьд оройнуудын 3, 4, 1, 6, 5, 2 эрэмбийг ашиглан зэргэлдийн матрицыг ол.</p></li>
+<li><p>Таван компьютер сүлжээнд холбогдсон бөгөөд өгөгдсөн матриц нь энэ сүлжээн дэх компьютерүүдийн хоорондын шууд кабелийн холболтыг тусгасан болно.</p>
+<p><span class="math display">\[
+\begin{array}{c}
+\begin{matrix} &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \end{matrix} \\
+\begin{matrix} 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{matrix}
+\begin{bmatrix}
+0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix}
+\end{array}
+\]</span></p>
+<p>Сүлжээний тохиргоог тусгасан энэхүү зэргэлдийн матрицтай графыг зур.</p></li>
+<li><p>Таван цахилгаан станц цахилгаан сүлжээ үүсгэхээр холбогдсон. Станцуудын хоорондын шууд холболтыг өгөгдсөн матриц тусгасан бөгөөд холболт бүр нь бүтэлгүйтэх тохиолдолд нөөц холболтыг хадгалахад илүүдэл холболтуудыг ашигладаг.</p>
+<p><span class="math display">\[
+\begin{array}{c}
+\begin{matrix} &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \end{matrix} \\
+\begin{matrix} 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{matrix}
+\begin{bmatrix}
+0 &amp; 2 &amp; 0 &amp; 0 &amp; 0 \\
+2 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 1 &amp; 0
+\end{bmatrix}
+\end{array}
+\]</span></p>
+<p>Цахилгаан сүлжээг тусгасан энэхүү зэргэлдийн матрицтай графыг зур.</p></li>
+</ol>
+<p>11-ээс 18 хүртэлх дасгалуудад матрицын үржвэр болон зэрэгтийг гараар тооцоолж, эдгээр үйлдлүүдтэй танилцах хэрэгтэй. Гэхдээ <em>Mathematica</em> эсвэл <em>Maple</em> зэрэг математик програм хангамжийг ашиглан гарсан үр дүнг баталгаажуулж болно.</p>
+<ol start="11" type="1">
+<li><p>Үржвэрийг тооцоол: <span class="math inline">\(\begin{bmatrix} 3 &amp; 2 \\ 4 &amp; 1 \end{bmatrix} \begin{bmatrix} 4 &amp; 1 \\ 2 &amp; 5 \end{bmatrix}\)</span>.</p></li>
+<li><p>Үржвэрийг тооцоол: <span class="math inline">\(\begin{bmatrix} 3 &amp; 5 \\ 1 &amp; 2 \end{bmatrix} \begin{bmatrix} 2 &amp; 3 \\ 4 &amp; 1 \end{bmatrix}\)</span>.</p></li>
+<li><p>3-р дасгал дахь <span class="math inline">\(A\)</span> матриц гэе. <strong>(a)</strong> 2, 5, 1, 4, 6, 3 пермутацид харгалзах <span class="math inline">\(P\)</span> пермутацийн матрицыг ол. <strong>(b)</strong> <span class="math inline">\(PA\)</span>-г тооцоол. <strong>(c)</strong> <span class="math inline">\(PAP^T\)</span>-г тооцоолж, энэ тохиолдолд 8.11-р жишээний дараа хийсэн ажиглалтыг батал.</p></li>
+<li><p>4-р дасгал дахь <span class="math inline">\(A\)</span> матриц гэе. <strong>(a)</strong> 3, 4, 1, 6, 5, 2 пермутацид харгалзах <span class="math inline">\(P\)</span> пермутацийн матрицыг ол. <strong>(b)</strong> <span class="math inline">\(PA\)</span>-г тооцоол. <strong>(c)</strong> <span class="math inline">\(PAP^T\)</span>-г тооцоолж, энэ тохиолдолд 8.11-р жишээний дараа хийсэн ажиглалтыг батал. 15-аас 18 хүртэлх дасгалуудад өгөгдсөн <span class="math inline">\(A\)</span> зэргэлдийн матрицын квадрат <span class="math inline">\(A^2\)</span>-ыг тооцоолж, Теорем 8.1-д байгаа <span class="math inline">\(A^2\)</span>-ийн <span class="math inline">\(b_{i,j}\)</span> элемент бүр нь харгалзах граф дээр <span class="math inline">\(i\)</span> оройноос <span class="math inline">\(j\)</span> орой хүртэлх 2 урттай алхалтын тоог тооцдог гэсэн үр дүнг батал.</p></li>
+<li><p>3-р дасгал дахь <span class="math inline">\(A\)</span> матриц.</p></li>
+<li><p>4-р дасгал дахь <span class="math inline">\(A\)</span> матриц.</p></li>
+<li><p>5-р дасгал дахь <span class="math inline">\(A\)</span> матриц.</p></li>
+<li><p>6-р дасгал дахь <span class="math inline">\(A\)</span> матриц.</p></li>
+</ol>
+<p><em>19. <span class="math inline">\(G\)</span> нь <span class="math inline">\(n\)</span> оройтой аливаа граф ба <span class="math inline">\(A\)</span> нь <span class="math inline">\(G\)</span>-ийн зэргэлдийн матриц гэе. Хэрэв <span class="math inline">\(I + A + A^2 + \dots + A^{n-1}\)</span> матрицад тэг бус элемент байвал <span class="math inline">\(G\)</span> нь холбогдсон байна. Мөн эсрэгээрээ, хэрэв <span class="math inline">\(G\)</span> холбогдсон бол уг матрицад тэг бус элемент байна гэдгийг харуул. </em>20. Графын оройнуудыг өөр өөр бүрэлдэхүүн хэсгүүдэд хуваахад ашиглаж болох 19-р дасгалтай төстэй үр дүнг гарга.</p>
+<p>21-ээс 24 хүртэлх дасгалуудад өгөгдсөн графын зэргэлдийн жагсаалтуудыг гарга.</p>
+<ol start="21" type="1">
+<li><p>Граф (a).</p></li>
+<li><p>Граф (b).</p></li>
+<li><p>Граф (c).</p></li>
+<li><p>Граф (d).</p></li>
+<li><p>Долоон цахилгаан станц цахилгаан сүлжээ үүсгэхээр холбогдсон. Өгөгдсөн зэргэлдийн жагсаалтууд нь цахилгаан станцуудын хоорондын шууд холболтыг тусгасан болно. Цахилгаан сүлжээг тусгасан энэхүү зэргэлдийн жагсаалтуудтай графыг зур.</p>
+<p><span class="math display">\[
+\begin{array}{ll}
+1 : &amp; 2, 3, 4, 7 \\
+2 : &amp; 1, 6, 7 \\
+3 : &amp; 1, 6 \\
+4 : &amp; 1, 4, 6 \\
+5 : &amp; 4, 6 \\
+6 : &amp; 2, 3, 4, 5 \\
+7 : &amp; 1, 2
+\end{array}
+\]</span></p></li>
+<li><p>Зургаан компьютер сүлжээнд холбогдсон. Өгөгдсөн зэргэлдийн жагсаалтууд нь энэ сүлжээн дэх компьютерүүдийн хоорондын шууд кабелийн холболтыг тусгасан болно. Сүлжээний тохиргоог тусгасан энэхүү зэргэлдийн жагсаалтуудтай графыг зур.</p>
+<p><span class="math display">\[
+\begin{array}{ll}
+1 : &amp; 2, 4 \\
+2 : &amp; 1, 3, 4, 5 \\
+3 : &amp; 2, 4, 5, 6 \\
+4 : &amp; 1, 2, 3, 5 \\
+5 : &amp; 2, 3, 4, 6 \\
+6 : &amp; 3, 5
+\end{array}
+\]</span></p></li>
+</ol>
+<p>27-оос 36 хүртэлх дасгалуудад өгөгдсөн графыг зур.</p>
+<ol start="27" type="1">
+<li><p><span class="math inline">\(P_4\)</span>.</p></li>
+<li><p><span class="math inline">\(C_3\)</span>.</p></li>
+<li><p><span class="math inline">\(C_6\)</span>.</p></li>
+<li><p><span class="math inline">\(P_6\)</span>.</p></li>
+<li><p><span class="math inline">\(K_6\)</span>.</p></li>
+<li><p><span class="math inline">\(K_{1,3}\)</span>.</p></li>
+<li><p><span class="math inline">\(K_{3,2}\)</span>.</p></li>
+<li><p><span class="math inline">\(K_7\)</span>.</p></li>
+<li><p><span class="math inline">\(Q_1\)</span>.</p></li>
+<li><p><span class="math inline">\(Q_2\)</span>.</p></li>
+<li><p>8.1-р хэсгийн 5-р дасгал дахь метроны системийн графыг авч үзье. <strong>(a)</strong> Цэнхэр шугамаар тодорхойлогддог дэд граф аль вэ? <strong>(b)</strong> Метроны шугам бүр зам (path) дэд графтай харгалзах уу? <strong>(c)</strong> Метроны шугамд харгалзахгүй зам дэд графын жишээ өг.</p></li>
+<li><p>8.1-р хэсгийн 6-р дасгал дахь автобусны системийн графыг авч үзье. <strong>(a)</strong> 2-р автобусны чиглэлээр тодорхойлогддог дэд граф аль вэ? <strong>(b)</strong> 1-р автобусны чиглэл эргэлт (cycle) дэд графтай харгалзах уу? <strong>(c)</strong> Автобусны чиглэлд харгалзахгүй эргэлт дэд графын жишээ өг.</p></li>
+<li><p><strong>(a)</strong> 8.1-р хэсгийн 1-р дасгал дахь Парисын хэсгийг төлөөлж буй граф бүрэн мөн үү? <strong>(b)</strong> Тэр графын хувьд гурван орой дээрх бүрэн дэд графын жишээ өг.</p></li>
+<li><p><strong>(a)</strong> 8.1-р хэсгийн 2-р дасгал дахь Ромын хэсгийг төлөөлж буй граф бүрэн мөн үү? <strong>(b)</strong> Энэ нь энгийн граф мөн үү?</p></li>
+<li><p>101101 ба 101011 нь <span class="math inline">\(Q_6\)</span>-д зэргэлдээ байх уу?</p></li>
+<li><p>011011 ба 110110 нь <span class="math inline">\(Q_6\)</span>-д ямар зайтай вэ?</p></li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Мессеж</th>
+<th style="text-align: center;">Код үг</th>
+<th style="text-align: center;">Мессеж</th>
+<th style="text-align: center;">Код үг</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0000</td>
+<td style="text-align: center;">00000000</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;">10001111</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0001</td>
+<td style="text-align: center;">00010111</td>
+<td style="text-align: center;">1001</td>
+<td style="text-align: center;">10011000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0010</td>
+<td style="text-align: center;">00101010</td>
+<td style="text-align: center;">1010</td>
+<td style="text-align: center;">10100100</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0011</td>
+<td style="text-align: center;">00111101</td>
+<td style="text-align: center;">1011</td>
+<td style="text-align: center;">10110011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0100</td>
+<td style="text-align: center;">01001100</td>
+<td style="text-align: center;">1100</td>
+<td style="text-align: center;">11000001</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0101</td>
+<td style="text-align: center;">01011011</td>
+<td style="text-align: center;">1101</td>
+<td style="text-align: center;">11010110</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0110</td>
+<td style="text-align: center;">01100110</td>
+<td style="text-align: center;">1110</td>
+<td style="text-align: center;">11101011</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0111</td>
+<td style="text-align: center;">01110001</td>
+<td style="text-align: center;">1111</td>
+<td style="text-align: center;">11111111</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 8.2 4 оронтой мессежийн хоёртын шугаман код</em></p>
+<ol start="43" type="1">
+<li>Эмнэлгийн өгөгдлийн сан нь өвчтөн бүрийн хүйс болон цусны бүлгийг 8.3-р хүснэгтэд үзүүлсний адил кодчилдог.</li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Хүйс, Цусны бүлэг</th>
+<th style="text-align: center;">Мессеж</th>
+<th style="text-align: center;">Хүйс, Цусны бүлэг</th>
+<th style="text-align: center;">Мессеж</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Эмэгтэй, O⁻</td>
+<td style="text-align: center;">0000</td>
+<td style="text-align: center;">Эрэгтэй, O⁻</td>
+<td style="text-align: center;">1000</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Эмэгтэй, O⁺</td>
+<td style="text-align: center;">0001</td>
+<td style="text-align: center;">Эрэгтэй, O⁺</td>
+<td style="text-align: center;">1001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Эмэгтэй, B⁻</td>
+<td style="text-align: center;">0010</td>
+<td style="text-align: center;">Эрэгтэй, B⁻</td>
+<td style="text-align: center;">1010</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Эмэгтэй, B⁺</td>
+<td style="text-align: center;">0011</td>
+<td style="text-align: center;">Эрэгтэй, B⁺</td>
+<td style="text-align: center;">1011</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Эмэгтэй, A⁻</td>
+<td style="text-align: center;">0100</td>
+<td style="text-align: center;">Эрэгтэй, A⁻</td>
+<td style="text-align: center;">1100</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Эмэгтэй, A⁺</td>
+<td style="text-align: center;">0101</td>
+<td style="text-align: center;">Эрэгтэй, A⁺</td>
+<td style="text-align: center;">1101</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Эмэгтэй, AB⁻</td>
+<td style="text-align: center;">0110</td>
+<td style="text-align: center;">Эрэгтэй, AB⁻</td>
+<td style="text-align: center;">1110</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Эмэгтэй, AB⁺</td>
+<td style="text-align: center;">0111</td>
+<td style="text-align: center;">Эрэгтэй, AB⁺</td>
+<td style="text-align: center;">1111</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 8.3 Хүйс ба цусны бүлгийг кодлох</em></p>
+<p><strong>(a)</strong> 8.2-р хүснэгт дэх хоёртын шугаман код болон хамгийн ойрын хөршийн декодчилолыг ашиглан 1111010 код үгийг мессеж рүү тайл. <strong>(b)</strong> Энэ өвчтөний хүйс, цусны бүлгийг тодорхойл.</p>
+<ol start="44" type="1">
+<li>Харилцааны холбоос дээр гарч болзошгүй алдааг шийдвэрлэхийн тулд арми 8.20-р зурагт үзүүлсэн тэмдэгтүүдийг ашиглан талбай дахь цэргүүддээ чиглэл дамжуулдаг.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_8_20.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 8.20 Чиглэлийг кодлох</figcaption>
+</figure>
+</div>
+<p><em>Зураг 8.20 Чиглэлийг кодлох</em></p>
+<p><strong>(a)</strong> 8.2-р хүснэгт дэх хоёртын шугаман код болон хамгийн ойрын хөршийн декодчилолыг ашиглан 10011111 код үгийг мессеж рүү тайл. <strong>(b)</strong> Дамжуулж буй чиглэлийг тодорхойл.</p>
+<ol start="45" type="1">
+<li>Бүрэн графын дэд граф бүр бүрэн мөн үү? Индукцлагдсан дэд графуудын хувьд яах вэ?</li>
+<li>Хоосон графын дэд граф бүр хоосон мөн үү?</li>
+<li>Доорх хүснэгтэд X нь тухайн баганын толгойд заасан мэргэжлийн ангид шаардагдах математикийн хичээлийг илэрхийлнэ.</li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Комп. шинж.</th>
+<th style="text-align: center;">Матем</th>
+<th style="text-align: center;">Физик</th>
+<th style="text-align: center;">Хими</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Тооцоолол</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Диф. тэгш.</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Дискрет матем</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Шугаман алгебр</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Бүлгийн онол</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+</tr>
+</tbody>
+</table>
+<p>Харгалзах хоёр хэсэгт графыг зур.</p>
+<ol start="48" type="1">
+<li>Доорх хүснэгтэд X нь хөвгүүн бүсгүйг бүжиглэхээр урихыг хүсч буйг илэрхийлнэ.</li>
+</ol>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Алис</th>
+<th style="text-align: center;">Бэт</th>
+<th style="text-align: center;">Синди</th>
+<th style="text-align: center;">Дороти</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Альберт</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Боб</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Чарльз</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Дэвид</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+</tbody>
+</table>
+<p>Харгалзах хоёр хэсэгт графыг зур.</p>
+<ol start="49" type="1">
+<li><span class="math inline">\(P_n\)</span> нь хоёр хэсэгт граф мөн үү? Хариултаа зөвтгө.</li>
+<li><span class="math inline">\(C_n\)</span> нь зөвхөн <span class="math inline">\(n\)</span> тэгш байх тохиолдолд л хоёр хэсэгт граф болохыг батал.</li>
+<li>Хоёр хэсэгт графуудын дэд графууд хоёр хэсэгт графууд болохыг харуул.</li>
+<li>Батал эсвэл няцаа: Хоёр хэсэгт бус графуудын дэд графууд хоёр хэсэгт бус байна.</li>
+<li>Дүрслэгдсэн граф хоёр хэсэгт мөн гэдгийг батал эсвэл няцаа.</li>
+<li>Дүрслэгдсэн граф хоёр хэсэгт мөн гэдгийг батал эсвэл няцаа.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_53_54.png" class="img-fluid figure-img"></p>
+<figcaption>Дасгал 53-54-ийн графууд</figcaption>
+</figure>
+</div>
+<p>55-аас 64 хүртэлх дасгалуудад заасан графын орой болон ирмэгүүдийн тоог тодорхойл.</p>
+<ol start="55" type="1">
+<li><span class="math inline">\(P_n\)</span>.</li>
+<li><span class="math inline">\(C_n\)</span>.</li>
+<li><span class="math inline">\(K_n\)</span>.</li>
+<li><span class="math inline">\(K_{m,n}\)</span>.</li>
+<li>Шоо.</li>
+<li>Найман талст (октаэдр).</li>
+<li>Арван хоёр талст (додекаэдр).</li>
+<li>Хорин талст (икосаэдр).</li>
+<li><span class="math inline">\(Q_4\)</span>.</li>
+<li><span class="math inline">\(Q_5\)</span>.</li>
+</ol>
+<p>65-аас 74 хүртэлх дасгалуудад өгөгдсөн графын хоёр оройн хоорондын хамгийн их боломжит зайг ол. Энэ тоог графын <strong>диаметр</strong> (diameter) гэнэ.</p>
+<ol start="65" type="1">
+<li><span class="math inline">\(P_n\)</span>.</li>
+<li><span class="math inline">\(C_n\)</span>.</li>
+<li><span class="math inline">\(K_n\)</span>.</li>
+<li><span class="math inline">\(K_{m,n}\)</span>.</li>
+<li>Шоо.</li>
+<li>Найман талст (октаэдр).</li>
+<li>Арван хоёр талст (додекаэдр).</li>
+<li>Хорин талст (икосаэдр).</li>
+<li><span class="math inline">\(Q_4\)</span>.</li>
+<li><span class="math inline">\(Q_5\)</span>.</li>
+</ol>
+<p>75-аас 78 хүртэлх дасгалуудад заасан оройнуудын дарааллыг ашиглан өгөгдсөн графын зэргэлдийн матрицыг гарга.</p>
+<ol start="75" type="1">
+<li><p><span class="math inline">\(K_5\)</span> граф, оройнууд 1, 2, 3, 4, 5 гэж эрэмбэлэгдсэн.</p></li>
+<li><p><span class="math inline">\(Q_3\)</span> граф, оройнууд хоёртын дарааллаар.</p></li>
+<li><p><span class="math inline">\(K_{2,4}\)</span> граф, оройнууд <span class="math inline">\((1, 1), (1, 2), (2, 1), (2, 2), (2, 3), (2, 4)\)</span>.</p></li>
+<li><p><span class="math inline">\(C_5\)</span> граф, оройнууд 1, 2, 3, 4, 5 гэж эрэмбэлэгдсэн.</p></li>
+<li><p><span class="math inline">\(Q_3\)</span> графын зэргэлдийн жагсаалтуудыг гарга.</p></li>
+<li><p><span class="math inline">\(K_{2,3}\)</span> графын зэргэлдийн жагсаалтуудыг гарга.</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./8-1.html" class="pagination-link" aria-label="Бүлэг 8: Графын онолын үндэс">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Бүлэг 8: Графын онолын үндэс</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./8-4.html" class="pagination-link" aria-label="Бүлэг 8.4: Инвариантууд">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Бүлэг 8.4: Инвариантууд</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

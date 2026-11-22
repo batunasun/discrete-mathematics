@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; Бүлэг 8.5: Чиглэгдсэн графууд ба Марковын гинжин хэлхээ – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./8-6.html" rel="next">
+<link href="./8-4.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8-5.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Бүлэг 8.5: Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Графын онолын үндэс</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Бүлэг 0: Тоонуудыг дүрслэх нь</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Бүлэг 8: Графын онолын үндэс</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Бүлэг 8.2: Матриц ба тусгай графууд</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Бүлэг 8.4: Инвариантууд</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Бүлэг 8.5: Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Бүлэг 8: Давтлагын бодлогууд</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#чиглэгдсэн-графууд-ба-марковын-гинжин-хэлхээ" id="toc-чиглэгдсэн-графууд-ба-марковын-гинжин-хэлхээ" class="nav-link active" data-scroll-target="#чиглэгдсэн-графууд-ба-марковын-гинжин-хэлхээ"><span class="header-section-number">6.1</span> 8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</a>
+  <ul class="collapse">
+  <li><a href="#марковын-гинжин-хэлхээ" id="toc-марковын-гинжин-хэлхээ" class="nav-link" data-scroll-target="#марковын-гинжин-хэлхээ"><span class="header-section-number">6.1.1</span> Марковын гинжин хэлхээ</a></li>
+  </ul></li>
+  <li><a href="#хэсгийн-дасгалууд" id="toc-хэсгийн-дасгалууд" class="nav-link" data-scroll-target="#хэсгийн-дасгалууд"><span class="header-section-number">6.2</span> 8.5 Хэсгийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Бүлэг 8.5: Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="чиглэгдсэн-графууд-ба-марковын-гинжин-хэлхээ" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="чиглэгдсэн-графууд-ба-марковын-гинжин-хэлхээ"><span class="header-section-number">6.1</span> 8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</h2>
+<p>5.1-р хэсэгт чиглэгдсэн граф буюу олонлог дээрх хамаарлын диграфын ойлголтыг танилцуулсан. Жишээлбэл, 8.30-р зурагт <span class="math inline">\(\{1, 2, \dots, 8\}\)</span> олонлог дээрх “нь хуваагч” хамаарлын чиглэгдсэн графикийг үзүүлэв. Энэ бүлэгт графуудыг судалсны дараа бид ийм диграфууд нь ирмэгүүдэд чиглэл өгөгдсөнөөс бусад тохиолдолд энгийн графуудтай маш төстэй болохыг харж болно.</p>
+<p><img src="fig_8_30.png" class="img-fluid" alt="Зураг 8.30 “Зөв хуваагч” хамаарлын диграф"> <em>Зураг 8.30 “Зөв хуваагч” хамаарлын диграф</em></p>
+<p>Графуудын нэгэн адил чиглэгдсэн графууд олон янзын хэрэглээнд тохиолддог. Энгийн графуудын хувьд 8.1-р тодорхойлолттой адил чиглэгдсэн графын албан ёсны тодорхойлолтыг өгөхөөс өмнө холбогдох ирмэгүүд нь тодорхой чиглэлтэй байдаг өөр нэг жишээг авч үзье.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.35</strong></p>
+<p>(Суурийг гүйцээх нь). 8.31-р зурагт бейсболын тоглогчийн (тоглогч өөрөө эсвэл багийн гишүүн байж болно) бөхөөс өмнө болон дараа нь байх боломжтой төлөвүүдийг харуулав. Тиймээс сум нь бөхөөс өмнөх төлөвөөс дараах төлөв рүү чиглэнэ. Жишээлбэл, тоглогч 2-р суурь дээр эхэлж, цохилт хийвэл 1-р суурь руу шилжих боломжтой. Гэхдээ тоглогч 2-р суурь дээр эхэлж, 1-р суурь руу шилжих боломжгүй юм. 8.31-р зурагтай адил статистик мэдээлэл агуулсан диаграммыг бейсболын видео тоглоомын стратегийг тодорхойлох эсвэл тоглолтын магадлалыг хянахад ашиглаж болно.</p>
+</blockquote>
+<p><img src="fig_8_31.png" class="img-fluid" alt="Зураг 8.31 Бөхөөс өмнөх байдал"> <em>Зураг 8.31 Бөхөөс өмнөх байдал</em></p>
+<p>Энгийн графд ирмэг бүрт <span class="math inline">\(V\)</span> оройн олонлогоос <span class="math inline">\(\{u, v\}\)</span> төгсгөлүүдийн багцыг оноодог. Чиглэгдсэн графд бид энэхүү ирмэгийн оноолтыг илүү тодорхойгоор, <span class="math inline">\(u\)</span> оройгоос <span class="math inline">\(v\)</span> орой руу чиглэсэн байхаар хүсч байна. Үндсэндээ бид төгсгөлийн цэгүүдийг <span class="math inline">\(u\)</span> нь эхний, <span class="math inline">\(v\)</span> нь хоёр дахь байхаар эрэмбэлэхийг зорьж байна. Хэдийгээр <span class="math inline">\(\{u, v\}\)</span> олонлог дахь элементүүд дараалалгүй боловч <span class="math inline">\((u, v)\)</span> эрэмбэлэгдсэн хосын координатууд нь мэдээж дараалалтай байдаг. Бид ирмэг бүрт чиглэл өгөхийн тулд эрэмбэлэгдсэн хосуудын энэхүү онцлогийг ашигладаг. <span class="math inline">\(V^2 = V \times V\)</span> үржвэрийн элементүүд нь эрэмбэлэгдсэн хосууд гэдгийг эргэн санаарай.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.22</strong></p>
+<p><strong>(a)</strong> <strong>Чиглэгдсэн граф</strong> буюу <strong>диграф</strong> <span class="math inline">\(G\)</span> нь <span class="math inline">\(V_G\)</span> оройн олонлог, <span class="math inline">\(E_G\)</span> ирмэгийн олонлог болон <span class="math inline">\(e_G : E_G \rightarrow V_G \times V_G\)</span> функцээс бүрдэнэ. Бид <span class="math inline">\(G = (V_G, E_G)\)</span> гэж бичих ба <span class="math inline">\(e_G(e) = (u, v)\)</span>-ийн оронд <span class="math inline">\(e \mapsto (u, v)\)</span> гэж бичнэ. Энгийн графуудын адил <span class="math inline">\(G\)</span> тодорхой бол доогуур бичлэгүүдийг хасаж болно.</p>
+<p><strong>(b)</strong> Хэрэв <span class="math inline">\(e \mapsto (u, v)\)</span> бол <span class="math inline">\(u\)</span> оройг (e)-ийн <strong>анхны цэг</strong> (эсвэл <strong>сүүл</strong>) гэж нэрлэх ба <span class="math inline">\(v\)</span> оройг (e)-ийн <strong>төгсгөлийн цэг</strong> (эсвэл <strong>толгой</strong>) гэнэ. Бид (e) нь <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> руу чиглэнэ гэж хэлнэ.</p>
+<p><strong>(c)</strong> Зарим <span class="math inline">\(v \in V\)</span> байх <span class="math inline">\(e \mapsto (v, v)\)</span> хэлбэрийн ирмэгийг <strong>гогцоо</strong> гэж нэрлэх ба ижил анхны болон төгсгөлийн цэгүүдэд оноогдсон хоёр буюу түүнээс дээш ирмэгийг <strong>олон ирмэг</strong> гэж нэрлэдэг.</p>
+<p><strong>(d)</strong> <strong>Энгийн чиглэгдсэн граф</strong> гэдэг нь гогцоо болон олон ирмэггүй <span class="math inline">\(G = (V, E)\)</span> чиглэгдсэн граф юм. Энэ тохиолдолд бид <span class="math inline">\(E\)</span>-г <span class="math inline">\(V^2 \setminus \{(v, v) : v \in V\}\)</span>-ийн дэд олонлог гэж авч болно.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.36</strong></p>
+<p>Дараах жишээнүүдэд <span class="math inline">\(G = (V, E)\)</span> нь чиглэгдсэн граф байна.</p>
+<p><strong>(a)</strong> <span class="math inline">\(V = \{1, 2, 3, 4, 5\}\)</span> ба <span class="math inline">\(E = \{a, b, c, d, e, f, g\}\)</span> бөгөөд <span class="math inline">\(a = (1, 2), b = (2, 1), c = (3, 1), d = (4, 2), e = (2, 5), f = (3, 4)\)</span> ба <span class="math inline">\(g = (5, 4)\)</span> гэе.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_36_a.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.36(a)-ийн диграф</figcaption>
+</figure>
+</div>
+<p>Энэ нь үнэхээр энгийн чиглэгдсэн граф юм. <span class="math inline">\((1, 2)\)</span> ба <span class="math inline">\((2, 1)\)</span> ирмэгүүд нь <span class="math inline">\(V^2\)</span> үржвэрийн ялгаатай элементүүд юм.</p>
+<p><strong>(b)</strong> <span class="math inline">\(V = \{1, 2, 3, 4, 5\}\)</span> ба <span class="math inline">\(E = \{a, b, c, d, e, f, g, h\}\)</span> бөгөөд <span class="math inline">\(a \mapsto (1, 2), b \mapsto (1, 2), c = (3, 1), d = (4, 2), e = (2, 5), f = (3, 4), g = (5, 4)\)</span> ба <span class="math inline">\(h = (5, 5)\)</span> гэе.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_36_b.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.36(b)-ийн диграф</figcaption>
+</figure>
+</div>
+<p>Энэ чиглэгдсэн граф нь энгийн биш юм. <span class="math inline">\(a\)</span> ба <span class="math inline">\(b\)</span> ирмэгүүд нь <span class="math inline">\(V^2\)</span> үржвэрийн ижил элементэд оноогдсон тул олон ирмэг болно. Мөн <span class="math inline">\(h = (5, 5)\)</span> ирмэг нь гогцоо юм.</p>
+</blockquote>
+<p>Чиглэгдсэн графын дэд графыг энгийн графуудын хувьд (8.3-р тодорхойлолтод) адил аргаар тодорхойлно. Гэхдээ алхалтыг тодорхойлоход илүү анхаарал хандуулах шаардлагатай.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.23</strong></p>
+<p><span class="math inline">\(G = (V, E)\)</span> чиглэгдсэн граф дахь <strong>алхалт</strong> гэдэг нь оройнууд ба ирмэгүүдийн ээлжлэх жагсаалт</p>
+<p><span class="math display">\[v_0, e_1, v_1, e_2, v_2, e_3, \dots, v_{n-1}, e_n, v_n\]</span></p>
+<p>бөгөөд <span class="math inline">\(n \ge 0\)</span> байх ба <span class="math inline">\(v_0\)</span> оройгоос эхэлж, <span class="math inline">\(v_n\)</span> орой дээр төгсдөг, мөн <span class="math inline">\(1 \le i \le n\)</span> бүрийн хувьд <span class="math inline">\(e_i \mapsto (v_{i-1}, v_i)\)</span> байна. Өөрөөр хэлбэл, ирмэгүүдийг сүүлээс нь толгой руу нь дайрч туулах ёстой.</p>
+</blockquote>
+<p>Чиглэгдсэн граф дахь алхалтын тодорхойлолтод үндэслэн 8.4-р тодорхойлолт дахь бусад нэр томьёо (урт, эхлэл, төгсгөл, цикл, мөр, зам, эргэлт, зай) болон тэмдэглэгээг чиглэгдсэн графуудын хувьд мөн адил тодорхойлно.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.37</strong></p>
+<p>8.36(a) жишээн дээрх чиглэгдсэн графд <span class="math inline">\(5, g, 4, d, 2, b, 1, a, 2\)</span> жагсаалтаар алхалтыг өгөв. Гэхдээ 8.36(b) жишээн дээрх чиглэгдсэн графд мөн адил алхалт биш юм. Тэнд <span class="math inline">\(b\)</span> ирмэгийг сүүлээс толгой руу нь дайрч туулах боломжгүй тул <span class="math inline">\(2, b, 1\)</span> хэсэг нь зөвшөөрөгдөхгүй.</p>
+<p>8.36(a) жишээн дээрх чиглэгдсэн графыг авч үзье. (e) нь 2-ыг 5-тай шууд холбосон ирмэг тул <span class="math inline">\(dist(2, 5) = 1\)</span> байна. Харин 5-аас 2 руу нэг ч ирмэг байхгүй тул <span class="math inline">\(dist(5, 2) = \infty\)</span> байна. Үүний оронд <span class="math inline">\(5, g, 4, d, 2\)</span> нь 5-аас 2 хүртэлх хамгийн богино зам юм.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.38</strong></p>
+<p>(Гудамжны төлөвлөгөө). Замын хөдөлгөөнийг багасгах, зогсоолыг нэмэгдүүлэхийн тулд хотын төлөвлөгчид 8.32-р зургийн зүүн гар талд үзүүлсэн хорооллыг сумаар тэмдэглэсэн гудамжны хэсгүүдийг нэг чиглэлийн болгохыг санал болгосон.</p>
+<p><img src="fig_8_32.png" class="img-fluid" alt="Зураг 8.32 Хороолол дахь төлөвлөсөн нэг чиглэлийн гудамжууд"> <em>Зураг 8.32 Хороолол дахь төлөвлөсөн нэг чиглэлийн гудамжууд</em></p>
+<p>Үүний үр дүнд үүссэн замын хөдөлгөөний урсгалыг 8.32-р зургийн баруун гар талд үзүүлсэн чиглэгдсэн граф тусгаж байна. Энэ диграфд уулзваруудыг оройнуудаар дүрсэлсэн бөгөөд амархан лавлахын тулд бид тэдгээрийг нэмж шошголсон. Ирмэг бүр нь хоёр уулзварын хоорондох боломжит замын чиглэлийг илэрхийлнэ. Тиймээс хоёр чиглэлийн гудамж бүрийг чиглэл бүрт нэг гэсэн хоёр ирмэгээр дүрсэлдэг. Спрюс ба Гуравдугаар гудамжны булангаас (9 гэж тэмдэглэсэн) Мэйпл ба Нэгдүгээр гудамжны булан (1 гэж тэмдэглэсэн) хүртэл явдаг зам байгааг анхаарна уу. Гэхдээ 1-ээс 9 руу буцах зам байхгүй. Энэ нь 8.25-р тодорхойлолтын дараа авч үзэх төлөвлөгөөний томоохон алдаа юм.</p>
+</blockquote>
+<p>Чиглэгдсэн графыг харахдаа түүний доорх энгийн графыг харах нь зүйн хэрэг юм; үүнийг ирмэгүүдээс нь чиглэлийг арилгаснаар гаргаж авдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.24</strong></p>
+<p><span class="math inline">\(G = (V, E)\)</span> чиглэгдсэн граф өгөгдсөн үед түүний <strong>суурь граф</strong> (underlying graph) буюу <span class="math inline">\(\underline{G}\)</span> нь ижил <span class="math inline">\(V\)</span> оройн олонлогтой ба <span class="math inline">\(E\)</span>-ийн чиглэгдсэн ирмэг <span class="math inline">\(e\)</span> бүрт (e)-ийн толгой ба сүүлийг төгсгөл болгосон чиглэлгүй ирмэг агуулсан <span class="math inline">\(E'\)</span> ирмэгийн олонлогтой энгийн граф юм.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.39</strong></p>
+<p><span class="math inline">\(G\)</span> чиглэгдсэн граф ба түүний суурь граф <span class="math inline">\(\underline{G}\)</span>-ийг үзүүлэв.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_39.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.39-ийн диграф</figcaption>
+</figure>
+</div>
+</blockquote>
+<p>Хэдийгээр <span class="math inline">\(G\)</span> нь энгийн чиглэгдсэн граф байсан ч <span class="math inline">\(\underline{G}\)</span> нь 8.39-р жишээний адил олон ирмэгтэй байж болно. Чиглэгдсэн графд <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> руу зам байх боловч <span class="math inline">\(v\)</span>-ээс <span class="math inline">\(u\)</span> руу байхгүй байж болох тул чиглэгдсэн граф дахь бүрэлдэхүүн хэсгүүдийг тодорхойлох хоёр байгалийн арга байдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.25</strong></p>
+<p><span class="math inline">\(G\)</span> нь чиглэгдсэн граф гэе.</p>
+<p><strong>(a)</strong> Хэрэв дурын <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span> оройн хувьд <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> руу, мөн <span class="math inline">\(v\)</span>-ээс <span class="math inline">\(u\)</span> руу зам байвал <span class="math inline">\(G\)</span>-ийг <strong>хүчтэй холбогдсон</strong> (strongly connected) гэнэ.</p>
+<p><strong>(b)</strong> Хэрэв <span class="math inline">\(\underline{G}\)</span> нь холбогдсон бол <span class="math inline">\(G\)</span>-ийг <strong>сул холбогдсон</strong> (weakly connected) гэнэ.</p>
+<p><strong>(c)</strong> <span class="math inline">\(G\)</span>-ийн <strong>хүчтэй бүрэлдэхүүн хэсэг</strong> (strong component) гэдэг нь <span class="math inline">\(G\)</span>-ийн өөр холбогдсон дэд граф дотор агуулагдаагүй <span class="math inline">\(G\)</span>-ийн хүчтэй холбогдсон дэд граф <span class="math inline">\(H\)</span> юм.</p>
+<p><strong>(d)</strong> <span class="math inline">\(G\)</span>-ийн <strong>сул бүрэлдэхүүн хэсэг</strong> (weak component) гэдэг нь <span class="math inline">\(H\)</span> нь <span class="math inline">\(\underline{G}\)</span>-ийн бүрэлдэхүүн хэсэг болох <span class="math inline">\(G\)</span>-ийн дэд граф <span class="math inline">\(H\)</span> юм.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.40</strong></p>
+<p>Зурагт үзүүлсэн <span class="math inline">\(G\)</span> чиглэгдсэн граф нь</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_40.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.40-ийн диграф</figcaption>
+</figure>
+</div>
+<p>түүний суурь граф холбогдсон тул сул холбогдсон байна. Гэсэн хэдий ч <span class="math inline">\(G\)</span> нь хүчтэй холбогдсон биш; энэ нь 2 хүчтэй бүрэлдэхүүн хэсэгтэй. Нэг нь тусгаарлагдсан <span class="math inline">\(\{1\}\)</span> орой, нөгөө нь <span class="math inline">\(\{2, 3, 4\}\)</span> оройнуудаар индукцлагдсан дэд граф юм. <span class="math inline">\(\{2, 3, 4\}\)</span> дахь орой бүрээс тухайн олонлогийн өөр аль ч орой руу зам байгаа боловч 1-р орой руу очих зам байхгүй.</p>
+</blockquote>
+<p>Хүчтэй бүрэлдэхүүн хэсгийн ойлголт нь 8.32-р зурагт байгаа гудамжны төлөвлөгөөний доголдлыг илүү сайн тайлбарлахад тусалдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.41</strong></p>
+<p>8.33-р зурагт 8.32-р зурагт байгаа чиглэгдсэн графын хүчтэй бүрэлдэхүүн хэсгүүдийг үзүүлэв. Нэг нь <span class="math inline">\(\{1, 2, 5, 6\}\)</span> оройнуудаар индукцлагдсан хотын блок, нөгөө нь <span class="math inline">\(\{3, 4, 7, 8, 9, 10\}\)</span>-аар индукцлагдсан.</p>
+<p><img src="fig_8_33.png" class="img-fluid" alt="Зураг 8.33 Хорооллын тусгаарлагдсан хэсгүүд"> <em>Зураг 8.33 Хорооллын тусгаарлагдсан хэсгүүд</em></p>
+<p>Гол нь 1, 2, 5, эсвэл 6 уулзваруудын аль нэгээс эхлээд тухайн хотын блокоос гарч хорооллын өөр хэсэг рүү орох боломжгүй юм. Хаа нэгтээгээс энэ хотын блок руу очих боломжтой байсан ч гарч явах боломжгүй. Тиймээс 8.32-р зурагт санал болгосон төлөвлөгөөнд хороолол нь хүчтэй холбогдсон биш байх бөгөөд энэ нь тийм ч сайн биш юм.</p>
+</blockquote>
+<p>Чиглэгдсэн графуудыг энгийн графуудын адил аргаар харьцуулдаг. Гэсэн хэдий ч чиглэгдсэн графд ирмэг бүрийн чиглэлийг графын зураглалаар хадгалах ёстой. Энэ нь изоморфизмыг тодорхойлоход чухал ач холбогдолтой.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.42</strong></p>
+<p>Зурагт үзүүлсэн хоёр чиглэгдсэн граф нь изоморф юм.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_42.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.42-ын диграфууд</figcaption>
+</figure>
+</div>
+<p><span class="math inline">\(f : G \rightarrow H\)</span> изоморфизмыг <span class="math inline">\(f(1) = 5, f(2) = 6, f(3) = 4\)</span> гэж өгөв. <span class="math inline">\(f\)</span> нь <span class="math inline">\((1, 2)\)</span> ирмэгийг <span class="math inline">\((5, 6)\)</span> ирмэг рүү, харин эсрэг чиглэлийн <span class="math inline">\((6, 5)\)</span> ирмэг рүү буулгадаг болохыг анхаарна уу. Өөрөөр хэлбэл, <span class="math inline">\(f(1) = 6, f(2) = 5, f(3) = 4\)</span> гэж өгвөл энд чиглэгдсэн графуудын хувьд изоморфизм болохгүй байсан ч тэдгээрийн суурь графуудын хувьд изоморфизм болох байсан.</p>
+</blockquote>
+<p>Графын изоморфизм нь орой, ирмэгүүдийн тоо зэрэг инвариантуудыг заавал хадгалдаг. Чиглэгдсэн графын хувьд <span class="math inline">\(v\)</span> оройн <strong>орох зэрэг</strong> (in-degree) буюу <span class="math inline">\(\text{indeg}(v)\)</span> нь толгой нь <span class="math inline">\(v\)</span> байх ирмэгүүдийн тоо, <strong>гарах зэрэг</strong> (out-degree) буюу <span class="math inline">\(\text{outdeg}(v)\)</span> нь сүүл нь <span class="math inline">\(v\)</span> байх ирмэгүүдийн тоо юм. Чиглэгдсэн граф дахь <span class="math inline">\(v\)</span> оройн хувьд <span class="math inline">\(\text{deg}(v) = \text{indeg}(v) + \text{outdeg}(v)\)</span> гэж тодорхойлно. Өөрөөр хэлбэл, <span class="math inline">\(\text{deg}(v)\)</span> нь <span class="math inline">\(\underline{G}\)</span> дахь <span class="math inline">\(v\)</span>-ийн зэрэг юм.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.43</strong></p>
+<p><strong>(a)</strong> Чиглэгдсэн графд</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_43_a.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.43(a)-ийн диграф</figcaption>
+</figure>
+</div>
+<p>бидэнд <span class="math inline">\(\text{indeg}(1) = 0, \text{indeg}(2) = 2, \text{indeg}(3) = 2, \text{indeg}(4) = 1, \text{outdeg}(1) = 2, \text{outdeg}(2) = 0, \text{outdeg}(3) = 0\)</span>, ба <span class="math inline">\(\text{outdeg}(4) = 3\)</span> байна. Жишээлбэл, 1-р орой нь хоёр ирмэгтэй, гэхдээ түүн рүү чиглэсэн нэг ч ирмэг байхгүй. Мөн 4-р орой дээрх гогцоо нь 4-р оройн орох болон гарах зэрэгт тус бүр нэгийг нэмж байгааг анхаарна уу.</p>
+<p><strong>(b)</strong> Зурагт үзүүлсэн хоёр чиглэгдсэн граф нь изоморф бус.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_43_b.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.43(b)-ийн диграфууд</figcaption>
+</figure>
+</div>
+<p><span class="math inline">\(G\)</span>-д 1-р орой нь <span class="math inline">\(\text{indeg}(1) = 0\)</span>-тэй байна. Харин <span class="math inline">\(K\)</span>-ийн орой бүр <span class="math inline">\(\text{indeg}(v) = 1\)</span>-тэй байна. Тиймээс <span class="math inline">\(f : G \rightarrow K\)</span> изоморфизмд 1-ийн дүрс болох 0 орох зэрэгтэй орой байхгүй юм.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.44</strong></p>
+<p>(Гудамжны шинэ төлөвлөгөө). Хэрэв бид 8.32-р зурагт байгаа замын хөдөлгөөний төлөвлөгөөг Хоёрдугаар гудамжны нэг чиглэлийн хэсгийн чиглэлийг эсрэгээр нь өөрчилснөөр өөрчилбөл үүссэн чиглэгдсэн граф нь хүчтэй холбогдоно. Үүний үр дүнд энэ шинэ төлөвлөгөө нь суурь граф ижил хэвээр байсан ч хуучин төлөвлөгөөтэй изоморф биш юм. Шинэ төлөвлөгөө нь хорооллын оршин суугчдын, ялангуяа <span class="math inline">\(\{1, 2, 5, 6\}\)</span> оройнуудаар индукцлагдсан хотын блокт амьдардаг хүмүүсийн хувьд илүү дээр юм. Эс бөгөөс тэд тэнд гацах байсан.</p>
+</blockquote>
+<p>Энгийн графуудын адил чиглэгдсэн граф дахь оройнуудын зэрэгтүүдийн нийлбэр болон ирмэгүүдийн тооны хооронд холбоо байдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 8.16</strong></p>
+<p><span class="math inline">\(G = (V, E)\)</span> аливаа чиглэгдсэн графын хувьд бидэнд</p>
+<p><span class="math display">\[\sum_{v \in V} \text{indeg}(v) = \sum_{v \in V} \text{outdeg}(v) = |E|\]</span></p>
+<p>байна.</p>
+</blockquote>
+<p>Теорем 8.16-ын баталгааг дасгалуудад үлдээв.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.26</strong></p>
+<p><span class="math inline">\(v_1, v_2, \dots, v_n\)</span> оройнуудын эрэмбэлэгдсэн жагсаалттай <span class="math inline">\(G\)</span> чиглэгдсэн графын <strong>зэргэлдийн матриц</strong> нь <span class="math inline">\(v_i\)</span>-ээс <span class="math inline">\(v_j\)</span> руу чиглэсэн ирмэгүүдийн тоо болох <span class="math inline">\(a_{i,j}\)</span> элементүүдтэй <span class="math inline">\(n \times n\)</span> хэмжээтэй <span class="math inline">\(A = [a_{i,j}]\)</span> матриц юм.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.45</strong></p>
+<p>Хэрэв чиглэгдсэн графын хувьд</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_45.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.45-ийн диграф</figcaption>
+</figure>
+</div>
+<p>бид оройнуудын дарааллыг 1, 2, 3, 4, 5 гэж авбал олдох зэргэлдийн матриц нь</p>
+<p><span class="math display">\[
+\begin{array}{c}
+\begin{matrix} &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \end{matrix} \\
+\begin{matrix} 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{matrix}
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 1
+\end{bmatrix}
+\end{array}
+\]</span></p>
+<p>байна.</p>
+<p>Чиглэгдсэн графуудын зэргэлдийн матрицууд нь энгийн графуудын адил тэгш хэмтэй байх шаардлагагүй.</p>
+</blockquote>
+<section id="марковын-гинжин-хэлхээ" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="марковын-гинжин-хэлхээ"><span class="header-section-number">6.1.1</span> Марковын гинжин хэлхээ</h3>
+<p>Чиглэгдсэн графыг санамсаргүй үйл явцыг загварчлахад ашиглаж болно. Оройнуудыг үйл явцын төлөвүүдийг дүрслэхэд ашигладаг бөгөөд ирмэг бүр <span class="math inline">\((u, v)\)</span> нь үйл явцын нэг давталтад <span class="math inline">\(u\)</span> төлвөөс <span class="math inline">\(v\)</span> төлөв рүү шилжих боломжтой шилжилтийг илэрхийлнэ. Жишээлбэл, энэ нь 8.31-р зурагт байгаа бөгөөд оройнууд нь бейсболын тоглогчийн төлөвүүдийг, ирмэгүүд нь дараагийн боломжит төлөвүүд рүү зааж байна. (Бид энэ жишээг 63-р дасгалд өргөжүүлсэн.) Ерөнхийдөө ирмэг бүрт <span class="math inline">\((u, v)\)</span> шууд шилжилт <span class="math inline">\(u\)</span> төлвөөс <span class="math inline">\(v\)</span> төлөв рүү явагдах магадлалыг оноож болох бөгөөд <span class="math inline">\((u, v)\)</span> ирмэг байхгүй бол <span class="math inline">\(p(u, v) = 0\)</span> байна. Мэдээж хэрэг, тогтмол <span class="math inline">\(u\)</span> төлвийн хувьд үйл явцын нэг давталтын үр дүнд заавал ямар нэг <span class="math inline">\(v\)</span> төлөв рүү шилжих ёстой тул <span class="math inline">\(\sum_{v \in V} p(u, v) = 1\)</span> байх ёстой. Хэрэв бүх <span class="math inline">\(u\)</span> төлөв болон <span class="math inline">\(v\)</span> төлөвийн хувьд <span class="math inline">\(p(u, v)\)</span> магадлал давталт бүрт өөрчлөгдөхгүй бол үйл явцыг <strong>Марковын гинжин хэлхээ</strong> (Markov chain) гэж нэрлэдэг. Энэ үйл явцыг Оросын математикч Андрей Марков (1856-1922)-ын нэрээр нэрлэсэн. Бид зөвхөн төгсгөлөг олон төлөвтэй Марковын гинжин хэлхээг авч үзэх болно.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.27</strong></p>
+<p><strong>Марковын гинжин хэлхээний граф</strong> гэдэг нь олон ирмэггүй <span class="math inline">\(G = (V, E)\)</span> чиглэгдсэн граф бөгөөд ирмэг бүрт <span class="math inline">\((u, v)\)</span> <span class="math inline">\([0, 1]\)</span> интервал дахь <span class="math inline">\(p(u, v)\)</span> утгыг оноодог. Түүнчлэн <span class="math inline">\(u\)</span> орой бүрийн хувьд <span class="math inline">\(u\)</span>-ээс гарах ирмэгүүдэд оноогдсон утгуудын нийлбэр 1 байх ёстой.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.46</strong></p>
+<p>Маш өрсөлдөөнтэй хувийн сургуульд семестр бүрт оюутан бүрт гурван төлөвийн аль нэгийг оноодог. Хэрэв бүх зүйл хэвийн байвал оюутан хэвийн төлөвтэй байна. Хэрэв өмнөх семестрийн дүн муу байвал оюутанд туршилтын хугацаатай төлөв оноодог. Хэрэв туршилтын хугацаанд дүн нь сайжрахгүй бол оюутан нэг семестр түдгэлзүүлэх төлөвт шилждэг. Оюутнууд түдгэлзүүлсний дараа нэг семестрийн дараа үргэлж хэвийн төлөв рүү буцдаг гэж бид таамаглаж байна.</p>
+<p>Сургууль хэдэн жилийн турш оюутнуудыг хянаж, төлөвийн өөрчлөлтийн магадлалыг тодорхойлсон. Хэвийн төлөвийг <span class="math inline">\(v_1\)</span>, туршилтын хугацаатай төлөвийг <span class="math inline">\(v_2\)</span>, түдгэлзүүлсэн төлөвийг <span class="math inline">\(v_3\)</span> гэж ашиглан Марковын гинжин хэлхээний граф</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_46.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.46-ийн Марковын гинжин хэлхээ</figcaption>
+</figure>
+</div>
+<p>нь энэ сургуульд нэг төлвөөс нөгөөд шилжих магадлалыг тусгаж байна. Жишээлбэл, хэвийн төлвөөс хэвийн төлвөө хадгалах <span class="math inline">\(\frac{2}{3}\)</span> магадлалтай, туршилтын хугацаатай төлөвт шилжих <span class="math inline">\(\frac{1}{3}\)</span> магадлалтай, дараагийн семестрт түдгэлзүүлэх төлөвт шилжих магадлал 0 байна.</p>
+</blockquote>
+<p>Төлөвөөс төлөв рүү шилжих магадлалыг хянахад зэргэлдийн матрицтай маш төстэй матрицыг ашиглаж болно.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.28</strong></p>
+<p>Марковын гинжин хэлхээний граф болон түүний <span class="math inline">\(v_1, v_2, \dots, v_n\)</span> оройнуудын эрэмбийг өгөгдсөн үед түүний <strong>шилжилтийн матриц</strong> (transition matrix) нь <span class="math inline">\(M = [p(v_i, v_j)]\)</span> байх <span class="math inline">\(n \times n\)</span> матриц юм. Өөрөөр хэлбэл, <span class="math inline">\(M\)</span>-ийн <span class="math inline">\((i, j)\)</span>-р элемент нь <span class="math inline">\(p(v_i, v_j)\)</span> утга бөгөөд үүнийг <span class="math inline">\(p(i, j)\)</span> гэж илүү товчоор тэмдэглэж болно.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.47</strong></p>
+<p>8.46-р жишээн дээрх Марковын гинжин хэлхээний <span class="math inline">\(M\)</span> шилжилтийн матрицыг үзүүлэв.</p>
+<p><span class="math display">\[
+\begin{array}{c}
+\begin{matrix} &amp; v_1 &amp; v_2 &amp; v_3 \end{matrix} \\
+\begin{matrix} v_1 \\ v_2 \\ v_3 \end{matrix}
+\begin{bmatrix}
+\frac{2}{3} &amp; \frac{1}{3} &amp; 0 \\
+\frac{1}{2} &amp; 0 &amp; \frac{1}{2} \\
+1 &amp; 0 &amp; 0
+\end{bmatrix}
+\end{array}
+\]</span></p>
+</blockquote>
+<p>Шилжилтийн матриц нь үйл явцын нэг давталтын шилжилтийн магадлалыг хадгалаад зогсохгүй үйл явцын олон давталтын шилжилтийн магадлалыг тооцоолоход ашиглаж болно.</p>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 8.17</strong></p>
+<p><span class="math inline">\(M\)</span> нь <span class="math inline">\(v_1, v_2, \dots, v_n\)</span> оройнуудын эрэмбээр олдсон Марковын гинжин хэлхээний граф <span class="math inline">\(G\)</span>-ийн шилжилтийн матриц ба <span class="math inline">\(m \in \mathbb{N}\)</span> гэе. Тэгвэл <span class="math inline">\(M\)</span>-ийн <span class="math inline">\(m\)</span>-р зэрэг <span class="math inline">\(M^m = [q_{i,j}]\)</span> матриц нь <span class="math inline">\(1 \le i \le n\)</span> ба <span class="math inline">\(1 \le j \le n\)</span> бүрийн хувьд <span class="math inline">\(q_{i,j}\)</span> нь яг <span class="math inline">\(m\)</span> алхамаар <span class="math inline">\(G\)</span> дотор <span class="math inline">\(v_i\)</span>-ээс <span class="math inline">\(v_j\)</span> руу шилжих магадлал байх шинж чанартай байна.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.48</strong></p>
+<p>8.46-р жишээн дээрх Марковын гинжин хэлхээний <span class="math inline">\(M\)</span> шилжилтийн матрицын хоёр болон гуравдугаар зэрэгтийг үзүүлэв.</p>
+<p><span class="math display">\[
+M^2 = \begin{bmatrix}
+\frac{11}{18} &amp; \frac{2}{9} &amp; \frac{1}{6} \\
+\frac{5}{6} &amp; \frac{1}{6} &amp; 0 \\
+\frac{2}{3} &amp; \frac{1}{3} &amp; 0
+\end{bmatrix}
+\quad
+M^3 = \begin{bmatrix}
+\frac{37}{54} &amp; \frac{11}{54} &amp; \frac{1}{9} \\
+\frac{23}{36} &amp; \frac{5}{18} &amp; \frac{1}{12} \\
+\frac{11}{18} &amp; \frac{2}{9} &amp; \frac{1}{6}
+\end{bmatrix}
+\]</span></p>
+<p>Жишээлбэл, оюутан хэвийн төлөвтэй байсан бол хоёр семестрийн дараа түдгэлзүүлэх төлөвт шилжих <span class="math inline">\(\frac{1}{6}\)</span> магадлал байгааг бид харж байна. Мөн туршилтын хугацаатай байсан оюутан гурван семестрийн дараа хэвийн төлөвт эргэж орох <span class="math inline">\(\frac{23}{36}\)</span> магадлалтай байна.</p>
+<p>Хэрэв бид <span class="math inline">\(M\)</span>-ийн илүү өндөр зэрэгтүүдийг авч үзвэл тэдгээр нь тусгай шинж чанартай тогтмол матриц руу нийлдэг болохыг харна. Энэ тохиолдолд хүчтэй чиг хандлага 7-р зэрэгт аль хэдийн тод харагдаж байгаа бөгөөд эдгээр зэрэгтүүд <span class="math inline">\(M^\infty\)</span> гэж тэмдэглэгдсэн хязгаарлагч матриц руу ойртож байгаа нь доор харагдаж байна.</p>
+<p><span class="math display">\[
+M^7 \approx \begin{bmatrix}
+.667 &amp; .223 &amp; .110 \\
+.665 &amp; .222 &amp; .113 \\
+.668 &amp; .221 &amp; .112
+\end{bmatrix}
+\quad
+M^\infty = \begin{bmatrix}
+\frac{2}{3} &amp; \frac{2}{9} &amp; \frac{1}{9} \\
+\frac{2}{3} &amp; \frac{2}{9} &amp; \frac{1}{9} \\
+\frac{2}{3} &amp; \frac{2}{9} &amp; \frac{1}{9}
+\end{bmatrix}
+\]</span></p>
+<p>Түүнчлэн <span class="math inline">\(M^\infty\)</span>-ийн мөрүүд бүгд ижил байна. Иймээс <span class="math inline">\(j = 1, 2, 3\)</span> бүрийн хувьд <span class="math inline">\(M^\infty\)</span>-ийн <span class="math inline">\(j\)</span>-р баганын элемент нь анхны төлөвөөс үл хамааран <span class="math inline">\(v_j\)</span> төлөвт байх урт хугацааны магадлалыг өгнө. Өөрөөр хэлбэл, урт хугацаанд оюутнуудын ойролцоогоор <span class="math inline">\(\frac{2}{3}\)</span> нь хэвийн төлөвтэй, <span class="math inline">\(\frac{2}{9}\)</span> нь туршилтын хугацаатай, <span class="math inline">\(\frac{1}{9}\)</span> нь түдгэлзүүлсэн байдаг.</p>
+</blockquote>
+<p>8.48-р жишээн дээр ажигласан 8.46-р жишээний нийлэх шинж чанарыг илүү сайн тайлбарлахын тулд бидэнд зарим нэр томьёо хэрэгтэй. Марковын гинжин хэлхээний <span class="math inline">\(v_i\)</span> төлөвийг <span class="math inline">\(q \in \mathbb{Z}^+\)</span> байх ба <span class="math inline">\(v_i\)</span> дээр эхэлдэг аливаа циклийн урт нь <span class="math inline">\(q\)</span>-ийн үржвэр байх тохиолдолд <strong>үечилсэн</strong> (period) <span class="math inline">\(q\)</span> гэж нэрлэдэг. Хэрэв <span class="math inline">\(q &gt; 1\)</span> бол <span class="math inline">\(v_i\)</span> нь үечилсэн, <span class="math inline">\(q=1\)</span> бол <strong>үечилсэн бус</strong> гэж хэлнэ. 8.46-р жишээн дээрх Марковын гинжин хэлхээний <span class="math inline">\(v_1\)</span> дээр эхэлдэг хамгийн богино цикл нь 3 урттай боловч <span class="math inline">\(v_1\)</span> дээр гогцоо байгаа нь аль ч оройноос эхэлсэн 3 буюу түүнээс их урттай цикл үүсгэх боломжийг олгодог. Тиймээс 8.46-р жишээн дээрх төлөв бүр үечилсэн бус байна.</p>
+<p>Марковын гинжин хэлхээний <strong>класс</strong> гэдэг нь харгалзах графын хүчтэй бүрэлдэхүүн хэсгийн оройн олонлогтой харгалзах төлөвүүдийн олонлог юм. Хэрэв Марковын гинжин хэлхээ нь зөвхөн нэг класстай бол түүнийг <strong>бууруулж болохгүй</strong> (irreducible) гэнэ. Хэрэв Марковын гинжин хэлхээ нь бууруулж болохгүй бөгөөд төлөв бүр үечилсэн бус бол үүнийг <strong>регуляр</strong> (regular) гэнэ. Регуляр байдлыг шалгах энгийн тест байдаг бөгөөд үүнийг бид нотолгоогүйгээр тодорхойлж байна.</p>
+<blockquote class="blockquote">
+<p><strong>ЛЕММА 8.18</strong></p>
+<p><span class="math inline">\(M\)</span> шилжилтийн матрицтай төгсгөлөг Марковын гинжин хэлхээ нь зөвхөн бүх элементүүд нь эерэг байх <span class="math inline">\(M^m\)</span> матриц байх <span class="math inline">\(m \in \mathbb{Z}^+\)</span> оршин байх тохиолдолд л регуляр байна.</p>
+</blockquote>
+<p>8.48-р жишээнд үзүүлсэн <span class="math inline">\(M^3\)</span>-ын гэрэлд Лемма 8.18-аас үзэхэд 8.46-р жишээн дээрх Марковын гинжин хэлхээ регуляр болно. Мэдээж хэрэг, граф нь хүчтэй холбогдсон байхыг харах нь тийм ч хэцүү биш бөгөөд дээрх төлөв бүр үечилсэн бус болохыг бид ажигласан. Нотолгоогүйгээр дурдсан дараах үр дүн нь 8.46-р жишээнд харуулсан нийлэх зан төлөвийг тайлбарлаж байна.</p>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 8.19</strong></p>
+<p>Хэрэв <span class="math inline">\(M\)</span> нь төгсгөлөг регуляр Марковын гинжин хэлхээний шилжилтийн матриц бол <span class="math inline">\(m\)</span> өсөхөд <span class="math inline">\(M\)</span>-ийн зэрэгтүүд <span class="math inline">\(M^\infty\)</span> гэж тэмдэглэгдэх матриц руу нийлэх ба түүний бүх мөрүүд ижил байна. Түүнчлэн <span class="math inline">\(j\)</span> бүрийн хувьд <span class="math inline">\(M^\infty\)</span>-ийн мөр бүрийн <span class="math inline">\(j\)</span>-р баганын элемент нь анхны төлөвөөс үл хамааран <span class="math inline">\(v_j\)</span> төлөвт байх урт хугацааны магадлал юм.</p>
+</blockquote>
+<p>Регуляр бус Марковын гинжин хэлхээний үечилсэн байдал зэрэг шинж чанаруудыг ойлгохын тулд бид өөр нэг жишээг авч үзье.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.49</strong></p>
+<p>(Тэнцээт теннис). Теннисний тоглолтод “тэнцээ” (deuce) гэсэн оноотой байх үед тоглолт тэнцэж, эхлээд хоёр онооны давуу тал олсон тоглогч ялагчаар тодорхойлогдоно. Нэг онооны давуу талтай тоглогчийг давуу талтай (advantage) гэж хэлэх боловч тоглолт дуусахаас өмнө тэнцээ хэд хэдэн удаа давтагдаж болно. Тоглолт нь тогтмол үйлчилдэг (serves) нэг тоглогч, тогтмол хүлээн авдаг (receives) нэг тоглогчтой тул боломжит төлөвүүд нь тэнцээ (D), үйлчилдэг тоглогчийн давуу тал (AS), хүлээн авагчийн давуу тал (AR), үйлчилдэг тоглогчийн хожил (WS), хүлээн авагчийн хожил (WR) юм. Үйлчилдэг тоглогч ямар ч оноо авах 60%, хүлээн авагч 40% магадлалтай гэж үзвэл холбогдох Марковын гинжин хэлхээний графикийг 8.34-р зурагт үзүүлсэн бөгөөд түүний шилжилтийн матрицыг хамт үзүүлэв.</p>
+<p><img src="fig_8_34.png" class="img-fluid" alt="Зураг 8.34 Теннисний тоглолтын төгсгөлийн шинжилгээ"> <em>Зураг 8.34 Теннисний тоглолтын төгсгөлийн шинжилгээ</em></p>
+<p><span class="math display">\[
+\begin{array}{c}
+\begin{matrix} &amp; \text{D} &amp; \text{AS} &amp; \text{AR} &amp; \text{WS} &amp; \text{WR} \end{matrix} \\
+\begin{matrix} \text{D} \\ \text{AS} \\ \text{AR} \\ \text{WS} \\ \text{WR} \end{matrix}
+\begin{bmatrix}
+0 &amp; .6 &amp; .4 &amp; 0 &amp; 0 \\
+.4 &amp; 0 &amp; 0 &amp; .6 &amp; 0 \\
+.6 &amp; 0 &amp; 0 &amp; 0 &amp; .4 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix} = M
+\end{array}
+\]</span></p>
+</blockquote>
+<p><span class="math inline">\(M^2\)</span>-ийн утгыг тооцоолсноор тоглолтын дараа хоёр оноо гарсны дараа юу болохыг бид харж болно. Жишээлбэл, тэнцээнээс (D), үйлчилдэг тоглогч ялах (WS) <span class="math inline">\(\frac{1}{3}\)</span> магадлалтай, хүлээн авагч ялах (WR) <span class="math inline">\(\frac{1}{3}\)</span> магадлалтай байна. Үйлчилдэг тоглогчийн давуу талаас (AS) үзвэл үйлчилдэг тоглогч ялах .6 магадлалтай байна. Мэдээж хэрэг, тэр ялалт нь эхний онооноос хойш гарсан бөгөөд хоёр дахь давталт нь тэр тохиолдолд ялалтын төлөв рүү эргэж очсон байх болно.</p>
+<p><span class="math display">\[
+M^2 = \begin{bmatrix}
+&gt; .48 &amp; 0 &amp; 0 &amp; .36 &amp; .16 \\
+&gt; 0 &amp; .24 &amp; .16 &amp; .6 &amp; 0 \\
+&gt; 0 &amp; .36 &amp; .24 &amp; 0 &amp; .4 \\
+&gt; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+&gt; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\quad
+M^{30} \approx \begin{bmatrix}
+&gt; 0 &amp; 0 &amp; 0 &amp; .692 &amp; .308 \\
+&gt; 0 &amp; 0 &amp; 0 &amp; .877 &amp; .123 \\
+&gt; 0 &amp; 0 &amp; 0 &amp; .415 &amp; .585 \\
+&gt; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+&gt; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</span> <em>Зураг 8.35 Үргэлжилж буй теннис</em></p>
+<p>Марковын гинжин хэлхээ нь бууруулж болохгүй юм: энэ нь гурван класстай. Нэг класс нь D, AS, AR төлөвүүдээс бүрдэнэ. Эдгээр төлөв бүр 2 үетэй. WS болон WR тус бүр нь нэг класс үүсгэдэг ба 1 үетэй. Хэдийгээр Марковын гинжин хэлхээ регуляр биш бөгөөд Теорем 8.19 үүнд хамаарахгүй ч бид зарим утга учиртай урт хугацааны зан төлөвийг ажиглаж чадна. Энэ тохиолдолд <span class="math inline">\(M\)</span>-ийн зэрэгтүүд 30 дахь зэрэгтэй ойролцоо их өөрчлөгдөхгүй байгааг бид 8.35-р зурагт харж байна. Хэдийгээр регуляр тохиолдлын адил мөрүүд бүгд ижил биш боловч тэдгээр нь урт хугацааны магадлалыг хадгалсаар байна. Эхний мөрөнд тэнцээнээс (D) эхлэхэд үйлчилдэг тоглогч ялах магадлал ойролцоогоор .692, хүлээн авагч ялах магадлал ойролцоогоор .308 байна. Хоёр ба гурав дахь мөрүүд нь үйлчилдэг тоглогчийн давуу тал (AS) болон хүлээн авагчийн давуу талаас (AR) эхлэх ижил төстэй магадлалуудыг өгдөг. Сүүлийн хоёр мөр нь тоглогч нэг удаа хожсон бол тоглолтод өөр төлөв рүү шилжих шилжилт байхгүй гэдгийг илэрхийлнэ.</p>
+<p>Марковын гинжин хэлхээнд <span class="math inline">\(v_i\)</span> төлөвийг <span class="math inline">\(p(i, i) = 1\)</span> бол <strong>шингээгч</strong> (absorbing) гэж хэлнэ. Өөрөөр хэлбэл, Марковын гинжин хэлхээний графикт 1 магадлалтайгаар оноогдсон <span class="math inline">\(v_i\)</span> дээр гогцоо ирмэг байна. 8.49-р жишээнд WS болон WR нь шингээгч төлөвүүд юм. Нийлэлтийн зан төлөвт ажиглагдсан тэг биш утгууд нь тэдгээр багануудад төвлөрч байгаа бөгөөд бүх анхны төлөвүүд эдгээр шингээгч төлөвүүдэд шингэдэг болохыг анхаарна уу.</p>
+<p>Марковын гинжин хэлхээний графикт класст биш орой руу заасан класст байгаа оройгоос гарах ирмэг байхгүй бол уг классыг <strong>эргодик</strong> (ergodic) гэнэ. Энэ тохиолдолд класс дахь төлөвүүдийг мөн эргодик буюу <strong>дахин давтагдах</strong> (recurrent) гэж нэрлэдэг. 8.49-р жишээнд WS болон WR төлөвүүд дахин давтагдах төлөвүүд юм. Графикт класст биш орой руу заасан класст байгаа оройгоос гарах ирмэг байвал уг классыг <strong>түр зуурын</strong> (transient) гэнэ. 8.49-р жишээнд D, AS, AR төлөвүүд нь түр зуурын төлөвүүдийн класс үүсгэдэг.</p>
+<p>Хэрэв төлөв бүр нь шингээгч эсвэл түр зуурын байвал Марковын гинжин хэлхээг <strong>шингээгч</strong> гэж хэлнэ. 8.49-р жишээн дээрх Марковын гинжин хэлхээ нь шингээгч байдаг нь онцгой юм. Ерөнхийдөө, <span class="math inline">\(M\)</span> шилжилтийн матрицтай Марковын гинжин хэлхээ шингээгч бол <span class="math inline">\(M\)</span>-ийн зэрэгтүүд урт хугацааны шилжилтийн магадлалыг агуулсан <span class="math inline">\(M^\infty\)</span> матриц руу нийлдэг. Энэ үр дүн болон энэ хэсэгт дурдсан бусад батлагдаагүй үр дүнгийн нотолгоог [8]-аас үзнэ үү.</p>
+</section>
+</section>
+<section id="хэсгийн-дасгалууд" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="хэсгийн-дасгалууд"><span class="header-section-number">6.2</span> 8.5 Хэсгийн дасгалууд</h2>
+<ol type="1">
+<li>Газар дээр маш их цас унасан үед дүрслэгдсэн хорооллын оршин суугчид зарим гудамж хоёр машин зэрэг явахад хэт нарийн байна гэж гомдоллосон. Тиймээс хотын төлөвлөгчид өвлийн саруудад сумаар тэмдэглэсэн гудамжны хэсгүүдийг нэг чиглэлийн болгохыг санал болгосон. Үүний үр дүнд үүссэн замын хөдөлгөөний урсгалыг тусгасан чиглэгдсэн граф зур.</li>
+<li>Замын хөдөлгөөнийг багасгах, зогсоолыг нэмэгдүүлэхийн тулд хотын төлөвлөгчид дүрслэгдсэн хорооллыг сумаар тэмдэглэсэн гудамжны хэсгүүдийг нэг чиглэлийн болгохыг санал болгосон. Үүний үр дүнд үүссэн замын хөдөлгөөний урсгалыг тусгасан чиглэгдсэн граф зур.</li>
+<li>Зурагт үзүүлсэн компьютерний сүлжээний тохиргоонд зарим шууд кабелийн холболтууд нэг компьютерээс нөгөө рүү зөвхөн нэг чиглэлд харилцах боломжийг олгодог. Мөр бүр дээр сум нь тухайн шугамын дагуух боломжит харилцааны чиглэлийг заана. Энэ сүлжээг тусгасан чиглэгдсэн граф зур.</li>
+<li>Тодорхой нэг хотын автобусны системийн газрын зургийг дүрслэв. Автобус бүрийн аяллын чиглэлийг газрын зураг дээр тэмдэглэсэн. Автобусны чиглэл бүр цикл үүсгэдэг. Бүх автобусны системийг төлөөлсөн чиглэгдсэн граф зур.</li>
+</ol>
+<p>Дараах <span class="math inline">\(G = (V, E)\)</span> чиглэгдсэн графуудыг дасгалуудын туршид иш татах болно.</p>
+<p><strong>(a)</strong> <span class="math inline">\(V = \{1, 2, 3, 4, 5\}\)</span> ба <span class="math inline">\(E = \{(1, 3), (1, 5), (2, 3), (4, 2), (3, 4), (3, 5)\}\)</span>. <strong>(b)</strong> <span class="math inline">\(V = \{1, 2, 3, 4, 5, 6\}\)</span> ба <span class="math inline">\(E = \{(1, 3), (2, 1), (3, 2), (4, 3), (4, 6), (5, 4), (6, 1), (6, 5)\}\)</span>. <strong>(c)</strong> <span class="math inline">\(V = \{1, 2, 3, 4\}\)</span> ба <span class="math inline">\(E = \{(1, 3), (2, 1), (2, 3), (3, 4), (4, 1), (2, 2)\}\)</span>. <strong>(d)</strong> <span class="math inline">\(V = \{1, 2, 3, 4\}\)</span> ба <span class="math inline">\(E = \{(1, 2), (1, 3), (1, 4), (2, 3), (4, 1)\}\)</span>.</p>
+<p>5-аас 8 хүртэлх дасгалуудад заасан чиглэгдсэн графыг зурж, энгийн эсэхийг тодорхойл. Хэрэв энгийн биш бол яагаад гэдгийг тайлбарла.</p>
+<ol start="5" type="1">
+<li><p>Граф (a).</p></li>
+<li><p>Граф (b).</p></li>
+<li><p>Граф (c).</p></li>
+<li><p>Граф (d).</p></li>
+<li><p>Граф (c)-д 2-оос 4 хүртэл зам байна уу?</p></li>
+<li><p>Граф (d)-д 2-оос 4 хүртэл зам байна уу?</p></li>
+<li><p>3-р дасгал дахь компьютерний сүлжээг авч үзье. 1-р компьютерээс 5-р компьютер рүү мессеж илгээх хоёр боломжит замыг ол.</p></li>
+<li><p>4-р дасгал дахь хотын автобусны системийг авч үзье. Саут-аас Төв рүү очиход хэрэглэж болох хоёр боломжит замыг ол.</p></li>
+</ol>
+<p>13-аас 16 хүртэлх дасгалуудад заасан чиглэгдсэн графын суурь графыг зур.</p>
+<ol start="13" type="1">
+<li>Граф (a).</li>
+<li>Граф (b).</li>
+<li>Граф (c).</li>
+<li>Граф (d).</li>
+</ol>
+<p>17-оос 22 хүртэлх дасгалуудад заасан чиглэгдсэн графын хүчтэй бүрэлдэхүүн хэсгүүдийг тодорхойл.</p>
+<ol start="17" type="1">
+<li><p>Граф (a).</p></li>
+<li><p>Граф (b).</p></li>
+<li><p>Граф (c).</p></li>
+<li><p>Граф (d).</p></li>
+<li><p>1-р дасгал дахь хорооллыг авч үзье. Хорооллын цэг бүрээс өөр аль ч цэг рүү очих боломжтой юу? Хэрэв үгүй бол хорооллын аль хэсэгт аялал хязгаарлагддагийг тайлбарла.</p></li>
+<li><p>2-р дасгал дахь хорооллыг авч үзье. Хорооллын цэг бүрээс өөр аль ч цэг рүү очих боломжтой юу? Хэрэв үгүй бол хорооллын аль хэсэгт аялал хязгаарлагддагийг тайлбарла.</p></li>
+</ol>
+<p>23-аас 26 хүртэлх дасгалуудад дүрслэгдсэн хоёр чиглэгдсэн граф изоморф болохыг батал.</p>
+<p>27-оос 32 хүртэлх дасгалуудад заасан чиглэгдсэн графын орой бүрийн орох болон гарах зэрэгтүүдийг жагсаа.</p>
+<ol start="27" type="1">
+<li>Граф (a).</li>
+<li>Граф (b).</li>
+<li>Граф (c).</li>
+<li>Граф (d).</li>
+<li>Зурагт үзүүлсэн граф.</li>
+<li>Зурагт үзүүлсэн граф.</li>
+</ol>
+<p>33-аас 36 хүртэлх дасгалуудад дүрслэгдсэн хоёр чиглэгдсэн граф изоморф бус болохыг батал.</p>
+<p>37-оос 40 хүртэлх дасгалуудад дүрслэгдсэн чиглэгдсэн графууд изоморф мөн эсэхийг батал эсвэл няцаа.</p>
+<ol start="41" type="1">
+<li>3 эсвэл түүнээс цөөн оройтой бүх изоморф бус энгийн чиглэгдсэн графуудыг жагсаа.</li>
+<li>4 орой, 3 эсвэл түүнээс цөөн ирмэгтэй бүх изоморф бус энгийн чиглэгдсэн графуудыг жагсаа. <em>43. <span class="math inline">\(G \cong K_4\)</span> байх бүх изоморф бус чиглэгдсэн графуудыг жагсаа. </em>44. <span class="math inline">\(G \cong K_{2,3}\)</span> байх бүх изоморф бус чиглэгдсэн графуудыг жагсаа. *45. <span class="math inline">\(G\)</span> нь дурын чиглэгдсэн граф гэе. Хэрэв <span class="math inline">\(G\)</span> хүчтэй холбогдсон бол <span class="math inline">\(G\)</span> нь сул холбогдсон болохыг харуул.</li>
+<li>Теорем 8.16-г батал.</li>
+<li>(G) ба (H) нь дурын чиглэгдсэн графууд гэе. Хэрэв (G H) бол <span class="math inline">\(\underline{G} \cong \underline{H}\)</span> болохыг харуул. Эсрэг нь үнэн үү?</li>
+<li>Дурын чиглэгдсэн <span class="math inline">\(G = (V, E)\)</span> графын хувьд хүчтэй бүрэлдэхүүн хэсгүүд болон сул бүрэлдэхүүн хэсгүүд нь <span class="math display">\[\forall u, v \in V, \ (u, v) \in E \leftrightarrow (v, u) \in E\]</span> нөхцөлийг хангах тохиолдолд ижил болохыг харуул.</li>
+</ol>
+<p>49 ба 50 хүртэлх дасгалуудад (a) өгөгдсөн графын зэргэлдийн матриц <span class="math inline">\(A\)</span>-г ол, (b) <span class="math inline">\(A^2\)</span>-г гараар тооцоол.</p>
+<p><em>51. Хэрэв <span class="math inline">\(G\)</span> нь гогцоогүй чиглэгдсэн граф ба <span class="math inline">\(A\)</span> нь түүний зэргэлдийн матриц бол <span class="math inline">\(G\)</span>-ийн зэргэлдийн матрицыг <span class="math inline">\(A\)</span>-аар илэрхийл. </em>52. Чиглэгдсэн графын зэргэлдийн матриц ямар нөхцөлд тэгш хэмтэй байх вэ? 53. Үр дагавар 8.11-ийн чиглэгдсэн графуудад зориулсан хувилбарыг бич. 54. Үр дагавар 8.13-ийн чиглэгдсэн графуудад зориулсан хувилбарыг бич. 55. Зурагт үзүүлсэн чиглэгдсэн граф нь Марковын гинжин хэлхээний график мөн үү? Хэрэв тийм биш бол яагаад гэдгийг тайлбарла. 56. Зурагт үзүүлсэн чиглэгдсэн граф нь Марковын гинжин хэлхээний график мөн үү? Хэрэв тийм биш бол яагаад гэдгийг тайлбарла. 57. Өгөгдсөн Марковын гинжин хэлхээний графикийн хувьд, (a) шилжилтийн матриц <span class="math inline">\(M\)</span>-ийг ол. (b) <span class="math inline">\(M^2\)</span>-г ол. 58. Өгөгдсөн Марковын гинжин хэлхээний графикийн хувьд, (a) шилжилтийн матриц <span class="math inline">\(M\)</span>-ийг ол. (b) <span class="math inline">\(M^2\)</span>-г ол.</p>
+<p>59-өөс 68 хүртэлх дасгалуудад матрицын зэрэгтийг тооцоолохын тулд <em>Mathematica</em> эсвэл <em>Maple</em> зэрэг математик програм хангамжийг ашигла.</p>
+<ol start="59" type="1">
+<li><strong>Бүрэн теннисний тоглолт.</strong> Теннисний тоглолтод тоглогч дор хаяж хоёр онооны зөрүүгээр ялах ёстой. Гэхдээ оноог 0, 1, 2 гэж нэрлэдэггүй, харин 0 (эсвэл Хайр), 15, 30, 40 гэж нэрлэдэг. Хураангуй нь тоглогчдын оноог эхлээд үйлчилдэг тоглогчийн оноог эхлүүлж хосоор бичих явдал юм. Бага оноотой тоглогчдын аль нэг нь 30 хүрэхэд, эсвэл тэнцээтэй оноо (жишээ нь, 40-40) гарвал тоглолтыг “тэнцээ” гэж нэрлэдэг бөгөөд ялалт байгуулахад нэг оноо л хэрэгтэй тоглогч “давуу талтай” гэж хэлэгддэг.
+<ol type="a">
+<li>Теннисний тоглолтод гарч болох оноонуудыг тусгасан оройнуудтай Марковын гинжин хэлхээний график зур. 8.34-р зураг энэ графын дэд графикийг дүрсэлж байгааг анхаарна уу. Гэхдээ бидний граф ямар ч магадлалын шошгогүй байх болно.</li>
+<li>Хэдэн класс байгаа вэ?</li>
+<li>Хэд нь түр зуурын вэ?</li>
+</ol></li>
+<li><strong>Гурван оноогоор хожих.</strong> A болон B тоглогчид зоос шидэх замаар тодорхойлогддог оноотой тоглоом тоглож байгаа бөгөөд эхлээд гурван оноо авсан тоглогч хожно. Хэрэв зоос толгойгоор унавал А тоглогч оноо авна. Хэрэв зоос сүүлээр унавал В тоглогч оноо авна. Зөвхөн онооны зөрүү л чухал тул <span class="math inline">\((2, 1)\)</span> гэсэн оноог <span class="math inline">\((1, 0)\)</span> гэж тодорхойлдог, өөрөөр хэлбэл ерөнхийдөө <span class="math inline">\((a, b)\)</span>-г <span class="math inline">\((a - \min(a, b), b - \min(a, b))\)</span> гэж тодорхойлдог. Тиймээс зөвхөн төгсгөлөг олон боломжит төлөв байна.
+<ol type="a">
+<li>Зоос шударга, тоглоом шударга гэж үзээд энэ тоглоомыг тусгасан Марковын гинжин хэлхээний график зур.</li>
+<li>Шингээгч төлөвүүд аль вэ?</li>
+<li>Түр зуурын төлөвүүдийн үе хэд вэ?</li>
+<li>Эхний шидэлтээр хожсон тоглогч тоглоомыг хожих магадлал хэд вэ? <em>Заавар:</em> <span class="math inline">\(M^\infty\)</span>-г авч үз.</li>
+</ol></li>
+<li><span class="math inline">\(M\)</span> нь Марковын гинжин хэлхээний шилжилтийн матриц гэе. <span class="math inline">\(1 \le i \le n\)</span> бүрийн хувьд <span class="math inline">\(M\)</span>-ийн <span class="math inline">\(i\)</span>-р мөрийн нийлбэр 1 болохыг, өөрөөр хэлбэл <span class="math inline">\(\sum_{j=1}^n p(i, j) = 1\)</span> болохыг харуул. Баганын нийлбэр мөн 1 байх уу?</li>
+<li><span class="math inline">\(G\)</span> нь <span class="math inline">\(n\)</span> оройтой дурын Марковын гинжин хэлхээний график ба <span class="math inline">\(M\)</span> нь <span class="math inline">\(G\)</span>-ийн шилжилтийн матриц гэе. Зөвхөн <span class="math inline">\(I + M + M^2 + \dots + M^{n-1}\)</span> матрицын элемент бүр эерэг байх тохиолдолд л <span class="math inline">\(G\)</span> хүчтэй холбогдсон болохыг харуул.</li>
+<li><strong>Бейсболын шинжилгээ.</strong> 8.31-р зурагт байгаа чиглэгдсэн графаас Марковын гинжин хэлхээ үүсгэ. Оройнуудыг 0, 1, 2, 3, 4, 5 гэж шошголох ба 0 нь Бөхөөс өмнө (At Bat), 1 нь Нэгдүгээр суурь (First Base), 2 нь Хоёрдугаар суурь (Second Base), 3 нь Гуравдугаар суурь (Third Base), 4 нь Оноо (Score), 5 нь Аут (Out) юм. Мөн 4 ба 5 оройнууд дээр гогцоо нэм. Дараах шилжилтийн матрицыг ашигла. <span class="math display">\[
+M = \begin{array}{c}
+\begin{matrix} &amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \end{matrix} \\
+\begin{matrix} 0 \\ 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{matrix}
+\begin{bmatrix}
+0 &amp; .2 &amp; .05 &amp; .025 &amp; .025 &amp; .7 \\
+0 &amp; .55 &amp; .125 &amp; .125 &amp; .075 &amp; .125 \\
+0 &amp; 0 &amp; .65 &amp; .05 &amp; .2 &amp; .1 \\
+0 &amp; 0 &amp; 0 &amp; .7 &amp; .25 &amp; .05 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\end{array}
+\]</span>
+<ol type="a">
+<li><span class="math inline">\(M^2\)</span> ба <span class="math inline">\(M^3\)</span>-ыг тооцоол. Хэрэв тоглогч нэгдүгээр суурь дээр эхэлбэл дараагийн 2 бөхөөс хойш оноо авах магадлал хэд вэ? 3 бөхөөс хойш?</li>
+<li><span class="math inline">\(M\)</span>-ийн том зэрэгтийг (жишээ нь <span class="math inline">\(M^{40}\)</span>) тооцоол. Энэ нь нийлэлтийг харуулж, тодорхой суурьаас оноо авах эсвэл аут болох эцсийн боломжийг харуулж байна. Нэгдүгээр суурьаас оноо авах эцсийн магадлал хэд вэ? Энэ эцсийн магадлал эхлэх суурьаас хамаарч өөрчлөгдөх үү?</li>
+</ol></li>
+<li><strong>Хүн амын шилжилт.</strong> Дөрвөн арлын оршин суугчид жил бүр эдгээр арлуудын хооронд нүүдэг. Шилжилтүүдийн магадлалыг үзүүлсэн Марковын гинжин хэлхээний графикт харуулав.
+<ol type="a">
+<li>Энэ Марковын гинжин хэлхээний графикийн <span class="math inline">\(M\)</span> шилжилтийн матрицыг өг.</li>
+<li><span class="math inline">\(M^2\)</span> ба <span class="math inline">\(M^3\)</span>-ыг тооцоол. <span class="math inline">\(A\)</span> арал дээр амьдардаг хүн 2 жилийн дараа <span class="math inline">\(D\)</span> арал дээр амьдрах магадлал хэд вэ? 3 жилийн дараа?</li>
+<li><span class="math inline">\(M\)</span>-ийн том зэрэгтийг (жишээ нь <span class="math inline">\(M^{40}\)</span>) тооцоол. Энэ нь нийлэлтийг харуулж, арлуудын хооронд хүн амын эцсийн тэнцвэрийг харуулж байна. <span class="math inline">\(A\)</span> арал дээр амьдардаг хүн эцэстээ <span class="math inline">\(D\)</span> арал дээр амьдрах магадлал хэд вэ? Эхлэх арал энэ эцсийн магадлалд нөлөөлөх үү?</li>
+</ol></li>
+<li><strong>Тооцооллын нөхөн олговор.</strong> Өрсөлдөөнтэй коллежид тооцоолол хичээлээр унаж, коллежид үлдэхийг хүсч буй оюутнууд эхлээд алгебр, дараа нь тригонометр хичээл заавал үзэх ёстой (нөхөн олговрын хичээлүүдийг тэнцсэн ч тооцоолол хичээлээ дахин авч болно). Олон хүн урам хугарч сургуулиа орхидог. Энэ Марковын гинжин хэлхээний <span class="math inline">\(M\)</span> шилжилтийн матрицыг үзүүлэв. <span class="math display">\[
+M = \begin{array}{c}
+\begin{matrix} &amp; \text{Calc.} &amp; \text{Trig.} &amp; \text{Alg.} &amp; \text{WD} &amp; \text{Pass} \end{matrix} \\
+\begin{matrix} \text{Calc.} \\ \text{Trig.} \\ \text{Alg.} \\ \text{WD} \\ \text{Pass} \end{matrix}
+\begin{bmatrix}
+0 &amp; 0 &amp; .3 &amp; .1 &amp; .6 \\
+.5 &amp; 0 &amp; 0 &amp; .5 &amp; 0 \\
+0 &amp; .8 &amp; 0 &amp; .2 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\end{array}
+\]</span>
+<ol type="a">
+<li>Харгалзах Марковын гинжин хэлхээний график зур.</li>
+<li>Төлөв бүрийн хувьд үеийг нь тодорхойл.</li>
+<li><span class="math inline">\(M\)</span>-ийн том зэрэгтийг (жишээ нь <span class="math inline">\(M^{50}\)</span>) тооцоол. Тооцоолол хичээлээр эхэлсэн оюутнуудын хэдэн хувь нь эцэст нь тооцоолол тэнцэх вэ? Алгебраар эхэлсэн оюутнуудын хэдэн хувь нь эцэст нь сургуулиа орхих вэ?</li>
+</ol></li>
+<li><strong>Хос теннисний тэмцээн.</strong> А ба В багууд хос теннис тоглож байна. А баг нь a ба a тоглогчдоос, В баг нь b ба b тоглогчдоос бүрдэнэ. Тоглогч бүрийн хувьд өрсөлдөгчийнх нь багийн аль гишүүн түүний цохилтыг хүлээн авах талаар статистик мэдээлэл хадгалагддаг. Бид тоглогчдын хэн нь ч цохилтоо алдахгүй гэж үзэж байгаа тул дур мэдэн урт удаан тоглолт үргэлжилж болно. <span class="math display">\[
+M = \begin{array}{c}
+\begin{matrix} &amp; \text{A} &amp; \text{a} &amp; \text{B} &amp; \text{b} \end{matrix} \\
+\begin{matrix} \text{A} \\ \text{a} \\ \text{B} \\ \text{b} \end{matrix}
+\begin{bmatrix}
+0 &amp; 0 &amp; .3 &amp; .7 \\
+0 &amp; 0 &amp; .6 &amp; .4 \\
+.2 &amp; .8 &amp; 0 &amp; 0 \\
+.5 &amp; .5 &amp; 0 &amp; 0
+\end{bmatrix}
+\end{array}
+\]</span>
+<ol type="a">
+<li>Харгалзах Марковын гинжин хэлхээний график зур.</li>
+<li><span class="math inline">\(M^2\)</span>-г тооцоолж, төлөв бүр 2 үетэй болохыг ажигла.</li>
+<li>Энэ Марковын гинжин хэлхээ нь <span class="math inline">\(M\)</span>-ийн зэрэгтүүд нийлэх ганц <span class="math inline">\(M^\infty\)</span> матрицтай биш юм. Харин төлөв бүр 2 үетэй тул <span class="math inline">\(M\)</span>-ийн тэгш зэрэгтүүд <span class="math inline">\(M^{\text{even}}\)</span> матриц руу, сондгой зэрэгтүүд нь <span class="math inline">\(M^{\text{odd}}\)</span> өөр матриц руу нийлдэг. <span class="math inline">\(M\)</span>-ийн том зэрэгтүүдийг тооцоолж эдгээр матрицуудыг тооцоол.</li>
+</ol></li>
+<li><strong>Видео покер.</strong> Кит казиногийн видео покерын машинтай тэмцэхийг оролдож байна. Хэдэн цагийн ажиглалтын дараа тэрээр дараах матрицад жагсаасан шилжилтийн магадлалыг харсан. Өөрөөр хэлбэл, компютерийн нэг ээлжийн үйлдэл өгөгдсөн үед матриц нь дараагийн ээлжийн компютерийн үйлдлийн магадлалыг тусгадаг. <span class="math display">\[
+M = \begin{array}{c}
+\begin{matrix} &amp; \text{Bet} &amp; \text{Check} &amp; \text{Fold} &amp; \text{Win} \end{matrix} \\
+\begin{matrix} \text{Bet} \\ \text{Check} \\ \text{Fold} \\ \text{Win} \end{matrix}
+\begin{bmatrix}
+.4 &amp; .2 &amp; .1 &amp; .3 \\
+.3 &amp; .2 &amp; .3 &amp; .2 \\
+0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\end{array}
+\]</span> Мэдээж хэрэг, компютер эвхэх (энэ нь компютер хожигдсонтой адил) эсвэл компютер хожих үед тоглоом дуусдаг.
+<ol type="a">
+<li>Харгалзах Марковын гинжин хэлхээний график зур.</li>
+<li><span class="math inline">\(M^\infty\)</span>-г тооцоол.</li>
+<li>Компютерийн эхний ээлжийн боломжит үйлдэл бүрийн хувьд компютер тэр тоглоомыг хожих магадлалыг тодорхойл.</li>
+<li>Кит энэ шинжилгээний үр дүнд компютерийн эсрэг ямар нэг давуу тал олж чадах уу?</li>
+</ol></li>
+<li><strong>Хос теннисний оноо.</strong> Энд бид 66-р дасгалтай ижил хос теннисний тоглолтын үндсэн тохиргоог авч үзье. Гэхдээ одоо тоглогч цохилтоо гүйцээж чадахгүй байх боломжтой асуудлыг авч үзье. Тиймээс тоглогчийн цохилтыг илэрхийлэх <span class="math inline">\(x\)</span> төлөв бүрийн хувьд бид тухайн тоглогч цохилтоо гүйцээж чадаагүйг илэрхийлэх <span class="math inline">\(x'\)</span> төлөвийг нэмнэ. Мэдээж хэрэг, эдгээр шинэ төлөвүүдийн аль нэгэнд хүрсэн дараа оноо дууссан байна. <span class="math display">\[
+M = \begin{array}{c}
+\begin{matrix} &amp; \text{A} &amp; \text{a} &amp; \text{B} &amp; \text{b} &amp; \text{a}' &amp; \text{A}' &amp; \text{B}' &amp; \text{b}' \end{matrix} \\
+\begin{matrix} \text{A} \\ \text{a} \\ \text{B} \\ \text{b} \\ \text{a}' \\ \text{A}' \\ \text{B}' \\ \text{b}' \end{matrix}
+\begin{bmatrix}
+0 &amp; 0 &amp; .2 &amp; .6 &amp; 2 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; .4 &amp; .2 &amp; 0 &amp; 4 &amp; 0 &amp; 0 \\
+.1 &amp; .6 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; .3 &amp; 0 \\
+.3 &amp; .4 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; .3 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\end{array}
+\]</span>
+<ol type="a">
+<li>Харгалзах Марковын гинжин хэлхээний график зур.</li>
+<li><span class="math inline">\(M^\infty\)</span>-г тооцоол. Хэрэв A тоглогч үйлчилбэл, эцэст нь А тоглогч оноогоо алдах магадлал хэд вэ?</li>
+<li>Аль баг оноог хожих магадлалтай вэ? Аль тоглогч үйлчилж (оноог эхлүүлж) байгаа нь хамаатай юу?</li>
+</ol></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./8-4.html" class="pagination-link" aria-label="Бүлэг 8.4: Инвариантууд">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Бүлэг 8.4: Инвариантууд</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./8-6.html" class="pagination-link" aria-label="Бүлэг 8: Давтлагын бодлогууд">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Бүлэг 8: Давтлагын бодлогууд</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
