@@ -15,6 +15,10 @@ book:
     - index.qmd
     - 0.qmd
     - 8-1.qmd
+    - 8-2.qmd
+    - 8-4.qmd
+    - 8-5.qmd
+    - 8-6.qmd
     #- appendix.qmd
 
 
