@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Бүлэг 8.3: Изоморфизм – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./8-4.html" rel="next">
+<link href="./8-2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8-1.html">2 Графын онол</a></li><li class="breadcrumb-item"><a href="./8-3.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Бүлэг 8.3: Изоморфизм</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Тоонуудыг дүрслэх нь</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">2 Графын онол</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Графын онолын үндэс</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Матриц ба тусгай графууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Бүлэг 8.3: Изоморфизм</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Бүлэг 8.4: Инвариантууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Бүлэг 8.5: Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Бүлэг 8: Давтлагын бодлогууд</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#изоморфизм" id="toc-изоморфизм" class="nav-link active" data-scroll-target="#изоморфизм"><span class="header-section-number">4.1</span> 8.3 Изоморфизм</a></li>
+  <li><a href="#хэсгийн-дасгалууд" id="toc-хэсгийн-дасгалууд" class="nav-link" data-scroll-target="#хэсгийн-дасгалууд"><span class="header-section-number">4.2</span> 8.3 Хэсгийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8-1.html">2 Графын онол</a></li><li class="breadcrumb-item"><a href="./8-3.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Бүлэг 8.3: Изоморфизм</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Бүлэг 8.3: Изоморфизм</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="изоморфизм" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="изоморфизм"><span class="header-section-number">4.1</span> 8.3 Изоморфизм</h2>
+<p>8.21-р зурагт хоёр граф (a) ба (b)-ийн зургуудыг үзүүлэв. Тэдгээр нь нэг графын зургууд мөн үү? (a)-ийн зургийг 8.22-р зурагт үзүүлсэн (b)-ийн зураг руу хувиргах нь тийм гэдгийг харуулж байна.</p>
+<p><img src="fig_8_21.png" class="img-fluid" alt="Зураг 8.21 Харьцуулах хоёр граф"> <em>Зураг 8.21 Харьцуулах хоёр граф</em></p>
+<p><img src="fig_8_22.png" class="img-fluid" alt="Зураг 8.22 Нэг графыг нөгөө рүү хувиргах нь"> <em>Зураг 8.22 Нэг графыг нөгөө рүү хувиргах нь</em></p>
+<p>8.22-р зургийн сүүлчийн алхамд чухал ажиглалт хийх хэрэгтэй. Тэнд (a) графын оройнууд (b) графын оройнуудтай 8.23-р зурагт заасан оноолтын дагуу таарч байгааг харж байна. Мөн ирмэгүүд 8.23-р зургийн баруун гар талд заасны дагуу зөв таарч байгаа нь чухал юм. Энд чухал зүйл бол <span class="math inline">\(b \rightarrow m\)</span> гэх мэт ирмэгийн оноолт нь төгсгөлийн цэгүүдийн харгалзах оройнуудтай тохирч байгаа явдал юм. Өөрөөр хэлбэл, <span class="math inline">\(b \rightarrow \{1, 3\}\)</span> ба <span class="math inline">\(m \rightarrow \{7, 10\}\)</span> оноолт нь 1 ба 3 оройг 7 ба 10 оройтой харгалзуулж байна. Үнэн хэрэгтээ, зөвхөн нэг ирмэг нь хоёр төгсгөлийг холбосон тохиолдолд оройнуудын харгалзаа нь ирмэгүүдийн харгалзааг бүрэн тодорхойлдог. Энэ шийдвэр нь <span class="math inline">\(1 \rightarrow 7\)</span> ба <span class="math inline">\(3 \rightarrow 10\)</span> нь <span class="math inline">\(b \rightarrow m\)</span> сонголтыг албаддаг. Гэхдээ олон ирмэгтэй, жишээлбэл <span class="math inline">\(e\)</span> ба <span class="math inline">\(f\)</span> зэрэг тохиолдолд <span class="math inline">\(e \rightarrow k\)</span> ба <span class="math inline">\(f \rightarrow j\)</span>, эсвэл <span class="math inline">\(e \rightarrow j\)</span> ба <span class="math inline">\(f \rightarrow k\)</span> гэдгийг тодорхой зааж өгөх шаардлагатай.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(V_{(a)}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(V_{(b)}\)</span></th>
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><span class="math inline">\(E_{(a)}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(E_{(b)}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(7\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(a\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(8\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(b\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(10\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(c\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(9\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(d\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(e\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><span class="math inline">\(f\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: center;"><span class="math inline">\(g\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\rightarrow\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><em>Зураг 8.23 8.21-р зураг дахь орой ба ирмэгүүдийн тохироо</em></p>
+<p>Тодорхой нэг хос граф эквивалент гэдгийг харуулахад тулгардаг асуудлуудыг үзсэний дараа бид одоо графын изоморфизмын ойлголтыг ерөнхийд нь тодорхойлж байна.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.16</strong></p>
+<p><span class="math inline">\(G = (V_G, E_G)\)</span> ба <span class="math inline">\(H = (V_H, E_H)\)</span> графууд гэе.</p>
+<p><strong>(a)</strong> <span class="math inline">\(G\)</span>-ээс <span class="math inline">\(H\)</span> руу чиглэсэн, <span class="math inline">\(f: G \rightarrow H\)</span> гэж тэмдэглэгдэх <strong>графын изоморфизм</strong> (graph isomorphism) нь <span class="math inline">\(f_V: V_G \rightarrow V_H\)</span> ба <span class="math inline">\(f_E: E_G \rightarrow E_H\)</span> гэсэн хоёр биекц (bijections) юм. Үүнд, <span class="math inline">\(E_G\)</span>-ийн ирмэг <span class="math inline">\(e\)</span> бүрийн хувьд <span class="math inline">\(f_V\)</span> биекц нь <span class="math inline">\(e\)</span>-ийн төгсгөлүүдийг <span class="math inline">\(f_E(e)\)</span>-ийн төгсгөлүүд рүү буулгана. <span class="math inline">\(f_V\)</span> ба <span class="math inline">\(f_E\)</span>-ийн тодорхойлох мужуудын хооронд огтлолцол байхгүй бөгөөд тэдгээрийг зүгээр л <span class="math inline">\(f\)</span>-ээр тэмдэглэдэг. Хэрэв <span class="math inline">\(G\)</span> ба <span class="math inline">\(H\)</span> нь энгийн графууд бол <span class="math inline">\(f\)</span> нь <span class="math inline">\(f_V: V_G \rightarrow V_H\)</span> функцээр бүрэн тодорхойлогдоно, учир нь <span class="math inline">\(f_V\)</span> нь заавал <span class="math inline">\(\{u, v\} \in E_G \rightarrow \{f_V(u), f_V(v)\} \in E_H\)</span> байх ёстой.</p>
+<p><strong>(b)</strong> Хэрэв <span class="math inline">\(G\)</span>-ээс <span class="math inline">\(H\)</span> руу изоморфизм байвал <span class="math inline">\(G\)</span> нь <span class="math inline">\(H\)</span>-тэй <strong>изоморф</strong> (isomorphic) гэж хэлэх ба <span class="math inline">\(G \cong H\)</span> гэж тэмдэглэнэ.</p>
+<p><strong>(c)</strong> <span class="math inline">\(G\)</span> дээрх <strong>графын автоморфизм</strong> (graph automorphism) гэдэг нь <span class="math inline">\(G\)</span>-ээс <span class="math inline">\(G\)</span> руу чиглэсэн изоморфизм юм. <strong>Тривиал бус автоморфизм</strong> гэдэг нь нэгж хувиргалт биш автоморфизм <span class="math inline">\(f: G \rightarrow G\)</span> юм. <span class="math inline">\(G\)</span>-ийн автоморфизмуудын олонлогийг <span class="math inline">\(Aut(G)\)</span> гэж тэмдэглэнэ.</p>
+</blockquote>
+<p>Бид графын изоморфизмыг зэргэлдийн матрицуудын хувьд ойлгож болно. Жишээлбэл, 8.21-р зурагт байгаа (a) ба (b) графуудын хувьд оройнуудыг өсөх дарааллаар нь авч үзвэл <span class="math inline">\(A_{(a)}\)</span> ба <span class="math inline">\(A_{(b)}\)</span> зэргэлдийн матрицууд 8.24-р зурагт үзүүлсэн байна.</p>
+<p><span class="math display">\[
+A_{(a)} = \begin{array}{c}
+\begin{matrix} &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 \end{matrix} \\
+\begin{matrix} 1 \\ 2 \\ 3 \\ 4 \\ 5 \end{matrix}
+\begin{bmatrix}
+0 &amp; 1 &amp; 1 &amp; 2 &amp; 1 \\
+1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+2 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 1 &amp; 0 &amp; 0
+\end{bmatrix}
+\end{array}
+\quad
+A_{(b)} = \begin{array}{c}
+\begin{matrix} &amp; 6 &amp; 7 &amp; 8 &amp; 9 &amp; 10 \end{matrix} \\
+\begin{matrix} 6 \\ 7 \\ 8 \\ 9 \\ 10 \end{matrix}
+\begin{bmatrix}
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 1 &amp; 2 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 2 &amp; 0 &amp; 0 &amp; 1 \\
+1 &amp; 1 &amp; 0 &amp; 1 &amp; 0
+\end{bmatrix}
+\end{array}
+\]</span> <em>Зураг 8.24 8.21-р зургийн зэргэлдийн матрицууд</em></p>
+<p>Хэдийгээр <span class="math inline">\(A_{(a)} \neq A_{(b)}\)</span> боловч хэрэв бид <span class="math display">\[
+\begin{array}{c}
+6 \rightarrow 7 \\
+7 \rightarrow 8 \\
+8 \rightarrow 10 \\
+9 \rightarrow 9 \\
+10 \rightarrow 6
+\end{array}
+\]</span> пермутацийг <span class="math inline">\(A_{(b)}\)</span>-ийн мөр, багануудад хэрэглэвэл <span class="math inline">\(A_{(a)}\)</span>-тай яг ижил элементүүдтэй <span class="math inline">\(A'_{(b)}\)</span> шинэ зэргэлдийн матриц гарна. Мэдээж, <span class="math inline">\(7, 8, 10, 9, 6\)</span> гэсэн дараалал нь 8.23-р зурагт байгаа оройн зураглалаар тодорхойлогдоно. Өөрөөр хэлбэл, оройн зураглал нь (a) ба (b)-ийн оройнуудыг харгалзах зэргэлдийн матрицууд ижил байхаар эрэмбэлэхэд тусалдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.20</strong></p>
+<p>(Эквивалент сүлжээний тохиргоо). Нарийн төвөгтэй зэрэгцээ программыг хэрэгжүүлэхийн тулд 8.25-р зурагт үзүүлсэн хоёр өөр төрлийн компьютерний сүлжээний тохиргоог санал болгосон. Эдгээр сүлжээгүүд үнэндээ ижил тохиргоотой болохыг харуул.</p>
+<p><img src="fig_8_25.png" class="img-fluid" alt="Зураг 8.25 Эквивалент компьютерний сүлжээнүүд"> <em>Зураг 8.25 Эквивалент компьютерний сүлжээнүүд</em></p>
+<p><strong>Шийдэл.</strong> Зорилго нь 8.26-р зурагт үзүүлсэн харгалзах графууд изоморф болохыг харуулахад оршино. <span class="math inline">\(G\)</span> ба <span class="math inline">\(H\)</span> нь энгийн графууд тул <span class="math inline">\(E_G\)</span> ба <span class="math inline">\(E_H\)</span> ирмэгүүдийн хооронд ирмэгийг тогтоох оройн биекц <span class="math inline">\(f: V_G \rightarrow V_H\)</span>-ийг зааж өгөхөд хангалттай. <span class="math inline">\(f(1)=9, f(2)=10, f(3)=7, f(4)=6, f(5)=8\)</span> гэж тодорхойлбол хүссэн изоморфизмыг өгөхийг шалгахад хялбар юм.</p>
+</blockquote>
+<p><img src="fig_8_26.png" class="img-fluid" alt="Зураг 8.26 Изоморф сүлжээний графууд"> <em>Зураг 8.26 Изоморф сүлжээний графууд</em></p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.21</strong></p>
+<p>Бид <span class="math inline">\(K_4\)</span> домэйнтэй зарим графын изоморфизмуудыг авч үзье. Тохиолдол бүрт изоморфизмыг өгөгдсөн шошготой зургуудын хувьд тайлбарласан. Мөн <span class="math inline">\(K_4\)</span> нь энгийн граф тул ирмэгийн зураглал нь оройн зураглалаар бүрэн тодорхойлогддог.</p>
+<p><strong>(a)</strong> Доор <span class="math inline">\(K_4\)</span>-ийг зурах хоёр өөр аргыг үзүүлэв. <span class="math inline">\(f: K_4 \rightarrow H\)</span> изоморфизмыг</p>
+<p><span class="math display">\[f(1) = a, f(2) = d, f(3) = c, f(4) = b\]</span></p>
+<p>гэж өгөв. Тиймээс (K_4 H). Түүнчлэн, хэрэв <span class="math inline">\(a, b, c, d\)</span> шошгуудыг 1, 4, 3, 2-оор сольсон бол (H)-ийн зураг нь (K_4)-ийн өөр нэг зураг болохыг харж болно.</p>
+<p><strong>(b)</strong> (K_4)-ийн тривиал бус автоморфизмыг (f: K_4 K_4) графын изоморфизмоор өгөв.</p>
+<p><span class="math display">\[f(1) = 2, f(2) = 4, f(3) = 1, f(4) = 3\]</span></p>
+<p>Өөрөөр хэлбэл, (f) нь оройнуудын</p>
+<p><span class="math display">\[
+\begin{array}{cccc}
+1 &amp; 2 &amp; 3 &amp; 4 \\
+\downarrow &amp; \downarrow &amp; \downarrow &amp; \downarrow \\
+2 &amp; 4 &amp; 1 &amp; 3
+\end{array}
+\]</span></p>
+<p>пермутаци бөгөөд (f(1) ) тул (f) нь нэгж хувиргалт биш юм.</p>
+</blockquote>
+<p>8.21(b) жишээнд авч үзсэн (K_4)-ийн автоморфизмын хувьд маш олон сонголт байсан. Өөрөөр хэлбэл, бид <span class="math inline">\(f(1)=4\)</span>, дараа нь <span class="math inline">\(f(2)=2, f(3)=3\)</span>, ба <span class="math inline">\(f(4)=1\)</span> гэж сонгож болох байсан. Үнэн хэрэгтээ, (K_4)-ийн автоморфизмыг байгуулахад <span class="math inline">\(f(1)\)</span>-ийн хувьд ямар ч оройг сонгож болно. Энэ утгаараа (K_4)-ийн бүх оройнууд ижил харагдаж байна гэж хэлж болно.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.17</strong></p>
+<p>Аливаа <span class="math inline">\(u, v \in V\)</span> ба <span class="math inline">\(f(u) = v\)</span> байх графын автоморфизм (f) байвал <span class="math inline">\(G = (V, E)\)</span> графыг <strong>оройн хувьд шилжих чадвартай</strong> (vertex transitive) гэнэ.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.22</strong></p>
+<p>Аливаа эерэг бүхэл (n) тооны хувьд бүрэн граф (K_n) нь оройн хувьд шилжих чадвартай байх нь амархан харагддаг. Гол нь (K_n)-ийн хувьд графын автоморфизмууд нь ({1, 2, , n})-ийн пермутацуудтай тохирдог. Жишээлбэл, 8.21(b) жишээн дээрх автоморфизмыг (u=1)-ийг (v=2) руу илгээдэг (f) изоморфизм гэж үзэж болно.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.23</strong></p>
+<p><strong>Петерсений граф</strong> (Petersen graph) гэж нэрлэгддэг графын гурван өөр зургийг үзүүлэв. Эдгээр графууд үнэхээр изоморф мөн эсэхийг шалгахыг дасгалуудад үлдээв.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_23.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.23-ын графууд</figcaption>
+</figure>
+</div>
+<p>Петерсений граф нь оройн хувьд шилжих чадвартай гэдгийг мөн дасгалуудад үлдээв.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 8.4 Графын изоморфизм нь эквивалент хамаарал юм.</strong></p>
+<p>Бүх (G, H), ба (K) графуудын хувьд,</p>
+<p><strong>(a)</strong> (G G).</p>
+<p><strong>(b)</strong> хэрэв (G H) бол (H G).</p>
+<p><strong>(c)</strong> хэрэв (G H) ба (H K) бол (G K).</p>
+<p><strong>Баталгаа</strong></p>
+<ol type="a">
+<li>хэсгийн хувьд (V_G) ба (E_G) дээрх нэгж зураглалууд нь хүссэн изоморфизмыг өгнө. (b) ба (c) хэсгүүдийг дасгалуудад үлдээв. <span class="math inline">\(\square\)</span></li>
+</ol>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Тайлбар 8.3</strong></p>
+<p>Бид одоог хүртэл хэд хэдэн графуудыг <span class="math inline">\(P_n, C_n, K_n, K_{m,n}, Q_n\)</span>, тетраэдр, октаэдр, додекаэдр, икосаэдр, Петерсений граф гэх мэтээр нэрлэсэн. Тодорхой оройн олонлогуудыг (жишээ нь <span class="math inline">\(P_n, C_n, K_n\)</span>-ийн хувьд ({1, , n})) тэдгээрийн тодорхойлолтод ашигласан хэдий ч бид эдгээр графуудыг зөвхөн изоморфизм хүртэл тодорхойлсон гэсэн үг юм. Өөрөөр хэлбэл, эдгээрийн аль нэгтэй изоморф байх аливаа графыг мөн зохих нэрээр нь нэрлэх болно. Жишээлбэл, 8.21(a) жишээн дээрх (H) графыг бас (K_4) гэж нэрлэж болно.</p>
+</blockquote>
+<p>Дараах үр дүн нь <span class="math inline">\(Aut(G)\)</span> нь зүгээр нэг олонлогоос илүү бүтэцтэй болохыг тогтоож байна.</p>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 8.5</strong></p>
+<p>Аливаа (G) графын хувьд (Aut(G)) нь бүлэг (group) болно.</p>
+<p><strong>Баталгаа</strong></p>
+<p>Бид бүлгийн гурван тодорхойлогч шинж чанарыг тогтоох ёстой.</p>
+<p>(Ассоциатив) <span class="math inline">\(f, g, h \in Aut(G)\)</span> гэж үзье. <span class="math inline">\(f_V, g_V, h_V\)</span> функцууд тул функцийн композицийн ассоциатив чанараар (Теорем 5.7) <span class="math inline">\((f_V \circ g_V) \circ h_V = f_V \circ (g_V \circ h_V)\)</span> болно. Мөн <span class="math inline">\(f_E, g_E, h_E\)</span>-ийн хувьд мөн адил. Иймээс <span class="math inline">\((f \circ g) \circ h = f \circ (g \circ h)\)</span> гэж дүгнэж болно.</p>
+<p>(Нэгж) <span class="math inline">\(\text{id}_V(v) = v\)</span> ба <span class="math inline">\(\text{id}_E(e) = e\)</span> гэж тодорхойлогдсон нэгж функц <span class="math inline">\(\text{id}_G\)</span> нь (G)-ийн автоморфизм болохыг харахад хялбар. Түүнчлэн, аливаа автоморфизм (f)-ийн хувьд <span class="math inline">\(\text{id}_G \circ f = f \circ \text{id}_G = f\)</span> байна.</p>
+<p>(Урвуу) <span class="math inline">\(f \in Aut(G)\)</span> гэж үзье. <span class="math inline">\(f_V\)</span> ба <span class="math inline">\(f_E\)</span> нь биекц тул Теорем 5.10-аас үзэхэд <span class="math inline">\(g_V = f_V^{-1}\)</span> ба <span class="math inline">\(g_E = f_E^{-1}\)</span> нь мөн биекц юм. <span class="math inline">\(g_V\)</span> нь (e) ирмэгийн төгсгөлүүдийг <span class="math inline">\(g_E(e)\)</span>-ийн төгсгөлүүд рүү буулгадаг гэдгийг батлах ёстой. Аливаа <span class="math inline">\(e \leftrightarrow \{u, v\}\)</span> ирмэгийг авч үзье. <span class="math inline">\(f_E\)</span> нь бүрэн тодорхойлогдсон тул <span class="math inline">\(f_E(e') = e\)</span> байх <span class="math inline">\(e'\)</span> ирмэг байна. (f) нь графын изоморфизм тул <span class="math inline">\(f_V(u') = u\)</span> ба <span class="math inline">\(f_V(v') = v\)</span> байх <span class="math inline">\(e' \leftrightarrow \{u', v'\}\)</span> байх ёстой. <span class="math inline">\(g_V\)</span> нь <span class="math inline">\(f_V^{-1}\)</span> ба <span class="math inline">\(g_E\)</span> нь <span class="math inline">\(f_E^{-1}\)</span> гэдгээс үзэхэд <span class="math inline">\(g_E(e) = e'\)</span>, <span class="math inline">\(g_V(u) = u'\)</span>, <span class="math inline">\(g_V(v) = v'\)</span> болно. Өөрөөр хэлбэл, <span class="math inline">\(g_V\)</span> нь (e) ирмэгийн төгсгөлүүдийг <span class="math inline">\(g_E(e)\)</span>-ийн төгсгөлүүд рүү буулгана. Иймээс <span class="math inline">\(g_V\)</span> ба <span class="math inline">\(g_E\)</span> нь (G)-ийн автоморфизмыг тодорхойлно. Түүнчлэн, <span class="math inline">\(g \circ f = f \circ g = \text{id}_G\)</span> байх ба үүнээс <span class="math inline">\(g = f^{-1}\)</span> болно. <span class="math inline">\(\square\)</span></p>
+</blockquote>
+<p>Ерөнхийдөө, <span class="math inline">\(G = (\{v_1, \dots, v_n\}, E)\)</span> графын автоморфизм нь оройн олонлогийн <span class="math inline">\(f(v_1), \dots, f(v_n)\)</span> пермутацид харгалзана. Ингэснээр <span class="math inline">\(v_1, \dots, v_n\)</span> эрэмбийг ашигласан <span class="math inline">\(A\)</span> зэргэлдийн матриц нь <span class="math inline">\(f(v_1), \dots, f(v_n)\)</span> эрэмбийг ашигласан зэргэлдийн матрицтай ижил байна. Матрицын хувьд хэлбэл, <span class="math inline">\(P\)</span> нь <span class="math inline">\(f(v_1), \dots, f(v_n)\)</span> пермутацид харгалзах пермутацийн матриц гэвэл, (f) нь зөвхөн <span class="math inline">\(PAP^T = A\)</span> байх тохиолдолд л (G)-ийн автоморфизм болно. Ялангуяа <span class="math inline">\(Aut(G)\)</span> олонлог нь <span class="math inline">\(v_1, \dots, v_n\)</span>-ийн пермутацуудын олонлогийн дэд олонлог юм.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.24</strong></p>
+<p>Графын автоморфизмууд нь 1, 2, 3, 4-ийн тодорхой пермутацууд юм. Ялангуяа тэдгээр нь:</p>
+<p><span class="math display">\[
+\begin{array}{ll}
+1, 2, 3, 4 &amp; \text{нэгж хувиргалт}, \\
+1, 4, 3, 2 &amp; \text{зөвхөн 2 ба 4-ийг сэлгэх}, \\
+3, 2, 1, 4 &amp; \text{зөвхөн 1 ба 3-ыг сэлгэх}, \\
+3, 4, 1, 2 &amp; \text{2 ба 4-ийг, мөн 1 ба 3-ыг сэлгэх}.
+\end{array}
+\]</span></p>
+<p>Нийт 4 автоморфизм байна. Нэг нь тривиал, нөгөө гурав нь тривиал бус.</p>
+</blockquote>
+<p>Хэрэв бид графын изоморфизмын тодорхойлолтоос биекц функцийн шаардлагыг хасвал графуудын хоорондын зураглалын илүү ерөнхий ойлголтыг олж авна.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.18</strong></p>
+<p><span class="math inline">\(G = (V_G, E_G)\)</span> графаас (H = (V_H, E_H)) граф руу чиглэсэн, <span class="math inline">\(f: G \rightarrow H\)</span> гэж тэмдэглэгдэх <strong>графын зураглал</strong> (graph map) гэдэг нь (E_G)-ийн ирмэг (e) бүрийн хувьд (f_V) функц нь (e)-ийн төгсгөлүүдийг (f_E(e))-ийн төгсгөлүүд рүү буулгах <span class="math inline">\(f_V: V_G \rightarrow V_H\)</span> ба <span class="math inline">\(f_E: E_G \rightarrow E_H\)</span> функцүүдийн хос юм.</p>
+</blockquote>
+<p>Графын зураглал нь оройг орой руу, ирмэгийг ирмэг рүү илгээдэг. <span class="math inline">\(f: G \rightarrow H\)</span> графын зураглалыг (H) дотор (G)-ийг эвхэх (folding) гэж үзэж болно.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.25</strong></p>
+<p>Доорх хоёр тохиолдолд (G) ба (H) графуудыг шошготойгоор үзүүлсэн бөгөөд (f: G H) графын зураглалын утгуудыг заасан.</p>
+<p><strong>(a)</strong> Зурагт үзүүлсэн (f) зураглалыг орой болон ирмэгүүд дээр хоёуланд нь зааж өгөх ёстой.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_25_a.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.25(a)</figcaption>
+</figure>
+</div>
+<p>Энд, <span class="math inline">\(f(1) = 6, f(2) = 7, f(3) = 9, f(4) = 10, f(5) = 9, f(a) = j, f(b) = j, f(c) = m, f(d) = o, f(e) = n, f(g) = q, f(h) = q\)</span>, мөн <span class="math inline">\(f(i) = p\)</span>. (f)-ийн дүрс нь (H)-ийн бүдүүнээр харуулсан дэд граф юм.</p>
+<p><strong>(b)</strong> Зурагт үзүүлсэн (f) зураглалыг зөвхөн оройнууд дээр зааж өгөх шаардлагатай.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_8_25_b.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 8.25(b)</figcaption>
+</figure>
+</div>
+<p>Энд <span class="math inline">\(f(1) = 7, f(2) = 9, f(3) = 6, f(4) = 8\)</span>. (f)-ийн дүрсийг бүдүүнээр харуулав. Энгийнээр хэлбэл, (f) нь (G)-ийг цагийн зүүний дагуу эргүүлж, (H)-ийн нэг хэсэг дээр байрлуулна.</p>
+</blockquote>
+</section>
+<section id="хэсгийн-дасгалууд" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="хэсгийн-дасгалууд"><span class="header-section-number">4.2</span> 8.3 Хэсгийн дасгалууд</h2>
+<p>Графын изоморфизмыг дасгалуудын туршид асуух болно. Графууд энгийн байх тохиолдолд 8.16-р тодорхойлолтод заасны дагуу ирмэгүүдийн хувьд зохих ёсоор ажиллах оройн биекцийг зааж өгөхөд хангалттай. Бусад тохиолдолд ирмэгийн биекцийг мөн өгөх ёстой.</p>
+<ol type="1">
+<li>Дүрслэгдсэн хоёр граф изоморф болохыг харуул.</li>
+<li>Дүрслэгдсэн хоёр граф изоморф болохыг харуул.</li>
+<li><span class="math inline">\(P_3 \cong K_{1,2}\)</span> болохыг харуул.</li>
+<li><span class="math inline">\(C_4 \cong K_{2,2}\)</span> болохыг харуул.</li>
+<li>Дүрслэгдсэн хоёр граф изоморф болохыг харуул.</li>
+<li>Дүрслэгдсэн хоёр граф изоморф болохыг харуул.</li>
+<li>Тодорхой нэг компанийн Нью-Йорк дахь оффис нь зүүн талд үзүүлсэн тохиргоотой сүлжээг агуулдаг. Лос Анжелес дахь оффис нь баруун талд үзүүлсэн компьютерний тохиргоог агуулдаг. Нью-Йоркийн оффисоос Лос Анжелесийн оффис руу аялсан программист Нью-Йоркийн сүлжээнд туршиж үзсэн програмаа харуулахыг хүсч байна. Зурагт үзүүлсэн хоёр сүлжээний тохиргоо нь эквивалент сүлжээг бий болгодог тул програм нь Лос Анжелест ажиллах боломжтой гэдгийг харуул.</li>
+<li>Нэг компани 5 компьютерээ 7 кабелийн холболтоор сүлжээнд холбох шаардлагатай болжээ. Хоёр өрсөлдөгч сүлжээний загвар зохион бүтээгч өөр өөрийн загварын давуу талыг бататган зурган дээрх сүлжээний тохиргоог гаргаж ирэв. Зурагт үзүүлсэн хоёр сүлжээний тохиргоо нь үнэндээ эквивалент сүлжээг бий болгодог болохыг харуул.</li>
+<li>Цахилгаан сүлжээний хоёр өөр төлөвлөгөөг дүрслэв. Тэмдэглэгээ нь цахилгаан станцыг илэрхийлнэ. Нэг нь Теннесси мужийн Нэшвилл, нөгөө нь Нью-Йорк мужийн Сиракуз дахь сүлжээг төлөөлдөг. Нэшвиллд цахилгаан станцуудын хооронд эрчим хүч дамжуулах ажлыг удирдахад маш үр дүнтэй програм хангамжтай байдаг. Цахилгаан сүлжээнүүд эквивалент болохыг харуул. Үүнээс үзэхэд Сиракуз Нэшвиллд ашиглаж байгаа ижил удирдлагын програм хангамжийг ашиглаж болно.</li>
+<li>Цахилгаан сүлжээний хоёр өөр төлөвлөгөөг дүрслэв. Тэмдэглэгээ нь цахилгаан станцыг илэрхийлнэ. Нэг нь Пенсильвани мужийн Филадельфи, нөгөө нь Пенсильвани мужийн Питтсбург дахь сүлжээг төлөөлдөг. Филадельфи өөрсдийн станцуудын зарим нь шуурганд өртөх үед сүлжээгээ хэрхэн ажиллуулах талаар иж бүрэн дүн шинжилгээ хийлгэсэн. Цахилгаан сүлжээнүүд эквивалент болохыг харуул. Үүнээс үзэхэд Питтсбург Филадельфийн худалдан авсан сүлжээний шинжилгээнээс шууд ашиг хүртэж болно. <em>11. Тодорхой нэг их сургууль сурагчдын урьдчилан тодорхойлсон сонирхолд үндэслэн зуны хичээлийн хуваариа гаргаж байна. Шинжлэх ухаан, технологийн тэнхим Алгебр, Биологи, C++, Өгөгдлийн сан, Дэлхийн шинжлэх ухаан, Функциональ анализын хичээлүүдийг зааж байна. Хэл, соёлын тэнхим Герман, Түүх, Энэтхэг-Хятад, Япон, Кувейт, Латин хэлний хичээлүүдийг зааж байна. Доорх хүснэгтэд X нь тухайн мөр, баганад харгалзах хоёр өөр ангид нийтлэг оюутан байгааг илэрхийлнэ. Харгалзах хичээлийн хуваарийн графууд изоморф болохыг харуул. Иймээс нэг тэнхимийн ажлын хуваарийг нөгөө тэнхим рүү хөрвүүлж болно. Энэ изоморфизмыг ашиглан Шинжлэх ухаан, технологийн тэнхимийн хуваарийг Хэл, соёлын тэнхим рүү хөрвүүл. </em>12. Сенат хороодынхоо хуралдааны хуваарийг гаргах шаардлагатай: Зураг төсөв (A), Төсөв (B), Худалдаа (C), Эрчим хүч (D), Байгаль орчин (E), Гадаад харилцаа (F), Дотоодын аюулгүй байдал, Засгийн газрын асуудал (G), Эрүүл мэнд (H). Капитолийн барилгын нөгөө талд Төлөөлөгчдийн танхим хороодынхоо хуралдааны хуваарийг гаргах шаардлагатай: Олон улсын харилцаа (I), Шүүхийн (J), Хөдөө аж ахуй (K), Зэвсэгт хүчин (L), Санхүүгийн үйлчилгээ (M), Шинжлэх ухаан (N), Стандарт ёс зүйн дүрэм (O), Хэвлэл мэдээлэл (P). Хүснэгтэд X нь тухайн мөр, баганад харгалзах хоёр өөр хороонд нийтлэг гишүүн байгааг илэрхийлнэ. Харгалзах хорооны хуралдааны хуваарийн графууд изоморф болохыг харуул. Иймээс Сенатын ажлын хуваарийг Төлөөлөгчдийн танхим руу хөрвүүлж болно. Энэ изоморфизмыг ашиглан Сенатын хуваарийг Төлөөлөгчдийн танхим руу хөрвүүл. <strong>Тусгай графууд.</strong> 13-аас 18 хүртэлх дасгалуудад 8.2-р хэсгийн зарим тусгай графуудын, ялангуяа зарим Платоны биетүүдийн өөр дүрслэлүүдийг үзүүлэв.</li>
+<li><span class="math inline">\(K_{3,3}\)</span> нь дүрслэгдсэн графтай изоморф болохыг харуул.</li>
+<li>Дүрслэгдсэн хоёр граф изоморф болохыг харуул. Тэдгээрийг хоёуланг нь <strong>додекаэдр</strong> (арван хоёр талст) гэж нэрлэдэг.</li>
+<li>Дүрслэгдсэн хоёр граф изоморф болохыг харуул. Тэдгээрийг хоёуланг нь <strong>шоо</strong> гэж нэрлэдэг.</li>
+<li>Дүрслэгдсэн хоёр граф изоморф болохыг харуул. Тэдгээрийг хоёуланг нь <strong>октаэдр</strong> (найман талст) гэж нэрлэдэг.</li>
+<li>8.23-р жишээнд дүрслэгдсэн гурван граф изоморф болохыг харуул.</li>
+<li>Дүрслэгдсэн хоёр граф изоморф болохыг харуул. Тэдгээрийг хоёуланг нь <strong>икосаэдр</strong> (хорин талст) гэж нэрлэдэг.</li>
+</ol>
+<p>Дараах графуудыг үлдсэн дасгалуудын туршид иш татах болно.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_19_26.png" class="img-fluid figure-img"></p>
+<figcaption>Дасгал 19-26-ын графууд</figcaption>
+</figure>
+</div>
+<p>19-ээс 26 хүртэлх дасгалуудад заасан графын автоморфизмуудын тоог тодорхойл. Автоморфизмууд нь графын бүтцийг хадгалдаг оройнуудын пермутацуудтай тохирдог гэдгийг санаарай.</p>
+<ol start="19" type="1">
+<li><p>Граф (a).</p></li>
+<li><p>Граф (b).</p></li>
+<li><p>Граф (c).</p></li>
+<li><p>Граф (d).</p></li>
+<li><p><span class="math inline">\(C_n\)</span>.</p></li>
+<li><p><span class="math inline">\(P_n\)</span>.</p></li>
+<li><p><span class="math inline">\(K_{n,n}\)</span>.</p></li>
+<li><p><span class="math inline">\(K_{m,n}\)</span>, энд <span class="math inline">\(m \neq n\)</span>.</p></li>
+<li><p>Графын изоморфизм нь замыг зам руу илгээдэг болохыг харуул. Өөрөөр хэлбэл, хэрэв <span class="math inline">\(v_0, e_1, v_1, \dots, v_n\)</span> нь (G) граф дахь зам ба <span class="math inline">\(f: G \rightarrow H\)</span> нь изоморфизм бол <span class="math inline">\(f(v_0), f(e_1), f(v_1), \dots, f(v_n)\)</span> нь (H) дахь зам болно.</p></li>
+<li><p>Графын изоморфизм нь дэд графуудыг изоморф дэд графууд руу илгээдэг болохыг харуул. Өөрөөр хэлбэл, хэрэв (K) нь (G) графын дэд граф ба <span class="math inline">\(f: G \rightarrow H\)</span> нь изоморфизм бол <span class="math inline">\(f(K)\)</span> нь (H)-ийн дэд граф бөгөөд <span class="math inline">\(K \cong f(K)\)</span> байна. Үүнээс (f) нь циклүүдийг циклүүд рүү (ижил урттай), бүрэн графуудыг бүрэн графууд руу (ижил хэмжээтэй), индукцлагдсан дэд графуудыг индукцлагдсан дэд графууд руу буулгадаг гэж дүгнэ.</p></li>
+<li><p><span class="math inline">\(V = P_2(\{1, 2, 3, 4, 5\})\)</span> гэж тавиад огтлолцохгүй олонлогуудын хооронд ирмэгүүдийг тавь. Үүссэн граф нь Петерсений графтай изоморф болохыг харуул. <em>30. Петерсений граф нь оройн хувьд шилжих чадвартай болохыг харуул. </em>Заавар:* 29-р дасгалыг ашигла. <em>31. Петерсений граф дахь аливаа 5 урттай (C) циклийн хувьд (C)-г 8.23-р жишээн дээрх 1, 2, 3, 4, 5 оройнуудаар индукцлагдсан цикл рүү илгээдэг Петерсений графын автоморфизм байгааг харуул. </em>32. Петерсений граф дахь аливаа 3 урттай (P) замын хувьд (P)-г 8.23-р жишээн дээрх 1, 2, 3 оройнуудаар индукцлагдсан зам руу илгээдэг Петерсений графын автоморфизм байгааг харуул.</p></li>
+<li><p><span class="math inline">\(C_n\)</span> нь оройн хувьд шилжих чадвартай болохыг харуул.</p></li>
+<li><p><span class="math inline">\(K_{m,n}\)</span> нь оройн хувьд шилжих чадвартай болохыг харуул.</p></li>
+<li><p>Теорем 8.4(b)-г батал.</p></li>
+<li><p>Теорем 8.4(c)-г батал. <em>37. <span class="math inline">\(G = (V, E)\)</span> граф нь зөвхөн бүх <span class="math inline">\(v \in V\)</span>-ийн хувьд <span class="math inline">\(f(u) = v\)</span> байх (G)-ийн автоморфизм (f) байх <span class="math inline">\(u \in V\)</span> оршин байх тохиолдолд л оройн хувьд шилжих чадвартай болохыг харуул. </em>38. Батал эсвэл няцаа: Хэрэв (G) граф оройн хувьд шилжих чадвартай бол түүний индукцлагдсан аливаа дэд граф (H) мөн оройн хувьд шилжих чадвартай байна. <em>39. Бүх (G) ба (H) графуудын хувьд, хэрэв (G H) бол ижил дүрс (өөрөөр хэлбэл ижил цэгүүдийг эзэлдэг) бүхий (G) ба (H) графууд байгааг харуул. </em>40. <span class="math inline">\(G = (\{v_1, \dots, v_n\}, E_G)\)</span> ба <span class="math inline">\(H = (\{u_1, \dots, u_n\}, E_H)\)</span> нь олон ирмэггүй аливаа графууд гэе. <span class="math inline">\(f: \{v_1, \dots, v_n\} \rightarrow \{u_1, \dots, u_n\}\)</span> биекц байх ба <span class="math inline">\(f\)</span>-ийг зэргэлдийн жагсаалт бүрт хэрэглэснээр олдох <span class="math inline">\(f(v_1), \dots, f(v_n)\)</span> оройн эрэмбийг ашигласан (H)-ийн зэргэлдийн жагсаалтууд нь (G)-ийн зэргэлдийн жагсаалтуудтай ижил байх тохиолдолд л (G H) болохыг харуул.</p></li>
+</ol>
+<p>41-ээс 50 хүртэлх дасгалуудад өгөгдсөн энгийн графуудын хоорондын графын зураглалыг тодорхойлоход 8.18-р тодорхойлолтод заасны дагуу ирмэгүүдийн хувьд зохих ёсоор ажиллах оройн зураглалыг зааж өгөхөд хангалттай.</p>
+<ol start="41" type="1">
+<li>Граф (a)-аас граф (b) руу графын зураглалын жишээ өг.</li>
+<li>Граф (c)-ээс граф (d) руу графын зураглалын жишээ өг. <em>43. <span class="math inline">\(C_3\)</span>-аас <span class="math inline">\(C_4\)</span> руу графын зураглал байхгүй гэдгийг харуул. </em>44. <span class="math inline">\(C_5\)</span>-аас <span class="math inline">\(K_2\)</span> руу графын зураглал байхгүй гэдгийг харуул.</li>
+<li>Граф (b)-ээс граф (c) руу графын зураглал байх уу? Тайлбарла.</li>
+<li>Граф (d)-ээс граф (a) руу графын зураглал байх уу?</li>
+<li>Аливаа <span class="math inline">\(m, n \in \mathbb{Z}^+\)</span> хувьд <span class="math inline">\(K_{m,n}\)</span>-ээс <span class="math inline">\(P_2\)</span> руу графын зураглал байгааг харуул.</li>
+<li>Аливаа <span class="math inline">\(n \in \mathbb{Z}^+\)</span> хувьд <span class="math inline">\(C_n\)</span>-ээс <span class="math inline">\(K_3\)</span> руу графын зураглал байгааг харуул.</li>
+<li>Ямар <span class="math inline">\(m, n\)</span> бүхэл тоонуудын хосын хувьд <span class="math inline">\(K_n\)</span>-ээс <span class="math inline">\(K_m\)</span> руу графын зураглал байхгүй вэ? Тайлбарла.</li>
+<li>Ямар <span class="math inline">\(m, n\)</span> бүхэл тоонуудын хосын хувьд <span class="math inline">\(Q_m\)</span>-ээс <span class="math inline">\(Q_n\)</span> руу графын зураглал байх вэ? Тайлбарла.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./8-2.html" class="pagination-link" aria-label="Матриц ба тусгай графууд">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Матриц ба тусгай графууд</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./8-4.html" class="pagination-link" aria-label="Бүлэг 8.4: Инвариантууд">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Бүлэг 8.4: Инвариантууд</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
