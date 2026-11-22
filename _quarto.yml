@@ -12,6 +12,7 @@ book:
   sidebar:
     logo: images/must-logo.png
   chapters:
+    - index.qmd
     - 0.qmd
     - 8-1.qmd
     #- appendix.qmd
