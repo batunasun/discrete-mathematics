@@ -4,8 +4,8 @@ project:
 lang: mn
 
 book:
-  title: "Хугацааны цувааны шинжилгээ"
-  subtitle: "R хэл дээрх практик хэрэглээ"
+  title: "Дискрет математик"
+  #subtitle: "R хэл дээрх практик хэрэглээ"
   #author: "Д.Батнасан"
   cover-image: images/cover.png
   #favicon: images/must-logo.png
