@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Бүлэг 8: Графын онолын үндэс – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./0.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./8-1.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Бүлэг 8: Графын онолын үндэс</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Графын онолын үндэс</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Бүлэг 0: Тоонуудыг дүрслэх нь</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Бүлэг 8: Графын онолын үндэс</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#графын-онолын-үндэс" id="toc-графын-онолын-үндэс" class="nav-link active" data-scroll-target="#графын-онолын-үндэс"><span class="header-section-number">4</span> Графын онолын үндэс</a>
+  <ul class="collapse">
+  <li><a href="#урам-зориг-ба-оршил" id="toc-урам-зориг-ба-оршил" class="nav-link" data-scroll-target="#урам-зориг-ба-оршил"><span class="header-section-number">4.1</span> 8.1 Урам зориг ба Оршил</a>
+  <ul class="collapse">
+  <li><a href="#урам-зориг" id="toc-урам-зориг" class="nav-link" data-scroll-target="#урам-зориг"><span class="header-section-number">4.1.1</span> Урам зориг</a></li>
+  <li><a href="#оршил" id="toc-оршил" class="nav-link" data-scroll-target="#оршил"><span class="header-section-number">4.1.2</span> Оршил</a></li>
+  <li><a href="#графын-хэсгүүд" id="toc-графын-хэсгүүд" class="nav-link" data-scroll-target="#графын-хэсгүүд"><span class="header-section-number">4.1.3</span> Графын хэсгүүд</a></li>
+  </ul></li>
+  <li><a href="#хэсгийн-дасгалууд" id="toc-хэсгийн-дасгалууд" class="nav-link" data-scroll-target="#хэсгийн-дасгалууд"><span class="header-section-number">4.2</span> 8.1 Хэсгийн дасгалууд</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Бүлэг 8: Графын онолын үндэс</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="графын-онолын-үндэс" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Графын онолын үндэс</h1>
+<p><strong>ГРАФЫН ОНОЛ</strong>-ыг сүлжээний онол гэж нэрлэх нь илүү тохиромжтой байж магадгүй. Энэ нь компьютерний сүлжээ, тээврийн сүлжээ зэрэг сүлжээг загварчлах бүтцийг судлах шинжлэх ухаан юм. Компьютерний сүлжээний загварын хувьд граф нь хоёр төрлийн объектоос бүрддэг. Компьютерүүдийг цэгүүдээр дүрсэлдэг бөгөөд хос компьютер бүрийн хооронд шууд харилцааны холбоо хангадаг кабель бүрийг муруй шугамаар дүрсэлдэг. Геометрийн нэр томьёог ашигласнаар бид цэгүүдийг <strong>орой</strong> (vertices), муруй шугамуудыг <strong>ирмэг</strong> (edges) гэж нэрлэдэг. Энгийнээр хэлбэл, граф нь оройнуудын олонлог, ирмэгүүдийн олонлог болон ирмэг бүрээр холбогдсон хос оройг заасан зураглалаас бүрддэг.</p>
+<p>Сэдэл болох хэд хэдэн жишээ, албан ёсны тодорхойлолт, графын үндсэн нэр томьёог танилцуулсны дараа бид хэд хэдэн үндсэн графуудыг толилуулна. Дараа нь хоёр графыг хэзээ ижил гэж үзэх, тэдгээрийг ижил биш гэдгийг хэрхэн зөвтгөх талаар ярилцана. Олонлогын үйлдлүүдтэй төстэй графын үйлдлүүдийг мөн судална. Эцсийн хэсэгт ирмэг бүрт чиглэл өгснөөр үүсэх зарим нэг өөрчлөлтүүдийг авч үзнэ. Энэ нь Марковын гинжин хэлхээний хэлэлцүүлэгт хүргэдэг. Графуудыг олон төрлийн бодит асуудлыг загварчлахад ашиглаж болох тул хэрэглээг бүхэл бүлгийн туршид судлах болно.</p>
+<section id="урам-зориг-ба-оршил" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="урам-зориг-ба-оршил"><span class="header-section-number">4.1</span> 8.1 Урам зориг ба Оршил</h2>
+<p><em>Граф</em> гэдэг нэр томьёо нь ихэвчлэн <span class="math inline">\(y = f(x)\)</span> функцийн графикийг санагдуулдаг. Гэсэн хэдий ч энд өөр ойлголтыг авч үзэх болно. Нарийн тодорхойлолт өгөхөөс өмнө бид судалгааны ажлаа урамшуулах хэд хэдэн жишээнээс эхлэх болно.</p>
+<section id="урам-зориг" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="урам-зориг"><span class="header-section-number">4.1.1</span> Урам зориг</h3>
+<p>Графын онолын танилцуулгыг бид Кёнигсбергийн гүүрний бодлогоор эхлүүлж байна; энэ бодлого нь уг сэдвийг үүсгэх шалтгаан болсон юм. 1736 онд Кёнигсберг нь Пруссийн Прегель гол дээр байрладаг хот байсан бөгөөд үзэсгэлэнтэй гүүрүүдээрээ алдартай байв. (Кёнигсберг одоо Оросын Калининград хот юм.) 8.1-р зурагт Кёнигсбергийн зохион байгуулалтыг дүрсэлсэн бөгөөд гүүрнүүдийг 1-ээс 7 хүртэл, газрын хэсгүүдийг <span class="math inline">\(A\)</span>-аас <span class="math inline">\(D\)</span> хүртэл үсгээр тэмдэглэсэн байна.</p>
+<p>Кёнигсбергийн ард түмэн дараах асуултыг бодож байсан.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.1</strong></p>
+<p>(Кёнигсбергийн гүүрний бодлого). Кёнигсбергийн аль нэг газраас эхлээд, гүүр бүрээр яг нэг удаа алхаж, эхэлсэн газартаа буцаж ирэх боломжтой юу?</p>
+</blockquote>
+<!-- ![Зураг 8.1 Кёнигсбергийн долоон гүүр](fig_8_1.png) -->
+<p><em>Зураг 8.1 Кёнигсбергийн долоон гүүр</em></p>
+<p>1736 онд Швейцарийн математикч Леонард Эйлер (1707-1782) Кёнигсбергийн гүүрний бодлого болон үүнтэй төстэй бусад бодлогыг 8.2-р зурагт үзүүлсэн диаграмын хувьд шинжлэх замаар маш ухаалаг шийдлийг санал болгосон. Тэнд газрын хэсэг бүрийг цэгээр, гүүр бүрийг тохирох цэгүүдийг холбосон муруй шугамаар дүрсэлсэн. Хавсаргасан шошгууд нь 8.1-р зураг дээрх шошгуудтай тохирч байна. Кёнигсбергээр хийх хүссэн алхалтыг 8.2-р зураг дээр амархан дагаж болох байсан. Гэсэн хэдий ч ийм алхалт байхгүй. 8.2-р зураг ашиглан ийм алхалт байхгүй гэдгийг харуулсан бүрэн дүүрэн үндэслэлийг дасгалуудад тайлбарласан болно. 9.2-р хэсэгт Эйлерийн теорем гэж нэрлэгддэг илүү ухаалаг нотолгоог өгсөн болно.</p>
+<!-- ![Зураг 8.2 Кёнигсбергийн гүүрний граф](fig_8_2.png) -->
+<p><em>Зураг 8.2 Кёнигсбергийн гүүрний граф</em></p>
+<p>8.2-р зураг (шошгогүйгээр) нь <strong>граф</strong>-ын бидний анхны жишээг дүрсэлж байна. Ийм диаграмууд байгальд олон нөхцөлд үүсдэг бөгөөд ихэвчлэн цэгүүд нь байршил эсвэл объектуудыг төлөөлдөг. Дараагийн жишээ нь арилжааны нислэгийн сэтгүүлд ихэвчлэн байдаг диаграмын төрлөөр урамшуулагдсан болно.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.2</strong></p>
+<p>(Агаарын тээврийн үйлчилгээ). 8.3-р зурагт тодорхой нэг агаарын тээврийн компаниас санал болгож буй томоохон хотуудын хоорондох шууд хоёр тийш нислэгийг харуулсан газрын зураг байна. Газрын зургаар дамжуулагдаж буй чухал мэдээллийг 8.4-р зурагт граф хэлбэрээр илүү үр дүнтэй харуулсан болно. Тэнд цэгүүд нь хотуудыг (эсвэл нисэх онгоцны буудлуудыг), муруй бүр нь хос хотын хооронд хоёр тийш нислэг байгааг илэрхийлж байна. Эдгээр хотуудыг хамарсан аяллыг төлөвлөхийн тулд ямар шууд нислэгээр явах ёстойгоо тодорхойлох шаардлагатай. Эдгээр нислэгийн зардал, үргэлжлэх хугацааг мөн авч үзэх шаардлагатай. 10.3-р хэсэгт ийм төрлийн асуудлыг авч үзнэ.</p>
+</blockquote>
+<!-- ![Зураг 8.3 Нислэгийн сэтгүүлийн зар](fig_8_3.png) -->
+<p><em>Зураг 8.3 Нислэгийн сэтгүүлийн зар</em></p>
+<!-- ![Зураг 8.4 Шууд нислэгийн граф](fig_8_4.png) -->
+<p><em>Зураг 8.4 Шууд нислэгийн граф</em></p>
+<p>Бидний дараагийн урамшуулах жишээнд графын цэгүүд нь биет байршлыг илэрхийлэхгүй.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.3</strong></p>
+<p>(Хуваарийн зөрчил). Зургаан анги (Астрологи, Биологи, Тооцоолол, Дискрет математик, Англи хэлний найруулга, Франц хэл) судалгааны бүлгийн хичээлүүдийг товлох шаардлагатай болжээ. Доорх хүснэгтэд X нь тухайн мөр, баганад харгалзах хоёр өөр ангид нийтлэг оюутан байгааг илэрхийлнэ.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Астр.</th>
+<th style="text-align: center;">Био.</th>
+<th style="text-align: center;">Тооц.</th>
+<th style="text-align: center;">Диск.</th>
+<th style="text-align: center;">Англ.</th>
+<th style="text-align: center;">Фран.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Астр.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Био.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Тооц.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Диск.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Англ.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Фран.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>8.5-р зурагт боломжит хуваарийн зөрчлийг дүрсэлсэн. Тэнд анги бүрийг цэгээр, нийтлэг оюутантай ангиудын хосыг харгалзах цэгүүдийг холбосон муруй бүрээр дүрсэлсэн. 9.5-р хэсэгт 8.5-р зураг дээрх графыг хэрхэн тохирох хуваарийг олоход ашиглаж болох талаар ярилцсан болно.</p>
+</blockquote>
+<!-- ![Зураг 8.5 Хичээлийн хуваарийн граф](fig_8_5.png) -->
+<p><em>Зураг 8.5 Хичээлийн хуваарийн граф</em></p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.4</strong></p>
+<p>(Сүлжээнд холбогдсон компьютерүүд). Таван компьютер, 1, …, 5-ыг ажил дуусгахын тулд зэрэгцээ ажиллаж, компьютерүүдийн хооронд даалгавар дамжуулах замаар сүлжээнд холбосон. 8.6-р зурагт хос компьютерүүдийн хоорондох муруй нь тэдгээр хоёр компьютер шууд даалгавар дамжуулж чадахыг илэрхийлнэ. Харилцааны холбоо нь хоёр тийш байдаг тул аль ч компьютер даалгавар оноож чадна, эсвэл өөр компьютерээс даалгавар хүлээн авч болно. Компьютер 5-ыг өөртэй нь холбосон гогцоо нь энэ компьютер өөртөө даалгавар оноож чадахыг илэрхийлнэ. 8.7-р зурагт энэхүү компьютерний сүлжээний даалгавар дамжуулах чадварыг тусгасан графыг дүрсэлсэн. Компьютер бүрийг цэгээр, муруй бүр нь төгсгөлийн цэгүүдээр тусгагдсан компьютерүүдийн хооронд шууд даалгавар дамжуулах боломжийг илэрхийлнэ.</p>
+</blockquote>
+<!-- ![Зураг 8.6 Компьютерний сүлжээнд даалгавар дамжуулах нь](fig_8_6.png) -->
+<p><em>Зураг 8.6 Компьютерний сүлжээнд даалгавар дамжуулах нь</em></p>
+<!-- ![Зураг 8.7 Компьютерний сүлжээний граф](fig_8_7.png) -->
+<p><em>Зураг 8.7 Компьютерний сүлжээний граф</em></p>
+</section>
+<section id="оршил" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="оршил"><span class="header-section-number">4.1.2</span> Оршил</h3>
+<p>Албан бус байдлаар бид 8.2, 8.4, 8.5, 8.7-р зураг дээрх графуудын зарим жишээг үзсэн. Эдгээр жишээнээс харахад графын хоёр чухал шинж чанар нь цэгүүд болон тэдгээрийг холбосон муруйнууд юм. Геометрийн нэр томьёог баримтлан бид цэгүүдийг <strong>орой</strong> (vertices), муруйнуудыг <strong>ирмэг</strong> (edges) гэж нэрлэх болно. Ихэнх тохиолдолд ирмэг бүр нь хоёр ялгаатай оройтой байдаг. Тиймээс ирмэг <span class="math inline">\(e\)</span>-д эдгээр оройг агуулсан <span class="math inline">\(\{u, v\}\)</span> хоёр элементийн олонлогийг оноох нь зүйн хэрэг юм. Гэсэн хэдий ч 8.2-р зурагт Кёнигсбергийн гүүрний графын хувьд хоёр ирмэг ижил хос оройг холбож болзошгүйг анхаарах хэрэгтэй. Үүнтэй адил 8.7-р зурагт компьютерний сүлжээний графын хувьд ирмэг нь оройг өөртэй нь холбосон тохиолдлыг зохицуулах ёстой. Энэ тохиолдолд бид ирмэг <span class="math inline">\(e\)</span>-д холбогдсон оройг агуулсан <span class="math inline">\(e\)</span>-ийн нэг элементийн дэд олонлог болох <span class="math inline">\(\{v\}\)</span>-ийг оноодог. <span class="math inline">\(V\)</span> нь оройнуудын олонлогийг илэрхийлнэ. Ирмэг бүрт <span class="math inline">\(V\)</span>-ийн нэг элементийн дэд олонлог эсвэл <span class="math inline">\(V\)</span>-ийн хоёр элементийн дэд олонлогийг оноодог болохыг бид харж байна.</p>
+<p>Натурал <span class="math inline">\(k\)</span> тоо бүрийн хувьд <span class="math inline">\(V\)</span>-ийн <span class="math inline">\(k\)</span> элементийн дэд олонлогуудын олонлогийг <span class="math inline">\(P_k(V)\)</span> гэж тэмдэглэх нь тохиромжтой. Ялангуяа <span class="math inline">\(P_1(V) \cup P_2(V)\)</span>-ийн элемент бүрийг <span class="math inline">\(u, v \in V\)</span> байх <span class="math inline">\(\{u, v\}\)</span> хэлбэрээр бичиж болно; хэрэв <span class="math inline">\(u = v\)</span> бол <span class="math inline">\(\{u, v\} = \{u\} \in P_1(V)\)</span>, бусад тохиолдолд <span class="math inline">\(\{u, v\} \in P_2(V)\)</span> болно. <span class="math inline">\(E\)</span>-г ирмэгүүдийн олонлог гэе. Ирмэг бүр <span class="math inline">\(e \in E\)</span> нь <span class="math inline">\(u, v \in V\)</span> байх <span class="math inline">\(\{u, v\}\)</span> хэлбэрийн олонлогт оноогддог бөгөөд <span class="math inline">\(u, v\)</span> нь <span class="math inline">\(e\)</span>-ээр холбогдох оройнууд юм.</p>
+<p>Одоо бид граф <span class="math inline">\(G\)</span>-г <span class="math inline">\(V\)</span> оройн олонлог, <span class="math inline">\(E\)</span> ирмэгийн олонлог, мөн ирмэг бүрээр холбогдсон оройнуудыг тодорхойлсон <span class="math inline">\(\epsilon\)</span> функцээс бүрдсэн форматаар албан ёсоор тодорхойлоход бэлэн боллоо. Энэхүү формализм шаардлагатай хэдий ч 8.1-ээс 8.4 хүртэлх жишээнүүдэд боловсруулсан графын бүтцийн талаарх бидний оюун ухаан дахь ойлголтыг хадгалах нь бас чухал юм.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.1</strong></p>
+<p><strong>(a)</strong> <strong>Граф</strong> <span class="math inline">\(G\)</span> нь <span class="math inline">\(V_G\)</span> оройн олонлог, <span class="math inline">\(E_G\)</span> ирмэгийн олонлог болон <span class="math inline">\(e_G : E_G \rightarrow P_2(V_G) \cup P_1(V_G)\)</span> функцийн хамт хосоос бүрддэг. Бид <span class="math inline">\(G = (V_G, E_G)\)</span> гэж бичих ба <span class="math inline">\(e_G(e)\)</span>-г <span class="math inline">\(e \leftrightarrow \{u, v\}\)</span> гэж бичихийн оронд <span class="math inline">\(e \leftrightarrow \{u, v\}\)</span> гэж бичнэ. <span class="math inline">\(V_G\)</span>-ийн элементийг <span class="math inline">\(G\)</span>-ийн <strong>орой</strong> (vertex), <span class="math inline">\(E_G\)</span>-ийн элементийг <span class="math inline">\(G\)</span>-ийн <strong>ирмэг</strong> (edge) гэж нэрлэдэг. Тодорхой контекстэд <span class="math inline">\(G\)</span> тодорхой бол <span class="math inline">\(V_G\)</span> ба <span class="math inline">\(E_G\)</span> гэсэн доогуур бичлэгүүдийг хасаж <span class="math inline">\(V\)</span> ба <span class="math inline">\(E\)</span> гэж бичнэ.</p>
+<p><strong>(b)</strong> Хэрэв <span class="math inline">\(e \leftrightarrow \{u, v\}\)</span> бол <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span> оройнууд нь <span class="math inline">\(e\)</span> <strong>ирмэгийн төгсгөлүүд</strong> бөгөөд <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span> нь <strong>зэргэлдээ</strong> (adjacent), <span class="math inline">\(u\)</span> нь <span class="math inline">\(v\)</span>-ийн <strong>хөрш</strong> (neighbor) гэж хэлнэ. Хэрэв хоёр ирмэг нийтлэг төгсгөлтэй бол тэдгээрийг мөн <strong>зэргэлдээ</strong> гэж хэлнэ. Мөн ирмэг нь төгсгөлүүдтэйгээ <strong>тусдаг</strong> (incident) гэж хэлнэ.</p>
+<p><strong>(c)</strong> Зарим <span class="math inline">\(v \in V\)</span> байх <span class="math inline">\(e \leftrightarrow \{v\}\)</span> хэлбэрийн ирмэгийг <strong>гогцоо</strong> (loop) гэж нэрлэдэг; өөрөөр хэлбэл ганц төгсгөлтэй ирмэг юм. Ижил хос төгсгөлүүдэд оноогдсон хоёр буюу түүнээс дээш ирмэгийг <strong>олон ирмэг</strong> (multiple edges) буюу <strong>параллел ирмэг</strong> гэж нэрлэдэг.</p>
+<p><strong>(d)</strong> <strong>Энгийн граф</strong> (simple graph) гэдэг нь гогцоо болон олон ирмэггүй <span class="math inline">\(G = (V, E)\)</span> граф юм.</p>
+</blockquote>
+<p>8.7-р зурагт Компьютерний сүлжээний графын хувьд <span class="math inline">\(V\)</span> оройн олонлог нь компьютерүүдийн олонлог <span class="math inline">\(\{1, 2, 3, 4, 5\}\)</span> бөгөөд <span class="math inline">\(E\)</span> ирмэгийн олонлог нь нэг компьютерээс нөгөө рүү даалгавар дамжуулах холбоосуудын олонлог юм. Өөрөөр хэлбэл, хоёр компьютер зэргэлдээ байна гэдэг нь зөвхөн тэдгээрийн хооронд шууд даалгавар дамжуулж чаддаг бол гэсэн үг юм. Орой 5 дээр 8.8-р зургийн зүүн гар талд үзүүлсний адил гогцоо байгаа нь компьютер 5 өөртөө даалгавар оноож чадахыг харуулж байна. Энэ гогцоо байгаа тул <span class="math inline">\(G\)</span> нь энгийн граф биш юм.</p>
+<!-- ![Зураг 8.8 Энгийн бус графын онцлогууд](fig_8_8.png) -->
+<p><em>Зураг 8.8 Энгийн бус графын онцлогууд</em></p>
+<p>8.2-р зурагт Кёнигсбергийн гүүрний графын хувьд <span class="math inline">\(V\)</span> оройн олонлог нь газрын хэсгүүдийн олонлог <span class="math inline">\(\{A, B, C, D\}\)</span> бөгөөд <span class="math inline">\(E\)</span> ирмэгийн олонлог нь гүүрнүүдийн олонлог <span class="math inline">\(\{1, 2, 3, 4, 5, 6, 7\}\)</span> юм. Тиймээс ирмэгүүдийн төгсгөлүүд нь гүүрнүүд холбосон газрын хэсгүүд юм. <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> оройг холбох нь 8.8-р зургийн баруун гар талд үзүүлсэн бөгөөд <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> газрын хэсгүүдийг холбосон олон ирмэгтэй байна. Олон ирмэг байгаа тул <span class="math inline">\(G\)</span> нь энгийн граф биш юм.</p>
+<p>8.4-р зураг дээрх Шууд нислэгийн граф болон 8.5-р зураг дээрх Хичээлийн хуваарийн граф нь энгийн графууд юм. Зургуудаас харж болохын адил эдгээр нь гогцоо болон олон ирмэггүй.</p>
+<p>Графын албан ёсны тодорхойлолтыг өгч, бидний өмнөх жишээнүүдийг 8.1-р тодорхойлолтын нэр томьёогоор тайлбарласны дараа бид графыг <span class="math inline">\(V\)</span> оройн олонлог, <span class="math inline">\(E\)</span> ирмэгийн олонлог, тэдгээрийн төгсгөлүүдэд ирмэгүүдийн оноолт хэлбэрээр хэрхэн дүрсэлдэг талаар ойлгох ёстой. Тиймээс бид 8.1-р тодорхойлолтоор шууд тодорхойлогдсон зарим жишээнүүдийг авч үзье. Энэ номын туршид зөвхөн төгсгөлөг графуудыг <span class="math inline">\(G = (V, E)\)</span> гэж үзнэ. Өөрөөр хэлбэл <span class="math inline">\(V\)</span> ба <span class="math inline">\(E\)</span> нь төгсгөлөг байна.</p>
+<blockquote class="blockquote">
+<p><strong>Тайлбар 8.1</strong></p>
+<p>Граф <span class="math inline">\(G = (V, E)\)</span> нь олон ирмэггүй үед бид <span class="math inline">\(E\)</span>-г ихэвчлэн <span class="math inline">\(P_1(V) \cup P_2(V)\)</span>-ийн дэд олонлог гэж үздэг бөгөөд ирмэгүүдийн төгсгөлүүдийн оноолтыг <span class="math inline">\(\epsilon(u, v) = \{u, v\}\)</span> гэсэн ижилтгэлээр өгөгдсөн гэж ойлгодог. Өөрөөр хэлбэл, <span class="math inline">\(E \subseteq P_1(V) \cup P_2(V)\)</span> үед ирмэг бүрийг төгсгөлүүдийнх нь олонлог <span class="math inline">\(\{u, v\}\)</span> гэж ойлгоно. Ялангуяа үүнийг энгийн графуудын хувьд хийдэг.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.5</strong></p>
+<p>Доорх тохиолдол бүрт <span class="math inline">\(G = (V, E)\)</span> нь графын жишээ юм.</p>
+<p><strong>(a)</strong> <span class="math inline">\(V = \{1, 2, 3, 4, 5, 6, 7\}\)</span> ба <span class="math inline">\(E = \{\{1, 2\}, \{2, 3\}, \{1, 4\}, \{2, 5\}, \{4, 5\}, \{4, 6\}, \{5, 6\}, \{5, 7\}\}\)</span> гэе.</p>
+<!-- ![Жишээ 8.5(a)](fig_ex_8_5_a.png) -->
+<p>Бид энд ирмэг бүрийг оройнуудын хосоор нь тодорхойлж байна. Энэ нь гогцоо болон олон ирмэггүй тул энгийн граф юм.</p>
+<p><strong>(b)</strong> <span class="math inline">\(V = \{1, 2, 3, 4, 5, 6, 7\}\)</span> ба <span class="math inline">\(E = \{\{1, 2\}, \{1, 4\}, \{2, 5\}, \{4, 5\}, \{4, 6\}, \{5, 6\}, \{3, 7\}\}\)</span> гэе.</p>
+<!-- ![Жишээ 8.5(b)](fig_ex_8_5_b.png) -->
+<p>Энэ нь энгийн граф юм. Энэ тодорхой граф нь хэд хэдэн хэсгээс бүрддэг бөгөөд бид үүнийг 8.5-р тодорхойлолтод албан ёсоор оруулах болно гэдгийг анхаарна уу.</p>
+<p><strong>(c)</strong> <span class="math inline">\(V = \{1, 2, 3, 4, 5\}\)</span> ба <span class="math inline">\(E = \{\{1, 2\}, \{1, 5\}, \{1, 3\}, \{2, 4\}, \{2, 5\}, \{3, 4\}, \{4, 5\}, \{5\}\}\)</span> гэе.</p>
+<!-- ![Жишээ 8.5(c)](fig_ex_8_5_c.png) -->
+<p>Зураг дээр бид <span class="math inline">\(a = \{1, 2\}, b = \{1, 5\}, c = \{1, 3\}, d = \{2, 4\}, e = \{2, 5\}, f = \{3, 4\}, g = \{4, 5\}, h = \{5\}\)</span> байна. Мэдээж энэ нь 8.7-р зураг дээрх Компьютерний сүлжээний графтай ижил юм. <span class="math inline">\(h\)</span> гогцооны ирмэг байгаа тул энэ нь энгийн граф биш юм.</p>
+<p><strong>(d)</strong> <span class="math inline">\(V = \{1, 2, 3, 4, 5\}\)</span> ба <span class="math inline">\(E = \{a, b, c, d, e, f, g, h\}\)</span> бөгөөд <span class="math inline">\(a \leftrightarrow \{1, 2\}, b \leftrightarrow \{1, 2\}, c \leftrightarrow \{1, 3\}, d \leftrightarrow \{2, 4\}, e \leftrightarrow \{2, 5\}, f \leftrightarrow \{3, 4\}, g \leftrightarrow \{4, 5\}, h \leftrightarrow \{5\}, i \leftrightarrow \{5\}\)</span> гэе.</p>
+<!-- ![Жишээ 8.5(d)](fig_ex_8_5_d.png) -->
+<p>Энд бид ирмэгүүдэд оноолт хийхдээ <span class="math inline">\(\leftrightarrow\)</span> тэмдэглэгээний утгыг ойлгож байна. <span class="math inline">\(a\)</span> ба <span class="math inline">\(b\)</span> ирмэгүүд хоёулаа ижил төгсгөлүүдтэй байх шаардлагатай боловч бид <span class="math inline">\(a\)</span> ба <span class="math inline">\(b\)</span>-ийг ялгаатай гэж үзэж байна. <span class="math inline">\(h\)</span> ба <span class="math inline">\(i\)</span>-ийн хувьд ч мөн адил. Эдгээр олон ирмэгүүд байгаа тул граф нь энгийн биш юм.</p>
+</blockquote>
+<p>Бид одоогоор графуудын хэд хэдэн зургийг үзүүллээ. Ийм зургууд ямар шинж чанартай байх ёстой вэ? 8.5(c) жишээн дээрх графын зурагт орой биш цэг дээр хоёр ирмэг огтлолцож болохыг анхаарна уу. Зургийн хувьд албан ёсны хязгаарлалтыг дараах байдлаар тодорхойлно.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.2</strong></p>
+<p><span class="math inline">\(G = (V, E)\)</span> графын <strong>зураг</strong> (drawing) гэдэг нь хавтгай дээрх оройнуудад нэгээс нэгээр оноолт хийх, мөн ирмэг бүрт оройнуудын төгсгөлүүдийг дараах байдлаар холбосон муруй оноохыг хэлнэ:</p>
+<ol type="i">
+<li><p>зөвхөн оройнууд нь муруйн төгсгөлийн цэгүүд болох ирмэгүүдийг төлөөлнө;</p></li>
+<li><p>муруй бүр нэгээс нэг байна (өөрөөр хэлбэл өөртэйгөө огтлолцохгүй), гогцоо ирмэгийн төгсгөлүүд нь нийтлэг цэгт оноогддог тохиолдлыг эс тооцвол;</p></li>
+<li><p>хоёр ялгаатай ирмэгтэй холбоотой муруйнуудын дүрс хамгийн ихдээ хязгаарлагдмал тооны цэг дээр огтлолцдог.</p></li>
+</ol>
+<p>Төгсгөлийн цэгүүдээсээ өөр цэг дээр хоёр муруй огтлолцохыг <strong>огтлолцол</strong> (crossing) гэнэ.</p>
+</blockquote>
+<p>8.2, 8.4, 8.5, 8.7-р зураг болон 8.5-р жишээн дээрх бүх зургууд нь зургууд юм. Зөвхөн 8.7-р зурагт (8.5(c) жишээнд давтагдсан) огтлолцол агуулагдаж байна. Гэсэн хэдий ч 8.9-р зурагт ижил графын огтлолцолгүй зургийг харуулсан. Зарим графуудыг огтлолцолгүйгээр зурж болох боловч заримыг нь зурж болохгүй, үүнийг бид 9.4-р хэсэгт авч үзэх болно.</p>
+<!-- ![Зураг 8.9 8.5(c) жишээний өөр нэг зураг](fig_8_9.png) -->
+<p><em>Зураг 8.9 8.5(c) жишээний өөр нэг зураг</em></p>
+</section>
+<section id="графын-хэсгүүд" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="графын-хэсгүүд"><span class="header-section-number">4.1.3</span> Графын хэсгүүд</h3>
+<p>Зарим нөхцөлд бид зөвхөн өгөгдсөн графын зарим хэсгийг л сонирхож болно. Жишээлбэл, 8.4-р зураг дээрх Шууд нислэгийн графын хувьд бид зөвхөн АНУ-ын дотор аялалыг сонирхож магадгүй, эсвэл зөвхөн зарим дэд хотуудыг багтаасан амралтын аялал хийхийг хүсч магадгүй. Бид Хонолулу, Чикаго хоорондын урт нислэг гэх мэт зарим нислэгээс зайлсхийхийг хүсч магадгүй. Эдгээр тохиолдолд бид том графын дэд хэсэгт анхаарлаа төвлөрүүлэхийг сонгодог.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.3</strong></p>
+<p>Хэрэв <span class="math inline">\(W \subseteq V\)</span>, <span class="math inline">\(F \subseteq E\)</span> бөгөөд <span class="math inline">\(F\)</span>-ийн ирмэгүүд болон тэдгээрийн төгсгөлүүд бүгд <span class="math inline">\(W\)</span>-д байвал <span class="math inline">\(H = (W, F)\)</span> граф нь <span class="math inline">\(G = (V, E)\)</span> графын <strong>дэд граф</strong> (subgraph) гэж хэлнэ. <span class="math inline">\(G = (V, E)\)</span> граф болон <span class="math inline">\(V\)</span>-ийн дэд олонлог <span class="math inline">\(W\)</span> өгөгдсөн үед ирмэгүүд нь</p>
+<p><span class="math display">\[\{e : e \in E \text{ ба } e \text{-ийн төгсгөлүүд } W\text{-д байна}\}\]</span></p>
+<p>олонлогоос бүрдэх <span class="math inline">\(W\)</span>-аар <strong>индукцлагдсан</strong> (induced) дэд граф гэж нэрлэдэг.</p>
+</blockquote>
+<p>Шууд нислэгийн графын хувьд оройнууд нь АНУ-ын бүх хотууд бөгөөд нислэгүүд нь Хонолулу, Чикаго хоорондын нислэгийг эс тооцвол АНУ-ын доторх бүх нислэг болох дэд графыг 8.10-р зурагт үзүүлэв.</p>
+<!-- ![Зураг 8.10 АНУ-ын аяллын дэд граф](fig_8_10.png) -->
+<p><em>Зураг 8.10 АНУ-ын аяллын дэд граф</em></p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.6</strong></p>
+<p>8.5(d) жишээн дээрх графыг <span class="math inline">\(G = (V, E)\)</span> гэе. Дараах зургуудын хувьд тайлбарласан дэд граф <span class="math inline">\(H\)</span>-ийг тодруулсан болно.</p>
+<p><strong>(a)</strong> <span class="math inline">\(W = \{1, 2, 4, 5\}\)</span> ба <span class="math inline">\(F = \{b, d, e\}\)</span> гэе. Тэгэхээр <span class="math inline">\(H = (W, F)\)</span> нь <span class="math inline">\(G\)</span>-ийн дэд граф юм.</p>
+<!-- ![Жишээ 8.6(a)](fig_ex_8_6_a.png) -->
+<p><strong>(b)</strong> <span class="math inline">\(H\)</span> нь <span class="math inline">\(W = \{1, 2, 4, 5\}\)</span>-аар индукцлагдсан <span class="math inline">\(G\)</span>-ийн дэд граф гэе.</p>
+<!-- ![Жишээ 8.6(b)](fig_ex_8_6_b.png) -->
+<ol start="2" type="a">
+<li>хэсэгт байгаа дэд граф нь түүний оройн олонлогоор индукцлагдсан бөгөөд <span class="math inline">\(W\)</span>-д хоёр төгсгөл нь байгаа бүх ирмэгийг агуулдаг. (a) хэсэгт байгаа дэд граф нь индукцлагдаагүй дэд граф бөгөөд <span class="math inline">\(a, g, h\)</span> ирмэгүүд болон тэдгээрийн төгсгөлийн цэгүүд <span class="math inline">\(W\)</span>-д ороогүй болно.</li>
+</ol>
+</blockquote>
+<p>Граф дээрх хоёр орой өгөгдсөн үед бид тэдгээрийн хооронд граф дотор аялах замыг хайж магадгүй. 8.4-р зурагт байгаа Шууд нислэгийн графын хувьд бид Лос Анжелесээс Лондон руу аялах хувилбаруудыг судлахыг хүсч магадгүй, эсвэл Лос Анжелесээс эхэлж, буцаж Лос Анжелес руу буцах боломжит аяллын хувилбаруудыг авч үзэж магадгүй. Эдгээр тохиолдолд бид граф доторх янз бүрийн төрлийн алхалтыг үздэг.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.4</strong></p>
+<p><strong>(a)</strong> <span class="math inline">\(G = (V, E)\)</span> графын <strong>алхалт</strong> (walk) гэдэг нь оройнууд ба ирмэгүүдийн ээлжлэх жагсаалт</p>
+<p><span class="math display">\[v_0, e_1, v_1, e_2, v_2, e_3, \dots, e_{n-1}, v_{n-1}, e_n, v_n\]</span></p>
+<p>бөгөөд <span class="math inline">\(n \ge 0\)</span> байх ба <span class="math inline">\(v_0\)</span> оройгоос <strong>эхэлж</strong>, <span class="math inline">\(v_n\)</span> орой дээр <strong>төгсдөг</strong>, мөн <span class="math inline">\(1 \le i \le n\)</span> бүрийн хувьд <span class="math inline">\(e_i \leftrightarrow \{v_{i-1}, v_i\}\)</span> байна. Алхалтын <strong>урт</strong> (length) гэдэг нь агуулж буй ирмэгүүдийн тоо юм (ижил ирмэгийн давтагдах тоог тооцно). Олон ирмэггүй графын хувьд алхалтыг илүү үр дүнтэйгээр <span class="math inline">\(v_0, v_1, \dots, v_n\)</span> оройнуудын жагсаалтаар дүрсэлж болох бөгөөд <span class="math inline">\(1 \le i \le n\)</span> бүрийн хувьд <span class="math inline">\(\{v_{i-1}, v_i\} \in E\)</span> байна. Тэнд бид <span class="math inline">\(E\)</span>-г <span class="math inline">\(E \subseteq P_2(V) \cup P_1(V)\)</span> дэд олонлогтой адилтгадаг.</p>
+<p><em>(Үргэлжлэл)</em></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>(b)</strong> <strong>Цикл</strong> (circuit) гэдэг нь ижил орой дээр эхэлж, төгсдөг эерэг урттай алхалт юм.</p>
+<p><strong>(c)</strong> <strong>Мөр</strong> (trail) гэдэг нь давтагдсан ирмэггүй алхалт юм. Олон ирмэгтэй графын хувьд ялгаатай олон ирмэгүүд орж болно.</p>
+<p><strong>(d)</strong> <strong>Зам</strong> (path) гэдэг нь давтагдсан оройгүй алхалт юм.</p>
+<p><strong>(e)</strong> <strong>Эргэлт</strong> (cycle) гэдэг нь цорын ганц оройн давталт нь <span class="math inline">\(v_n = v_0\)</span> байх цикл юм.</p>
+<p><strong>(f)</strong> <span class="math inline">\(G\)</span> дахь <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span> хоёр оройн хоорондын <strong>зай</strong> (distance) буюу <span class="math inline">\(dist_G(u, v)\)</span> гэдэг нь <span class="math inline">\(G\)</span> доторх <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span>-ийн хоорондох хамгийн богино алхалтын урт юм. Хэрэв <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> хүртэл алхалт байхгүй бол <span class="math inline">\(dist_G(u, v) = \infty\)</span> гэж онооно. <span class="math inline">\(G\)</span> тодорхой бол доогуур бичлэгийг хасаж болно.</p>
+</blockquote>
+<p>8.4-р тодорхойлолт дахь янз бүрийн төрлийн алхалтуудын хоорондын хамаарлыг 8.11-р зураг дээрх Венн диаграмаар харуулав.</p>
+<!-- ![Зураг 8.11 Алхалтын төрлүүд](fig_8_11.png) -->
+<p><em>Зураг 8.11 Алхалтын төрлүүд</em></p>
+<p>Шууд нислэгийн граф дээрх Лос Анжелес - Нью Йорк - Лондон - Ром - Нью Йорк - Чикаго - Лос Анжелес алхалт нь Лос Анжелес дээр эхэлж, төгсдөг тул цикл юм. Нью Йорк давтагддаг тул энэ нь эргэлт биш юм. Гэсэн хэдий ч ирмэг давтагдоогүй тул энэ нь мөр юм. Хэдийгээр энэ алхалт нь Лос Анжелесээс Ром хүрэхэд 3 ирмэг ашигладаг ч <span class="math inline">\(dist(\text{Лос Анжелес, Ром}) = 2\)</span> байна, учир нь 2 урттай Лос Анжелес - Нью Йорк - Ром зам байгаа бөгөөд үүнээс богино зам байхгүй.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.7</strong></p>
+<p>8.5(d) жишээн дээрх <span class="math inline">\(G = (V, E)\)</span> графыг өгөв.</p>
+<!-- ![Жишээ 8.7-ийн граф](fig_ex_8_7.png) -->
+<p><strong>(a)</strong> <span class="math inline">\(1, b, 2, e, 5, h, 5, e, 2, d, 4\)</span> нь 1-ээс эхэлж 4 дээр төгсдөг 5 урттай алхалт юм.</p>
+<p><strong>(b)</strong> <span class="math inline">\(1, b, 2, e, 5, h, 5, g, 4, d, 2, a, 1\)</span> нь 1-ээс эхэлж 1 дээр төгсдөг 6 урттай цикл юм.</p>
+<p><strong>(c)</strong> <span class="math inline">\(2, a, 1, b, 2, c, 5, h, 5\)</span> нь 2-оос эхэлж 5 дээр төгсдөг 4 урттай мөр юм.</p>
+<p><strong>(d)</strong> <span class="math inline">\(2, b, 1, c, 3, f, 4\)</span> нь 2-оос эхэлж 4 дээр төгсдөг 3 урттай зам юм.</p>
+<p><strong>(e)</strong> <span class="math inline">\(2, b, 1, c, 3, f, 4, d, 2\)</span> нь 2-оос эхэлж 2 дээр төгсдөг 4 урттай эргэлт юм.</p>
+<p><strong>(f)</strong> <span class="math inline">\(dist(2, 4) = 1, dist(3, 5) = 2, dist(5, 5) = 0\)</span>.</p>
+</blockquote>
+<p>Зарим графууд нэг хэсгээс бүрддэг бөгөөд <strong>холбогдсон</strong> (connected) гэж хэлдэг. Бусад нь олон хэсэгт хуваагддаг. Ерөнхийдөө хэсгүүдийг <strong>бүрэлдэхүүн хэсэг</strong> (component) гэж нэрлэдэг бөгөөд тодорхойлолт нь дараах байдалтай байна.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 8.5</strong></p>
+<p><strong>(a)</strong> Хэрэв дурын хоёр оройн хооронд зам байвал <span class="math inline">\(G\)</span> граф нь <strong>холбогдсон</strong> (connected) гэнэ. Үгүй бол <span class="math inline">\(G\)</span> нь <strong>салангид</strong> (disconnected) байна.</p>
+<p><strong>(b)</strong> <span class="math inline">\(G\)</span> графын <strong>бүрэлдэхүүн хэсэг</strong> (component) гэдэг нь <span class="math inline">\(G\)</span>-ийн өөр холбогдсон дэд граф дотор агуулагдаагүй <span class="math inline">\(G\)</span>-ийн холбогдсон дэд граф <span class="math inline">\(H\)</span> юм; хоёр орой нь зөвхөн тэдгээрийн хооронд зам байгаа тохиолдолд л ижил бүрэлдэхүүн хэсэгт байна.</p>
+</blockquote>
+<p>Энгийнээр хэлбэл, графын бүрэлдэхүүн хэсэг гэдэг нь холбогдсон дэд граф хэвээр үлдэхдээ графын ямар ч ирмэг, оройг нэмж болохгүй холбогдсон дэд граф юм. Ялангуяа бүрэлдэхүүн хэсгүүд нь үргэлж индукцлагдсан дэд графууд байдаг. Гэсэн хэдий ч 8.6(b) жишээ нь холбогдсон индукцлагдсан дэд граф үргэлж бүрэлдэхүүн хэсэг байдаггүйг харуулж байна.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 8.8</strong></p>
+<p>8.5(a), (c), (d) жишээнүүд дээрх графууд бүгд холбогдсон тул нэг бүрэлдэхүүн хэсэгтэй байна. 8.5(b) жишээн дээрх граф нь салангид бөгөөд хоёр бүрэлдэхүүн хэсэгтэй.</p>
+<!-- ![Жишээ 8.8-ийн граф](fig_ex_8_8.png) -->
+<p>Нэг нь <span class="math inline">\(\{1, 2, 4, 5, 6\}\)</span>-аар, нөгөө нь <span class="math inline">\(\{3, 7\}\)</span>-оор индукцлагдсан.</p>
+</blockquote>
+</section>
+</section>
+<section id="хэсгийн-дасгалууд" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="хэсгийн-дасгалууд"><span class="header-section-number">4.2</span> 8.1 Хэсгийн дасгалууд</h2>
+<ol type="1">
+<li>Парисын Нотр-Дам сүм нь Парисын дүрслэгдсэн хэсэг дэх Иль де ла Сите (Île de la Cité) арал дээр байрладаг. Энэ зураг дээрх 9 гэж тэмдэглэсэн гүүр бол алдартай Пон Неф (Pont Neuf) гүүр юм.</li>
+</ol>
+<!-- ![Дасгал 1-ийн зураг](fig_ex_8_1.png) -->
+<p>Парисын энэ хэсэгт гүүрний хөндлөн гарах хэсгүүдийг тусгасан граф зур.</p>
+<ol start="2" type="1">
+<li>Ром хотын Тибр гол урсдаг хэсгийг дүрсэлсэн байна. Ватикан хот мөн Тибр голын ойролцоо байрладаг.</li>
+</ol>
+<!-- ![Дасгал 2-ын зураг](fig_ex_8_2.png) -->
+<p>Ромын энэ хэсэгт гүүрний хөндлөн гарах хэсгүүдийг тусгасан граф зур.</p>
+<ol start="3" type="1">
+<li><p>Алгебр, Бизнес, Харилцаа холбоо, Дифференциал тэгшитгэл, Эдийн засаг, Санхүүгийн ангиуд тус бүр судалгааны бүлгийн хичээл товлох шаардлагатай. Доорх хүснэгтэд X нь тухайн мөр, баганад харгалзах хоёр өөр ангид нийтлэг оюутан байгааг илэрхийлнэ.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Алг.</th>
+<th style="text-align: center;">Биз.</th>
+<th style="text-align: center;">Холб.</th>
+<th style="text-align: center;">Диф. тэгш.</th>
+<th style="text-align: center;">Эд. з.</th>
+<th style="text-align: center;">Санх.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Алг.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Биз.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Холб.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Диф. тэгш.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Эд. з.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Санх.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Харгалзах хичээлийн хуваарийн графыг зур.</p></li>
+<li><p>Тодорхой нэг ахлах сургуульд хурал зохион байгуулах шаардлагатай хэд хэдэн сургуулийн хороо байдаг: Хөнгөн атлетик, Төсөв, Цэвэрлэгээ, Бүжиг, Үзвэр үйлчилгээ, Санхүүжилт, Дээд зэрэглэлийн бэлгийн сонгон шалгаруулалт, Гэрийн ажил. Доорх хүснэгтэд X нь тухайн мөр, баганад харгалзах хоёр өөр хороонд нийтлэг гишүүн байгааг илэрхийлнэ.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Атл.</th>
+<th style="text-align: center;">Төс.</th>
+<th style="text-align: center;">Цэв.</th>
+<th style="text-align: center;">Бүж.</th>
+<th style="text-align: center;">Үзв.</th>
+<th style="text-align: center;">Сан.</th>
+<th style="text-align: center;">Бэл.</th>
+<th style="text-align: center;">Гэр.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Атл.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Төс.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Цэв.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Бүж.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Үзв.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Сан.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Бэл.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Гэр.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Харгалзах хорооны хуралдааны хуваарийн графыг зур.</p></li>
+<li><p>Тодорхой нэг хотын метроны системийн газрын зургийг дүрсэлсэн байна. Үүнд өнгөөр ялгасан гурван тусдаа шугам байна. Шилжилтийг нэгээс олон шугам дээр зогсож байгаа газруудад хийж болно.</p></li>
+</ol>
+<!-- ![Дасгал 5-ын зураг](fig_ex_8_5.png) -->
+<p>Бүх метроны системийг төлөөлсөн граф зур.</p>
+<ol start="6" type="1">
+<li>Тодорхой нэг хотын автобусны системийн газрын зургийг дүрсэлсэн байна. Хоёр автобусны чиглэл байна. Гэсэн хэдий ч тэд хотын хамгийн завгүй хэсэгт давхцдаг.</li>
+</ol>
+<!-- ![Дасгал 6-ын зураг](fig_ex_8_6.png) -->
+<p>Бүх автобусны системийг төлөөлсөн граф зур.</p>
+<p>Дараах <span class="math inline">\(G = (V, E)\)</span> графуудыг дасгалуудын туршид иш татах болно.</p>
+<ol type="a">
+<li><p><span class="math inline">\(V = \{1, 2, 3, 4, 5\}\)</span> ба <span class="math inline">\(E = \{\{1, 3\}, \{1, 5\}, \{2, 3\}, \{2, 4\}, \{3, 4\}, \{3, 5\}\}\)</span>.</p></li>
+<li><p><span class="math inline">\(V = \{1, 2, 3, 4, 5, 6\}\)</span> ба <span class="math inline">\(E = \{\{1, 2\}, \{2, 3\}, \{3, 4\}, \{4, 5\}, \{6\}, \{2, 4\}\}\)</span>.</p></li>
+<li><p><span class="math inline">\(V = \{1, 2, 3, 4\}\)</span> ба <span class="math inline">\(E = \{a, b, c, d, e\}\)</span>, энд <span class="math inline">\(a \leftrightarrow \{1, 3\}, b \leftrightarrow \{2, 3\}, c \leftrightarrow \{2, 4\}, d \leftrightarrow \{1, 3\}, e \leftrightarrow \{3, 4\}\)</span>.</p></li>
+<li><p><span class="math inline">\(V = \{1, 2, 3\}\)</span> ба <span class="math inline">\(E = \{a, b, c\}\)</span>, энд <span class="math inline">\(a \leftrightarrow \{1, 2\}, b \leftrightarrow \{2, 3\}, c \leftrightarrow \{3, 1\}\)</span>.</p></li>
+</ol>
+<p>7-оос 10 хүртэлх дасгалуудад заасан графыг зурж, энгийн эсэхийг тодорхойл. Хэрэв энгийн биш бол яагаад гэдгийг тайлбарла.</p>
+<ol start="7" type="1">
+<li>Граф (a).</li>
+<li>Граф (b).</li>
+<li>Граф (c).</li>
+<li>Граф (d).</li>
+</ol>
+<p>Дараах энгийн графуудыг үлдсэн дасгалуудын туршид иш татах болно. Ирмэг бүрийг түүний төгсгөлийн хоёр элементийн олонлогтой адилтгасан.</p>
+<!-- ![Дасгал 7-10-ын графууд](fig_ex_7_10.png) -->
+<p>11-ээс 14 хүртэлх дасгалуудад <span class="math inline">\(H = (W, F)\)</span> дэд граф заасан эсэхийг тодорхойл. Хэрэв заагаагүй бол яагаад гэдгийг тайлбарла.</p>
+<ol start="11" type="1">
+<li>Граф (e)-д <span class="math inline">\(W = \{2, 4, 6\}\)</span> ба <span class="math inline">\(F = \{\{2, 4\}, \{4, 6\}\}\)</span> гэе.</li>
+<li>Граф (f)-д <span class="math inline">\(W = \{1, 2, 3, 4\}\)</span> ба <span class="math inline">\(F = \{\{1, 3\}, \{2, 3\}, \{2, 4\}\}\)</span> гэе.</li>
+<li>Граф (c)-д <span class="math inline">\(W = \{1, 2, 3\}\)</span> ба <span class="math inline">\(F = \{a, d, e\}\)</span> гэе.</li>
+<li>Граф (d)-д <span class="math inline">\(W = \{1, 2, 3\}\)</span> ба <span class="math inline">\(F = \emptyset\)</span> гэе.</li>
+</ol>
+<p>15-аас 18 хүртэлх дасгалуудад заасан дэд графын ирмэгийн олонлогийг тодорхойл.</p>
+<ol start="15" type="1">
+<li><p>Граф (g)-д <span class="math inline">\(W = \{1, 2, 3, 5\}\)</span>-аар индукцлагдсан дэд граф.</p></li>
+<li><p>Граф (h)-д <span class="math inline">\(W = \{2, 3, 4, 5\}\)</span>-аар индукцлагдсан дэд граф.</p></li>
+<li><p>Граф (a)-д <span class="math inline">\(W = \{1, 3, 5\}\)</span>-аар индукцлагдсан дэд граф.</p></li>
+<li><p>Граф (b)-д <span class="math inline">\(W = \{2, 4, 6\}\)</span>-аар индукцлагдсан дэд граф.</p></li>
+<li><p>3-р дасгал дахь хичээлийн хуваарийн бодлогыг авч үзье. Семестрийн тодорхой долоо хоногт шалгалт өгөх шаардлагатай тул зөвхөн Алгебр, Бизнес, Дифференциал тэгшитгэл, Санхүүгийн ангиуд судалгааны бүлгийн хичээл товлох шаардлагатай. Эдгээр оройгоор индукцлагдсан дэд графыг зур.</p></li>
+<li><p>4-р дасгал дахь ахлах сургуулийн хорооны хуралдааны хуваарийн бодлогыг авч үзье. Хэрэв зөвхөн Хөнгөн атлетик, Цэвэрлэгээ, Үзвэр үйлчилгээ, Дээд зэрэглэлийн бэлгийн сонгон шалгаруулалт, Гэрийн ажлын хороод хуралдахаар товлож байгаа бол зөвхөн эдгээр оройгоор индукцлагдсан дэд графыг авч үзэх шаардлагатай. Тэр дэд графыг зур.</p></li>
+</ol>
+<p>21-ээс 26 хүртэлх дасгалуудад өгөгдсөн зураг нь графын зураг мөн эсэхийг тодорхойл. Хэрэв тийм биш бол яагаад гэдгийг тайлбарла.</p>
+<!-- ![Дасгал 21-26-ын зураг](fig_ex_21_26.png) -->
+<ol start="27" type="1">
+<li>Граф (a)-д 1-ээс 4 хүртэл зам байна уу?</li>
+<li>Граф (b)-д 2-оос 6 хүртэл зам байна уу?</li>
+<li>Дор хаяж нэг ирмэгтэй граф бүр зам биш алхалтуудыг агуулдаг гэдгийг харуул.</li>
+<li>Энгийн биш граф бүр эргэлт агуулдаг гэдгийг харуул.</li>
+<li>Граф (a) эргэлт агуулж байна уу?</li>
+<li>Граф (b) эргэлт агуулж байна уу?</li>
+<li>Граф (f)-д 1-ээс 4 хүртэлх зайг ол.</li>
+<li>Граф (g)-д 1-ээс 5 хүртэлх зайг ол.</li>
+<li>Граф (c)-д 1-ээс 4 хүртэлх зайг ол.</li>
+<li>Граф (d)-д 1-ээс 3 хүртэлх зайг ол.</li>
+<li>5-р дасгал дахь хотын метроны системийн графыг авч үзье. Тэр граф дээр Бервик ба Коннор хоорондын зай хэд вэ? Энэ зай нь биет зайг тусгахгүй байж магадгүйг анхаарна уу.</li>
+<li>6-р дасгал дахь хотын автобусны системийн графыг авч үзье. Харгалзах граф дээр Винтер ба Хоук хоорондын зай хэд вэ? Энэ зай нь биет зайг тусгахгүй байж магадгүйг анхаарна уу.</li>
+</ol>
+<p>39-ээс 42 хүртэлх дасгалууд дараах энгийн графыг иш татсан болно. Энэ тохиолдолд алхалтыг зөвхөн оройнуудын жагсаалтаар тодорхойлж болно.</p>
+<!-- ![Дасгал 39-42-ын граф](fig_ex_39_42.png) -->
+<ol start="39" type="1">
+<li><p><span class="math inline">\(5, 1, 2, 3\)</span> зам мөн үү?</p></li>
+<li><p><span class="math inline">\(2, 5, 1, 2, 3\)</span> зам мөн үү?</p></li>
+<li><p><span class="math inline">\(1, 2, 5, 1, 4\)</span> эргэлт мөн үү?</p></li>
+<li><p><span class="math inline">\(5, 2, 1, 4, 5\)</span> эргэлт мөн үү?</p></li>
+<li><p>5-р дасгал дахь хотын метроны системийн графыг авч үзье. <strong>(a)</strong> Колбигоос эхэлсэн ногоон шугамыг замаар илэрхийл. <strong>(b)</strong> Цэнхэр шугам мөн адил замыг үүсгэдэг үү?</p></li>
+<li><p>6-р дасгал дахь хотын автобусны системийн графыг авч үзье. <strong>(a)</strong> Мейнээс Маркет хүртэлх хэсгээс эхлэн 2-р автобусны чиглэлийг цикл хэлбэрээр илэрхийл. <strong>(b)</strong> 1-р автобусны чиглэл мөн адил цикл үүсгэдэг үү?</p></li>
+<li><p><span class="math inline">\(u, w\)</span> нь графын дурын оройнууд гэе. Хэрэв <span class="math inline">\(dist(u, w) \ge 1\)</span> бол <span class="math inline">\(dist(u, v) = dist(u, w) - 1\)</span> байх <span class="math inline">\(w\)</span>-ийн хөрш <span class="math inline">\(v\)</span> орой байгааг харуул.</p></li>
+<li><p><span class="math inline">\(u, v, w\)</span> нь графын дурын оройнууд гэе. Дараахь зүйлийг харуул: <strong>(a)</strong> <span class="math inline">\(dist(u, u) = 0\)</span>. <strong>(b)</strong> <span class="math inline">\(dist(u, v) = dist(v, u)\)</span>. <strong>(c)</strong> <span class="math inline">\(dist(u, w) \le dist(u, v) + dist(v, w)\)</span>.</p></li>
+<li><p>Хэрэв <span class="math inline">\(G\)</span> граф дээр <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> хүртэл хоёр ялгаатай зам байвал <span class="math inline">\(G\)</span> нь эргэлт агуулдаг гэдгийг харуул.</p></li>
+<li><p>Граф дээрх дурын <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span> хоёр оройн хувьд <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> хүртэл алхалт байх нь зөвхөн <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> хүртэл зам байх тохиолдолд л болохыг харуул.</p></li>
+<li><p>Кёнигсбергийн гүүрний бодлого шийдэлгүй гэдгийг харуулахын тулд 8.2-р зургийг ашигла. <em>Заавар</em>: <span class="math inline">\(C\)</span> оройг авч үзэхдээ эхлэх алхмыг таамаглаарай. Тэгш хэмийн давуу талыг ашиглаарай. Та хаа нэгтээ гацах болно гэдгийг марга.</p></li>
+<li><p>Кёнигсбергийн гүүрний бодлогын хувьд ирмэгүүдийг давтахгүйгээр эхэлж, төгссөн газраа буцаж ирэх циклд хамгийн ихдээ хэдэн гүүр багтах вэ?</p></li>
+<li><p><strong>(a)</strong> 8.4-р зурагт Хонолулугаас Лондон хүртэл <span class="math inline">\(n\)</span> урттай зам байх <span class="math inline">\(n\)</span>-ийн утгууд юу вэ? <strong>(b)</strong> Хонолулугаас Лондон хүртэлх зай хэд вэ?</p></li>
+<li><p>8.4-р зурагт ямар ч хот 2-оос илүү зайд оршдоггүй ямар шинж чанар байна вэ?</p></li>
+<li><p>8.3-р жишээнд Астрологийн судалгааны бүлэгтэй нэгэн зэрэг ямар судалгааны бүлгүүд уулзаж болох вэ?</p></li>
+<li><p>8.3-р жишээнд хэрэв 1 ба 2-р ангиуд нэгэн зэрэг уулзаж чадахгүй, 2 ба 3-р ангиуд нэгэн зэрэг уулзаж чадахгүй бол 1 ба 3-р ангиуд нэгэн зэрэг уулзаж чадахгүй гэдэг нь үргэлж үнэн үү?</p></li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./0.html" class="pagination-link" aria-label="Бүлэг 0: Тоонуудыг дүрслэх нь">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Бүлэг 0: Тоонуудыг дүрслэх нь</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
