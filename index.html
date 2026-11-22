@@ -49,9 +49,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-48ad98ff3229c4815ec3be23995b5ba0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-202164abd7158b22469cb0a9feded391.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-48ad98ff3229c4815ec3be23995b5ba0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -80,6 +80,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -263,7 +292,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Графын онолын үндэс</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Тоонуудыг дүрслэх нь</span></a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -298,7 +327,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Графын онолын үндэс</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Тоонуудыг дүрслэх нь</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -341,7 +370,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Дэд гарчиг</h2>
    
   <ul>
-  <li><a href="#графын-онолын-үндэс" id="toc-графын-онолын-үндэс" class="nav-link active" data-scroll-target="#графын-онолын-үндэс"><span class="header-section-number">1</span> Графын онолын үндэс</a></li>
+  <li><a href="#тоонуудыг-дүрслэх-нь" id="toc-тоонуудыг-дүрслэх-нь" class="nav-link active" data-scroll-target="#тоонуудыг-дүрслэх-нь"><span class="header-section-number">1</span> Тоонуудыг дүрслэх нь</a>
+  <ul class="collapse">
+  <li><a href="#аравтын-тоолол-аравтын-суурь" id="toc-аравтын-тоолол-аравтын-суурь" class="nav-link" data-scroll-target="#аравтын-тоолол-аравтын-суурь"><span class="header-section-number">1.1</span> Аравтын тоолол (Аравтын суурь)</a></li>
+  <li><a href="#s-суурь" id="toc-s-суурь" class="nav-link" data-scroll-target="#s-суурь"><span class="header-section-number">1.2</span> <span class="math inline">\(s\)</span> суурь</a></li>
+  <li><a href="#хоёртын-тоолол-хоёртын-суурь" id="toc-хоёртын-тоолол-хоёртын-суурь" class="nav-link" data-scroll-target="#хоёртын-тоолол-хоёртын-суурь"><span class="header-section-number">1.3</span> Хоёртын тоолол (Хоёртын суурь)</a></li>
+  <li><a href="#i-болон-ii-хэсгүүдийг-холбох-нь" id="toc-i-болон-ii-хэсгүүдийг-холбох-нь" class="nav-link" data-scroll-target="#i-болон-ii-хэсгүүдийг-холбох-нь"><span class="header-section-number">1.4</span> I болон II хэсгүүдийг холбох нь</a></li>
+  <li><a href="#тоонуудыг-өөр-суурьт-илэрхийлэх-нь" id="toc-тоонуудыг-өөр-суурьт-илэрхийлэх-нь" class="nav-link" data-scroll-target="#тоонуудыг-өөр-суурьт-илэрхийлэх-нь"><span class="header-section-number">1.5</span> Тоонуудыг өөр суурьт илэрхийлэх нь</a></li>
+  <li><a href="#наймтын-наймтын-суурь-болон-арван-зургаатын-тоолол-арван-зургаатын-суурь" id="toc-наймтын-наймтын-суурь-болон-арван-зургаатын-тоолол-арван-зургаатын-суурь" class="nav-link" data-scroll-target="#наймтын-наймтын-суурь-болон-арван-зургаатын-тоолол-арван-зургаатын-суурь"><span class="header-section-number">1.6</span> Наймтын (Наймтын суурь) болон арван зургаатын тоолол (Арван зургаатын суурь)</a></li>
+  <li><a href="#дасгалууд" id="toc-дасгалууд" class="nav-link" data-scroll-target="#дасгалууд"><span class="header-section-number">1.7</span> Дасгалууд</a></li>
+  <li><a href="#бодолт-хийх" id="toc-бодолт-хийх" class="nav-link" data-scroll-target="#бодолт-хийх"><span class="header-section-number">1.8</span> Бодолт хийх</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -369,11 +408,338 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="графын-онолын-үндэс" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Графын онолын үндэс</h1><p><img src="images/cover.png" title="Дискрет математик" class="quarto-cover-image nolightbox img-fluid"></p>
+<section id="тоонуудыг-дүрслэх-нь" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Тоонуудыг дүрслэх нь</h1><p><img src="images/cover.png" title="Дискрет математик" class="quarto-cover-image nolightbox img-fluid"></p>
+<p><strong>ЭНЭХҮҮ НОМЫН ТУРШ</strong>, бид зөвхөн хоёр боломжит утгатай гишүүдээс бүрдсэн хоёртын дарааллуудтай таарна. I хэсэгт бид Булийн хувьсагчдын дарааллыг авч үзэх бөгөөд ийм дарааллын гишүүд нь Үнэн эсвэл Худал (товчоор <span class="math inline">\(T\)</span> эсвэл <span class="math inline">\(F\)</span>) гэсэн утгыг авч болно. Жишээлбэл, II хэсэгт зоос шидэх дарааллыг авч үздэг бөгөөд зоос шидэх бүр Эсвэл Толгой (товчоор <span class="math inline">\(H\)</span> эсвэл <span class="math inline">\(T\)</span>) гэсэн үр дүнд хүрдэг. Эдгээр хоёр төрлийн дараалал нь гишүүд нь 1 эсвэл 0 байдаг дараалалтай ижил бүтэцтэй байдаг. Ийм дарааллыг компьютерт өгөгдөл хадгалахад ашигладаг, учир нь 1-ийг цахилгаан дохио байгаагаар, 0-ийг байхгүйгээр дүрсэлж болно. Ийм тохиргоонд гишүүн бүрийг <strong>бит</strong> (bit) гэж нэрлэдэг бөгөөд энэ нь <em>binary digit</em> (хоёртын орон) гэсэн үгийн товчлол юм.</p>
+<p>Энэ бүлгийн гол зорилго нь 1-үүд болон 0-үүдийн дарааллыг судлах, сөрөг бус бүхэл тоо бүрийг ийм дарааллаар хэрхэн дүрслэх боломжтойг сурах явдал юм. Бүхэл тоог хэрхэн дүрслэх талаар ойлгох түлхүүр нь тоонуудыг аравтын системд хэрхэн бичдэг талаар эргэн санах явдал юм.</p>
+<section id="аравтын-тоолол-аравтын-суурь" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="аравтын-тоолол-аравтын-суурь"><span class="header-section-number">1.1</span> Аравтын тоолол (Аравтын суурь)</h2>
+<p>Бид <span class="math inline">\(3527\)</span> болон <span class="math inline">\(60,409\)</span> гэж бичигдсэн тоонуудыг харахдаа тэдгээрийг танил хэлбэрээр дүрслэгдсэн гэж ойлгодог учраас тэдгээрийн утгыг мэддэг. <strong>Аравтын</strong> систем буюу суурь аравтын байрлалын системийг бага сургуульд заадаг. Жишээлбэл, <span class="math inline">\(3527\)</span> тоонд 7 нь нэгжийн орон, 2 нь аравтын орон, 5 нь зуутын орон, 3 нь мянгатын орон гэдгийг бид мэднэ. Өөрөөр хэлбэл,</p>
+<p><span class="math display">\[
+\begin{align*}
+3527 &amp;= (3)1000 + (5)100 + (2)10 + (7)1 \\
+&amp;= (3)10^3 + (5)10^2 + (2)10^1 + (7)10^0.
+\end{align*}
+\]</span></p>
+<p>Үүнтэй адил,</p>
+<p><span class="math display">\[
+60409 = (6)10^4 + (0)10^3 + (4)10^2 + (0)10^1 + (9)10^0.
+\]</span></p>
+<p>Дээрх нийлбэрүүдэд аравтын суурийн зэрэг нь хамгийн баруун талын гишүүнд 0-ээс эхэлж, зүүн тийш шилжих бүрт 1-ээр нэмэгддэг. Аравтын суурьт зөвхөн <span class="math inline">\(0, 1, \dots, 9\)</span> гэсэн цифрүүдийг ашигладаг. Байрлалын систем нь сөрөг бус бүхэл тоо бүрийг тодорхойлох боломжийг олгодог. Аравтын суурийг ашиглах шалтгаан нь бидэнд аравхан хуруу байдагтай холбоотой. Гэхдээ энэ тооллын системийг <span class="math inline">\(s \ge 2\)</span> байх дурын бүхэл <span class="math inline">\(s\)</span> суурьт ашиглаж болно.</p>
+</section>
+<section id="s-суурь" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="s-суурь"><span class="header-section-number">1.2</span> <span class="math inline">\(s\)</span> суурь</h2>
+<p>Бид 4.5 хэсэгт батлахын адил, аравтын суурьт тоог дүрслэхэд ашигладаг системийг <span class="math inline">\(s \ge 2\)</span> байх дурын бүхэл <span class="math inline">\(s\)</span> суурьт тоог дүрслэхэд ерөнхийлж болно. Хэрэв <span class="math inline">\(s \le 10\)</span> бол танил тэмдэгтүүдийг ашиглана (мөн <span class="math inline">\(s, s+1, \dots, 9\)</span>-ийг хасна). Хэрэв <span class="math inline">\(s &gt; 10\)</span> бол <span class="math inline">\(10, 11, \dots, s-1\)</span> утгуудад зориулж шинэ тэмдэгтүүдийг сонгох шаардлагатай. Жишээлбэл, <span class="math inline">\(s = 16\)</span> (<strong>арван зургаатын систем</strong>) үед <span class="math inline">\(0, 1, \dots, 9, a, b, c, d, e, f\)</span> гэсэн цифрүүдийг ашигладаг. Энэ нь аравыг <span class="math inline">\(a\)</span>, арван нэгийг <span class="math inline">\(b\)</span> гэх мэтээр дүрсэлдэг.</p>
+<p><span class="math inline">\(s\)</span> суурьт, сөрөг бус бүхэл <span class="math inline">\(n\)</span> тоог дараах хэлбэрээр дүрсэлнэ</p>
+<p><span class="math display">\[
+n = a_k a_{k-1} \cdots a_1 a_0 \quad \text{($s$ суурьт)}
+\]</span></p>
+<p>энд <span class="math inline">\(a_k, a_{k-1}, \dots, a_1, a_0\)</span> цифрүүд нь <span class="math inline">\(\{0, 1, \dots, s-1\}\)</span> олонлогоос элемент авдаг. <span class="math inline">\(n\)</span>-ийн харгалзах утгыг дараах тэгшитгэлээр тодорхойлно</p>
+<p><span class="math display">\[
+n = a_k s^k + a_{k-1} s^{k-1} + \dots + a_1 s^1 + a_0 s^0.
+\]</span></p>
+<p>Бидний гол анхаарлыг <span class="math inline">\(s = 2\)</span> суурьт хандуулах болно. Өөрөөр хэлбэл, бид <strong>хоёртын тоонууд</strong> дээр төвлөрнө. Гэхдээ бусад зарим холбогдох болон чухал суурьнуудыг мөн судлах болно.</p>
+</section>
+<section id="хоёртын-тоолол-хоёртын-суурь" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="хоёртын-тоолол-хоёртын-суурь"><span class="header-section-number">1.3</span> Хоёртын тоолол (Хоёртын суурь)</h2>
+<p>Хоёртын тоонуудын хувьд сөрөг бус бүхэл тоог дүрслэхэд зөвхөн <span class="math inline">\(0\)</span> болон <span class="math inline">\(1\)</span> цифрүүдийг ашигладаг. Бид хоёртын тоог унших дадлагаас эхэлье.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 0.1</strong></p>
+<p>Дараах хоёртын тоонуудын аравтын бутархай утгыг тодорхойл.</p>
+<p><strong>(a)</strong> <span class="math inline">\(110101\)</span>.</p>
+<p><span class="math display">\[
+\begin{align*}
+&amp;(1)2^5 + (1)2^4 + (0)2^3 + (1)2^2 + (0)2^1 + (1)2^0 = \\
+&amp;\quad 32 + 16 + 0 + 4 + 0 + 1 = 53 \\
+&amp;\quad \text{(аравтын суурьт)}
+\end{align*}
+\]</span></p>
+<p><strong>(b)</strong> <span class="math inline">\(01101110\)</span>.</p>
+<p><span class="math display">\[
+\begin{align*}
+&amp;(0)2^7 + (1)2^6 + (1)2^5 + (0)2^4 + (1)2^3 + (1)2^2 + (1)2^1 + (0)2^0 = \\
+&amp;\quad 0 + 64 + 32 + 0 + 8 + 4 + 2 + 0 = 110 \\
+&amp;\quad \text{(аравтын суурьт)}
+\end{align*}
+\]</span></p>
+</blockquote>
+<p>0.1(b) жишээнд аравтын суурь нь 110 гэдгийг анхаарна уу. Олон суурьтай ажиллахдаа тоог аль суурьт дүрсэлж байгааг зааж өгөх нь чухал юм. Үгүй бол 110 гэсэн тоог хоёртын тоо гэж андуурч ойлгож болно. Мөн 0.1(b) жишээнд эхний 0 цифр нь тооны утгад хувь нэмэр оруулахгүй гэдгийг анхаарна уу. Зөвхөн хамгийн зүүн талын тэг биш цифрээс эхлэн тооны утгад хувь нэмэр оруулдаг. Гэсэн хэдий ч заримдаа тогтмол урттай болгохын тулд тооны зүүн талд тэг нэмж бичих нь тохиромжтой байдаг. Хүснэгт 1-д 3 оронтой бүх хоёртын тоонуудын утгыг жагсаав.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Хоёртын тоо</th>
+<th style="text-align: center;">Аравтын суурийн утга</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">000</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">001</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">010</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">011</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">101</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">111</td>
+<td style="text-align: center;">7</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 1: Бүх 3 оронтой хоёртын тоонууд</em></p>
+<p>3 оронтой <span class="math inline">\(8 = 2^3\)</span> хоёртын тоо байна. Ерөнхийдөө <span class="math inline">\(n\)</span> оронтой <span class="math inline">\(2^n\)</span> хоёртын тоо байдаг.</p>
+</section>
+<section id="i-болон-ii-хэсгүүдийг-холбох-нь" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="i-болон-ii-хэсгүүдийг-холбох-нь"><span class="header-section-number">1.4</span> I болон II хэсгүүдийг холбох нь</h2>
+<p>Хоёртын дарааллын тоон утгууд нь тэдгээрийг эрэмбэлэх байгалийн аргыг олгодог. Булийн дарааллын хувьд <span class="math inline">\(T\)</span>-ийг 1-тэй, <span class="math inline">\(F\)</span>-ийг 0-тэй адилтгавал дараалал бүр тоон утгыг өгдөг. Үүнтэй адил зоос шидэх дарааллыг <span class="math inline">\(H\)</span>-ийг 1-тэй, <span class="math inline">\(T\)</span>-ийг 0-тэй адилтгаж тоон утгаар дүрсэлж болно. Иймээс энэ нь тодорхой <span class="math inline">\(n\)</span> урттай бүх Булийн дараалал болон зоос шидэх бүх дарааллыг (өсөх дарааллаар) жагсаах системтэй аргыг олгодог. Бидний адилтгалын дагуу Хүснэгт 2-т 3 урттай боломжит бүх дарааллыг жагсаав. Энэ номын I хэсэгт бид Хүснэгт 2-ын хоёр дахь баганатай холбоотой асуудлуудыг судалдаг. II хэсэгт бид Хүснэгт 2-ын гурав дахь баганатай холбоотой асуудлуудыг судалдаг. Хоёртын тооны үндсэн ойлголт нь эдгээр хоёр бодолстын хоорондын холбоог бий болгодог.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Хоёртын тоо</th>
+<th style="text-align: center;">Булийн утга</th>
+<th style="text-align: center;">Зоос шидэх</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">000</td>
+<td style="text-align: center;">FFF</td>
+<td style="text-align: center;">TTT</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">001</td>
+<td style="text-align: center;">FFT</td>
+<td style="text-align: center;">TTH</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">010</td>
+<td style="text-align: center;">FTF</td>
+<td style="text-align: center;">THT</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">011</td>
+<td style="text-align: center;">FTT</td>
+<td style="text-align: center;">THH</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">100</td>
+<td style="text-align: center;">TFF</td>
+<td style="text-align: center;">HTT</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">101</td>
+<td style="text-align: center;">TFT</td>
+<td style="text-align: center;">HTH</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">110</td>
+<td style="text-align: center;">TTF</td>
+<td style="text-align: center;">HHT</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">111</td>
+<td style="text-align: center;">TTT</td>
+<td style="text-align: center;">HHH</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 2: 3 урттай хоёртын дарааллууд</em></p>
+</section>
+<section id="тоонуудыг-өөр-суурьт-илэрхийлэх-нь" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="тоонуудыг-өөр-суурьт-илэрхийлэх-нь"><span class="header-section-number">1.5</span> Тоонуудыг өөр суурьт илэрхийлэх нь</h2>
+<p>Одоогоор бид хоёртын системээс аравтын систем рүү хэрхэн хөрвүүлэх талаар сурсан, гэхдээ бид эсрэг чиглэлд буюу аравтын системээс хоёртын систем рүү хэрхэн шилжихээ мэдэх хэрэгтэй. Үүний тулд бүхэл тоог хуваах болон үлдэгдлийг тооцоолох энгийн алгоритм байдаг. Бид 4.5 хэсэгт нотлох ур чадварыг хөгжүүлсний дараа дасгалуудад бид 0.2 жишээнд танилцуулж буй аргын үндэслэлийг батлахыг хүсэх болно.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 0.2</strong></p>
+<p>Аравтын системээр өгөгдсөн дараах тоонуудын хоёртын дүрслэлийг тодорхойл.</p>
+<p><strong>(a)</strong> <span class="math inline">\(49\)</span>.</p>
+<p>Эхлэхийн тулд бид 2-т хуваах дарааллыг гүйцэтгэх бөгөөд үүнд гарсан ноогдвор бүрийг дараагийн алхамд 2-т хуваана.</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+49/2 = 24 &amp; \text{үлдэгдэл} &amp; 1 \\
+24/2 = 12 &amp; \text{үлдэгдэл} &amp; 0 \\
+12/2 = 6 &amp; \text{үлдэгдэл} &amp; 0 \\
+6/2 = 3 &amp; \text{үлдэгдэл} &amp; 0 \\
+3/2 = 1 &amp; \text{үлдэгдэл} &amp; 1 \\
+1/2 = 0 &amp; \text{үлдэгдэл} &amp; 1 \\
+\end{array}
+\]</span></p>
+<p>Хуваалтын дараалал нь ноогдвор 0 болох үед дуусна. Дараа нь хоёртын дүрслэлийг үлдэгдлүүдийг эсрэг дарааллаар жагсааж гаргана. Энэ тохиолдолд 49-ийн хоёртын дүрслэл нь <span class="math inline">\(110001\)</span> болно.</p>
+<p>Дараахь зүйлийг анхаарна уу [ (1)2^5 + (1)2^4 + (0)2^3 + (0)2^2 + (0)2^1 + (1)2^0 = 2^5 + 2^4 + 2^0 = 49. ]</p>
+<p><strong>(b)</strong> <span class="math inline">\(72\)</span>.</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+72/2 = 36 &amp; \text{үлдэгдэл} &amp; 0 \\
+36/2 = 18 &amp; \text{үлдэгдэл} &amp; 0 \\
+18/2 = 9 &amp; \text{үлдэгдэл} &amp; 0 \\
+9/2 = 4 &amp; \text{үлдэгдэл} &amp; 1 \\
+4/2 = 2 &amp; \text{үлдэгдэл} &amp; 0 \\
+2/2 = 1 &amp; \text{үлдэгдэл} &amp; 0 \\
+1/2 = 0 &amp; \text{үлдэгдэл} &amp; 1 \\
+\end{array}
+\]</span></p>
+<p>72-ын хоёртын дүрслэл нь <span class="math inline">\(1001000\)</span> болно.</p>
+<p>Дараахь зүйлийг анхаарна уу [ (1)2^6 + (0)2^5 + (0)2^4 + (1)2^3 + (0)2^2 + (0)2^1 + (0)2^0 = 2^6 + 2^3 = 72. ]</p>
+</blockquote>
+<p>0.2 жишээний процедурыг дагаснаар сөрөг бус бүхэл тоо бүрийг хоёртын системээр бичиж болно. Бид 4.5 хэсэгт батлахын адил, дурын бүхэл <span class="math inline">\(s \ge 2\)</span> суурийн хувьд <span class="math inline">\(s\)</span> суурь дахь тооны дүрслэлийг <span class="math inline">\(s\)</span>-д хуваах дарааллаар гаргаж авдаг. Ерөнхий тохиолдолд үлдэгдлүүд нь <span class="math inline">\(0, 1, \dots, s-1\)</span> утгуудыг авдаг бөгөөд эдгээр нь <span class="math inline">\(s\)</span> суурьт тохирох цифрүүд юм. Ноогдвор 0 болсны дараа <span class="math inline">\(s\)</span> суурь дахь дүрслэлийг үлдэгдлүүдийн дарааллыг эсрэг дарааллаар жагсааж гаргана.</p>
+</section>
+<section id="наймтын-наймтын-суурь-болон-арван-зургаатын-тоолол-арван-зургаатын-суурь" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="наймтын-наймтын-суурь-болон-арван-зургаатын-тоолол-арван-зургаатын-суурь"><span class="header-section-number">1.6</span> Наймтын (Наймтын суурь) болон арван зургаатын тоолол (Арван зургаатын суурь)</h2>
+<p>Компьютерийн шинжлэх ухаанд хоёртын тоотой холбоотой хоёр тооллын систем онцгой чухал юм. <strong>Наймтын</strong> систем нь наймтын суурийг, <strong>арван зургаатын</strong> систем нь арван зургаатын суурийг ашигладаг. <span class="math inline">\(s\)</span> суурийн тохирох утгыг ашигласнаар бусад системүүдийн адилаар эдгээр системийг ашиглан илэрхийлсэн тоонуудын утгыг тодорхойлж чадна.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 0.3</strong></p>
+<p><span class="math inline">\(3cc0\)</span> арван зургаатын тооны аравтын утга нь <span class="math inline">\(15584\)</span> болохыг олно.</p>
+<p><span class="math display">\[
+\begin{align*}
+&amp;(3)16^3 + (12)16^2 + (14)16^1 + (0)16^0 = \\
+&amp;\quad 12288 + 3072 + 224 + 0 = 15584 \\
+&amp;\quad \text{(аравтын суурьт)}
+\end{align*}
+\]</span></p>
+<p>Арван зургаатын системд <span class="math inline">\(c\)</span> нь арван хоёрыг, <span class="math inline">\(e\)</span> нь арван дөрөвийг төлөөлдөг гэдгийг санаарай.</p>
+</blockquote>
+<p>Аравтын системээс эдгээр тооллын системүүд рүү хөрвүүлэхийн тулд бид 0.2 жишээнд тайлбарласан ерөнхий процедурыг ашиглана.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 0.4</strong></p>
+<p><span class="math inline">\(93\)</span> тоог наймтын системээр бичихдээ 8-д дараалан хуваах замаар гүйцэтгэнэ.</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+93/8 = 11 &amp; \text{үлдэгдэл} &amp; 5 \\
+11/8 = 1 &amp; \text{үлдэгдэл} &amp; 3 \\
+1/8 = 0 &amp; \text{үлдэгдэл} &amp; 1 \\
+\end{array}
+\]</span></p>
+<p>Иймээс <span class="math inline">\(93\)</span> аравтын тооны наймтын дүрслэл нь <span class="math inline">\(135\)</span> болно.</p>
+</blockquote>
+<p>Наймтын болон арван зургаатын системүүдийн ач холбогдол нь тэдгээрийн суурь нь хоёрын зэрэгтэй байдагтай холбоотой. Энэ нь тэдгээрийг хоёртын систем болон эсрэгээр хөрвүүлэхэд хялбар болгодог. Жишээлбэл, <span class="math inline">\(16 = 2^4\)</span> тул арван зургаатын тооны цифрүүдийг баруунаас эхлэн 4 битийн бүлгүүдэд хуваах замаар гаргаж авдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 0.5</strong></p>
+<p><span class="math inline">\(1110110101\)</span> хоёртын тоог арван зургаатын системээр <span class="math inline">\(3b5\)</span> гэж бичнэ.</p>
+<p><span class="math display">\[
+\begin{array}{cccc}
+0011 &amp; 1011 &amp; 0101 \\
+\downarrow &amp; \downarrow &amp; \downarrow \\
+3 &amp; b &amp; 5
+\end{array}
+\]</span></p>
+<p>Хамгийн зүүн талын блокийг 4 хэмжээтэй болгохын тулд зүүн талд нь тэг нэмсэн. <span class="math inline">\(1011\)</span> нь арван нэгийн хоёртын дүрслэл тул дунд блокийн арван зургаатын цифр нь <span class="math inline">\(b\)</span> болно.</p>
+</blockquote>
+<p>Арван зургаатын систем нь хоёртын системээс цөөн цифрээр тоог дүрсэлдэг. Хүн <span class="math inline">\(1110110101\)</span>-ээс илүү <span class="math inline">\(3b5\)</span>-ыг илүү хялбар уншдаг тул хоёртын өгөгдлийг компьютерт хэвлэх үед хүн уншихад тохиромжтой болгохын тулд үүнийг арван зургаатын систем шиг илүү уншигдахуйц систем рүү хөрвүүлдэг.</p>
+<hr>
+</section>
+<section id="дасгалууд" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="дасгалууд"><span class="header-section-number">1.7</span> Дасгалууд</h2>
+<p>1-ээс 10 хүртэлх дасгалуудад өгөгдсөн хоёртын тоонуудыг аравтын систем рүү хөрвүүл.</p>
+<ol type="1">
+<li><span class="math inline">\(1010\)</span></li>
+<li><span class="math inline">\(1001\)</span></li>
+<li><span class="math inline">\(10111\)</span></li>
+<li><span class="math inline">\(11010\)</span></li>
+<li><span class="math inline">\(101110\)</span></li>
+<li><span class="math inline">\(110010\)</span></li>
+<li><span class="math inline">\(1001011\)</span></li>
+<li><span class="math inline">\(1011011\)</span></li>
+<li><span class="math inline">\(10101011\)</span></li>
+<li><span class="math inline">\(11110000\)</span></li>
+</ol>
+<p>11-ээс 20 хүртэлх дасгалуудад аравтын системээр өгөгдсөн тоонуудыг хоёртын системээр бич.</p>
+<ol start="11" type="1">
+<li><span class="math inline">\(59\)</span></li>
+<li><span class="math inline">\(73\)</span></li>
+<li><span class="math inline">\(84\)</span></li>
+<li><span class="math inline">\(95\)</span></li>
+<li><span class="math inline">\(117\)</span></li>
+<li><span class="math inline">\(230\)</span></li>
+<li><span class="math inline">\(304\)</span></li>
+<li><span class="math inline">\(500\)</span></li>
+<li><span class="math inline">\(1024\)</span></li>
+<li><span class="math inline">\(4096\)</span></li>
+<li>4 удаа зоос шидэх дарааллын бүх боломжит үр дүнг жагсаа.</li>
+<li>4 урттай Булийн хувьсагчдын дарааллын бүх боломжит утгыг жагсаа.</li>
+</ol>
+<p><strong>Бусад суурьнууд</strong> 23-аас 28 хүртэлх дасгалуудад наймтын системээр өгөгдсөн тоонуудыг аравтын систем рүү хөрвүүл.</p>
+<ol start="23" type="1">
+<li><span class="math inline">\(163\)</span></li>
+<li><span class="math inline">\(274\)</span></li>
+<li><span class="math inline">\(3217\)</span></li>
+<li><span class="math inline">\(2164\)</span></li>
+<li><span class="math inline">\(40510\)</span></li>
+<li><span class="math inline">\(50072\)</span></li>
+</ol>
+<p>29-ээс 32 хүртэлх дасгалуудад арван зургаатын системээр өгөгдсөн тоонуудыг аравтын систем рүү хөрвүүл.</p>
+<ol start="29" type="1">
+<li><span class="math inline">\(dc9\)</span></li>
+<li><span class="math inline">\(2ab\)</span></li>
+<li><span class="math inline">\(5a7e\)</span></li>
+<li><span class="math inline">\(b63d\)</span></li>
+</ol>
+<p>33-аас 36 хүртэлх дасгалуудад аравтын системээр өгөгдсөн тоонуудыг наймтын системээр бич.</p>
+<ol start="33" type="1">
+<li><span class="math inline">\(59\)</span></li>
+<li><span class="math inline">\(84\)</span></li>
+<li><span class="math inline">\(117\)</span></li>
+<li><span class="math inline">\(230\)</span></li>
+</ol>
+<p>37-оос 42 хүртэлх дасгалуудад аравтын системээр өгөгдсөн тоонуудыг арван зургаатын системээр бич.</p>
+<ol start="37" type="1">
+<li><span class="math inline">\(59\)</span></li>
+<li><span class="math inline">\(84\)</span></li>
+<li><span class="math inline">\(117\)</span></li>
+<li><span class="math inline">\(230\)</span></li>
+<li><span class="math inline">\(44252\)</span></li>
+<li><span class="math inline">\(43962\)</span></li>
+</ol>
+<p>43-аас 46 хүртэлх дасгалуудад өгөгдсөн хоёртын тоонуудыг (a) наймтын болон (b) арван зургаатын системээр бич.</p>
+<ol start="43" type="1">
+<li><p><span class="math inline">\(1100110011\)</span>.</p></li>
+<li><p><span class="math inline">\(11100011001\)</span>.</p></li>
+<li><p><span class="math inline">\(1011100100011011\)</span>.</p></li>
+<li><p><span class="math inline">\(1101100001100111\)</span>.</p></li>
+<li><p><span class="math inline">\(47\)</span> наймтын тоог хоёртын системээр бич.</p></li>
+<li><p><span class="math inline">\(162\)</span> наймтын тоог хоёртын системээр бич.</p></li>
+<li><p><span class="math inline">\(acc\)</span> арван зургаатын тоог хоёртын системээр бич.</p></li>
+<li><p><span class="math inline">\(fda\)</span> арван зургаатын тоог хоёртын системээр бич.</p></li>
+</ol>
+</section>
+<section id="бодолт-хийх" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="бодолт-хийх"><span class="header-section-number">1.8</span> Бодолт хийх</h2>
+<ol start="51" type="1">
+<li>Хоёртын системд нэг нэгжээс хойш <span class="math inline">\(m\)</span> тэг дараалан орсон тоо ямар тоог илэрхийлэх вэ?</li>
+<li>Хоёртын системд <span class="math inline">\(m\)</span> ширхэг нэгж дараалан орсон тоо ямар тоог илэрхийлэх вэ?</li>
+<li><span class="math inline">\(4^n\)</span> тооны хоёртын дүрслэлийг тайлбарла.</li>
+<li>8-аар үржүүлэх үйлдлийг хоёртын тоотой хэрхэн гүйцэтгэх вэ?</li>
+<li>Хоёртын тоо 4-т хуваагдах эсэхийг хэрхэн шалгах вэ?</li>
+<li>Хоёртын тооны цифрүүдийн ээлжлэх нийлбэрийг 3-т хуваагдах эсэхийг шалгахад хэрхэн ашиглах вэ? Жишээлбэл, <span class="math inline">\(1011\)</span> тооны ээлжлэх нийлбэр нь <span class="math inline">\(-1+0-1+1=-1\)</span>, <span class="math inline">\(10101\)</span> тооны хувьд <span class="math inline">\(1-0+1-0+1=3\)</span> байна.</li>
+<li>Наймтын системд <span class="math inline">\(m\)</span> ширхэг долоо дараалан орсон тоо ямар тоог илэрхийлэх вэ?</li>
+<li>Наймтын системд <span class="math inline">\(m\)</span> ширхэг нэгж дараалан орсон тоо ямар тоог илэрхийлэх вэ?</li>
+<li>Наймтын тооны цифрүүдийн нийлбэрийг 7-д хуваагдах эсэхийг шалгахад хэрхэн ашиглах вэ?</li>
+<li>Наймтын тооны цифрүүдийн ээлжлэх нийлбэрийг 9-д хуваагдах эсэхийг шалгахад хэрхэн ашиглах вэ?</li>
+<li>Аравтын системийг ашиглахгүйгээр наймтын системээс арван зургаатын систем рүү хэрхэн хөрвүүлэх вэ?</li>
+<li>Хэрэв хоёртын системээр бичигдсэн тоо урагш болон хойш уншихад ижил байвал (палиндром), энэ тэгш хэм нь арван зургаатын системээр бичихэд хадгалагдах уу? Тайлбарла.</li>
+</ol>
 <p><strong>ГРАФЫН ОНОЛ</strong>-ыг сүлжээний онол гэж нэрлэх нь илүү тохиромжтой байж магадгүй. Энэ нь компьютерний сүлжээ, тээврийн сүлжээ зэрэг сүлжээг загварчлах бүтцийг судлах шинжлэх ухаан юм. Компьютерний сүлжээний загварын хувьд граф нь хоёр төрлийн объектоос бүрддэг. Компь</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
