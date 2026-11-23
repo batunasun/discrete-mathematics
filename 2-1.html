@@ -584,14 +584,15 @@ I^c = [0, \infty)^c = (-\infty, 0).
 <p>Хэрэв <span class="math inline">\(\mathcal{U}\)</span> огторгуй нь төгсгөлөг бөгөөд маш бага хэмжээтэй бол дараах хэлбэрийн батламжийг: <span class="math display">\[
 \forall x \in \mathcal{U}, p(x)
 \]</span> <span class="math inline">\(\mathcal{U}\)</span>-ийн элемент бүрийн хувьд <span class="math inline">\(p(x)\)</span>-ийг шалгах замаар баталж болно.</p>
-<p><strong>ЖИШЭЭ 2.6.</strong> Харуул: <span class="math inline">\(\forall x \in \{-1, 0, 1\}, x^3 = x\)</span>. <strong>Баталгаа.</strong> Ажиглавал: <span class="math display">\[
+<p><strong>ЖИШЭЭ 2.6.</strong> Харуул: <span class="math inline">\(\forall x \in \{-1, 0, 1\}, x^3 = x\)</span>.</p>
+<p><strong>Баталгаа.</strong> <span class="math display">\[
 (-1)^3 = -1,
 \]</span> <span class="math display">\[
 0^3 = 0, \quad \text{болон}
 \]</span> <span class="math display">\[
-1^3 = 1.
-\]</span> <span class="math inline">\(\square\)</span></p>
-<p><strong>ЖИШЭЭ 2.7.</strong> <span class="math inline">\(A_0 = \emptyset, A_1 = \{\emptyset\}, A_2 = \{\emptyset, \{\emptyset\}\}, A_3 = \{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}\)</span> гэж тодорхойлъё. <span class="math inline">\(0 \le i \le 2\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(A_{i+1} \subseteq \mathcal{P}(A_i)\)</span> гэдгийг харуул. <strong>Баталгаа.</strong> <span class="math inline">\(i = 0\)</span>-ийн хувьд <span class="math inline">\(\mathcal{P}(A_0) = \{\emptyset\}\)</span>. Ажиглавал: <span class="math display">\[
+1^3 = 1. \square
+\]</span> <strong>ЖИШЭЭ 2.7.</strong> <span class="math inline">\(A_0 = \emptyset, A_1 = \{\emptyset\}, A_2 = \{\emptyset, \{\emptyset\}\}, A_3 = \{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\}\)</span> гэж тодорхойлъё. <span class="math inline">\(0 \le i \le 2\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(A_{i+1} \subseteq \mathcal{P}(A_i)\)</span> гэдгийг харуул.</p>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(i = 0\)</span>-ийн хувьд <span class="math inline">\(\mathcal{P}(A_0) = \{\emptyset\}\)</span>. <span class="math display">\[
 A_1 = \{\emptyset\} = \mathcal{P}(A_0).
 \]</span> Тухайлбал, <span class="math inline">\(A_{i+1} \subseteq \mathcal{P}(A_i)\)</span>. <span class="math inline">\(i = 1\)</span>-ийн хувьд <span class="math inline">\(\mathcal{P}(A_1) = \{\emptyset, \{\emptyset\}\}\)</span>. Ажиглавал: <span class="math display">\[
 A_2 = \{\emptyset, \{\emptyset\}\} = \mathcal{P}(A_1).
@@ -604,53 +605,57 @@ A_3 = \{\emptyset, \{\emptyset\}, \{\emptyset, \{\emptyset\}\}\} \subseteq \math
 <section id="хэсгийн-дасгалууд" class="level3">
 <h3 class="anchored" data-anchor-id="хэсгийн-дасгалууд">2.1 хэсгийн дасгалууд</h3>
 <ol type="1">
-<li><span class="math inline">\((-1, -8)\)</span>, <span class="math inline">\((1, -2)\)</span>, болон <span class="math inline">\((2, 1)\)</span> цэгүүд нэг шулуун дээр оршихыг харуул.</li>
-<li><span class="math inline">\((-1, 6)\)</span>, <span class="math inline">\((0, 3)\)</span>, <span class="math inline">\((1, 2)\)</span>, болон <span class="math inline">\((2, 5)\)</span> цэгүүд нэг парабол дээр оршихыг харуул. <em>Заавар: Ноорог хийхдээ эдгээр цэгүүдийг <span class="math inline">\(y = ax^2 + bx + c\)</span> тэгшитгэлд орлуулж, <span class="math inline">\(a, b\)</span>, болон <span class="math inline">\(c\)</span>-ийн хувьд гурван шугаман тэгшитгэл үүсгэ.</em></li>
-<li><span class="math inline">\(\{1, 2, 3, 4\} \subseteq A\)</span> байх <span class="math inline">\(A\)</span> олонлог оршин байгааг харуул.</li>
-<li><span class="math inline">\(\mathbb{Z} \cup A = \mathbb{R}\)</span> байх <span class="math inline">\(A\)</span> олонлог оршин байгааг харуул.</li>
-<li><span class="math inline">\(A \cup B = A \cap B\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд оршин байгааг харуул.</li>
-<li><span class="math inline">\(|A \setminus B| \ne |A| - |B|\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд оршин байгааг харуул.</li>
-<li><span class="math inline">\(\mathbb{Z}\)</span>-д <span class="math inline">\(10^n = 0.001\)</span> байх <span class="math inline">\(n \in \mathbb{Z}\)</span> оршин байгааг харуул.</li>
-<li><span class="math inline">\(3m + 5n = 11\)</span> байх <span class="math inline">\(m, n \in \mathbb{Z}\)</span> оршин байгааг харуул.</li>
-<li><span class="math inline">\(9m + 14n = 1\)</span> байх <span class="math inline">\(m, n \in \mathbb{Z}\)</span> оршин байгааг харуул.</li>
-<li><span class="math inline">\(A \ne (A \cup B) \setminus B\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд оршин байгааг харуул.</li>
-<li><span class="math inline">\(A \setminus B = B \setminus A\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд оршин байгааг харуул.</li>
-<li><span class="math inline">\(x^3 + 2x^2 - 2x + 3 = 0\)</span> байх <span class="math inline">\(x \in \mathbb{Z}\)</span> оршин байгааг харуул. 13-16-р дасгалуудад <span class="math inline">\(f(x)\)</span> функцийн үндэс нь <span class="math inline">\(f(x) = 0\)</span> тэгшитгэлийн шийдлүүд гэдгийг санаарай. Үржвэрлэх болон квадрат тэгшитгэлийн томъёог ашигла.</li>
-<li><span class="math inline">\(x^2 - 1\)</span> нь хоёр ялгаатай бодит үндэстэй болохыг харуул.</li>
-<li><span class="math inline">\(x^2 + 1\)</span> нь бодит үндэсгүй болохыг харуул. *15. <span class="math inline">\(x^2 - 2x + 5\)</span> нь бодит үндэсгүй болохыг харуул.</li>
-<li><span class="math inline">\(x^3 - 3x^2 + 4\)</span> нь зөвхөн хоёр ялгаатай бодит үндэстэй болохыг харуул.</li>
-<li>Хэрэв тодорхой дансанд <span class="math inline">\(P\)</span> доллар хөрөнгө оруулсан бол <span class="math inline">\(t\)</span> жилийн дараах дансны мөнгөн дүн <span class="math inline">\(A\)</span>-г <span class="math inline">\(A = P(1.075)^t\)</span> томъёогоор өгнө.
+<li><p><span class="math inline">\((-1, -8)\)</span>, <span class="math inline">\((1, -2)\)</span>, болон <span class="math inline">\((2, 1)\)</span> цэгүүд нэг шулуун дээр оршихыг харуул.</p></li>
+<li><p><span class="math inline">\((-1, 6)\)</span>, <span class="math inline">\((0, 3)\)</span>, <span class="math inline">\((1, 2)\)</span>, болон <span class="math inline">\((2, 5)\)</span> цэгүүд нэг парабол дээр оршихыг харуул. <em>Заавар: Ноорог хийхдээ эдгээр цэгүүдийг <span class="math inline">\(y = ax^2 + bx + c\)</span> тэгшитгэлд орлуулж, <span class="math inline">\(a, b\)</span>, болон <span class="math inline">\(c\)</span>-ийн хувьд гурван шугаман тэгшитгэл үүсгэ.</em></p></li>
+<li><p><span class="math inline">\(\{1, 2, 3, 4\} \subseteq A\)</span> байх <span class="math inline">\(A\)</span> олонлог оршин байгааг харуул.</p></li>
+<li><p><span class="math inline">\(\mathbb{Z} \cup A = \mathbb{R}\)</span> байх <span class="math inline">\(A\)</span> олонлог оршин байгааг харуул.</p></li>
+<li><p><span class="math inline">\(A \cup B = A \cap B\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд оршин байгааг харуул.</p></li>
+<li><p><span class="math inline">\(|A \setminus B| \ne |A| - |B|\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд оршин байгааг харуул.</p></li>
+<li><p><span class="math inline">\(\mathbb{Z}\)</span>-д <span class="math inline">\(10^n = 0.001\)</span> байх <span class="math inline">\(n \in \mathbb{Z}\)</span> оршин байгааг харуул.</p></li>
+<li><p><span class="math inline">\(3m + 5n = 11\)</span> байх <span class="math inline">\(m, n \in \mathbb{Z}\)</span> оршин байгааг харуул.</p></li>
+<li><p><span class="math inline">\(9m + 14n = 1\)</span> байх <span class="math inline">\(m, n \in \mathbb{Z}\)</span> оршин байгааг харуул.</p></li>
+<li><p><span class="math inline">\(A \ne (A \cup B) \setminus B\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд оршин байгааг харуул.</p></li>
+<li><p><span class="math inline">\(A \setminus B = B \setminus A\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд оршин байгааг харуул.</p></li>
+<li><p><span class="math inline">\(x^3 + 2x^2 - 2x + 3 = 0\)</span> байх <span class="math inline">\(x \in \mathbb{Z}\)</span> оршин байгааг харуул. 13-16-р дасгалуудад <span class="math inline">\(f(x)\)</span> функцийн үндэс нь <span class="math inline">\(f(x) = 0\)</span> тэгшитгэлийн шийдлүүд гэдгийг санаарай. Үржвэрлэх болон квадрат тэгшитгэлийн томъёог ашигла.</p></li>
+<li><p><span class="math inline">\(x^2 - 1\)</span> нь хоёр ялгаатай бодит үндэстэй болохыг харуул.</p></li>
+<li><p><span class="math inline">\(x^2 + 1\)</span> нь бодит үндэсгүй болохыг харуул. *15. <span class="math inline">\(x^2 - 2x + 5\)</span> нь бодит үндэсгүй болохыг харуул.</p></li>
+<li><p><span class="math inline">\(x^3 - 3x^2 + 4\)</span> нь зөвхөн хоёр ялгаатай бодит үндэстэй болохыг харуул.</p></li>
+<li><p>Хэрэв тодорхой дансанд <span class="math inline">\(P\)</span> доллар хөрөнгө оруулсан бол <span class="math inline">\(t\)</span> жилийн дараах дансны мөнгөн дүн <span class="math inline">\(A\)</span>-г <span class="math inline">\(A = P(1.075)^t\)</span> томъёогоор өгнө.</p>
 <ol type="a">
-<li>6000 долларын хөрөнгө оруулалтын 10 жилийн дараах <span class="math inline">\(A\)</span> мөнгөн дүнг ол. *(b) 10 жилийн дараа хамгийн багадаа 10,000 доллар болж өсөх 5000 доллараас бага хөрөнгө оруулалт байгаа гэдгийг харуул.</li>
-</ol></li>
-<li>Тодорхой банкнаас <span class="math inline">\(M\)</span> долларын 30 жилийн ипотекийн зээл авсан бол сарын <span class="math inline">\(R\)</span> төлбөрийг дараах томъёогоор өгнө: <span class="math display">\[ R = \frac{0.008(1.008^{360})M}{1.008^{360} - 1}. \]</span>
+<li>6000 долларын хөрөнгө оруулалтын 10 жилийн дараах <span class="math inline">\(A\)</span> мөнгөн дүнг ол.</li>
+</ol>
+<p>*(b) 10 жилийн дараа хамгийн багадаа 10,000 доллар болж өсөх 5000 доллараас бага хөрөнгө оруулалт байгаа гэдгийг харуул.</p></li>
+<li><p>Тодорхой банкнаас <span class="math inline">\(M\)</span> долларын 30 жилийн ипотекийн зээл авсан бол сарын <span class="math inline">\(R\)</span> төлбөрийг дараах томъёогоор өгнө: <span class="math display">\[ R = \frac{0.008(1.008^{360})M}{1.008^{360} - 1}. \]</span></p>
 <ol type="a">
-<li>Сард 1000 долларын төлбөр төлөх боломжтой <span class="math inline">\(M\)</span> ипотекийн зээлийн хэмжээг ол. *(b) Сард 650 доллараас ихгүй төсвөөр 75,000 долларын ипотек авах боломжтой юу?</li>
-</ol></li>
-<li><span class="math inline">\(A^2 = A\)</span> байх <span class="math inline">\(A\)</span> олонлог оршин байгааг харуул.</li>
-<li>Няцаа: <span class="math inline">\(\forall x \in \mathbb{R}, \frac{x+4}{x-4} = x - 2\)</span>.</li>
-<li>Няцаа: Дурын хоёр интервалын нэгдэл нь интервал байна.</li>
-<li>Няцаа: <span class="math inline">\(\forall x \in \mathbb{R}, x &gt; 2\)</span> ба <span class="math inline">\(x^2 \in \mathbb{Z}\)</span>.</li>
-<li>Няцаа: <span class="math inline">\(\forall x \in \mathbb{R}, x^2 &gt; x\)</span>.</li>
-<li>Няцаа: <span class="math inline">\(\forall x \in \mathbb{R}, 4x^2 + 4x + 1 &gt; 0\)</span>.</li>
-<li>Батлах эсвэл няцаах: <span class="math inline">\(\forall n \in \mathbb{N}, n^2 \le 2^n\)</span>.</li>
-<li>Батлах эсвэл няцаах: <span class="math inline">\(n \ge 2\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(2^n - 1\)</span> нь анхны тоо. Анхны тооны тодорхойлолтыг 3.3-р хэсгээс үзнэ үү.</li>
-<li>Няцаа: <span class="math inline">\(x &lt; 10\)</span> ба <span class="math inline">\(x^2 &gt; 100\)</span> байх <span class="math inline">\(x \in \mathbb{R}\)</span> оршин байна.</li>
-<li>Няцаа: <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> бүх олонлогийн хувьд хэрэв <span class="math inline">\(A \times B = \emptyset\)</span> бол <span class="math inline">\(A = B = \emptyset\)</span>. <em>29. Няцаа: Синус функц нэмэгдэж байна. 1.15-р тодорхойлолтыг үзнэ үү. </em>30. Няцаа: Косинус функц буурч байна. 1.15-р тодорхойлолтыг үзнэ үү.</li>
-<li>Батлах эсвэл няцаах: Сөрөг бус бодит тоо бүр эерэг байна.</li>
-<li>Батлах эсвэл няцаах: <span class="math inline">\(\forall x \in \mathbb{R}, \sqrt{x^2} = x\)</span>.</li>
-<li>Батлах эсвэл няцаах: <span class="math inline">\(|A| \le |B|\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> бүх олонлогийн хувьд <span class="math inline">\(A \subseteq B\)</span>.</li>
-<li>Батлах эсвэл няцаах: <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> бүх олонлогийн хувьд <span class="math inline">\(A \cup B = A \triangle B\)</span>.</li>
-<li>Няцаа: <span class="math inline">\(A, B\)</span>, ба <span class="math inline">\(C\)</span> бүх олонлогийн хувьд хэрэв <span class="math inline">\(A \ne B\)</span> бол <span class="math inline">\(A \cap C \ne B \cap C\)</span>.</li>
-<li>Няцаа: <span class="math inline">\(A, B\)</span>, ба <span class="math inline">\(C\)</span> бүх олонлогийн хувьд хэрэв <span class="math inline">\(A \setminus C = B \setminus C\)</span> бол <span class="math inline">\(A = B\)</span>.</li>
-<li>Харуул: <span class="math inline">\(\forall A \in \{ \emptyset, \{1\}, \{2\}, A \}, A \cup \{3\} = A \triangle \{3\}\)</span>.</li>
-<li>Харуул: <span class="math inline">\(1 \le n \le 3\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(\frac{n}{6} \in \mathbb{Z}\)</span>.</li>
-<li>Батлах эсвэл няцаах: <span class="math inline">\(2 \le n \le 9\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(9n\)</span>-ийн аравтын орон ба нэгжийн орны тоонуудын нийлбэр 9 байна.</li>
-<li>Батлах эсвэл няцаах: <span class="math inline">\(\forall A \in \{\{1, 2\}, \{2, 3, 4\}\}, |A \times \{3, 4\}| = 4\)</span>.</li>
-<li>11-д хуваагдах шинж гэдэг нь тухайн тооны цифрүүдийн ээлжлэн нэмэх, хасах үйлдлийн нийлбэр 11-д хуваагдаж байвал тухайн тоо 11-д хуваагдана гэсэн үг. Тодорхой хэлбэл, <span class="math inline">\(11n\)</span> нь 11-д хуваагдана. Харуул: <span class="math inline">\(19 \le n \le 29\)</span> бүх бүхэл тооны хувьд <span class="math inline">\(11n\)</span>-ийн зуутын орны цифр - аравтын орны цифр + нэгжийн орны цифр нь 11-ийн үржвэр байна.</li>
-<li>3-д хуваагдах шинж гэдэг нь тухайн тооны цифрүүдийн нийлбэр 3-д хуваагдаж байвал тухайн тоо 3-д хуваагдана гэсэн үг. Тодорхой хэлбэл, <span class="math inline">\(3n\)</span> нь 3-д хуваагдана. Харуул: <span class="math inline">\(4 \le n \le 33\)</span> бүх бүхэл тооны хувьд <span class="math inline">\(3n\)</span>-ийн аравтын орон ба нэгжийн орны цифрүүдийн нийлбэр 3-ын үржвэр байна.</li>
-<li>Харуул: <span class="math inline">\(n \in \{2, 3, 5, 7\}\)</span> бүрийн хувьд <span class="math inline">\(2^n - 1\)</span> нь анхны тоо байна. Анхны тооны тодорхойлолтыг 3.3-р хэсгээс үзнэ үү. <span class="math inline">\(2^n - 1\)</span> хэлбэрийн анхны тоог Мерсенний анхны тоо гэж нэрлэдэг. 26-р дасгалтай харьцуул.</li>
-<li>Харуул: <span class="math inline">\(5 \le n \le 10\)</span> бүх бүхэл тооны хувьд <span class="math inline">\(n^2 \le 2^n\)</span>. <em>45. <strong>Сиракузын бодлого</strong>, мөн <strong><span class="math inline">\(3n + 1\)</span> бодлого</strong> гэж нэрлэгддэг нь тооны онолын алдартай таамаглал бөгөөд энэ нь ямар ч эерэг бүхэл <span class="math inline">\(n\)</span>-ээс эхлэн давтан хэрэглэхэд 1 гэсэн утга руу буцаж ирдэг функцийг тодорхойлдог: <span class="math display">\[ f(n) = \begin{cases} \frac{n}{2} &amp; \text{хэрэв } n \text{ тэгш бол,} \\ 3n + 1 &amp; \text{хэрэв } n \text{ сондгой бол.} \end{cases} \]</span> Жишээлбэл, <span class="math inline">\(n = 1\)</span>-ээс эхэлбэл: <span class="math display">\[ f(1) = 4, \quad f(4) = 2, \quad f(2) = 1. \]</span> Бид <span class="math inline">\(1 \mapsto 4 \mapsto 2 \mapsto 1\)</span> гэж бичиж болно. Өөрөөр хэлбэл, функцийн утга 1 болох үед бид зогсдог. Энэ таамаглал <span class="math inline">\(1 \le n \le 6\)</span> бүх тохиолдолд биелдэг болохыг харуул. </em>46. <span class="math inline">\(g\)</span> функцийг дараах байдлаар өгье: <span class="math display">\[ g(n) = \begin{cases} \frac{n}{2} &amp; \text{хэрэв } n \text{ тэгш бол,} \\ \frac{3n + 1}{2} &amp; \text{хэрэв } n \text{ сондгой бол.} \end{cases} \]</span> Ямар ч эерэг бүхэл <span class="math inline">\(n \le 8\)</span>-ийн хувьд <span class="math inline">\(n\)</span>-ээс эхлэн <span class="math inline">\(g\)</span> функцийг давтан хэрэглэхэд функцийн утга эцэстээ 1 рүү буцаж ирдэг болохыг харуул. (45-р дасгалтай харьцуул.)</li>
+<li>Сард 1000 долларын төлбөр төлөх боломжтой <span class="math inline">\(M\)</span> ипотекийн зээлийн хэмжээг ол.</li>
+</ol>
+<p>*(b) Сард 650 доллараас ихгүй төсвөөр 75,000 долларын ипотек авах боломжтой юу?</p></li>
+<li><p><span class="math inline">\(A^2 = A\)</span> байх <span class="math inline">\(A\)</span> олонлог оршин байгааг харуул.</p></li>
+<li><p>Няцаа: <span class="math inline">\(\forall x \in \mathbb{R}, \frac{x+4}{x-4} = x - 2\)</span>.</p></li>
+<li><p>Няцаа: Дурын хоёр интервалын нэгдэл нь интервал байна.</p></li>
+<li><p>Няцаа: <span class="math inline">\(\forall x \in \mathbb{R}, x &gt; 2\)</span> ба <span class="math inline">\(x^2 \in \mathbb{Z}\)</span>.</p></li>
+<li><p>Няцаа: <span class="math inline">\(\forall x \in \mathbb{R}, x^2 &gt; x\)</span>.</p></li>
+<li><p>Няцаа: <span class="math inline">\(\forall x \in \mathbb{R}, 4x^2 + 4x + 1 &gt; 0\)</span>.</p></li>
+<li><p>Батлах эсвэл няцаах: <span class="math inline">\(\forall n \in \mathbb{N}, n^2 \le 2^n\)</span>.</p></li>
+<li><p>Батлах эсвэл няцаах: <span class="math inline">\(n \ge 2\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(2^n - 1\)</span> нь анхны тоо. Анхны тооны тодорхойлолтыг 3.3-р хэсгээс үзнэ үү.</p></li>
+<li><p>Няцаа: <span class="math inline">\(x &lt; 10\)</span> ба <span class="math inline">\(x^2 &gt; 100\)</span> байх <span class="math inline">\(x \in \mathbb{R}\)</span> оршин байна.</p></li>
+<li><p>Няцаа: <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> бүх олонлогийн хувьд хэрэв <span class="math inline">\(A \times B = \emptyset\)</span> бол <span class="math inline">\(A = B = \emptyset\)</span>. <em>29. Няцаа: Синус функц нэмэгдэж байна. 1.15-р тодорхойлолтыг үзнэ үү. </em>30. Няцаа: Косинус функц буурч байна. 1.15-р тодорхойлолтыг үзнэ үү.</p></li>
+<li><p>Батлах эсвэл няцаах: Сөрөг бус бодит тоо бүр эерэг байна.</p></li>
+<li><p>Батлах эсвэл няцаах: <span class="math inline">\(\forall x \in \mathbb{R}, \sqrt{x^2} = x\)</span>.</p></li>
+<li><p>Батлах эсвэл няцаах: <span class="math inline">\(|A| \le |B|\)</span> байх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> бүх олонлогийн хувьд <span class="math inline">\(A \subseteq B\)</span>.</p></li>
+<li><p>Батлах эсвэл няцаах: <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> бүх олонлогийн хувьд <span class="math inline">\(A \cup B = A \triangle B\)</span>.</p></li>
+<li><p>Няцаа: <span class="math inline">\(A, B\)</span>, ба <span class="math inline">\(C\)</span> бүх олонлогийн хувьд хэрэв <span class="math inline">\(A \ne B\)</span> бол <span class="math inline">\(A \cap C \ne B \cap C\)</span>.</p></li>
+<li><p>Няцаа: <span class="math inline">\(A, B\)</span>, ба <span class="math inline">\(C\)</span> бүх олонлогийн хувьд хэрэв <span class="math inline">\(A \setminus C = B \setminus C\)</span> бол <span class="math inline">\(A = B\)</span>.</p></li>
+<li><p>Харуул: <span class="math inline">\(\forall A \in \{ \emptyset, \{1\}, \{2\}, A \}, A \cup \{3\} = A \triangle \{3\}\)</span>.</p></li>
+<li><p>Харуул: <span class="math inline">\(1 \le n \le 3\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(\frac{n}{6} \in \mathbb{Z}\)</span>.</p></li>
+<li><p>Батлах эсвэл няцаах: <span class="math inline">\(2 \le n \le 9\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(9n\)</span>-ийн аравтын орон ба нэгжийн орны тоонуудын нийлбэр 9 байна.</p></li>
+<li><p>Батлах эсвэл няцаах: <span class="math inline">\(\forall A \in \{\{1, 2\}, \{2, 3, 4\}\}, |A \times \{3, 4\}| = 4\)</span>.</p></li>
+<li><p>11-д хуваагдах шинж гэдэг нь тухайн тооны цифрүүдийн ээлжлэн нэмэх, хасах үйлдлийн нийлбэр 11-д хуваагдаж байвал тухайн тоо 11-д хуваагдана гэсэн үг. Тодорхой хэлбэл, <span class="math inline">\(11n\)</span> нь 11-д хуваагдана. Харуул: <span class="math inline">\(19 \le n \le 29\)</span> бүх бүхэл тооны хувьд <span class="math inline">\(11n\)</span>-ийн зуутын орны цифр - аравтын орны цифр + нэгжийн орны цифр нь 11-ийн үржвэр байна.</p></li>
+<li><p>3-д хуваагдах шинж гэдэг нь тухайн тооны цифрүүдийн нийлбэр 3-д хуваагдаж байвал тухайн тоо 3-д хуваагдана гэсэн үг. Тодорхой хэлбэл, <span class="math inline">\(3n\)</span> нь 3-д хуваагдана. Харуул: <span class="math inline">\(4 \le n \le 33\)</span> бүх бүхэл тооны хувьд <span class="math inline">\(3n\)</span>-ийн аравтын орон ба нэгжийн орны цифрүүдийн нийлбэр 3-ын үржвэр байна.</p></li>
+<li><p>Харуул: <span class="math inline">\(n \in \{2, 3, 5, 7\}\)</span> бүрийн хувьд <span class="math inline">\(2^n - 1\)</span> нь анхны тоо байна. Анхны тооны тодорхойлолтыг 3.3-р хэсгээс үзнэ үү. <span class="math inline">\(2^n - 1\)</span> хэлбэрийн анхны тоог Мерсенний анхны тоо гэж нэрлэдэг. 26-р дасгалтай харьцуул.</p></li>
+<li><p>Харуул: <span class="math inline">\(5 \le n \le 10\)</span> бүх бүхэл тооны хувьд <span class="math inline">\(n^2 \le 2^n\)</span>.</p></li>
+<li><p><span class="math inline">\(*\)</span> <strong>Сиракузын бодлого</strong>, мөн <strong><span class="math inline">\(3n + 1\)</span> бодлого</strong> гэж нэрлэгддэг нь тооны онолын алдартай таамаглал бөгөөд энэ нь ямар ч эерэг бүхэл <span class="math inline">\(n\)</span>-ээс эхлэн давтан хэрэглэхэд 1 гэсэн утга руу буцаж ирдэг функцийг тодорхойлдог: <span class="math display">\[ f(n) = \begin{cases} \frac{n}{2} &amp; \text{хэрэв } n \text{ тэгш бол,} \\ 3n + 1 &amp; \text{хэрэв } n \text{ сондгой бол.} \end{cases} \]</span> Жишээлбэл, <span class="math inline">\(n = 1\)</span>-ээс эхэлбэл: <span class="math display">\[ f(1) = 4, \quad f(4) = 2, \quad f(2) = 1. \]</span> Бид <span class="math inline">\(1 \mapsto 4 \mapsto 2 \mapsto 1\)</span> гэж бичиж болно. Өөрөөр хэлбэл, функцийн утга 1 болох үед бид зогсдог. Энэ таамаглал <span class="math inline">\(1 \le n \le 6\)</span> бүх тохиолдолд биелдэг болохыг харуул.</p></li>
+<li><p><span class="math inline">\(*\)</span> <span class="math inline">\(g\)</span> функцийг дараах байдлаар өгье: <span class="math display">\[ g(n) = \begin{cases} \frac{n}{2} &amp; \text{хэрэв } n \text{ тэгш бол,} \\ \frac{3n + 1}{2} &amp; \text{хэрэв } n \text{ сондгой бол.} \end{cases} \]</span> Ямар ч эерэг бүхэл <span class="math inline">\(n \le 8\)</span>-ийн хувьд <span class="math inline">\(n\)</span>-ээс эхлэн <span class="math inline">\(g\)</span> функцийг давтан хэрэглэхэд функцийн утга эцэстээ 1 рүү буцаж ирдэг болохыг харуул. (45-р дасгалтай харьцуул.)</p></li>
 </ol>
 
 
