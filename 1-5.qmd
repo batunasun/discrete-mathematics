@@ -514,4 +514,3 @@ $$\therefore \forall x \in \mathcal{U}, p(x)$$
 $$\forall x \in \mathbb{R}, x < 1 \text{ эсвэл } x > 0$$
 $$\forall x \in \mathbb{R}, x > 0 \text{ эсвэл } x^2 > -1$$
 $$\therefore \forall x \in \mathbb{R}, x < 1 \text{ эсвэл } x^2 > -1$$
-```
