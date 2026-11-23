@@ -8,7 +8,7 @@ book:
   #subtitle: "R хэл дээрх практик хэрэглээ"
   #author: "Д.Батнасан"
   sidebar:
-    collapse-level: 1
+    collapse-level: 0
   cover-image: images/cover.png
   #favicon: images/must-logo.png
   sidebar:
