@@ -8,12 +8,11 @@ book:
   #subtitle: ""
   #author: "Д.Батнасан"
   sidebar:
-    collapse-level: 0
+    collapse-level: 1
+    logo: images/must-logo.png
   cover-image: images/cover.png
   #favicon: images/must-logo.png
-  sidebar:
-    logo: images/must-logo.png
-
+    
   chapters:
     - index.qmd
     - 0.qmd
@@ -40,7 +39,6 @@ book:
         - 8-5.qmd
         - 8-6.qmd
         #- appendix.qmd
-number-sections: false
 
 format:
   html:
