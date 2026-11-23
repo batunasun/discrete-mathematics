@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Бүлэг 1: Логик ба Олонлогууд – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./1-5.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1-1.html">1 Логик ба Олонлог</a></li><li class="breadcrumb-item"><a href="./1-1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Бүлэг 1: Логик ба Олонлогууд</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Тоонуудыг дүрслэх нь</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1 Логик ба Олонлог</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Бүлэг 1: Логик ба Олонлогууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.5 Хүчинтэй аргументууд</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2 Энгийн баталгааны арга</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Энгийн баталгааны арга (Basic Proof Writing)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">2.4 Шууд бус аргументууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">2-р бүлгийн давтлагын бодлогууд</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">3 Графын онол</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Графын онолын үндэс</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Матриц ба тусгай графууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Бүлэг 8.3: Изоморфизм</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Бүлэг 8.4: Инвариантууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Бүлэг 8.5: Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бүлэг 8: Давтлагын бодлогууд</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#бүлэг-1-логик-ба-олонлог" id="toc-бүлэг-1-логик-ба-олонлог" class="nav-link active" data-scroll-target="#бүлэг-1-логик-ба-олонлог"><span class="header-section-number">3</span> БҮЛЭГ 1 Логик ба Олонлог</a>
+  <ul class="collapse">
+  <li><a href="#өгүүлбэрийн-хэлбэр-ба-логик-эквивалентууд" id="toc-өгүүлбэрийн-хэлбэр-ба-логик-эквивалентууд" class="nav-link" data-scroll-target="#өгүүлбэрийн-хэлбэр-ба-логик-эквивалентууд"><span class="header-section-number">3.1</span> 1.1 Өгүүлбэрийн хэлбэр ба логик эквивалентууд</a>
+  <ul class="collapse">
+  <li><a href="#өгүүлбэрийн-хэлбэрүүд" id="toc-өгүүлбэрийн-хэлбэрүүд" class="nav-link" data-scroll-target="#өгүүлбэрийн-хэлбэрүүд"><span class="header-section-number">3.1.1</span> Өгүүлбэрийн хэлбэрүүд</a></li>
+  <li><a href="#логик-эквивалентууд" id="toc-логик-эквивалентууд" class="nav-link" data-scroll-target="#логик-эквивалентууд"><span class="header-section-number">3.1.2</span> Логик эквивалентууд</a></li>
+  <li><a href="#дижитал-хэлхээ" id="toc-дижитал-хэлхээ" class="nav-link" data-scroll-target="#дижитал-хэлхээ"><span class="header-section-number">3.1.3</span> Дижитал хэлхээ</a></li>
+  </ul></li>
+  <li><a href="#хэсгийн-дасгалууд" id="toc-хэсгийн-дасгалууд" class="nav-link" data-scroll-target="#хэсгийн-дасгалууд"><span class="header-section-number">3.2</span> 1.1 Хэсгийн дасгалууд</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./1-1.html">1 Логик ба Олонлог</a></li><li class="breadcrumb-item"><a href="./1-1.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Бүлэг 1: Логик ба Олонлогууд</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Бүлэг 1: Логик ба Олонлогууд</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="бүлэг-1-логик-ба-олонлог" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> БҮЛЭГ 1 Логик ба Олонлог</h1>
+<p><strong>ЭНЭ БҮЛЭГТ</strong> бид энэ номын ихэнх хэсгийн, ялангуяа I хэсгийн үзэл баримтлалын болон тэмдэглэгээний үндсийг тавьж байна. Математик үндэслэл ба аргументууд нь логикийн дүрмүүд дээр суурилдаг. Логикийн эдгээр дүрмүүдийг судалж, тэдгээрийг дагаж мөрдөхгүй байх буруу ойлголтуудыг арилгахад цаг гаргах хэрэгтэй. Жишээлбэл, “эсвэл” гэдэг үгийн математик утга нь заримдаа өдөр тутмын хэрэглээнд зориулагддаг “онцгой эсвэл” (exclusive or) хэллэгтэй харьцуулахад бид танил байх ёстой.</p>
+<p>Танилцуулах шаардлагатай тэмдэглэгээ бол олонлогийн тэмдэглэгээ юм. Үүнийг эхлээд зарим талаар албан бус байдлаар танилцуулсан болно. Логик ба тоон үзүүлэлтүүд албан ёсоор тогтоогдсоны дараа үүнийг илүү нарийвчлалтайгаар авч үздэг. Гэсэн хэдий ч бид олонлогийн онолд хэтэрхий энгийн арга барилаас цааш гарахгүй.</p>
+<p>Бүлгийн туршид бид зарим хэрэглээг авч үздэг. Дижитал хэлхээний загвар нь логикийн онцлох хэрэглээ юм. Олонлогийн програм хангамжийн хэрэгжилтийн хэлэлцүүлгийг мөн онцлон тэмдэглэсэн.</p>
+<section id="өгүүлбэрийн-хэлбэр-ба-логик-эквивалентууд" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="өгүүлбэрийн-хэлбэр-ба-логик-эквивалентууд"><span class="header-section-number">3.1</span> 1.1 Өгүүлбэрийн хэлбэр ба логик эквивалентууд</h2>
+<p>Бидний I хэсэг дэх зорилго бол нотлох баримтыг хэрхэн гаргахыг сурах явдал юм. Гэхдээ үүнийг хийхээс өмнө бид өгүүлбэрүүд болон тэдгээрийн бүтцийг судлах ёстой. Үүний дагуу бидний ажлын ихэнх хэсэг нь үнэний хүснэгт ба логик ижилтгэлийг хамардаг. Нягт холбоотой хэрэглээний хувьд бид дижитал хэлхээг авч үздэг, учир нь тэдгээрийн үндсэн бүтэц нь өгүүлбэрийнхтэй ижил байдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 1.1</strong></p>
+<p><strong>Өгүүлбэр</strong> (statement) гэдэг нь үнэн эсвэл худал, гэхдээ хоёулаа биш өгүүлбэр юм.</p>
+</blockquote>
+<p>Өгүүлбэрийн жишээг бүтээхэд хялбар байдаг. Мэдээж хэрэг, бидний гол анхаарлыг математикийн шинж чанартай зүйлсэд хандуулах болно.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.1</strong></p>
+<p>Дараах өгүүлбэрүүд нь өгүүлбэрүүд юм.</p>
+<p><strong>(a)</strong> (2 + 2 = 4).</p>
+<p><strong>(b)</strong> (2 + 2 ).</p>
+<p><strong>(c)</strong> ( = 2) ба ( &gt; 2).</p>
+<p><strong>(d)</strong> Синус функц нь үечилсэн ба (2) нь бүхэл тоо юм.</p>
+<p><strong>(e)</strong> (10^2 &gt; 2^{10}) эсвэл (2^{10} &gt; 10^2).</p>
+<p><strong>(f)</strong> Хэрэв (e &gt; 2) бол (e^2 &gt; 4).</p>
+<p><strong>(g)</strong> () нь бодит тоо юм.</p>
+</blockquote>
+<p>1.1-р жишээнээс харахад (a), (c), (e), (f) өгүүлбэрүүд нь үнэн бөгөөд (b), (d), (g) нь худал юм. Зарим тохиолдолд (a) шиг үнэн эсвэл худал эсэх нь тодорхой байдаг. Гэхдээ (f) шиг бусад тохиолдолд бид өгүүлбэрүүд ямар хэлбэртэй байж болохыг, тухайлбал if-then (хэрэв-тэгвэл) өгүүлбэрүүдийг ойлгох хэрэгтэй болдог. Ийм хэлбэрийг судлах ажлыг өгүүлбэр бүр өгүүлбэр байдаггүйг харуулсан дараах жишээний дараа шууд авч үзнэ.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.2</strong></p>
+<p>Дараах өгүүлбэрүүд нь өгүүлбэрүүд биш юм.</p>
+<p><strong>(a)</strong> (2 + 2)-ын нийлбэр хэд вэ?</p>
+<p><strong>(b)</strong> (2 + 2)-ын нийлбэрийг тооцоол.</p>
+<p><strong>(c)</strong> Энэ өгүүлбэр худал юм.</p>
+</blockquote>
+<ol type="a">
+<li>ба (b) өгүүлбэрүүд нь асуулт эсвэл тушаал байж болох боловч үнэн эсвэл худал байж чадахгүй. Гол нь өгүүлбэр нь заавал тунхаглах өгүүлбэр байх ёстой. (c) өгүүлбэр нь тунхаглах өгүүлбэр учраас бага зэрэг бодол төрүүлдэг. Хэрэв (c) үнэн байсан бол түүний хэлсэн зүйл худал болно. Хэрэв (c) худал байсан бол түүний хэлсэн зүйл үнэн болно. Иймээс (c) нь үнэн ч, худал ч байж чадахгүй.</li>
+</ol>
+<section id="өгүүлбэрийн-хэлбэрүүд" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="өгүүлбэрийн-хэлбэрүүд"><span class="header-section-number">3.1.1</span> Өгүүлбэрийн хэлбэрүүд</h3>
+<p>Бид өгүүлбэрүүдийг судлах сонирхолтой байна. Гэхдээ тэдгээрийн хэлбэрийг буцааж харж, шалгаснаар ухаарал олж авдаг. 1.1-р жишээнд (c) ба (d) хоёулаа “(p) ба (q)” гэсэн хэлбэрийн өгүүлбэрүүд бөгөөд (p) ба (q) нь өгүүлбэрүүдийг төлөөлдөг. (c)-д, [ p = “ = 2” ] [ q = “ &gt; 2” ] (d)-д, [ p = “” ] [ q = “2” ] Хэдийгээр (c) ба (d) өгүүлбэрүүд ялгаатай боловч тэдгээрийн хэлбэр ижил байна. Албан ёсоор хэлбэл, (c) ба (d) хоёулаа өгүүлбэрийн хэлбэртэй байна. [ p q ] Энд “ба” гэдэг үгийг () тэмдгээр тэмдэглэсэн бөгөөд (p) ба (q) нь <strong>өгүүлбэрийн хувьсагчид</strong> юм. Хамгийн үндсэн өгүүлбэрийн хэлбэрүүдийг 1.1-р хүснэгтэд жагсаав. Ерөнхий өгүүлбэрийн хэлбэрүүд буюу <strong>логик илэрхийллүүд</strong>-ийг эдгээрээс байгуулж болно. Үндсэн логик үйлдлүүд болох (, , , )-ийн тодорхойлолтыг 1.1-р хүснэгтэд жагсаасан өгүүлбэрийн хэлбэрүүдийн үнэний хүснэгтээр илэрхийлж болно. <strong>Үнэний хүснэгт</strong> нь логик илэрхийлэл дэх өгүүлбэрийн хувьсагчдын үнэн эсвэл худал байдал нь илэрхийллийн үнэн эсвэл худал байдалд хэрхэн нөлөөлж байгааг харуулсан хүснэгт юм. () үйлдлийг тодорхойлсон үнэний хүснэгтийг 1.2-р хүснэгтэд үзүүлэв. (, , )-ийн үнэний хүснэгтийг нэгтгэж 1.3-р хүснэгтэд оруулсан. 1.2 ба 1.3-р хүснэгтэд (F)-ийг 0-ээр, (T)-ийг 1-ээр тус тус сольсон бол хүснэгтүүд нь оролтын хувьсагчдыг өсөх дарааллаар хоёртын тоогоор илэрхийлсэнтэй тохирч байна. Энэ дараалал нь үнэний хүснэгтэд шаардлагагүй боловч энэ номын туршид тогтвортой байх үүднээс ашиглагддаг. Зөвхөн хоёр боломжит утгын аль нэгийг ((T) эсвэл (F)) авдаг хувьсагчдыг (өгүүлбэрийн хувьсагчдыг) Английн математикч Жорж Бүүл (1815-1864)-ийн нэрээр <strong>Булийн хувьсагчид</strong> гэж нэрлэдэг.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Хэлбэр</th>
+<th style="text-align: left;">Орчуулга</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(p)</td>
+<td style="text-align: left;">(p) биш ((p)-ийн үгүйсгэл)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(p q)</td>
+<td style="text-align: left;">(p) ба (q)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(p q)</td>
+<td style="text-align: left;">(p) эсвэл (q)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(p q)</td>
+<td style="text-align: left;">хэрэв (p) бол (q) ((p) нь (q)-г агуулна)</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 1.1 Үндсэн өгүүлбэрийн хэлбэрүүд</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(p)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 1.2 Үгүйсгэлийг тодорхойлох үнэний хүснэгт</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">(p q)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 1.3 (, ), ба ()-г тодорхойлох үнэний хүснэгт</em></p>
+<p>1.3-р хүснэгтээс харахад (p q) нь зөвхөн (p) ба (q) хоёулаа үнэн байх үед үнэн болдог. (p q) нь (p) эсвэл (q) үнэн байх үед, мөн (p) ба (q) хоёулаа үнэн байх үед үнэн болдог. Үнэндээ (p q) нь (p) ба (q) хоёулаа худал байх үед л худал болдог. If-then буюу нөхцөлт өгүүлбэрийн хэлбэр (p q) нь (p) нь (q)-ийн үнэнийг илэрхийлж байгаа эсэхийг (эсвэл албаддаг эсэхийг) тусгахад зориулагдсан. Үүний дагуу (p q) нь зөвхөн (p) үнэн байх ба (q) худал байх тохиолдолд л худал болно. (p) худал байх бүрд (p q) нь үнэн байдаг гэдгийг анхаарна уу. Энэ тохиолдолд бид (p q) нь “хоосон” үнэн гэж хэлдэг. Бусад тохиолдолд (p) үнэн байхад (q)-ийн үнэн эсэх нь чухал юм.</p>
+<p>Нэгээс олон үйлдэл агуулсан логик илэрхийллүүдэд үйлдлүүдийн дарааллыг ойлгох ёстой. Үндсэн үйлдлүүдийн дараалал нь хамгийн өндрөөс доош нь: [ , ] [ , , ] [ . ] () ба () үйлдлүүдийг нэг мөрөнд жагсаасан болно, учир нь тэдгээр нь ижил давуу эрхтэй гэж үздэг. Мэдээж хэрэг, хаалт ашиглан үйлдлүүдийн хүссэн дарааллыг зааж болно. Жишээлбэл, (p q r) нь ((p) q) гэж ойлгогдох ба ((p q)) биш юм.</p>
+<blockquote class="blockquote">
+<p><strong>Тайлбар 1.1</strong></p>
+<p>C++, Java зэрэг програмчлалын хэлүүдэд ()-ээр тэмдэглэгддэг ба C++ хэлэнд <code>!</code> гэж тэмдэглэгддэг үйлдэл нь C++ хэлэнд <code>&amp;&amp;</code> гэж тэмдэглэгддэг () үйлдлээс илүү өндөр давуу эрхтэй байдаг. Үүний дагуу <code>p &amp;&amp; q || r</code> гэж бичих нь ((p q) r) гэж ойлгогдоно. Гэсэн хэдий ч Microsoft Excel зэрэг програмуудад (p q r) хэлбэрийн илэрхийллийг ((p q) r) эсвэл (p (q r)) гэж тодорхой хаалтгүйгээр оруулах боломжгүй юм. Excel-д ашигладаг синтаксийг 1.4-р жишээнд авч үзсэн. Үйлдлүүдийн дарааллыг 1.8-р жишээнд дүрсэлсэн.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.3</strong></p>
+<p>(p q r) өгүүлбэрийн хэлбэрийн үнэний хүснэгт гарга.</p>
+<p><strong>Шийдэл.</strong> Үйлдлүүдийн дараалал нь эхлээд (p q), дараа нь () үйлдэл хийгдэнэ гэж заадаг. Үнэндээ, үнэний хүснэгт гаргахдаа тооцооллын завсрын алхмуудыг тусгасан нэмэлт баганыг оруулах нь ихэвчлэн тустай байдаг.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(r)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">(p q r)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>Microsoft Excel зэрэг хүснэгтийн програм хангамжийг үнэний хүснэгт үүсгэхэд ашиглаж болно. Excel-д (T) ба (F)-ийг TRUE ба FALSE гэж бичих шаардлагатай. Үндсэн (, ), ба () үйлдлүүдийг NOT, AND, OR логик функцуудыг ашиглан гүйцэтгэдэг. ()-г хэрхэн гүйцэтгэх аргыг 1.10-р жишээний дараа авч үзнэ.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.4</strong></p>
+<p>((p q)) өгүүлбэрийн хэлбэрийн үнэний хүснэгт гарга.</p>
+<p><strong>Шийдэл.</strong> Энд бид Excel ашиглан үнэний хүснэгтийг хэрхэн байгуулж болохыг харуулав.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">A</th>
+<th style="text-align: center;">B</th>
+<th style="text-align: center;">C</th>
+<th style="text-align: center;">D</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">(p)</td>
+<td style="text-align: center;">(q)</td>
+<td style="text-align: center;">(p q)</td>
+<td style="text-align: center;">((p q))</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">TRUE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">FALSE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">TRUE</td>
+<td style="text-align: center;">FALSE</td>
+</tr>
+</tbody>
+</table>
+<p>Жишээлбэл, C2 ба D2 нүднүүдийн утгуудыг C2 = OR(A2, B2) ба D2 = NOT(C2) томьёонуудаар тус тус олдог. C ба D баганын үлдсэн хэсгийг хуулж, буулгах замаар амархан бөглөнө.</p>
+</blockquote>
+<p>Үндсэн үйлдлүүдийн хувьд тодорхойлогддог боловч тохиромжтой байх үүднээс ашиглагддаг бусад үйлдлүүд байдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 1.2</strong></p>
+<p><strong>(a)</strong> <strong>Онцгой эсвэл</strong> (exclusive or) () үйлдлийг дараах байдлаар тодорхойлно:</p>
+<p>[ p q = (p q) (p q). ]</p>
+<p><strong>(b)</strong> <strong>Хэрэв ба зөвхөн хэрэв</strong> (if and only if) () үйлдлийг дараах байдлаар тодорхойлно:</p>
+<p>[ p q = (p q) (q p). ]</p>
+<p>Iff гэдэг нь мөн ()-г тэмдэглэхэд ашиглагддаг болохыг анхаарна уу.</p>
+</blockquote>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">(p q)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 1.4 () ба ()-г тодорхойлох үнэний хүснэгт</em></p>
+<p>() ба ()-ийн үнэний хүснэгтийг 1.4-р хүснэгтэд нэгтгэсэн. (p q) нь (p) ба (q) хоёулаа үнэн байх үед худал байдаг тул (p q)-ээс ялгаатай гэдгийг анхаарна уу. Хэдийгээр Англи хэлэнд “эсвэл” гэдэг үгийг ашиглахдаа заримдаа “онцгой эсвэл”-ыг хэлж байгаа байж болох ч (жишээ нь: “Та бургер эсвэл пицца идэх үү?”), бид () ба ()-г хооронд нь ялгах ёстой. (p q)-ийн үнэн утга нь (p) ба (q) ижил үнэний утгатай байх үед л биелнэ.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 1.3</strong></p>
+<p><strong>(a)</strong> <strong>Тавтологи</strong> (tautology) гэдэг нь үргэлж үнэн байдаг өгүүлбэрийн хэлбэр юм. Бид тавтологийг (t) гэж тэмдэглэдэг.</p>
+<p><strong>(b)</strong> <strong>Зөрчил</strong> (contradiction) гэдэг нь үргэлж худал байдаг өгүүлбэрийн хэлбэр юм. Бид зөрчлийг (f) гэж тэмдэглэдэг.</p>
+<p>Хэлбэр нь тавтологи эсвэл зөрчил байдаг өгүүлбэрийг мөн тавтологи эсвэл зөрчил гэж хэлдэг.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.5</strong></p>
+<p><strong>(a)</strong> (p p) нь тавтологи юм.</p>
+<p><strong>Шийдэл.</strong> Үнэний хүснэгтэд</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(p p)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p>(p p)-ийн баганын бүх оруулга (T) байна.</p>
+<p><strong>(b)</strong> (p p) нь зөрчил юм.</p>
+<p><strong>Шийдэл.</strong> Үнэний хүснэгтэд</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(p p)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+</tbody>
+</table>
+<p>(p p)-ийн баганын бүх оруулга (F) байна.</p>
+</blockquote>
+</section>
+<section id="логик-эквивалентууд" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="логик-эквивалентууд"><span class="header-section-number">3.1.2</span> Логик эквивалентууд</h3>
+<p>Алгебрт (a + b = b + a) зэрэг ижилтгэлүүд байдаг шиг логик илэрхийллүүдийн дунд мөн ижилтгэлүүд байдаг. Тэдгээр нь өгүүлбэрийн хэлбэрүүдийн хоорондын эквивалент дээр суурилдаг бөгөөд үүнийг бид одоо тодорхойлж байна.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 1.4</strong></p>
+<p>Хоёр өгүүлбэрийн хэлбэр (p) ба (q) нь зөвхөн (p q) өгүүлбэрийн хэлбэр тавтологи байх тохиолдолд л <strong>логик эквивалент</strong> (logically equivalent) гэж хэлэх ба (p q) гэж бичнэ. Хэрэв (p) ба (q) нь логик эквивалент биш бол (p q) гэж бичнэ.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.6</strong></p>
+<p>((p q) p q) болохыг батал.</p>
+<p><strong>Шийдэл.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">((p q))</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">(((p q)) (p q))</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p>(((p q)) (p q)) нь тавтологи тул бид</p>
+<p>[ (p q) p q ]</p>
+<p>гэж дүгнэж болно.</p>
+<p>Мөн ((p q)) ба (p q) нь ижил үнэний хүснэгттэй эсэхийг шалгахад хангалттай.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.7</strong></p>
+<p>“Хэрэв Алисса татварын бэлтгэлийн програм хангамж ашиглаж байгаа бол түүний татварын тайлан үнэн зөв байх болно.” гэсэн өгүүлбэрийн үгүйсгэл нь</p>
+<p>“Алисса татварын бэлтгэлийн програм хангамж ашиглаж байгаа бөгөөд түүний татварын тайлан үнэн зөв биш байх болно.” юм.</p>
+</blockquote>
+<p>1.8-р жишээ нь (p q r) гэсэн өгүүлбэрийн хэлбэр нь хоёрдмол утгатай болохыг харуулж байна. Үйлдлүүдийн тодорхой дарааллыг заахад хаалт шаардлагатай.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.8</strong></p>
+<p>(p (q r) (p q) r) болохыг батал.</p>
+<p><strong>Шийдэл.</strong> Дараах үнэний хүснэгтийг авч үзье.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(r)</th>
+<th style="text-align: center;">(q r)</th>
+<th style="text-align: center;">(p (q r))</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">((p q) r)</th>
+<th style="text-align: center;">((p (q r)) ((p q) r))</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p>((p (q r)) ((p q) r)) нь тавтологи биш тул бид</p>
+<p>[ p (q r) (p q) r ]</p>
+<p>гэж дүгнэж байна.</p>
+<p>Мэдээж хэрэг, (p (q r)) ба ((p q) r) нь өөр өөр үнэний хүснэгттэй байгааг бид харж болно.</p>
+</blockquote>
+<p>1.6 ба 1.8-р жишээн дээр дурдсанчлан, хоёр өгүүлбэрийн хэлбэрийг тэдгээрийн үнэний хүснэгтийг харьцуулж логик эквивалент мөн эсэхийг тодорхойлж болно.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.9</strong></p>
+<p>(p q (p q) (p q)) болохыг батал.</p>
+<p><strong>Шийдэл.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">((p q) (p q))</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+</tbody>
+</table>
+<p>(p q) ба ((p q) (p q)) нь ижил үнэний хүснэгттэй тул бид</p>
+<p>[ p q (p q) (p q) ]</p>
+<p>гэж дүгнэж байна.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.10</strong></p>
+<p>(p q p q) болохыг батал.</p>
+<p><strong>Шийдэл.</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">(p q)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p>(p q) ба (p q) нь ижил үнэний хүснэгттэй тул бид</p>
+<p>[ p q p q ]</p>
+<p>гэж дүгнэж байна.</p>
+</blockquote>
+<p>1.10-р жишээ нь if-then (хэрэв-тэгвэл) өгүүлбэрийн хэлбэрийн өөр нэг илэрхийлэлийг өгдөг. Excel болон бусад хүснэгтийн програм хангамжууд нь ()-ийн хувьд суурилагдсан логик функцгүй байдаг тул энэхүү өөр илэрхийлэл нь ашигтай байдаг. Тиймээс (p q)-г OR(NOT((p)), (q)) гэж оруулж болно. (p q) гэсэн if-then өгүүлбэрийн хэлбэр нь бидний судалж, нотлохыг хүсдэг өгүүлбэрүүдэд байнга тохиолддог. Тиймээс ийм хэлбэрийн зарим холбогдох ойлголтуудыг ойлгох нь чухал юм.</p>
+<blockquote class="blockquote">
+<p><strong>ТОДОРХОЙЛОЛТ 1.5</strong></p>
+<p>(p q) өгүүлбэрийн хэлбэрийг өгөгдсөн үед,</p>
+<p><strong>(a)</strong> түүний <strong>эсрэг өгүүлбэр</strong> (converse) нь (q p) юм.</p>
+<p><strong>(b)</strong> түүний <strong>эсрэгээр нь</strong> (contrapositive) нь (q p) юм.</p>
+<p><strong>(c)</strong> түүний <strong>урвуу</strong> (inverse) нь (p q) юм.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.11</strong></p>
+<p>If-then өгүүлбэр нь эсрэг өгүүлбэртэйгээ логик эквивалент биш боловч эсрэгээр нь (contrapositive) илэрхийлэлтэйгээ логик эквивалент болохыг батал.</p>
+<p><strong>Шийдэл.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(p)</th>
+<th style="text-align: center;">(q)</th>
+<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;">(q p)</th>
+<th style="text-align: center;">(q p)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">F</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+<td style="text-align: center;">T</td>
+</tr>
+</tbody>
+</table>
+<p>Үнэний хүснэгтэд (p q) ба (q p)-ийн баганууд ялгаатай байхад (p q) ба (q p)-ийн баганууд ижил байна. Иймээс,</p>
+<p>[ p q q p p q q p. ]</p>
+</blockquote>
+<p>If-then өгүүлбэрийн эсрэг өгүүлбэр нь (p q) нь (p q) болон түүний эсрэг (q p)-ийг нэгтгэдэг тул чухал юм. 1.11-р жишээнээс харахад (p q) нь түүний эсрэгээр нь (contrapositive) (q p)-тэй логик эквивалент байдаг. Үнэндээ энэ эквивалент нь маш ашигтай хэрэгсэл болж хувирдаг бөгөөд бид үүнийг 2.4-р хэсэгт ашигладаг. Урвуу (inverse) нь эсрэг өгүүлбэрийн эсрэгээр нь (contrapositive) байдаг тул анхаарал татахуйц биш юм.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.12</strong></p>
+<p>“Хэрэв шийдэл байгаа бол програм төгсдөг.” гэсэн өгүүлбэрийг авч үзье.</p>
+<p><strong>(a)</strong> Түүний эсрэг өгүүлбэр нь “Хэрэв програм төгссөн бол шийдэл байна.”</p>
+<p><strong>(b)</strong> Түүний эсрэгээр нь (contrapositive) “Хэрэв програм төгсөхгүй бол шийдэл байхгүй.”</p>
+<p><strong>(c)</strong> Түүний урвуу нь “Хэрэв шийдэл байхгүй бол програм төгсөхгүй.”</p>
+</blockquote>
+<p>Хэрэв бид 1.12-р жишээн дээрх өгүүлбэрийг үнэн гэж үзвэл түүний эсрэгээр нь (contrapositive) мөн үнэн байх ёстой. Гэхдээ түүний эсрэг ба урвуу нь үнэн байх шаардлагагүй. Жишээлбэл, холбогдох програм нь зөвхөн хязгаарлагдмал олон боломжит шийдлүүдийг шалгаж, ямар ч шийдэл олдохгүй бол төгсөхөөр зохиогдсон байж болно. Логик эквивалентууд нь логик илэрхийллүүдийг удирдаж, хялбарчлахад ашигтай байдаг. Теорем 1.1-д бусад илэрхийллүүдийг бүтээхэд ашиглаж болох зарим үндсэн логик эквивалентуудыг жагсаав.</p>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 1.1 Үндсэн логик эквивалентууд</strong></p>
+<p>(p, q), ба (r) нь өгүүлбэрийн хувьсагчид гэе. Тэгвэл дараах логик эквивалентууд биелнэ.</p>
+<p><strong>(a)</strong> (p p) (Давхар үгүйсгэл)</p>
+<p><strong>(b)</strong> ((p q) r p (q r)) (Ассоциатив) ((p q) r p (q r))</p>
+<p><strong>(c)</strong> (p q q p) (Коммутатив) (p q q p)</p>
+<p><strong>(d)</strong> (p (q r) (p q) (p r)) (Тархалт) (p (q r) (p q) (p r))</p>
+<p><strong>(e)</strong> ((p q) p q) (Де Морганы хууль) ((p q) p q)</p>
+<p><strong>(f)</strong> Хэрэв (p q) бол ([p q p]) (Шингээлтийн дүрэм) Хэрэв (p q) бол ([p q q])</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ТЕОРЕМ 1.2 Тавтологи ба зөрчилтэй харилцан үйлчлэх нь</strong></p>
+<p>(p) нь өгүүлбэрийн хувьсагч гэе. Тэгвэл дараах логик эквивалентууд биелнэ.</p>
+<p><strong>(a)</strong> (t f) <strong>(b)</strong> (p t p) (f t) (p t t)</p>
+<p><strong>(c)</strong> (p f f) <strong>(d)</strong> (p p f) (p f p) (p p t)</p>
+<p><strong>(e)</strong> (t p p) <strong>(f)</strong> (p f p) (f t t) (f p t)</p>
+</blockquote>
+<p><strong>Теорем</strong> эсвэл <strong>өгүүлбэр</strong> (proposition) гэдэг нь үнэн гэж баталсан өгүүлбэр юм. Теорем 1.1 ба 1.2 дахь ижилтгэлүүдийн баталгааг дасгалуудад үлдээв. Баталгаажуулалтаас гадна эдгээр ижилтгэлүүдийг цээжлэх нь чухал юм. Зөвхөн заримыг нь ойлгосноор л хүн бусдыг нь санаж, нарийн төвөгтэй нөхцөлд үр дүнтэй ашиглаж чадна. Теорем 1.1 дэх эхний дөрвөн ижилтгэлийг арифметик үйлдлүүд болох (-), (+)-ыг хамарсан зарим алгебрийн адилтгалуудыг бодож үзвэл ойлгоход хялбар байдаг. Жишээлбэл, эхний тархалтын дүрэм нь арифметик тархалтын дүрэмтэй төстэй юм. [ a (b + c) = (a b) + (a c). ] Түүнчлэн (1.1)-ийн (b) ба (c) гэсэн хоёр нэмэгдэхүүнээс олон нэмэгдэхүүн рүү хийх тодорхой ерөнхийлөлтүүд нь логик эквивалентуудад мөн адил аналогтой байдаг. Энэхүү богино өгүүллэгийн нэг дутагдал нь Теорем 1.1 дэх хоёр дахь тархалтын дүрэм нь арифметик аналоггүй байдагт оршино. Ассоциатив дүрмүүд нь (p q r) ба (p q r) гэсэн илэрхийллүүд хоёрдмол утгагүй гэдгийг харуулдаг бол 1.8-р жишээнээс бид (p q r) нь хоёрдмол утгатай болохыг харсан. Ассоциатив дүрмүүдээс үзэхэд ерөнхий (n)-тэй [ p_1 p_2 p_3 p_n p_1 p_2 p_3 p_n ] гэсэн өгүүлбэрийн хэлбэрүүдийг үйлдлүүдийн хүссэн дарааллыг тусгасан нэр томьёонуудыг (хаалт ашиглан) нэгтгэж тооцоолж болно. Жишээлбэл, [ p_1 (p_2 (p_3 p_n)) ] гэсэн нэгдэл нь тооцооллыг баруунаас зүүн тийш гүйцэтгэх нэг сонголтыг харуулж байна. Де Морганы хуулиудыг Английн математикч Августус Де Морган (1806-1871) нээсэн бөгөөд эдгээр нь () ба () өгүүлбэрийн хэлбэрийг хэрхэн үгүйсгэх талаар заадаг дүрмүүд юм. Ийм өгүүлбэрийн хэлбэрүүд хэзээ худал болох талаар бодох нь Де Морганы хуулиудыг илүү байгалийн мэт харагдуулдаг. Де Морганы хуулиуд нь Теорем 1.1-ийн (e) хэсгийн (b)-(d) хуулиудын нэгэн адил олон хувьсагчтай аналогуудтай байдаг. Теорем 1.1 дахь Шингээлтийн дүрмүүд нь магадгүй хамгийн бүрхэг юм. Бид тэдгээрийн ашиг тусыг 1.15-р жишээнд судлах болно. Нөгөөтэйгүүр, Теорем 1.2 дахь ижилтгэлүүд нь баталгаажуулах, цээжлэхэд илүү хялбар байдаг. Дараах хэдэн жишээнд Теорем 1.1 ба 1.2-ын ижилтгэлүүд болон бусад ижилтгэлүүдийг ашиглан илүү олон ижилтгэлийг баталдаг.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.13</strong></p>
+<p>((p q r) (p q r) p q) болохыг батал.</p>
+<p><strong>Шийдэл.</strong></p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+(p \land q \land r) \lor (p \land q \land \neg r) &amp; \equiv &amp; ((p \land q) \land r) \lor ((p \land q) \land \neg r) &amp; \text{Ассоциатив} \\
+&amp; \equiv &amp; (p \land q) \land (r \lor \neg r) &amp; \text{Тархалт} \\
+&amp; \equiv &amp; (p \land q) \land t &amp; \text{Теорем 1.2(d)} \\
+&amp; \equiv &amp; p \land q &amp; \text{Теорем 1.2(b)}
+\end{array}
+\]</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.14</strong></p>
+<p>(p q r s r s p q) болохыг батал.</p>
+<p><strong>Шийдэл.</strong></p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+p \land q \rightarrow \neg r \lor \neg s &amp; \equiv &amp; (p \land q) \rightarrow (\neg r \lor \neg s) &amp; \text{Дараалал} \\
+&amp; \equiv &amp; \neg(\neg r \lor \neg s) \rightarrow \neg(p \land q) &amp; \text{Жишээ 1.11} \\
+&amp; \equiv &amp; (\neg\neg r \land \neg\neg s) \rightarrow (\neg p \lor \neg q) &amp; \text{Де Морганы хууль} \\
+&amp; \equiv &amp; (r \land s) \rightarrow (\neg p \lor \neg q) &amp; \text{Давхар үгүйсгэл} \\
+&amp; \equiv &amp; r \land s \rightarrow \neg p \lor \neg q &amp; \text{Дараалал}
+\end{array}
+\]</span></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.15</strong></p>
+<p>(Үндсэн шингээлтийн дүрмүүд). Дараах логик эквивалентуудыг батал.</p>
+<p><strong>(a)</strong> (p (p r) p).</p>
+<p><strong>(b)</strong> ((q r) q q).</p>
+<p><strong>Шийдэл.</strong></p>
+<p><strong>(a)</strong> Бид (q = p r) гэж эхний шингээлтийн дүрмийг ашиглана. (p p r) нь тавтологи гэдгийг батлахад хялбар. Теорем 1.2(e)-ээс үзэхэд шингээлтийн дүрмийн дараах тохиолдол гарна.</p>
+<p>[ (p (p r)) ((p (p r)) p) ]</p>
+<p>Энэ нь (p (p r) p) гэсэн хүссэн үр дүнтэй тэнцэнэ.</p>
+<p><strong>(b)</strong> Бид (p = q r) гэж хоёр дахь шингээлтийн дүрмийг ашиглана. (q r q t) гэдгийг батлахад хялбар тул дахин Теорем 1.2(e)-ээс шингээлтийн дүрмийн дараах тохиолдол гарна.</p>
+<p>[ ((q r) q) (((q r) q) q) ]</p>
+<p>Энэ нь хүссэн үр дүнд хүргэнэ.</p>
+</blockquote>
+</section>
+<section id="дижитал-хэлхээ" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="дижитал-хэлхээ"><span class="header-section-number">3.1.3</span> Дижитал хэлхээ</h3>
+<p>Бидний авч үзсэн үндсэн логикийг компьютерний техник хангамжийн загварт хэрэглэж болно. <strong>Дижитал хэлхээ</strong> гэдэг нь цахилгаан дохио (P_1, P_2, , P_n)-ийг оролт болгон авч, тэдгээр оролтоор тодорхойлогддог гаралтын дохио (S_1, S_2, , S_m)-ийг үүсгэдэг электрон техник хангамжийн хэсэг юм. 1.1-р зурагт компьютерний чипийг төлөөлж болох дижитал хэлхээний ерөнхий бүтцийг үзүүлэв. (P_i) ба (S_j) дохио бүр нь өгөгдлийн <strong>бит</strong>-ийг хадгалдаг бөгөөд үүнийг асаах эсвэл унтраах боломжтой тул 1 эсвэл 0-ээр тус тус дүрсэлж болно. Судалгааг хялбарчлахын тулд бид зөвхөн ганц гаралтын дохио (S)-тэй дижитал хэлхээг авч үзэх болно.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_1_1.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 1.1 Дижитал хэлхээний бүтэц</figcaption>
+</figure>
+</div>
+<p><em>Зураг 1.1 Дижитал хэлхээний бүтэц</em></p>
+<p>(P, Q, R) оролтын дохио, (S) гаралтын дохиотой тодорхой нэг дижитал хэлхээний үйлдлийг оролтууд гаралтыг хэрхэн тодорхойлж байгааг тодорхой заасан <strong>оролт-гаралтын хүснэгт</strong>-д бичиж болно. Ийм хүснэгтийг 1.5-р хүснэгтэд үзүүлсэн бөгөөд энэ нь (T)-ийг 1-ээр, (F)-ийг 0-оор сольсон үнэний хүснэгттэй тодорхой холбоотой байдаг. Энэхүү хүчтэй ижил төстэй байдлаас үзэхэд нарийн төвөгтэй дижитал хэлхээг үндсэн логик үйлдлүүдтэй харгалзах <strong>логик хаалга</strong> (logic gates) гэж нэрлэгддэг маш энгийн хэлхээнүүдээс бүтээж болох нь гайхах зүйл биш юм. Бидний авч үзэх үндсэн хаалганууд нь <strong>Inverter</strong> (эсвэл <strong>NOT хаалга</strong>), <strong>AND хаалга</strong>, ба <strong>OR хаалга</strong> юм. Эдгээрийг 1.6-р хүснэгтэд үзүүлсэн бөгөөд үндсэн логик үйлдлүүд болох (, ), ба ()-той харгалзана. Үндсэн хаалгануудыг ашиглан 1.2-р зурагт үзүүлсэн шиг хэлхээг бүтээж болно. Дохио дамжуулж буй утаснууд нь нэгээс олон хаалгыг тэжээхээр салж болохыг анхаарна уу. Ийм салаалсан хэсгийг бид диаграммд () тэмдгээр тэмдэглэдэг. Бусад утаснууд нь ийм тэмдэглэгээгүйгээр огтлолцох нь утаснуудын харилцан үйлчлэл байхгүй гэсэн үг бөгөөд нарийн төвөгтэй хэлхээ зурах үед зайлсхийх боломжгүй байж магадгүй юм.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Оролт</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Гаралт</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">(P)</td>
+<td style="text-align: center;">(Q)</td>
+<td style="text-align: center;">(R)</td>
+<td style="text-align: center;">(S)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 1.5 Оролт-Гаралтын хүснэгт</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Хаалга</th>
+<th style="text-align: center;">Inverter</th>
+<th style="text-align: center;">AND</th>
+<th style="text-align: center;">OR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Тэмдэглэгээ</td>
+<td style="text-align: center;">(P S)</td>
+<td style="text-align: center;">(P S)</td>
+<td style="text-align: center;">(P S)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Оролт-Гаралтын хүснэгт</td>
+<td style="text-align: center;">(P S) <br> 0 <span class="math inline">\(\quad\)</span> 1 <br> 1 <span class="math inline">\(\quad\)</span> 0</td>
+<td style="text-align: center;">(P Q S) <br> 0 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 0 <br> 0 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 0 <br> 1 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 0 <br> 1 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 1</td>
+<td style="text-align: center;">(P Q S) <br> 0 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 0 <br> 0 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 1 <br> 1 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 1 <br> 1 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 1</td>
+</tr>
+</tbody>
+</table>
+<p><em>Хүснэгт 1.6 Үндсэн хаалганууд</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_1_2.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 1.2 Дижитал хэлхээний дотоод бүтэц</figcaption>
+</figure>
+</div>
+<p><em>Зураг 1.2 Дижитал хэлхээний дотоод бүтэц</em></p>
+<p>Одоо бид үндсэн хаалгануудаас бүрдсэн тодорхой нэг дижитал хэлхээний дотоод ажиллагааг шинжлэхэд бэлэн боллоо.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.16</strong></p>
+<p>1.2-р зурагт үзүүлсэн хэлхээг дагаж, гаралтын илэрхийлэлийг оролтын хувьд тодорхойлж, оролт-гаралтын хүснэгт гарга.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_1_3.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 1.3 1.2-р зургийн дижитал хэлхээг дагах нь</figcaption>
+</figure>
+</div>
+<p><em>Зураг 1.3 1.2-р зургийн дижитал хэлхээг дагах нь</em></p>
+<p><strong>Шийдэл.</strong> Бидний хийх алхмуудыг 1.3-р зурагт үзүүлэв. Хаалга бүрийн гаралтын хэсэгт бид хаалганы үйлдлийг хэрэглэснээр олдсон утасны логик утгыг жагсаав. Эцэст нь бид (S)-ийн илэрхийлэлийг олно. Энэ нь</p>
+<p>[ (P Q) (P R) = S. ]</p>
+<p>Энэ илэрхийллийн, улмаар хэлхээний оролт-гаралтын хүснэгт нь 1.5-р хүснэгтэд үзүүлсэн хүснэгт юм.</p>
+</blockquote>
+<p>1.16-р жишээнээс бид дижитал хэлхээ нь гаралтыг оролтын хувьд тодорхойлсон логик илэрхийлэлтэй харгалзаж байгааг харж байна. Үүний дагуу ийм илэрхийлэл өгөгдсөн үед бид үүнийг хэрэгжүүлдэг хэлхээг зохиох ёстой.</p>
+<blockquote class="blockquote">
+<p><strong>ЖИШЭЭ 1.17</strong></p>
+<p>((P Q R) (Q R) = S) илэрхийллийг хэрэгжүүлдэг дижитал хэлхээг зур.</p>
+<p><strong>Шийдэл.</strong> Тохирох хэлхээг 1.4-р зурагт үзүүлэв.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_1_4.png" class="img-fluid figure-img"></p>
+<figcaption>Зураг 1.4 ((P Q R) (Q R) = S)-г хэрэгжүүлсэн хэлхээ</figcaption>
+</figure>
+</div>
+<p><em>Зураг 1.4 ((P Q R) (Q R) = S)-г хэрэгжүүлсэн хэлхээ</em></p>
+</blockquote>
+</section>
+</section>
+<section id="хэсгийн-дасгалууд" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="хэсгийн-дасгалууд"><span class="header-section-number">3.2</span> 1.1 Хэсгийн дасгалууд</h2>
+<p>1-ээс 4 хүртэлх дасгалуудад өгөгдсөн өгүүлбэр өгүүлбэр мөн эсэхийг тодорхойл. Хэрэв тийм бол үнэн эсвэл худал эсэхийг тодорхойл.</p>
+<ol type="1">
+<li>(-1) нь бүхэл тоо.</li>
+<li>(1 + 2 + 3 = 5).</li>
+<li>Хэрэв (&gt; 0) бол ()-г тооцоол.</li>
+<li>Энэ өгүүлбэрийн үгүйсгэл нь худал юм.</li>
+</ol>
+<p>5-аас 10 хүртэлх дасгалуудад өгөгдсөн өгүүлбэрийн хэлбэрүүдийн үнэний хүснэгтийг гарга.</p>
+<ol start="5" type="1">
+<li>(p q).</li>
+<li>(p (q r)).</li>
+<li>(p (q r)).</li>
+<li>((p q) r).</li>
+<li>((p q) r).</li>
+<li>(p (q r)).</li>
+</ol>
+<p>11-ээс 14 хүртэлх дасгалуудад Microsoft Excel зэрэг хүснэгтийн програм хангамжийг ашиглан өгөгдсөн хоёр өгүүлбэрийн хэлбэрийн үнэний хүснэгтийг гарга. Тэдгээр нь хэрхэн ялгаатай вэ? Үүнийг гараар хийж болно.</p>
+<ol start="11" type="1">
+<li><p>(p q) ба (p q).</p></li>
+<li><p>(p q) ба ((p q)).</p></li>
+<li><p>(p (q r)) ба (p (q r)).</p></li>
+<li><p>(p (q r)) ба (p (q r)).</p></li>
+<li><p>(p p) нь тавтологи болохыг харуул.</p></li>
+<li><p>(p (q p)) нь зөрчил болохыг харуул.</p></li>
+</ol>
+<p>17-оос 34 хүртэлх дасгалуудад тодорхойлсон логик эквивалентуудыг батал.</p>
+<ol start="17" type="1">
+<li><strong>(a)</strong> Давхар үгүйсгэл (Теорем 1.1(a)): (p p). <strong>(b)</strong> Теорем 1.2(a): (t f) ба (f t).</li>
+<li><strong>(a)</strong> Теорем 1.2(b): (p t p) ба (p t t). <strong>(b)</strong> Теорем 1.2(c): (p f f) ба (p f p).</li>
+<li>Теорем 1.2(e): (t p p) ба (p t t).</li>
+<li>Теорем 1.2(e): (p f p) ба (f p t).</li>
+<li>(p q (p q)).</li>
+<li>(p q (p q)).</li>
+<li>(p q q p).</li>
+<li>(p q p t).</li>
+<li>() ба ()-ийн ассоциатив чанар: ((p q) r p (q r)) ба ((p q) r p (q r)).</li>
+<li>() ба ()-ийн коммутатив чанар: (p q q p) ба (p q q p).</li>
+<li>()-ийн ассоциатив чанар: ((p q) r p (q r)).</li>
+<li>()-ийн коммутатив чанар: (p q q p).</li>
+<li>() ба ()-ийн тархалт: (p (q r) (p q) (p r)) ба (p (q r) (p q) (p r)).</li>
+<li>() ба ()-ийн тархалт: (p (q r) (p q) (p r)). Мөн 37-р дасгалыг үз.</li>
+<li>Де Морганы хуулиуд: ((p q) p q) ба ((p q) p q).</li>
+<li>Шингээлтийн дүрмүүд: ((p q) (p q p)) ба ((p q) (p q q)) нь тавтологи юм.</li>
+<li>((p q) p q).</li>
+<li>If-then өгүүлбэрийн урвуу нь түүний эсрэг өгүүлбэртэй эквивалент юм. Өөрөөр хэлбэл, ((p q) q p).</li>
+</ol>
+<p>35-аас 40 хүртэлх дасгалуудад өгөгдсөн өгүүлбэрийн хэлбэрүүд логик эквивалент мөн эсэхийг тодорхойл. Хариултаа зөвтгө.</p>
+<ol start="35" type="1">
+<li>((p q) r) ба (p (q r)).</li>
+<li>((p q) r) ба (p (q r)).</li>
+<li>(p (q r)) ба ((p q) (p r)).</li>
+<li>((p q)) ба (p q).</li>
+<li>(p q) ба (p q).</li>
+<li>((p q)) ба (p q).</li>
+</ol>
+<p>41-ээс 48 хүртэлх дасгалуудад өгөгдсөн if-then өгүүлбэрийн хэлбэрийн хувьд (a) эсрэг өгүүлбэрийг (converse), (b) эсрэгээр нь (contrapositive), (c) урвуу (inverse), (d) үгүйсгэлийг олж, хялбарчил.</p>
+<ol start="41" type="1">
+<li><p>(p q).</p></li>
+<li><p>(p q).</p></li>
+<li><p>(p q r).</p></li>
+<li><p>(p q r).</p></li>
+<li><p>Хэрэв Тэдийн дундаж 60-аас бага бол Тэд унана.</p></li>
+<li><p>Хэрэв Илиа машинаа авч чадвал Илиа машин худалдаж авна.</p></li>
+<li><p>Хэрэв Жорж сайн мэдэрч байвал Жорж кино үзэх эсвэл бүжиглэхээр явна.</p></li>
+<li><p>Хэрэв Анна түүх, сэтгэл зүйн хичээлээр унаж байгаа бол Анна төгсөхгүй.</p></li>
+<li><p>(p q)-ийн үгүйсгэлийг ол.</p></li>
+<li><p>(p q)-ийн үгүйсгэлийг ол.</p></li>
+<li><p>“Хелен-ийн дундаж хамгийн багадаа 90, Хелен А үнэлгээ авч байна.” гэсэн өгүүлбэрийг үгүйсгэ.</p></li>
+<li><p>“Рафаэль инээмсэглэхгүй байгаа, гэхдээ Рафаэль мэхэлж байна.” гэсэн өгүүлбэрийг үгүйсгэ.</p></li>
+<li><p>(p q r p (q r)) логик эквивалентыг <strong>(a)</strong> үнэний хүснэгт ашиглан батал. <strong>(b)</strong> 1.10-р жишээ болон бусад ижилтгэлүүдийн үр дүнг ашиглан батал.</p></li>
+<li><p>((p q) (p r) p (q r)) логик эквивалентыг <strong>(a)</strong> үнэний хүснэгт ашиглан батал. <strong>(b)</strong> 1.10-р жишээ болон бусад ижилтгэлүүдийн үр дүнг ашиглан батал.</p></li>
+</ol>
+<p>55-аас 62 хүртэлх дасгалуудад өгөгдсөн логик эквивалентуудыг үнэний хүснэгт гаргахгүйгээр, харин аль хэдийн тогтоосон ижилтгэлүүдийг ашиглан батал.</p>
+<ol start="55" type="1">
+<li>(p (q r s) (p q) (p r) (p s)).</li>
+<li>((p q r) p q r).</li>
+<li>((p q r) (p q r) p r).</li>
+<li>((p q r) (p q r) p r).</li>
+<li>(p (q r) (p q) (p r)).</li>
+<li>((p (q r)) p (q r)). <em>61. ((p q) (p q r) p q). </em>62. ((p q) (p q r) p q). <em>63. () үйлдэл нь (, ), ба () үйлдлүүдийн аль нэгтэй хамт нөгөө хоёрыг үүсгэж чадахыг харуул. </em>Заавар:* 1.10-р жишээ үүний нэг хэсгийг гүйцэтгэдэг. *64. () үйлдлийг (, ), ба () үйлдлүүдээс үүсгэж болох уу? Тайлбарла.</li>
+</ol>
+<p>65-аас 68 хүртэлх дасгалуудад (a) Зурган дээрх хэлхээг дагаж, гаралтын илэрхийлэлийг оролтын хувьд тодорхойл. (b) Оролт-гаралтын хүснэгт гарга. (c) Ижил оролт-гаралтын хүснэгтийг цөөн үндсэн хаалга ашиглан хийж болох уу? Тайлбарла.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig_ex_65_68.png" class="img-fluid figure-img"></p>
+<figcaption>Дасгал 65-68-ын хэлхээнүүд</figcaption>
+</figure>
+</div>
+<p>69-ээс 72 хүртэлх дасгалуудад өгөгдсөн илэрхийллүүдийг хэрэгжүүлдэг хэлхээг зур.</p>
+<ol start="69" type="1">
+<li>((P Q) R = S).</li>
+<li>((P (Q R)) = S).</li>
+<li>(P Q = S). Үүнийг дараах байдлаар гүйцэтгэ: <strong>(a)</strong> 1.2-р тодорхойлолт дахь ()-ийн тодорхойлолтыг ашиглан. <strong>(b)</strong> 1.9-р жишээнд өгөгдсөн ()-ийн шинж чанарыг ашиглан. Аль арга нь цөөн хаалга ашигладаг вэ?</li>
+<li><strong>(a)</strong> 1.10-р жишээнд өгөгдсөн ()-ийн шинж чанарыг ашиглан (P Q = S). <strong>(b)</strong> (a) хэсгийн санааг ашиглан (P Q = S).</li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Тоонуудыг дүрслэх нь">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Тоонуудыг дүрслэх нь</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./1-5.html" class="pagination-link" aria-label="1.5 Хүчинтэй аргументууд">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.5 Хүчинтэй аргументууд</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

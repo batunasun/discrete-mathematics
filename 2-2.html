@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; 2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1)) – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./2-3.html" rel="next">
+<link href="./2-1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2-1.html">2 Энгийн баталгааны арга</a></li><li class="breadcrumb-item"><a href="./2-2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Тоонуудыг дүрслэх нь</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1 Логик ба Олонлог</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Бүлэг 1: Логик ба Олонлогууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.5 Хүчинтэй аргументууд</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2 Энгийн баталгааны арга</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Энгийн баталгааны арга (Basic Proof Writing)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">2.4 Шууд бус аргументууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">2-р бүлгийн давтлагын бодлогууд</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">3 Графын онол</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Графын онолын үндэс</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Матриц ба тусгай графууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Бүлэг 8.3: Изоморфизм</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Бүлэг 8.4: Инвариантууд</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Бүлэг 8.5: Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Бүлэг 8: Давтлагын бодлогууд</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#хэрэв-тэгвэл-батламж-if-then-statements" id="toc-хэрэв-тэгвэл-батламж-if-then-statements" class="nav-link active" data-scroll-target="#хэрэв-тэгвэл-батламж-if-then-statements"><span class="header-section-number">5.0.1</span> Хэрэв-Тэгвэл батламж (If-Then Statements)</a></li>
+  <li><a href="#дэд-олонлогууд-subsets" id="toc-дэд-олонлогууд-subsets" class="nav-link" data-scroll-target="#дэд-олонлогууд-subsets"><span class="header-section-number">5.0.2</span> Дэд олонлогууд (Subsets)</a></li>
+  <li><a href="#олонлогийн-тэнцэтгэл-set-equalities" id="toc-олонлогийн-тэнцэтгэл-set-equalities" class="nav-link" data-scroll-target="#олонлогийн-тэнцэтгэл-set-equalities"><span class="header-section-number">5.0.3</span> Олонлогийн тэнцэтгэл (Set Equalities)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./2-1.html">2 Энгийн баталгааны арга</a></li><li class="breadcrumb-item"><a href="./2-2.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Ихэвчлэн бид дараах хэлбэрийн батламжийг батлахыг хүсдэг: <span class="math display">\[
+\forall x \in \mathcal{U}, p(x).
+\]</span> 2.1-р хэсэг нь <span class="math inline">\(\mathcal{U}\)</span> ихэвчлэн том, эсвэл хязгааргүй байдаг тул тийм ч ашигтай биш жижиг олонлогуудад зориулсан аргыг санал болгодог. Илүү ерөнхийдөө, тохирох арга бол 1.5-р хэсгийн Теорем 1.9-өөс гаралтай Ерөнхийлөлтийн зарчмыг ашиглах явдал юм. Баталгаа нь зөвхөн хязгаарлагдмал олон тооны үг агуулж, тиймээс зөвхөн хязгаарлагдмал олон зүйлийг авч үзэх боломжтой тул <span class="math inline">\(x \in \mathcal{U}\)</span> ерөнхий элементтэй ажиллах, <span class="math inline">\(p(x)\)</span>-ийг зохих ёсоор батлах чадвар нь хүчирхэг юм. Одооноос эхлэн бид бүхэл батламжид гарч буй ерөнхий элементийг төлөөлөхөд ижил хувьсагчийн нэрийг (энд <span class="math inline">\(x\)</span>) ашиглана (1.5-р хэсэгт шинэ <span class="math inline">\(a\)</span> үсэг ашигласантай адил).</p>
+<p><strong>ЖИШЭЭ 2.8.</strong> Харуул: <span class="math inline">\(\forall x \in \mathbb{R}, x^2 + 1 &gt; 0\)</span>. <strong>Баталгаа.</strong> <span class="math inline">\(x \in \mathbb{R}\)</span> гэж үзье. Аливаа бодит тооны квадрат нь сөрөг биш тул (<span class="math inline">\(x^2 \ge 0\)</span>) (Хавсралт А, 11-р шинж чанарыг үзнэ үү), бидэнд: <span class="math display">\[
+x^2 + 1 \ge 0 + 1 = 1 &gt; 0.
+\]</span> Тиймээс бид <span class="math inline">\(x^2 + 1 &gt; 0\)</span> болохыг батлав. <span class="math inline">\(\square\)</span></p>
+<p>2.8-р жишээний баталгааны эхний өгүүлбэр нь <span class="math inline">\(x\)</span> нь ерөнхий бодит тоог илэрхийлж байгааг тогтоож өгсөн болохыг анхаарна уу. Өөрөөр хэлбэл, дараа нь бид <span class="math inline">\(x\)</span>-тэй ажиллахдаа зөвхөн бодит тооны ерөнхий шинж чанарыг ашиглаж болно. Жишээлбэл, <span class="math inline">\(x\)</span> эерэг эсвэл өөр ямар нэг тусгай шинж чанартай гэж үзэж болохгүй. Үүнтэй адилтгах нь баталгааны эхний өгүүлбэрийг “Let <span class="math inline">\(x \in \mathbb{R}\)</span>” гэж сольж болох бөгөөд энэ нь <span class="math inline">\(x\)</span> дур зоргоороо байна гэсэн үг бөгөөд үүнийг далд утгаар ойлгож болох бөгөөд тусгайлан бичих шаардлагагүй.</p>
+<p><strong>ЖИШЭЭ 2.9.</strong> Харуул: <span class="math inline">\(\forall n \in \mathbb{Z}^-, -n \in \mathbb{Z}^+\)</span>. <strong>Баталгаа.</strong> <span class="math inline">\(n \in \mathbb{Z}^-\)</span> гэж үзье. Тэгвэл <span class="math inline">\(n \in \mathbb{Z}\)</span> ба <span class="math inline">\(n &lt; 0\)</span>. <span class="math inline">\((-1)\)</span>-ээр үржүүлбэл <span class="math inline">\(-n &gt; 0\)</span> гарна. (Хавсралт А, 10-р шинж чанарыг үзнэ үү). <span class="math inline">\(-n \in \mathbb{Z}\)</span> ба <span class="math inline">\(-n &gt; 0\)</span> тул бидэнд <span class="math inline">\(-n \in \mathbb{Z}^+\)</span> байна. <span class="math inline">\(\square\)</span></p>
+<section id="хэрэв-тэгвэл-батламж-if-then-statements" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="хэрэв-тэгвэл-батламж-if-then-statements"><span class="header-section-number">5.0.1</span> Хэрэв-Тэгвэл батламж (If-Then Statements)</h3>
+<p>Дараах хэлбэрийн хэрэв-тэгвэл батламж: <span class="math display">\[
+\forall x \in \mathcal{U}, p(x) \rightarrow q(x)
+\]</span> нь бүхэл батламжийн тусгай тохиолдол юм. Тиймээс <span class="math inline">\(\mathcal{U}\)</span>-д ерөнхий <span class="math inline">\(x\)</span> элементтэй ажиллах замаар үүнийг баталж болно. Гэсэн хэдий ч үүнээс гадна гарч буй хэрэв-тэгвэл батламжийг батлах стандарт арга байдаг: <span class="math display">\[
+p(x) \rightarrow q(x). \tag{2.2}
+\]</span> Бид <span class="math inline">\(p(x)\)</span> үнэн гэж үзээд, дараа нь энэ таамаглалын дагуу <span class="math inline">\(q(x)\)</span> заавал үнэн байх ёстойг харуулна. (2.2) нь <span class="math inline">\(p(x)\)</span> худал үед ач холбогдолгүйгээр үнэн байдаг тул ийм боломжийг авч үзэх шаардлагагүй. Энгийнээр хэлбэл, хэрэв-тэгвэл батламжийг түүний таамаглалыг үнэн гэж үзээд, үр дүн нь дагахыг батлах замаар баталж болно.</p>
+<p><strong>ЖИШЭЭ 2.10.</strong> Харуул: <span class="math inline">\(\forall x \in \mathbb{R}\)</span>, хэрэв <span class="math inline">\(x \in [2, 3]\)</span> бол <span class="math inline">\(x^2 \in [4, 9]\)</span>. <strong>Баталгаа.</strong> <span class="math inline">\(x \in \mathbb{R}\)</span> гэж үзье. Мөн <span class="math inline">\(x \in [2, 3]\)</span> гэж үзье. Өөрөөр хэлбэл, <span class="math inline">\(2 \le x \le 3\)</span>. Гишүүн бүрийг квадрат зэрэгт дэвшүүлбэл <span class="math inline">\(2^2 \le x^2 \le 3^2\)</span> гарна. (Энэ нь Хавсралт А, 10-р шинж чанараас дагаж мөрдөнө.) Тиймээс <span class="math inline">\(4 \le x^2 \le 9\)</span>. Иймд <span class="math inline">\(x^2 \in [4, 9]\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong>ЖИШЭЭ 2.11.</strong> Бүх бодит <span class="math inline">\(f\)</span> функцийн хувьд, хэрэв <span class="math inline">\(f\)</span> тогтмол бол <span class="math inline">\(f^2\)</span> нь мөн тогтмол болохыг харуул. <strong>Бодолт.</strong> 1.15-р тодорхойлолтоос үзэхэд бодит <span class="math inline">\(g\)</span> функц нь зөвхөн дараах шинж чанартай байх <span class="math inline">\(c \in \mathbb{R}\)</span> оршин байвал <strong>тогтмол</strong> байна: <span class="math display">\[
+\forall x \in \mathbb{R}, \quad g(x) = c.
+\]</span> Мөн 1.16-р тодорхойлолтоос үзэхэд <span class="math inline">\(f^2\)</span> функцийг дараах байдлаар тодорхойлдог: <span class="math display">\[
+\forall x \in \mathbb{R}, \quad f^2(x) = [f(x)]^2.
+\]</span> <strong>Баталгаа.</strong> <span class="math inline">\(f\)</span> нь бодит функц байг. Мөн <span class="math inline">\(f\)</span> тогтмол гэж үзье. Тиймээс <span class="math inline">\(c \in \mathbb{R}\)</span> байх бөгөөд: <span class="math display">\[
+\forall x \in \mathbb{R}, \quad f(x) = c.
+\]</span> Ажиглавал: <span class="math display">\[
+\forall x \in \mathbb{R}, \quad f^2(x) = [f(x)]^2 = c^2.
+\]</span> <span class="math inline">\(c^2 \in \mathbb{R}\)</span> ба <span class="math inline">\(\forall x \in \mathbb{R}, f^2(x) = c^2\)</span> тул <span class="math inline">\(f^2\)</span> нь тогтмол байна. <span class="math inline">\(\square\)</span></p>
+<p>2.11-р жишээний баталгааны өмнөх тайлбар нь баталгаа бичихэд тодорхойлолтыг жолоодох чухал ач холбогдлыг онцлон харуулж байна. Аливаа батламжийг батлахаас өмнө түүнд оролцож буй нэр томъёоны тодорхойлолтыг тодорхой ойлгох ёстой. 2.11-р жишээнд <span class="math inline">\(f^2\)</span> нь тогтмол гэдгийг батлахын тулд <span class="math inline">\(f^2\)</span> гэж юу гэсэн үг, тогтмол гэдэг нь албан ёсоор юу гэсэн үг болохыг мэдэх хэрэгтэй. Дараа нь бид юу харуулах ёстойгоо тодорхой мэдэж байна. 2.11-р жишээний баталгааны эхний өгүүлбэрийг “Suppose <span class="math inline">\(f\)</span> is a constant real function” (f нь тогтмол бодит функц гэж үзье) гэсэн өгүүлбэрээр илүү үр дүнтэй илэрхийлж болохыг анхаарна уу.</p>
+<p><strong>ЖИШЭЭ 2.12.</strong> Харуул: Бүх бодит <span class="math inline">\(f\)</span> функцийн хувьд, хэрэв <span class="math inline">\(f\)</span> тогтмол бол <span class="math inline">\(f\)</span> нь үечилсэн байна. Өөрөөр хэлбэл, тогтмол функцууд нь үечилсэн байдаг. <strong>Бодолт.</strong> 1.15-р тодорхойлолтоос үзэхэд <span class="math inline">\(f\)</span> функц нь зөвхөн дараах шинж чанартай эерэг бодит <span class="math inline">\(p\)</span> тоо оршин байвал <strong>үечилсэн</strong> байна: <span class="math display">\[
+\forall x \in \mathbb{R}, \quad f(x + p) = f(x).
+\]</span> <strong>Баталгаа.</strong> <span class="math inline">\(f\)</span> нь тогтмол бодит функц гэж үзье. Тиймээс <span class="math inline">\(c \in \mathbb{R}\)</span> байх бөгөөд: <span class="math display">\[
+\forall x \in \mathbb{R}, \quad f(x) = c.
+\]</span> (<span class="math inline">\(p = 1\)</span> гэе.) Ажиглавал: <span class="math display">\[
+\forall x \in \mathbb{R}, \quad f(x + 1) = c = f(x).
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\(f\)</span> нь үечилсэн (үе нь <span class="math inline">\(p = 1\)</span>). <span class="math inline">\(\square\)</span></p>
+<p>2.12-р жишээний баталгаанд аливаа эерэг <span class="math inline">\(p\)</span> утга нь тогтмол <span class="math inline">\(f\)</span> функц үечилсэн гэдгийг харуулахад хангалттай. Баталгаанд зориулж зөвхөн нэг утгыг сонгох шаардлагатай бөгөөд бид <span class="math inline">\(p = 1\)</span>-ийг сонгосон.</p>
+</section>
+<section id="дэд-олонлогууд-subsets" class="level3" data-number="5.0.2">
+<h3 data-number="5.0.2" class="anchored" data-anchor-id="дэд-олонлогууд-subsets"><span class="header-section-number">5.0.2</span> Дэд олонлогууд (Subsets)</h3>
+<p>Зарим <span class="math inline">\(\mathcal{U}\)</span> огторгуй дахь <span class="math inline">\(S\)</span> ба <span class="math inline">\(T\)</span> хоёр олонлогийг өгөв. 1.17-р тодорхойлолт нь <span class="math inline">\(S\)</span> нь <span class="math inline">\(T\)</span>-ийн дэд олонлог (<span class="math inline">\(S \subseteq T\)</span>) байх нь дараах бүхэл батламжаар тодорхойлогддог гэдгийг хэлж байна: <span class="math display">\[
+\forall x \in \mathcal{U}, \quad x \in S \rightarrow x \in T.
+\]</span> Тиймээс <span class="math inline">\(S \subseteq T\)</span> дэд олонлогийн хамаарлыг батлах нь харгалзах бүхэл хэрэв-тэгвэл батламжийг батлах замаар хийгддэг. Өөрөөр хэлбэл, бид <span class="math inline">\(S\)</span> олонлогт <span class="math inline">\(x\)</span> элемент байна гэж үзээд, <span class="math inline">\(T\)</span> олонлогт <span class="math inline">\(x\)</span> байх ёстойгоо харуулах ёстой.</p>
+<p><strong>ЖИШЭЭ 2.13.</strong> Бүх <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогийн хувьд <span class="math inline">\(A \cap B \subseteq A\)</span> болохыг харуул. <strong>Баталгаа.</strong> <span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд байг. <span class="math inline">\(x \in A \cap B\)</span> гэж үзье. Тэгвэл <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in B\)</span>. Тухайлбал, <span class="math inline">\(x \in A\)</span>. Иймд <span class="math inline">\(x \in A \cap B\)</span> байх нь <span class="math inline">\(x \in A\)</span> байхыг шаардана. Өөрөөр хэлбэл, <span class="math inline">\(A \cap B \subseteq A\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>1.5-р хэсгийн аргумент хэлбэрүүд нь бидний баталгааны логик үндсийг бүрдүүлдэг гэдгийг 2.13-р жишээний баталгаанаас маш тодорхой харж болно. Энэ баталгааны гурав, дөрөв дэх өгүүлбэрүүд нь (Тухайлбал) аргументын хэлбэрийн Теорем 1.7(d)-ийн жишээг өгч байна. Сүүлийн хоёр өгүүлбэр нь заавал байх албагүй. Тэдгээр нь бидний хүссэн зүйлээ баталсан гэдгийг энгийнээр илэрхийлж байна. Туршлагатай болохын хэрээр бид ийм төгсгөлийн тайлбарыг хийх шаардлагагүй болно.</p>
+<p><strong>ЖИШЭЭ 2.14.</strong> (Дэд олонлогийн хамаарлын дамжуулалт). <span class="math inline">\(A, B\)</span>, ба <span class="math inline">\(C\)</span> олонлогууд байг. Харуул: Хэрэв <span class="math inline">\(A \subseteq B\)</span> ба <span class="math inline">\(B \subseteq C\)</span> бол <span class="math inline">\(A \subseteq C\)</span>. <strong>Бодолт.</strong> Бидний батлах гэж буй батламж нь дараах бүхэл батламж юм: <span class="math display">\[
+A, B, \text{ ба } C \text{ бүх олонлогийн хувьд, хэрэв } A \subseteq B \text{ ба } B \subseteq C \text{ бол } A \subseteq C.
+\]</span> Гэсэн хэдий ч 2.14-р жишээнд өгүүлбэрт дурдсан байдлаас шалтгаалан бид <span class="math inline">\(A, B\)</span>, ба <span class="math inline">\(C\)</span> нь бидний баталгаанд орсон ерөнхий олонлогууд гэдгийг зааж өгөх шаардлагагүй. Бид харуулах ёстой зүйлээсээ өмнө өгүүлбэрт үүнийг аль хэдийн хийсэн гэж үздэг. Тиймээс бид шууд хэрэв-тэгвэл батламжийг батлах руу орж болно.</p>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(A \subseteq B\)</span> ба <span class="math inline">\(B \subseteq C\)</span> гэж үзье. (Зорилго: <span class="math inline">\(A \subseteq C\)</span>. Өөрөөр хэлбэл, <span class="math inline">\(\forall x, x \in A \rightarrow x \in C\)</span>.) <span class="math inline">\(x \in A\)</span> гэж үзье. <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(A \subseteq B\)</span> тул <span class="math inline">\(x \in B\)</span> болно. <span class="math inline">\(x \in B\)</span> ба <span class="math inline">\(B \subseteq C\)</span> тул <span class="math inline">\(x \in C\)</span> болно. Иймд <span class="math inline">\(A \subseteq C\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>Бид 2.14-р жишээний баталгаанд хаалт дотор хэрэв-тэгвэл батламжийн дүгнэлтийг батлах хэрэгцээ, үүнээс гадна энэ нь юу гэсэн үг болохыг тайлбарлав. Баталгаа бичиж сурахад ийм тэмдэглэл хийх нь ихэвчлэн тустай байдаг. 2.14-р жишээний баталгаа нь аргументын хэлбэрийг (Теорем 1.7(c)-ийн дамжуулалт) харуулж байна.</p>
+<p>Дараагийн баталгааны мөрүүдийг зөвхөн доорх тайлбарт хялбархан иш татах зорилгоор дугаарласан болно. Жинхэнэ баталгаанд мөрүүд дугаарлагдахгүй.</p>
+<p><strong>ЖИШЭЭ 2.15.</strong> (Огтлолын үйлдэл дэд олонлогийн хамаарлыг хүндэтгэдэг). <span class="math inline">\(A, B, C\)</span>, ба <span class="math inline">\(D\)</span> олонлогууд байг. Харуул: Хэрэв <span class="math inline">\(A \subseteq B\)</span> ба <span class="math inline">\(C \subseteq D\)</span> бол <span class="math inline">\(A \cap C \subseteq B \cap D\)</span>. <strong>Баталгаа.</strong> 1. <span class="math inline">\(A \subseteq B\)</span> ба <span class="math inline">\(C \subseteq D\)</span> гэж үзье. 2. (Зорилго: <span class="math inline">\(A \cap C \subseteq B \cap D\)</span>.) 3. <span class="math inline">\(x \in A \cap C\)</span> гэж үзье. 4. Тэгвэл <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in C\)</span>. 5. <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(A \subseteq B\)</span> тул <span class="math inline">\(x \in B\)</span> болно. 6. <span class="math inline">\(x \in C\)</span> ба <span class="math inline">\(C \subseteq D\)</span> тул <span class="math inline">\(x \in D\)</span> болно. 7. Иймд <span class="math inline">\(x \in B\)</span> ба <span class="math inline">\(x \in D\)</span>. 8. Өөрөөр хэлбэл, <span class="math inline">\(x \in B \cap D\)</span>. 9. Тиймээс <span class="math inline">\(A \cap C \subseteq B \cap D\)</span>. <span class="math inline">\(\square\)</span></p>
+<p><strong>Баталгаа бичих стратеги.</strong> Харьцангуй шулуун баталгаа бичихдээ бид ихэвчлэн автопилот дээр байдаг. Батламжийн бүтэц, нэр томъёоны тодорхойлолтууд нь бидний юу хийхийг зааж өгдөг. Өмнөх баталгаа нь үүнийг үлгэр жишээ болгон харуулж, одоо хүртэл таарсан баталгаа бичих үндсэн зарчмуудын заримыг онцлох сайн боломжийг олгож байна.</p>
+<p>2.15-р жишээний батламж нь хэрэв-тэгвэл батламж учраас бид 1-р мөрөнд түүний таамаглалыг үнэн гэж үзсэн. Хоёр дахь мөр (шаардлагагүй ч гэсэн) хэрэв-тэгвэл батламжийн дүгнэлтийг батлах зорилготойгоо эргэн санахад тусалдаг. Зорилго нь дэд олонлогийн хамаарал тул 3-р мөр нь (бага) <span class="math inline">\(A \cap C\)</span> олонлогийн дур зоргоороо авсан элементээр бууддаг. 3-р мөр нь олонлогийн үйлдлийг агуулж байгаа тул 4-р мөр нь түүний тодорхойлолтыг задлах ажлыг гүйцэтгэдэг. Үнэн хэрэгтээ энэ баталгааны эхний дөрвөн мөр нь бүрэн автомат юм. Бид байгалийн жамаар авах алхмуудаас болж гарц руугаа албадан гардаг.</p>
+<p>Анхны импульс маань буурах үед бид баталгаагаа хаашаа чиглүүлэх талаар бодох хэрэгтэй. Бид <span class="math inline">\(x \in A \cap C\)</span> гэсэн дурын элементийг авч дэд олонлогийн хамаарлыг батлах замаар эхэлсэн. Энэ даалгаврыг дуусгахын тулд бид <span class="math inline">\(x \in B \cap D\)</span> руу хүрэх хэрэгтэй. Үнэндээ, урьдчилан харвал энэ шаардлагатай мэдэгдэл 8-р мөрөнд гарч ирнэ. Түүнээс гадна, 9-р мөрөнд бид хэрэв-тэгвэл батламжийн дүгнэлтээ баталж, баталгаагаа гүйцээж байгаагаа тэмдэглэсэн. Энэ цэг дээр 1, 2, 3, 4, 8, 9-р мөрүүдийг албадан хийсэн тул 4-р мөрөөс 8-р мөр хүртэлх зайг нөхөх шаардлагатай. Тиймээс бид 8-р мөр юу гэсэн үг болохыг ойлгох хэрэгтэй. Энэ ойлголт нь 8-р мөрөнд заасан тодорхойлолтыг задлахаас гардаг. Одоо бид 4-р мөрөөс хойш 7-р мөрөнд хэрхэн хүрэх талаар бодох хэрэгтэй.</p>
+<p>Бид 1-ээс 4-р мөр хүртэлх мөрүүдийг ашиглан 7-р мөрөнд батламж авах арга замын талаар тодорхой бодож үлдсэн нүхнүүдийг нөхдөг. 1-ээс 4-р мөр хүртэл бид хэрэв-тэгвэл батламжийн таамаглалыг (1-р мөрөнд таамагласан) ашиглахаас өөр аргагүй болсон тул энэ таамаглал нь 7-р мөрөнд батламж авах түлхүүр болж байгаа нь гайхмаар зүйл биш юм. Энд бидэнд <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in B\)</span> байна. Тиймээс бид <span class="math inline">\(A \subseteq B\)</span>-ийг (1-р мөрөөс) ашигладаг. Энэ нь 5-р мөрийн сэдэв юм. Бидэнд <span class="math inline">\(x \in C\)</span> ба <span class="math inline">\(x \in D\)</span> байна. Тиймээс бид <span class="math inline">\(C \subseteq D\)</span>-ийг (1-р мөрөөс) ашигладаг. Энэ нь 6-р мөрийн сэдэв юм. Энэ жишээнд бид нүхийг нөхөж байна.</p>
+<p>Дүгнэж хэлэхэд, бидний баталгааг жолооддог гурван гол зүйл байна.</p>
+<ul>
+<li>Байгалийн эхлэл бөмбөгийг өнхрүүлж эхэлдэг.</li>
+<li>Зорилгоосоо ухрах нь хэрхэн үргэлжлүүлэхээ хэлж өгдөг.</li>
+<li>Бүхий л үйл явцын туршид тодорхойлолтыг задлах нь бидний ажиллаж, ажиллах ёстой зүйлийн дэлгэрэнгүй мэдээллийг өгдөг.</li>
+</ul>
+<p>Заримдаа, 2.15-р жишээнд шаардлагагүй байсан ч, өмнөх үр дүнг ашиглах нь ашигтай байдаг. Ухаалаг байх нэмэлт найрлага нь үргэлж тустай боловч заавал байх албагүй.</p>
+<p>Батлагдсан баталгааны бүтцийн талаар ярилцсаны дараа бид мөн хэв маягийг авч үзэх хэрэгтэй. Баталгаа бичихдээ уншигчийг нэг өгүүлбэрээс нөгөө рүү жигд, байгалийн байдлаар хөтлөх урсгалтай байх ёстой. Бичихэд хэцүү байдалд хүргэж болзошгүй нэг зүйл бол өгүүлбэрүүдийг ижил аргаар давтан эхлүүлэх явдал юм. Жишээлбэл, өгүүлбэрийг өмнөх баримтаас дагаж мөрдөж байгаа тул “So, Hence, Thus, эсвэл Therefore” гэсэн үгсээр эхлүүлэх нь тохиромжтой. Хүн үргэлж ижил аргаар эхлүүлэх дадалд автахгүй байх ёстой, харин тэдгээрийн дундаас ээлжлэн солих хэрэгтэй. Үүнийг 2.15-р жишээний баталгаанд хийсэн.</p>
+</section>
+<section id="олонлогийн-тэнцэтгэл-set-equalities" class="level3" data-number="5.0.3">
+<h3 data-number="5.0.3" class="anchored" data-anchor-id="олонлогийн-тэнцэтгэл-set-equalities"><span class="header-section-number">5.0.3</span> Олонлогийн тэнцэтгэл (Set Equalities)</h3>
+<p>Энэ хэсгийн сүүлийн хоёр жишээнд бид 1.17-р тодорхойлолтод хандаж зарим олонлогийн ижилтгэлийг баталж байна. Энэ нь зарим <span class="math inline">\(\mathcal{U}\)</span> огторгуйд өгөгдсөн <span class="math inline">\(S\)</span> ба <span class="math inline">\(T\)</span> хоёр олонлогийн хувьд: <span class="math display">\[
+S = T \quad \text{зөвхөн хэрэв} \quad \forall x \in \mathcal{U}, (x \in S \leftrightarrow x \in T) \text{ болно.}
+\]</span> Олонлогийн тэнцэтгэлийн өөр нэг аргыг дараагийн хэсэгт үзүүлнэ.</p>
+<p><strong>ЖИШЭЭ 2.16.</strong> Харуул: Бүх <span class="math inline">\(A\)</span> олонлогийн хувьд <span class="math inline">\((A^c)^c = A\)</span>. <strong>Баталгаа.</strong> <span class="math inline">\(A\)</span> нь олонлог байг. Мөн <span class="math inline">\(x \in \mathcal{U}\)</span> (<span class="math inline">\(A\)</span>-г агуулж буй огторгуй) байг. Бид дараах эквивалентуудын хэлхээтэй байгааг ажиглаарай: <span class="math display">\[
+\begin{aligned}
+x \in (A^c)^c &amp;\leftrightarrow x \notin A^c \\
+&amp;\leftrightarrow \sim(x \in A^c) \\
+&amp;\leftrightarrow \sim(x \notin A) \\
+&amp;\leftrightarrow \sim(\sim(x \in A)) \\
+&amp;\leftrightarrow x \in A.
+\end{aligned}
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\(x \in (A^c)^c \leftrightarrow x \in A\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>2.16-р жишээний баталгаанд үзүүлсэн шиг зөвхөн логик эквивалентуудын хэлхээг өгөх нь өөрөө баталгаа болохгүй ч, хэлхээг ашиглах нь хүлээн зөвшөөрөгдөхүйц юм. Бид хэлхээг өгүүлбэрт оруулсан. Үүнийг бидний хийсэн шиг харуулах нь уншихад хялбар болгосон. Хэлхээ нь өөрөө баталгааны ноорог гэж үзэгдэх болно.</p>
+<p><strong>ЖИШЭЭ 2.17.</strong> <span class="math inline">\(A, B\)</span>, ба <span class="math inline">\(C\)</span> олонлогууд нь зарим <span class="math inline">\(\mathcal{U}\)</span> огторгуйд байг. Харуул: <span class="math inline">\(A \cap (B \cup C) = (A \cap B) \cup (A \cap C)\)</span>. <strong>Баталгаа.</strong> <span class="math inline">\(x \in \mathcal{U}\)</span> байг. Логик эквивалентуудын хэлхээнээс дараахь зүйл гарна: <span class="math display">\[
+\begin{aligned}
+x \in A \cap (B \cup C) &amp;\leftrightarrow x \in A \land x \in B \cup C \\
+&amp;\leftrightarrow x \in A \land (x \in B \lor x \in C) \\
+&amp;\leftrightarrow (x \in A \land x \in B) \lor (x \in A \land x \in C) \\
+&amp;\leftrightarrow (x \in A \cap B) \lor (x \in A \cap C) \\
+&amp;\leftrightarrow x \in (A \cap B) \cup (A \cap C),
+\end{aligned}
+\]</span> үүнээс дараахь зүйл гарна: <span class="math display">\[
+x \in A \cap (B \cup C) \leftrightarrow x \in (A \cap B) \cup (A \cap C). \square
+\]</span></p>
+<p>2.16 ба 2.17-р жишээнүүдийн баталгаа нь 1.5-р хэсгийн тэнцэтгэлийн олонлогийн ижилтгэлүүд болон 1.1-р хэсгийн логик эквивалентуудын хоорондын холбоог тодорхой харуулж байна. Хүчтэй холбоо байгаа тохиолдолд эдгээр жишээнүүдэд ашигласан хэв маяг нь тохиромжтой.</p>
+<hr>
+<p><strong>2.2-р хэсгийн дасгалууд</strong></p>
+<ol type="1">
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}^+, -x \in \mathbb{R}^-\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in [-1, 2), -x \in (-2, 1]\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}\)</span>, хэрэв <span class="math inline">\(x \in (2, 4)\)</span> бол <span class="math inline">\(2x \in (4, 8)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}\)</span>, хэрэв <span class="math inline">\(x \in [1, 2]\)</span> бол <span class="math inline">\((3x - 1) \in [2, 5]\)</span>.</li>
+<li>Батлах эсвэл няцаах: <span class="math inline">\(\forall x \in \mathbb{R}^+, \sqrt{x} &lt; x\)</span>.</li>
+<li>Батлах эсвэл няцаах: <span class="math inline">\(\forall x \in \mathbb{R}^+, (x + 2)^2 &gt; 4\)</span>.</li>
+<li>Батлах эсвэл няцаах: <span class="math inline">\(\forall x \in \mathbb{R}\)</span>, хэрэв <span class="math inline">\(x &lt; 2\)</span> бол <span class="math inline">\(x^2 &lt; 4\)</span>.</li>
+<li>Батлах эсвэл няцаах: <span class="math inline">\(\forall x \in \mathbb{R}\)</span>, хэрэв <span class="math inline">\(x &lt; -4\)</span> бол <span class="math inline">\(4 - 3x &gt; 10\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}\)</span>, хэрэв <span class="math inline">\(x &lt; -2\)</span> бол <span class="math inline">\(x^2 &gt; 4\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}\)</span>, хэрэв <span class="math inline">\(x &gt; 2\)</span> бол <span class="math inline">\(x^3 &gt; 8\)</span>.</li>
+<li>Омын хуулиар дамжуулагчаар урсах <span class="math inline">\(V\)</span> хүчдэл (вольт), <span class="math inline">\(I\)</span> гүйдэл (ампер), <span class="math inline">\(R\)</span> эсэргүүцэл (ом) нь <span class="math inline">\(V = IR\)</span> тэгшитгэлээр хамааралтай. 10 вольтын хүчдэлтэй дамжуулагчаар гүйдэл урсаж байна гэж бодъё. Хэрэв эсэргүүцэл 2 омоос их бол гүйдэл 5 ваттаас бага байх болно гэдгийг харуул.</li>
+<li>Хэрэв 1000 долларыг жилийн 5%-ийн хүүтэй дансанд хөрөнгө оруулбал <span class="math inline">\(t\)</span> жилийн дараах <span class="math inline">\(A\)</span> мөнгөн дүнг <span class="math inline">\(A = 1000(1.05)^t\)</span> томъёогоор өгнө. Хамгийн багадаа 15 жил өнгөрсний дараа дансны мөнгөн дүн хамгийн багадаа 2000 доллар болохыг харуул.</li>
+</ol>
+<p>13-24-р дасгалуудад 1.15-р тодорхойлолтыг үзнэ үү. 13. Харуул: Бүх бодит <span class="math inline">\(f\)</span> функцийн хувьд, хэрэв <span class="math inline">\(f\)</span> үечилсэн бол <span class="math inline">\(f^2\)</span> үечилсэн байна. 14. Харуул: Бүх бодит <span class="math inline">\(f\)</span> функцийн хувьд, хэрэв <span class="math inline">\(f\)</span> үечилсэн бол <span class="math inline">\(-f\)</span> үечилсэн байна. 15. Харуул: Бүх бодит <span class="math inline">\(f\)</span> функцийн хувьд, хэрэв <span class="math inline">\(f\)</span> тогтмол бол <span class="math inline">\(2f\)</span> тогтмол байна. 16. Харуул: Бүх бодит <span class="math inline">\(f\)</span> функцийн хувьд, хэрэв <span class="math inline">\(f\)</span> тогтмол бол <span class="math inline">\(f\)</span> нь буурахгүй байна. 17. Харуул: Бүх бодит <span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> функцийн хувьд, хэрэв <span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> нь буурахгүй бол <span class="math inline">\(f + g\)</span> нь буурахгүй. 18. Харуул: Бүх бодит <span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> функцийн хувьд, хэрэв <span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> тогтмол бол <span class="math inline">\(f + g\)</span> тогтмол байна. 19. <span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> нь бодит функцууд байг. Харуул: Хэрэв <span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> тогтмол бол <span class="math inline">\(fg\)</span> тогтмол байна. 20. <span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> нь бодит функцууд байг. Харуул: Хэрэв <span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> нь дээрээсээ хязгаарлагдсан бол <span class="math inline">\(f + g\)</span> нь дээрээсээ хязгаарлагдсан байна. <em>21. <span class="math inline">\(f\)</span> нь бодит функц, <span class="math inline">\(c \in \mathbb{R}\)</span> байг. Харуул: Хэрэв <span class="math inline">\(f\)</span> үечилсэн бол <span class="math inline">\(f + c\)</span> үечилсэн байна. </em>22. <span class="math inline">\(f\)</span> нь бодит функц, <span class="math inline">\(c \in \mathbb{R}\)</span> байг. Харуул: Хэрэв <span class="math inline">\(f\)</span> үечилсэн бол <span class="math inline">\(cf\)</span> үечилсэн байна. 23. <span class="math inline">\(f\)</span> нь бодит функц, <span class="math inline">\(c \in \mathbb{R}^+\)</span> байг. Харуул: Хэрэв <span class="math inline">\(f\)</span> нэмэгдэж байгаа бол <span class="math inline">\(cf\)</span> нэмэгдэж байна. 24. <span class="math inline">\(f\)</span> нь бодит функц, <span class="math inline">\(c \in \mathbb{R}\)</span> байг. Харуул: Хэрэв <span class="math inline">\(f\)</span> буурч байгаа бол <span class="math inline">\(f + c\)</span> буурч байна. 25. Харуул: <span class="math inline">\(\mathbb{R}^+ \subseteq (\mathbb{R}^-)^c\)</span>. 26. Харуул: <span class="math inline">\(\mathbb{R}^- \subseteq [0, 1]^c\)</span>.</p>
+<p>27 ба 28-р дасгалуудад бид хавтгайн геометрийн дараах тодорхойлолтуудыг ашиглана. Зөвхөн эдгээр батлагдсан тодорхойлолтуудыг ашиглана уу.</p>
+<ul>
+<li><span class="math inline">\(n \ge 3\)</span> бүхэл тоо бүрийн хувьд <strong><span class="math inline">\(n\)</span>-gon</strong> нь <span class="math inline">\(A_1A_2, A_2A_3, \dots, A_{n-1}A_n, A_nA_1\)</span> шулууны хэрчмүүдийн нэгдэл бөгөөд эдгээр хэрчмүүдийн аль нь ч төгсгөлийн цэгүүд болох <span class="math inline">\(A_1, A_2, \dots, A_n\)</span> цэгүүдээс бусад тохиолдолд хавтгай дотор огтлолцохгүй. <span class="math inline">\(A_1, A_2, \dots, A_n\)</span> нь хавтгай дахь ялгаатай цэгүүд юм.</li>
+<li><strong>Параллелограмм</strong> гэдэг нь эсрэг талууд нь хосоороо параллель байх 4-gon юм.</li>
+<li><strong>Тэгш өнцөгт</strong> гэдэг нь бүх өнцөг нь тэгш өнцөгтэй параллелограмм юм.</li>
+<li><strong>Ромб</strong> гэдэг нь бүх тал нь тэнцүү параллелограмм юм.</li>
+<li><strong>Квадрат</strong> гэдэг нь бүх тал нь тэнцүү тэгш өнцөгт юм.</li>
+</ul>
+<ol start="27" type="1">
+<li>Квадрат бүр параллелограмм болохыг батал.</li>
+<li>Ромб бүр 4-gon болохыг батал.</li>
+</ol>
+<p>29-44-р дасгалуудад <span class="math inline">\(A, B\)</span>, ба <span class="math inline">\(C\)</span> нь дурын олонлогууд байг.</p>
+<ol start="29" type="1">
+<li>Харуул: <span class="math inline">\(A \subseteq A \cup B\)</span>.</li>
+<li>Харуул: <span class="math inline">\(A \cap B \subseteq A \cap B\)</span>.</li>
+<li>Харуул: Хэрэв <span class="math inline">\(A \subseteq A \cap B\)</span> бол <span class="math inline">\(A \subseteq B\)</span>.</li>
+<li>Харуул: Хэрэв <span class="math inline">\(A \cup B \subseteq B\)</span> бол <span class="math inline">\(A \subseteq B\)</span>.</li>
+<li>Харуул: Хэрэв <span class="math inline">\(A \subseteq B\)</span> бол <span class="math inline">\(A \cap C \subseteq B \cap C\)</span>.</li>
+<li>Харуул: Хэрэв <span class="math inline">\(A \subseteq B\)</span> ба <span class="math inline">\(A \subseteq C\)</span> бол <span class="math inline">\(A \subseteq B \cap C\)</span>.</li>
+<li>Харуул: <span class="math inline">\((A \cap B) \cap C = A \cap (B \cap C)\)</span>.</li>
+<li>Харуул: <span class="math inline">\((A \cup B) \cup C = A \cup (B \cup C)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(A \cap B = B \cap A\)</span>.</li>
+<li>Харуул: <span class="math inline">\(A \cup B = B \cup A\)</span>.</li>
+<li>Батлах эсвэл няцаах: <span class="math inline">\(A \times B = B \times A\)</span>.</li>
+<li>Батлах эсвэл няцаах: <span class="math inline">\(A \triangle B = B \triangle A\)</span>.</li>
+<li>Харуул: <span class="math inline">\(A \cup (B \cap C) = (A \cup B) \cap (A \cup C)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(A \cap (B \triangle C) = (A \cap B) \triangle (A \cap C)\)</span>. <em>Заавар: <span class="math inline">\(\land\)</span> ба <span class="math inline">\(\oplus\)</span>-ийн шинж чанарыг ашигла.</em></li>
+<li>Харуул: <span class="math inline">\((A \cap B)^c = A^c \cup B^c\)</span>.</li>
+<li>Харуул: <span class="math inline">\((A \cup B)^c = A^c \cap B^c\)</span>.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./2-1.html" class="pagination-link" aria-label="Энгийн баталгааны арга (Basic Proof Writing)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Энгийн баталгааны арга (Basic Proof Writing)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./2-3.html" class="pagination-link" aria-label="2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
