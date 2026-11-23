@@ -39,3 +39,22 @@ body.quarto-dark .quarto-cover-image {
   width: auto;
   margin-bottom: 10px;
 }
+
+/* Харанхуй горим дээрх хайлтын талбарын өнгө */
+body.quarto-dark .aa-DetachedSearchButton,
+body.quarto-dark #quarto-search .aa-Form {
+  background-color: #2b2b2b !important;
+  border-color: #444444 !important;
+  color: #e0e0e0 !important;
+}
+
+/* Хайлтын талбар дээр хулгана аваачих үед */
+body.quarto-dark .aa-DetachedSearchButton:hover {
+  background-color: #363636 !important;
+  border-color: #555555 !important;
+}
+
+/* Хайлтын томруулагч шилний (icon) өнгө */
+body.quarto-dark .aa-DetachedSearchButtonIcon {
+  color: #aaaaaa !important;
+}
