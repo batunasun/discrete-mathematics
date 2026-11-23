@@ -48,5 +48,5 @@ format:
       dark: darkly
     css: custom.css
     toc: true
-    number-sections: true
+    number-sections: false
     code-copy: true
