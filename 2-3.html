@@ -50,9 +50,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-48ad98ff3229c4815ec3be23995b5ba0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-202164abd7158b22469cb0a9feded391.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-48ad98ff3229c4815ec3be23995b5ba0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -81,6 +81,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -499,109 +528,109 @@ ul.task-list li input[type="checkbox"] {
 <p>Бид Ерөнхийлөлтийн зарчимд үндэслэн баталгаа бичиж сурах 2.2 хэсэгт эхэлсэн ажлаа үргэлжлүүлж байна.</p>
 <section id="зөвхөн-хэрэв-if-and-only-if-мэдэгдлүүд" class="level3">
 <h3 class="anchored" data-anchor-id="зөвхөн-хэрэв-if-and-only-if-мэдэгдлүүд">Зөвхөн хэрэв (If and Only If) мэдэгдлүүд</h3>
-<p>Зөвхөн хэрэв гэсэн мэдэгдлийн баталгаа нь ихэвчлэн (p q) мэдэгдлийн хэлбэр нь ((p q) (q p))-тэй логик эквивалент байдаг баримтад үндэслэдэг.</p>
-<p>Өөрөөр хэлбэл, бид (p q) хэлбэрийн мэдэгдлийг эхлээд (p q)-г, дараа нь (q p)-г баталснаар баталж болно.</p>
+<p>Зөвхөн хэрэв гэсэн мэдэгдлийн баталгаа нь ихэвчлэн <span class="math inline">\(p \leftrightarrow q\)</span> мэдэгдлийн хэлбэр нь <span class="math inline">\((p \to q) \land (q \to p)\)</span>-тэй логик эквивалент байдаг баримтад үндэслэдэг.</p>
+<p>Өөрөөр хэлбэл, бид <span class="math inline">\(p\leftrightarrow q\)</span> хэлбэрийн мэдэгдлийг эхлээд <span class="math inline">\(p \to q\)</span>-г, дараа нь <span class="math inline">\(q \to p\)</span>-г баталснаар баталж болно.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 2.18</strong></p>
-<p>(A, B) ба (C) олонлогууд байг. Харуул: (C A B) нь зөвхөн хэрэв (C A) ба (C B) байх үед биелнэ.</p>
+<p><span class="math inline">\(A, B\)</span> ба <span class="math inline">\(C\)</span> олонлогууд байг. Харуул: <span class="math inline">\(C \subseteq A \cap B\)</span> нь зөвхөн хэрэв <span class="math inline">\(C \subseteq A\)</span> ба <span class="math inline">\(C \subseteq B\)</span> байх үед биелнэ.</p>
 </blockquote>
 <p><strong>Баталгаа.</strong></p>
-<p>(()) (C A B) гэж үзье. (Зорилго: (C A) ба (C B).)</p>
-<p>(x C) гэж үзье. (C A B) тул (x A B) байна. Өөрөөр хэлбэл, (x A) ба (x B). Тиймээс (C A) ба (C B).</p>
-<p>(()) (C A) ба (C B) гэж үзье. (Зорилго: (C A B).)</p>
-<p>(x C) гэж үзье. (C A) тул (x A) байна. (C B) тул (x B) байна. Иймд (x A) ба (x B). Өөрөөр хэлбэл, (x A B). Тэгэхээр (C A B).</p>
-<p>Жишээ 2.18-ын баталгааны эхэнд (()) тэмдэглэгээ нь бид эхлээд зөвхөн хэрэв гэсэн мэдэгдлийн зүүн гар тал нь баруун гар талыг дагуулдаг гэдгийг батлахыг зорьж байгааг илэрхийлнэ. Үүнтэй адил (()) тэмдэглэгээ нь баруун гар тал нь зүүн гар талыг дагуулдаг гэсэн баталгааны эхлэлийг илэрхийлнэ. Эдгээр хэрэв-тэгвэл мэдэгдэл бүрийг 2.2 хэсгийн аргуудыг ашиглан баталдаг. Ийм нэмэлт тэмдэглэгээ нь баталгаанд заавал шаардлагатай биш боловч ялангуяа баталгаа бичиж анх сурч байх үед тустай байж болно.</p>
-<p>Жишээ 2.18-ын баталгааны (()) ба (()) хэсгүүдийн аль алинд нь аргумент дотор (x) хувьсагч элементийг ашигласан. Эхний (()) хэсэгт ашигласан (x) нь хоёр дахь (()) хэсэгт ашигласан (x)-тэй холбоогүй гэдгийг ойлгох нь чухал. Үүний үр дүнд хоёр дахь хэсэгт эхний хэсгийн (x)-ийн шинж чанаруудыг дурдаж болохгүй. Хэсэг бүрийн дотор (x)-ийг <strong>локал хувьсагч</strong> гэж үзэх ёстой. Түүний шинж чанарууд нь компьютер програмд ашиглагддаг функцийн локал хувьсагчдын нэгэн адил хэсгүүдийн хооронд глобал байдлаар дамждаггүй. Эхний хэсэг дуусахад түүний (x) хувьсагч “үхэж”, хоёр дахь хэсэгт шинэ хувьсагч үүсгэх ёстой.</p>
+<p><span class="math inline">\((\to)\)</span> <span class="math inline">\(C \subseteq A \cap B\)</span> гэж үзье. (Зорилго: <span class="math inline">\(C \subseteq A\)</span> ба <span class="math inline">\(C \subseteq B\)</span>.)</p>
+<p><span class="math inline">\(x \in C\)</span> гэж үзье. <span class="math inline">\(C \subseteq A \cap B\)</span> тул <span class="math inline">\(x \in A \cap B\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in B\)</span>. Тиймээс <span class="math inline">\(C \subseteq A\)</span> ба <span class="math inline">\(C \subseteq B\)</span>.</p>
+<p><span class="math inline">\((\leftarrow)\)</span> <span class="math inline">\(C \subseteq A\)</span> ба <span class="math inline">\(C \subseteq B\)</span> гэж үзье. (Зорилго: <span class="math inline">\(C \subseteq A \cap B\)</span>.)</p>
+<p><span class="math inline">\(x \in C\)</span> гэж үзье. <span class="math inline">\(C \subseteq A\)</span> тул <span class="math inline">\(x \in A\)</span> байна. <span class="math inline">\(C \subseteq B\)</span> тул <span class="math inline">\(x \in B\)</span> байна. Иймд <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in B\)</span>. Өөрөөр хэлбэл, <span class="math inline">\(x \in A \cap B\)</span>. Тэгэхээр <span class="math inline">\(C \subseteq A \cap B\)</span>.</p>
+<p>Жишээ 2.18-ын баталгааны эхэнд <span class="math inline">\((\to)\)</span> тэмдэглэгээ нь бид эхлээд зөвхөн хэрэв гэсэн мэдэгдлийн зүүн гар тал нь баруун гар талыг дагуулдаг гэдгийг батлахыг зорьж байгааг илэрхийлнэ. Үүнтэй адил <span class="math inline">\((\leftarrow)\)</span> тэмдэглэгээ нь баруун гар тал нь зүүн гар талыг дагуулдаг гэсэн баталгааны эхлэлийг илэрхийлнэ. Эдгээр хэрэв-тэгвэл мэдэгдэл бүрийг 2.2 хэсгийн аргуудыг ашиглан баталдаг. Ийм нэмэлт тэмдэглэгээ нь баталгаанд заавал шаардлагатай биш боловч ялангуяа баталгаа бичиж анх сурч байх үед тустай байж болно.</p>
+<p>Жишээ 2.18-ын баталгааны <span class="math inline">\((\to)\)</span> ба <span class="math inline">\((\leftarrow)\)</span> хэсгүүдийн аль алинд нь аргумент дотор <span class="math inline">\(x\)</span> хувьсагч элементийг ашигласан. Эхний <span class="math inline">\((\to)\)</span> хэсэгт ашигласан <span class="math inline">\(x\)</span> нь хоёр дахь <span class="math inline">\((\leftarrow)\)</span> хэсэгт ашигласан <span class="math inline">\(x\)</span>-тэй холбоогүй гэдгийг ойлгох нь чухал. Үүний үр дүнд хоёр дахь хэсэгт эхний хэсгийн <span class="math inline">\(x\)</span>-ийн шинж чанаруудыг дурдаж болохгүй. Хэсэг бүрийн дотор <span class="math inline">\(x\)</span>-ийг <strong>локал хувьсагч</strong> гэж үзэх ёстой. Түүний шинж чанарууд нь компьютер програмд ашиглагддаг функцийн локал хувьсагчдын нэгэн адил хэсгүүдийн хооронд глобал байдлаар дамждаггүй. Эхний хэсэг дуусахад түүний <span class="math inline">\(x\)</span> хувьсагч “үхэж”, хоёр дахь хэсэгт шинэ хувьсагч үүсгэх ёстой.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 2.19</strong></p>
-<p>(f) нь бодит функц байг. Харуул: (f) нь доороосоо зааглагдсан байх нь зөвхөн хэрэв (-f) дээрээсээ зааглагдсан байх үед биелнэ.</p>
+<p><span class="math inline">\(f\)</span> нь бодит функц байг. Харуул: <span class="math inline">\(f\)</span> нь доороосоо зааглагдсан байх нь зөвхөн хэрэв <span class="math inline">\(-f\)</span> дээрээсээ зааглагдсан байх үед биелнэ.</p>
 </blockquote>
 <p><strong>Баталгаа.</strong></p>
-<p>(()) (f) нь доороосоо зааглагдсан гэж үзье. Тэгэхээр (x , f(x) L) байх ямар нэг (L ) байна.</p>
-<p>(-1)-ээр үржүүлбэл (x , -f(x) -L) гарна.</p>
-<p>Тиймээс (-L) нь (-f) дээрээсээ зааглагдсаныг харуулах зааг (хязгаар) болж байна.</p>
-<p>(()) (-f) дээрээсээ зааглагдсан гэж үзье. Иймд (x , -f(x) M) байх ямар нэг (M ) байна.</p>
-<p>(-1)-ээр үржүүлбэл (x , f(x) -M) гарна.</p>
-<p>Тиймээс (-M) нь (f) доороосоо зааглагдсаныг харуулах зааг болж байна.</p>
+<p><span class="math inline">\((\to)\)</span> <span class="math inline">\(f\)</span> нь доороосоо зааглагдсан гэж үзье. Тэгэхээр <span class="math inline">\(\forall x \in \mathbb{R}, \quad f(x) \ge L\)</span> байх ямар нэг <span class="math inline">\(L \in \mathbb{R}\)</span> байна.</p>
+<p><span class="math inline">\(-1\)</span>-ээр үржүүлбэл <span class="math inline">\(\forall x \in \mathbb{R}, \quad -f(x) \le -L\)</span> гарна.</p>
+<p>Тиймээс <span class="math inline">\(-L\)</span> нь <span class="math inline">\(-f\)</span> дээрээсээ зааглагдсаныг харуулах зааг (хязгаар) болж байна.</p>
+<p><span class="math inline">\((\leftarrow)\)</span> <span class="math inline">\(-f\)</span> дээрээсээ зааглагдсан гэж үзье. Иймд <span class="math inline">\(\forall x \in \mathbb{R}, \quad -f(x) \le M\)</span> байх ямар нэг <span class="math inline">\(M \in \mathbb{R}\)</span> байна.</p>
+<p><span class="math inline">\(-1\)</span>-ээр үржүүлбэл <span class="math inline">\(\forall x \in \mathbb{R}, \quad f(x) \ge -M\)</span> гарна.</p>
+<p>Тиймээс <span class="math inline">\(-M\)</span> нь <span class="math inline">\(f\)</span> доороосоо зааглагдсаныг харуулах зааг болж байна.</p>
 </section>
 <section id="олонлогийн-тэнцэтгэлүүдийг-дахин-авч-үзэх" class="level3">
 <h3 class="anchored" data-anchor-id="олонлогийн-тэнцэтгэлүүдийг-дахин-авч-үзэх">Олонлогийн тэнцэтгэлүүдийг дахин авч үзэх</h3>
-<p>Олонлогийн тэнцэтгэлүүд нь тодорхойлолтоороо зөвхөн хэрэв гэсэн мэдэгдлүүдэд харгалздаг тул 2.2 хэсэгт хийсэн шиг зөвхөн хэрэв гэсэн мэдэгдлүүдийн цуваанд тулгуурлан баталж болно. Гэсэн хэдий ч харгалзах зөвхөн хэрэв гэсэн мэдэгдлийг Жишээ 2.18-ын аргыг ашиглан батлах нь ихэвчлэн ашигтай байдаг. Үүнтэй адилтгах нь (S = T) олонлогийн тэнцэтгэлийн (S T T S) гэсэн тодорхойлолтыг ашиглахтай ижил юм.</p>
+<p>Олонлогийн тэнцэтгэлүүд нь тодорхойлолтоороо зөвхөн хэрэв гэсэн мэдэгдлүүдэд харгалздаг тул 2.2 хэсэгт хийсэн шиг зөвхөн хэрэв гэсэн мэдэгдлүүдийн цуваанд тулгуурлан баталж болно. Гэсэн хэдий ч харгалзах зөвхөн хэрэв гэсэн мэдэгдлийг Жишээ 2.18-ын аргыг ашиглан батлах нь ихэвчлэн ашигтай байдаг. Үүнтэй адилтгах нь <span class="math inline">\(S = T\)</span> олонлогийн тэнцэтгэлийн <span class="math inline">\(S \subseteq T \text{ ба } T \subseteq S\)</span> гэсэн тодорхойлолтыг ашиглахтай ижил юм.</p>
 <p>Өөрөөр хэлбэл, олонлогийн тэнцэтгэлийг батлах нь харгалзах хоёр дэд олонлогийн хамаарлыг баталснаар хийгдэж болно.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 2.20</strong></p>
-<p>(A) ба (B) олонлогууд байг. Харуул: Хэрэв (A A B) ба (B A B) бол (A = B).</p>
+<p><span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд байг. Харуул: Хэрэв <span class="math inline">\(A \subseteq A \cap B\)</span> ба <span class="math inline">\(B \subseteq A \cap B\)</span> бол <span class="math inline">\(A = B\)</span>.</p>
 </blockquote>
 <p><strong>Баталгаа.</strong></p>
-<p>(A A B) ба (B A B) гэж үзье. (Зорилго: (A = B).)</p>
-<p>(()) (x A) гэж үзье. (A A B) тул (x A B) байна. Өөрөөр хэлбэл, (x A) ба (x B). Тухайлбал, (x B). Тиймээс (A B).</p>
-<p>(()) (x B) гэж үзье. (B A B) тул (x A B) байна. Өөрөөр хэлбэл, (x A) ба (x B). Тухайлбал, (x A). Тиймээс (B A).</p>
-<p>(A B) ба (B A) тул (A = B) байна.</p>
-<p>Жишээ 2.20-ын баталгаанд (()) тэмдэглэгээ нь хүссэн олонлогийн тэнцэтгэлийн ((A = B)) зүүн гар талын олонлог нь баруун гар талын олонлогийн дэд олонлог болохыг батлах эхлэлийг илэрхийлнэ. Үүнтэй адил (()) тэмдэглэгээ нь баруун гар тал нь зүүн гар талын дэд олонлог болохыг батлах эхлэлийг илэрхийлнэ. Мэдээж эдгээр тэмдэглэгээ нь зайлшгүй шаардлагатай биш юм.</p>
+<p><span class="math inline">\(A \subseteq A \cap B\)</span> ба <span class="math inline">\(B \subseteq A \cap B\)</span> гэж үзье. (Зорилго: <span class="math inline">\(A = B\)</span>.)</p>
+<p><span class="math inline">\((\subseteq)\)</span> <span class="math inline">\(x \in A\)</span> гэж үзье. <span class="math inline">\(A \subseteq A \cap B\)</span> тул <span class="math inline">\(x \in A \cap B\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in B\)</span>. Тухайлбал, <span class="math inline">\(x \in B\)</span>. Тиймээс <span class="math inline">\(A \subseteq B\)</span>.</p>
+<p><span class="math inline">\((\supseteq)\)</span> <span class="math inline">\(x \in B\)</span> гэж үзье. <span class="math inline">\(B \subseteq A \cap B\)</span> тул <span class="math inline">\(x \in A \cap B\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in B\)</span>. Тухайлбал, <span class="math inline">\(x \in A\)</span>. Тиймээс <span class="math inline">\(B \subseteq A\)</span>.</p>
+<p><span class="math inline">\(A \subseteq B\)</span> ба <span class="math inline">\(B \subseteq A\)</span> тул <span class="math inline">\(A = B\)</span> байна.</p>
+<p>Жишээ 2.20-ын баталгаанд <span class="math inline">\((\subseteq)\)</span> тэмдэглэгээ нь хүссэн олонлогийн тэнцэтгэлийн (<span class="math inline">\(A = B\)</span>) зүүн гар талын олонлог нь баруун гар талын олонлогийн дэд олонлог болохыг батлах эхлэлийг илэрхийлнэ. Үүнтэй адил <span class="math inline">\((\supseteq)\)</span> тэмдэглэгээ нь баруун гар тал нь зүүн гар талын дэд олонлог болохыг батлах эхлэлийг илэрхийлнэ. Мэдээж эдгээр тэмдэглэгээ нь зайлшгүй шаардлагатай биш юм.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 2.21</strong></p>
-<p>(A, B, C) ба (D) олонлогууд (D A B, D B C), ба (A C D) байхаар өгөгдөв. Харуул: (D = A B C).</p>
+<p><span class="math inline">\(A, B, C\)</span> ба <span class="math inline">\(D\)</span> олонлогууд <span class="math inline">\(D \subseteq A \cap B, D \subseteq B \cap C\)</span>, ба <span class="math inline">\(A \cap C \subseteq D\)</span> байхаар өгөгдөв. Харуул: <span class="math inline">\(D = A \cap B \cap C\)</span>.</p>
 </blockquote>
 <p><strong>Шийдэл.</strong> Бүх таамаглалууд хүссэн мэдэгдлийнхээ өмнө дурдагдсаныг анхаарна уу. Тиймээс бид тэдгээрийг баталгаандаа дахин дурдах шаардлагагүй.</p>
 <p><strong>Баталгаа.</strong></p>
-<p>(()) (x D) гэж үзье. (D A B) тул (x A B) байна. Өөрөөр хэлбэл, (x A) ба (x B). (D B C) тул мөн (x B C) байна. Өөрөөр хэлбэл, (x B) ба (x C). Нийтдээ (x A) ба (x B) ба (x C) байна. Тиймээс (x A B C).</p>
-<p>(()) (x A B C) гэж үзье. Тэгэхээр (x A) ба (x B) ба (x C). Тухайлбал, (x A C). (A C D) тул (x D) байна.</p>
+<p><span class="math inline">\((\subseteq)\)</span> <span class="math inline">\(x \in D\)</span> гэж үзье. <span class="math inline">\(D \subseteq A \cap B\)</span> тул <span class="math inline">\(x \in A \cap B\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in B\)</span>. <span class="math inline">\(D \subseteq B \cap C\)</span> тул мөн <span class="math inline">\(x \in B \cap C\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(x \in B\)</span> ба <span class="math inline">\(x \in C\)</span>. Нийтдээ <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in B\)</span> ба <span class="math inline">\(x \in C\)</span> байна. Тиймээс <span class="math inline">\(x \in A \cap B \cap C\)</span>.</p>
+<p><span class="math inline">\((\supseteq)\)</span> <span class="math inline">\(x \in A \cap B \cap C\)</span> гэж үзье. Тэгэхээр <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(x \in B\)</span> ба <span class="math inline">\(x \in C\)</span>. Тухайлбал, <span class="math inline">\(x \in A \cap C\)</span>. <span class="math inline">\(A \cap C \subseteq D\)</span> тул <span class="math inline">\(x \in D\)</span> байна.</p>
 </section>
 <section id="тодорхой-хэлбэртэй-олонлогууд" class="level3">
 <h3 class="anchored" data-anchor-id="тодорхой-хэлбэртэй-олонлогууд">Тодорхой хэлбэртэй олонлогууд</h3>
 <p>Бидний таарсан зарим олонлогийн үйлдлүүд нь элементүүд нь тусгай хэлбэртэй олонлогуудыг үүсгэдэг. Жишээлбэл, үржвэрийн элементүүд нь эрэмбэлэгдсэн хосууд юм. Ийм үйлдлүүд орсон баталгаануудад бид үүнийг анхаарч үзэх хэрэгтэй.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 2.22</strong></p>
-<p>(A, B) ба (C) олонлогууд байг. Харуул: Хэрэв (A B) бол (A C B C).</p>
+<p><span class="math inline">\(A, B\)</span> ба <span class="math inline">\(C\)</span> олонлогууд байг. Харуул: Хэрэв <span class="math inline">\(A \subseteq B\)</span> бол <span class="math inline">\(A \times C \subseteq B \times C\)</span>.</p>
 </blockquote>
-<p><strong>Шийдэл.</strong> Гаднаас нь харвал энэ хэрэв-тэгвэл мэдэгдлийн дүгнэлт нь дэд олонлогийн хамаарал юм. Тиймээс (A B) гэж үзсэний дараа бид (A C)-д элемент байна гэж үзэх ёстой. Хэрэв бид энэ элементийг эхлээд (z) гэх мэт нэг хувьсагчаар нэрлэвэл, дараа нь (z) нь үржвэрийн элемент гэдгийг задлах шаардлагатай болно. Өөрөөр хэлбэл, (x A) ба (y C) байх (z = (x, y)) хос гэж бичих хэрэгтэй. Энэ нэмэлт бичлэгийг хэмнэх, эцэст нь хасагдах (z) нэмэлт хувьсагчаас зайлсхийхийн тулд эхлээд ((x, y)) нь (A C)-ийн элемент гэж үзэх нь илүү үр дүнтэй юм. Өөрөөр хэлбэл, бид элементээ үржвэрт тохирох хэлбэрээр шууд бичиж болно.</p>
+<p><strong>Шийдэл.</strong> Гаднаас нь харвал энэ хэрэв-тэгвэл мэдэгдлийн дүгнэлт нь дэд олонлогийн хамаарал юм. Тиймээс <span class="math inline">\(A \subseteq B\)</span> гэж үзсэний дараа бид <span class="math inline">\(A \times C\)</span>-д элемент байна гэж үзэх ёстой. Хэрэв бид энэ элементийг эхлээд <span class="math inline">\(z\)</span> гэх мэт нэг хувьсагчаар нэрлэвэл, дараа нь <span class="math inline">\(z\)</span> нь үржвэрийн элемент гэдгийг задлах шаардлагатай болно. Өөрөөр хэлбэл, <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(y \in C\)</span> байх <span class="math inline">\(z = (x, y)\)</span> хос гэж бичих хэрэгтэй. Энэ нэмэлт бичлэгийг хэмнэх, эцэст нь хасагдах <span class="math inline">\(z\)</span> нэмэлт хувьсагчаас зайлсхийхийн тулд эхлээд <span class="math inline">\((x, y)\)</span> нь <span class="math inline">\(A \times C\)</span>-ийн элемент гэж үзэх нь илүү үр дүнтэй юм. Өөрөөр хэлбэл, бид элементээ үржвэрт тохирох хэлбэрээр шууд бичиж болно.</p>
 <p><strong>Баталгаа.</strong></p>
-<p>(A B) гэж үзье. (Зорилго: (A C B C).)</p>
-<p>((x, y) A C) гэж үзье. Тэгэхээр (x A) ба (y C). (x A) ба (A B) тул (x B) байна. Иймд (x B) ба (y C). Өөрөөр хэлбэл, ((x, y) B C). Иймд (A C B C).</p>
+<p><span class="math inline">\(A \subseteq B\)</span> гэж үзье. (Зорилго: <span class="math inline">\(A \times C \subseteq B \times C\)</span>.)</p>
+<p><span class="math inline">\((x, y) \in A \times C\)</span> гэж үзье. Тэгэхээр <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(y \in C\)</span>. <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(A \subseteq B\)</span> тул <span class="math inline">\(x \in B\)</span> байна. Иймд <span class="math inline">\(x \in B\)</span> ба <span class="math inline">\(y \in C\)</span>. Өөрөөр хэлбэл, <span class="math inline">\((x, y) \in B \times C\)</span>. Иймд <span class="math inline">\(A \times C \subseteq B \times C\)</span>.</p>
 <p>Дараагийн жишээ маань үржвэр болон гүйцээгч (complement)-ийг хольсон байна.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 2.23</strong></p>
-<p>(A) ба (B) олонлогууд байг. Харуул: (A^c B^c (A B)^c).</p>
+<p><span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд байг. Харуул: <span class="math inline">\(A^c \times B^c \subseteq (A \times B)^c\)</span>.</p>
 </blockquote>
 <p><strong>Баталгаа.</strong></p>
-<p>((x, y) A^c B^c) гэж үзье. Тэгэхээр (x A^c) ба (y B^c). Тухайлбал, (x A) тул ((x, y) A B) байна. ((A B)-ийн тодорхойлолтыг санаарай.) Өөрөөр хэлбэл, ((x, y) (A B)^c).</p>
-<p>Жишээ 2.23-ын баталгаанд ((x, y) A B) гэдгийг батлахад (x A) эсвэл (y B) гэсэн баримтуудын зөвхөн нэг нь л хэрэгтэй гэдгийг анхаарна уу. Хэдийгээр ((x, y) A B) гэдгийг батлахад (x A) ба (y B) хоёулаа хэрэгтэй боловч ((x, y)) хосыг (A B) үржвэрээс “шидэхэд” зөвхөн нэг координат нь л буруу байхад хангалттай.</p>
+<p><span class="math inline">\((x, y) \in A^c \times B^c\)</span> гэж үзье. Тэгэхээр <span class="math inline">\(x \in A^c\)</span> ба <span class="math inline">\(y \in B^c\)</span>. Тухайлбал, <span class="math inline">\(x \notin A\)</span> тул <span class="math inline">\((x, y) \notin A \times B\)</span> байна. (<span class="math inline">\(A \times B\)</span>-ийн тодорхойлолтыг санаарай.) Өөрөөр хэлбэл, <span class="math inline">\((x, y) \in (A \times B)^c\)</span>.</p>
+<p>Жишээ 2.23-ын баталгаанд <span class="math inline">\((x, y) \notin A \times B\)</span> гэдгийг батлахад <span class="math inline">\(x \notin A\)</span> эсвэл <span class="math inline">\(y \notin B\)</span> гэсэн баримтуудын зөвхөн нэг нь л хэрэгтэй гэдгийг анхаарна уу. Хэдийгээр <span class="math inline">\((x, y) \in A \times B\)</span> гэдгийг батлахад <span class="math inline">\(x \in A\)</span> ба <span class="math inline">\(y \in B\)</span> хоёулаа хэрэгтэй боловч <span class="math inline">\((x, y)\)</span> хосыг <span class="math inline">\(A \times B\)</span> үржвэрээс “шидэхэд” зөвхөн нэг координат нь л буруу байхад хангалттай.</p>
 <p>Зэрэгт олонлогууд (power sets) нь өөрсдийн тусгай анхаарал шаарддаг.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 2.24</strong></p>
-<p>(A) ба (B) олонлогууд байг. Харуул: Хэрэв (A B) бол ((A) (B)).</p>
+<p><span class="math inline">\(A\)</span> ба <span class="math inline">\(B\)</span> олонлогууд байг. Харуул: Хэрэв <span class="math inline">\(A \subseteq B\)</span> бол <span class="math inline">\(\mathcal{P}(A) \subseteq \mathcal{P}(B)\)</span>.</p>
 </blockquote>
 <p><strong>Шийдэл.</strong> Зэрэгт олонлогийн элементүүд нь өөрсдөө олонлогууд гэдгийг санаарай. Олонлогийг тэмдэглэхдээ том үсэг ашигладаг уламжлалтай. Тиймээс бид элементүүдэд түгээмэл хэрэглэгддэг жижиг үсгийн оронд зэрэгт олонлогийн элементүүдийг том үсгээр тэмдэглэдэг. Мэдээж ийм нэрлэх уламжлал нь математикийн хувьд шаардлагатай биш юм. Гэхдээ уншигч объектыг нэрнээс нь мэдрэх боломжтой бол баталгааны уншигдах байдлыг сайжруулдаг.</p>
 <p><strong>Баталгаа.</strong></p>
-<p>(A B) гэж үзье. (Зорилго: ((A) (B)).)</p>
-<p>(S (A)) гэж үзье. Өөрөөр хэлбэл, (S A). (S A) ба (A B) тул ()-ийн шилжилтийн шинжээр (Жишээ 2.14-д батлагдсан) (S B) байна. Иймд (S (B)).</p>
+<p><span class="math inline">\(A \subseteq B\)</span> гэж үзье. (Зорилго: <span class="math inline">\(\mathcal{P}(A) \subseteq \mathcal{P}(B)\)</span>.)</p>
+<p><span class="math inline">\(S \in \mathcal{P}(A)\)</span> гэж үзье. Өөрөөр хэлбэл, <span class="math inline">\(S \subseteq A\)</span>. <span class="math inline">\(S \subseteq A\)</span> ба <span class="math inline">\(A \subseteq B\)</span> тул <span class="math inline">\(\subseteq\)</span>-ийн шилжилтийн шинжээр (Жишээ 2.14-д батлагдсан) <span class="math inline">\(S \subseteq B\)</span> байна. Иймд <span class="math inline">\(S \in \mathcal{P}(B)\)</span>.</p>
 <hr>
 </section>
 <section id="хэсэг-дасгалууд" class="level3">
 <h3 class="anchored" data-anchor-id="хэсэг-дасгалууд">2.3 хэсэг Дасгалууд</h3>
 <ol type="1">
-<li>Харуул: (x , x ^-) нь зөвхөн хэрэв (-x ^+) үед биелнэ.</li>
-<li>Харуул: (x , x (-2, 1]) нь зөвхөн хэрэв (-x [-1, 2)) үед биелнэ.</li>
-<li>Харуул: (x , x = 2x) нь зөвхөн хэрэв (x = 0) үед биелнэ.</li>
-<li>Харуул: (x , = 2) нь зөвхөн хэрэв (x = 1) үед биелнэ.</li>
-<li>(x ) байг. Харуул: (x^3 &gt; 0) нь зөвхөн хэрэв (x &gt; 0) үед биелнэ. <em>Зөвлөмж: Хавсралт A, 10 ба 11 шинж чанаруудыг үзнэ үү.</em></li>
-<li>Харуул: (x ^+, x^2 &lt; x) нь зөвхөн хэрэв (x &lt; 1) үед биелнэ.</li>
-<li>Харуул: (x , 4 - x &lt; 2) нь зөвхөн хэрэв (x &gt; 2) үед биелнэ.</li>
-<li>Харуул: (x ^+, x^3 = x) нь зөвхөн хэрэв (x = 1) үед биелнэ.</li>
-<li>Харуул: (x , x^4 - 16 = 0) нь зөвхөн хэрэв (x^2 - 4 = 0) үед биелнэ.</li>
-<li>Харуул: (x , x = ) нь зөвхөн хэрэв (x = 2) үед биелнэ.</li>
-<li>(f) нь бодит функц байг. Харуул: (f) нь тогтмол байх нь зөвхөн хэрэв (2f) тогтмол байх үед биелнэ.</li>
-<li>Тодорхойлолт 1.15-д өгөгдсөн тогтмол функцүүдийн тодорхойлолт болон 1.3 хэсгийн 37(b) дасгал дахь тогтмол функцүүдийн тодорхойлолт нь эквивалент болохыг харуул. Өөрөөр хэлбэл, (f) нь бодит функц байг. Харуул: (c ) бөгөөд (x , f(x) = c) байх нь зөвхөн хэрэв (x, y , f(x) = f(y)) үед биелнэ. <em>Зөвлөмж: (())-ийн хувьд (c = f(0)) гэж үзнэ үү.</em></li>
-<li>(f) нь бодит функц байг. Харуул: (f) нь доороосоо зааглагдсан байх нь зөвхөн хэрэв (f + 1) дээрээсээ зааглагдсан байх үед биелнэ.</li>
-<li>(f) нь бодит функц байг. Харуул: (f) нь өсөж байгаа нь зөвхөн хэрэв (2f) өсөж байгаа үед биелнэ. <em>15. (f) нь бодит функц байг. Харуул: (f) нь дээрээсээ болон доороосоо зааглагдсан байх нь зөвхөн хэрэв (f^2) дээрээсээ зааглагдсан байх үед биелнэ. </em>16. (f) нь сөрөг бус бодит функц байг. Харуул: (f) нь тогтмол байх нь зөвхөн хэрэв (f^2) тогтмол байх үед биелнэ.</li>
-<li>(f) нь бодит функц байг. Харуул: (f) нь үечилсэн байх нь зөвхөн хэрэв (2f) үечилсэн байх үед биелнэ.</li>
-<li>(f) нь бодит функц байг. Харуул: (f) нь үечилсэн байх нь зөвхөн хэрэв (f + 1) үечилсэн байх үед биелнэ.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}, x \in \mathbb{R}^-\)</span> нь зөвхөн хэрэв <span class="math inline">\(-x \in \mathbb{R}^+\)</span> үед биелнэ.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}, x \in (-2, 1]\)</span> нь зөвхөн хэрэв <span class="math inline">\(-x \in [-1, 2)\)</span> үед биелнэ.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}, x = 2x\)</span> нь зөвхөн хэрэв <span class="math inline">\(x = 0\)</span> үед биелнэ.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}, \frac{x+1}{2} = 2\)</span> нь зөвхөн хэрэв <span class="math inline">\(x = 1\)</span> үед биелнэ.</li>
+<li><span class="math inline">\(x \in \mathbb{R}\)</span> байг. Харуул: <span class="math inline">\(x^3 &gt; 0\)</span> нь зөвхөн хэрэв <span class="math inline">\(x &gt; 0\)</span> үед биелнэ. <em>Зөвлөмж: Хавсралт A, 10 ба 11 шинж чанаруудыг үзнэ үү.</em></li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}^+, x^2 &lt; x\)</span> нь зөвхөн хэрэв <span class="math inline">\(x &lt; 1\)</span> үед биелнэ.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}, 4 - x &lt; 2\)</span> нь зөвхөн хэрэв <span class="math inline">\(x &gt; 2\)</span> үед биелнэ.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}^+, x^3 = x\)</span> нь зөвхөн хэрэв <span class="math inline">\(x = 1\)</span> үед биелнэ.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}, x^4 - 16 = 0\)</span> нь зөвхөн хэрэв <span class="math inline">\(x^2 - 4 = 0\)</span> үед биелнэ.</li>
+<li>Харуул: <span class="math inline">\(\forall x \in \mathbb{R}, x = \sqrt{6-x}\)</span> нь зөвхөн хэрэв <span class="math inline">\(x = 2\)</span> үед биелнэ.</li>
+<li><span class="math inline">\(f\)</span> нь бодит функц байг. Харуул: <span class="math inline">\(f\)</span> нь тогтмол байх нь зөвхөн хэрэв <span class="math inline">\(2f\)</span> тогтмол байх үед биелнэ.</li>
+<li>Тодорхойлолт 1.15-д өгөгдсөн тогтмол функцүүдийн тодорхойлолт болон 1.3 хэсгийн 37(b) дасгал дахь тогтмол функцүүдийн тодорхойлолт нь эквивалент болохыг харуул. Өөрөөр хэлбэл, <span class="math inline">\(f\)</span> нь бодит функц байг. Харуул: <span class="math inline">\(\exists c \in \mathbb{R}\)</span> бөгөөд <span class="math inline">\(\forall x \in \mathbb{R}, f(x) = c\)</span> байх нь зөвхөн хэрэв <span class="math inline">\(\forall x, y \in \mathbb{R}, f(x) = f(y)\)</span> үед биелнэ. <em>Зөвлөмж: <span class="math inline">\((\leftarrow)\)</span>-ийн хувьд <span class="math inline">\(c = f(0)\)</span> гэж үзнэ үү.</em></li>
+<li><span class="math inline">\(f\)</span> нь бодит функц байг. Харуул: <span class="math inline">\(f\)</span> нь доороосоо зааглагдсан байх нь зөвхөн хэрэв <span class="math inline">\(f + 1\)</span> дээрээсээ зааглагдсан байх үед биелнэ.</li>
+<li><span class="math inline">\(f\)</span> нь бодит функц байг. Харуул: <span class="math inline">\(f\)</span> нь өсөж байгаа нь зөвхөн хэрэв <span class="math inline">\(2f\)</span> өсөж байгаа үед биелнэ. <em>15. <span class="math inline">\(f\)</span> нь бодит функц байг. Харуул: <span class="math inline">\(f\)</span> нь дээрээсээ болон доороосоо зааглагдсан байх нь зөвхөн хэрэв <span class="math inline">\(f^2\)</span> дээрээсээ зааглагдсан байх үед биелнэ. </em>16. <span class="math inline">\(f\)</span> нь сөрөг бус бодит функц байг. Харуул: <span class="math inline">\(f\)</span> нь тогтмол байх нь зөвхөн хэрэв <span class="math inline">\(f^2\)</span> тогтмол байх үед биелнэ.</li>
+<li><span class="math inline">\(f\)</span> нь бодит функц байг. Харуул: <span class="math inline">\(f\)</span> нь үечилсэн байх нь зөвхөн хэрэв <span class="math inline">\(2f\)</span> үечилсэн байх үед биелнэ.</li>
+<li><span class="math inline">\(f\)</span> нь бодит функц байг. Харуул: <span class="math inline">\(f\)</span> нь үечилсэн байх нь зөвхөн хэрэв <span class="math inline">\(f + 1\)</span> үечилсэн байх үед биелнэ.</li>
 <li>Хөлбөмбөгийн баг зөвхөн тачдаун (touchdowns), 7 оноо, талбайн гоол (field goals), 3 оноо авах боломжтой гэж үзье. Тэгвэл 21 оноог 3 тачдаун эсвэл 7 талбайн гоолоор авах боломжтой. Харуул: Баг нийт 20 оноо авсан байх нь зөвхөн хэрэв баг 2 тачдаун, 2 талбайн гоол авсан байх үед биелнэ.</li>
 <li>АНУ-ын шуудангийн үйлчилгээ зөвхөн 39 цент, 24 цент бүхий нэгдүгээр зэрэглэлийн марк худалдаалдаг гэж үзье. Тодорхой илгээмжийг шуудангаар явуулахад 53 цент төлөх шаардлагатай. Харуул: 53 центийг зөвхөн хэрэв 4 ширхэг 39 центийн болон 6 ширхэг 24 центийн марк ашигласан тохиолдолд л авах боломжтой.</li>
-<li>Харуул: (^+ = (0, 2]).</li>
-<li>Харуул: ([-2, 2] ^+ = [-2, 0]).</li>
+<li>Харуул: <span class="math inline">\(\mathbb{R}^+ \cap [-2, 2] = (0, 2]\)</span>.</li>
+<li>Харуул: <span class="math inline">\([-2, 2] \setminus \mathbb{R}^+ = [-2, 0]\)</span>.</li>
 </ol>
-<p>23-42 дасгалд (A, B, C), ба (D) олонлогууд нь () универсумд хамаарах байг. 23. Харуул: Хэрэв (A B) бол (A B = A). 24. Харуул: (A = A). 25. Харуул: ((A C) B = (B C) A). 26. Харуул: Хэрэв (C A B) бол (C A = C B). 27. Харуул: Хэрэв (A B = A C) бол (A B C = A B). 28. Харуул: Хэрэв (A B, A C, A D), ба (C D A) бол (A = B C D). 29. Харуул: ((A B)^c = A^c B). 30. Харуул: (A (B C) = (A B) (A C)). 31. Харуул: Хэрэв (A B) бол (A^2 B^2). 32. Харуул: ((A )^c = A^c ). 33. Харуул: (( B) (A B) = A^c B). 34. Харуул: Хэрэв (A B) ба (C D) бол (A C B D). 35. Харуул: (A (B C) = (A B) (A C)). 36. Харуул: ((B A) (D C) (B D) (A C)). <em>37. (C ) гэж үзье. Харуул: (A C = B C) нь зөвхөн хэрэв (A = B) үед биелнэ. </em>38. Харуул: ((A) = (B)) нь зөвхөн хэрэв (A = B) үед биелнэ. <em>39. Харуул: ((A^c) {} (A)^c). 40. Харуул: Хэрэв ((C, D) (A) (B)) бол (C D (A B)). 41. Харуул: ((A B) (A) (B)). </em>42. Харуул: ((A B) {} (A) (B)). 43. Марио 1 милийн тойрог замд машинаар 2 тойрог хийж байна. Тэрээр энэ бүх аяллынхаа туршид тодорхой дундаж хурдтай байхыг зорьж байна. (a) Хэрэв эхний тойрогт дунджаар 40 миль/цаг, хоёр дахь тойрогт 60 миль/цаг хурдтай явсан бол бүх аяллын дундаж хурдыг ол. <em>Зөвлөмж: Энэ нь 50 миль/цаг биш.</em> <em>(b) Марио эхний тойрогт дунджаар 30 миль/цаг-аас хэтэрсэн хурдтай явсан тохиолдолд л бүх аяллынхаа туршид дунджаар 60 миль/цаг хурдтай явж чадна гэдгийг харуул. 44. (R_1) ба (R_2) эсэргүүцэлтэй резисторуудыг хэлхээнд зэрэгцээ холбоход нийт эсэргүүцэл (R) нь (R = ) тэгшитгэлээр өгөгддөг. (a) Хэрэв нийт эсэргүүцэл (R = 8) Ом ба (R_1 = 10) Ом байвал (R_2)-ийн утга ямар байх ёстой вэ? </em>(b) (R_1 = 10) Ом гэж үзье. Энэ хэлхээнд нийт (R) эсэргүүцэл нь зөвхөн (R &lt; 10) Ом байх үед л боломжтой болохыг харуул.</p>
+<p>23-42 дасгалд <span class="math inline">\(A, B, C\)</span>, ба <span class="math inline">\(D\)</span> олонлогууд нь <span class="math inline">\(\mathcal{U}\)</span> универсумд хамаарах байг. 23. Харуул: Хэрэв <span class="math inline">\(A \subseteq B\)</span> бол <span class="math inline">\(A \cap B = A\)</span>. 24. Харуул: <span class="math inline">\(A \cap \mathcal{U} = A\)</span>. 25. Харуул: <span class="math inline">\((A \cap C) \cap B = (B \cap C) \cap A\)</span>. 26. Харуул: Хэрэв <span class="math inline">\(C \subseteq A \cap B\)</span> бол <span class="math inline">\(C \cap A = C \cap B\)</span>. 27. Харуул: Хэрэв <span class="math inline">\(A \cap B = A \cap C\)</span> бол <span class="math inline">\(A \cap B \cap C = A \cap B\)</span>. 28. Харуул: Хэрэв <span class="math inline">\(A \subseteq B, A \subseteq C, A \subseteq D\)</span>, ба <span class="math inline">\(C \cap D \subseteq A\)</span> бол <span class="math inline">\(A = B \cap C \cap D\)</span>. 29. Харуул: <span class="math inline">\((A \setminus B)^c = A^c \cup B\)</span>. 30. Харуул: <span class="math inline">\(A \times (B \setminus C) = (A \times B) \setminus (A \times C)\)</span>. 31. Харуул: Хэрэв <span class="math inline">\(A \subseteq B\)</span> бол <span class="math inline">\(A^2 \subseteq B^2\)</span>. 32. Харуул: <span class="math inline">\((A \times \mathcal{U})^c = A^c \times \mathcal{U}\)</span>. 33. Харуул: <span class="math inline">\((\mathcal{U} \times B) \setminus (A \times B) = A^c \times B\)</span>. 34. Харуул: Хэрэв <span class="math inline">\(A \subseteq B\)</span> ба <span class="math inline">\(C \subseteq D\)</span> бол <span class="math inline">\(A \times C \subseteq B \times D\)</span>. 35. Харуул: <span class="math inline">\(A \times (B \cap C) = (A \times B) \cap (A \times C)\)</span>. 36. Харуул: <span class="math inline">\((B \setminus A) \times (D \setminus C) \subseteq (B \times D) \setminus (A \times C)\)</span>. <em>37. <span class="math inline">\(C \ne \emptyset\)</span> гэж үзье. Харуул: <span class="math inline">\(A \times C = B \times C\)</span> нь зөвхөн хэрэв <span class="math inline">\(A = B\)</span> үед биелнэ. </em>38. Харуул: <span class="math inline">\(\mathcal{P}(A) = \mathcal{P}(B)\)</span> нь зөвхөн хэрэв <span class="math inline">\(A = B\)</span> үед биелнэ. <em>39. Харуул: <span class="math inline">\(\mathcal{P}(A^c) \setminus \{\emptyset\} \subseteq \mathcal{P}(A)^c\)</span>. 40. Харуул: Хэрэв <span class="math inline">\((C, D) \in \mathcal{P}(A) \times \mathcal{P}(B)\)</span> бол <span class="math inline">\(C \times D \in \mathcal{P}(A \times B)\)</span>. 41. Харуул: <span class="math inline">\(\mathcal{P}(A \cap B) \subseteq \mathcal{P}(A) \cap \mathcal{P}(B)\)</span>. </em>42. Харуул: <span class="math inline">\(\mathcal{P}(A \setminus B) \setminus \{\emptyset\} \subseteq \mathcal{P}(A) \setminus \mathcal{P}(B)\)</span>. 43. Марио 1 милийн тойрог замд машинаар 2 тойрог хийж байна. Тэрээр энэ бүх аяллынхаа туршид тодорхой дундаж хурдтай байхыг зорьж байна. (a) Хэрэв эхний тойрогт дунджаар 40 миль/цаг, хоёр дахь тойрогт 60 миль/цаг хурдтай явсан бол бүх аяллын дундаж хурдыг ол. <em>Зөвлөмж: Энэ нь 50 миль/цаг биш.</em> <em>(b) Марио эхний тойрогт дунджаар 30 миль/цаг-аас хэтэрсэн хурдтай явсан тохиолдолд л бүх аяллынхаа туршид дунджаар 60 миль/цаг хурдтай явж чадна гэдгийг харуул. 44. <span class="math inline">\(R_1\)</span> ба <span class="math inline">\(R_2\)</span> эсэргүүцэлтэй резисторуудыг хэлхээнд зэрэгцээ холбоход нийт эсэргүүцэл <span class="math inline">\(R\)</span> нь <span class="math inline">\(R = \frac{R_1 R_2}{R_1 + R_2}\)</span> тэгшитгэлээр өгөгддөг. (a) Хэрэв нийт эсэргүүцэл <span class="math inline">\(R = 8\)</span> Ом ба <span class="math inline">\(R_1 = 10\)</span> Ом байвал <span class="math inline">\(R_2\)</span>-ийн утга ямар байх ёстой вэ? </em>(b) <span class="math inline">\(R_1 = 10\)</span> Ом гэж үзье. Энэ хэлхээнд нийт <span class="math inline">\(R\)</span> эсэргүүцэл нь зөвхөн <span class="math inline">\(R &lt; 10\)</span> Ом байх үед л боломжтой болохыг харуул.</p>
 
 
 </section>
