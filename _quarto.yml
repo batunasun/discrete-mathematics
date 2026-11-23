@@ -5,7 +5,7 @@ lang: mn
 
 book:
   title: "Дискрет математик"
-  #subtitle: "R хэл дээрх практик хэрэглээ"
+  #subtitle: ""
   #author: "Д.Батнасан"
   sidebar:
     collapse-level: 0
