@@ -30,7 +30,7 @@ book:
         - 2-5.qmd
         - 2-6.qmd
     
-    - part: .qmd
+    - part: 8.qmd
       chapters:
         - 8-1.qmd
         - 8-2.qmd
