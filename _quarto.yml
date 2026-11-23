@@ -14,8 +14,8 @@ book:
   #favicon: images/must-logo.png
     
   chapters:
-    - index.qmd "Өмнөх үг"
-    - 0.qmd "0. Тоонуудыг дүрслэх нь"
+    - index.qmd
+    - 0.qmd
     - part: "1. Логик ба Олонлог"
       chapters:
         - 1-1.qmd
