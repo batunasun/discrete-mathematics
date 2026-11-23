@@ -14,14 +14,14 @@ book:
   #favicon: images/must-logo.png
     
   chapters:
-    - index.qmd
-    - 0.qmd
-    - part: "1 Логик ба Олонлог"
+    - index.qmd "Өмнөх үг"
+    - 0.qmd "0. Тоонуудыг дүрслэх нь"
+    - part: "1. Логик ба Олонлог"
       chapters:
         - 1-1.qmd
         - 1-5.qmd
     
-    - part: "2 Энгийн баталгааны арга"
+    - part: "2. Энгийн баталгааны арга"
       chapters:
         - 2-1.qmd
         - 2-2.qmd
