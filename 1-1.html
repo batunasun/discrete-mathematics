@@ -534,20 +534,20 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.1</strong></p>
 <p>Дараах өгүүлбэрүүд нь өгүүлбэрүүд юм.</p>
-<p><strong>(a)</strong> (2 + 2 = 4).</p>
-<p><strong>(b)</strong> (2 + 2 ).</p>
-<p><strong>(c)</strong> ( = 2) ба ( &gt; 2).</p>
-<p><strong>(d)</strong> Синус функц нь үечилсэн ба (2) нь бүхэл тоо юм.</p>
-<p><strong>(e)</strong> (10^2 &gt; 2^{10}) эсвэл (2^{10} &gt; 10^2).</p>
-<p><strong>(f)</strong> Хэрэв (e &gt; 2) бол (e^2 &gt; 4).</p>
-<p><strong>(g)</strong> () нь бодит тоо юм.</p>
+<p><strong>(a)</strong> <span class="math inline">\(2 + 2 = 4\)</span>.</p>
+<p><strong>(b)</strong> <span class="math inline">\(2 + 2 \neq 4\)</span>.</p>
+<p><strong>(c)</strong> <span class="math inline">\(\sqrt{4} = 2\)</span> ба <span class="math inline">\(\sqrt{5} &gt; 2\)</span>.</p>
+<p><strong>(d)</strong> Синус функц нь үечилсэн ба <span class="math inline">\(2\pi\)</span> нь бүхэл тоо юм.</p>
+<p><strong>(e)</strong> <span class="math inline">\(10^2 &gt; 2^{10}\)</span> эсвэл <span class="math inline">\(2^{10} &gt; 10^2\)</span>.</p>
+<p><strong>(f)</strong> Хэрэв <span class="math inline">\(e &gt; 2\)</span> бол <span class="math inline">\(e^2 &gt; 4\)</span>.</p>
+<p><strong>(g)</strong> <span class="math inline">\(\sqrt{-1}\)</span> нь бодит тоо юм.</p>
 </blockquote>
 <p>1.1-р жишээнээс харахад (a), (c), (e), (f) өгүүлбэрүүд нь үнэн бөгөөд (b), (d), (g) нь худал юм. Зарим тохиолдолд (a) шиг үнэн эсвэл худал эсэх нь тодорхой байдаг. Гэхдээ (f) шиг бусад тохиолдолд бид өгүүлбэрүүд ямар хэлбэртэй байж болохыг, тухайлбал if-then (хэрэв-тэгвэл) өгүүлбэрүүдийг ойлгох хэрэгтэй болдог. Ийм хэлбэрийг судлах ажлыг өгүүлбэр бүр өгүүлбэр байдаггүйг харуулсан дараах жишээний дараа шууд авч үзнэ.</p>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.2</strong></p>
 <p>Дараах өгүүлбэрүүд нь өгүүлбэрүүд биш юм.</p>
-<p><strong>(a)</strong> (2 + 2)-ын нийлбэр хэд вэ?</p>
-<p><strong>(b)</strong> (2 + 2)-ын нийлбэрийг тооцоол.</p>
+<p><strong>(a)</strong> <span class="math inline">\(2 + 2\)</span>-ын нийлбэр хэд вэ?</p>
+<p><strong>(b)</strong> <span class="math inline">\(2 + 2\)</span>-ын нийлбэрийг тооцоол.</p>
 <p><strong>(c)</strong> Энэ өгүүлбэр худал юм.</p>
 </blockquote>
 <ol type="a">
@@ -555,12 +555,18 @@ window.Quarto = {
 </ol>
 <section id="өгүүлбэрийн-хэлбэрүүд" class="level3">
 <h3 class="anchored" data-anchor-id="өгүүлбэрийн-хэлбэрүүд">Өгүүлбэрийн хэлбэрүүд</h3>
-<p>Бид өгүүлбэрүүдийг судлах сонирхолтой байна. Гэхдээ тэдгээрийн хэлбэрийг буцааж харж, шалгаснаар ухаарал олж авдаг. 1.1-р жишээнд (c) ба (d) хоёулаа “(p) ба (q)” гэсэн хэлбэрийн өгүүлбэрүүд бөгөөд (p) ба (q) нь өгүүлбэрүүдийг төлөөлдөг. (c)-д, [ p = “ = 2” ] [ q = “ &gt; 2” ] (d)-д, [ p = “” ] [ q = “2” ] Хэдийгээр (c) ба (d) өгүүлбэрүүд ялгаатай боловч тэдгээрийн хэлбэр ижил байна. Албан ёсоор хэлбэл, (c) ба (d) хоёулаа өгүүлбэрийн хэлбэртэй байна. [ p q ] Энд “ба” гэдэг үгийг () тэмдгээр тэмдэглэсэн бөгөөд (p) ба (q) нь <strong>өгүүлбэрийн хувьсагчид</strong> юм. Хамгийн үндсэн өгүүлбэрийн хэлбэрүүдийг 1.1-р хүснэгтэд жагсаав. Ерөнхий өгүүлбэрийн хэлбэрүүд буюу <strong>логик илэрхийллүүд</strong>-ийг эдгээрээс байгуулж болно. Үндсэн логик үйлдлүүд болох (, , , )-ийн тодорхойлолтыг 1.1-р хүснэгтэд жагсаасан өгүүлбэрийн хэлбэрүүдийн үнэний хүснэгтээр илэрхийлж болно. <strong>Үнэний хүснэгт</strong> нь логик илэрхийлэл дэх өгүүлбэрийн хувьсагчдын үнэн эсвэл худал байдал нь илэрхийллийн үнэн эсвэл худал байдалд хэрхэн нөлөөлж байгааг харуулсан хүснэгт юм. () үйлдлийг тодорхойлсон үнэний хүснэгтийг 1.2-р хүснэгтэд үзүүлэв. (, , )-ийн үнэний хүснэгтийг нэгтгэж 1.3-р хүснэгтэд оруулсан. 1.2 ба 1.3-р хүснэгтэд (F)-ийг 0-ээр, (T)-ийг 1-ээр тус тус сольсон бол хүснэгтүүд нь оролтын хувьсагчдыг өсөх дарааллаар хоёртын тоогоор илэрхийлсэнтэй тохирч байна. Энэ дараалал нь үнэний хүснэгтэд шаардлагагүй боловч энэ номын туршид тогтвортой байх үүднээс ашиглагддаг. Зөвхөн хоёр боломжит утгын аль нэгийг ((T) эсвэл (F)) авдаг хувьсагчдыг (өгүүлбэрийн хувьсагчдыг) Английн математикч Жорж Бүүл (1815-1864)-ийн нэрээр <strong>Булийн хувьсагчид</strong> гэж нэрлэдэг.</p>
+<p>Бид өгүүлбэрүүдийг судлах сонирхолтой байна. Гэхдээ тэдгээрийн хэлбэрийг буцааж харж, шалгаснаар ухаарал олж авдаг. 1.1-р жишээнд (c) ба (d) хоёулаа “<span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span>” гэсэн хэлбэрийн өгүүлбэрүүд бөгөөд <span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span> нь өгүүлбэрүүдийг төлөөлдөг. (c)-д, <span class="math display">\[
+p = "\sqrt{4} = 2"
+\]</span> <span class="math display">\[
+q = "\sqrt{5} &gt; 2"
+\]</span> (d)-д, <span class="math display">\[
+p = "\text{Синус функц нь үечилсэн.}"
+\]</span> <span class="math display">\[
+q = "2\pi \text{ нь бүхэл тоо.}"
+\]</span> Хэдийгээр (c) ба (d) өгүүлбэрүүд ялгаатай боловч тэдгээрийн хэлбэр ижил байна. Албан ёсоор хэлбэл, (c) ба (d) хоёулаа өгүүлбэрийн хэлбэртэй байна. <span class="math display">\[
+p \land q
+\]</span> Энд “ба” гэдэг үгийг <span class="math inline">\(\land\)</span> тэмдгээр тэмдэглэсэн бөгөөд <span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span> нь <strong>өгүүлбэрийн хувьсагчид</strong> юм. Хамгийн үндсэн өгүүлбэрийн хэлбэрүүдийг 1.1-р хүснэгтэд жагсаав. Ерөнхий өгүүлбэрийн хэлбэрүүд буюу <strong>логик илэрхийллүүд</strong>-ийг эдгээрээс байгуулж болно. Үндсэн логик үйлдлүүд болох <span class="math inline">\(\neg, \land, \lor, \rightarrow\)</span>-ийн тодорхойлолтыг 1.1-р хүснэгтэд жагсаасан өгүүлбэрийн хэлбэрүүдийн үнэний хүснэгтээр илэрхийлж болно. <strong>Үнэний хүснэгт</strong> нь логик илэрхийлэл дэх өгүүлбэрийн хувьсагчдын үнэн эсвэл худал байдал нь илэрхийллийн үнэн эсвэл худал байдалд хэрхэн нөлөөлж байгааг харуулсан хүснэгт юм. <span class="math inline">\(\neg\)</span> үйлдлийг тодорхойлсон үнэний хүснэгтийг 1.2-р хүснэгтэд үзүүлэв. <span class="math inline">\(\land, \lor, \rightarrow\)</span>-ийн үнэний хүснэгтийг нэгтгэж 1.3-р хүснэгтэд оруулсан. 1.2 ба 1.3-р хүснэгтэд <span class="math inline">\(F\)</span>-ийг 0-ээр, <span class="math inline">\(T\)</span>-ийг 1-ээр тус тус сольсон бол хүснэгтүүд нь оролтын хувьсагчдыг өсөх дарааллаар хоёртын тоогоор илэрхийлсэнтэй тохирч байна. Энэ дараалал нь үнэний хүснэгтэд шаардлагагүй боловч энэ номын туршид тогтвортой байх үүднээс ашиглагддаг. Зөвхөн хоёр боломжит утгын аль нэгийг (<span class="math inline">\(T\)</span> эсвэл <span class="math inline">\(F\)</span>) авдаг хувьсагчдыг (өгүүлбэрийн хувьсагчдыг) Английн математикч Жорж Бүүл (1815-1864)-ийн нэрээр <strong>Булийн хувьсагчид</strong> гэж нэрлэдэг.</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Хэлбэр</th>
@@ -569,20 +575,20 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">(p)</td>
-<td style="text-align: left;">(p) биш ((p)-ийн үгүйсгэл)</td>
+<td style="text-align: left;"><span class="math inline">\(\neg p\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p\)</span> биш (<span class="math inline">\(p\)</span>-ийн үгүйсгэл)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">(p q)</td>
-<td style="text-align: left;">(p) ба (q)</td>
+<td style="text-align: left;"><span class="math inline">\(p \land q\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">(p q)</td>
-<td style="text-align: left;">(p) эсвэл (q)</td>
+<td style="text-align: left;"><span class="math inline">\(p \lor q\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(p\)</span> эсвэл <span class="math inline">\(q\)</span></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">(p q)</td>
-<td style="text-align: left;">хэрэв (p) бол (q) ((p) нь (q)-г агуулна)</td>
+<td style="text-align: left;"><span class="math inline">\(p \rightarrow q\)</span></td>
+<td style="text-align: left;">хэрэв <span class="math inline">\(p\)</span> бол <span class="math inline">\(q\)</span> (<span class="math inline">\(p\)</span> нь <span class="math inline">\(q\)</span>-г агуулна)</td>
 </tr>
 </tbody>
 </table>
@@ -590,8 +596,8 @@ window.Quarto = {
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(p)</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg p\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -609,11 +615,11 @@ window.Quarto = {
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \land q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \lor q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \rightarrow q\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -647,25 +653,31 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p><em>Хүснэгт 1.3 (, ), ба ()-г тодорхойлох үнэний хүснэгт</em></p>
-<p>1.3-р хүснэгтээс харахад (p q) нь зөвхөн (p) ба (q) хоёулаа үнэн байх үед үнэн болдог. (p q) нь (p) эсвэл (q) үнэн байх үед, мөн (p) ба (q) хоёулаа үнэн байх үед үнэн болдог. Үнэндээ (p q) нь (p) ба (q) хоёулаа худал байх үед л худал болдог. If-then буюу нөхцөлт өгүүлбэрийн хэлбэр (p q) нь (p) нь (q)-ийн үнэнийг илэрхийлж байгаа эсэхийг (эсвэл албаддаг эсэхийг) тусгахад зориулагдсан. Үүний дагуу (p q) нь зөвхөн (p) үнэн байх ба (q) худал байх тохиолдолд л худал болно. (p) худал байх бүрд (p q) нь үнэн байдаг гэдгийг анхаарна уу. Энэ тохиолдолд бид (p q) нь “хоосон” үнэн гэж хэлдэг. Бусад тохиолдолд (p) үнэн байхад (q)-ийн үнэн эсэх нь чухал юм.</p>
-<p>Нэгээс олон үйлдэл агуулсан логик илэрхийллүүдэд үйлдлүүдийн дарааллыг ойлгох ёстой. Үндсэн үйлдлүүдийн дараалал нь хамгийн өндрөөс доош нь: [ , ] [ , , ] [ . ] () ба () үйлдлүүдийг нэг мөрөнд жагсаасан болно, учир нь тэдгээр нь ижил давуу эрхтэй гэж үздэг. Мэдээж хэрэг, хаалт ашиглан үйлдлүүдийн хүссэн дарааллыг зааж болно. Жишээлбэл, (p q r) нь ((p) q) гэж ойлгогдох ба ((p q)) биш юм.</p>
+<p><em>Хүснэгт 1.3 <span class="math inline">\(\land, \lor\)</span>, ба <span class="math inline">\(\rightarrow\)</span>-г тодорхойлох үнэний хүснэгт</em></p>
+<p>1.3-р хүснэгтээс харахад <span class="math inline">\(p \land q\)</span> нь зөвхөн <span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span> хоёулаа үнэн байх үед үнэн болдог. <span class="math inline">\(p \lor q\)</span> нь <span class="math inline">\(p\)</span> эсвэл <span class="math inline">\(q\)</span> үнэн байх үед, мөн <span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span> хоёулаа үнэн байх үед үнэн болдог. Үнэндээ <span class="math inline">\(p \lor q\)</span> нь <span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span> хоёулаа худал байх үед л худал болдог. If-then буюу нөхцөлт өгүүлбэрийн хэлбэр <span class="math inline">\(p \rightarrow q\)</span> нь <span class="math inline">\(p\)</span> нь <span class="math inline">\(q\)</span>-ийн үнэнийг илэрхийлж байгаа эсэхийг (эсвэл албаддаг эсэхийг) тусгахад зориулагдсан. Үүний дагуу <span class="math inline">\(p \rightarrow q\)</span> нь зөвхөн <span class="math inline">\(p\)</span> үнэн байх ба <span class="math inline">\(q\)</span> худал байх тохиолдолд л худал болно. <span class="math inline">\(p\)</span> худал байх бүрд <span class="math inline">\(p \rightarrow q\)</span> нь үнэн байдаг гэдгийг анхаарна уу. Энэ тохиолдолд бид <span class="math inline">\(p \rightarrow q\)</span> нь “хоосон” үнэн гэж хэлдэг. Бусад тохиолдолд <span class="math inline">\(p\)</span> үнэн байхад <span class="math inline">\(q\)</span>-ийн үнэн эсэх нь чухал юм.</p>
+<p>Нэгээс олон үйлдэл агуулсан логик илэрхийллүүдэд үйлдлүүдийн дарааллыг ойлгох ёстой. Үндсэн үйлдлүүдийн дараалал нь хамгийн өндрөөс доош нь: <span class="math display">\[
+\neg,
+\]</span> <span class="math display">\[
+\land, \lor,
+\]</span> <span class="math display">\[
+\rightarrow.
+\]</span> <span class="math inline">\(\land\)</span> ба <span class="math inline">\(\lor\)</span> үйлдлүүдийг нэг мөрөнд жагсаасан болно, учир нь тэдгээр нь ижил давуу эрхтэй гэж үздэг. Мэдээж хэрэг, хаалт ашиглан үйлдлүүдийн хүссэн дарааллыг зааж болно. Жишээлбэл, <span class="math inline">\(p \land q \rightarrow r\)</span> нь <span class="math inline">\((\neg p) \land q\)</span> гэж ойлгогдох ба <span class="math inline">\((\neg p \land q)\)</span> биш юм.</p>
 <blockquote class="blockquote">
 <p><strong>Тайлбар 1.1</strong></p>
-<p>C++, Java зэрэг програмчлалын хэлүүдэд ()-ээр тэмдэглэгддэг ба C++ хэлэнд <code>!</code> гэж тэмдэглэгддэг үйлдэл нь C++ хэлэнд <code>&amp;&amp;</code> гэж тэмдэглэгддэг () үйлдлээс илүү өндөр давуу эрхтэй байдаг. Үүний дагуу <code>p &amp;&amp; q || r</code> гэж бичих нь ((p q) r) гэж ойлгогдоно. Гэсэн хэдий ч Microsoft Excel зэрэг програмуудад (p q r) хэлбэрийн илэрхийллийг ((p q) r) эсвэл (p (q r)) гэж тодорхой хаалтгүйгээр оруулах боломжгүй юм. Excel-д ашигладаг синтаксийг 1.4-р жишээнд авч үзсэн. Үйлдлүүдийн дарааллыг 1.8-р жишээнд дүрсэлсэн.</p>
+<p>C++, Java зэрэг програмчлалын хэлүүдэд <span class="math inline">\(\neg\)</span>-ээр тэмдэглэгддэг ба C++ хэлэнд <code>!</code> гэж тэмдэглэгддэг үйлдэл нь C++ хэлэнд <code>&amp;&amp;</code> гэж тэмдэглэгддэг <span class="math inline">\(\land\)</span> үйлдлээс илүү өндөр давуу эрхтэй байдаг. Үүний дагуу <code>p &amp;&amp; q || r</code> гэж бичих нь <span class="math inline">\((p \land q) \lor r\)</span> гэж ойлгогдоно. Гэсэн хэдий ч Microsoft Excel зэрэг програмуудад <span class="math inline">\(p \land q \lor r\)</span> хэлбэрийн илэрхийллийг <span class="math inline">\((p \land q) \lor r\)</span> эсвэл <span class="math inline">\(p \land (q \lor r)\)</span> гэж тодорхой хаалтгүйгээр оруулах боломжгүй юм. Excel-д ашигладаг синтаксийг 1.4-р жишээнд авч үзсэн. Үйлдлүүдийн дарааллыг 1.8-р жишээнд дүрсэлсэн.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.3</strong></p>
-<p>(p q r) өгүүлбэрийн хэлбэрийн үнэний хүснэгт гарга.</p>
-<p><strong>Шийдэл.</strong> Үйлдлүүдийн дараалал нь эхлээд (p q), дараа нь () үйлдэл хийгдэнэ гэж заадаг. Үнэндээ, үнэний хүснэгт гаргахдаа тооцооллын завсрын алхмуудыг тусгасан нэмэлт баганыг оруулах нь ихэвчлэн тустай байдаг.</p>
+<p><span class="math inline">\(p \land q \rightarrow r\)</span> өгүүлбэрийн хэлбэрийн үнэний хүснэгт гарга.</p>
+<p><strong>Шийдэл.</strong> Үйлдлүүдийн дараалал нь эхлээд <span class="math inline">\(p \land q\)</span>, дараа нь <span class="math inline">\(\rightarrow\)</span> үйлдэл хийгдэнэ гэж заадаг. Үнэндээ, үнэний хүснэгт гаргахдаа тооцооллын завсрын алхмуудыг тусгасан нэмэлт баганыг оруулах нь ихэвчлэн тустай байдаг.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(r)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">(p q r)</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(r\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \land q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \land q \rightarrow r\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -728,10 +740,10 @@ window.Quarto = {
 </tbody>
 </table>
 </blockquote>
-<p>Microsoft Excel зэрэг хүснэгтийн програм хангамжийг үнэний хүснэгт үүсгэхэд ашиглаж болно. Excel-д (T) ба (F)-ийг TRUE ба FALSE гэж бичих шаардлагатай. Үндсэн (, ), ба () үйлдлүүдийг NOT, AND, OR логик функцуудыг ашиглан гүйцэтгэдэг. ()-г хэрхэн гүйцэтгэх аргыг 1.10-р жишээний дараа авч үзнэ.</p>
+<p>Microsoft Excel зэрэг хүснэгтийн програм хангамжийг үнэний хүснэгт үүсгэхэд ашиглаж болно. Excel-д <span class="math inline">\(T\)</span> ба <span class="math inline">\(F\)</span>-ийг TRUE ба FALSE гэж бичих шаардлагатай. Үндсэн <span class="math inline">\(\neg, \land\)</span>, ба <span class="math inline">\(\lor\)</span> үйлдлүүдийг NOT, AND, OR логик функцуудыг ашиглан гүйцэтгэдэг. <span class="math inline">\(\rightarrow\)</span>-г хэрхэн гүйцэтгэх аргыг 1.10-р жишээний дараа авч үзнэ.</p>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.4</strong></p>
-<p>((p q)) өгүүлбэрийн хэлбэрийн үнэний хүснэгт гарга.</p>
+<p><span class="math inline">\(\neg(p \lor q)\)</span> өгүүлбэрийн хэлбэрийн үнэний хүснэгт гарга.</p>
 <p><strong>Шийдэл.</strong> Энд бид Excel ашиглан үнэний хүснэгтийг хэрхэн байгуулж болохыг харуулав.</p>
 <table class="caption-top table">
 <thead>
@@ -746,10 +758,10 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <td style="text-align: center;">1</td>
-<td style="text-align: center;">(p)</td>
-<td style="text-align: center;">(q)</td>
-<td style="text-align: center;">(p q)</td>
-<td style="text-align: center;">((p q))</td>
+<td style="text-align: center;"><span class="math inline">\(p\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(q\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(p \lor q\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\neg(p \lor q)\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">2</td>
@@ -786,19 +798,23 @@ window.Quarto = {
 <p>Үндсэн үйлдлүүдийн хувьд тодорхойлогддог боловч тохиромжтой байх үүднээс ашиглагддаг бусад үйлдлүүд байдаг.</p>
 <blockquote class="blockquote">
 <p><strong>ТОДОРХОЙЛОЛТ 1.2</strong></p>
-<p><strong>(a)</strong> <strong>Онцгой эсвэл</strong> (exclusive or) () үйлдлийг дараах байдлаар тодорхойлно:</p>
-<p>[ p q = (p q) (p q). ]</p>
-<p><strong>(b)</strong> <strong>Хэрэв ба зөвхөн хэрэв</strong> (if and only if) () үйлдлийг дараах байдлаар тодорхойлно:</p>
-<p>[ p q = (p q) (q p). ]</p>
-<p>Iff гэдэг нь мөн ()-г тэмдэглэхэд ашиглагддаг болохыг анхаарна уу.</p>
+<p><strong>(a)</strong> <strong>Онцгой эсвэл</strong> (exclusive or) <span class="math inline">\(\oplus\)</span> үйлдлийг дараах байдлаар тодорхойлно:</p>
+<p><span class="math display">\[
+p \oplus q = (p \lor q) \land \neg(p \land q).
+\]</span></p>
+<p><strong>(b)</strong> <strong>Хэрэв ба зөвхөн хэрэв</strong> (if and only if) <span class="math inline">\(\leftrightarrow\)</span> үйлдлийг дараах байдлаар тодорхойлно:</p>
+<p><span class="math display">\[
+p \leftrightarrow q = (p \rightarrow q) \land (q \rightarrow p).
+\]</span></p>
+<p>Iff гэдэг нь мөн <span class="math inline">\(\leftrightarrow\)</span>-г тэмдэглэхэд ашиглагддаг болохыг анхаарна уу.</p>
 </blockquote>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \oplus q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \leftrightarrow q\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -828,24 +844,24 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p><em>Хүснэгт 1.4 () ба ()-г тодорхойлох үнэний хүснэгт</em></p>
-<p>() ба ()-ийн үнэний хүснэгтийг 1.4-р хүснэгтэд нэгтгэсэн. (p q) нь (p) ба (q) хоёулаа үнэн байх үед худал байдаг тул (p q)-ээс ялгаатай гэдгийг анхаарна уу. Хэдийгээр Англи хэлэнд “эсвэл” гэдэг үгийг ашиглахдаа заримдаа “онцгой эсвэл”-ыг хэлж байгаа байж болох ч (жишээ нь: “Та бургер эсвэл пицца идэх үү?”), бид () ба ()-г хооронд нь ялгах ёстой. (p q)-ийн үнэн утга нь (p) ба (q) ижил үнэний утгатай байх үед л биелнэ.</p>
+<p><em>Хүснэгт 1.4 <span class="math inline">\(\oplus\)</span> ба <span class="math inline">\(\leftrightarrow\)</span>-г тодорхойлох үнэний хүснэгт</em></p>
+<p><span class="math inline">\(\oplus\)</span> ба <span class="math inline">\(\leftrightarrow\)</span>-ийн үнэний хүснэгтийг 1.4-р хүснэгтэд нэгтгэсэн. <span class="math inline">\(p \oplus q\)</span> нь <span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span> хоёулаа үнэн байх үед худал байдаг тул <span class="math inline">\(p \lor q\)</span>-ээс ялгаатай гэдгийг анхаарна уу. Хэдийгээр Англи хэлэнд “эсвэл” гэдэг үгийг ашиглахдаа заримдаа “онцгой эсвэл”-ыг хэлж байгаа байж болох ч (жишээ нь: “Та бургер эсвэл пицца идэх үү?”), бид <span class="math inline">\(\lor\)</span> ба <span class="math inline">\(\oplus\)</span>-г хооронд нь ялгах ёстой. <span class="math inline">\(p \leftrightarrow q\)</span>-ийн үнэн утга нь <span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span> ижил үнэний утгатай байх үед л биелнэ.</p>
 <blockquote class="blockquote">
 <p><strong>ТОДОРХОЙЛОЛТ 1.3</strong></p>
-<p><strong>(a)</strong> <strong>Тавтологи</strong> (tautology) гэдэг нь үргэлж үнэн байдаг өгүүлбэрийн хэлбэр юм. Бид тавтологийг (t) гэж тэмдэглэдэг.</p>
-<p><strong>(b)</strong> <strong>Зөрчил</strong> (contradiction) гэдэг нь үргэлж худал байдаг өгүүлбэрийн хэлбэр юм. Бид зөрчлийг (f) гэж тэмдэглэдэг.</p>
+<p><strong>(a)</strong> <strong>Тавтологи</strong> (tautology) гэдэг нь үргэлж үнэн байдаг өгүүлбэрийн хэлбэр юм. Бид тавтологийг <span class="math inline">\(t\)</span> гэж тэмдэглэдэг.</p>
+<p><strong>(b)</strong> <strong>Зөрчил</strong> (contradiction) гэдэг нь үргэлж худал байдаг өгүүлбэрийн хэлбэр юм. Бид зөрчлийг <span class="math inline">\(f\)</span> гэж тэмдэглэдэг.</p>
 <p>Хэлбэр нь тавтологи эсвэл зөрчил байдаг өгүүлбэрийг мөн тавтологи эсвэл зөрчил гэж хэлдэг.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.5</strong></p>
-<p><strong>(a)</strong> (p p) нь тавтологи юм.</p>
+<p><strong>(a)</strong> <span class="math inline">\(p \lor \neg p\)</span> нь тавтологи юм.</p>
 <p><strong>Шийдэл.</strong> Үнэний хүснэгтэд</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(p p)</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \lor \neg p\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -861,15 +877,15 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>(p p)-ийн баганын бүх оруулга (T) байна.</p>
-<p><strong>(b)</strong> (p p) нь зөрчил юм.</p>
+<p><span class="math inline">\(p \lor \neg p\)</span>-ийн баганын бүх оруулга <span class="math inline">\(T\)</span> байна.</p>
+<p><strong>(b)</strong> <span class="math inline">\(p \land \neg p\)</span> нь зөрчил юм.</p>
 <p><strong>Шийдэл.</strong> Үнэний хүснэгтэд</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(p p)</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \land \neg p\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -885,19 +901,19 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>(p p)-ийн баганын бүх оруулга (F) байна.</p>
+<p><span class="math inline">\(p \land \neg p\)</span>-ийн баганын бүх оруулга <span class="math inline">\(F\)</span> байна.</p>
 </blockquote>
 </section>
 <section id="логик-эквивалентууд" class="level3">
 <h3 class="anchored" data-anchor-id="логик-эквивалентууд">Логик эквивалентууд</h3>
-<p>Алгебрт (a + b = b + a) зэрэг ижилтгэлүүд байдаг шиг логик илэрхийллүүдийн дунд мөн ижилтгэлүүд байдаг. Тэдгээр нь өгүүлбэрийн хэлбэрүүдийн хоорондын эквивалент дээр суурилдаг бөгөөд үүнийг бид одоо тодорхойлж байна.</p>
+<p>Алгебрт <span class="math inline">\(a + b = b + a\)</span> зэрэг ижилтгэлүүд байдаг шиг логик илэрхийллүүдийн дунд мөн ижилтгэлүүд байдаг. Тэдгээр нь өгүүлбэрийн хэлбэрүүдийн хоорондын эквивалент дээр суурилдаг бөгөөд үүнийг бид одоо тодорхойлж байна.</p>
 <blockquote class="blockquote">
 <p><strong>ТОДОРХОЙЛОЛТ 1.4</strong></p>
-<p>Хоёр өгүүлбэрийн хэлбэр (p) ба (q) нь зөвхөн (p q) өгүүлбэрийн хэлбэр тавтологи байх тохиолдолд л <strong>логик эквивалент</strong> (logically equivalent) гэж хэлэх ба (p q) гэж бичнэ. Хэрэв (p) ба (q) нь логик эквивалент биш бол (p q) гэж бичнэ.</p>
+<p>Хоёр өгүүлбэрийн хэлбэр <span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span> нь зөвхөн <span class="math inline">\(p \leftrightarrow q\)</span> өгүүлбэрийн хэлбэр тавтологи байх тохиолдолд л <strong>логик эквивалент</strong> (logically equivalent) гэж хэлэх ба <span class="math inline">\(p \equiv q\)</span> гэж бичнэ. Хэрэв <span class="math inline">\(p\)</span> ба <span class="math inline">\(q\)</span> нь логик эквивалент биш бол <span class="math inline">\(p \not\equiv q\)</span> гэж бичнэ.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.6</strong></p>
-<p>((p q) p q) болохыг батал.</p>
+<p><span class="math inline">\(\neg(p \rightarrow q) \equiv p \land \neg q\)</span> болохыг батал.</p>
 <p><strong>Шийдэл.</strong></p>
 <table class="caption-top table">
 <colgroup>
@@ -911,13 +927,13 @@ window.Quarto = {
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">((p q))</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">(((p q)) (p q))</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \rightarrow q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg(p \rightarrow q)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \land \neg q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((\neg(p \rightarrow q)) \leftrightarrow (p \land \neg q)\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -959,20 +975,22 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>(((p q)) (p q)) нь тавтологи тул бид</p>
-<p>[ (p q) p q ]</p>
+<p><span class="math inline">\((\neg(p \rightarrow q)) \leftrightarrow (p \land \neg q)\)</span> нь тавтологи тул бид</p>
+<p><span class="math display">\[
+\neg(p \rightarrow q) \equiv p \land \neg q
+\]</span></p>
 <p>гэж дүгнэж болно.</p>
-<p>Мөн ((p q)) ба (p q) нь ижил үнэний хүснэгттэй эсэхийг шалгахад хангалттай.</p>
+<p>Мөн <span class="math inline">\(\neg(p \rightarrow q)\)</span> ба <span class="math inline">\(p \land \neg q\)</span> нь ижил үнэний хүснэгттэй эсэхийг шалгахад хангалттай.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.7</strong></p>
 <p>“Хэрэв Алисса татварын бэлтгэлийн програм хангамж ашиглаж байгаа бол түүний татварын тайлан үнэн зөв байх болно.” гэсэн өгүүлбэрийн үгүйсгэл нь</p>
 <p>“Алисса татварын бэлтгэлийн програм хангамж ашиглаж байгаа бөгөөд түүний татварын тайлан үнэн зөв биш байх болно.” юм.</p>
 </blockquote>
-<p>1.8-р жишээ нь (p q r) гэсэн өгүүлбэрийн хэлбэр нь хоёрдмол утгатай болохыг харуулж байна. Үйлдлүүдийн тодорхой дарааллыг заахад хаалт шаардлагатай.</p>
+<p>1.8-р жишээ нь <span class="math inline">\(p \land q \lor r\)</span> гэсэн өгүүлбэрийн хэлбэр нь хоёрдмол утгатай болохыг харуулж байна. Үйлдлүүдийн тодорхой дарааллыг заахад хаалт шаардлагатай.</p>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.8</strong></p>
-<p>(p (q r) (p q) r) болохыг батал.</p>
+<p><span class="math inline">\(p \land (q \lor r) \not\equiv (p \land q) \lor r\)</span> болохыг батал.</p>
 <p><strong>Шийдэл.</strong> Дараах үнэний хүснэгтийг авч үзье.</p>
 <table class="caption-top table">
 <colgroup>
@@ -987,14 +1005,14 @@ window.Quarto = {
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(r)</th>
-<th style="text-align: center;">(q r)</th>
-<th style="text-align: center;">(p (q r))</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">((p q) r)</th>
-<th style="text-align: center;">((p (q r)) ((p q) r))</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(r\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q \lor r\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \land (q \lor r)\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \land q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((p \land q) \lor r\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((p \land (q \lor r)) \leftrightarrow ((p \land q) \lor r)\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1080,15 +1098,17 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>((p (q r)) ((p q) r)) нь тавтологи биш тул бид</p>
-<p>[ p (q r) (p q) r ]</p>
+<p><span class="math inline">\((p \land (q \lor r)) \leftrightarrow ((p \land q) \lor r)\)</span> нь тавтологи биш тул бид</p>
+<p><span class="math display">\[
+p \land (q \lor r) \not\equiv (p \land q) \lor r
+\]</span></p>
 <p>гэж дүгнэж байна.</p>
-<p>Мэдээж хэрэг, (p (q r)) ба ((p q) r) нь өөр өөр үнэний хүснэгттэй байгааг бид харж болно.</p>
+<p>Мэдээж хэрэг, <span class="math inline">\(p \land (q \lor r)\)</span> ба <span class="math inline">\((p \land q) \lor r\)</span> нь өөр өөр үнэний хүснэгттэй байгааг бид харж болно.</p>
 </blockquote>
 <p>1.6 ба 1.8-р жишээн дээр дурдсанчлан, хоёр өгүүлбэрийн хэлбэрийг тэдгээрийн үнэний хүснэгтийг харьцуулж логик эквивалент мөн эсэхийг тодорхойлж болно.</p>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.9</strong></p>
-<p>(p q (p q) (p q)) болохыг батал.</p>
+<p><span class="math inline">\(p \oplus q \equiv (p \land \neg q) \lor (\neg p \land q)\)</span> болохыг батал.</p>
 <p><strong>Шийдэл.</strong></p>
 <table class="caption-top table">
 <colgroup>
@@ -1103,14 +1123,14 @@ window.Quarto = {
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">((p q) (p q))</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \land \neg q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg p \land q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \oplus q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\((p \land \neg q) \lor (\neg p \land q)\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1156,22 +1176,24 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>(p q) ба ((p q) (p q)) нь ижил үнэний хүснэгттэй тул бид</p>
-<p>[ p q (p q) (p q) ]</p>
+<p><span class="math inline">\(p \oplus q\)</span> ба <span class="math inline">\((p \land \neg q) \lor (\neg p \land q)\)</span> нь ижил үнэний хүснэгттэй тул бид</p>
+<p><span class="math display">\[
+p \oplus q \equiv (p \land \neg q) \lor (\neg p \land q)
+\]</span></p>
 <p>гэж дүгнэж байна.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.10</strong></p>
-<p>(p q p q) болохыг батал.</p>
+<p><span class="math inline">\(p \rightarrow q \equiv \neg p \lor q\)</span> болохыг батал.</p>
 <p><strong>Шийдэл.</strong></p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">(p q)</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \rightarrow q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg p \lor q\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1205,17 +1227,19 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>(p q) ба (p q) нь ижил үнэний хүснэгттэй тул бид</p>
-<p>[ p q p q ]</p>
+<p><span class="math inline">\(p \rightarrow q\)</span> ба <span class="math inline">\(\neg p \lor q\)</span> нь ижил үнэний хүснэгттэй тул бид</p>
+<p><span class="math display">\[
+p \rightarrow q \equiv \neg p \lor q
+\]</span></p>
 <p>гэж дүгнэж байна.</p>
 </blockquote>
-<p>1.10-р жишээ нь if-then (хэрэв-тэгвэл) өгүүлбэрийн хэлбэрийн өөр нэг илэрхийлэлийг өгдөг. Excel болон бусад хүснэгтийн програм хангамжууд нь ()-ийн хувьд суурилагдсан логик функцгүй байдаг тул энэхүү өөр илэрхийлэл нь ашигтай байдаг. Тиймээс (p q)-г OR(NOT((p)), (q)) гэж оруулж болно. (p q) гэсэн if-then өгүүлбэрийн хэлбэр нь бидний судалж, нотлохыг хүсдэг өгүүлбэрүүдэд байнга тохиолддог. Тиймээс ийм хэлбэрийн зарим холбогдох ойлголтуудыг ойлгох нь чухал юм.</p>
+<p>1.10-р жишээ нь if-then (хэрэв-тэгвэл) өгүүлбэрийн хэлбэрийн өөр нэг илэрхийлэлийг өгдөг. Excel болон бусад хүснэгтийн програм хангамжууд нь <span class="math inline">\(\rightarrow\)</span>-ийн хувьд суурилагдсан логик функцгүй байдаг тул энэхүү өөр илэрхийлэл нь ашигтай байдаг. Тиймээс <span class="math inline">\(p \rightarrow q\)</span>-г OR(NOT(<span class="math inline">\(p\)</span>), <span class="math inline">\(q\)</span>) гэж оруулж болно. <span class="math inline">\(p \rightarrow q\)</span> гэсэн if-then өгүүлбэрийн хэлбэр нь бидний судалж, нотлохыг хүсдэг өгүүлбэрүүдэд байнга тохиолддог. Тиймээс ийм хэлбэрийн зарим холбогдох ойлголтуудыг ойлгох нь чухал юм.</p>
 <blockquote class="blockquote">
 <p><strong>ТОДОРХОЙЛОЛТ 1.5</strong></p>
-<p>(p q) өгүүлбэрийн хэлбэрийг өгөгдсөн үед,</p>
-<p><strong>(a)</strong> түүний <strong>эсрэг өгүүлбэр</strong> (converse) нь (q p) юм.</p>
-<p><strong>(b)</strong> түүний <strong>эсрэгээр нь</strong> (contrapositive) нь (q p) юм.</p>
-<p><strong>(c)</strong> түүний <strong>урвуу</strong> (inverse) нь (p q) юм.</p>
+<p><span class="math inline">\(p \rightarrow q\)</span> өгүүлбэрийн хэлбэрийг өгөгдсөн үед,</p>
+<p><strong>(a)</strong> түүний <strong>эсрэг өгүүлбэр</strong> (converse) нь <span class="math inline">\(q \rightarrow p\)</span> юм.</p>
+<p><strong>(b)</strong> түүний <strong>эсрэгээр нь</strong> (contrapositive) нь <span class="math inline">\(\neg q \rightarrow \neg p\)</span> юм.</p>
+<p><strong>(c)</strong> түүний <strong>урвуу</strong> (inverse) нь <span class="math inline">\(\neg p \rightarrow \neg q\)</span> юм.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.11</strong></p>
@@ -1233,13 +1257,13 @@ window.Quarto = {
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(p)</th>
-<th style="text-align: center;">(q)</th>
-<th style="text-align: center;">(p q)</th>
-<th style="text-align: center;">(q p)</th>
-<th style="text-align: center;">(q p)</th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p \rightarrow q\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q \rightarrow p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(\neg q \rightarrow \neg p\)</span></th>
 </tr>
 </thead>
 <tbody>
@@ -1281,10 +1305,12 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>Үнэний хүснэгтэд (p q) ба (q p)-ийн баганууд ялгаатай байхад (p q) ба (q p)-ийн баганууд ижил байна. Иймээс,</p>
-<p>[ p q q p p q q p. ]</p>
+<p>Үнэний хүснэгтэд <span class="math inline">\(p \rightarrow q\)</span> ба <span class="math inline">\(q \rightarrow p\)</span>-ийн баганууд ялгаатай байхад <span class="math inline">\(p \rightarrow q\)</span> ба <span class="math inline">\(\neg q \rightarrow \neg p\)</span>-ийн баганууд ижил байна. Иймээс,</p>
+<p><span class="math display">\[
+p \rightarrow q \not\equiv q \rightarrow p \quad \text{ба} \quad p \rightarrow q \equiv \neg q \rightarrow \neg p.
+\]</span></p>
 </blockquote>
-<p>If-then өгүүлбэрийн эсрэг өгүүлбэр нь (p q) нь (p q) болон түүний эсрэг (q p)-ийг нэгтгэдэг тул чухал юм. 1.11-р жишээнээс харахад (p q) нь түүний эсрэгээр нь (contrapositive) (q p)-тэй логик эквивалент байдаг. Үнэндээ энэ эквивалент нь маш ашигтай хэрэгсэл болж хувирдаг бөгөөд бид үүнийг 2.4-р хэсэгт ашигладаг. Урвуу (inverse) нь эсрэг өгүүлбэрийн эсрэгээр нь (contrapositive) байдаг тул анхаарал татахуйц биш юм.</p>
+<p>If-then өгүүлбэрийн эсрэг өгүүлбэр нь <span class="math inline">\(p \leftrightarrow q\)</span> нь <span class="math inline">\(p \rightarrow q\)</span> болон түүний эсрэг <span class="math inline">\(q \rightarrow p\)</span>-ийг нэгтгэдэг тул чухал юм. 1.11-р жишээнээс харахад <span class="math inline">\(p \rightarrow q\)</span> нь түүний эсрэгээр нь (contrapositive) <span class="math inline">\(\neg q \rightarrow \neg p\)</span>-тэй логик эквивалент байдаг. Үнэндээ энэ эквивалент нь маш ашигтай хэрэгсэл болж хувирдаг бөгөөд бид үүнийг 2.4-р хэсэгт ашигладаг. Урвуу (inverse) нь эсрэг өгүүлбэрийн эсрэгээр нь (contrapositive) байдаг тул анхаарал татахуйц биш юм.</p>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.12</strong></p>
 <p>“Хэрэв шийдэл байгаа бол програм төгсдөг.” гэсэн өгүүлбэрийг авч үзье.</p>
@@ -1295,25 +1321,31 @@ window.Quarto = {
 <p>Хэрэв бид 1.12-р жишээн дээрх өгүүлбэрийг үнэн гэж үзвэл түүний эсрэгээр нь (contrapositive) мөн үнэн байх ёстой. Гэхдээ түүний эсрэг ба урвуу нь үнэн байх шаардлагагүй. Жишээлбэл, холбогдох програм нь зөвхөн хязгаарлагдмал олон боломжит шийдлүүдийг шалгаж, ямар ч шийдэл олдохгүй бол төгсөхөөр зохиогдсон байж болно. Логик эквивалентууд нь логик илэрхийллүүдийг удирдаж, хялбарчлахад ашигтай байдаг. Теорем 1.1-д бусад илэрхийллүүдийг бүтээхэд ашиглаж болох зарим үндсэн логик эквивалентуудыг жагсаав.</p>
 <blockquote class="blockquote">
 <p><strong>ТЕОРЕМ 1.1 Үндсэн логик эквивалентууд</strong></p>
-<p>(p, q), ба (r) нь өгүүлбэрийн хувьсагчид гэе. Тэгвэл дараах логик эквивалентууд биелнэ.</p>
-<p><strong>(a)</strong> (p p) (Давхар үгүйсгэл)</p>
-<p><strong>(b)</strong> ((p q) r p (q r)) (Ассоциатив) ((p q) r p (q r))</p>
-<p><strong>(c)</strong> (p q q p) (Коммутатив) (p q q p)</p>
-<p><strong>(d)</strong> (p (q r) (p q) (p r)) (Тархалт) (p (q r) (p q) (p r))</p>
-<p><strong>(e)</strong> ((p q) p q) (Де Морганы хууль) ((p q) p q)</p>
-<p><strong>(f)</strong> Хэрэв (p q) бол ([p q p]) (Шингээлтийн дүрэм) Хэрэв (p q) бол ([p q q])</p>
+<p><span class="math inline">\(p, q\)</span>, ба <span class="math inline">\(r\)</span> нь өгүүлбэрийн хувьсагчид гэе. Тэгвэл дараах логик эквивалентууд биелнэ.</p>
+<p><strong>(a)</strong> <span class="math inline">\(\neg\neg p \equiv p\)</span> (Давхар үгүйсгэл)</p>
+<p><strong>(b)</strong> <span class="math inline">\((p \land q) \land r \equiv p \land (q \land r)\)</span> (Ассоциатив) <span class="math inline">\((p \lor q) \lor r \equiv p \lor (q \lor r)\)</span></p>
+<p><strong>(c)</strong> <span class="math inline">\(p \land q \equiv q \land p\)</span> (Коммутатив) <span class="math inline">\(p \lor q \equiv q \lor p\)</span></p>
+<p><strong>(d)</strong> <span class="math inline">\(p \land (q \lor r) \equiv (p \land q) \lor (p \land r)\)</span> (Тархалт) <span class="math inline">\(p \lor (q \land r) \equiv (p \lor q) \land (p \lor r)\)</span></p>
+<p><strong>(e)</strong> <span class="math inline">\(\neg(p \land q) \equiv \neg p \lor \neg q\)</span> (Де Морганы хууль) <span class="math inline">\(\neg(p \lor q) \equiv \neg p \land \neg q\)</span></p>
+<p><strong>(f)</strong> Хэрэв <span class="math inline">\(p \rightarrow q\)</span> бол <span class="math inline">\([p \land q \equiv p]\)</span> (Шингээлтийн дүрэм) Хэрэв <span class="math inline">\(p \rightarrow q\)</span> бол <span class="math inline">\([p \lor q \equiv q]\)</span></p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>ТЕОРЕМ 1.2 Тавтологи ба зөрчилтэй харилцан үйлчлэх нь</strong></p>
-<p>(p) нь өгүүлбэрийн хувьсагч гэе. Тэгвэл дараах логик эквивалентууд биелнэ.</p>
-<p><strong>(a)</strong> (t f) <strong>(b)</strong> (p t p) (f t) (p t t)</p>
-<p><strong>(c)</strong> (p f f) <strong>(d)</strong> (p p f) (p f p) (p p t)</p>
-<p><strong>(e)</strong> (t p p) <strong>(f)</strong> (p f p) (f t t) (f p t)</p>
+<p><span class="math inline">\(p\)</span> нь өгүүлбэрийн хувьсагч гэе. Тэгвэл дараах логик эквивалентууд биелнэ.</p>
+<p><strong>(a)</strong> <span class="math inline">\(\neg t \equiv f\)</span> <strong>(b)</strong> <span class="math inline">\(p \land t \equiv p\)</span> <span class="math inline">\(\neg f \equiv t\)</span> <span class="math inline">\(p \lor t \equiv t\)</span></p>
+<p><strong>(c)</strong> <span class="math inline">\(p \land f \equiv f\)</span> <strong>(d)</strong> <span class="math inline">\(p \land \neg p \equiv f\)</span> <span class="math inline">\(p \lor f \equiv p\)</span> <span class="math inline">\(p \lor \neg p \equiv t\)</span></p>
+<p><strong>(e)</strong> <span class="math inline">\(t \rightarrow p \equiv p\)</span> <strong>(f)</strong> <span class="math inline">\(p \rightarrow f \equiv \neg p\)</span> <span class="math inline">\(f \rightarrow t \equiv t\)</span> <span class="math inline">\(f \rightarrow p \equiv t\)</span></p>
 </blockquote>
-<p><strong>Теорем</strong> эсвэл <strong>өгүүлбэр</strong> (proposition) гэдэг нь үнэн гэж баталсан өгүүлбэр юм. Теорем 1.1 ба 1.2 дахь ижилтгэлүүдийн баталгааг дасгалуудад үлдээв. Баталгаажуулалтаас гадна эдгээр ижилтгэлүүдийг цээжлэх нь чухал юм. Зөвхөн заримыг нь ойлгосноор л хүн бусдыг нь санаж, нарийн төвөгтэй нөхцөлд үр дүнтэй ашиглаж чадна. Теорем 1.1 дэх эхний дөрвөн ижилтгэлийг арифметик үйлдлүүд болох (-), (+)-ыг хамарсан зарим алгебрийн адилтгалуудыг бодож үзвэл ойлгоход хялбар байдаг. Жишээлбэл, эхний тархалтын дүрэм нь арифметик тархалтын дүрэмтэй төстэй юм. [ a (b + c) = (a b) + (a c). ] Түүнчлэн (1.1)-ийн (b) ба (c) гэсэн хоёр нэмэгдэхүүнээс олон нэмэгдэхүүн рүү хийх тодорхой ерөнхийлөлтүүд нь логик эквивалентуудад мөн адил аналогтой байдаг. Энэхүү богино өгүүллэгийн нэг дутагдал нь Теорем 1.1 дэх хоёр дахь тархалтын дүрэм нь арифметик аналоггүй байдагт оршино. Ассоциатив дүрмүүд нь (p q r) ба (p q r) гэсэн илэрхийллүүд хоёрдмол утгагүй гэдгийг харуулдаг бол 1.8-р жишээнээс бид (p q r) нь хоёрдмол утгатай болохыг харсан. Ассоциатив дүрмүүдээс үзэхэд ерөнхий (n)-тэй [ p_1 p_2 p_3 p_n p_1 p_2 p_3 p_n ] гэсэн өгүүлбэрийн хэлбэрүүдийг үйлдлүүдийн хүссэн дарааллыг тусгасан нэр томьёонуудыг (хаалт ашиглан) нэгтгэж тооцоолж болно. Жишээлбэл, [ p_1 (p_2 (p_3 p_n)) ] гэсэн нэгдэл нь тооцооллыг баруунаас зүүн тийш гүйцэтгэх нэг сонголтыг харуулж байна. Де Морганы хуулиудыг Английн математикч Августус Де Морган (1806-1871) нээсэн бөгөөд эдгээр нь () ба () өгүүлбэрийн хэлбэрийг хэрхэн үгүйсгэх талаар заадаг дүрмүүд юм. Ийм өгүүлбэрийн хэлбэрүүд хэзээ худал болох талаар бодох нь Де Морганы хуулиудыг илүү байгалийн мэт харагдуулдаг. Де Морганы хуулиуд нь Теорем 1.1-ийн (e) хэсгийн (b)-(d) хуулиудын нэгэн адил олон хувьсагчтай аналогуудтай байдаг. Теорем 1.1 дахь Шингээлтийн дүрмүүд нь магадгүй хамгийн бүрхэг юм. Бид тэдгээрийн ашиг тусыг 1.15-р жишээнд судлах болно. Нөгөөтэйгүүр, Теорем 1.2 дахь ижилтгэлүүд нь баталгаажуулах, цээжлэхэд илүү хялбар байдаг. Дараах хэдэн жишээнд Теорем 1.1 ба 1.2-ын ижилтгэлүүд болон бусад ижилтгэлүүдийг ашиглан илүү олон ижилтгэлийг баталдаг.</p>
+<p><strong>Теорем</strong> эсвэл <strong>өгүүлбэр</strong> (proposition) гэдэг нь үнэн гэж баталсан өгүүлбэр юм. Теорем 1.1 ба 1.2 дахь ижилтгэлүүдийн баталгааг дасгалуудад үлдээв. Баталгаажуулалтаас гадна эдгээр ижилтгэлүүдийг цээжлэх нь чухал юм. Зөвхөн заримыг нь ойлгосноор л хүн бусдыг нь санаж, нарийн төвөгтэй нөхцөлд үр дүнтэй ашиглаж чадна. Теорем 1.1 дэх эхний дөрвөн ижилтгэлийг арифметик үйлдлүүд болох <span class="math inline">\(-\)</span>, <span class="math inline">\(+\)</span>-ыг хамарсан зарим алгебрийн адилтгалуудыг бодож үзвэл ойлгоход хялбар байдаг. Жишээлбэл, эхний тархалтын дүрэм нь арифметик тархалтын дүрэмтэй төстэй юм. <span class="math display">\[
+a \cdot (b + c) = (a \cdot b) + (a \cdot c). \quad \text{(1.1)}
+\]</span> Түүнчлэн (1.1)-ийн <span class="math inline">\(b\)</span> ба <span class="math inline">\(c\)</span> гэсэн хоёр нэмэгдэхүүнээс олон нэмэгдэхүүн рүү хийх тодорхой ерөнхийлөлтүүд нь логик эквивалентуудад мөн адил аналогтой байдаг. Энэхүү богино өгүүллэгийн нэг дутагдал нь Теорем 1.1 дэх хоёр дахь тархалтын дүрэм нь арифметик аналоггүй байдагт оршино. Ассоциатив дүрмүүд нь <span class="math inline">\(p \land q \land r\)</span> ба <span class="math inline">\(p \lor q \lor r\)</span> гэсэн илэрхийллүүд хоёрдмол утгагүй гэдгийг харуулдаг бол 1.8-р жишээнээс бид <span class="math inline">\(p \land q \lor r\)</span> нь хоёрдмол утгатай болохыг харсан. Ассоциатив дүрмүүдээс үзэхэд ерөнхий <span class="math inline">\(n\)</span>-тэй <span class="math display">\[
+p_1 \land p_2 \land p_3 \land \dots \land p_n \quad \text{ба} \quad p_1 \lor p_2 \lor p_3 \lor \dots \lor p_n
+\]</span> гэсэн өгүүлбэрийн хэлбэрүүдийг үйлдлүүдийн хүссэн дарааллыг тусгасан нэр томьёонуудыг (хаалт ашиглан) нэгтгэж тооцоолж болно. Жишээлбэл, <span class="math display">\[
+p_1 \land (p_2 \land (p_3 \land \dots \land p_n))
+\]</span> гэсэн нэгдэл нь тооцооллыг баруунаас зүүн тийш гүйцэтгэх нэг сонголтыг харуулж байна. Де Морганы хуулиудыг Английн математикч Августус Де Морган (1806-1871) нээсэн бөгөөд эдгээр нь <span class="math inline">\(\land\)</span> ба <span class="math inline">\(\lor\)</span> өгүүлбэрийн хэлбэрийг хэрхэн үгүйсгэх талаар заадаг дүрмүүд юм. Ийм өгүүлбэрийн хэлбэрүүд хэзээ худал болох талаар бодох нь Де Морганы хуулиудыг илүү байгалийн мэт харагдуулдаг. Де Морганы хуулиуд нь Теорем 1.1-ийн (e) хэсгийн (b)-(d) хуулиудын нэгэн адил олон хувьсагчтай аналогуудтай байдаг. Теорем 1.1 дахь Шингээлтийн дүрмүүд нь магадгүй хамгийн бүрхэг юм. Бид тэдгээрийн ашиг тусыг 1.15-р жишээнд судлах болно. Нөгөөтэйгүүр, Теорем 1.2 дахь ижилтгэлүүд нь баталгаажуулах, цээжлэхэд илүү хялбар байдаг. Дараах хэдэн жишээнд Теорем 1.1 ба 1.2-ын ижилтгэлүүд болон бусад ижилтгэлүүдийг ашиглан илүү олон ижилтгэлийг баталдаг.</p>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.13</strong></p>
-<p>((p q r) (p q r) p q) болохыг батал.</p>
+<p><span class="math inline">\((p \land q \land r) \lor (p \land q \land \neg r) \equiv p \land q\)</span> болохыг батал.</p>
 <p><strong>Шийдэл.</strong></p>
 <p><span class="math display">\[
 \begin{array}{rcl}
@@ -1326,7 +1358,7 @@ window.Quarto = {
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.14</strong></p>
-<p>(p q r s r s p q) болохыг батал.</p>
+<p><span class="math inline">\(p \land q \rightarrow \neg r \lor \neg s \equiv r \land s \rightarrow \neg p \lor \neg q\)</span> болохыг батал.</p>
 <p><strong>Шийдэл.</strong></p>
 <p><span class="math display">\[
 \begin{array}{rcl}
@@ -1341,20 +1373,24 @@ p \land q \rightarrow \neg r \lor \neg s &amp; \equiv &amp; (p \land q) \rightar
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.15</strong></p>
 <p>(Үндсэн шингээлтийн дүрмүүд). Дараах логик эквивалентуудыг батал.</p>
-<p><strong>(a)</strong> (p (p r) p).</p>
-<p><strong>(b)</strong> ((q r) q q).</p>
+<p><strong>(a)</strong> <span class="math inline">\(p \land (p \lor r) \equiv p\)</span>.</p>
+<p><strong>(b)</strong> <span class="math inline">\((q \land r) \lor q \equiv q\)</span>.</p>
 <p><strong>Шийдэл.</strong></p>
-<p><strong>(a)</strong> Бид (q = p r) гэж эхний шингээлтийн дүрмийг ашиглана. (p p r) нь тавтологи гэдгийг батлахад хялбар. Теорем 1.2(e)-ээс үзэхэд шингээлтийн дүрмийн дараах тохиолдол гарна.</p>
-<p>[ (p (p r)) ((p (p r)) p) ]</p>
-<p>Энэ нь (p (p r) p) гэсэн хүссэн үр дүнтэй тэнцэнэ.</p>
-<p><strong>(b)</strong> Бид (p = q r) гэж хоёр дахь шингээлтийн дүрмийг ашиглана. (q r q t) гэдгийг батлахад хялбар тул дахин Теорем 1.2(e)-ээс шингээлтийн дүрмийн дараах тохиолдол гарна.</p>
-<p>[ ((q r) q) (((q r) q) q) ]</p>
+<p><strong>(a)</strong> Бид <span class="math inline">\(q = p \lor r\)</span> гэж эхний шингээлтийн дүрмийг ашиглана. <span class="math inline">\(p \rightarrow p \lor r\)</span> нь тавтологи гэдгийг батлахад хялбар. Теорем 1.2(e)-ээс үзэхэд шингээлтийн дүрмийн дараах тохиолдол гарна.</p>
+<p><span class="math display">\[
+(p \rightarrow (p \lor r)) \rightarrow ((p \land (p \lor r)) \equiv p)
+\]</span></p>
+<p>Энэ нь <span class="math inline">\(p \land (p \lor r) \equiv p\)</span> гэсэн хүссэн үр дүнтэй тэнцэнэ.</p>
+<p><strong>(b)</strong> Бид <span class="math inline">\(p = q \land r\)</span> гэж хоёр дахь шингээлтийн дүрмийг ашиглана. <span class="math inline">\(q \land r \rightarrow q \equiv t\)</span> гэдгийг батлахад хялбар тул дахин Теорем 1.2(e)-ээс шингээлтийн дүрмийн дараах тохиолдол гарна.</p>
+<p><span class="math display">\[
+((q \land r) \rightarrow q) \rightarrow (((q \land r) \lor q) \equiv q)
+\]</span></p>
 <p>Энэ нь хүссэн үр дүнд хүргэнэ.</p>
 </blockquote>
 </section>
 <section id="дижитал-хэлхээ" class="level3">
 <h3 class="anchored" data-anchor-id="дижитал-хэлхээ">Дижитал хэлхээ</h3>
-<p>Бидний авч үзсэн үндсэн логикийг компьютерний техник хангамжийн загварт хэрэглэж болно. <strong>Дижитал хэлхээ</strong> гэдэг нь цахилгаан дохио (P_1, P_2, , P_n)-ийг оролт болгон авч, тэдгээр оролтоор тодорхойлогддог гаралтын дохио (S_1, S_2, , S_m)-ийг үүсгэдэг электрон техник хангамжийн хэсэг юм. 1.1-р зурагт компьютерний чипийг төлөөлж болох дижитал хэлхээний ерөнхий бүтцийг үзүүлэв. (P_i) ба (S_j) дохио бүр нь өгөгдлийн <strong>бит</strong>-ийг хадгалдаг бөгөөд үүнийг асаах эсвэл унтраах боломжтой тул 1 эсвэл 0-ээр тус тус дүрсэлж болно. Судалгааг хялбарчлахын тулд бид зөвхөн ганц гаралтын дохио (S)-тэй дижитал хэлхээг авч үзэх болно.</p>
+<p>Бидний авч үзсэн үндсэн логикийг компьютерний техник хангамжийн загварт хэрэглэж болно. <strong>Дижитал хэлхээ</strong> гэдэг нь цахилгаан дохио <span class="math inline">\(P_1, P_2, \dots, P_n\)</span>-ийг оролт болгон авч, тэдгээр оролтоор тодорхойлогддог гаралтын дохио <span class="math inline">\(S_1, S_2, \dots, S_m\)</span>-ийг үүсгэдэг электрон техник хангамжийн хэсэг юм. 1.1-р зурагт компьютерний чипийг төлөөлж болох дижитал хэлхээний ерөнхий бүтцийг үзүүлэв. <span class="math inline">\(P_i\)</span> ба <span class="math inline">\(S_j\)</span> дохио бүр нь өгөгдлийн <strong>бит</strong>-ийг хадгалдаг бөгөөд үүнийг асаах эсвэл унтраах боломжтой тул 1 эсвэл 0-ээр тус тус дүрсэлж болно. Судалгааг хялбарчлахын тулд бид зөвхөн ганц гаралтын дохио <span class="math inline">\(S\)</span>-тэй дижитал хэлхээг авч үзэх болно.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="fig_1_1.png" class="img-fluid figure-img"></p>
@@ -1362,7 +1398,7 @@ p \land q \rightarrow \neg r \lor \neg s &amp; \equiv &amp; (p \land q) \rightar
 </figure>
 </div>
 <p><em>Зураг 1.1 Дижитал хэлхээний бүтэц</em></p>
-<p>(P, Q, R) оролтын дохио, (S) гаралтын дохиотой тодорхой нэг дижитал хэлхээний үйлдлийг оролтууд гаралтыг хэрхэн тодорхойлж байгааг тодорхой заасан <strong>оролт-гаралтын хүснэгт</strong>-д бичиж болно. Ийм хүснэгтийг 1.5-р хүснэгтэд үзүүлсэн бөгөөд энэ нь (T)-ийг 1-ээр, (F)-ийг 0-оор сольсон үнэний хүснэгттэй тодорхой холбоотой байдаг. Энэхүү хүчтэй ижил төстэй байдлаас үзэхэд нарийн төвөгтэй дижитал хэлхээг үндсэн логик үйлдлүүдтэй харгалзах <strong>логик хаалга</strong> (logic gates) гэж нэрлэгддэг маш энгийн хэлхээнүүдээс бүтээж болох нь гайхах зүйл биш юм. Бидний авч үзэх үндсэн хаалганууд нь <strong>Inverter</strong> (эсвэл <strong>NOT хаалга</strong>), <strong>AND хаалга</strong>, ба <strong>OR хаалга</strong> юм. Эдгээрийг 1.6-р хүснэгтэд үзүүлсэн бөгөөд үндсэн логик үйлдлүүд болох (, ), ба ()-той харгалзана. Үндсэн хаалгануудыг ашиглан 1.2-р зурагт үзүүлсэн шиг хэлхээг бүтээж болно. Дохио дамжуулж буй утаснууд нь нэгээс олон хаалгыг тэжээхээр салж болохыг анхаарна уу. Ийм салаалсан хэсгийг бид диаграммд () тэмдгээр тэмдэглэдэг. Бусад утаснууд нь ийм тэмдэглэгээгүйгээр огтлолцох нь утаснуудын харилцан үйлчлэл байхгүй гэсэн үг бөгөөд нарийн төвөгтэй хэлхээ зурах үед зайлсхийх боломжгүй байж магадгүй юм.</p>
+<p><span class="math inline">\(P, Q, R\)</span> оролтын дохио, <span class="math inline">\(S\)</span> гаралтын дохиотой тодорхой нэг дижитал хэлхээний үйлдлийг оролтууд гаралтыг хэрхэн тодорхойлж байгааг тодорхой заасан <strong>оролт-гаралтын хүснэгт</strong>-д бичиж болно. Ийм хүснэгтийг 1.5-р хүснэгтэд үзүүлсэн бөгөөд энэ нь <span class="math inline">\(T\)</span>-ийг 1-ээр, <span class="math inline">\(F\)</span>-ийг 0-оор сольсон үнэний хүснэгттэй тодорхой холбоотой байдаг. Энэхүү хүчтэй ижил төстэй байдлаас үзэхэд нарийн төвөгтэй дижитал хэлхээг үндсэн логик үйлдлүүдтэй харгалзах <strong>логик хаалга</strong> (logic gates) гэж нэрлэгддэг маш энгийн хэлхээнүүдээс бүтээж болох нь гайхах зүйл биш юм. Бидний авч үзэх үндсэн хаалганууд нь <strong>Inverter</strong> (эсвэл <strong>NOT хаалга</strong>), <strong>AND хаалга</strong>, ба <strong>OR хаалга</strong> юм. Эдгээрийг 1.6-р хүснэгтэд үзүүлсэн бөгөөд үндсэн логик үйлдлүүд болох <span class="math inline">\(\neg, \land\)</span>, ба <span class="math inline">\(\lor\)</span>-той харгалзана. Үндсэн хаалгануудыг ашиглан 1.2-р зурагт үзүүлсэн шиг хэлхээг бүтээж болно. Дохио дамжуулж буй утаснууд нь нэгээс олон хаалгыг тэжээхээр салж болохыг анхаарна уу. Ийм салаалсан хэсгийг бид диаграммд <span class="math inline">\(\bullet\)</span> тэмдгээр тэмдэглэдэг. Бусад утаснууд нь ийм тэмдэглэгээгүйгээр огтлолцох нь утаснуудын харилцан үйлчлэл байхгүй гэсэн үг бөгөөд нарийн төвөгтэй хэлхээ зурах үед зайлсхийх боломжгүй байж магадгүй юм.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -1374,10 +1410,10 @@ p \land q \rightarrow \neg r \lor \neg s &amp; \equiv &amp; (p \land q) \rightar
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">(P)</td>
-<td style="text-align: center;">(Q)</td>
-<td style="text-align: center;">(R)</td>
-<td style="text-align: center;">(S)</td>
+<td style="text-align: center;"><span class="math inline">\(P\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(Q\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(R\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(S\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: center;">0</td>
@@ -1448,15 +1484,15 @@ p \land q \rightarrow \neg r \lor \neg s &amp; \equiv &amp; (p \land q) \rightar
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Тэмдэглэгээ</td>
-<td style="text-align: center;">(P S)</td>
-<td style="text-align: center;">(P S)</td>
-<td style="text-align: center;">(P S)</td>
+<td style="text-align: center;"><span class="math inline">\(P \xrightarrow{\text{NOT}} S\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(P \xrightarrow{\text{AND}} S\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(P \xrightarrow{\text{OR}} S\)</span></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Оролт-Гаралтын хүснэгт</td>
-<td style="text-align: center;">(P S) <br> 0 <span class="math inline">\(\quad\)</span> 1 <br> 1 <span class="math inline">\(\quad\)</span> 0</td>
-<td style="text-align: center;">(P Q S) <br> 0 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 0 <br> 0 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 0 <br> 1 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 0 <br> 1 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 1</td>
-<td style="text-align: center;">(P Q S) <br> 0 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 0 <br> 0 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 1 <br> 1 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 1 <br> 1 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 1</td>
+<td style="text-align: center;"><span class="math inline">\(P \quad S\)</span> <br> 0 <span class="math inline">\(\quad\)</span> 1 <br> 1 <span class="math inline">\(\quad\)</span> 0</td>
+<td style="text-align: center;"><span class="math inline">\(P \quad Q \quad S\)</span> <br> 0 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 0 <br> 0 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 0 <br> 1 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 0 <br> 1 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 1</td>
+<td style="text-align: center;"><span class="math inline">\(P \quad Q \quad S\)</span> <br> 0 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 0 <br> 0 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 1 <br> 1 <span class="math inline">\(\quad\)</span> 0 <span class="math inline">\(\quad\)</span> 1 <br> 1 <span class="math inline">\(\quad\)</span> 1 <span class="math inline">\(\quad\)</span> 1</td>
 </tr>
 </tbody>
 </table>
@@ -1479,106 +1515,108 @@ p \land q \rightarrow \neg r \lor \neg s &amp; \equiv &amp; (p \land q) \rightar
 </figure>
 </div>
 <p><em>Зураг 1.3 1.2-р зургийн дижитал хэлхээг дагах нь</em></p>
-<p><strong>Шийдэл.</strong> Бидний хийх алхмуудыг 1.3-р зурагт үзүүлэв. Хаалга бүрийн гаралтын хэсэгт бид хаалганы үйлдлийг хэрэглэснээр олдсон утасны логик утгыг жагсаав. Эцэст нь бид (S)-ийн илэрхийлэлийг олно. Энэ нь</p>
-<p>[ (P Q) (P R) = S. ]</p>
+<p><strong>Шийдэл.</strong> Бидний хийх алхмуудыг 1.3-р зурагт үзүүлэв. Хаалга бүрийн гаралтын хэсэгт бид хаалганы үйлдлийг хэрэглэснээр олдсон утасны логик утгыг жагсаав. Эцэст нь бид <span class="math inline">\(S\)</span>-ийн илэрхийлэлийг олно. Энэ нь</p>
+<p><span class="math display">\[
+(\neg P \lor Q) \land (P \lor R) = S.
+\]</span></p>
 <p>Энэ илэрхийллийн, улмаар хэлхээний оролт-гаралтын хүснэгт нь 1.5-р хүснэгтэд үзүүлсэн хүснэгт юм.</p>
 </blockquote>
 <p>1.16-р жишээнээс бид дижитал хэлхээ нь гаралтыг оролтын хувьд тодорхойлсон логик илэрхийлэлтэй харгалзаж байгааг харж байна. Үүний дагуу ийм илэрхийлэл өгөгдсөн үед бид үүнийг хэрэгжүүлдэг хэлхээг зохиох ёстой.</p>
 <blockquote class="blockquote">
 <p><strong>ЖИШЭЭ 1.17</strong></p>
-<p>((P Q R) (Q R) = S) илэрхийллийг хэрэгжүүлдэг дижитал хэлхээг зур.</p>
+<p><span class="math inline">\((P \land \neg Q \land R) \lor (Q \land \neg R) = S\)</span> илэрхийллийг хэрэгжүүлдэг дижитал хэлхээг зур.</p>
 <p><strong>Шийдэл.</strong> Тохирох хэлхээг 1.4-р зурагт үзүүлэв.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="fig_1_4.png" class="img-fluid figure-img"></p>
-<figcaption>Зураг 1.4 ((P Q R) (Q R) = S)-г хэрэгжүүлсэн хэлхээ</figcaption>
+<figcaption>Зураг 1.4 <span class="math inline">\((P \land \neg Q \land R) \lor (Q \land \neg R) = S\)</span>-г хэрэгжүүлсэн хэлхээ</figcaption>
 </figure>
 </div>
-<p><em>Зураг 1.4 ((P Q R) (Q R) = S)-г хэрэгжүүлсэн хэлхээ</em></p>
+<p><em>Зураг 1.4 <span class="math inline">\((P \land \neg Q \land R) \lor (Q \land \neg R) = S\)</span>-г хэрэгжүүлсэн хэлхээ</em></p>
 </blockquote>
 </section>
 <section id="хэсгийн-дасгалууд" class="level3">
 <h3 class="anchored" data-anchor-id="хэсгийн-дасгалууд">1.1 Хэсгийн дасгалууд</h3>
 <p>1-ээс 4 хүртэлх дасгалуудад өгөгдсөн өгүүлбэр өгүүлбэр мөн эсэхийг тодорхойл. Хэрэв тийм бол үнэн эсвэл худал эсэхийг тодорхойл.</p>
 <ol type="1">
-<li>(-1) нь бүхэл тоо.</li>
-<li>(1 + 2 + 3 = 5).</li>
-<li>Хэрэв (&gt; 0) бол ()-г тооцоол.</li>
+<li><span class="math inline">\(-1\)</span> нь бүхэл тоо.</li>
+<li><span class="math inline">\(1 + 2 + 3 = 5\)</span>.</li>
+<li>Хэрэв <span class="math inline">\(\pi &gt; 0\)</span> бол <span class="math inline">\(\sqrt{\pi}\)</span>-г тооцоол.</li>
 <li>Энэ өгүүлбэрийн үгүйсгэл нь худал юм.</li>
 </ol>
 <p>5-аас 10 хүртэлх дасгалуудад өгөгдсөн өгүүлбэрийн хэлбэрүүдийн үнэний хүснэгтийг гарга.</p>
 <ol start="5" type="1">
-<li>(p q).</li>
-<li>(p (q r)).</li>
-<li>(p (q r)).</li>
-<li>((p q) r).</li>
-<li>((p q) r).</li>
-<li>(p (q r)).</li>
+<li><span class="math inline">\(p \lor \neg q\)</span>.</li>
+<li><span class="math inline">\(\neg p \land (q \lor \neg r)\)</span>.</li>
+<li><span class="math inline">\(\neg p \rightarrow (q \land r)\)</span>.</li>
+<li><span class="math inline">\((p \lor \neg q) \rightarrow r\)</span>.</li>
+<li><span class="math inline">\((p \rightarrow q) \lor r\)</span>.</li>
+<li><span class="math inline">\(p \lor (\neg q \rightarrow r)\)</span>.</li>
 </ol>
 <p>11-ээс 14 хүртэлх дасгалуудад Microsoft Excel зэрэг хүснэгтийн програм хангамжийг ашиглан өгөгдсөн хоёр өгүүлбэрийн хэлбэрийн үнэний хүснэгтийг гарга. Тэдгээр нь хэрхэн ялгаатай вэ? Үүнийг гараар хийж болно.</p>
 <ol start="11" type="1">
-<li><p>(p q) ба (p q).</p></li>
-<li><p>(p q) ба ((p q)).</p></li>
-<li><p>(p (q r)) ба (p (q r)).</p></li>
-<li><p>(p (q r)) ба (p (q r)).</p></li>
-<li><p>(p p) нь тавтологи болохыг харуул.</p></li>
-<li><p>(p (q p)) нь зөрчил болохыг харуул.</p></li>
+<li><p><span class="math inline">\(p \lor \neg q\)</span> ба <span class="math inline">\(p \rightarrow \neg q\)</span>.</p></li>
+<li><p><span class="math inline">\(\neg p \land q\)</span> ба <span class="math inline">\(\neg(p \land q)\)</span>.</p></li>
+<li><p><span class="math inline">\(p \rightarrow (q \lor r)\)</span> ба <span class="math inline">\(p \rightarrow (q \lor \neg r)\)</span>.</p></li>
+<li><p><span class="math inline">\(\neg p \land (q \lor r)\)</span> ба <span class="math inline">\(\neg p \land (q \lor \neg r)\)</span>.</p></li>
+<li><p><span class="math inline">\(p \rightarrow p\)</span> нь тавтологи болохыг харуул.</p></li>
+<li><p><span class="math inline">\(p \land (q \lor \neg p)\)</span> нь зөрчил болохыг харуул.</p></li>
 </ol>
 <p>17-оос 34 хүртэлх дасгалуудад тодорхойлсон логик эквивалентуудыг батал.</p>
 <ol start="17" type="1">
-<li><strong>(a)</strong> Давхар үгүйсгэл (Теорем 1.1(a)): (p p). <strong>(b)</strong> Теорем 1.2(a): (t f) ба (f t).</li>
-<li><strong>(a)</strong> Теорем 1.2(b): (p t p) ба (p t t). <strong>(b)</strong> Теорем 1.2(c): (p f f) ба (p f p).</li>
-<li>Теорем 1.2(e): (t p p) ба (p t t).</li>
-<li>Теорем 1.2(e): (p f p) ба (f p t).</li>
-<li>(p q (p q)).</li>
-<li>(p q (p q)).</li>
-<li>(p q q p).</li>
-<li>(p q p t).</li>
-<li>() ба ()-ийн ассоциатив чанар: ((p q) r p (q r)) ба ((p q) r p (q r)).</li>
-<li>() ба ()-ийн коммутатив чанар: (p q q p) ба (p q q p).</li>
-<li>()-ийн ассоциатив чанар: ((p q) r p (q r)).</li>
-<li>()-ийн коммутатив чанар: (p q q p).</li>
-<li>() ба ()-ийн тархалт: (p (q r) (p q) (p r)) ба (p (q r) (p q) (p r)).</li>
-<li>() ба ()-ийн тархалт: (p (q r) (p q) (p r)). Мөн 37-р дасгалыг үз.</li>
-<li>Де Морганы хуулиуд: ((p q) p q) ба ((p q) p q).</li>
-<li>Шингээлтийн дүрмүүд: ((p q) (p q p)) ба ((p q) (p q q)) нь тавтологи юм.</li>
-<li>((p q) p q).</li>
-<li>If-then өгүүлбэрийн урвуу нь түүний эсрэг өгүүлбэртэй эквивалент юм. Өөрөөр хэлбэл, ((p q) q p).</li>
+<li><strong>(a)</strong> Давхар үгүйсгэл (Теорем 1.1(a)): <span class="math inline">\(\neg\neg p \equiv p\)</span>. <strong>(b)</strong> Теорем 1.2(a): <span class="math inline">\(\neg t \equiv f\)</span> ба <span class="math inline">\(\neg f \equiv t\)</span>.</li>
+<li><strong>(a)</strong> Теорем 1.2(b): <span class="math inline">\(p \land t \equiv p\)</span> ба <span class="math inline">\(p \lor t \equiv t\)</span>. <strong>(b)</strong> Теорем 1.2(c): <span class="math inline">\(p \land f \equiv f\)</span> ба <span class="math inline">\(p \lor f \equiv p\)</span>.</li>
+<li>Теорем 1.2(e): <span class="math inline">\(t \rightarrow p \equiv p\)</span> ба <span class="math inline">\(p \rightarrow t \equiv t\)</span>.</li>
+<li>Теорем 1.2(e): <span class="math inline">\(p \rightarrow f \equiv \neg p\)</span> ба <span class="math inline">\(f \rightarrow p \equiv t\)</span>.</li>
+<li><span class="math inline">\(p \lor q \equiv \neg(\neg p \land \neg q)\)</span>.</li>
+<li><span class="math inline">\(p \land q \equiv \neg(\neg p \lor \neg q)\)</span>.</li>
+<li><span class="math inline">\(p \rightarrow q \equiv \neg q \rightarrow \neg p\)</span>.</li>
+<li><span class="math inline">\(p \land q \rightarrow p \equiv t\)</span>.</li>
+<li><span class="math inline">\(\land\)</span> ба <span class="math inline">\(\lor\)</span>-ийн ассоциатив чанар: <span class="math inline">\((p \land q) \land r \equiv p \land (q \land r)\)</span> ба <span class="math inline">\((p \lor q) \lor r \equiv p \lor (q \lor r)\)</span>.</li>
+<li><span class="math inline">\(\land\)</span> ба <span class="math inline">\(\lor\)</span>-ийн коммутатив чанар: <span class="math inline">\(p \land q \equiv q \land p\)</span> ба <span class="math inline">\(p \lor q \equiv q \lor p\)</span>.</li>
+<li><span class="math inline">\(\oplus\)</span>-ийн ассоциатив чанар: <span class="math inline">\((p \oplus q) \oplus r \equiv p \oplus (q \oplus r)\)</span>.</li>
+<li><span class="math inline">\(\oplus\)</span>-ийн коммутатив чанар: <span class="math inline">\(p \oplus q \equiv q \oplus p\)</span>.</li>
+<li><span class="math inline">\(\land\)</span> ба <span class="math inline">\(\lor\)</span>-ийн тархалт: <span class="math inline">\(p \land (q \lor r) \equiv (p \land q) \lor (p \land r)\)</span> ба <span class="math inline">\(p \lor (q \land r) \equiv (p \lor q) \land (p \lor r)\)</span>.</li>
+<li><span class="math inline">\(\land\)</span> ба <span class="math inline">\(\oplus\)</span>-ийн тархалт: <span class="math inline">\(p \land (q \oplus r) \equiv (p \land q) \oplus (p \land r)\)</span>. Мөн 37-р дасгалыг үз.</li>
+<li>Де Морганы хуулиуд: <span class="math inline">\(\neg(p \land q) \equiv \neg p \lor \neg q\)</span> ба <span class="math inline">\(\neg(p \lor q) \equiv \neg p \land \neg q\)</span>.</li>
+<li>Шингээлтийн дүрмүүд: <span class="math inline">\((p \rightarrow q) \rightarrow (p \land q \leftrightarrow p)\)</span> ба <span class="math inline">\((p \rightarrow q) \rightarrow (p \lor q \leftrightarrow q)\)</span> нь тавтологи юм.</li>
+<li><span class="math inline">\(\neg(p \oplus q) \equiv p \leftrightarrow q\)</span>.</li>
+<li>If-then өгүүлбэрийн урвуу нь түүний эсрэг өгүүлбэртэй эквивалент юм. Өөрөөр хэлбэл, <span class="math inline">\((\neg p \rightarrow \neg q) \equiv q \rightarrow p\)</span>.</li>
 </ol>
 <p>35-аас 40 хүртэлх дасгалуудад өгөгдсөн өгүүлбэрийн хэлбэрүүд логик эквивалент мөн эсэхийг тодорхойл. Хариултаа зөвтгө.</p>
 <ol start="35" type="1">
-<li>((p q) r) ба (p (q r)).</li>
-<li>((p q) r) ба (p (q r)).</li>
-<li>(p (q r)) ба ((p q) (p r)).</li>
-<li>((p q)) ба (p q).</li>
-<li>(p q) ба (p q).</li>
-<li>((p q)) ба (p q).</li>
+<li><span class="math inline">\((p \rightarrow q) \rightarrow r\)</span> ба <span class="math inline">\(p \rightarrow (q \rightarrow r)\)</span>.</li>
+<li><span class="math inline">\((p \leftrightarrow q) \leftrightarrow r\)</span> ба <span class="math inline">\(p \leftrightarrow (q \leftrightarrow r)\)</span>.</li>
+<li><span class="math inline">\(p \oplus (q \land r)\)</span> ба <span class="math inline">\((p \oplus q) \land (p \oplus r)\)</span>.</li>
+<li><span class="math inline">\(\neg(p \oplus q)\)</span> ба <span class="math inline">\(\neg p \oplus \neg q\)</span>.</li>
+<li><span class="math inline">\(p \oplus q\)</span> ба <span class="math inline">\(\neg p \oplus \neg q\)</span>.</li>
+<li><span class="math inline">\(\neg(p \oplus q)\)</span> ба <span class="math inline">\(\neg p \oplus q\)</span>.</li>
 </ol>
 <p>41-ээс 48 хүртэлх дасгалуудад өгөгдсөн if-then өгүүлбэрийн хэлбэрийн хувьд (a) эсрэг өгүүлбэрийг (converse), (b) эсрэгээр нь (contrapositive), (c) урвуу (inverse), (d) үгүйсгэлийг олж, хялбарчил.</p>
 <ol start="41" type="1">
-<li><p>(p q).</p></li>
-<li><p>(p q).</p></li>
-<li><p>(p q r).</p></li>
-<li><p>(p q r).</p></li>
+<li><p><span class="math inline">\(p \rightarrow \neg q\)</span>.</p></li>
+<li><p><span class="math inline">\(\neg p \rightarrow \neg q\)</span>.</p></li>
+<li><p><span class="math inline">\(p \land \neg q \rightarrow r\)</span>.</p></li>
+<li><p><span class="math inline">\(p \lor q \rightarrow \neg r\)</span>.</p></li>
 <li><p>Хэрэв Тэдийн дундаж 60-аас бага бол Тэд унана.</p></li>
 <li><p>Хэрэв Илиа машинаа авч чадвал Илиа машин худалдаж авна.</p></li>
 <li><p>Хэрэв Жорж сайн мэдэрч байвал Жорж кино үзэх эсвэл бүжиглэхээр явна.</p></li>
 <li><p>Хэрэв Анна түүх, сэтгэл зүйн хичээлээр унаж байгаа бол Анна төгсөхгүй.</p></li>
-<li><p>(p q)-ийн үгүйсгэлийг ол.</p></li>
-<li><p>(p q)-ийн үгүйсгэлийг ол.</p></li>
+<li><p><span class="math inline">\(p \lor \neg q\)</span>-ийн үгүйсгэлийг ол.</p></li>
+<li><p><span class="math inline">\(\neg p \land \neg q\)</span>-ийн үгүйсгэлийг ол.</p></li>
 <li><p>“Хелен-ийн дундаж хамгийн багадаа 90, Хелен А үнэлгээ авч байна.” гэсэн өгүүлбэрийг үгүйсгэ.</p></li>
 <li><p>“Рафаэль инээмсэглэхгүй байгаа, гэхдээ Рафаэль мэхэлж байна.” гэсэн өгүүлбэрийг үгүйсгэ.</p></li>
-<li><p>(p q r p (q r)) логик эквивалентыг <strong>(a)</strong> үнэний хүснэгт ашиглан батал. <strong>(b)</strong> 1.10-р жишээ болон бусад ижилтгэлүүдийн үр дүнг ашиглан батал.</p></li>
-<li><p>((p q) (p r) p (q r)) логик эквивалентыг <strong>(a)</strong> үнэний хүснэгт ашиглан батал. <strong>(b)</strong> 1.10-р жишээ болон бусад ижилтгэлүүдийн үр дүнг ашиглан батал.</p></li>
+<li><p><span class="math inline">\(p \land q \rightarrow r \equiv \neg p \lor (q \rightarrow r)\)</span> логик эквивалентыг <strong>(a)</strong> үнэний хүснэгт ашиглан батал. <strong>(b)</strong> 1.10-р жишээ болон бусад ижилтгэлүүдийн үр дүнг ашиглан батал.</p></li>
+<li><p><span class="math inline">\((p \rightarrow q) \rightarrow (p \land r) \equiv p \land (q \rightarrow r)\)</span> логик эквивалентыг <strong>(a)</strong> үнэний хүснэгт ашиглан батал. <strong>(b)</strong> 1.10-р жишээ болон бусад ижилтгэлүүдийн үр дүнг ашиглан батал.</p></li>
 </ol>
 <p>55-аас 62 хүртэлх дасгалуудад өгөгдсөн логик эквивалентуудыг үнэний хүснэгт гаргахгүйгээр, харин аль хэдийн тогтоосон ижилтгэлүүдийг ашиглан батал.</p>
 <ol start="55" type="1">
-<li>(p (q r s) (p q) (p r) (p s)).</li>
-<li>((p q r) p q r).</li>
-<li>((p q r) (p q r) p r).</li>
-<li>((p q r) (p q r) p r).</li>
-<li>(p (q r) (p q) (p r)).</li>
-<li>((p (q r)) p (q r)). <em>61. ((p q) (p q r) p q). </em>62. ((p q) (p q r) p q). <em>63. () үйлдэл нь (, ), ба () үйлдлүүдийн аль нэгтэй хамт нөгөө хоёрыг үүсгэж чадахыг харуул. </em>Заавар:* 1.10-р жишээ үүний нэг хэсгийг гүйцэтгэдэг. *64. () үйлдлийг (, ), ба () үйлдлүүдээс үүсгэж болох уу? Тайлбарла.</li>
+<li><span class="math inline">\(p \land (q \lor r \lor s) \equiv (p \land q) \lor (p \land r) \lor (p \land s)\)</span>.</li>
+<li><span class="math inline">\(\neg(p \lor q \lor r) \equiv \neg p \land \neg q \land \neg r\)</span>.</li>
+<li><span class="math inline">\((p \land q \land \neg r) \lor (p \land \neg q \land \neg r) \equiv p \land \neg r\)</span>.</li>
+<li><span class="math inline">\((p \land q \land \neg r) \lor (p \land \neg q \land \neg r) \equiv p \land \neg r\)</span>.</li>
+<li><span class="math inline">\(p \land (\neg q \lor r) \equiv (p \land \neg q) \lor (p \land r)\)</span>.</li>
+<li><span class="math inline">\(\neg(p \lor (q \land r)) \equiv \neg p \land (\neg q \lor \neg r)\)</span>. <em>61. <span class="math inline">\((p \land q) \lor (p \land q \land r) \equiv p \land q\)</span>. </em>62. <span class="math inline">\((p \lor q) \land (p \lor q \lor r) \equiv p \lor q\)</span>. <em>63. <span class="math inline">\(\oplus\)</span> үйлдэл нь <span class="math inline">\(\lor, \land\)</span>, ба <span class="math inline">\(\rightarrow\)</span> үйлдлүүдийн аль нэгтэй хамт нөгөө хоёрыг үүсгэж чадахыг харуул. </em>Заавар:* 1.10-р жишээ үүний нэг хэсгийг гүйцэтгэдэг. *64. <span class="math inline">\(\lor\)</span> үйлдлийг <span class="math inline">\(\oplus, \neg\)</span>, ба <span class="math inline">\(\land\)</span> үйлдлүүдээс үүсгэж болох уу? Тайлбарла.</li>
 </ol>
 <p>65-аас 68 хүртэлх дасгалуудад (a) Зурган дээрх хэлхээг дагаж, гаралтын илэрхийлэлийг оролтын хувьд тодорхойл. (b) Оролт-гаралтын хүснэгт гарга. (c) Ижил оролт-гаралтын хүснэгтийг цөөн үндсэн хаалга ашиглан хийж болох уу? Тайлбарла.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -1589,10 +1627,10 @@ p \land q \rightarrow \neg r \lor \neg s &amp; \equiv &amp; (p \land q) \rightar
 </div>
 <p>69-ээс 72 хүртэлх дасгалуудад өгөгдсөн илэрхийллүүдийг хэрэгжүүлдэг хэлхээг зур.</p>
 <ol start="69" type="1">
-<li>((P Q) R = S).</li>
-<li>((P (Q R)) = S).</li>
-<li>(P Q = S). Үүнийг дараах байдлаар гүйцэтгэ: <strong>(a)</strong> 1.2-р тодорхойлолт дахь ()-ийн тодорхойлолтыг ашиглан. <strong>(b)</strong> 1.9-р жишээнд өгөгдсөн ()-ийн шинж чанарыг ашиглан. Аль арга нь цөөн хаалга ашигладаг вэ?</li>
-<li><strong>(a)</strong> 1.10-р жишээнд өгөгдсөн ()-ийн шинж чанарыг ашиглан (P Q = S). <strong>(b)</strong> (a) хэсгийн санааг ашиглан (P Q = S).</li>
+<li><span class="math inline">\(\neg(P \land Q) \lor R = S\)</span>.</li>
+<li><span class="math inline">\(\neg(P \lor (Q \land R)) = S\)</span>.</li>
+<li><span class="math inline">\(P \oplus Q = S\)</span>. Үүнийг дараах байдлаар гүйцэтгэ: <strong>(a)</strong> 1.2-р тодорхойлолт дахь <span class="math inline">\(\oplus\)</span>-ийн тодорхойлолтыг ашиглан. <strong>(b)</strong> 1.9-р жишээнд өгөгдсөн <span class="math inline">\(\oplus\)</span>-ийн шинж чанарыг ашиглан. Аль арга нь цөөн хаалга ашигладаг вэ?</li>
+<li><strong>(a)</strong> 1.10-р жишээнд өгөгдсөн <span class="math inline">\(\rightarrow\)</span>-ийн шинж чанарыг ашиглан <span class="math inline">\(P \rightarrow Q = S\)</span>. <strong>(b)</strong> (a) хэсгийн санааг ашиглан <span class="math inline">\(P \leftrightarrow Q = S\)</span>.</li>
 </ol>
 
 
