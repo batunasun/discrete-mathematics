@@ -30,6 +30,16 @@ book:
         - 2-5.qmd
         - 2-6.qmd
     
+    - part: 4.qmd
+      chapters:
+        - 4-1.qmd
+        - 4-2.qmd
+        - 4-3.qmd
+        - 4-4.qmd
+        - 4-5.qmd
+        - 4-6.qmd
+        - 4-7.qmd
+
     - part: 8.qmd
       chapters:
         - 8-1.qmd
