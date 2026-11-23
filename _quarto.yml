@@ -11,6 +11,7 @@ book:
   #favicon: images/must-logo.png
   sidebar:
     logo: images/must-logo.png
+
   chapters:
     - index.qmd
     - part: "1 Логик ба Олонлог"
@@ -36,7 +37,7 @@ book:
         - 8-5.qmd
         - 8-6.qmd
         #- appendix.qmd
-
+number-sections: false
 
 format:
   html:
