@@ -21,6 +21,16 @@ book:
         - 1-1.qmd
         - 1-5.qmd
     
+    - part: 2.qmd
+      chapters:
+        - 2-1.qmd
+        - 2-2.qmd
+        - 2-3.qmd
+        - 2-4.qmd
+        - 2-5.qmd
+
+
+
     - part: "2. Энгийн баталгааны арга"
       chapters:
         - 2-1.qmd
