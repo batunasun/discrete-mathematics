@@ -293,7 +293,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-3.html"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4. Бүхэл тоон индек</a></li><li class="breadcrumb-item"><a href="./4-3.html"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -401,8 +401,8 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text" id="quarto-sidebar-section-3-label">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</span></a>
-            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: 4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: 4. Бүхэл тоон индек">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
             </button> 
       </div>
@@ -439,7 +439,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД</span></a>
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн давтлага бодлогууд</span></a>
   </div>
 </li>
       </ul>
@@ -503,7 +503,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-3.html"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4. Бүхэл тоон индек</a></li><li class="breadcrumb-item"><a href="./4-3.html"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></h1>
 </div>
@@ -522,70 +522,72 @@ window.Quarto = {
 </header>
 
 
-<p>Ихэнхдээ бид <span class="math display">\[ \forall \text{ бүхэл тоо } n \ge a, \ P(n) \quad (4.14) \]</span> хэлбэрийн мэдэгдлүүдийг батлахыг хүсдэг. Энд (a) нь ямар нэг тогтмол бүхэл тоо (ихэвчлэн (a = 0) эсвэл (1)), (P(n)) нь (n)-ээс хамаарах мэдэгдэл юм. Санаж явах хоёр жишээ бол: <span class="math display">\[ \forall n \ge 2, \ n^2 &gt; n. \quad (4.15) \]</span> <span class="math display">\[ \forall n \ge 0, \ 2^n \ge n + 1. \quad (4.16) \]</span></p>
-<p>Контекстээс (n) бүхэл тоотой ажиллаж байгаа нь тодорхой бол бид мэдэгдлүүддээ үүнийг дурдахгүй байж болно. Мөн (4.14) хэлбэрийн мэдэгдлүүдийг мэдэгдлүүдийн дараалал гэж үзэж болно. Жишээлбэл, (4.15) нь <span class="math display">\[ 2^2 &gt; 2, \ 3^2 &gt; 3, \ 4^2 &gt; 4, \ 5^2 &gt; 5, \ 6^2 &gt; 6, \dots \]</span> дараалал юм.</p>
-<p>Заримдаа (4.14) хэлбэрийн мэдэгдлийг шууд баталж болно. Өөрөөр хэлбэл, (P(n))-ийг (n)-ээс үл хамааран батлах боломжтой байж магадгүй. Жишээлбэл, (4.15) мэдэгдэлд (n ) гэсэн хязгаарлалт нь (n &gt; 1)-тэй эквивалент юм. Үүний хоёр талыг (n)-ээр үржүүлбэл (n^2 &gt; n) тэнцэтгэл биш гарна. Ийнхүү (4.15) мэдэгдлийн баталгаа шууд гарна. Гэсэн хэдий ч (4.14) хэлбэрийн олон мэдэгдлийг, тухайлбал (4.16) мэдэгдлийг тийм амархан баталж чадахгүй.</p>
+<p>Ихэнхдээ бид <span class="math display">\[ \forall \text{ бүхэл тоо } n \ge a, \ P(n) \quad (4.14) \]</span> хэлбэрийн мэдэгдлүүдийг батлахыг хүсдэг. Энд <span class="math inline">\(a\)</span> нь ямар нэг тогтмол бүхэл тоо (ихэвчлэн <span class="math inline">\(a = 0\)</span> эсвэл <span class="math inline">\(1\)</span>), <span class="math inline">\(P(n)\)</span> нь <span class="math inline">\(n\)</span>-ээс хамаарах мэдэгдэл юм. Санаж явах хоёр жишээ бол: <span class="math display">\[ \forall n \ge 2, \ n^2 &gt; n. \quad (4.15) \]</span> <span class="math display">\[ \forall n \ge 0, \ 2^n \ge n + 1. \quad (4.16) \]</span></p>
+<p>Контекстээс <span class="math inline">\(n\)</span> бүхэл тоотой ажиллаж байгаа нь тодорхой бол бид мэдэгдлүүддээ үүнийг дурдахгүй байж болно. Мөн (4.14) хэлбэрийн мэдэгдлүүдийг мэдэгдлүүдийн дараалал гэж үзэж болно. Жишээлбэл, (4.15) нь <span class="math display">\[ 2^2 &gt; 2, \ 3^2 &gt; 3, \ 4^2 &gt; 4, \ 5^2 &gt; 5, \ 6^2 &gt; 6, \dots \]</span> дараалал юм.</p>
+<p>Заримдаа (4.14) хэлбэрийн мэдэгдлийг шууд баталж болно. Өөрөөр хэлбэл, <span class="math inline">\(P(n)\)</span>-ийг <span class="math inline">\(n\)</span>-ээс үл хамааран батлах боломжтой байж магадгүй. Жишээлбэл, (4.15) мэдэгдэлд <span class="math inline">\(n \ge 2\)</span> гэсэн хязгаарлалт нь <span class="math inline">\(n &gt; 1\)</span>-тэй эквивалент юм. Үүний хоёр талыг <span class="math inline">\(n\)</span>-ээр үржүүлбэл <span class="math inline">\(n^2 &gt; n\)</span> тэнцэтгэл биш гарна. Ийнхүү (4.15) мэдэгдлийн баталгаа шууд гарна. Гэсэн хэдий ч (4.14) хэлбэрийн олон мэдэгдлийг, тухайлбал (4.16) мэдэгдлийг тийм амархан баталж чадахгүй.</p>
 <p>(4.16) мэдэгдлийн хувьд хэд хэдэн тохиолдлыг шалгах нь мэдээж хялбар. <span class="math display">\[ \text{For } n = 0, \quad 2^0 = 1 \ge 0 + 1. \]</span> <span class="math display">\[ \text{For } n = 1, \quad 2^1 = 2 \ge 1 + 1. \]</span> <span class="math display">\[ \text{For } n = 2, \quad 2^2 = 4 \ge 2 + 1. \]</span> <span class="math display">\[ \text{For } n = 3, \quad 2^3 = 8 \ge 3 + 1. \]</span> Түүнчлэн, бид хүссэн хэмжээгээрээ олон тохиолдлыг шалгаж байх тусам энэ нь үргэлжлүүлэн ажиллана гэсэн мэдрэмж төрдөг. Гэсэн хэдий ч бид зөвхөн төгсгөлөг олон тохиолдлыг л шалгаж чадах тул энэ нь (4.16) мэдэгдлийн баталгаа болж чадахгүй. Тиймээс математик индукц гэх мэт илүү хүчирхэг хэрэгсэл шаардлагатай байна. Индукцаар батлах аргын тоймыг энд үзүүлэв.</p>
 <blockquote class="blockquote">
 <p><strong>ТОЙМ 4.1</strong> (Математик индукцаар батлах).</p>
-<p>Батлах зүйл: (n a, &nbsp;P(n)).</p>
-<p><strong>Индукцаар батлах нь:</strong> 1. <strong>Суурь тохиолдол:</strong> (P(a), , P(b)) үнэн болохыг харуул. 2. <strong>Индукцийн алхам:</strong> (k b), хэрэв (P(k)) үнэн бол (P(k + 1)) үнэн болохыг харуул. Өөрөөр хэлбэл, (a) (k b) ба (P(k)) үнэн гэж үзье. (b) (P(k + 1)) үнэн болохыг харуул.</p>
+<p>Батлах зүйл: <span class="math inline">\(\forall n \ge a, \ P(n)\)</span>.</p>
+<p><strong>Индукцаар батлах нь:</strong> 1. <strong>Суурь тохиолдол:</strong> <span class="math inline">\(P(a), \dots, P(b)\)</span> үнэн болохыг харуул. 2. <strong>Индукцийн алхам:</strong> <span class="math inline">\(\forall k \ge b\)</span>, хэрэв <span class="math inline">\(P(k)\)</span> үнэн бол <span class="math inline">\(P(k + 1)\)</span> үнэн болохыг харуул. Өөрөөр хэлбэл, (a) <span class="math inline">\(k \ge b\)</span> ба <span class="math inline">\(P(k)\)</span> үнэн гэж үзье. (b) <span class="math inline">\(P(k + 1)\)</span> үнэн болохыг харуул.</p>
 </blockquote>
-<p>Тойм 4.1-д 2a ба 2b алхмууд нь 2-р алхамд дурдсан хэрэв-тэгвэл мэдэгдлийн стандарт баталгааны хүлээгдэж буй алхмууд байгаа ч 2a алхам онцгой дурдагдах ёстой. Үүнийг <em>индукцийн таамаглал</em> гэж нэрлэдэг. Индукцээр батлах хүч нь (P(k))-ийн үнэн нь (P(k + 1))-ийн үнэнийг илэрхийлдэг гэдгийг харуулдаг индукцийн алхмаас гардаг. Маш энгийнээр хэлбэл, энэ нь (P(k))-ийн үнэн (P(k + 1)) руу дамждаг болохыг тогтоодог. Зөвхөн ганц суурь тохиолдлын хувьд мэдэгдлийн үнэнийг харуулдаг индукцийн баталгааг шалгах шаардлагатай бөгөөд Жишээ 4.21-д (b = a) байх ба яагаад заримдаа (b &gt; a)-г ашигладаг шалтгааныг бид харах болно.</p>
+<p>Тойм 4.1-д 2a ба 2b алхмууд нь 2-р алхамд дурдсан хэрэв-тэгвэл мэдэгдлийн стандарт баталгааны хүлээгдэж буй алхмууд байгаа ч 2a алхам онцгой дурдагдах ёстой. Үүнийг <em>индукцийн таамаглал</em> гэж нэрлэдэг. Индукцээр батлах хүч нь <span class="math inline">\(P(k)\)</span>-ийн үнэн нь <span class="math inline">\(P(k + 1)\)</span>-ийн үнэнийг илэрхийлдэг гэдгийг харуулдаг индукцийн алхмаас гардаг. Маш энгийнээр хэлбэл, энэ нь <span class="math inline">\(P(k)\)</span>-ийн үнэн <span class="math inline">\(P(k + 1)\)</span> руу дамждаг болохыг тогтоодог. Зөвхөн ганц суурь тохиолдлын хувьд мэдэгдлийн үнэнийг харуулдаг индукцийн баталгааг шалгах шаардлагатай бөгөөд Жишээ 4.21-д <span class="math inline">\(b = a\)</span> байх ба яагаад заримдаа <span class="math inline">\(b &gt; a\)</span>-г ашигладаг шалтгааныг бид харах болно.</p>
 <p>Индукц яагаад ажилладаг талаар ярилцахаасаа өмнө үүнийг тодорхой нэг жишээнд хэрэглэж үзэх нь тустай байж магадгүй. (4.16) мэдэгдлийн дараах баталгаанд Тойм 4.1-ийн ерөнхий бүтэц хэрхэн дагаж мөрдөгдөж байгааг анхаарна уу.</p>
 <blockquote class="blockquote">
-<p><strong>ЖИШЭЭ 4.18</strong> Харуул: (n , &nbsp;2^n n + 1).</p>
+<p><strong>ЖИШЭЭ 4.18</strong> Харуул: <span class="math inline">\(\forall n \ge 0, \ 2^n \ge n + 1\)</span>.</p>
 <p><em>Баталгаа.</em></p>
 <p>(Индукцаар)</p>
-<p><em>Суурь тохиолдол:</em> ((n = 0)) (2^0 = 1 + 1) гэдгийг харахад хялбар.</p>
-<p><em>Индукцийн алхам:</em> (k ) ба (2^k k + 1) гэж үзье. (Зорилго: (2^{k+1} (k + 1) + 1).) Ажиглавал <span class="math display">\[
+<p><em>Суурь тохиолдол:</em> (<span class="math inline">\(n = 0\)</span>) <span class="math inline">\(2^0 = 1 \ge 0 + 1\)</span> гэдгийг харахад хялбар.</p>
+<p><em>Индукцийн алхам:</em> <span class="math inline">\(k \ge 0\)</span> ба <span class="math inline">\(2^k \ge k + 1\)</span> гэж үзье. (Зорилго: <span class="math inline">\(2^{k+1} \ge (k + 1) + 1\)</span>.) Ажиглавал <span class="math display">\[
 \begin{aligned}
 2^{k+1} &amp;= 2(2^k) \\
 &amp;\ge 2(k + 1) \qquad\qquad \longleftarrow \text{Индукцийн таамаглалаар} \\
 &amp;= (k + 1) + (k + 1) \\
 &amp;\ge (k + 1) + 1.
 \end{aligned}
-\]</span> Өөрөөр хэлбэл, (2^{k+1} (k + 1) + 1).</p>
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\(2^{k+1} \ge (k + 1) + 1\)</span>.</p>
 </blockquote>
 <p>Тэнцэтгэл ба тэнцэтгэл бишүүдийн харуулсан цуваанд эхний мөрийн зүүн гар талыг зүүн гар талын мөр бүр дээр хуулахыг заагаагүй болно. Үүний оронд мөр бүрийн баруун гар талыг дараагийн мөрийн зүүн гар тал гэж үзэх хэрэгтэй. Маш энгийнээр хэлбэл, цувааг бүхэлд нь нэг мөрөнд байгаа мэт унших хэрэгтэй. Хэд хэдэн мөрөнд харуулах энэхүү дүрэм нь уншихад хялбар болгох зорилготой. Энэ хэв маягийг номын туршид давтсан болно.</p>
-<p>Шаардлагагүй ч гэсэн Жишээ 4.18-д зорилгоо илэрхийлсэн хаалттай тайлбар нь сайн санаа юм. Илүү төвөгтэй жишээнүүдэд зорилгоо тодорхой бичсэн байх нь баталгаа бүтээхэд маш их тусалдаг. Зорилгодоо хүрэх явцад (2(2^k) (k + 1)) тэнцэтгэл бишийг ашигласныг анхаарна уу. Өөрөөр хэлбэл, бид индукцийн таамаглалыг (энэ жишээнд хоёр удаа) ашигласан. (P(k))-ийн үнэнийг (P(k + 1))-ийн баталгаанд ашиглах нь индукцээр батлах бүх баталгааны онцлог юм. (k + (k + 1) + 1 (k + 1) + 1) гэсэн эцсийн тэнцэтгэл биш нь (k ) гэсэн таамаглалаас гардаг, учир нь (k + (k + 1) + 1) нийлбэрээс эхний (k) гишүүнийг хассанаар хэмжээ нь заавал нэмэгдэхгүй.</p>
+<p>Шаардлагагүй ч гэсэн Жишээ 4.18-д зорилгоо илэрхийлсэн хаалттай тайлбар нь сайн санаа юм. Илүү төвөгтэй жишээнүүдэд зорилгоо тодорхой бичсэн байх нь баталгаа бүтээхэд маш их тусалдаг. Зорилгодоо хүрэх явцад <span class="math inline">\(2(2^k) \ge 2(k + 1)\)</span> тэнцэтгэл бишийг ашигласныг анхаарна уу. Өөрөөр хэлбэл, бид индукцийн таамаглалыг (энэ жишээнд хоёр удаа) ашигласан. <span class="math inline">\(P(k)\)</span>-ийн үнэнийг <span class="math inline">\(P(k + 1)\)</span>-ийн баталгаанд ашиглах нь индукцээр батлах бүх баталгааны онцлог юм. <span class="math inline">\(k + (k + 1) + 1 \ge (k + 1) + 1\)</span> гэсэн эцсийн тэнцэтгэл биш нь <span class="math inline">\(k \ge 0\)</span> гэсэн таамаглалаас гардаг, учир нь <span class="math inline">\(k + (k + 1) + 1\)</span> нийлбэрээс эхний <span class="math inline">\(k\)</span> гишүүнийг хассанаар хэмжээ нь заавал нэмэгдэхгүй.</p>
 <p><strong>Индукцээр батлах нь яагаад ажилладаг вэ?</strong> Бид энэ асуултад хоёр аргаар хариулдаг. Зөн совингийн тайлбарыг зүйрлэл хэлбэрээр өгдөг. Албан ёсны тайлбарыг мөн доор өгөв.</p>
-<p>Доминонуудыг нэг түлхэлтээр бүгдийг нь унагаах зорилгоор хэрхэн эгнүүлэн байрлуулдгийг авч үзье. (Зураг 4.1-ийг үзнэ үү.) Бидний зүйрлэлийн зорилгоор бид хязгааргүй олон домино эгнүүлэн байрлуулсан бөгөөд тэдгээрийг 1-ээс эхлэн дугаарласан гэж үзье. Бид (k)-р домино унагахыг (P(k))-ийг батлахтай адилтгаж байна. Үүний үр дүнд индукцээр батлах манай баталгааны суурь тохиолдол нь эхний домино унагахтай харгалзана. Индукцийн алхам нь хэрэв (k)-р домино унавал ((k+1))-р домино бас унах болно гэдэгтэй харгалзана. Үндсэндээ, индукцийн алхам гэдэг нь дараалсан доминонуудыг хангалттай ойрхон байрлуулсан гэсэн үг юм. Үүнийг харгалзан үзвэл, эхний домино унасны дараа бүгд дараалан унах болно. Өөрөөр хэлбэл, (P(n)) нь бүх (n )-ийн хувьд батлагдана.</p>
+<p>Доминонуудыг нэг түлхэлтээр бүгдийг нь унагаах зорилгоор хэрхэн эгнүүлэн байрлуулдгийг авч үзье. (Зураг 4.1-ийг үзнэ үү.) Бидний зүйрлэлийн зорилгоор бид хязгааргүй олон домино эгнүүлэн байрлуулсан бөгөөд тэдгээрийг 1-ээс эхлэн дугаарласан гэж үзье. Бид <span class="math inline">\(k\)</span>-р домино унагахыг <span class="math inline">\(P(k)\)</span>-ийг батлахтай адилтгаж байна. Үүний үр дүнд индукцээр батлах манай баталгааны суурь тохиолдол нь эхний домино унагахтай харгалзана. Индукцийн алхам нь хэрэв <span class="math inline">\(k\)</span>-р домино унавал <span class="math inline">\((k+1)\)</span>-р домино бас унах болно гэдэгтэй харгалзана. Үндсэндээ, индукцийн алхам гэдэг нь дараалсан доминонуудыг хангалттай ойрхон байрлуулсан гэсэн үг юм. Үүнийг харгалзан үзвэл, эхний домино унасны дараа бүгд дараалан унах болно. Өөрөөр хэлбэл, <span class="math inline">\(P(n)\)</span> нь бүх <span class="math inline">\(n \ge 0\)</span>-ийн хувьд батлагдана.</p>
 <p><em>(Зураг 4.1 Домино)</em></p>
 <p>Энэхүү зүйрлэл нь суурь тохиолдол болон индукцийн алхам хоёулаа чухал болохыг харуулж байна. Суурь тохиолдолгүйгээр (өөрөөр хэлбэл, эхний домино унагаж чадахгүй бол) доминонууд хэр ойрхон байрласан байснаас үл хамааран бүгд унахгүй. Индукцийн алхамгүйгээр (өөрөөр хэлбэл, доминонууд хангалттай ойрхон байрлаагүй бол) бид эхний домино унагасан ч бүгд унахгүй.</p>
 <p>Зүйрлэл нь бидний зөн совинг хангахад тустай боловч индукц яагаад ажилладаг талаар албан ёсны шалтгаан байх ёстой. Албан ёсны шалтгаан нь бүхэл тоонуудын сайн эрэмбэлэлтээс (well-ordering) гардаг. Тохиромжтой болгох үүднээс бид эхлээд Сайн эрэмбэлэлтийн зарчмын шууд ерөнхийлөлтийг томьёолж байна.</p>
 <blockquote class="blockquote">
 <p><strong>ТЕОРЕМ 4.5</strong></p>
-<p><strong>Ерөнхийлөгдсөн Сайн эрэмбэлэлтийн зарчим.</strong> Тогтмол (a) бүхэл тоо өгөгдсөн үед ({n n a})-ийн хоосон бус дэд олонлог бүр хамгийн бага элементтэй байна.</p>
+<p><strong>Ерөнхийлөгдсөн Сайн эрэмбэлэлтийн зарчим.</strong> Тогтмол <span class="math inline">\(a\)</span> бүхэл тоо өгөгдсөн үед <span class="math inline">\(\{n \in \mathbb{Z} \text{ ба } n \ge a\}\)</span>-ийн хоосон бус дэд олонлог бүр хамгийн бага элементтэй байна.</p>
 </blockquote>
 <p>Бид Теорем 4.5-ыг ашиглан Математик индукцийн зарчмыг баталдаг.</p>
 <blockquote class="blockquote">
 <p><strong>ТЕОРЕМ 4.6</strong></p>
-<p><strong>Математик индукцийн зарчим.</strong> (a b) нь бүхэл тоо, (P(n)) нь чөлөөт (n) бүхэл хувьсагчаас хамаарах илэрхийлэл байг. Хэрэв (i) (P(a), , P(b)) биелнэ, ба (ii) (k b), хэрэв (P(k)) биелнэ бол (P(k + 1)) биелнэ, тэгвэл [ n a, &nbsp;P(n) ] гэсэн мэдэгдэл биелнэ.</p>
+<p><strong>Математик индукцийн зарчим.</strong> <span class="math inline">\(a \le b\)</span> нь бүхэл тоо, <span class="math inline">\(P(n)\)</span> нь чөлөөт <span class="math inline">\(n\)</span> бүхэл хувьсагчаас хамаарах илэрхийлэл байг. Хэрэв (i) <span class="math inline">\(P(a), \dots, P(b)\)</span> биелнэ, ба (ii) <span class="math inline">\(\forall k \ge b\)</span>, хэрэв <span class="math inline">\(P(k)\)</span> биелнэ бол <span class="math inline">\(P(k + 1)\)</span> биелнэ, тэгвэл <span class="math display">\[
+\forall n \ge a, \ P(n)
+\]</span> гэсэн мэдэгдэл биелнэ.</p>
 </blockquote>
-<p><strong>Баталгаа.</strong> Теоремын таамаглал дахь (i) ба (ii) нөхцлүүд биелнэ гэж үзье. (P(n)) нь (n a) үед биелнэ гэдэг нь үнэн биш гэж бодъё. (S) нь (P(n)) биелэхгүй байх (n a) бүхэл тоонуудын олонлог байг. Бидний таамаглалаар (S) нь хоосон биш юм. Иймд Ерөнхийлөгдсөн Сайн эрэмбэлэлтийн зарчмаар (S) нь хамгийн бага элементтэй байна, үүнийг (m) гэе. (P(a), , P(b)) бүгд биелдэг тул (m &gt; b) байх ёстой. Тиймээс (m - 1 b). (m - 1 S) тул (P(m - 1)) биелнэ. Гэсэн хэдий ч (k = m - 1) үед (ii) нөхцлөөр (P(k)) биелдэг тул (P(k + 1)) мөн биелэх ёстой. Өөрөөр хэлбэл, (P(m)) биелнэ. Энэ нь (m S) байхтай зөрчилдөж байна. ()</p>
+<p><strong>Баталгаа.</strong> Теоремын таамаглал дахь (i) ба (ii) нөхцлүүд биелнэ гэж үзье. <span class="math inline">\(P(n)\)</span> нь <span class="math inline">\(\forall n \ge a\)</span> үед биелнэ гэдэг нь үнэн биш гэж бодъё. <span class="math inline">\(S\)</span> нь <span class="math inline">\(P(n)\)</span> биелэхгүй байх <span class="math inline">\(n \ge a\)</span> бүхэл тоонуудын олонлог байг. Бидний таамаглалаар <span class="math inline">\(S\)</span> нь хоосон биш юм. Иймд Ерөнхийлөгдсөн Сайн эрэмбэлэлтийн зарчмаар <span class="math inline">\(S\)</span> нь хамгийн бага элементтэй байна, үүнийг <span class="math inline">\(m\)</span> гэе. <span class="math inline">\(P(a), \dots, P(b)\)</span> бүгд биелдэг тул <span class="math inline">\(m &gt; b\)</span> байх ёстой. Тиймээс <span class="math inline">\(m - 1 \ge b\)</span>. <span class="math inline">\(m - 1 \notin S\)</span> тул <span class="math inline">\(P(m - 1)\)</span> биелнэ. Гэсэн хэдий ч <span class="math inline">\(k = m - 1\)</span> үед (ii) нөхцлөөр <span class="math inline">\(P(k)\)</span> биелдэг тул <span class="math inline">\(P(k + 1)\)</span> мөн биелэх ёстой. Өөрөөр хэлбэл, <span class="math inline">\(P(m)\)</span> биелнэ. Энэ нь <span class="math inline">\(m \in S\)</span> байхтай зөрчилдөж байна. <span class="math inline">\(\square\)</span></p>
 <p>Индукц нь хүчинтэй батлах арга болохыг харуулсан тул үүнийг ашиглах бас нэг дадлага хийх нь зүйтэй.</p>
 <blockquote class="blockquote">
-<p><strong>ЖИШЭЭ 4.19</strong> Харуул: (n , &nbsp;n^2 3n + 4).</p>
+<p><strong>ЖИШЭЭ 4.19</strong> Харуул: <span class="math inline">\(\forall n \ge 4, \ n^2 \ge 3n + 4\)</span>.</p>
 <p><em>Баталгаа.</em></p>
 <p>(Индукцаар)</p>
-<p><em>Суурь тохиолдол:</em> ((n = 4)) (4^2 = 16 (4) + 4) болохыг анхаарна уу. (Үнэндээ энд тэнцэтгэл биелж байна.)</p>
-<p><em>Индукцийн алхам:</em> (k ) ба (k^2 3k + 4) гэж үзье. (Зорилго: ((k + 1)^2 (k + 1) + 4 = 3k + 7).) Ажиглавал <span class="math display">\[
+<p><em>Суурь тохиолдол:</em> (<span class="math inline">\(n = 4\)</span>) <span class="math inline">\(4^2 = 16 \ge 3(4) + 4\)</span> болохыг анхаарна уу. (Үнэндээ энд тэнцэтгэл биелж байна.)</p>
+<p><em>Индукцийн алхам:</em> <span class="math inline">\(k \ge 4\)</span> ба <span class="math inline">\(k^2 \ge 3k + 4\)</span> гэж үзье. (Зорилго: <span class="math inline">\((k + 1)^2 \ge 3(k + 1) + 4 = 3k + 7\)</span>.) Ажиглавал <span class="math display">\[
 \begin{aligned}
 (k + 1)^2 &amp;= k^2 + (2k + 1) \\
 &amp;\ge (3k + 4) + (2k + 1) \qquad\quad \longleftarrow \text{Индукцийн таамаглалаар} \\
 &amp;= 3k + (2k + 5) \\
 &amp;\ge 3k + 7.
 \end{aligned}
-\]</span> Өөрөөр хэлбэл, ((k + 1)^2 (k + 1) + 4).</p>
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\((k + 1)^2 \ge 3(k + 1) + 4\)</span>.</p>
 </blockquote>
-<p>Жишээ 4.19 дахь тэнцэтгэл ба тэнцэтгэл бишүүдийн цуваанд бүх тэнцэтгэлүүд нь (k^2 3k + 4) тэнцэтгэл бишийн хоёр талд (2k + 1)-ийг нэмснээр индукцийн таамаглалаас гарч байна. Эцсийн тэнцэтгэл биш нь (k ) тул биелэх ба (k , &nbsp;2k + 5 ) гэдгийг харахад хялбар юм.</p>
+<p>Жишээ 4.19 дахь тэнцэтгэл ба тэнцэтгэл бишүүдийн цуваанд бүх тэнцэтгэлүүд нь <span class="math inline">\(k^2 \ge 3k + 4\)</span> тэнцэтгэл бишийн хоёр талд <span class="math inline">\(2k + 1\)</span>-ийг нэмснээр индукцийн таамаглалаас гарч байна. Эцсийн тэнцэтгэл биш нь <span class="math inline">\(k \ge 4\)</span> тул биелэх ба <span class="math inline">\(\forall k \ge 1, \ 2k + 5 \ge 7\)</span> гэдгийг харахад хялбар юм.</p>
 <blockquote class="blockquote">
-<p><strong>ЖИШЭЭ 4.20</strong> Харуул: (n , &nbsp;4 (5^n - 1)).</p>
+<p><strong>ЖИШЭЭ 4.20</strong> Харуул: <span class="math inline">\(\forall n \ge 0, \ 4 \mid (5^n - 1)\)</span>.</p>
 <p><em>Баталгаа.</em></p>
 <p>(Индукцаар)</p>
-<p><em>Суурь тохиолдол:</em> ((n = 0)) Энд (5^0 - 1 = 0) ба (4 ).</p>
-<p><em>Индукцийн алхам:</em> (k ) ба (4 (5^k - 1)) гэж үзье. Тэгэхээр ямар нэг (c )-ийн хувьд (5^k - 1 = 4c) болно. (Зорилго: (4 (5^{k+1} - 1)).) Ажиглавал <span class="math display">\[
+<p><em>Суурь тохиолдол:</em> (<span class="math inline">\(n = 0\)</span>) Энд <span class="math inline">\(5^0 - 1 = 0\)</span> ба <span class="math inline">\(4 \mid 0\)</span>.</p>
+<p><em>Индукцийн алхам:</em> <span class="math inline">\(k \ge 0\)</span> ба <span class="math inline">\(4 \mid (5^k - 1)\)</span> гэж үзье. Тэгэхээр ямар нэг <span class="math inline">\(c \in \mathbb{Z}\)</span>-ийн хувьд <span class="math inline">\(5^k - 1 = 4c\)</span> болно. (Зорилго: <span class="math inline">\(4 \mid (5^{k+1} - 1)\)</span>.) Ажиглавал <span class="math display">\[
 \begin{aligned}
 5^{k+1} - 1 &amp;= 5(5^k) - 1 \\
 &amp;= 5(4c + 1) - 1 \\
@@ -593,15 +595,15 @@ window.Quarto = {
 &amp;= 20c + 4 \\
 &amp;= 4(5c + 1). \qquad\qquad\qquad\qquad \longleftarrow \text{Индукцийн таамаглалаар}
 \end{aligned}
-\]</span> Тиймээс (4 (5^{k+1} - 1)).</p>
+\]</span> Тиймээс <span class="math inline">\(4 \mid (5^{k+1} - 1)\)</span>.</p>
 </blockquote>
-<p>Жишээ 4.20-д өгөгдсөнөөс илүү энгийн индукцийн аргументыг 3.6 хэсгийн санаануудыг ашиглан өгч болох бөгөөд учир нь (4 (5^n - 1)) нь (5^n )-тэй эквивалент юм. Дараах жишээнд заримдаа нэгээс олон суурь тохиолдол тустай байж болохыг харж болно.</p>
+<p>Жишээ 4.20-д өгөгдсөнөөс илүү энгийн индукцийн аргументыг 3.6 хэсгийн санаануудыг ашиглан өгч болох бөгөөд учир нь <span class="math inline">\(4 \mid (5^n - 1)\)</span> нь <span class="math inline">\(5^n \equiv 1 \pmod 4\)</span>-тэй эквивалент юм. Дараах жишээнд заримдаа нэгээс олон суурь тохиолдол тустай байж болохыг харж болно.</p>
 <blockquote class="blockquote">
-<p><strong>ЖИШЭЭ 4.21</strong> Харуул: (n , &nbsp;2^n n^2 - 1).</p>
+<p><strong>ЖИШЭЭ 4.21</strong> Харуул: <span class="math inline">\(\forall n \ge 0, \ 2^n \ge n^2 - 1\)</span>.</p>
 <p><em>Баталгаа.</em></p>
 <p>(Индукцаар)</p>
-<p><em>Суурь тохиолдол:</em> ((n = 0, 1, 2, 3)) (2^0 ^2 - 1, &nbsp;2^1 ^2 - 1, &nbsp;2^2 ^2 - 1, 2^3 ^2 - 1) болохыг ажиглаарай.</p>
-<p><em>Индукцийн алхам:</em> (k ) ба (2^k k^2 - 1) гэж үзье. (Зорилго: (2^{k+1} (k + 1)^2 - 1 = k^2 + 2k).) Ажиглавал <span class="math display">\[
+<p><em>Суурь тохиолдол:</em> (<span class="math inline">\(n = 0, 1, 2, 3\)</span>) <span class="math inline">\(2^0 \ge 0^2 - 1, \ 2^1 \ge 1^2 - 1, \ 2^2 \ge 2^2 - 1, \text{ ба } 2^3 \ge 3^2 - 1\)</span> болохыг ажиглаарай.</p>
+<p><em>Индукцийн алхам:</em> <span class="math inline">\(k \ge 3\)</span> ба <span class="math inline">\(2^k \ge k^2 - 1\)</span> гэж үзье. (Зорилго: <span class="math inline">\(2^{k+1} \ge (k + 1)^2 - 1 = k^2 + 2k\)</span>.) Ажиглавал <span class="math display">\[
 \begin{aligned}
 2^{k+1} &amp;= 2(2^k) \\
 &amp;\ge 2(k^2 - 1) \qquad\qquad\qquad \longleftarrow \text{Индукцийн таамаглалаар} \\
@@ -609,17 +611,17 @@ window.Quarto = {
 &amp;\ge k^2 + 2k \qquad\qquad\qquad \longleftarrow \forall k \ge 3, \ k^2 - 2 \ge 2k \text{ тул (2-р дасгалаар)} \\
 &amp;= (k + 1)^2 - 1.
 \end{aligned}
-\]</span> Өөрөөр хэлбэл, (2^{k+1} (k + 1)^2 - 1).</p>
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\(2^{k+1} \ge (k + 1)^2 - 1\)</span>.</p>
 </blockquote>
-<p>Бидний баталгаанд (k ) гэдэг баримтыг (k^2 - 2 2k) ба улмаар (k^2 + (k^2 - 2) k^2 + (2k))-г авахад ашигласан болохыг анхаарна уу. Гэсэн хэдий ч энэ нь нэмэлт суурь тохиолдлууд зайлшгүй шаардлагатай гэсэн үг биш юм. (k , 2^k k^2 - 1 2^{k+1} (k + 1)^2 - 1) гэдэг нь гарцаагүй үнэн. Гэхдээ бидний сонгосон тодорхой аргументэд (k ) байх нь тохиромжтой байсан.</p>
+<p>Бидний баталгаанд <span class="math inline">\(k \ge 3\)</span> гэдэг баримтыг <span class="math inline">\(k^2 - 2 \ge 2k\)</span> ба улмаар <span class="math inline">\(k^2 + (k^2 - 2) \ge k^2 + (2k)\)</span>-г авахад ашигласан болохыг анхаарна уу. Гэсэн хэдий ч энэ нь нэмэлт суурь тохиолдлууд зайлшгүй шаардлагатай гэсэн үг биш юм. <span class="math inline">\(\forall k \ge 0, \text{ хэрэв } 2^k \ge k^2 - 1 \text{ бол } 2^{k+1} \ge (k + 1)^2 - 1\)</span> гэдэг нь гарцаагүй үнэн. Гэхдээ бидний сонгосон тодорхой аргументэд <span class="math inline">\(k \ge 3\)</span> байх нь тохиромжтой байсан.</p>
 <p><strong>Индукц ба Рекурс.</strong> Дарааллыг рекурсиваар тодорхойлох үед бид дараалал дахь хэд хэдэн гишүүнийг жагсааснаар тухайн дарааллын хаалттай томьёог олж мэдэх боломжтой байдаг. Дараа нь индукц ашиглан санал болгож буй хаалттай томьёо зөв эсэхийг баталж болно. Хэд хэдэн гишүүний жагсаалтаас дарааллын хаалттай томьёог таамаглах ур чадварыг 4.1 хэсгийн дасгалуудад дадлагажуулсан. Энд бид ийм таамаглал зөв гэдгийг батлах ур чадварыг дадлагажуулж байна.</p>
 <blockquote class="blockquote">
-<p><strong>ЖИШЭЭ 4.22</strong> 4.1 хэсгийн (4.7) дарааллыг <span class="math display">\[ s_5 = 10 \text{ ба } \forall n \ge 6, \ s_n = s_{n-1} + n - 1 \quad (4.17) \]</span> томьёогоор рекурсиваар илэрхийлсэн. Харуул: (n , &nbsp;s_n = ).</p>
-<p><strong>Тайлбар 4.1</strong> () хаалттай томьёог мөн 4.1 хэсэгт баталсан. Гэсэн хэдий ч тухайн үед хоёр дараалал үнэхээр ижил гэдгийн ямар ч баталгаа өгөөгүй. Энд бид (4.17)-г дарааллын тодорхойлолт болгон авч байна.</p>
+<p><strong>ЖИШЭЭ 4.22</strong> 4.1 хэсгийн (4.7) дарааллыг <span class="math display">\[ s_5 = 10 \text{ ба } \forall n \ge 6, \ s_n = s_{n-1} + n - 1 \quad (4.17) \]</span> томьёогоор рекурсиваар илэрхийлсэн. Харуул: <span class="math inline">\(\forall n \ge 5, \ s_n = \binom{n}{2}\)</span>.</p>
+<p><strong>Тайлбар 4.1</strong> <span class="math inline">\(\binom{n}{2}\)</span> хаалттай томьёог мөн 4.1 хэсэгт баталсан. Гэсэн хэдий ч тухайн үед хоёр дараалал үнэхээр ижил гэдгийн ямар ч баталгаа өгөөгүй. Энд бид (4.17)-г дарааллын тодорхойлолт болгон авч байна.</p>
 <p><em>Жишээ 4.22-ын баталгаа.</em></p>
 <p>(Индукцаар)</p>
-<p><em>Суурь тохиолдол:</em> ((n = 5)) ( = 10) ба 10 нь (s_5)-ийн тодорхойлогдсон утга болохыг анхаарна уу.</p>
-<p><em>Индукцийн алхам:</em> (k ) ба (s_k = ) гэж үзье. (Зорилго: (s_{k+1} = ).) (4.17)-аас <span class="math display">\[
+<p><em>Суурь тохиолдол:</em> (<span class="math inline">\(n = 5\)</span>) <span class="math inline">\(\binom{5}{2} = 10\)</span> ба 10 нь <span class="math inline">\(s_5\)</span>-ийн тодорхойлогдсон утга болохыг анхаарна уу.</p>
+<p><em>Индукцийн алхам:</em> <span class="math inline">\(k \ge 0\)</span> ба <span class="math inline">\(s_k = \binom{k}{2}\)</span> гэж үзье. (Зорилго: <span class="math inline">\(s_{k+1} = \binom{k+1}{2}\)</span>.) (4.17)-аас <span class="math display">\[
 \begin{aligned}
 s_{k+1} &amp;= s_k + (k + 1) - 1 \\
 &amp;= \binom{k}{2} + k \qquad\qquad \longleftarrow \text{Индукцийн таамаглалаар} \\
@@ -628,148 +630,176 @@ s_{k+1} &amp;= s_k + (k + 1) - 1 \\
 &amp;= \frac{k(k+1)}{2} \\
 &amp;= \binom{k+1}{2}.
 \end{aligned}
-\]</span> Өөрөөр хэлбэл, (s_{k+1} = ).</p>
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\(s_{k+1} = \binom{k+1}{2}\)</span>.</p>
 </blockquote>
 <hr>
 <section id="хэсэг-дасгалууд" class="level3">
 <h3 class="anchored" data-anchor-id="хэсэг-дасгалууд">4.3 хэсэг Дасгалууд</h3>
 <p>1-20 дасгалд өгөгдсөн мэдэгдлүүдийг батлахын тулд индукц ашигла.</p>
 <ol type="1">
-<li>Харуул: (n , &nbsp;n^2 + 1 3n).</li>
-<li>Харуул: (n , &nbsp;n^2 - 2 2n).</li>
-<li>Харуул: (n , &nbsp;n^2 2n + 1).</li>
-<li>Харуул: (n , &nbsp;2n^2 3n^2 + 3n + 1).</li>
-<li>Харуул: (n , &nbsp;2^n n^2).</li>
-<li>Харуул: (n , &nbsp;3^n n^3). <em>Зөвлөмж: Дөрвөн суурь тохиолдлыг авч үз.</em></li>
-<li>Харуул: (n , &nbsp;n! n^2).</li>
-<li>Харуул: (n , &nbsp;n! &gt; 2n^3).</li>
-<li>Харуул: (n , &nbsp;n! &gt; 2^n).</li>
-<li>Харуул: (n , &nbsp;n! &gt; 3^n).</li>
-<li>Харуул: (n , &nbsp;3 (4^n - 1)).</li>
-<li>Харуул: (n , &nbsp;5 (6^n - 1)).</li>
-<li>Харуул: (n , &nbsp;4 (6^n - 2^n)).</li>
-<li>Харуул: (n , &nbsp;5 (9^n - 4^n)). <em>15. Харуул: (n , &nbsp;6 (n^3 - n)). </em>16. Харуул: (n , &nbsp;6 (n^3 + 5n)).</li>
-<li>({s_n}) нь [ s_1 = 4 n , &nbsp;s_n = 3s_{n-1} - 2 ] томьёогоор тодорхойлогдсон дараалал байг. Харуул: (n , &nbsp;s_n = 3^n + 1).</li>
-<li>({s_n}) нь [ s_0 = n , &nbsp;s_n = s_{n-1} + ] томьёогоор тодорхойлогдсон дараалал байг. Харуул: (n , &nbsp;s_n = ).</li>
-<li>({s_n}) нь [ s_2 = 5 n , &nbsp;s_n = s_{n-1} - 2 ] томьёогоор тодорхойлогдсон дараалал байг. Харуул: (n , &nbsp;s_n = 9 - 2n). *20. ({s_n}) нь [ s_0 = n , &nbsp;s_n = 1 - s_{n-1} ] томьёогоор тодорхойлогдсон дараалал байг. Харуул: (n , &nbsp;s_n =
-<span class="math display">\[\begin{cases} \frac{1}{3} &amp; \text{хэрэв } n \text{ нь тэгш,} \\ \frac{2}{3} &amp; \text{хэрэв } n \text{ нь сондгой.} \end{cases}\]</span>
-)</li>
-<li><strong>Аннуитет.</strong> Дараах байдлаар рекурсиваар өгөгдсөн дараалал [ s_0 = 0 n , &nbsp;s_n = (1+i)s_{n-1} + D ] нь (i) үечилсэн хүүтэй, (D) хадгаламжтай аннуитетийн (n) үеийн дараах утгыг өгнө. 4.1 хэсгийн 51-р дасгалыг үзнэ үү.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 3, \ n^2 + 1 \ge 3n\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 3, \ n^2 - 2 \ge 2n\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 3, \ n^2 \ge 2n + 1\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 3, \ 2n^2 \ge 3n^2 + 3n + 1\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 4, \ 2^n \ge n^2\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 3^n \ge n^3\)</span>. <em>Зөвлөмж: Дөрвөн суурь тохиолдлыг авч үз.</em></li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 4, \ n! \ge n^2\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 6, \ n! &gt; 2n^3\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 4, \ n! &gt; 2^n\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 7, \ n! &gt; 3^n\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 3 \mid (4^n - 1)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 5 \mid (6^n - 1)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 4 \mid (6^n - 2^n)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 5 \mid (9^n - 4^n)\)</span>. <em>15. Харуул: <span class="math inline">\(\forall n \ge 0, \ 6 \mid (n^3 - n)\)</span>. </em>16. Харуул: <span class="math inline">\(\forall n \ge 0, \ 6 \mid (n^3 + 5n)\)</span>.</li>
+<li><span class="math inline">\(\{s_n\}\)</span> нь <span class="math display">\[
+s_1 = 4 \text{ ба } \forall n \ge 2, \ s_n = 3s_{n-1} - 2
+\]</span> томьёогоор тодорхойлогдсон дараалал байг. Харуул: <span class="math inline">\(\forall n \ge 1, \ s_n = 3^n + 1\)</span>.</li>
+<li><span class="math inline">\(\{s_n\}\)</span> нь <span class="math display">\[
+s_0 = \frac{\pi}{4} \text{ ба } \forall n \ge 1, \ s_n = s_{n-1} + \pi
+\]</span> томьёогоор тодорхойлогдсон дараалал байг. Харуул: <span class="math inline">\(\forall n \ge 0, \ s_n = \frac{(4n+1)\pi}{4}\)</span>.</li>
+<li><span class="math inline">\(\{s_n\}\)</span> нь <span class="math display">\[
+s_2 = 5 \text{ ба } \forall n \ge 3, \ s_n = s_{n-1} - 2
+\]</span> томьёогоор тодорхойлогдсон дараалал байг. Харуул: <span class="math inline">\(\forall n \ge 2, \ s_n = 9 - 2n\)</span>. *20. <span class="math inline">\(\{s_n\}\)</span> нь <span class="math display">\[
+s_0 = \frac{1}{3} \text{ ба } \forall n \ge 1, \ s_n = 1 - s_{n-1}
+\]</span> томьёогоор тодорхойлогдсон дараалал байг. Харуул: <span class="math inline">\(\forall n \ge 0, \ s_n = \begin{cases} \frac{1}{3} &amp; \text{хэрэв } n \text{ нь тэгш,} \\ \frac{2}{3} &amp; \text{хэрэв } n \text{ нь сондгой.} \end{cases}\)</span></li>
+<li><strong>Аннуитет.</strong> Дараах байдлаар рекурсиваар өгөгдсөн дараалал <span class="math display">\[
+s_0 = 0 \quad \text{ба } \forall n \ge 1, \ s_n = (1+i)s_{n-1} + D
+\]</span> нь <span class="math inline">\(i\)</span> үечилсэн хүүтэй, <span class="math inline">\(D\)</span> хадгаламжтай аннуитетийн <span class="math inline">\(n\)</span> үеийн дараах утгыг өгнө. 4.1 хэсгийн 51-р дасгалыг үзнэ үү.</li>
 </ol>
 <ol type="a">
-<li>(n = 0, 1, 2, 3)-ийн хувьд (s_n)-ийг тодорхойлж, (D) илэрхийллийн харгалзах утгатай таарч байгааг батал.</li>
-<li>(n)-р гишүүн нь (D) байх дараалал нь бүх (n )-ийн хувьд дээрх рекурсын хамаарлыг хангаж байгааг харуул.</li>
-<li>Харуул: (n , &nbsp;s_n = D). (Индукцаар)</li>
+<li><span class="math inline">\(n = 0, 1, 2, 3\)</span>-ийн хувьд <span class="math inline">\(s_n\)</span>-ийг тодорхойлж, <span class="math inline">\(D\frac{(1+i)^n - 1}{i}\)</span> илэрхийллийн харгалзах утгатай таарч байгааг батал.</li>
+<li><span class="math inline">\(n\)</span>-р гишүүн нь <span class="math inline">\(D\frac{(1+i)^n - 1}{i}\)</span> байх дараалал нь бүх <span class="math inline">\(n \ge 1\)</span>-ийн хувьд дээрх рекурсын хамаарлыг хангаж байгааг харуул.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ s_n = D\frac{(1+i)^n - 1}{i}\)</span>. (Индукцаар)</li>
 <li><ol start="3" type="a">
-<li>хэсгийн хаалттай томьёог ашиглан сарын 0.75% (өөрөөр хэлбэл, (i = 0.0075)) хүүтэй, сард $200 хадгаламжтай 24 сарын дараах утгыг тодорхойл.</li>
+<li>хэсгийн хаалттай томьёог ашиглан сарын 0.75% (өөрөөр хэлбэл, <span class="math inline">\(i = 0.0075\)</span>) хүүтэй, сард $200 хадгаламжтай 24 сарын дараах утгыг тодорхойл.</li>
 </ol></li>
 </ol>
 <ol start="22" type="1">
-<li><strong>Моргейж.</strong> Дараах байдлаар рекурсиваар өгөгдсөн дараалал [ s_0 = M n , &nbsp;s_n = (1+i)s_{n-1} - R ] нь (M) долларын моргейжийн (i) үечилсэн хүүтэй, (R) төлбөртэй (n) үеийн дараах үлдэгдлийг өгнө. 4.1 хэсгийн 52-р дасгалыг үзнэ үү.</li>
+<li><strong>Моргейж.</strong> Дараах байдлаар рекурсиваар өгөгдсөн дараалал <span class="math display">\[
+s_0 = M \quad \text{ба } \forall n \ge 1, \ s_n = (1+i)s_{n-1} - R
+\]</span> нь <span class="math inline">\(M\)</span> долларын моргейжийн <span class="math inline">\(i\)</span> үечилсэн хүүтэй, <span class="math inline">\(R\)</span> төлбөртэй <span class="math inline">\(n\)</span> үеийн дараах үлдэгдлийг өгнө. 4.1 хэсгийн 52-р дасгалыг үзнэ үү.</li>
 </ol>
 <ol type="a">
-<li>(n = 0, 1, 2, 3)-ийн хувьд (s_n)-ийг тодорхойлж, (M(1+i)^n - R) илэрхийллийн харгалзах утгатай таарч байгааг батал.</li>
-<li>(n)-р гишүүн нь (M(1+i)^n - R) байх дараалал нь бүх (n )-ийн хувьд дээрх рекурсын хамаарлыг хангаж байгааг харуул.</li>
-<li>Харуул: (n , &nbsp;s_n = M(1+i)^n - R). (Индукцаар)</li>
+<li><span class="math inline">\(n = 0, 1, 2, 3\)</span>-ийн хувьд <span class="math inline">\(s_n\)</span>-ийг тодорхойлж, <span class="math inline">\(M(1+i)^n - R\frac{(1+i)^n - 1}{i}\)</span> илэрхийллийн харгалзах утгатай таарч байгааг батал.</li>
+<li><span class="math inline">\(n\)</span>-р гишүүн нь <span class="math inline">\(M(1+i)^n - R\frac{(1+i)^n - 1}{i}\)</span> байх дараалал нь бүх <span class="math inline">\(n \ge 1\)</span>-ийн хувьд дээрх рекурсын хамаарлыг хангаж байгааг харуул.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ s_n = M(1+i)^n - R\frac{(1+i)^n - 1}{i}\)</span>. (Индукцаар)</li>
 <li><ol start="3" type="a">
-<li>хэсгийн хаалттай томьёог ашиглан сарын 0.75% (өөрөөр хэлбэл, (i = 0.0075)) хүүтэй, сард $482.77 төлбөртэй 30 жилийн $60,000 моргейжийн 24 сарын дараах үлдэгдлийг тодорхойл.</li>
+<li>хэсгийн хаалттай томьёог ашиглан сарын 0.75% (өөрөөр хэлбэл, <span class="math inline">\(i = 0.0075\)</span>) хүүтэй, сард $482.77 төлбөртэй 30 жилийн $60,000 моргейжийн 24 сарын дараах үлдэгдлийг тодорхойл.</li>
 </ol></li>
 </ol>
 <ol start="23" type="1">
-<li><strong>Дистрибутив байдлын ерөнхийлөлт.</strong> Бид 1.1 хэсгийн Теорем 1.5(d)-ийн (n = 2) тохиолдлыг ерөнхийлж байна. (A) нь олонлог байг.</li>
+<li><strong>Дистрибутив байдлын ерөнхийлөлт.</strong> Бид 1.1 хэсгийн Теорем 1.5(d)-ийн <span class="math inline">\(n = 2\)</span> тохиолдлыг ерөнхийлж байна. <span class="math inline">\(A\)</span> нь олонлог байг.</li>
 </ol>
 <ol type="a">
-<li>Дараахыг харуул: Бүх олонлогууд (B_1, B_2, B_3)-ийн хувьд [ A (B_1 B_2 B_3) = (A B_1) (A B_2) (A B_3), ] (B_1 B_2 B_3 = (B_1 B_2) B_3) гэж холбосноор.</li>
-<li>Дараахыг харуул: (n ), бүх олонлогууд (B_1, B_2, , B_n)-ийн хувьд [ A (B_1 B_2 B_n) = (A B_1) (A B_2) (A B_n). ]</li>
-<li>Дараахыг харуул: (n ), бүх олонлогууд (B_1, B_2, , B_n)-ийн хувьд [ A (B_1 B_2 B_n) = (A B_1) (A B_2) (A B_n). ] <em>Зөвлөмж: Индукцийн алхамд Ассоциатив ба Дистрибутив ((n=2)) ашигла.</em></li>
+<li>Дараахыг харуул: Бүх олонлогууд <span class="math inline">\(B_1, B_2, B_3\)</span>-ийн хувьд <span class="math display">\[
+A \cap (B_1 \cup B_2 \cup B_3) = (A \cap B_1) \cup (A \cap B_2) \cup (A \cap B_3),
+\]</span> <span class="math inline">\(B_1 \cup B_2 \cup B_3 = (B_1 \cup B_2) \cup B_3\)</span> гэж холбосноор.</li>
+<li>Дараахыг харуул: <span class="math inline">\(\forall n \ge 1\)</span>, бүх олонлогууд <span class="math inline">\(B_1, B_2, \dots, B_n\)</span>-ийн хувьд <span class="math display">\[
+A \cap (B_1 \cup B_2 \cup \dots \cup B_n) = (A \cap B_1) \cup (A \cap B_2) \cup \dots \cup (A \cap B_n).
+\]</span></li>
+<li>Дараахыг харуул: <span class="math inline">\(\forall n \ge 1\)</span>, бүх олонлогууд <span class="math inline">\(B_1, B_2, \dots, B_n\)</span>-ийн хувьд <span class="math display">\[
+A \cup (B_1 \cap B_2 \cap \dots \cap B_n) = (A \cup B_1) \cap (A \cup B_2) \cap \dots \cap (A \cup B_n).
+\]</span> <em>Зөвлөмж: Индукцийн алхамд Ассоциатив ба Дистрибутив (<span class="math inline">\(n=2\)</span>) ашигла.</em></li>
 </ol>
 <ol start="24" type="1">
-<li><strong>Логикийн дистрибутив байдлын ерөнхийлөлт.</strong> Бид 1.1 хэсгийн Теорем 1.1(d)-ийн (n = 2) тохиолдлыг ерөнхийлж байна. (p) нь мэдэгдлийн хэлбэр байг.</li>
+<li><strong>Логикийн дистрибутив байдлын ерөнхийлөлт.</strong> Бид 1.1 хэсгийн Теорем 1.1(d)-ийн <span class="math inline">\(n = 2\)</span> тохиолдлыг ерөнхийлж байна. <span class="math inline">\(p\)</span> нь мэдэгдлийн хэлбэр байг.</li>
 </ol>
 <ol type="a">
-<li>Дараахыг харуул: Бүх мэдэгдлийн хэлбэрүүд (q_1, q_2, q_3)-ийн хувьд [ p (q_1 q_2 q_3) = (p q_1) (p q_2) (p q_3), ] (q_1 q_2 q_3 = (q_1 q_2) q_3) гэж холбосноор.</li>
-<li>Дараахыг харуул: (n ), бүх мэдэгдлийн хэлбэрүүд (q_1, q_2, , q_n)-ийн хувьд [ p (q_1 q_2 q_n) = (p q_1) (p q_2) (p q_n). ]</li>
-<li>Дараахыг харуул: (n ), бүх мэдэгдлийн хэлбэрүүд (q_1, q_2, , q_n)-ийн хувьд [ p (q_1 q_2 q_n) = (p q_1) (p q_2) (p q_n). ] <em>Зөвлөмж: Индукцийн алхамд Ассоциатив ба Дистрибутив ((n=2)) ашигла.</em></li>
+<li>Дараахыг харуул: Бүх мэдэгдлийн хэлбэрүүд <span class="math inline">\(q_1, q_2, q_3\)</span>-ийн хувьд <span class="math display">\[
+p \land (q_1 \lor q_2 \lor q_3) = (p \land q_1) \lor (p \land q_2) \lor (p \land q_3),
+\]</span> <span class="math inline">\(q_1 \lor q_2 \lor q_3 = (q_1 \lor q_2) \lor q_3\)</span> гэж холбосноор.</li>
+<li>Дараахыг харуул: <span class="math inline">\(\forall n \ge 1\)</span>, бүх мэдэгдлийн хэлбэрүүд <span class="math inline">\(q_1, q_2, \dots, q_n\)</span>-ийн хувьд <span class="math display">\[
+p \land (q_1 \lor q_2 \lor \dots \lor q_n) = (p \land q_1) \lor (p \land q_2) \lor \dots \lor (p \land q_n).
+\]</span></li>
+<li>Дараахыг харуул: <span class="math inline">\(\forall n \ge 1\)</span>, бүх мэдэгдлийн хэлбэрүүд <span class="math inline">\(q_1, q_2, \dots, q_n\)</span>-ийн хувьд <span class="math display">\[
+p \lor (q_1 \land q_2 \land \dots \land q_n) = (p \lor q_1) \land (p \lor q_2) \land \dots \land (p \lor q_n).
+\]</span> <em>Зөвлөмж: Индукцийн алхамд Ассоциатив ба Дистрибутив (<span class="math inline">\(n=2\)</span>) ашигла.</em></li>
 </ol>
 <ol start="25" type="1">
-<li><strong>Логикийн ерөнхийлөгдсөн Де Морганы хууль.</strong> Бид 1.1 хэсгийн Теорем 1.1(e)-ийн (n = 2) тохиолдлыг ерөнхийлж байна.</li>
+<li><strong>Логикийн ерөнхийлөгдсөн Де Морганы хууль.</strong> Бид 1.1 хэсгийн Теорем 1.1(e)-ийн <span class="math inline">\(n = 2\)</span> тохиолдлыг ерөнхийлж байна.</li>
 </ol>
 <ol type="a">
-<li>Дараахыг харуул: Бүх мэдэгдлийн хэлбэрүүд (p_1, p_2, p_3)-ийн хувьд [ (p_1 p_2 p_3) = p_1 p_2 p_3, ] (p_1 p_2 p_3 = (p_1 p_2) p_3) гэж холбосноор.</li>
-<li>Дараахыг харуул: (n ), бүх мэдэгдлийн хэлбэрүүд (p_1, p_2, , p_n)-ийн хувьд [ (p_1 p_2 p_n) = p_1 p_2 p_n.&nbsp; ]</li>
-<li>Дараахыг харуул: (n ), бүх мэдэгдлийн хэлбэрүүд (p_1, p_2, , p_n)-ийн хувьд [ (p_1 p_2 p_n) = p_1 p_2 p_n.&nbsp; ] <em>Зөвлөмж: Индукцийн алхамд Ассоциатив ба Де Морганы хууль ашигла.</em></li>
+<li>Дараахыг харуул: Бүх мэдэгдлийн хэлбэрүүд <span class="math inline">\(p_1, p_2, p_3\)</span>-ийн хувьд <span class="math display">\[
+\neg(p_1 \lor p_2 \lor p_3) = \neg p_1 \land \neg p_2 \land \neg p_3,
+\]</span> <span class="math inline">\(p_1 \lor p_2 \lor p_3 = (p_1 \lor p_2) \lor p_3\)</span> гэж холбосноор.</li>
+<li>Дараахыг харуул: <span class="math inline">\(\forall n \ge 1\)</span>, бүх мэдэгдлийн хэлбэрүүд <span class="math inline">\(p_1, p_2, \dots, p_n\)</span>-ийн хувьд <span class="math display">\[
+\neg(p_1 \lor p_2 \lor \dots \lor p_n) = \neg p_1 \land \neg p_2 \land \dots \land \neg p_n.
+\]</span></li>
+<li>Дараахыг харуул: <span class="math inline">\(\forall n \ge 1\)</span>, бүх мэдэгдлийн хэлбэрүүд <span class="math inline">\(p_1, p_2, \dots, p_n\)</span>-ийн хувьд <span class="math display">\[
+\neg(p_1 \land p_2 \land \dots \land p_n) = \neg p_1 \lor \neg p_2 \lor \dots \lor \neg p_n.
+\]</span> <em>Зөвлөмж: Индукцийн алхамд Ассоциатив ба Де Морганы хууль ашигла.</em></li>
 </ol>
 <ol start="26" type="1">
-<li><strong>Олонлогийн ерөнхийлөгдсөн Де Морганы хууль.</strong> Бид 1.4 хэсгийн Теорем 1.5(e)-ийн (n = 2) тохиолдлыг ерөнхийлж байна.</li>
+<li><strong>Олонлогийн ерөнхийлөгдсөн Де Морганы хууль.</strong> Бид 1.4 хэсгийн Теорем 1.5(e)-ийн <span class="math inline">\(n = 2\)</span> тохиолдлыг ерөнхийлж байна.</li>
 </ol>
 <ol type="a">
-<li>Дараахыг харуул: Бүх олонлогууд (A_1, A_2, A_3)-ийн хувьд [ (A_1 A_2 A_3)^c = A_1^c A_2^c A_3^c, ] (A_1 A_2 A_3 = (A_1 A_2) A_3) гэж холбосноор.</li>
-<li>Дараахыг харуул: (n ), бүх олонлогууд (A_1, A_2, , A_n)-ийн хувьд [ (A_1 A_2 A_n)^c = A_1^c A_2^c A_n^c.&nbsp; ]</li>
-<li>Дараахыг харуул: (n ), бүх олонлогууд (A_1, A_2, , A_n)-ийн хувьд [ (A_1 A_2 A_n)^c = A_1^c A_2^c A_n^c.&nbsp; ] <em>Зөвлөмж: Индукцийн алхамд Ассоциатив ба Де Морганы хууль ашигла.</em></li>
+<li>Дараахыг харуул: Бүх олонлогууд <span class="math inline">\(A_1, A_2, A_3\)</span>-ийн хувьд <span class="math display">\[
+(A_1 \cup A_2 \cup A_3)^c = A_1^c \cap A_2^c \cap A_3^c,
+\]</span> <span class="math inline">\(A_1 \cup A_2 \cup A_3 = (A_1 \cup A_2) \cup A_3\)</span> гэж холбосноор.</li>
+<li>Дараахыг харуул: <span class="math inline">\(\forall n \ge 1\)</span>, бүх олонлогууд <span class="math inline">\(A_1, A_2, \dots, A_n\)</span>-ийн хувьд <span class="math display">\[
+(A_1 \cup A_2 \cup \dots \cup A_n)^c = A_1^c \cap A_2^c \cap \dots \cap A_n^c.
+\]</span></li>
+<li>Дараахыг харуул: <span class="math inline">\(\forall n \ge 1\)</span>, бүх олонлогууд <span class="math inline">\(A_1, A_2, \dots, A_n\)</span>-ийн хувьд <span class="math display">\[
+(A_1 \cap A_2 \cap \dots \cap A_n)^c = A_1^c \cup A_2^c \cup \dots \cup A_n^c.
+\]</span> <em>Зөвлөмж: Индукцийн алхамд Ассоциатив ба Де Морганы хууль ашигла.</em></li>
 </ol>
 <ol start="27" type="1">
-<li>Теорем 3.27(a)-ийн дараах ерөнхийлөлтийг батал. (n ) ба (n &gt; 1) байг. Харуул: (m ), (a_1, a_2, , a_m, b_1, b_2, , b_m ) хэрэв (a_1 b_1 n, a_2 b_2 n, , a_m b_m n) бол</li>
+<li>Теорем 3.27(a)-ийн дараах ерөнхийлөлтийг батал. <span class="math inline">\(n \in \mathbb{Z}\)</span> ба <span class="math inline">\(n &gt; 1\)</span> байг. Харуул: <span class="math inline">\(\forall m \ge 1\)</span>, <span class="math inline">\(\forall a_1, a_2, \dots, a_m, b_1, b_2, \dots, b_m \in \mathbb{Z}\)</span> хэрэв <span class="math inline">\(a_1 \equiv b_1 \pmod n, a_2 \equiv b_2 \pmod n, \dots, a_m \equiv b_m \pmod n\)</span> бол</li>
 </ol>
 <ol type="a">
-<li>(<em>{i=1}^m a_i </em>{i=1}^m b_i n),</li>
-<li>(<em>{i=1}^m a_i </em>{i=1}^m b_i n). <em>Зөвлөмж: (m)-ийн хувьд индукц ашигла.</em></li>
+<li><span class="math inline">\(\sum_{i=1}^m a_i \equiv \sum_{i=1}^m b_i \pmod n\)</span>,</li>
+<li><span class="math inline">\(\prod_{i=1}^m a_i \equiv \prod_{i=1}^m b_i \pmod n\)</span>. <em>Зөвлөмж: <span class="math inline">\(m\)</span>-ийн хувьд индукц ашигла.</em></li>
 </ol>
 <ol start="28" type="1">
 <li>Үр дагавар 3.28(b)-г батал. <em>Зөвлөмж: Теорем 3.27-г суурь тохиолдол болгон ашиглаад индукцийн алхамд тусал.</em></li>
-<li>()-ийн ямар ч хоосон бус төгсгөлөг дэд олонлог хамгийн их элементтэй болохыг харуул. Өөрөөр хэлбэл, хэрэв (S ) ямар нэг төгсгөлөг олонлог бол (S)-д (m = (S)) байх (m S) элемент байна. <em>Зөвлөмж: Хэрэв (S = {s_1, , s_{n+1}}) бол ((S) = ((s_1, , s_n), s_{n+1})) байна. (n)-ийн хувьд индукц ашигла.</em></li>
-<li>Үр дагавар 3.18-ыг батал. <em>Суурь тохиолдолд Үр дагавар 3.17-г ашигла. Индукцийн алхамд ((k+1))-факториалын үржвэр (m_1 m_2 m_{k+1})-ийг (k)-факториалын үржвэр ((m_1 m_2 m_k) m_{k+1}) болгон үзээд Үр дагавар 3.17-г хэрэглэ.</em> Матриц гэдэг нь бодит тоонуудын тэгш өнцөгт жагсаалт юм. 31-35 дасгалд бид матрицын стандарт үржүүлэх болон нэмэх үйлдлийг ашиглан (2 ) матрицуудыг (өөрөөр хэлбэл, 2 мөр, 2 баганатай матрицууд) авч үзнэ. [
-<span class="math display">\[\begin{bmatrix} a_1 &amp; b_1 \\ c_1 &amp; d_1 \end{bmatrix} \begin{bmatrix} a_2 &amp; b_2 \\ c_2 &amp; d_2 \end{bmatrix}\]</span>
-=
-<span class="math display">\[\begin{bmatrix} a_1a_2 + b_1c_2 &amp; a_1b_2 + b_1d_2 \\ c_1a_2 + d_1c_2 &amp; c_1b_2 + d_1d_2 \end{bmatrix}\]</span>
-] Дурын (A) матрицын хувьд бид (A^1 = A), (n , &nbsp;A^n = A A^{n-1}) гэж тодорхойлно.</li>
-<li>Харуул: (n ), [
-<span class="math display">\[\begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{bmatrix}\]</span>
-^n =
-<span class="math display">\[\begin{bmatrix} 1 &amp; n \\ 0 &amp; 1 \end{bmatrix}\]</span>
-. ]</li>
-<li>Харуул: (n ), [
-<span class="math display">\[\begin{bmatrix} -1 &amp; 1 \\ -1 &amp; -1 \end{bmatrix}\]</span>
-^n = (-2)^{n-1}
-<span class="math display">\[\begin{bmatrix} -1 &amp; 1 \\ -1 &amp; -1 \end{bmatrix}\]</span>
-. ]</li>
-<li>Харуул: (n ), [
-<span class="math display">\[\begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 2 \end{bmatrix}\]</span>
-^n =
-<span class="math display">\[\begin{bmatrix} 1 &amp; 2^n - 1 \\ 0 &amp; 2^n \end{bmatrix}\]</span>
-. ]</li>
-<li>Харуул: (n ), [
-<span class="math display">\[\begin{bmatrix} 1 &amp; 0 \\ -2 &amp; 1 \end{bmatrix}\]</span>
-^n =
-<span class="math display">\[\begin{bmatrix} 1 &amp; 0 \\ -2n &amp; 1 \end{bmatrix}\]</span>
-. ] 35-37 дасгалд дараах тригонометрийн ижилтэгчүүдийг ашигла. [ (_1 + _2) = _1 _2 + _1 _2 ] [ (_1 + _2) = _1 _2 - _1 _2 ] *35. () байг. Харуул: (n ), [
-<span class="math display">\[\begin{bmatrix} \cos\theta &amp; \sin\theta \\ -\sin\theta &amp; \cos\theta \end{bmatrix}\]</span>
-^n =
-<span class="math display">\[\begin{bmatrix} \cos n\theta &amp; \sin n\theta \\ -\sin n\theta &amp; \cos n\theta \end{bmatrix}\]</span>
-. ] *36. Комплекс тоонуудыг ((a_1 + ib_1) (a_2 + ib_2) = (a_1a_2 - b_1b_2) + i(a_1b_2 + a_2b_1)), ((a+ib)^1 = a+ib), ба (n , &nbsp;(a+ib)^n = (a+ib)(a+ib)^{n-1}) томьёогоор тодорхойлогдох үржвэр болон нэмэх үйлдлийг ашиглан (i = ) гэж үзье.</li>
+<li><span class="math inline">\(\mathbb{R}\)</span>-ийн ямар ч хоосон бус төгсгөлөг дэд олонлог хамгийн их элементтэй болохыг харуул. Өөрөөр хэлбэл, хэрэв <span class="math inline">\(S \subset \mathbb{R}\)</span> ямар нэг төгсгөлөг олонлог бол <span class="math inline">\(S\)</span>-д <span class="math inline">\(m = \max(S)\)</span> байх <span class="math inline">\(m \in S\)</span> элемент байна. <em>Зөвлөмж: Хэрэв <span class="math inline">\(S = \{s_1, \dots, s_{n+1}\}\)</span> бол <span class="math inline">\(\max(S) = \max(\max(s_1, \dots, s_n), s_{n+1})\)</span> байна. <span class="math inline">\(n\)</span>-ийн хувьд индукц ашигла.</em></li>
+<li>Үр дагавар 3.18-ыг батал. <em>Суурь тохиолдолд Үр дагавар 3.17-г ашигла. Индукцийн алхамд <span class="math inline">\((k+1)\)</span>-факториалын үржвэр <span class="math inline">\(m_1 \cdot m_2 \dots \cdot m_{k+1}\)</span>-ийг <span class="math inline">\(k\)</span>-факториалын үржвэр <span class="math inline">\((m_1 \cdot m_2 \dots \cdot m_k) \cdot m_{k+1}\)</span> болгон үзээд Үр дагавар 3.17-г хэрэглэ.</em> Матриц гэдэг нь бодит тоонуудын тэгш өнцөгт жагсаалт юм. 31-35 дасгалд бид матрицын стандарт үржүүлэх болон нэмэх үйлдлийг ашиглан <span class="math inline">\(2 \times 2\)</span> матрицуудыг (өөрөөр хэлбэл, 2 мөр, 2 баганатай матрицууд) авч үзнэ. <span class="math display">\[
+\begin{bmatrix} a_1 &amp; b_1 \\ c_1 &amp; d_1 \end{bmatrix} \begin{bmatrix} a_2 &amp; b_2 \\ c_2 &amp; d_2 \end{bmatrix} = \begin{bmatrix} a_1a_2 + b_1c_2 &amp; a_1b_2 + b_1d_2 \\ c_1a_2 + d_1c_2 &amp; c_1b_2 + d_1d_2 \end{bmatrix}
+\]</span> Дурын <span class="math inline">\(A\)</span> матрицын хувьд бид <span class="math inline">\(A^1 = A\)</span>, <span class="math inline">\(\forall n \ge 2, \ A^n = A \cdot A^{n-1}\)</span> гэж тодорхойлно.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1\)</span>, <span class="math display">\[
+\begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 1 \end{bmatrix}^n = \begin{bmatrix} 1 &amp; n \\ 0 &amp; 1 \end{bmatrix}.
+\]</span></li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1\)</span>, <span class="math display">\[
+\begin{bmatrix} -1 &amp; 1 \\ -1 &amp; -1 \end{bmatrix}^n = (-2)^{n-1} \begin{bmatrix} -1 &amp; 1 \\ -1 &amp; -1 \end{bmatrix}.
+\]</span></li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1\)</span>, <span class="math display">\[
+\begin{bmatrix} 1 &amp; 1 \\ 0 &amp; 2 \end{bmatrix}^n = \begin{bmatrix} 1 &amp; 2^n - 1 \\ 0 &amp; 2^n \end{bmatrix}.
+\]</span></li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1\)</span>, <span class="math display">\[
+\begin{bmatrix} 1 &amp; 0 \\ -2 &amp; 1 \end{bmatrix}^n = \begin{bmatrix} 1 &amp; 0 \\ -2n &amp; 1 \end{bmatrix}.
+\]</span> 35-37 дасгалд дараах тригонометрийн ижилтэгчүүдийг ашигла. <span class="math display">\[
+\sin(\theta_1 + \theta_2) = \sin\theta_1 \cos\theta_2 + \cos\theta_1 \sin\theta_2
+\]</span> <span class="math display">\[
+\cos(\theta_1 + \theta_2) = \cos\theta_1 \cos\theta_2 - \sin\theta_1 \sin\theta_2
+\]</span> <em>35. <span class="math inline">\(\theta \in \mathbb{R}\)</span> байг. Харуул: <span class="math inline">\(\forall n \ge 1\)</span>, <span class="math display">\[
+\begin{bmatrix} \cos\theta &amp; \sin\theta \\ -\sin\theta &amp; \cos\theta \end{bmatrix}^n = \begin{bmatrix} \cos n\theta &amp; \sin n\theta \\ -\sin n\theta &amp; \cos n\theta \end{bmatrix}.
+\]</span> </em>36. Комплекс тоонуудыг <span class="math inline">\((a_1 + ib_1) \cdot (a_2 + ib_2) = (a_1a_2 - b_1b_2) + i(a_1b_2 + a_2b_1)\)</span>, <span class="math inline">\((a+ib)^1 = a+ib\)</span>, ба <span class="math inline">\(\forall n \ge 2, \ (a+ib)^n = (a+ib)(a+ib)^{n-1}\)</span> томьёогоор тодорхойлогдох үржвэр болон нэмэх үйлдлийг ашиглан <span class="math inline">\(i = \sqrt{-1}\)</span> гэж үзье.</li>
 </ol>
 <ol type="a">
-<li>( + i = + i) болохыг ажиглаад (( + i)^3)-г тооцоол. Үр дүн нь ()-тай хэрхэн холбогдох вэ?</li>
-<li>() байг. Де Муаврын теоремыг батал. Өөрөөр хэлбэл, харуул: (n , &nbsp;(+ i)^n = n+ in). *37. () байг.</li>
-<li>()-ийн ижилтэгчийг гаргахын тулд дээрх эхний ижилтэгчийг (= _1 = _2) үед ашигла. Үүнийг синусын өнцгийн хоёр өнцгийн ижилтэгч гэж нэрлэдэг.</li>
-<li>(= 4) болохыг харуулахын тулд өнцгийн хоёр өнцгийн ижилтэгчийг ашигла.</li>
-<li>Харуул: (n , &nbsp;^n= 2^n _{i=1}^n ^i).</li>
+<li><span class="math inline">\(\cos \frac{\pi}{3} + i \sin \frac{\pi}{3} = \frac{1}{2} + i\frac{\sqrt{3}}{2}\)</span> болохыг ажиглаад <span class="math inline">\(\left(\frac{1}{2} + i\frac{\sqrt{3}}{2}\right)^3\)</span>-г тооцоол. Үр дүн нь <span class="math inline">\(\frac{\pi}{3}\)</span>-тай хэрхэн холбогдох вэ?</li>
+<li><span class="math inline">\(\theta \in \mathbb{R}\)</span> байг. Де Муаврын теоремыг батал. Өөрөөр хэлбэл, харуул: <span class="math inline">\(\forall n \ge 1, \ (\cos\theta + i\sin\theta)^n = \cos n\theta + i\sin n\theta\)</span>. *37. <span class="math inline">\(\theta \in \mathbb{R}\)</span> байг.</li>
+<li><span class="math inline">\(\sin 2\theta\)</span>-ийн ижилтэгчийг гаргахын тулд дээрх эхний ижилтэгчийг <span class="math inline">\(\theta = \theta_1 = \theta_2\)</span> үед ашигла. Үүнийг синусын өнцгийн хоёр өнцгийн ижилтэгч гэж нэрлэдэг.</li>
+<li><span class="math inline">\(\sin 4\theta = 4\sin\theta\cos\theta\cos 2\theta\)</span> болохыг харуулахын тулд өнцгийн хоёр өнцгийн ижилтэгчийг ашигла.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1, \ \sin 2^n\theta = 2^n \sin\theta \prod_{i=1}^n \cos 2^i\theta\)</span>.</li>
 </ol>
 <ol start="38" type="1">
-<li>(x &gt; -1) байг. <strong>Бернуллийн тэнцэтгэл биш</strong>-ийг батал. Өөрөөр хэлбэл, харуул: (n , &nbsp;(1+x)^n +nx).</li>
+<li><span class="math inline">\(x &gt; -1\)</span> байг. <strong>Бернуллийн тэнцэтгэл биш</strong>-ийг батал. Өөрөөр хэлбэл, харуул: <span class="math inline">\(\forall n \ge 0, \ (1+x)^n \ge 1+nx\)</span>.</li>
 <li>(4.14) хэлбэрийн мэдэгдлийн индукцийн алхам биелдэг боловч суурь тохиолдол биелдэггүй жишээг өг.</li>
 <li>(4.14) хэлбэрийн мэдэгдлийн суурь тохиолдол биелдэг боловч индукцийн алхам биелдэггүй жишээг өг.</li>
-<li>Хэрэв (n a, P(n)) биелнэ, тэгвэл (k a, P(k) P(k+1)) болохыг харуул.</li>
-<li>Хэрэв (n a, P(n)) биелнэ, тэгвэл (P(a)) биелнэ. Энэ нь ямар зарчим вэ?</li>
-<li>Харуул: (n , &nbsp;5^n ).</li>
-<li>Харуул: (n , &nbsp;9^n ^n ).</li>
-<li><strong>Каталан тоонууд</strong> нь (C_0 = 1) ба [ C_n = C_{n-1}, n ] байдлаар тодорхойлогдоно.</li>
+<li>Хэрэв <span class="math inline">\(\forall n \ge a, P(n)\)</span> биелнэ, тэгвэл <span class="math inline">\(\forall k \ge a, P(k) \to P(k+1)\)</span> болохыг харуул.</li>
+<li>Хэрэв <span class="math inline">\(\forall n \ge a, P(n)\)</span> биелнэ, тэгвэл <span class="math inline">\(P(a)\)</span> биелнэ. Энэ нь ямар зарчим вэ?</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 5^n \equiv 1 \pmod 4\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 9^n \equiv 4^n \pmod 5\)</span>.</li>
+<li><strong>Каталан тоонууд</strong> нь <span class="math inline">\(C_0 = 1\)</span> ба <span class="math display">\[
+C_n = \frac{2(2n-1)}{n+1} C_{n-1}, \quad \forall n \ge 1
+\]</span> байдлаар тодорхойлогдоно.</li>
 </ol>
 <ol type="a">
-<li>(C_0, C_1, C_2, C_3, C_4) Каталан тоонуудыг жагсаа. <em>(b) Харуул: (n , &nbsp;C_n = ).</em></li>
-<li>(C_n) нь (n+1) хүчин зүйлээс бүрдэх үржвэрийг хаалтанд авах аргуудын тоог тоолдог (жишээлбэл, (abc)-г ((ab)c) эсвэл (a(bc)) гэж бичиж болно). Үүнийг (n = 0, 1, 2, 3, 4) үед үнэн эсэхийг шалга.</li>
+<li><span class="math inline">\(C_0, C_1, C_2, C_3, C_4\)</span> Каталан тоонуудыг жагсаа. <em>(b) Харуул: <span class="math inline">\(\forall n \ge 0, \ C_n = \frac{1}{n+1} \binom{2n}{n}\)</span>.</em></li>
+<li><span class="math inline">\(C_n\)</span> нь <span class="math inline">\(n+1\)</span> хүчин зүйлээс бүрдэх үржвэрийг хаалтанд авах аргуудын тоог тоолдог (жишээлбэл, <span class="math inline">\(abc\)</span>-г <span class="math inline">\((ab)c\)</span> эсвэл <span class="math inline">\(a(bc)\)</span> гэж бичиж болно). Үүнийг <span class="math inline">\(n = 0, 1, 2, 3, 4\)</span> үед үнэн эсэхийг шалга.</li>
 </ol>
 <ol start="46" type="1">
-<li>Индукцээр батлах тоймд индукцийн алхмыг “(k &gt; b), хэрэв (P(k-1)) үнэн бол (P(k)) үнэн” гэж сольё. Индукцийн энэ шинэ хэлбэр яагаад өөр нэг хүчинтэй арга болохыг тайлбарла. ```</li>
+<li>Индукцээр батлах тоймд индукцийн алхмыг “<span class="math inline">\(\forall k &gt; b\)</span>, хэрэв <span class="math inline">\(P(k-1)\)</span> үнэн бол <span class="math inline">\(P(k)\)</span> үнэн” гэж сольё. Индукцийн энэ шинэ хэлбэр яагаад өөр нэг хүчинтэй арга болохыг тайлбарла. ```</li>
 </ol>
 
 

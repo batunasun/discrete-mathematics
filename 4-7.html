@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД – Дискрет математик</title>
+<title>4-р бүлгийн давтлага бодлогууд – Дискрет математик</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -81,6 +81,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -264,7 +293,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-7.html"><span class="chapter-title">4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4. Бүхэл тоон индек</a></li><li class="breadcrumb-item"><a href="./4-7.html"><span class="chapter-title">4-р бүлгийн давтлага бодлогууд</span></a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -372,8 +401,8 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text" id="quarto-sidebar-section-3-label">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</span></a>
-            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: 4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: 4. Бүхэл тоон индек">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
             </button> 
       </div>
@@ -410,7 +439,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4-7.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД</span></a>
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">4-р бүлгийн давтлага бодлогууд</span></a>
   </div>
 </li>
       </ul>
@@ -468,9 +497,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-7.html"><span class="chapter-title">4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4. Бүхэл тоон индек</a></li><li class="breadcrumb-item"><a href="./4-7.html"><span class="chapter-title">4-р бүлгийн давтлага бодлогууд</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД</span></h1>
+<h1 class="title"><span class="chapter-title">4-р бүлгийн давтлага бодлогууд</span></h1>
 </div>
 
 
@@ -488,85 +517,97 @@ ul.task-list li input[type="checkbox"] {
 
 
 <ol type="1">
-<li>(n , s_n = 2^n ) гэж өгөгдсөн ({s_n}) дарааллын эхний таван гишүүнийг ол.</li>
-<li>(s_1 = 3), ба (n , s_n = (s_{n-1})^2 - 4) гэж өгөгдсөн ({s_n}) дарааллын эхний таван гишүүнийг ол.</li>
-<li>(, , , , , ) дарааллын хаалттай томьёог ол.</li>
-<li>(-6, 6, 18, 30, 42, ) дарааллын рекурсив томьёог ол.</li>
-<li>(-2, 6, -18, 54, -162, ) дарааллын хаалттай томьёог ол.</li>
-<li><strong>Нийлмэл хүү.</strong> Жилийн (r) хүүтэй, жилд (m) удаа хүү тооцдог дансанд (жишээлбэл, хүүг сар бүр тооцдог бол (m = 12)), үечилсэн хүүний хэмжээ нь () байна.</li>
+<li><span class="math inline">\(\forall n \ge 3, s_n = 2^n \binom{n}{3}\)</span> гэж өгөгдсөн <span class="math inline">\(\{s_n\}\)</span> дарааллын эхний таван гишүүнийг ол.</li>
+<li><span class="math inline">\(s_1 = 3\)</span>, ба <span class="math inline">\(\forall n \ge 2, s_n = (s_{n-1})^2 - 4\)</span> гэж өгөгдсөн <span class="math inline">\(\{s_n\}\)</span> дарааллын эхний таван гишүүнийг ол.</li>
+<li><span class="math inline">\(\frac{1}{2}, \frac{2}{4}, \frac{3}{8}, \frac{4}{16}, \frac{5}{32}, \dots\)</span> дарааллын хаалттай томьёог ол.</li>
+<li><span class="math inline">\(-6, 6, 18, 30, 42, \dots\)</span> дарааллын рекурсив томьёог ол.</li>
+<li><span class="math inline">\(-2, 6, -18, 54, -162, \dots\)</span> дарааллын хаалттай томьёог ол.</li>
+<li><strong>Нийлмэл хүү.</strong> Жилийн <span class="math inline">\(r\)</span> хүүтэй, жилд <span class="math inline">\(m\)</span> удаа хүү тооцдог дансанд (жишээлбэл, хүүг сар бүр тооцдог бол <span class="math inline">\(m = 12\)</span>), үечилсэн хүүний хэмжээ нь <span class="math inline">\(\frac{r}{m}\)</span> байна.</li>
 </ol>
 <ol type="a">
-<li>(r = 0.06, m = 12), ба ($500)-ийн анхны хөрөнгө оруулалт хийсэн гэж үзье. 2 сарын дараа энэ хөрөнгө оруулалт ямар хэмжээнд хүрэх вэ? 2 жилийн дараа?</li>
-<li>Ерөнхийдөө, (P) долларын анхны хөрөнгө оруулалт хийвэл (t) жилийн дараа үлдэгдэл (s_t) ямар утгад хүрэх вэ?</li>
+<li><span class="math inline">\(r = 0.06, m = 12\)</span>, ба <span class="math inline">\(\$500\)</span>-ийн анхны хөрөнгө оруулалт хийсэн гэж үзье. 2 сарын дараа энэ хөрөнгө оруулалт ямар хэмжээнд хүрэх вэ? 2 жилийн дараа?</li>
+<li>Ерөнхийдөө, <span class="math inline">\(P\)</span> долларын анхны хөрөнгө оруулалт хийвэл <span class="math inline">\(t\)</span> жилийн дараа үлдэгдэл <span class="math inline">\(s_t\)</span> ямар утгад хүрэх вэ?</li>
 </ol>
 <ol start="7" type="1">
 <li>1-р дасгал дахь дарааллыг индексийг 0-ээс эхлүүлж дахин индексжүүл.</li>
-<li>(k ) индекс өгөгдсөн үед 2-р дасгал дахь дарааллаас (s_{k+1})-ийн илэрхийллийг ол.</li>
-<li>(12 + 24 + 48 + 96 + + 3 ^{n-1})-г нийлбэрийн тэмдэглэгээгээр бич.</li>
-<li>(1 + 2 + 3 + 4 + + 500)-г тооцоол.</li>
-<li>(1 + 4 + 16 + 64 + + 4^{10})-г тооцоол.</li>
-<li>(_{i=1}^{100} (3i^2 - i + 2))-г тооцоол.</li>
-<li>(_{i=1}^n (i - 2)^2)-г тооцоол.</li>
-<li>(_{i=0}^n (-2)^i)-г тооцоол.</li>
-<li><strong>Моргейж.</strong> Жилийн (6%) хүүтэй, сард ($500) төлбөртэй (M) долларын моргейжийн (t) жилийн дараах (s_t) үлдэгдэл нь дараах байдлаар өгөгдөнө: [ s_t = M(1.005)^{12t} - 500(1.005)^{12t-1} - - 500(1.005) - 500. ]</li>
+<li><span class="math inline">\(k \ge 1\)</span> индекс өгөгдсөн үед 2-р дасгал дахь дарааллаас <span class="math inline">\(s_{k+1}\)</span>-ийн илэрхийллийг ол.</li>
+<li><span class="math inline">\(12 + 24 + 48 + 96 + \dots + 3 \cdot 2^{n-1}\)</span>-г нийлбэрийн тэмдэглэгээгээр бич.</li>
+<li><span class="math inline">\(1 + 2 + 3 + 4 + \dots + 500\)</span>-г тооцоол.</li>
+<li><span class="math inline">\(1 + 4 + 16 + 64 + \dots + 4^{10}\)</span>-г тооцоол.</li>
+<li><span class="math inline">\(\sum_{i=1}^{100} (3i^2 - i + 2)\)</span>-г тооцоол.</li>
+<li><span class="math inline">\(\sum_{i=1}^n (i - 2)^2\)</span>-г тооцоол.</li>
+<li><span class="math inline">\(\sum_{i=0}^n (-2)^i\)</span>-г тооцоол.</li>
+<li><strong>Моргейж.</strong> Жилийн <span class="math inline">\(6\%\)</span> хүүтэй, сард <span class="math inline">\(\$500\)</span> төлбөртэй <span class="math inline">\(M\)</span> долларын моргейжийн <span class="math inline">\(t\)</span> жилийн дараах <span class="math inline">\(s_t\)</span> үлдэгдэл нь дараах байдлаар өгөгдөнө: <span class="math display">\[
+s_t = M(1.005)^{12t} - 500(1.005)^{12t-1} - \dots - 500(1.005) - 500.
+\]</span></li>
 </ol>
 <ol type="a">
-<li>(M = $80,000) гэж үзье. 10 жилийн дараа үлдэгдэл хэд байх вэ? 20 жилийн дараа?</li>
+<li><span class="math inline">\(M = \$80,000\)</span> гэж үзье. 10 жилийн дараа үлдэгдэл хэд байх вэ? 20 жилийн дараа?</li>
 <li>30 жилийн эцэст яг тэглэхийн тулд хэдэн төгрөгийн моргейж төлж болох вэ?</li>
 </ol>
 <ol start="16" type="1">
-<li>(_{i=5}^{203} ) нийлбэрийг авч үзье.</li>
+<li><span class="math inline">\(\sum_{i=5}^{203} \frac{2}{3^i}\)</span> нийлбэрийг авч үзье.</li>
 </ol>
 <ol type="a">
 <li>Индексийг 0-ээс эхлүүлж дахин индексжүүл.</li>
 <li>Нийлбэрийг тооцоол.</li>
 </ol>
 <ol start="17" type="1">
-<li>Харуул: (n , &nbsp;n! &gt; 4^n).</li>
-<li>Харуул: (n , &nbsp;n^2 &gt; 4(n+2)). *19. Харуул: (n , &nbsp;3 (n^3 - 4n + 6)).</li>
-<li>Харуул: (n , &nbsp;3 (5^n - 2^n)).</li>
-<li>Харуул: (n , &nbsp;6 (7^n - 1)).</li>
-<li>Харуул: (n , &nbsp;3 (5^n - 2^n)).</li>
-<li><strong>Аннуитет.</strong> Жилийн (6%) хүү өгдөг аннуитетэд сард ($300) төлбөр хийж байгаа бөгөөд сар бүрийн эцэст үлдэгдэл нь ($300) төлбөрийг нэмэхийн өмнөхөн (0.5%) нэмэгддэг. Өөрөөр хэлбэл, (n) сарын дараах (s_n) үлдэгдэл дараах рекурсын хамаарлыг хангана: [ s_0 = 0 n , &nbsp;s_n = 1.005s_{n-1} + 300. ]</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 9, \ n! &gt; 4^n\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 6, \ n^2 &gt; 4(n+2)\)</span>. *19. Харуул: <span class="math inline">\(\forall n \ge 0, \ 3 \mid (n^3 - 4n + 6)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 3 \mid (5^n - 2^n)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 6 \mid (7^n - 1)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ 3 \mid (5^n - 2^n)\)</span>.</li>
+<li><strong>Аннуитет.</strong> Жилийн <span class="math inline">\(6\%\)</span> хүү өгдөг аннуитетэд сард <span class="math inline">\(\$300\)</span> төлбөр хийж байгаа бөгөөд сар бүрийн эцэст үлдэгдэл нь <span class="math inline">\(\$300\)</span> төлбөрийг нэмэхийн өмнөхөн <span class="math inline">\(0.5\%\)</span> нэмэгддэг. Өөрөөр хэлбэл, <span class="math inline">\(n\)</span> сарын дараах <span class="math inline">\(s_n\)</span> үлдэгдэл дараах рекурсын хамаарлыг хангана: <span class="math display">\[
+s_0 = 0 \quad \text{ба } \forall n \ge 1, \ s_n = 1.005s_{n-1} + 300.
+\]</span></li>
 </ol>
 <ol type="a">
-<li>(s_1, s_2, s_3)-ийг ол.</li>
-<li>Харуул: (n , &nbsp;s_n = 60000(1.005^n - 1)).</li>
+<li><span class="math inline">\(s_1, s_2, s_3\)</span>-ийг ол.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \ s_n = 60000(1.005^n - 1)\)</span>.</li>
 </ol>
 <ol start="24" type="1">
-<li>(a, x_1, x_2, ) бодит тоонууд байг. Харуул: (n , &nbsp;a(x_1 + + x_n) = ax_1 + + ax_n). <em>Зөвлөмж: Суурь тохиолдолд Дистрибутив хуулийг ашигла, мөн индукцийн алхамд ассоциатив шинж чанарыг нэмж ашигла.</em></li>
-<li>()-ийн ямар ч хоосон бус төгсгөлөг дэд олонлог хамгийн бага элементтэй болохыг харуул. Өөрөөр хэлбэл, ямар нэг төгсгөлөг (S ) олонлогийн хувьд (S)-д (m = (S)) байх (m S) элемент байна. <em>Зөвлөмж: (|S|)-ийн хувьд индукц ашигла.</em></li>
-<li>Харуул: (n , _{i=1}^n ( - ) = 1 - ).</li>
-<li>Харуул: (n , 4 + 7 + 10 + + (3n + 1) = (3n + 5)).</li>
-<li>Харуул: (n , _{i=1}^n 3^i = (3^n - 1)).</li>
-<li>Харуул: (n , _{i=0}^n (i + 1)2^i = n2^{n+1} + 1).</li>
-<li>Харуул: (n , _{i=1}^n (3i^2 + 5i) = n(n + 1)(n + 3)).</li>
-<li>Харуул: (n , _{i=1}^n i4^i = [4^n(3n - 1) + 1]).</li>
-<li>(b, a_1, a_2, a_3, ) бодит тоонууд ба (b &gt; 0) байг. Харуул: (n , &nbsp;b<sup>{_{i=1}</sup>n a_i} = _{i=1}^n b^{a_i}).</li>
-<li>({s_n}) нь [ s_0 = 6, s_1 = 3, n , &nbsp;s_n = 2s_{n-2} + s_{n-1} ] томьёогоор тодорхойлогдсон дараалал байг. Харуул: (n , &nbsp;3 s_n).</li>
-<li>({s_n}) нь [ s_0 = 7, s_1 = 32, n , &nbsp;s_n = -20s_{n-2} + 9s_{n-1} ] томьёогоор тодорхойлогдсон дараалал байг. Харуул: (n , &nbsp;s_n = 4 ^n + 3 ^n).</li>
-<li>({s_n}) нь [ s_0 = 5, s_1 = 16, n , &nbsp;s_n = 6s_{n-1} - 8s_{n-2} ] томьёогоор тодорхойлогдсон дараалал байг. Харуул: (n , &nbsp;s_n = 2^{n+1} + 3 ^n).</li>
-<li>Марк худалдагч машин зөвхөн (3) ба (8)-ийн марк гаргадаг бол (14) ба түүнээс дээш ямар ч мөнгөн дүнг энэ машинаас авч болно.</li>
+<li><span class="math inline">\(a, x_1, x_2, \dots\)</span> бодит тоонууд байг. Харуул: <span class="math inline">\(\forall n \ge 2, \ a(x_1 + \dots + x_n) = ax_1 + \dots + ax_n\)</span>. <em>Зөвлөмж: Суурь тохиолдолд Дистрибутив хуулийг ашигла, мөн индукцийн алхамд ассоциатив шинж чанарыг нэмж ашигла.</em></li>
+<li><span class="math inline">\(\mathbb{R}\)</span>-ийн ямар ч хоосон бус төгсгөлөг дэд олонлог хамгийн бага элементтэй болохыг харуул. Өөрөөр хэлбэл, ямар нэг төгсгөлөг <span class="math inline">\(S \subset \mathbb{R}\)</span> олонлогийн хувьд <span class="math inline">\(S\)</span>-д <span class="math inline">\(m = \min(S)\)</span> байх <span class="math inline">\(m \in S\)</span> элемент байна. <em>Зөвлөмж: <span class="math inline">\(|S|\)</span>-ийн хувьд индукц ашигла.</em></li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1, \sum_{i=1}^n \left( \frac{1}{i} - \frac{1}{i+1} \right) = 1 - \frac{1}{n+1}\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1, 4 + 7 + 10 + \dots + (3n + 1) = \frac{n}{2}(3n + 5)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1, \sum_{i=1}^n 3^i = \frac{3}{2}(3^n - 1)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \sum_{i=0}^n (i + 1)2^i = n2^{n+1} + 1\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1, \sum_{i=1}^n (3i^2 + 5i) = n(n + 1)(n + 3)\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 1, \sum_{i=1}^n i4^i = \frac{4}{9}[4^n(3n - 1) + 1]\)</span>.</li>
+<li><span class="math inline">\(b, a_1, a_2, a_3, \dots\)</span> бодит тоонууд ба <span class="math inline">\(b &gt; 0\)</span> байг. Харуул: <span class="math inline">\(\forall n \ge 1, \ b^{\sum_{i=1}^n a_i} = \prod_{i=1}^n b^{a_i}\)</span>.</li>
+<li><span class="math inline">\(\{s_n\}\)</span> нь <span class="math display">\[
+s_0 = 6, s_1 = 3, \text{ ба } \forall n \ge 2, \ s_n = 2s_{n-2} + s_{n-1}
+\]</span> томьёогоор тодорхойлогдсон дараалал байг. Харуул: <span class="math inline">\(\forall n \ge 0, \ 3 \mid s_n\)</span>.</li>
+<li><span class="math inline">\(\{s_n\}\)</span> нь <span class="math display">\[
+s_0 = 7, s_1 = 32, \text{ ба } \forall n \ge 2, \ s_n = -20s_{n-2} + 9s_{n-1}
+\]</span> томьёогоор тодорхойлогдсон дараалал байг. Харуул: <span class="math inline">\(\forall n \ge 0, \ s_n = 4 \cdot 5^n + 3 \cdot 4^n\)</span>.</li>
+<li><span class="math inline">\(\{s_n\}\)</span> нь <span class="math display">\[
+s_0 = 5, s_1 = 16, \text{ ба } \forall n \ge 2, \ s_n = 6s_{n-1} - 8s_{n-2}
+\]</span> томьёогоор тодорхойлогдсон дараалал байг. Харуул: <span class="math inline">\(\forall n \ge 0, \ s_n = 2^{n+1} + 3 \cdot 2^n\)</span>.</li>
+<li>Марк худалдагч машин зөвхөн <span class="math inline">\(3\text{¢}\)</span> ба <span class="math inline">\(8\text{¢}\)</span>-ийн марк гаргадаг бол <span class="math inline">\(14\text{¢}\)</span> ба түүнээс дээш ямар ч мөнгөн дүнг энэ машинаас авч болно.</li>
 </ol>
 <ol type="a">
-<li>(20)-ийг хэрхэн авах вэ?</li>
+<li><span class="math inline">\(20\text{¢}\)</span>-ийг хэрхэн авах вэ?</li>
 <li>Ерөнхий дүгнэлтийг батал.</li>
 </ol>
 <ol start="37" type="1">
 <li>1001-ийн стандартчиллыг харуул.</li>
 <li>78408-ийн стандартчиллыг харуул.</li>
-<li>()-ийн стандартчиллыг харуул.</li>
-<li>4.5 хэсгийн 8-р дасгалд тодорхойлсон Лукасын дараалал ({L_n}<em>{n }) нь (1, 3, 4, 7, 11, ) байна. Харуул: (n , </em>{i=1}^n L_i = L_{n+2} - 3).</li>
-<li>({s_n}) нь [ s_0 = 0, s_1 = 6, n , &nbsp;s_n = 3(4s_{n-1} - 9s_{n-2}) ] томьёогоор тодорхойлогдсон дараалал байг. Харуул: (n , &nbsp;s_n = 3<sup>n(3</sup>n - 1)).</li>
-<li>Биномын теоремыг ашиглан ((x + y)^4)-ийг задла.</li>
-<li>Биномын теоремыг ашиглан ((3x - 4y)^8)-ийг задла.</li>
-<li>Биномын теоремыг ашиглан ((x^2 - y<sup>2)</sup>5)-ийг задла.</li>
-<li>((x - 2)^{10})-ийн задаргаа дахь (x^{10})-ийн коэффициентийг ол.</li>
-<li>((3x - y)^{100})-ийн задаргаа дахь (x<sup>{25}y</sup>{75})-ийн коэффициентийг ол.</li>
-<li>((7x + 2y)^{80})-ийн задаргаа дахь (x<sup>{30}y</sup>{50})-ийн коэффициентийг ол.</li>
-<li>Та 6 хүний бүрэлдэхүүнтэй багт багтаж, том ажлыг жижиг даалгаварт хувааж, даалгавар бүрт нэг багийн гишүүнийг сайн дураараа сонгон гүйцэтгэж байна. Таны үзэж байгаагаар хэдэн даалгавар хийх нь чухал вэ? Хэрэв нийт (n) даалгавар байгаа бол та (i) даалгаврын хариуцлага хүлээх боломжтой даалгаврын хуваарилалтын тоо нь ( 5^i) байна. Бүх (0 i n)-ийн хувьд нэмбэл ажлын нийт боломжит хуваарилалт нь (<em>{i=0}^n 5^i) болно. Илүү хялбар томьёог (6^n)-ээр өгнө. (n , </em>{i=0}^n 5^i = 6^n) гэдгийг батлахын тулд Биномын теоремыг ашигла.</li>
-<li>Харуул: (n , _{i=0}^n 2^{2i} = 5^n).</li>
-<li>Харуул: (n , _{i=0}^n (-1)^i 3^{n-i} 4^i = (-1)^n).</li>
+<li><span class="math inline">\(\binom{30}{6}\)</span>-ийн стандартчиллыг харуул.</li>
+<li>4.5 хэсгийн 8-р дасгалд тодорхойлсон Лукасын дараалал <span class="math inline">\(\{L_n\}_{n \ge 1}\)</span> нь <span class="math inline">\(1, 3, 4, 7, 11, \dots\)</span> байна. Харуул: <span class="math inline">\(\forall n \ge 1, \sum_{i=1}^n L_i = L_{n+2} - 3\)</span>.</li>
+<li><span class="math inline">\(\{s_n\}\)</span> нь <span class="math display">\[
+s_0 = 0, s_1 = 6, \text{ ба } \forall n \ge 2, \ s_n = 3(4s_{n-1} - 9s_{n-2})
+\]</span> томьёогоор тодорхойлогдсон дараалал байг. Харуул: <span class="math inline">\(\forall n \ge 0, \ s_n = 3^n(3^n - 1)\)</span>.</li>
+<li>Биномын теоремыг ашиглан <span class="math inline">\((x + y)^4\)</span>-ийг задла.</li>
+<li>Биномын теоремыг ашиглан <span class="math inline">\((3x - 4y)^8\)</span>-ийг задла.</li>
+<li>Биномын теоремыг ашиглан <span class="math inline">\((x^2 - y^2)^5\)</span>-ийг задла.</li>
+<li><span class="math inline">\((x - 2)^{10}\)</span>-ийн задаргаа дахь <span class="math inline">\(x^{10}\)</span>-ийн коэффициентийг ол.</li>
+<li><span class="math inline">\((3x - y)^{100}\)</span>-ийн задаргаа дахь <span class="math inline">\(x^{25}y^{75}\)</span>-ийн коэффициентийг ол.</li>
+<li><span class="math inline">\((7x + 2y)^{80}\)</span>-ийн задаргаа дахь <span class="math inline">\(x^{30}y^{50}\)</span>-ийн коэффициентийг ол.</li>
+<li>Та 6 хүний бүрэлдэхүүнтэй багт багтаж, том ажлыг жижиг даалгаварт хувааж, даалгавар бүрт нэг багийн гишүүнийг сайн дураараа сонгон гүйцэтгэж байна. Таны үзэж байгаагаар хэдэн даалгавар хийх нь чухал вэ? Хэрэв нийт <span class="math inline">\(n\)</span> даалгавар байгаа бол та <span class="math inline">\(i\)</span> даалгаврын хариуцлага хүлээх боломжтой даалгаврын хуваарилалтын тоо нь <span class="math inline">\(\binom{n}{i} 5^i\)</span> байна. Бүх <span class="math inline">\(0 \le i \le n\)</span>-ийн хувьд нэмбэл ажлын нийт боломжит хуваарилалт нь <span class="math inline">\(\sum_{i=0}^n \binom{n}{i} 5^i\)</span> болно. Илүү хялбар томьёог <span class="math inline">\(6^n\)</span>-ээр өгнө. <span class="math inline">\(\forall n \ge 0, \sum_{i=0}^n \binom{n}{i} 5^i = 6^n\)</span> гэдгийг батлахын тулд Биномын теоремыг ашигла.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \sum_{i=0}^n \binom{n}{i} 2^{2i} = 5^n\)</span>.</li>
+<li>Харуул: <span class="math inline">\(\forall n \ge 0, \sum_{i=0}^n (-1)^i \binom{n}{i} 3^{n-i} 4^i = (-1)^n\)</span>.</li>
 </ol>
 
 

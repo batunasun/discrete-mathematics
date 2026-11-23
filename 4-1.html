@@ -328,7 +328,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-1.html"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4. Бүхэл тоон индек</a></li><li class="breadcrumb-item"><a href="./4-1.html"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -436,8 +436,8 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./4.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text" id="quarto-sidebar-section-3-label">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</span></a>
-            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: 4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: 4. Бүхэл тоон индек">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
             </button> 
       </div>
@@ -474,7 +474,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД</span></a>
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн давтлага бодлогууд</span></a>
   </div>
 </li>
       </ul>
@@ -544,7 +544,7 @@ window.Quarto = {
 <main class="content" id="quarto-document-content" tabindex="-1">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-1.html"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4. Бүхэл тоон индек</a></li><li class="breadcrumb-item"><a href="./4-1.html"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></h1>
 </div>
@@ -566,51 +566,103 @@ window.Quarto = {
 <p>Индукцийг танилцуулахаас өмнө дарааллуудтай анхан шатны танилцах шаардлагатай. Зарим стандарт тэмдэглэгээтэй бас танилцах хэрэгтэй.</p>
 <section id="факториал-ба-биномын-коэффициентүүд" class="level3">
 <h3 class="anchored" data-anchor-id="факториал-ба-биномын-коэффициентүүд">Факториал ба Биномын коэффициентүүд</h3>
-<p>Бүх (n ) бүхэл тооны хувьд (n!) гэсэн тэмдэглэгээг ((n)-ийн факториал гэж уншина) дараах үржвэрээр тодорхойлно:</p>
-<p>[ n! = n(n-1)(n-2) . ]</p>
-<p>Нэмж хэлэхэд, бид (0! = 1) гэж тодорхойлно.</p>
+<p>Бүх <span class="math inline">\(n \ge 1\)</span> бүхэл тооны хувьд <span class="math inline">\(n!\)</span> гэсэн тэмдэглэгээг (<span class="math inline">\(n\)</span>-ийн факториал гэж уншина) дараах үржвэрээр тодорхойлно:</p>
+<p><span class="math display">\[
+n! = n(n-1)(n-2)\cdots 2 \cdot 1.
+\]</span></p>
+<p>Нэмж хэлэхэд, бид <span class="math inline">\(0! = 1\)</span> гэж тодорхойлно.</p>
 <p>Дараах мэт жижиг жишээнүүдийг тооцоолоход хялбар байдаг:</p>
-<p>[ 0! = 1, ! = 1, ! = 2, ! = 6, ! = 24, ! = 120, ! = 720, , (4.1) ]</p>
+<p><span class="math display">\[
+0! = 1, \quad 1! = 1, \quad 2! = 2, \quad 3! = 6, \quad 4! = 24, \quad 5! = 120, \quad 6! = 720, \dots, \quad (4.1)
+\]</span></p>
 <p>гэхдээ тоонууд маш хурдан өсдөг.</p>
-<p>(0 k n) байх (n) ба (k) бүхэл тоонууд өгөгдсөн үед () <strong>биномын коэффициентийг</strong> дараах байдлаар тодорхойлно:</p>
-<p>[ = . ]</p>
-<p>Үүнийг биномын коэффициент гэж нэрлэх болсон шалтгаан нь 4.6 хэсэгт Биномын теоремд коэффициент болгон ашиглагдах утгыг харах үед тодорхой болно. () гэсэн тэмдэглэгээг “(n)-ээс (k)-г сонгох” гэж уншина. 6-р бүлэгт бид (n) ялгаатай объектуудаас (k) объектыг сонгох аргуудын тоог өгдөг () гэсэн тэмдэглэгээний утгыг харах болно. Бидний зорилгын хувьд биномын коэффициентүүдийн энгийн жишээг дараах томьёог ашиглан тооцоолж болно.</p>
+<p><span class="math inline">\(0 \le k \le n\)</span> байх <span class="math inline">\(n\)</span> ба <span class="math inline">\(k\)</span> бүхэл тоонууд өгөгдсөн үед <span class="math inline">\(\binom{n}{k}\)</span> <strong>биномын коэффициентийг</strong> дараах байдлаар тодорхойлно:</p>
+<p><span class="math display">\[
+\binom{n}{k} = \frac{n!}{k!(n-k)!}.
+\]</span></p>
+<p>Үүнийг биномын коэффициент гэж нэрлэх болсон шалтгаан нь 4.6 хэсэгт Биномын теоремд коэффициент болгон ашиглагдах утгыг харах үед тодорхой болно. <span class="math inline">\(\binom{n}{k}\)</span> гэсэн тэмдэглэгээг “<span class="math inline">\(n\)</span>-ээс <span class="math inline">\(k\)</span>-г сонгох” гэж уншина. 6-р бүлэгт бид <span class="math inline">\(n\)</span> ялгаатай объектуудаас <span class="math inline">\(k\)</span> объектыг сонгох аргуудын тоог өгдөг <span class="math inline">\(\binom{n}{k}\)</span> гэсэн тэмдэглэгээний утгыг харах болно. Бидний зорилгын хувьд биномын коэффициентүүдийн энгийн жишээг дараах томьёог ашиглан тооцоолж болно.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 4.1</strong> (Биномын коэффициентүүдийн тооцоолол).</p>
-<p>[ = = = 15 ] [ = = = 20 ] [ = = 1 ] [ = = n ] [ = = ] [ = = ]</p>
+<p><span class="math display">\[
+\binom{6}{4} = \frac{6!}{4!2!} = \frac{6 \cdot 5 \cdot 4!}{4! \cdot 2 \cdot 1} = 15
+\]</span> <span class="math display">\[
+\binom{6}{3} = \frac{6!}{3!3!} = \frac{6 \cdot 5 \cdot 4}{3 \cdot 2 \cdot 1} = 20
+\]</span> <span class="math display">\[
+\binom{n}{0} = \frac{n!}{0!n!} = 1
+\]</span> <span class="math display">\[
+\binom{n}{1} = \frac{n!}{1!(n-1)!} = n
+\]</span> <span class="math display">\[
+\binom{n}{2} = \frac{n!}{2!(n-2)!} = \frac{n(n-1)}{2}
+\]</span> <span class="math display">\[
+\binom{n}{n-4} = \frac{n!}{(n-4)!4!} = \frac{n(n-1)(n-2)(n-3)}{24}
+\]</span></p>
 </blockquote>
-<p>( = 1) гэсэн тооцоолол нь (0! = 1) гэж сонгоход хүргэдэг. Факториалууд болон биномын коэффициентүүд нь тоолох асуудлуудад ихэвчлэн ашиглагддаг. ()-ийг “(n)-ээс (k)-г сонгох” гэж унших нь тохиромжтой гэдгийг харуулж байна. Энэ нь () нь (n) элементээс (k) элементийг сонгох аргуудын тоо гэсэн утгаараа үнэн юм. Математик нь (n!) ((n)-ийн факториал) болон () гэсэн тэмдэглэгээгээр хангадаг. C++ болон Maple программууд нь (n!) (эсвэл (factorial(n))) болон () (эсвэл (binomial(n,k))) гэсэн тэмдэглэгээгээр хангадаг.</p>
+<p><span class="math inline">\(\binom{0}{0} = 1\)</span> гэсэн тооцоолол нь <span class="math inline">\(0! = 1\)</span> гэж сонгоход хүргэдэг. Факториалууд болон биномын коэффициентүүд нь тоолох асуудлуудад ихэвчлэн ашиглагддаг. <span class="math inline">\(\binom{n}{k}\)</span>-ийг “<span class="math inline">\(n\)</span>-ээс <span class="math inline">\(k\)</span>-г сонгох” гэж унших нь тохиромжтой гэдгийг харуулж байна. Энэ нь <span class="math inline">\(\binom{n}{k}\)</span> нь <span class="math inline">\(n\)</span> элементээс <span class="math inline">\(k\)</span> элементийг сонгох аргуудын тоо гэсэн утгаараа үнэн юм. Математик нь <span class="math inline">\(n!\)</span> (<span class="math inline">\(n\)</span>-ийн факториал) болон <span class="math inline">\(\binom{n}{k}\)</span> гэсэн тэмдэглэгээгээр хангадаг. C++ болон Maple программууд нь <span class="math inline">\(n!\)</span> (эсвэл <span class="math inline">\(factorial(n)\)</span>) болон <span class="math inline">\(\binom{n}{k}\)</span> (эсвэл <span class="math inline">\(binomial(n,k)\)</span>) гэсэн тэмдэглэгээгээр хангадаг.</p>
 </section>
 <section id="дараалалууд" class="level3">
 <h3 class="anchored" data-anchor-id="дараалалууд">Дараалалууд</h3>
 <p><strong>Дараалал</strong> гэдэг нь бодит тоонуудын эрэмбэлэгдсэн жагсаалт юм. Бүх дараалал нь эхний гишүүнтэй байдаг бөгөөд төгсгөлгүй олон гишүүнтэй байж болно. Бид (4.1)-д факториалуудын дарааллыг аль хэдийн танилцуулсан. Бусад жишээнүүд элбэг байдаг.</p>
-<p>[ 1, 2, 3, 4, 5, 6, (4.2) ] [ 7, 10, 13, 16, 19, 22, (4.3) ] [ 1, 2, 4, 8, 16, 32, 64, (4.4) ] [ 6, 18, 54, 162, 486, 1458, (4.5) ] [ 5, -9, 13, -17, 21, -25, (4.6) ] [ 10, 15, 21, 28, 36, 45, (4.7) ] [ -2, 11, 0, 23, -5, 4, (4.8) ]</p>
+<p><span class="math display">\[
+1, 2, 3, 4, 5, 6, \dots \quad (4.2)
+\]</span> <span class="math display">\[
+7, 10, 13, 16, 19, 22, \dots \quad (4.3)
+\]</span> <span class="math display">\[
+1, 2, 4, 8, 16, 32, 64, \dots \quad (4.4)
+\]</span> <span class="math display">\[
+6, 18, 54, 162, 486, 1458, \dots \quad (4.5)
+\]</span> <span class="math display">\[
+5, -9, 13, -17, 21, -25, \dots \quad (4.6)
+\]</span> <span class="math display">\[
+10, 15, 21, 28, 36, 45, \dots \quad (4.7)
+\]</span> <span class="math display">\[
+-2, 11, 0, 23, -5, 4, \dots \quad (4.8)
+\]</span></p>
 <p>Дараалал (4.8) нь тодорхой хэв маяггүй мэт санагдаж байгааг анхаарна уу. Гэсэн хэдий ч бид харагдах хэв маягтай дарааллуудтай голчлон ажилладаг бөгөөд үүний үр дүнд дараалал дахь гишүүдийг томьёогоор өгч болно.</p>
-<p>Бид дарааллыг ({s_n}_{n }) хэлбэрээр илэрхийлдэг бөгөөд энэ нь дарааллын гишүүд нь</p>
-<p>[ s_a, s_{a+1}, s_{a+2}, s_{a+3}, s_{a+4}, s_{a+5}, ]</p>
-<p>байна гэсэн үг юм. Энд (a ). Өөрөөр хэлбэл, дараалал нь (a, a+1, a+2, a+3, a+4, a+5, ) бүхэл тоогоор <strong>индексжсэн</strong> байна.</p>
-<p>Ихэвчлэн (a=0) эсвэл (1) байдаг боловч заавал тийм байх шаардлагагүй. Хэрэв контекстээс индекс тодорхой байвал дарааллыг ({s_n}) хэлбэрээр эсвэл (s_n)-ийн хувьд зүгээр л томьёо хэлбэрээр үзүүлж болно. (4.1)-ээс (4.7) хүртэлх дарааллуудыг дараах томьёогоор илэрхийлж болно.</p>
-<p>[ (4.1) n , s_n = n!. ] [ (4.2) n , s_n = n. ] [ (4.3) n , s_n = 7 + 3n. ] [ (4.4) n , s_n = 2^n. ] [ (4.5) n , s_n = 2 ^n. ] [ (4.6) n , s_n = (-1)^n(5+4n). ] [ (4.7) n , s_n = . ]</p>
-<p>(4.8) дараалалд тодорхой томьёо байхгүй. (4.6) дараалал дахь ээлжлэн солигдох тэмдгүүд нь томьёо дахь ((-1)^n) хүчин зүйлээс үүдэлтэй болохыг анхаарна уу. (4.7) дараалалд өгөгдсөн энгийн томьёо нь индексийг (a=0) эсвэл (1)-ээс эхлүүлэх нь яагаад үргэлж хамгийн сайн сонголт байж чаддаггүйг харуулж байна. Өөр нэг хувилбар бол (), (n )-ийн хувьд, учир нь (n=0) үед энэ нь тодорхойгүй болно.</p>
+<p>Бид дарааллыг <span class="math inline">\(\{s_n\}_{n \in \mathcal{K}}\)</span> хэлбэрээр илэрхийлдэг бөгөөд энэ нь дарааллын гишүүд нь</p>
+<p><span class="math display">\[
+s_a, s_{a+1}, s_{a+2}, s_{a+3}, s_{a+4}, s_{a+5}, \dots
+\]</span></p>
+<p>байна гэсэн үг юм. Энд <span class="math inline">\(a \in \mathbb{Z}\)</span>. Өөрөөр хэлбэл, дараалал нь <span class="math inline">\(a, a+1, a+2, a+3, a+4, a+5, \dots\)</span> бүхэл тоогоор <strong>индексжсэн</strong> байна.</p>
+<p>Ихэвчлэн <span class="math inline">\(a=0\)</span> эсвэл <span class="math inline">\(1\)</span> байдаг боловч заавал тийм байх шаардлагагүй. Хэрэв контекстээс индекс тодорхой байвал дарааллыг <span class="math inline">\(\{s_n\}\)</span> хэлбэрээр эсвэл <span class="math inline">\(s_n\)</span>-ийн хувьд зүгээр л томьёо хэлбэрээр үзүүлж болно. (4.1)-ээс (4.7) хүртэлх дарааллуудыг дараах томьёогоор илэрхийлж болно.</p>
+<p><span class="math display">\[
+(4.1) \quad \forall n \ge 0, \quad s_n = n!.
+\]</span> <span class="math display">\[
+(4.2) \quad \forall n \ge 1, \quad s_n = n.
+\]</span> <span class="math display">\[
+(4.3) \quad \forall n \ge 0, \quad s_n = 7 + 3n.
+\]</span> <span class="math display">\[
+(4.4) \quad \forall n \ge 0, \quad s_n = 2^n.
+\]</span> <span class="math display">\[
+(4.5) \quad \forall n \ge 1, \quad s_n = 2 \cdot 3^n.
+\]</span> <span class="math display">\[
+(4.6) \quad \forall n \ge 0, \quad s_n = (-1)^n(5+4n).
+\]</span> <span class="math display">\[
+(4.7) \quad \forall n \ge 5, \quad s_n = \binom{n}{2}.
+\]</span></p>
+<p>(4.8) дараалалд тодорхой томьёо байхгүй. (4.6) дараалал дахь ээлжлэн солигдох тэмдгүүд нь томьёо дахь <span class="math inline">\((-1)^n\)</span> хүчин зүйлээс үүдэлтэй болохыг анхаарна уу. (4.7) дараалалд өгөгдсөн энгийн томьёо нь индексийг <span class="math inline">\(a=0\)</span> эсвэл <span class="math inline">\(1\)</span>-ээс эхлүүлэх нь яагаад үргэлж хамгийн сайн сонголт байж чаддаггүйг харуулж байна. Өөр нэг хувилбар бол <span class="math inline">\(\binom{n+2}{n}\)</span>, <span class="math inline">\(n \ge 0\)</span>-ийн хувьд, учир нь <span class="math inline">\(n=0\)</span> үед энэ нь тодорхойгүй болно.</p>
 <p>Хязгааргүй дарааллуудыг програм хангамжийн хэрэгжүүлэлтэд тусгай функцүүдээр зохицуулж болно. Математикт (4.5) дарааллыг дараах байдлаар оруулж болно.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode mathematica code-with-copy"><code class="sourceCode mathematica"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">In</span><span class="op">[</span><span class="dv">1</span><span class="op">]</span><span class="ex">:=</span> <span class="fu">s</span><span class="op">[</span><span class="at">n_</span><span class="op">]</span> <span class="ex">:=</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">^</span><span class="fu">n</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Зүүн гар талд байгаа (n)-ийн дараах доогуур зураас нь (n) нь баруун гар талд гарч ирэх үед өөрчлөгдөж болох хувьсагч болохыг илэрхийлнэ. C++-д (4.6) дарааллыг дараах функцээр програмчилж болно.</p>
+<p>Зүүн гар талд байгаа <span class="math inline">\(n\)</span>-ийн дараах доогуур зураас нь <span class="math inline">\(n\)</span> нь баруун гар талд гарч ирэх үед өөрчлөгдөж болох хувьсагч болохыг илэрхийлнэ. C++-д (4.6) дарааллыг дараах функцээр програмчилж болно.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> s<span class="op">(</span><span class="dt">int</span> n<span class="op">)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span> pow<span class="op">(-</span><span class="dv">1</span><span class="op">,</span> n<span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="dv">5</span> <span class="op">+</span> <span class="dv">4</span> <span class="op">*</span> n<span class="op">);</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Төрөл тодорхойлогч (type identifier) нь объект нь бүхэл тоо байх ёстойг илэрхийлнэ. Maple-д (4.7) дарааллыг дараах байдлаар оруулж болно.</p>
 <pre class="maple"><code>&gt; s := n -&gt; binomial(n, 2);</code></pre>
-<p><code>-&gt;</code> тэмдэг нь оролтын индекс (n) нь гаралтын утгыг өгөхийг заадаг. Тохиолдол бүрт хүссэн гишүүнийг тухайн индекс дэх (s) функцийг үнэлэх замаар тооцоолж болно. Анхны индекс (энд 0, 1 эсвэл 5 гэх мэт) эдгээр тодорхойлолтуудад тусгайлан заагаагүй бөгөөд хэрэглэгч зөвхөн тохирох индексийг ашиглан ийм дуудлага бүрийг хийх ёстой гэдгийг анхаарна уу.</p>
+<p><code>-&gt;</code> тэмдэг нь оролтын индекс <span class="math inline">\(n\)</span> нь гаралтын утгыг өгөхийг заадаг. Тохиолдол бүрт хүссэн гишүүнийг тухайн индекс дэх <span class="math inline">\(s\)</span> функцийг үнэлэх замаар тооцоолж болно. Анхны индекс (энд 0, 1 эсвэл 5 гэх мэт) эдгээр тодорхойлолтуудад тусгайлан заагаагүй бөгөөд хэрэглэгч зөвхөн тохирох индексийг ашиглан ийм дуудлага бүрийг хийх ёстой гэдгийг анхаарна уу.</p>
 <p>(4.1)-ээс (4.7) хүртэлх дарааллуудын томьёог хэрхэн олохыг тайлбаргүйгээр үзүүлэв. Дарааллын томьёог олох нь жишээнүүдийг харж, хэв маягийг олж илрүүлэх чадвараас хамаардаг үнэ цэнэтэй ур чадвар юм. Зарим дасгалууд нь илүү олон жишээ үзсэний дараа энэ ур чадварыг дадлагажуулахад зориулагдсан болно.</p>
 </section>
 <section id="хоёр-тусгай-төрлийн-дараалал" class="level3">
 <h3 class="anchored" data-anchor-id="хоёр-тусгай-төрлийн-дараалал">Хоёр тусгай төрлийн дараалал</h3>
-<p>Дараагийн гишүүн бүрийг өмнөх гишүүн дээр тогтмол (c) тоог нэмснээр олддог дарааллыг <strong>арифметик дараалал</strong> гэж нэрлэдэг. Эхний (s_0) гишүүнтэй ийм дарааллыг дараах томьёогоор үүсгэдэг:</p>
-<p>[ n , s_n = s_0 + cn. ]</p>
+<p>Дараагийн гишүүн бүрийг өмнөх гишүүн дээр тогтмол <span class="math inline">\(c\)</span> тоог нэмснээр олддог дарааллыг <strong>арифметик дараалал</strong> гэж нэрлэдэг. Эхний <span class="math inline">\(s_0\)</span> гишүүнтэй ийм дарааллыг дараах томьёогоор үүсгэдэг:</p>
+<p><span class="math display">\[
+\forall n \ge 0, \quad s_n = s_0 + cn.
+\]</span></p>
 <p>(4.2) ба (4.3) дарааллууд нь арифметик дарааллуудын жишээ юм.</p>
-<p>Дараагийн гишүүн бүрийг өмнөх гишүүн дээр тогтмол (r) тоог үржүүлснээр олддог дарааллыг <strong>геометр дараалал</strong> гэж нэрлэдэг. Эхний (s_0) гишүүнтэй ийм дарааллыг дараах томьёогоор үүсгэдэг:</p>
-<p>[ n , s_n = s_0 r^n. ]</p>
+<p>Дараагийн гишүүн бүрийг өмнөх гишүүн дээр тогтмол <span class="math inline">\(r\)</span> тоог үржүүлснээр олддог дарааллыг <strong>геометр дараалал</strong> гэж нэрлэдэг. Эхний <span class="math inline">\(s_0\)</span> гишүүнтэй ийм дарааллыг дараах томьёогоор үүсгэдэг:</p>
+<p><span class="math display">\[
+\forall n \ge 0, \quad s_n = s_0 r^n.
+\]</span></p>
 <p>(4.4) ба (4.5) дарааллууд нь геометр дарааллуудын жишээ юм.</p>
 </section>
 <section id="дарааллыг-дахин-индексжүүлэх" class="level3">
@@ -618,82 +670,150 @@ window.Quarto = {
 <p>Дараалалд томьёо өгөхөд тулгардаг асуудлын нэг бол түүнийг хэрхэн индексжүүлэх явдал юм. Заримдаа анхны томьёолол дахь индексжүүлэлтийг бичих нь тийм ч тохиромжтой биш байж болох бөгөөд дахин индексжүүлэх нь шаардлагатай болдог. Дарааллыг дахин индексжүүлэх нь индексийн хувьсагчийг орлуулах энгийн асуудал юм.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 4.2</strong></p>
-<p>[ n , s_n = 5 + 2^n ]</p>
+<p><span class="math display">\[
+\forall n \ge 3, \quad s_n = 5 + 2^n
+\]</span></p>
 <p>гэсэн дарааллын гишүүд нь:</p>
-<p>[ s_3 = 13, s_4 = 21, s_5 = 37, s_6 = 69, ]</p>
-<p>Хэрэв бид энэ дарааллыг 1-ээс эхлэн индексжүүлэхийг хүсвэл (m = n - 2) гэж орлуулснаар шинэ томьёог гаргаж авна. Өөрөөр хэлбэл, дарааллыг (n = m + 2) гэж ажигласнаар олж авна. Тэгэхээр,</p>
-<p>[ m , t_m = 5 + 2^{m+2} = 5 + 4 ^m. ]</p>
+<p><span class="math display">\[
+s_3 = 13, \quad s_4 = 21, \quad s_5 = 37, \quad s_6 = 69, \quad \dots
+\]</span></p>
+<p>Хэрэв бид энэ дарааллыг 1-ээс эхлэн индексжүүлэхийг хүсвэл <span class="math inline">\(m = n - 2\)</span> гэж орлуулснаар шинэ томьёог гаргаж авна. Өөрөөр хэлбэл, дарааллыг <span class="math inline">\(n = m + 2\)</span> гэж ажигласнаар олж авна. Тэгэхээр,</p>
+<p><span class="math display">\[
+\forall m \ge 1, \quad t_m = 5 + 2^{m+2} = 5 + 4 \cdot 2^m.
+\]</span></p>
 <p>Гишүүд нь:</p>
-<p>[ t_1 = 13, t_2 = 21, t_3 = 37, t_4 = 69, ]</p>
+<p><span class="math display">\[
+t_1 = 13, \quad t_2 = 21, \quad t_3 = 37, \quad t_4 = 69, \quad \dots
+\]</span></p>
 <p>өмнөхтэй ижил байна. Зөвхөн индексжүүлэлт өөрчлөгдсөн. Индексжүүлэхэд ашиглах хувьсагчийг сонгох талаар тусгай шаардлага байхгүй тул бид мөн адил бичиж болно:</p>
-<p>[ n , t_n = 5 + 4 ^n. ]</p>
+<p><span class="math display">\[
+\forall n \ge 1, \quad t_n = 5 + 4 \cdot 2^n.
+\]</span></p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>Жишээ 4.3</strong></p>
-<p>[ n , s_n = ] томьёогоор өгөгдсөн дарааллыг 0-ээс эхлэн индексжүүлж дахин бич.</p>
-<p><strong>Шийдэл.</strong> (m = n - 5) гэж үзье. Тэгвэл (n = m + 5) болно.</p>
-<p>[ m , t_m = = . ]</p>
-<p>Үүнтэй адилтгах нь, (n , t_n = ).</p>
+<p><span class="math display">\[
+\forall n \ge 5, s_n = \binom{n-3}{2}
+\]</span> томьёогоор өгөгдсөн дарааллыг 0-ээс эхлэн индексжүүлж дахин бич.</p>
+<p><strong>Шийдэл.</strong> <span class="math inline">\(m = n - 5\)</span> гэж үзье. Тэгвэл <span class="math inline">\(n = m + 5\)</span> болно.</p>
+<p><span class="math display">\[
+\forall m \ge 0, \quad t_m = \binom{(m+5)-3}{2} = \binom{m+2}{2}.
+\]</span></p>
+<p>Үүнтэй адилтгах нь, <span class="math inline">\(\forall n \ge 0, \quad t_n = \binom{n+2}{2}\)</span>.</p>
 </blockquote>
 </section>
 <section id="рекурс" class="level3">
 <h3 class="anchored" data-anchor-id="рекурс">Рекурс</h3>
-<p>({s_n}<em>{n }) дарааллын хувьд <strong>хаалттай томьёо</strong> гэдэг нь (s_n)-ийг (n) индексийн хувьд илэрхийлсэн томьёо бөгөөд (n)-ээс шууд тооцоолох боломжийг олгодог. Бидний одоог хүртэл үзсэн дарааллууд бүгд хаалттай томьёотой байсан. Үүнээс ялгаатай нь <strong>рекурсив томьёо</strong> гэдэг нь (s_n)-ийг зөвхөн (n)-ийн хувьд бус, харин (s</em>{n-1}, , s_0) гэх мэт өмнөх гишүүдийн утгуудын хувьд илэрхийлсэн томьёо юм. Ерөнхийдөө рекурсив функц гэдэг нь өгөгдсөн оролтын утгыг жижиг оролтуудын хувьд илэрхийлсэн утгаараа тодорхойлогддог функц юм.</p>
+<p><span class="math inline">\(\{s_n\}_{n \in \mathcal{K}}\)</span> дарааллын хувьд <strong>хаалттай томьёо</strong> гэдэг нь <span class="math inline">\(s_n\)</span>-ийг <span class="math inline">\(n\)</span> индексийн хувьд илэрхийлсэн томьёо бөгөөд <span class="math inline">\(n\)</span>-ээс шууд тооцоолох боломжийг олгодог. Бидний одоог хүртэл үзсэн дарааллууд бүгд хаалттай томьёотой байсан. Үүнээс ялгаатай нь <strong>рекурсив томьёо</strong> гэдэг нь <span class="math inline">\(s_n\)</span>-ийг зөвхөн <span class="math inline">\(n\)</span>-ийн хувьд бус, харин <span class="math inline">\(s_{n-1}, \dots, s_0\)</span> гэх мэт өмнөх гишүүдийн утгуудын хувьд илэрхийлсэн томьёо юм. Ерөнхийдөө рекурсив функц гэдэг нь өгөгдсөн оролтын утгыг жижиг оролтуудын хувьд илэрхийлсэн утгаараа тодорхойлогддог функц юм.</p>
 <p>Рекурсив томьёо нь зарим дарааллыг илэрхийлэх илүү тохиромжтой, байгалийн аргыг санал болгож чадна. Жишээлбэл, (4.1) дэх факториалуудын дарааллыг авч үзье. Бид үүнийг дараах байдлаар рекурсиваар илэрхийлж болно:</p>
-<p>[ (4.1) s_0 = 1 n , s_n = n s_{n-1}. ]</p>
-<p>Бүх (n ) бүхэл тоонуудын хувьд тодорхойлогдсон (s_n = n s_{n-1}) тэгшитгэлийг <strong>рекурсын хамаарал</strong> гэж нэрлэдэг. Энэ тэгшитгэл нь дарааллын (s_n) гишүүнийг өмнөх гишүүдийн хувьд илэрхийлдэг ба энэ тохиолдолд зөвхөн нэг өмнөх гишүүний хувьд илэрхийлнэ. Мөн (s_0 = 1) гэсэн тэгшитгэл нь <strong>анхны нөхцөл</strong> гэж нэрлэгдэх бөгөөд дарааллын эхний гишүүний утгыг зааж өгдөг. Зарим тохиолдолд нэмэлт анхны нөхцөл шаардлагатай бол өөр гишүүнийг бас оруулж болно.</p>
-<p>Рекурсын хамаарал нь (s_n)-ийг өмнөх гишүүдийн утгуудаар илэрхийлдэг ба тэдгээр өмнөх утгуудыг цаашид илүү өмнөх утгуудаар илэрхийлж болох тул анхны нөхцөлүүд нь өөрөө өөрийгөө дуудах циклээс зайлсхийхэд чухал үүрэг гүйцэтгэдэг. Бид (4.1) дарааллын рекурсив томьёог ашиглан (s_5)-ийн утгыг хэрхэн тооцоолохыг харж болно.</p>
-<p>[ s_5 = 3s_4 s_3 ] [ s_4 = 4s_3 s_2 ] [ s_3 = 3s_2 s_1 ] [ s_2 = 2s_1 s_0 ] [ s_1 = 1s_0 ] [ s_1 = 1, s_0 s_1 ] [ s_2 = 2, s_1 s_2 ] [ s_3 = 6. s_2 s_3 ]</p>
+<p><span class="math display">\[
+(4.1) \quad s_0 = 1 \text{ ба } \forall n \ge 1, \quad s_n = n s_{n-1}.
+\]</span></p>
+<p>Бүх <span class="math inline">\(n \ge 1\)</span> бүхэл тоонуудын хувьд тодорхойлогдсон <span class="math inline">\(s_n = n s_{n-1}\)</span> тэгшитгэлийг <strong>рекурсын хамаарал</strong> гэж нэрлэдэг. Энэ тэгшитгэл нь дарааллын <span class="math inline">\(s_n\)</span> гишүүнийг өмнөх гишүүдийн хувьд илэрхийлдэг ба энэ тохиолдолд зөвхөн нэг өмнөх гишүүний хувьд илэрхийлнэ. Мөн <span class="math inline">\(s_0 = 1\)</span> гэсэн тэгшитгэл нь <strong>анхны нөхцөл</strong> гэж нэрлэгдэх бөгөөд дарааллын эхний гишүүний утгыг зааж өгдөг. Зарим тохиолдолд нэмэлт анхны нөхцөл шаардлагатай бол өөр гишүүнийг бас оруулж болно.</p>
+<p>Рекурсын хамаарал нь <span class="math inline">\(s_n\)</span>-ийг өмнөх гишүүдийн утгуудаар илэрхийлдэг ба тэдгээр өмнөх утгуудыг цаашид илүү өмнөх утгуудаар илэрхийлж болох тул анхны нөхцөлүүд нь өөрөө өөрийгөө дуудах циклээс зайлсхийхэд чухал үүрэг гүйцэтгэдэг. Бид (4.1) дарааллын рекурсив томьёог ашиглан <span class="math inline">\(s_5\)</span>-ийн утгыг хэрхэн тооцоолохыг харж болно.</p>
+<p><span class="math display">\[
+s_5 = 3s_4 \quad \text{Яагаад? } s_3 \text{ гэж юу вэ?}
+\]</span> <span class="math display">\[
+s_4 = 4s_3 \quad s_2 \text{ гэж юу вэ?}
+\]</span> <span class="math display">\[
+s_3 = 3s_2 \quad s_1 \text{ гэж юу вэ?}
+\]</span> <span class="math display">\[
+s_2 = 2s_1 \quad s_0 \text{ гэж юу вэ?}
+\]</span> <span class="math display">\[
+s_1 = 1s_0 \quad \text{Анхны нөхцөл.}
+\]</span> <span class="math display">\[
+s_1 = 1, \quad \text{Бид } s_0\text{-оос } s_1\text{-ийг авна.}
+\]</span> <span class="math display">\[
+s_2 = 2, \quad \text{Бид } s_1\text{-ээс } s_2\text{-ийг авна.}
+\]</span> <span class="math display">\[
+s_3 = 6. \quad \text{Бид } s_2\text{-оос } s_3\text{-ийг авна.}
+\]</span></p>
 <p>Мэдээж хэрэг, 6 бол 3!-ийн хүлээгдэж буй утга юм.</p>
 <p>(4.2)-оос (4.7) хүртэлх дарааллуудыг мөн рекурсиваар илэрхийлж болно.</p>
-<p>[ (4.2) s_1 = 1 n , s_n = s_{n-1} + 1. ] [ (4.3) s_0 = 7 n , s_n = s_{n-1} + 3. ] [ (4.4) s_0 = 1 n , s_n = 2s_{n-1}. ] [ (4.5) s_1 = 6 n , s_n = 3s_{n-1}. ] [ (4.6) s_0 = 5 n , s_n = -s_{n-1} (1 + ). ] [ (4.7) s_5 = 10 n , s_n = s_{n-1} + n - 1. ]</p>
+<p><span class="math display">\[
+(4.2) \quad s_1 = 1 \text{ ба } \forall n \ge 2, \quad s_n = s_{n-1} + 1.
+\]</span> <span class="math display">\[
+(4.3) \quad s_0 = 7 \text{ ба } \forall n \ge 1, \quad s_n = s_{n-1} + 3.
+\]</span> <span class="math display">\[
+(4.4) \quad s_0 = 1 \text{ ба } \forall n \ge 1, \quad s_n = 2s_{n-1}.
+\]</span> <span class="math display">\[
+(4.5) \quad s_1 = 6 \text{ ба } \forall n \ge 2, \quad s_n = 3s_{n-1}.
+\]</span> <span class="math display">\[
+(4.6) \quad s_0 = 5 \text{ ба } \forall n \ge 1, \quad s_n = -s_{n-1} \left(1 + \frac{4}{s_{n-1}}\right).
+\]</span> <span class="math display">\[
+(4.7) \quad s_5 = 10 \text{ ба } \forall n \ge 6, \quad s_n = s_{n-1} + n - 1.
+\]</span></p>
 <p>(4.6) дарааллыг илэрхийлэх өөр нэг арга бол:</p>
-[ s_0 = 5, s_1 = -9, n , s_n =
-<span class="math display">\[\begin{cases} s_{n-2} + 8 &amp; \text{хэрэв } n \text{ нь тэгш,} \\ s_{n-2} - 8 &amp; \text{хэрэв } n \text{ нь сондгой.} \end{cases}\]</span>
-<p>]</p>
+<p><span class="math display">\[
+s_0 = 5, s_1 = -9, \quad \text{ба } \forall n \ge 2, \quad s_n = \begin{cases} s_{n-2} + 8 &amp; \text{хэрэв } n \text{ нь тэгш,} \\ s_{n-2} - 8 &amp; \text{хэрэв } n \text{ нь сондгой.} \end{cases}
+\]</span></p>
 <p>Энэ хоёр дахь илэрхийлэл нь (4.6) дарааллын утгуудыг хоёр дахь хамгийн сүүлийн утгын хувьд илэрхийлж байна.</p>
 <blockquote class="blockquote">
 <p><strong>Жишээ 4.4</strong> (Арифметик ба Геометр дараалал дахь рекурс).</p>
 <ol type="a">
-<li>Арифметик дарааллыг (s_0) болон (c) тогтмолыг зааж өгснөөр маш байгалийн байдлаар рекурсиваар илэрхийлдэг:</li>
+<li>Арифметик дарааллыг <span class="math inline">\(s_0\)</span> болон <span class="math inline">\(c\)</span> тогтмолыг зааж өгснөөр маш байгалийн байдлаар рекурсиваар илэрхийлдэг:</li>
 </ol>
-<p>[ n , s_n = s_{n-1} + c. ]</p>
+<p><span class="math display">\[
+\forall n \ge 1, \quad s_n = s_{n-1} + c.
+\]</span></p>
 <ol start="2" type="a">
-<li>Геометр дарааллыг мөн (s_0) болон (r) тогтмолыг зааж өгснөөр байгалийн байдлаар рекурсиваар илэрхийлдэг:</li>
+<li>Геометр дарааллыг мөн <span class="math inline">\(s_0\)</span> болон <span class="math inline">\(r\)</span> тогтмолыг зааж өгснөөр байгалийн байдлаар рекурсиваар илэрхийлдэг:</li>
 </ol>
-<p>[ n , s_n = r s_{n-1}. ]</p>
+<p><span class="math display">\[
+\forall n \ge 1, \quad s_n = r s_{n-1}.
+\]</span></p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>Жишээ 4.5</strong></p>
 <p>Дараах рекурсын хамаарал нь дараалал дахь нэгээс олон өмнөх утгыг хамардаг.</p>
-<p>[ s_0 = 1, s_1 = 2, n , s_n = s_{n-1} + 2s_{n-2}. (4.9) ]</p>
+<p><span class="math display">\[
+s_0 = 1, s_1 = 2, \quad \text{ба } \forall n \ge 2, \quad s_n = s_{n-1} + 2s_{n-2}. \quad (4.9)
+\]</span></p>
 <p>Рекурсын хамаарлын баруун гар талд байгаа хамгийн эртний гишүүн нь зүүн гар талын гишүүнээс хоёр гишүүнээр өмнө байгаа бөгөөд хоёр анхны нөхцөл байгааг анхаарна уу. Ерөнхийдөө анхны нөхцлийн хамгийн бага тоо нь энэ хамаарал дахь баруун гар талын гишүүнээр тодорхойлогддог. Энэ тохиолдолд (4.9) дараалал нь дараах байдлаар эхэлнэ.</p>
-<p>[ 1, , , , , ]</p>
+<p><span class="math display">\[
+1, \quad 2, \quad 4, \quad 8, \quad 16, \quad \dots
+\]</span></p>
 <p>Үнэн хэрэгтээ, (4.9) дараалал нь (4.4) дараалалтай ижил юм.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>Жишээ 4.6</strong></p>
 <p>Дараах байдлаар рекурсиваар илэрхийлэгдсэн дараалал</p>
-<p>[ s_0 = 1 n , s_n = 2s_{n-1} ]</p>
+<p><span class="math display">\[
+s_0 = 1 \quad \text{ба } \forall n \ge 1, \quad s_n = 2s_{n-1}
+\]</span></p>
 <p>өөр байдлаар рекурсиваар ингэж илэрхийлж болно:</p>
-<p>[ s_0 = 1 n , s_{n+1} = 2s_n. ]</p>
-<p>Үүнийг албан ёсоор харахын тулд хоёр дахь илэрхийллийг ((m)-ийг индекс болгон ашиглан) дараах байдлаар дахин бичнэ үү:</p>
-<p>[ s_0 = 1 m , s_{m+1} = 2s_m. ]</p>
-<p>(m = n - 1) гэж тавивал (m + 1 = n) болох ба (m ) тэнцэтгэл биш нь (n ) тэнцэтгэл биш болно. Одоо орлуулснаар эхний илэрхийллийг өгнө:</p>
-<p>[ s_0 = 1 n , s_n = 2s_{n-1}. ]</p>
+<p><span class="math display">\[
+s_0 = 1 \quad \text{ба } \forall n \ge 0, \quad s_{n+1} = 2s_n.
+\]</span></p>
+<p>Үүнийг албан ёсоор харахын тулд хоёр дахь илэрхийллийг (<span class="math inline">\(m\)</span>-ийг индекс болгон ашиглан) дараах байдлаар дахин бичнэ үү:</p>
+<p><span class="math display">\[
+s_0 = 1 \quad \text{ба } \forall m \ge 0, \quad s_{m+1} = 2s_m.
+\]</span></p>
+<p><span class="math inline">\(m = n - 1\)</span> гэж тавивал <span class="math inline">\(m + 1 = n\)</span> болох ба <span class="math inline">\(m \ge 0\)</span> тэнцэтгэл биш нь <span class="math inline">\(n \ge 1\)</span> тэнцэтгэл биш болно. Одоо орлуулснаар эхний илэрхийллийг өгнө:</p>
+<p><span class="math display">\[
+s_0 = 1 \quad \text{ба } \forall n \ge 1, \quad s_n = 2s_{n-1}.
+\]</span></p>
 <p>Мэдээж хэрэг, энэ эквивалентийг албан бус байдлаар харах нь бас хялбар юм. Хоёр илэрхийлэл нь анхны утгын дараа дараагийн утга бүр нь өмнөх утгаасаа хоёр дахин их байна гэж хэлж байна.</p>
 </blockquote>
 <blockquote class="blockquote">
 <p><strong>Жишээ 4.7</strong></p>
 <p>Дараах байдлаар рекурсиваар илэрхийлэгдсэн дараалал өгөгдөв:</p>
-<p>[ s_1 = 1, s_2 = 3, n , s_n = 2s_{n-2} + s_{n-1}, ]</p>
-<p>болон (k ) индекс өгөгдсөн үед дарааллын өмнөх утгуудын хувьд (s_{k+1})-ийн илэрхийллийг ол.</p>
-<p><strong>Шийдэл.</strong> (n = k + 1) гэж үзье. (k ) тул (n ) байна. Тиймээс томьёог ашиглаж болно.</p>
-<p>[ s_n = 2s_{n-2} + s_{n-1} ]</p>
+<p><span class="math display">\[
+s_1 = 1, s_2 = 3, \quad \text{ба } \forall n \ge 3, \quad s_n = 2s_{n-2} + s_{n-1},
+\]</span></p>
+<p>болон <span class="math inline">\(k \ge 2\)</span> индекс өгөгдсөн үед дарааллын өмнөх утгуудын хувьд <span class="math inline">\(s_{k+1}\)</span>-ийн илэрхийллийг ол.</p>
+<p><strong>Шийдэл.</strong> <span class="math inline">\(n = k + 1\)</span> гэж үзье. <span class="math inline">\(k \ge 2\)</span> тул <span class="math inline">\(n \ge 3\)</span> байна. Тиймээс томьёог ашиглаж болно.</p>
+<p><span class="math display">\[
+s_n = 2s_{n-2} + s_{n-1}
+\]</span></p>
 <p>Энэ нь дараахь зүйлийг өгнө:</p>
-<p>[ s_{k+1} = 2s_{k+1-2} + s_{k+1-1}. ]</p>
+<p><span class="math display">\[
+s_{k+1} = 2s_{k+1-2} + s_{k+1-1}.
+\]</span></p>
 <p>Өөрөөр хэлбэл,</p>
-<p>[ s_{k+1} = 2s_{k-1} + s_k. ]</p>
+<p><span class="math display">\[
+s_{k+1} = 2s_{k-1} + s_k.
+\]</span></p>
 </blockquote>
 </section>
 <section id="рекурсын-програм-хангамжийн-хэрэгжүүлэлт" class="level3">
@@ -710,7 +830,7 @@ window.Quarto = {
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>n <span class="op">&gt;</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">return</span> n<span class="op">*</span>factorial<span class="op">(</span>n<span class="op">-</span><span class="dv">1</span><span class="op">);</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Оролт нь натурал тоо гэж үзнэ. Хэрэв эерэг бол функц нь өөрөө өөрийгөө жижиг оролтоор дууддаг. Үгүй бол (0! = 1) утгыг буцаана.</p>
+<p>Оролт нь натурал тоо гэж үзнэ. Хэрэв эерэг бол функц нь өөрөө өөрийгөө жижиг оролтоор дууддаг. Үгүй бол <span class="math inline">\(0! = 1\)</span> утгыг буцаана.</p>
 <p>Maple-д (4.4) дарааллыг дараах байдлаар рекурсиваар тодорхойлж болно.</p>
 <pre class="maple"><code>&gt; s := n -&gt; 2*s(n-1);
 &gt; s(1) := 1;</code></pre>
@@ -721,112 +841,112 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="хэсэг-дасгалууд">4.1 хэсэг Дасгалууд</h2>
 <p>Дараах дасгал бүрийг гараар хийж болно. Гэсэн хэдий ч тооцоолол шаардсан дасгалуудыг Mathematica эсвэл Maple зэрэг бэлгэдлийн тооны машин ашиглан хийж болно. Дараа нь үр дүнг гараар хийсэн тооцоололтой харьцуулж болно.</p>
 <ol type="1">
-<li>(10!)-г тооцоол.</li>
-<li>(12!)-г тооцоол.</li>
-<li>()-г тооцоол.</li>
-<li>()-г тооцоол.</li>
-<li>()-г тооцоол.</li>
-<li>()-г тооцоол.</li>
-<li>Бүх (0 k n) бүхэл тоонуудын хувьд ( = ) болохыг батлахын тулд биномын коэффициентүүдийн тодорхойлолтын томьёог ашигла.</li>
-<li>Бүх (1 k n) бүхэл тоонуудын хувьд ( + = ) болохыг батлахын тулд биномын коэффициентүүдийн тодорхойлолтын томьёог ашигла.</li>
+<li><span class="math inline">\(10!\)</span>-г тооцоол.</li>
+<li><span class="math inline">\(12!\)</span>-г тооцоол.</li>
+<li><span class="math inline">\(\binom{5}{3}\)</span>-г тооцоол.</li>
+<li><span class="math inline">\(\binom{6}{4}\)</span>-г тооцоол.</li>
+<li><span class="math inline">\(\binom{8}{7}\)</span>-г тооцоол.</li>
+<li><span class="math inline">\(\binom{10}{4}\)</span>-г тооцоол.</li>
+<li>Бүх <span class="math inline">\(0 \le k \le n\)</span> бүхэл тоонуудын хувьд <span class="math inline">\(\binom{n}{k} = \binom{n}{n-k}\)</span> болохыг батлахын тулд биномын коэффициентүүдийн тодорхойлолтын томьёог ашигла.</li>
+<li>Бүх <span class="math inline">\(1 \le k \le n\)</span> бүхэл тоонуудын хувьд <span class="math inline">\(\binom{n}{k-1} + \binom{n}{k} = \binom{n+1}{k}\)</span> болохыг батлахын тулд биномын коэффициентүүдийн тодорхойлолтын томьёог ашигла.</li>
 </ol>
 <p>9-12 дасгалд өгөгдсөн томьёо үнэн эсвэл худал эсэхийг тодорхойл.</p>
 <ol start="9" type="1">
-<li>(n , (n!)^2 = (n^2)!)</li>
-<li>(n , (n+1)! = (n+1)n!)</li>
-<li>( n , = )</li>
-<li>(k n , = )</li>
+<li><span class="math inline">\(\forall n \in \mathbb{N}, \quad (n!)^2 = (n^2)!\)</span></li>
+<li><span class="math inline">\(\forall n \in \mathbb{N}, \quad (n+1)! = (n+1)n!\)</span></li>
+<li><span class="math inline">\(\forall \text{ тэгш } n \in \mathbb{N}, \quad \binom{n}{n/2} = \frac{n!}{2!}\)</span></li>
+<li><span class="math inline">\(\forall k \le n \in \mathbb{N}, \quad \binom{n}{k} = \binom{n}{n-k}\)</span></li>
 </ol>
 <p>13-18 дасгалд дараалал бүрийн эхний дөрвөн гишүүнийг ол.</p>
 <ol start="13" type="1">
-<li>(n , s_n = 4n - 2).</li>
-<li>(n , s_n = 10^n).</li>
-<li>(n , s_n = ).</li>
-<li>(n , s_n = 6 - 3 ^n).</li>
-<li>(n , s_n = 3 + 2n).</li>
-<li>(n , s_n = ).</li>
+<li><span class="math inline">\(\forall n \ge 0, \quad s_n = 4n - 2\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 0, \quad s_n = 10^n\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 3, \quad s_n = \frac{n-2}{n}\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 0, \quad s_n = 6 - 3 \cdot 2^n\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 2, \quad s_n = 3 + 2n\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 6, \quad s_n = \binom{n}{2}\)</span>.</li>
 <li>Анхны тоонуудын дараалал дахь арван тав дахь гишүүн аль вэ? Эхнийх нь 2, дараагийнх нь 3 гэдгийг санаарай.</li>
 <li>Нийлмэл тоонуудын дараалал дахь арван тав дахь гишүүн аль вэ? Эхнийх нь 4.</li>
 </ol>
 <p>21-28 дасгалд дараалал бүрийн хаалттай томьёог ол.</p>
 <ol start="21" type="1">
-<li>(2, 4, 6, 8, 10, )</li>
-<li>(1, -4, 9, -16, 25, )</li>
-<li>(3, 6, 12, 24, 48, )</li>
-<li>(, , , , )</li>
-<li>(1, -3, 5, -7, 9, )</li>
-<li>(5, 10, 20, 40, 80, )</li>
-<li>(1, , , , , ) <em>28. (1, 4, 10, 20, 35, 56, ) </em>Зөвлөмж: Биномын коэффициентүүдийг авч үз.*</li>
-<li><strong>Нийлмэл хүү.</strong> (P) долларын анхны хөрөнгө оруулалтыг жилийн (i) хүүтэй дансанд хийв. Үе бүрийн эцэст хүүг өмнөх үлдэгдэл дээр нэмдэг.</li>
+<li><span class="math inline">\(2, 4, 6, 8, 10, \dots\)</span></li>
+<li><span class="math inline">\(1, -4, 9, -16, 25, \dots\)</span></li>
+<li><span class="math inline">\(3, 6, 12, 24, 48, \dots\)</span></li>
+<li><span class="math inline">\(\frac{3}{2}, \frac{4}{3}, \frac{5}{4}, \frac{6}{5}, \dots\)</span></li>
+<li><span class="math inline">\(1, -3, 5, -7, 9, \dots\)</span></li>
+<li><span class="math inline">\(5\sqrt{2}, 10\sqrt{2}, 20\sqrt{2}, 40\sqrt{2}, 80\sqrt{2}, \dots\)</span></li>
+<li><span class="math inline">\(1, \frac{1}{3}, \frac{1}{5}, \frac{1}{7}, \frac{1}{9}, \dots\)</span> <em>28. <span class="math inline">\(1, 4, 10, 20, 35, 56, \dots\)</span> </em>Зөвлөмж: Биномын коэффициентүүдийг авч үз.*</li>
+<li><strong>Нийлмэл хүү.</strong> <span class="math inline">\(P\)</span> долларын анхны хөрөнгө оруулалтыг жилийн <span class="math inline">\(i\)</span> хүүтэй дансанд хийв. Үе бүрийн эцэст хүүг өмнөх үлдэгдэл дээр нэмдэг.</li>
 </ol>
 <ol type="a">
-<li>Хэрэв (P = $6000) ба (i = 0.03) бол 1 үеийн дараа дансанд хэдэн төгрөг байх вэ? 2 үеийн дараа?</li>
-<li>Хэрэв (P = $1000) бол (i) хүүгээр илэрхийлбэл, 2 үеийн дараа дансанд байгаа мөнгөн дүн нь (i = 0.02) үеийн (i = 0.01) үеийнхээс хоёр дахин их байх уу? Үгүй бол хүүгийн орлогын ялгаа нь анхны нийт дүнгээс хасагдсан уу?</li>
-<li>Ерөнхийдөө, хэрэв (P) долларын анхны хөрөнгө оруулалт хийвэл (n) үеийн дараа үлдэгдэл (s_n) ямар утгад хүрэх вэ? ({s_n}) ямар төрлийн дараалал вэ?</li>
+<li>Хэрэв <span class="math inline">\(P = \$6000\)</span> ба <span class="math inline">\(i = 0.03\)</span> бол 1 үеийн дараа дансанд хэдэн төгрөг байх вэ? 2 үеийн дараа?</li>
+<li>Хэрэв <span class="math inline">\(P = \$1000\)</span> бол <span class="math inline">\(i\)</span> хүүгээр илэрхийлбэл, 2 үеийн дараа дансанд байгаа мөнгөн дүн нь <span class="math inline">\(i = 0.02\)</span> үеийн <span class="math inline">\(i = 0.01\)</span> үеийнхээс хоёр дахин их байх уу? Үгүй бол хүүгийн орлогын ялгаа нь анхны нийт дүнгээс хасагдсан уу?</li>
+<li>Ерөнхийдөө, хэрэв <span class="math inline">\(P\)</span> долларын анхны хөрөнгө оруулалт хийвэл <span class="math inline">\(n\)</span> үеийн дараа үлдэгдэл <span class="math inline">\(s_n\)</span> ямар утгад хүрэх вэ? <span class="math inline">\(\{s_n\}\)</span> ямар төрлийн дараалал вэ?</li>
 </ol>
 <ol start="30" type="1">
-<li><strong>Нөөцийн менежмент.</strong> Агуулахад (s_0 = a) ширхэг зүйл нөөцөлөгдсөн байна. Сар бүр (c) ширхэг зүйл зарагдаж, (b) ширхэг шинэ зүйл худалдан авдаг.</li>
+<li><strong>Нөөцийн менежмент.</strong> Агуулахад <span class="math inline">\(s_0 = a\)</span> ширхэг зүйл нөөцөлөгдсөн байна. Сар бүр <span class="math inline">\(c\)</span> ширхэг зүйл зарагдаж, <span class="math inline">\(b\)</span> ширхэг шинэ зүйл худалдан авдаг.</li>
 </ol>
 <ol type="a">
-<li>Хэрэв (a = 100, c = 40), ба (b = 25) бол 2 сарын дараа агуулахад хэдэн зүйл байх вэ?</li>
-<li>Хэрэв (a = 5000) бол 3 сарын дараа агуулахад байгаа зүйлийн тоог (c) болон (b)-ээр илэрхийл.</li>
-<li>Ерөнхийдөө (n) сарын дараа агуулахад хэдэн зүйл байх вэ? ({s_n}) ямар төрлийн дараалал вэ?</li>
+<li>Хэрэв <span class="math inline">\(a = 100, c = 40\)</span>, ба <span class="math inline">\(b = 25\)</span> бол 2 сарын дараа агуулахад хэдэн зүйл байх вэ?</li>
+<li>Хэрэв <span class="math inline">\(a = 5000\)</span> бол 3 сарын дараа агуулахад байгаа зүйлийн тоог <span class="math inline">\(c\)</span> болон <span class="math inline">\(b\)</span>-ээр илэрхийл.</li>
+<li>Ерөнхийдөө <span class="math inline">\(n\)</span> сарын дараа агуулахад хэдэн зүйл байх вэ? <span class="math inline">\(\{s_n\}\)</span> ямар төрлийн дараалал вэ?</li>
 </ol>
 <p>31-36 дасгалд индексийг 0-ээс эхлүүлж дарааллыг дахин индексжүүл.</p>
 <ol start="31" type="1">
-<li>(n , s_n = 10^{n-1}).</li>
-<li>(n , s_n = ).</li>
-<li>(n , s_n = 3 + 2n).</li>
-<li>(n , s_n = ).</li>
-<li>(n , s_n = (-1)^n ).</li>
-<li>(n , s_n = ).</li>
+<li><span class="math inline">\(\forall n \ge 1, \quad s_n = 10^{n-1}\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 3, \quad s_n = \frac{n}{n-2}\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 2, \quad s_n = 3 + 2n\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 6, \quad s_n = \binom{n}{2}\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 2, \quad s_n = (-1)^n \frac{n}{2}\)</span>.</li>
+<li><span class="math inline">\(\forall n \ge 1, \quad s_n = \frac{(-1)^n}{(n+1)^2}\)</span>.</li>
 </ol>
 <p>37-42 дасгалд дараалал бүрийн эхний дөрвөн гишүүнийг ол.</p>
 <ol start="37" type="1">
-<li>(s_1 = 4 n , s_n = 3s_{n-1} - 2).</li>
-<li>(s_0 = n , s_n = 1 - s_{n-1}).</li>
-<li>(s_1 = 5 n , s_n = s_{n-1} - 2).</li>
-<li>(s_0 = n , s_n = s_{n-1} + ). <em>41. (s_1 = -1 n , s_n = s_{n-1} + 1). Энэ дараалал буурч байгааг ажигла. Өөрөөр хэлбэл, (n , s_n &gt; s_{n-1}). Гэхдээ зөвхөн анхны нөхцөлийг өөрчлөхөд энэ нь өөрчлөгдөж болно. (s_n) нь буурахгүй байх хамгийн бага боломжит утгыг ол. </em>42. (s_1 = 2 n , s_n = s_{n-1}^2 - 1). Энэ дараалал өсөж байгааг ажигла. Өөрөөр хэлбэл, (n , s_n &lt; s_{n+1}). Гэхдээ зөвхөн анхны нөхцөлийг өөрчлөхөд энэ нь өөрчлөгдөж болно. (s_n) нь өсөхгүй байх хамгийн том боломжит утгыг ол.</li>
+<li><span class="math inline">\(s_1 = 4 \text{ ба } \forall n \ge 2, \quad s_n = 3s_{n-1} - 2\)</span>.</li>
+<li><span class="math inline">\(s_0 = \frac{1}{2} \text{ ба } \forall n \ge 1, \quad s_n = 1 - s_{n-1}\)</span>.</li>
+<li><span class="math inline">\(s_1 = 5 \text{ ба } \forall n \ge 2, \quad s_n = s_{n-1} - 2\)</span>.</li>
+<li><span class="math inline">\(s_0 = \frac{7}{2} \text{ ба } \forall n \ge 1, \quad s_n = s_{n-1} + \pi\)</span>. <em>41. <span class="math inline">\(s_1 = -1 \text{ ба } \forall n \ge 2, \quad s_n = s_{n-1} + 1\)</span>. Энэ дараалал буурч байгааг ажигла. Өөрөөр хэлбэл, <span class="math inline">\(\forall n \ge 1, s_n &gt; s_{n-1}\)</span>. Гэхдээ зөвхөн анхны нөхцөлийг өөрчлөхөд энэ нь өөрчлөгдөж болно. <span class="math inline">\(s_n\)</span> нь буурахгүй байх хамгийн бага боломжит утгыг ол. </em>42. <span class="math inline">\(s_1 = 2 \text{ ба } \forall n \ge 2, \quad s_n = s_{n-1}^2 - 1\)</span>. Энэ дараалал өсөж байгааг ажигла. Өөрөөр хэлбэл, <span class="math inline">\(\forall n \ge 1, s_n &lt; s_{n+1}\)</span>. Гэхдээ зөвхөн анхны нөхцөлийг өөрчлөхөд энэ нь өөрчлөгдөж болно. <span class="math inline">\(s_n\)</span> нь өсөхгүй байх хамгийн том боломжит утгыг ол.</li>
 </ol>
 <p>43-50 дасгалд дараалал бүрийн рекурсив томьёог ол.</p>
 <ol start="43" type="1">
-<li>(2, 4, 6, 8, 10, )</li>
-<li>(1, -4, 9, -16, 25, )</li>
-<li>(1, -3, 5, -7, 9, )</li>
-<li>(, , , , ) *47. (1, , , , , )</li>
-<li>(5, 10, 20, 40, 80, )</li>
-<li>(1, 4, 10, 20, 35, 56, )</li>
-<li>(1, 4, 10, 20, 35, 56, ) <em>Зөвлөмж: (s_n - s_{n-1}) ялгааг авч үз.</em></li>
-<li><strong>Аннуитет.</strong> Аннуитет гэдэг нь тогтмол хадгаламж хийдэг хөрөнгө оруулалт юм. Жишээлбэл, тэтгэврийн аннуитетууд нь ажилтны цалингийн хуудаснаас автоматаар суутгал хийх замаар тогтмол хадгаламж авдаг. Жилийн тогтмол (i) хүүтэй аннуитетийн хувьд сар бүрийн эцэст (D) долларын хадгаламж хийгддэг. (n) сарын дараах үлдэгдлийг (s_n) гэж үзвэл (s_0 = 0, s_1 = D, s_2 = D(1+i) + D, ) болно.</li>
+<li><span class="math inline">\(2, 4, 6, 8, 10, \dots\)</span></li>
+<li><span class="math inline">\(1, -4, 9, -16, 25, \dots\)</span></li>
+<li><span class="math inline">\(1, -3, 5, -7, 9, \dots\)</span></li>
+<li><span class="math inline">\(\frac{3}{2}, \frac{4}{3}, \frac{5}{4}, \frac{6}{5}, \dots\)</span> *47. <span class="math inline">\(1, \frac{1}{3}, \frac{1}{5}, \frac{1}{7}, \frac{1}{9}, \dots\)</span></li>
+<li><span class="math inline">\(5\sqrt{2}, 10\sqrt{2}, 20\sqrt{2}, 40\sqrt{2}, 80\sqrt{2}, \dots\)</span></li>
+<li><span class="math inline">\(1, 4, 10, 20, 35, 56, \dots\)</span></li>
+<li><span class="math inline">\(1, 4, 10, 20, 35, 56, \dots\)</span> <em>Зөвлөмж: <span class="math inline">\(s_n - s_{n-1}\)</span> ялгааг авч үз.</em></li>
+<li><strong>Аннуитет.</strong> Аннуитет гэдэг нь тогтмол хадгаламж хийдэг хөрөнгө оруулалт юм. Жишээлбэл, тэтгэврийн аннуитетууд нь ажилтны цалингийн хуудаснаас автоматаар суутгал хийх замаар тогтмол хадгаламж авдаг. Жилийн тогтмол <span class="math inline">\(i\)</span> хүүтэй аннуитетийн хувьд сар бүрийн эцэст <span class="math inline">\(D\)</span> долларын хадгаламж хийгддэг. <span class="math inline">\(n\)</span> сарын дараах үлдэгдлийг <span class="math inline">\(s_n\)</span> гэж үзвэл <span class="math inline">\(s_0 = 0, s_1 = D, s_2 = D(1+i) + D, \dots\)</span> болно.</li>
 </ol>
 <ol type="a">
-<li>Хэрэв (D = 1000) ба (i = 0.05) бол (s_2) ба (s_3)-ийг ол.</li>
-<li>Хэрэв (s_{10} = $1200.61), (i = 0.04), ба (D = $100) бол (s_{11})-ийг ол.</li>
-<li>Ерөнхийдөө (n) сарын дараах үлдэгдэл (s_n)-ийн рекурсив томьёог ол. Дараах хэсгүүдийн дасгалуудад хаалттай томьёо (s_n = ) тогтооно.</li>
+<li>Хэрэв <span class="math inline">\(D = 1000\)</span> ба <span class="math inline">\(i = 0.05\)</span> бол <span class="math inline">\(s_2\)</span> ба <span class="math inline">\(s_3\)</span>-ийг ол.</li>
+<li>Хэрэв <span class="math inline">\(s_{10} = \$1200.61\)</span>, <span class="math inline">\(i = 0.04\)</span>, ба <span class="math inline">\(D = \$100\)</span> бол <span class="math inline">\(s_{11}\)</span>-ийг ол.</li>
+<li>Ерөнхийдөө <span class="math inline">\(n\)</span> сарын дараах үлдэгдэл <span class="math inline">\(s_n\)</span>-ийн рекурсив томьёог ол. Дараах хэсгүүдийн дасгалуудад хаалттай томьёо <span class="math inline">\(s_n = \frac{D((1+i)^n-1)}{i}\)</span> тогтооно.</li>
 </ol>
 <ol start="52" type="1">
-<li><strong>Моргейж.</strong> Моргейж гэдэг нь тогтмол хугацаанд төлж барагдуулах зээл (ихэвчлэн сар бүр) бөгөөд хүү мөн авагддаг. Жилийн (i) хүүтэй моргейжийн хүүг сар бүрийн хүү (i)-тэй ((i = )) гэж ойлгоно. (M) долларын моргейжийг сар бүрийн (i) хүүтэйгээр авсан гэж үзье. Сар бүрийн эцэст хүүг өмнөх үлдэгдэл дээр нэмээд (R) долларын төлбөрийг хийнэ. (n) сарын дараах үлдэгдлийг (s_n) гэвэл (s_0 = M), (s_n = M(1+i) - R) болно.</li>
+<li><strong>Моргейж.</strong> Моргейж гэдэг нь тогтмол хугацаанд төлж барагдуулах зээл (ихэвчлэн сар бүр) бөгөөд хүү мөн авагддаг. Жилийн <span class="math inline">\(i\)</span> хүүтэй моргейжийн хүүг сар бүрийн хүү <span class="math inline">\(i\)</span>-тэй (<span class="math inline">\(i = \frac{I}{12}\)</span>) гэж ойлгоно. <span class="math inline">\(M\)</span> долларын моргейжийг сар бүрийн <span class="math inline">\(i\)</span> хүүтэйгээр авсан гэж үзье. Сар бүрийн эцэст хүүг өмнөх үлдэгдэл дээр нэмээд <span class="math inline">\(R\)</span> долларын төлбөрийг хийнэ. <span class="math inline">\(n\)</span> сарын дараах үлдэгдлийг <span class="math inline">\(s_n\)</span> гэвэл <span class="math inline">\(s_0 = M\)</span>, <span class="math inline">\(s_n = M(1+i) - R\)</span> болно.</li>
 </ol>
 <ol type="a">
-<li>Хэрэв (M = $100,000, i = 0.02), ба (R = $594.56) бол (s_2) ба (s_3)-ийг ол.</li>
-<li>Хэрэв (s_{20} = $79,495.98, i = 0.01), ба (R = $822.89) бол (s_{21})-ийг ол.</li>
-<li>Ерөнхийдөө (n) сарын дараах үлдэгдэл (s_n)-ийн рекурсив томьёог ол. Дараах хэсгүүдийн дасгалуудад хаалттай томьёо (s_n = M(1+i)^n - R) тогтооно.</li>
+<li>Хэрэв <span class="math inline">\(M = \$100,000, i = 0.02\)</span>, ба <span class="math inline">\(R = \$594.56\)</span> бол <span class="math inline">\(s_2\)</span> ба <span class="math inline">\(s_3\)</span>-ийг ол.</li>
+<li>Хэрэв <span class="math inline">\(s_{20} = \$79,495.98, i = 0.01\)</span>, ба <span class="math inline">\(R = \$822.89\)</span> бол <span class="math inline">\(s_{21}\)</span>-ийг ол.</li>
+<li>Ерөнхийдөө <span class="math inline">\(n\)</span> сарын дараах үлдэгдэл <span class="math inline">\(s_n\)</span>-ийн рекурсив томьёог ол. Дараах хэсгүүдийн дасгалуудад хаалттай томьёо <span class="math inline">\(s_n = M(1+i)^n - R\frac{(1+i)^n-1}{i}\)</span> тогтооно.</li>
 </ol>
-<p>53-58 дасгалд (k ) өгөгдсөн үед дарааллын өмнөх утгуудын хувьд (s_{k+1})-ийн илэрхийллийг ол.</p>
+<p>53-58 дасгалд <span class="math inline">\(k \ge 1\)</span> өгөгдсөн үед дарааллын өмнөх утгуудын хувьд <span class="math inline">\(s_{k+1}\)</span>-ийн илэрхийллийг ол.</p>
 <ol start="53" type="1">
-<li>(s_1 = 4 n , s_n = 3s_{n-1} - 2).</li>
-<li>(s_0 = n , s_n = 1 - s_{n-1}).</li>
-<li>(s_1 = 5 n , s_n = s_{n-1} - 2).</li>
-<li>(s_0 = n , s_n = s_{n-1} + ).</li>
-<li>(s_0 = 1, s_1 = -1, n , s_n = 5s_{n-2} - 3s_{n-1}). Эхлээд (s_2) ба (s_3)-ийг ол.</li>
-<li>(s_1 = 2, s_2 = 1, n , s_n = (s_{n-1})^2 - (s_{n-2})^3). Эхлээд (s_3) ба (s_4)-ийг ол.</li>
+<li><span class="math inline">\(s_1 = 4 \text{ ба } \forall n \ge 2, \quad s_n = 3s_{n-1} - 2\)</span>.</li>
+<li><span class="math inline">\(s_0 = \frac{1}{2} \text{ ба } \forall n \ge 1, \quad s_n = 1 - s_{n-1}\)</span>.</li>
+<li><span class="math inline">\(s_1 = 5 \text{ ба } \forall n \ge 2, \quad s_n = s_{n-1} - 2\)</span>.</li>
+<li><span class="math inline">\(s_0 = \frac{7}{2} \text{ ба } \forall n \ge 1, \quad s_n = s_{n-1} + \pi\)</span>.</li>
+<li><span class="math inline">\(s_0 = 1, s_1 = -1, \quad \text{ба } \forall n \ge 2, \quad s_n = 5s_{n-2} - 3s_{n-1}\)</span>. Эхлээд <span class="math inline">\(s_2\)</span> ба <span class="math inline">\(s_3\)</span>-ийг ол.</li>
+<li><span class="math inline">\(s_1 = 2, s_2 = 1, \quad \text{ба } \forall n \ge 2, \quad s_n = (s_{n-1})^2 - (s_{n-2})^3\)</span>. Эхлээд <span class="math inline">\(s_3\)</span> ба <span class="math inline">\(s_4\)</span>-ийг ол.</li>
 </ol>
-<p>59-62 дасгалд дарааллын өмнөх утгуудын хувьд (s_n)-ийг илэрхийлэх рекурсив томьёог ол.</p>
+<p>59-62 дасгалд дарааллын өмнөх утгуудын хувьд <span class="math inline">\(s_n\)</span>-ийг илэрхийлэх рекурсив томьёог ол.</p>
 <ol start="59" type="1">
-<li>(s_1 = 5 n , s_{n+1} = s_n - 2).</li>
-<li>(s_0 = n , s_{n+1} = 3s_n + ).</li>
-<li>(s_0 = 1, s_1 = -1, n , s_{n+2} = 5s_n - 3s_{n+1}).</li>
-<li>(s_1 = 2, s_2 = 1, n , s_{n+2} = (s_{n+1})^2 - (s_n)^3).</li>
+<li><span class="math inline">\(s_1 = 5 \text{ ба } \forall n \ge 1, \quad s_{n+1} = s_n - 2\)</span>.</li>
+<li><span class="math inline">\(s_0 = \frac{7}{2} \text{ ба } \forall n \ge 0, \quad s_{n+1} = 3s_n + \pi\)</span>.</li>
+<li><span class="math inline">\(s_0 = 1, s_1 = -1, \quad \text{ба } \forall n \ge 0, \quad s_{n+2} = 5s_n - 3s_{n+1}\)</span>.</li>
+<li><span class="math inline">\(s_1 = 2, s_2 = 1, \quad \text{ба } \forall n \ge 1, \quad s_{n+2} = (s_{n+1})^2 - (s_n)^3\)</span>.</li>
 </ol>
 <p>63 ба 64 дэх дасгалд Mathematica, Maple, эсвэл C++ зэрэг тохиромжтой програм хангамжийг ашигла.</p>
 <ol start="63" type="1">
@@ -841,7 +961,7 @@ window.Quarto = {
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">else</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    return <span class="dv">1.</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>энд (n) нь натурал тоо гэж ойлгоно. (b) 5 аравтын орон хүртэл <code>ApprE2(10)</code>-ийг тооцоолохын тулд програмыг ашигла. (c) (n) томрох тусам <code>ApprE2(n)</code> дараалал нь ()-ын илүү сайн ойролцооллыг өгдөг. <code>ApprE2(15)</code> ба ()-ын хооронд эхний аравтын орон ялгаатай байна вэ?</p>
+<p>энд <span class="math inline">\(n\)</span> нь натурал тоо гэж ойлгоно. (b) 5 аравтын орон хүртэл <code>ApprE2(10)</code>-ийг тооцоолохын тулд програмыг ашигла. (c) <span class="math inline">\(n\)</span> томрох тусам <code>ApprE2(n)</code> дараалал нь <span class="math inline">\(\sqrt{2}\)</span>-ын илүү сайн ойролцооллыг өгдөг. <code>ApprE2(15)</code> ба <span class="math inline">\(\sqrt{2}\)</span>-ын хооронд эхний аравтын орон ялгаатай байна вэ?</p>
 <ol start="64" type="1">
 <li><ol type="a">
 <li>Дараах функцийг хэрэгжүүлэх рекурсив програмыг бич.</li>
@@ -854,7 +974,7 @@ window.Quarto = {
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">else</span></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    return <span class="dv">1.</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>энд (n) нь натурал тоо гэж ойлгоно. (b) Долоон аравтын орон хүртэл <code>Gold(11)</code>-ийг олохын тулд програмыг ашигла. (c) (n) томрох тусам <code>Gold(n)</code> дараалал нь алтан харьцаа (= )-ын илүү сайн ойролцооллыг өгдөг. <code>Gold(20)</code> ба ()-ийн хооронд эхний аравтын орон ялгаатай байна вэ? ```</p>
+<p>энд <span class="math inline">\(n\)</span> нь натурал тоо гэж ойлгоно. (b) Долоон аравтын орон хүртэл <code>Gold(11)</code>-ийг олохын тулд програмыг ашигла. (c) <span class="math inline">\(n\)</span> томрох тусам <code>Gold(n)</code> дараалал нь алтан харьцаа <span class="math inline">\(\phi = \frac{1+\sqrt{5}}{2}\)</span>-ын илүү сайн ойролцооллыг өгдөг. <code>Gold(20)</code> ба <span class="math inline">\(\phi\)</span>-ийн хооронд эхний аравтын орон ялгаатай байна вэ? ```</p>
 
 
 </section>
@@ -1386,8 +1506,8 @@ window.Quarto = {
   </script>
 <nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
-      <a href="./4.html" class="pagination-link" aria-label="4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</span>
+      <a href="./4.html" class="pagination-link" aria-label="4. Бүхэл тоон индек">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">4. Бүхэл тоон индек</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
