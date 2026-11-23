@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4.2 Сигма тэмдэглэгээ – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./4-3.html" rel="next">
+<link href="./4-1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-2.html"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн давтлагын бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: 4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#үржвэрийн-тэмдэглэгээ" id="toc-үржвэрийн-тэмдэглэгээ" class="nav-link active" data-scroll-target="#үржвэрийн-тэмдэглэгээ">Үржвэрийн тэмдэглэгээ</a></li>
+  <li><a href="#ерөнхий-нийлбэрийн-томьёо" id="toc-ерөнхий-нийлбэрийн-томьёо" class="nav-link" data-scroll-target="#ерөнхий-нийлбэрийн-томьёо">Ерөнхий нийлбэрийн томьёо</a></li>
+  <li><a href="#хэсэг-дасгалууд" id="toc-хэсэг-дасгалууд" class="nav-link" data-scroll-target="#хэсэг-дасгалууд">4.2 хэсэг Дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-2.html"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><span class="math inline">\(\{s_i\}\)</span> дараалал өгөгдсөн үед хүн түүний гишүүдийн нийлбэрийг сонирхож магадгүй:</p>
+<p><span class="math display">\[ S = s_a + s_{a+1} + s_{a+2} + \dots + s_{b-1} + s_b, \quad (4.10) \]</span></p>
+<p>энд <span class="math inline">\(a, b \in \mathbb{Z}\)</span>. (4.10) тэгшитгэлд ашигласан тоог илэрхийлэхдээ</p>
+<p><span class="math display">\[ S = \sum_{i=a}^b s_i, \quad (4.11) \]</span></p>
+<p>гэж бичдэг. Грек <span class="math inline">\(\Sigma\)</span> үсгийг ашигласан тул (4.11) тэгшитгэлийн баруун талыг <strong>сигма тэмдэглэгээгээр</strong> бичсэн гэж хэлнэ. Энэ тэмдэглэгээг мөн <strong>нийлбэрийн тэмдэглэгээ</strong> гэж нэрлэдэг. (4.11) тэгшитгэлийн баруун талд байгаа нийлбэрийг “<span class="math inline">\(a\)</span>-аас <span class="math inline">\(b\)</span> хүртэлх <span class="math inline">\(s_i\)</span>-ийн нийлбэр” гэж уншина. Гэхдээ <span class="math inline">\(i\)</span> индексийг заавал ашиглах шаардлагагүй; хэрэв <span class="math inline">\(b &lt; a\)</span> бол (4.11)-д байгаа нийлбэрт 0 утгыг оноодог (<span class="math inline">\(b = a\)</span> эсвэл <span class="math inline">\(a = -\infty\)</span> үед нийлбэрийг 0 гэж үзнэ). Ийм нийлбэрийг <em>цуваа</em> (series) гэж нэрлэдэг. Тэдгээрийг энэ хичээлээр нарийвчлан судлахгүй бөгөөд бид зөвхөн төгсгөлөг нийлбэрт анхаарлаа хандуулах болно.</p>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.8</strong> <span class="math inline">\(\sum_{i=0}^5 i!\)</span>-ийг тооцоол.</p>
+<p><strong>Шийдэл.</strong></p>
+<p><span class="math display">\[ \begin{aligned} \sum_{i=0}^5 i! &amp;= 0! + 1! + 2! + 3! + 4! + 5! \\ &amp;= 1 + 1 + 2 + 6 + 24 + 120 \\ &amp;= 154. \end{aligned} \]</span></p>
+</blockquote>
+<p><span class="math inline">\(\{s_i\}\)</span> дараалал болон <span class="math inline">\(a, b \in \mathbb{Z}\)</span> өгөгдсөн үед <span class="math inline">\(\sum_{i=a}^b s_i\)</span> нийлбэрийг тооцоолохдоо давталтын (loop) хэрэгжүүлэлт гэж үзэж болно.</p>
+<pre class="text"><code>Let S = 0
+For i = a to b,
+  Let S = S + s_i.
+Return S.</code></pre>
+<p>C++ хэлэнд нийлбэрийг тооцоолох урьдчилан тодорхойлсон функц байдаггүй тул дээрх шиг алгоритмыг ашиглаж болно. <span class="math inline">\(\{s_i\}\)</span> нь дараалал ба <span class="math inline">\(a\)</span> ба <span class="math inline">\(b\)</span> нь бүхэл тоо гэж үзвэл, Mathematica програмыг ашигладаг:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode mathematica code-with-copy"><code class="sourceCode mathematica"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">In</span><span class="op">[</span><span class="dv">1</span><span class="op">]</span><span class="ex">:=</span> <span class="fu">Sum</span><span class="op">[</span><span class="fu">s</span><span class="op">[</span><span class="fu">i</span><span class="op">],</span> <span class="op">{</span><span class="fu">i</span><span class="op">,</span> <span class="fu">a</span><span class="op">,</span> <span class="fu">b</span><span class="op">}]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>болон Maple програмыг ашигладаг:</p>
+<pre class="maple"><code>&gt; sum(s[i], i=a..b);</code></pre>
+<p>нийлбэрийг тооцоолохын тулд.</p>
+<p>Хэдийгээр програм хангамжийг маш олон нийлбэрийн тооцоолол хийхэд ашиглаж болох ч тэдгээрийн зохицуулж чадах хэмжээнд хязгаар байдаг. Тиймээс сигма тэмдэглэгээг илүү гүнзгий ойлгох нь зүйтэй юм. Сигма тэмдэглэгээ нь нийлбэрийг илэрхийлдэг тул нэмэхийн ассоциатив болон дистрибутив шинж чанаруудын шууд үр дагавар болох зарим албан ёсны шинж чанаруудтай.</p>
+<blockquote class="blockquote">
+<p><strong>Теорем 4.1</strong></p>
+<p><span class="math inline">\(a, b \in \mathbb{Z}\)</span>, <span class="math inline">\(\{s_i\}\)</span> ба <span class="math inline">\(\{t_i\}\)</span> нь дараалал, <span class="math inline">\(c \in \mathbb{R}\)</span> байг.</p>
+<ol type="a">
+<li><span class="math inline">\(\sum_{i=a}^b (s_i + t_i) = \sum_{i=a}^b s_i + \sum_{i=a}^b t_i\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=a}^b c s_i = c \sum_{i=a}^b s_i\)</span>.</li>
+</ol>
+</blockquote>
+<p>Сигма тэмдэглэгээ нь урт нийлбэрүүдийг илэрхийлэх үр дүнтэй, ойлгомжтой аргыг санал болгодог.</p>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.9</strong> (Төгсгөлөг нийлбэрүүдийг сигма тэмдэглэгээгээр бичих).</p>
+<p><span class="math display">\[ 15 + 16 + 17 + 18 + \dots + 84 = \sum_{i=15}^{84} i. \]</span></p>
+<p><span class="math display">\[ 1 + 2 + 4 + 8 + \dots + 1024 = \sum_{i=0}^{10} 2^i. \]</span></p>
+</blockquote>
+<p>Хэдийгээр 4.9 жишээ шиг тодорхой нийлбэрүүд нь 4.9 тэгшитгэлийг шаарддаг боловч сигма тэмдэглэгээний бодит хүч нь хувьсах тооны гишүүдтэй ажиллахад оршино.</p>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.10</strong> (Ерөнхий нийлбэрүүдийг сигма тэмдэглэгээгээр бичих).</p>
+<p><span class="math display">\[ 1 + 2 + 3 + 4 + \dots + n = \sum_{i=1}^n i. \]</span></p>
+<p><span class="math display">\[ 1 + 4 + 9 + 16 + \dots + n^2 = \sum_{i=1}^n i^2. \]</span></p>
+<p><span class="math display">\[ 1 + 2 + 4 + 8 + \dots + 2^n = \sum_{i=0}^n 2^i. \]</span></p>
+<p><span class="math display">\[ \binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \binom{n}{3} + \dots + \binom{n}{n} = \sum_{i=0}^n \binom{n}{i}. \]</span></p>
+<p><span class="math display">\[ 7 \cdot 2^3 + 7 \cdot 2^4 + 7 \cdot 2^5 + 7 \cdot 2^6 + \dots + 7 \cdot 2^{n-1} = \sum_{i=3}^{n-1} 7 \cdot 2^i. \]</span></p>
+<p><span class="math display">\[ 1 - \frac{1}{2} + \frac{1}{6} - \frac{1}{24} + \dots + (-1)^{n+1} \frac{1}{n!} = \sum_{i=1}^n \frac{(-1)^{i+1}}{i!}. \]</span></p>
+</blockquote>
+<p>4.10 жишээн дэх ихэнх нийлбэрүүд тооцоолоход хялбар болгодог томьёотой байдаг. Жишээлбэл, эхний гурван нийлбэрийг дараах хоёр теоремыг ашиглан тооцоолж болно.</p>
+<blockquote class="blockquote">
+<p><strong>Теорем 4.2</strong></p>
+<p><span class="math inline">\(n \ge 1\)</span> байх <span class="math inline">\(n \in \mathbb{Z}\)</span> байг. Тэгвэл</p>
+<ol type="a">
+<li><span class="math inline">\(\sum_{i=1}^n 1 = n\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n i = \frac{n(n+1)}{2}\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n i^3 = \left( \frac{n(n+1)}{2} \right)^2\)</span>.</li>
+</ol>
+</blockquote>
+<p>Теорем 4.2 дахь томьёонууд нь нийлбэрийн индексийн тодорхой зэрэгтүүдийн нийлбэрийг хэрхэн авахыг бидэнд харуулж байна. <span class="math inline">\(1^k + 2^k + 3^k + \dots + n^k = \sum_{i=1}^n i^k\)</span> хэлбэрийн нийлбэрийн томьёог энэ хэсгийн төгсгөлд Теорем 4.4-д авч үзсэн болно. Дараагийн теорем нь <span class="math inline">\(r + r^2 + r^3 + \dots + r^n\)</span> хэлбэрийн геометр прогрессийн гишүүдийн нийлбэрийг авч үзнэ.</p>
+<blockquote class="blockquote">
+<p><strong>Теорем 4.3</strong></p>
+<p><span class="math inline">\(r \in \mathbb{R}\)</span> ба <span class="math inline">\(r \ne 1\)</span> ба <span class="math inline">\(n \in \mathbb{Z}\)</span> ба <span class="math inline">\(n \ge 0\)</span> байг. Тэгвэл</p>
+<p><span class="math display">\[ \sum_{i=0}^n r^i = \frac{r^{n+1} - 1}{r - 1}. \]</span></p>
+</blockquote>
+<p>Теорем 4.2 ба 4.3-ыг индукц ашиглан хялбархан баталж болно. Иймд тэдгээрийн баталгааг 4.4 хэсэг хүртэл хойшлуулсан. Үүний оронд бид Теорем 4.2, 4.3 болон 4.1 теорем дахь шинж чанаруудыг ашиглан нийлбэрийг тооцоолоход анхаарлаа төвлөрүүлж байна.</p>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.11</strong> <span class="math inline">\(1 + 2 + 3 + 4 + \dots + 100\)</span>-г тооцоол.</p>
+<p><strong>Шийдэл.</strong> Теорем 4.2(b)-г <span class="math inline">\(n = 100\)</span> гэж ашиглавал бид дараахь зүйлийг харна:</p>
+<p><span class="math display">\[ \sum_{i=1}^{100} i = \frac{100(101)}{2} = 5050. \]</span></p>
+</blockquote>
+<p>4.11 жишээн дэх тооцоолол нь Германы математикч Карл Фридрих Гаусс (1777-1855)-ын тухай сайн мэддэг түүхийн сэдэв юм. Түүний бага сургуулийн багш ангийнхаа сурагчдад эхний 100 эерэг бүхэл тоонуудын нийлбэрийг олохыг даалгажээ. Хэдхэн хормын дараа залуу Гаусс нийлбэрийн эхний ба сүүлчийн гишүүн, хоёр дахь ба түүнээс өмнөх гишүүн гэх мэтээр бүгд 101-тэй тэнцүү байгааг ажигласнаар шийдлийг олж авсан.</p>
+<p><span class="math display">\[ 1 + 2 + 3 + \dots + 98 + 99 + 100 \]</span> <span class="math display">\[ \underbrace{101 + 101 + \dots + 101 + 101}_{\text{50 хос}} \]</span></p>
+<p>Ийм 50 хос нийлбэр байгаа тул нийт нийлбэр нь <span class="math inline">\(50 \times 101 = 5050\)</span> болохыг нэн даруй харж болно. Үнэн хэрэгтээ энэ тооцоолол нь үндсэндээ 4.11 жишээнд ашиглагдсан арга юм. Түүнчлэн Гауссын арга нь Теорем 4.2(b)-ийн илүү тодорхой баталгааг өгдөг бөгөөд үүнийг 4.1 дасгалд авч үзсэн.</p>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.12</strong> <span class="math inline">\(\sum_{i=1}^n (6i^2 - 4i + 5)\)</span>-г тооцоол.</p>
+<p><strong>Шийдэл.</strong></p>
+<p><span class="math display">\[ \begin{aligned} \sum_{i=1}^n (6i^2 - 4i + 5) &amp;= \sum_{i=1}^n 6i^2 - \sum_{i=1}^n 4i + \sum_{i=1}^n 5 \\ &amp;= 6 \sum_{i=1}^n i^2 - 4 \sum_{i=1}^n i + 5 \sum_{i=1}^n 1 \\ &amp;= 6 \frac{n(n+1)(2n+1)}{6} - 4 \frac{n(n+1)}{2} + 5n \\ &amp;= 2n^3 + 2n^2 + n. \end{aligned} \]</span></p>
+</blockquote>
+<p>Эхний хоёр тэгшитгэл нь Теорем 4.1(a)-аас, гурав дахь тэгшитгэл нь Теорем 4.2 ба хамгийн энгийн алгебраас гардаг.</p>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.13</strong> <span class="math inline">\(\sum_{i=0}^{n-1} 3 \cdot 2^i\)</span>-г тооцоол.</p>
+<p><strong>Шийдэл.</strong></p>
+<p><span class="math display">\[ \sum_{i=0}^{n-1} 3 \cdot 2^i = 3 \sum_{i=0}^{n-1} 2^i = 3 \left[ \frac{2^{(n-1)+1} - 1}{2 - 1} \right] = 3(2^n - 1). \]</span></p>
+</blockquote>
+<p>Теорем 4.1(b) нь тогтмол 3-ыг ялгах боломжийг олгодог тул Теорем 4.3 нийлбэрийг шийднэ.</p>
+<p>Теорем 4.2 ба 4.3 нь 4.12 ба 4.13 жишээнүүд шиг нийлбэрийг тооцоолоход шууд хэрэглэгддэг бөгөөд индексийн эхлэл <span class="math inline">\(i = 1\)</span> эсвэл <span class="math inline">\(i = 0\)</span> байдаг. Энэ нь тийм биш нийлбэрүүдийн хувьд дахин индексжүүлэх нь ашигтай байдаг.</p>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.14</strong> <span class="math inline">\(15 + 16 + 17 + 18 + \dots + 84\)</span>-ийг тооцоол.</p>
+<p><strong>Шийдэл.</strong> Энэ нийлбэрийг сигма тэмдэглэгээгээр <span class="math inline">\(\sum_{i=15}^{84} i\)</span> гэж бичих нь хамгийн байгалийн арга юм. Теорем 4.2-ыг ийм нийлбэрт хэрэглэхийн тулд эхлээд <span class="math inline">\(i = 1\)</span>-ээс эхэлдэг тул дахин индексжүүлэх хэрэгтэй. <span class="math inline">\(j = i - 14\)</span> гэж үзье. Тэгвэл <span class="math inline">\(i = j + 14\)</span> болно. <span class="math inline">\(i = 15\)</span> үед <span class="math inline">\(j = 1\)</span> байх ба <span class="math inline">\(i = 70\)</span> үед <span class="math inline">\(j = 84\)</span> байна.</p>
+<p><span class="math display">\[ \sum_{i=15}^{84} i = \sum_{j=1}^{70} (j + 14) = \sum_{j=1}^{70} j + \sum_{j=1}^{70} 14 = \frac{70(71)}{2} + 70(14) = 3465. \]</span></p>
+<p>Эсвэл бид <span class="math inline">\(\sum_{i=15}^{84} i\)</span>-ийг дараах байдлаар тооцоолж болно:</p>
+<p><span class="math display">\[ \sum_{i=15}^{84} i = \sum_{i=1}^{84} i - \sum_{i=1}^{14} i = \frac{84(85)}{2} - \frac{14(15)}{2} = 3465. \]</span></p>
+<p>Өөрөөр хэлбэл, <span class="math inline">\(1 + 2 + 3 + \dots + 84\)</span> нийлбэрээс <span class="math inline">\(1 + 2 + 3 + \dots + 14\)</span> хэсэгчилсэн нийлбэрийг хасаж, хүссэн нийлбэрээс маань хасагдсан гишүүдийг гаргаж авна.</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.15</strong> <span class="math inline">\(\sum_{i=5}^n 3^i\)</span>-г тооцоол.</p>
+<p><strong>Шийдэл.</strong> Теорем 4.3-ыг хэрэглэхийн тулд индексийг 0-ээс эхлүүлж дахин индексжүүлнэ. <span class="math inline">\(j = i - 5\)</span> гэж үзье. Тэгвэл <span class="math inline">\(i = j + 5\)</span> болно. <span class="math inline">\(i = 5\)</span> үед <span class="math inline">\(j = 0\)</span> байх ба <span class="math inline">\(i = n\)</span> үед <span class="math inline">\(j = n - 5\)</span> байна. Тэгвэл</p>
+<p><span class="math display">\[ \sum_{i=5}^n 3^i = \sum_{j=0}^{n-5} 3^{j+5} = \sum_{j=0}^{n-5} 3^5 \cdot 3^j = 3^5 \sum_{j=0}^{n-5} 3^j = 3^5 \left[ \frac{3^{(n-5)+1} - 1}{3 - 1} \right] = \frac{3^5(3^{n-4} - 1)}{2}. \]</span></p>
+<p>Эсвэл</p>
+<p><span class="math display">\[ \sum_{i=5}^n 3^i = \sum_{i=0}^n 3^i - \sum_{i=0}^4 3^i = \frac{3^{n+1} - 1}{3 - 1} - \frac{3^{4+1} - 1}{3 - 1} = \frac{3^{n+1} - 1 - 3^5 + 1}{2} = \frac{3^5(3^{n-4} - 1)}{2}. \]</span></p>
+</blockquote>
+<section id="үржвэрийн-тэмдэглэгээ" class="level3">
+<h3 class="anchored" data-anchor-id="үржвэрийн-тэмдэглэгээ">Үржвэрийн тэмдэглэгээ</h3>
+<p>Нийлбэрийн тэмдэглэгээ нь нийлбэрийг илэрхийлдэгтэй адил үржвэрийг илэрхийлэх тэмдэглэгээ байдаг. Энэ тэмдэглэгээнд үржвэр</p>
+<p><span class="math display">\[ P = s_a \cdot s_{a+1} \cdot s_{a+2} \cdots s_b \]</span></p>
+<p>нь дараах байдлаар илэрхийлэгдэнэ:</p>
+<p><span class="math display">\[ P = \prod_{i=a}^b s_i. \]</span></p>
+<p><span class="math inline">\(b &lt; a\)</span> үед түүнд 1 утгыг оноодог. Жишээлбэл, факториалуудыг үржвэрийн тэмдэглэгээгээр дараах байдлаар илэрхийлж болно:</p>
+<p><span class="math display">\[ \forall n \ge 0, \quad n! = \prod_{i=1}^n i. \]</span></p>
+<p>Үржвэрүүдийг Mathematica болон Maple програмуудад <code>Product</code> ба <code>product</code> функцуудыг ашиглан тооцоолж болно.</p>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.16</strong> <span class="math inline">\(n \ge 1\)</span> байг. <span class="math inline">\(x^n - y^n\)</span>-ийн үржигдэхүүн болгон задалсан хэлбэрийг үржвэрийн тэмдэглэгээгээр илэрхийл.</p>
+<p><strong>Шийдэл.</strong> Квадратуудын ялгааг дахин дахин авах замаар үржигдэхүүн болгон задална. Жишээлбэл,</p>
+<p><span class="math display">\[ x^4 - y^4 = (x^2 - y^2)(x^2 + y^2) = (x - y)(x + y)(x^2 + y^2). \]</span></p>
+<p>Ерөнхийдөө,</p>
+<p><span class="math display">\[ \begin{aligned} x^n - y^n &amp;= (x^{n-1} - y^{n-1})(x^{n-1} + y^{n-1}) \\ &amp;= (x^{n-2} - y^{n-2})(x^{n-2} + y^{n-2})(x^{n-1} + y^{n-1}) \\ &amp;= \dots \\ &amp;= (x - y) \prod_{i=0}^{n-1} (x^{2^i} + y^{2^i}). \end{aligned} \]</span></p>
+<p>Энэ баримтын болгоомжтой баталгаа (үүнгүйгээр) индукцээр хийгдэх бөгөөд 4.4 хэсгийн дасгалуудад үлдээсэн.</p>
+</blockquote>
+</section>
+<section id="ерөнхий-нийлбэрийн-томьёо" class="level3">
+<h3 class="anchored" data-anchor-id="ерөнхий-нийлбэрийн-томьёо">Ерөнхий нийлбэрийн томьёо</h3>
+<p>Теорем 4.2 дахь <span class="math inline">\(\sum_{i=1}^n i^m\)</span> хэлбэрийн нийлбэрийн томьёонууд, гэхдээ <span class="math inline">\(m \ge 4\)</span> үед, дараах рекурсив хамаарлаас үүсэж болно.</p>
+<blockquote class="blockquote">
+<p><strong>Теорем 4.4</strong></p>
+<p><span class="math inline">\(m \ge 1\)</span> ба <span class="math inline">\(n \in \mathbb{Z}\)</span> байг. Тэгвэл</p>
+<p><span class="math display">\[ \sum_{i=1}^n i^m = \frac{(n+1)((n+1)^m - 1) - \sum_{j=1}^{m-1} \left( \binom{m}{j} \sum_{i=1}^n i^j \right)}{m}. \]</span></p>
+</blockquote>
+<p>Теорем 4.4-ийн баталгаа нь 4.6 хэсэгт Биномын теоремыг танилцуулсны дараа дасгалуудад үлдээсэн. Энд бид <span class="math inline">\(\sum_{i=1}^n i^4\)</span>-ийг олох замаар Теорем 4.4-ийн ашиг тусыг харуулж байна.</p>
+<blockquote class="blockquote">
+<p><strong>Жишээ 4.17</strong> <span class="math inline">\(\sum_{i=1}^n i^4\)</span>-ийн томьёог ол.</p>
+<p><strong>Шийдэл.</strong></p>
+<p><span class="math display">\[ \begin{aligned} \sum_{i=1}^n i^4 &amp;= \frac{(n+1)((n+1)^4 - 1) - \left( \binom{4}{1} \sum_{i=1}^n i + \binom{4}{2} \sum_{i=1}^n i^2 + \binom{4}{3} \sum_{i=1}^n i^3 \right)}{4} \\ &amp;= \frac{(n+1)((n+1)^4 - 1) - 4\frac{n(n+1)}{2} - 6\frac{n(n+1)(2n+1)}{6} - 4\left(\frac{n(n+1)}{2}\right)^2}{4} \\ &amp;= \frac{n(n+1)(2n+1)(3n^2 + 3n - 1)}{30}. \end{aligned} \]</span></p>
+<p>Эхний тэгшитгэл нь Теорем 4.4-өөс <span class="math inline">\(m = 4\)</span> үед гардаг. Хоёр дахь үр дүн нь Теорем 4.2 болон хамгийн энгийн алгебрын хэрэглээнээс гардаг. Ингээд бид дүгнэхэд:</p>
+<p><span class="math display">\[ \sum_{i=1}^n i^4 = \frac{n(n+1)(2n+1)(3n^2 + 3n - 1)}{30}. \]</span></p>
+</blockquote>
+<hr>
+</section>
+<section id="хэсэг-дасгалууд" class="level3">
+<h3 class="anchored" data-anchor-id="хэсэг-дасгалууд">4.2 хэсэг Дасгалууд</h3>
+<p>Дараах дасгал бүрийг гараар хийж болно. Гэсэн хэдий ч тооцоолол шаардсан дасгалуудыг Mathematica эсвэл Maple зэрэг бэлгэдлийн тооны машин ашиглан хийж болно. Дараа нь үр дүнг гараар хийсэн тооцоололтой харьцуулж болно.</p>
+<ol type="1">
+<li><span class="math inline">\(\sum_{i=1}^4 \frac{1}{i!}\)</span>-г тооцоол. <span class="math inline">\(n\)</span> томрох тусам <span class="math inline">\(\sum_{i=0}^n \frac{1}{i!}\)</span> нь Эйлерийн <span class="math inline">\(e\)</span> тооны (<span class="math inline">\(e \approx 2.718\)</span>) илүү сайн ойролцоолол болдог.</li>
+<li><span class="math inline">\(\sum_{i=2}^4 \binom{3}{i}\)</span>-г тооцоол.</li>
+</ol>
+<p>3-14 дасгалд (a) өгөгдсөн нийлбэрийг сигма тэмдэглэгээгээр бич, (b) мэдэгдэж буй нийлбэрийн томьёог ашиглан нийлбэрийг тооцоол.</p>
+<ol start="3" type="1">
+<li><span class="math inline">\(1 + 8 + 27 + 64 + \dots + 1000\)</span>.</li>
+<li><span class="math inline">\(1 + 2 + 3 + 4 + \dots + 1000\)</span>.</li>
+<li>2-ын 1-ээс 1024 хүртэлх зэрэгтүүдийн нийлбэр.</li>
+<li>3-ын 1-ээс <span class="math inline">\(3^{10}\)</span> хүртэлх зэрэгтүүдийн нийлбэр.</li>
+<li><span class="math inline">\(-2 + 4 - 8 + 16 - \dots - 512\)</span>. *8. 5-аас 1001 хүртэлх сондгой бүхэл тоонуудын нийлбэр.</li>
+<li><span class="math inline">\(12 + 27 + 48 + 75 + \dots + 3n^2\)</span>.</li>
+<li><span class="math inline">\(1 + 8 + 27 + 64 + \dots + n^3\)</span>.</li>
+<li>4-ийн 4-өөс <span class="math inline">\(4^k\)</span> хүртэлх зэрэгтүүдийн нийлбэр.</li>
+<li><span class="math inline">\(6 + 18 + 54 + 162 + \dots + 2 \cdot 3^n\)</span>.</li>
+<li><span class="math inline">\(9 - 27 + 81 - 243 + \dots + (-3)^n\)</span>. Энэ нь 3-ын <span class="math inline">\(9\)</span>-өөс <span class="math inline">\((-3)^n\)</span> хүртэлх зэрэгтүүдийн нийлбэртэй адилтгах нь 3-ын <span class="math inline">\(-3\)</span>-аас <span class="math inline">\(9\)</span> хүртэлх зэрэгтүүдийн нийлбэртэй тэнцүү юм.</li>
+<li><span class="math inline">\(2 - 4 + 6 - 8 + \dots + (-1)^{n+1} 2n\)</span>. Энэ нь тэгш бүхэл тоонуудын 2-оос <span class="math inline">\(2n\)</span> хүртэлх нийлбэрийн ээлжлэн солигдох нийлбэр юм.</li>
+<li><strong>Аннуитет.</strong> Жилийн <span class="math inline">\(i\)</span> хүүтэй энгийн аннуитетэд <span class="math inline">\(D\)</span> долларын хадгаламж хийж, <span class="math inline">\(n\)</span>-р үеийн эцэст <span class="math inline">\(s_n\)</span> үлдэгдлийг дараах байдлаар илэрхийлж болно. <span class="math display">\[ s_n = D(1+i)^{n-1} + D(1+i)^{n-2} + \dots + D(1+i) + D. \quad (4.12) \]</span></li>
+</ol>
+<ol type="a">
+<li>4.1 хэсгийн 51-р дасгалд өгөгдсөн <span class="math inline">\(s_n\)</span>-ийн рекурсив тодорхойлолтыг ашиглан <span class="math inline">\(s_2, s_3, s_4\)</span>-ийн илэрхийллүүдийг гарган авч, тэдгээрийг (4.12) хэлбэрээр бичиж болохыг батал.</li>
+<li><span class="math inline">\(i = 0.01\)</span> ба <span class="math inline">\(D = 100\)</span> байхад (4.12)-ыг ашиглан <span class="math inline">\(s_4\)</span>-ийг тооцоол.</li>
+<li>(4.12) болон мэдэгдэж буй нийлбэрийн томьёог ашиглан 4.1 хэсгийн 51-р дасгалд <span class="math inline">\(s_n\)</span>-ийн хаалттай томьёог баталсан эсэхийг шалга.</li>
+<li>Хэрэв <span class="math inline">\(i = 0.01\)</span> ба $1000 доллар 12 үеийн дараа хүссэн бол үе бүрт <span class="math inline">\(D\)</span>-ийн хэмжээ хэд байх ёстой вэ?</li>
+<li>Ерөнхийдөө, жилийн <span class="math inline">\(i\)</span> хүүтэй үед <span class="math inline">\(N\)</span> үеийн дараа <span class="math inline">\(F\)</span> доллар хүссэн бол үе бүрт <span class="math inline">\(D\)</span>-ийн хэмжээ хэд байх ёстой вэ?</li>
+</ol>
+<ol start="16" type="1">
+<li><strong>Моргейж.</strong> <span class="math inline">\(M\)</span> долларын моргейжийн сар бүрийн <span class="math inline">\(i\)</span> хүү, <span class="math inline">\(R\)</span> төлбөртэй үед сар бүрийн эцэст үлдэгдэл <span class="math inline">\(s_n\)</span>-ийг дараах байдлаар илэрхийлж болно. <span class="math display">\[ s_n = M(1+i)^n - R(1+i)^{n-1} - \dots - R(1+i) - R. \quad (4.13) \]</span></li>
+</ol>
+<ol type="a">
+<li>4.1 хэсгийн 52-р дасгалд өгөгдсөн <span class="math inline">\(s_n\)</span>-ийн рекурсив тодорхойлолтыг ашиглан <span class="math inline">\(s_2, s_3, s_4\)</span>-ийн илэрхийллүүдийг гарган авч, тэдгээрийг (4.13) хэлбэрээр бичиж болохыг батал.</li>
+<li><span class="math inline">\(M = \$80,000, i = 0.01\)</span>, ба <span class="math inline">\(R = \$822.89\)</span> байхад (4.13)-ыг ашиглан <span class="math inline">\(s_4\)</span>-ийг тооцоол.</li>
+<li>(4.13) болон мэдэгдэж буй нийлбэрийн томьёог ашиглан 4.1 хэсгийн 52-р дасгалд <span class="math inline">\(s_n\)</span>-ийн хаалттай томьёог баталсан эсэхийг шалга.</li>
+<li>$80,000-ийн моргейжийг <span class="math inline">\(i = 0.01\)</span> хүүтэйгээр авсан. Моргейжийн хугацаа 480 сар (40 жил) бол тэнцвэр нь 480 сарын дараа яг тэг байхын тулд сар бүрийн <span class="math inline">\(R\)</span> төлбөрийн хэмжээ хэд байх ёстой вэ?</li>
+<li>Жилийн <span class="math inline">\(i\)</span> хүүтэй <span class="math inline">\(M\)</span> долларын моргейж авсан. Ерөнхийдөө, хэрэв моргейжийн хугацаа <span class="math inline">\(N\)</span> сар бол <span class="math inline">\(N\)</span> сарын дараа үлдэгдэл нь яг тэнцвэртэй байхын тулд сар бүрийн <span class="math inline">\(R\)</span> төлбөрийн хэмжээ хэд байх ёстой вэ?</li>
+</ol>
+<p>17-28 дасгалд нийлбэрийг тооцоол.</p>
+<ol start="17" type="1">
+<li><span class="math inline">\(\sum_{i=1}^n (4i^3 - 6i - 1)\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n (12i^2 + 2i - 3)\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n (i - 1)^2\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n (i + 1)^3\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n \left( \frac{1}{3} \right)^i\)</span>.</li>
+<li>5-ын 5-аас <span class="math inline">\(5^n\)</span> хүртэлх зэрэгтүүдийн нийлбэр.</li>
+<li>2-ын 2-оос <span class="math inline">\(2^{100}\)</span> хүртэлх зэрэгтүүдийн нийлбэр.</li>
+<li><span class="math inline">\(\sum_{i=100}^{400} 3^i\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=2}^{64} 5 \cdot 4^i\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^{40} (-2) \cdot 3^i\)</span>. <em>27. <span class="math inline">\(\sum_{i=1}^{100} \frac{1}{2^i}\)</span>. </em>28. <span class="math inline">\(\sum_{i=2}^{50} \frac{2}{3^i}\)</span>.</li>
+</ol>
+<p>29-36 дасгалд өгөгдсөн томьёог батал.</p>
+<ol start="29" type="1">
+<li><span class="math inline">\(\sum_{i=1}^n (4i - 3) = n(2n - 1)\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n (3i - 2) = \frac{n(3n - 1)}{2}\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n (3i^2 - i) = n^2(n + 1)\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^n (4i^3 - 2i) = n(n + 1)^2(n + 2)\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^{2n} i = n(2n + 1)\)</span>.</li>
+<li>Эхний <span class="math inline">\(2n\)</span> шоо (өөрөөр хэлбэл, 1-ээс <span class="math inline">\((2n)^3\)</span> хүртэлх нийлбэр) нь <span class="math inline">\(n^2(2n + 1)^2\)</span>. *35. 3-аас <span class="math inline">\(2n + 1\)</span> хүртэлх сондгой бүхэл тоонуудын нийлбэр нь <span class="math inline">\((n + 1)^2\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=1}^{2n+1} 2^i = \frac{2}{3}(3^{n+1} - 1)\)</span>. <em>Зөвлөмж: <span class="math inline">\(2^{2n+1} = 2 \cdot 4^n\)</span>.</em></li>
+<li><span class="math inline">\(k^{th}\)</span> гишүүн нь <span class="math inline">\(k^2 - k\)</span> байх дарааллын нийлбэрийг үржвэрийн тэмдэглэгээгээр илэрхийл.</li>
+<li><span class="math inline">\(\frac{n}{2}\)</span>-ийн үржвэрийг үржвэрийн тэмдэглэгээгээр илэрхийл.</li>
+<li><span class="math inline">\(\prod_{i=1}^n 2^i\)</span>-ийн энгийн томьёог ол.</li>
+<li><span class="math inline">\(\prod_{i=1}^n i^2\)</span>-ийн энгийн томьёог ол.</li>
+<li>Теорем 4.2(b)-ийг батлахын тулд дараах тоймыг ашигла. <span class="math inline">\(S = 1 + 2 + 3 + \dots + (n-2) + (n-1) + n\)</span> гэж үзье. Тэгвэл бид мөн <span class="math inline">\(S = n + (n-1) + (n-2) + \dots + 3 + 2 + 1\)</span> гэж бичиж болно. Эдгээр хоёр тэгшитгэлийг нэмэхдээ эхлээд харгалзах гишүүдийн нийлбэрийг (баганын нийлбэр) ажиглавал бүгд ижил байх ба энэ нийлбэрийг 2S-ийг авахад ашиглахад хялбар байдаг.</li>
+<li>Теорем 4.3-ыг батлахын тулд дараах тоймыг ашигла. <span class="math inline">\(S = 1 + r + r^2 + r^3 + \dots + r^n\)</span> гэж үзье. Тэгвэл <span class="math inline">\(rS = r + r^2 + r^3 + \dots + r^n + r^{n+1}\)</span> болно. Эхний тэгшитгэлээс хоёр дахь тэгшитгэлийг хасаж, үр дүнгийн цуцлалтын давуу талыг ашигласнаар бид <span class="math inline">\(S\)</span>-ийг олоход ашиглаж болох тэгшитгэлийг олж авна. <em>43. Теорем 4.4-ийг ашиглан <span class="math inline">\(\sum_{i=1}^n i^5\)</span>-ийн томьёог ол. </em>44. Теорем 4.4-ийг ашиглан <span class="math inline">\(\sum_{i=1}^n i^6\)</span>-ийн томьёог ол.</li>
+<li>Спираль хэв маягийг тал нь өмнөх талтайгаа ижил квадратуудыг хооронд нь нааж бүтээдэг. Анхны квадрат нь нэгж квадрат бөгөөд энэ үйл явцын эхний дөрвөн давталтыг зурагт үзүүлэв. <em>(Зураг: <span class="math inline">\(s_1\)</span> - нэг квадрат, <span class="math inline">\(s_2\)</span> - хоёр квадрат, <span class="math inline">\(s_3\)</span> - гурван квадрат, <span class="math inline">\(s_4\)</span> - дөрвөн квадрат)</em></li>
+</ol>
+<ol type="a">
+<li><span class="math inline">\(s_6\)</span>-г зур.</li>
+<li>Талбай нь 1.33-аас их байх эхний <span class="math inline">\(s_n\)</span> аль нь вэ?</li>
+<li>Ерөнхийдөө <span class="math inline">\(a_n\)</span> талбайг <span class="math inline">\(s_n\)</span>-ийн нийлбэрээр илэрхийл.</li>
+<li>Теорем 4.3 болон (c) хэсгийн илэрхийллийг ашиглан <span class="math inline">\(a_n\)</span>-ийн хаалттай томьёог ол. <span class="math inline">\(n\)</span> томрох тусам <span class="math inline">\(a_n\)</span> нь <span class="math inline">\(\frac{4}{3}\)</span>-д ойртдог болохыг анхаар.</li>
+</ol>
+<ol start="46" type="1">
+<li>2 фут урт, 1 фунт жинтэй хязгааргүй олон тэгш өнцөгт блоктой гэж үзье. <span class="math inline">\(n\)</span> блокыг шаталсан хэв маягаар (доорх зурагт үзүүлсэн шиг) овоолсноор бид блокнуудыг өөрсдийн жингээрээ тэнцвэртэй байлгахын зэрэгцээ ширээний ирмэгээс цааш блокнуудын хамгийн их өргөтгөлийг олж авдаг. <em>(Зураг: <span class="math inline">\(s_1\)</span> - 1 блок ширээнээс 1/2-оор цухуйсан, <span class="math inline">\(s_2\)</span> - 2 блок, <span class="math inline">\(s_3\)</span> - 3 блок…)</em> Өөрөөр хэлбэл, <span class="math inline">\(n\)</span>-р шатанд <span class="math inline">\(s_{n-1}\)</span> овоолгыг <span class="math inline">\(n\)</span>-р блокны дээр байрлуулж, <span class="math inline">\(n\)</span>-р блок нь ширээний ирмэгээс <span class="math inline">\(\frac{1}{2n}\)</span> фут цааш сунадаг.</li>
+</ol>
+<ol type="a">
+<li><span class="math inline">\(s_5\)</span>-г зур.</li>
+<li>Хамгийн дээд блок нь ширээний ирмэгээс дор хаяж 3 фут цааш сунах эхний <span class="math inline">\(s_n\)</span> овоолго аль нь вэ?</li>
+<li><span class="math inline">\(s_n\)</span> овоолгын хамгийн дээд блок ширээний ирмэгээс цааш сунах <span class="math inline">\(d_n\)</span> зайг нийлбэрээр илэрхийл. 4.4 хэсгийн 32-р дасгалын үр дүнд ширээний ирмэгээс хүссэн зайд хүрэх овоолгыг бий болгож чадна.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./4-1.html" class="pagination-link" aria-label="4.1 Дараалал, Индексжүүлэлт, ба Рекурс">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./4-3.html" class="pagination-link" aria-label="4.3 Математик индукц, танилцуулга">
+        <span class="nav-page-text"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

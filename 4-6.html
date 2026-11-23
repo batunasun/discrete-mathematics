@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4.6 Биномын теорем – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./4-7.html" rel="next">
+<link href="./4-5.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-6.html"><span class="chapter-title">4.6 Биномын теорем</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн давтлагын бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: 4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#хэсэг-даалгаврууд" id="toc-хэсэг-даалгаврууд" class="nav-link active" data-scroll-target="#хэсэг-даалгаврууд">4.6 ХЭСЭГ Даалгаврууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./4.html">4-Р БҮЛЭГ Бүхэл тоогоор индексжсэн</a></li><li class="breadcrumb-item"><a href="./4-6.html"><span class="chapter-title">4.6 Биномын теорем</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">4.6 Биномын теорем</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Биномын теорем нь зарим бүхэл <span class="math inline">\(n \ge 0\)</span>-ийн хувьд <span class="math inline">\((a+b)^n\)</span> хэлбэрийн илэрхийллийг хэрхэн задлахыг заадаг үр дүн юм.</p>
+<p>Үнэндээ, энэ нь <span class="math inline">\(n\)</span>-ийн эхний хэдэн утгын хувьд илэрч эхэлдэг зүй тогтлыг илэрхийлдэг.</p>
+<p><span class="math display">\[ \begin{aligned} (a+b)^0 &amp;= 1 \\ (a+b)^1 &amp;= a+b \\ (a+b)^2 &amp;= a^2 + 2ab + b^2 \\ (a+b)^3 &amp;= a^3 + 3a^2b + 3ab^2 + b^3 \\ (a+b)^4 &amp;= a^4 + 4a^3b + 6a^2b^2 + 4ab^3 + b^4 \\ &amp;\vdots \end{aligned} \qquad (4.19) \]</span></p>
+<p>Хөгжиж буй зүй тогтолд ажиглах нэг онцлог нь мөр бүрт <span class="math inline">\(a\)</span>-ийн зэрэглэл зүүнээс баруун тийш буурч, харин <span class="math inline">\(b\)</span>-ийн зэрэглэл нэмэгддэг. Өөр нэг онцлог нь коэффициентүүд хэрхэн өөрчлөгдөж байгаа юм.</p>
+<p><span class="math display">\[ \begin{array}{ccccccccc} &amp; &amp; &amp; &amp; 1 &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; 1 &amp; &amp; 1 &amp; &amp; &amp; \\ &amp; &amp; 1 &amp; &amp; 2 &amp; &amp; 1 &amp; &amp; \\ &amp; 1 &amp; &amp; 3 &amp; &amp; 3 &amp; &amp; 1 &amp; \\ 1 &amp; &amp; 4 &amp; &amp; 6 &amp; &amp; 4 &amp; &amp; 1 \\ &amp; &amp; &amp; &amp; \vdots &amp; &amp; &amp; &amp; \end{array} \]</span></p>
+<p>Энэ төгсгөлгүй бүхэл тоонуудын массив нь <strong>Пасхалийн гурвалжин</strong> гэж нэрлэгддэг. Үүний гоо үзэсгэлэн нь дараагийн мөр бүрийг өмнөх мөрөөс хэрхэн тодорхойлж болдогт оршино. Үүнийг илэрхийлэхийн тулд <span class="math inline">\(c_{n,k}\)</span> нь <span class="math inline">\(n\)</span>-р мөрийн <span class="math inline">\(k\)</span>-р оруулгыг тэмдэглэе. Энд <span class="math inline">\(n\)</span> ба <span class="math inline">\(k\)</span> хоёулаа 0-ээс эхэлдэг.</p>
+<p><span class="math display">\[ \begin{array}{ccccccccc} &amp; &amp; &amp; &amp; c_{0,0} &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; c_{1,0} &amp; &amp; c_{1,1} &amp; &amp; &amp; \\ &amp; &amp; c_{2,0} &amp; &amp; c_{2,1} &amp; &amp; c_{2,2} &amp; &amp; \\ &amp; c_{3,0} &amp; &amp; c_{3,1} &amp; &amp; c_{3,2} &amp; &amp; c_{3,3} &amp; \\ c_{4,0} &amp; &amp; c_{4,1} &amp; &amp; c_{4,2} &amp; &amp; c_{4,3} &amp; &amp; c_{4,4} \\ &amp; &amp; &amp; &amp; \vdots &amp; &amp; &amp; &amp; \end{array} \]</span></p>
+<p>Гурвалжны ирмэгүүд нь <span class="math display">\[ \forall n \ge 0, \quad c_{n,0} = c_{n,n} = 1 \]</span> гэсэн ижилтгэлийг харуулна.</p>
+<p>Мөр бүрийн дотоод оруулгууд нь Пасхалийн ижилтгэлээр өмнөх мөрөөс тодорхойлогдоно. <span class="math display">\[ \forall n \ge 2 \text{ ба } 1 \le k \le n-1, \quad c_{n,k} = c_{n-1,k-1} + c_{n-1,k}. \qquad (4.20) \]</span> Жишээлбэл, Пасхалийн гурвалжны 5-р мөрийн оруулгууд нь <span class="math inline">\(c_{4,k}\)</span>-ийн дараах утгууд юм. <span class="math display">\[ c_{5,0} \quad c_{5,1} \quad c_{5,2} \quad c_{5,3} \quad c_{5,4} \quad c_{5,5} \]</span></p>
+<p>Дотоод <span class="math inline">\(c_{5,3}\)</span> оруулга нь (4.20)-оор дараах байдлаар тодорхойлогдоно. <span class="math display">\[ c_{5,3} = c_{4,2} + c_{4,3} = 4 + 6 = 10. \]</span> Үүнтэй адилаар 5-р мөрийн дотоод оруулга бүрийг 4-р мөрөөс тодорхойлж болно. Мэдээж, эхний ба эцсийн оруулгууд нь 1 гэж тодорхойлогддог. Улмаар Пасхалийн гурвалжны 5-р мөр дараах байдалтай болно. <span class="math display">\[ 1 \quad 5 \quad 10 \quad 10 \quad 5 \quad 1. \]</span></p>
+<p>Энэ аргын сул тал нь хэрэв 100-р мөрийг авахыг хүсвэл эхлээд 0-ээс 99 хүртэлх мөрүүдийг тооцоолох шаардлагатай болдог. Аз болоход, практик дээр энэ бүх нэмэлт ажил шаардлагагүй юм. Энэ нь Пасхалийн гурвалжин дахь оруулгууд нь биномын коэффициентүүд болох нь тогтоогдсонтой холбоотой. Өөрөөр хэлбэл, <span class="math inline">\(c_{n,k} = \binom{n}{k}\)</span>.</p>
+<p><span class="math display">\[ \begin{array}{ccccccccc} &amp; &amp; &amp; &amp; \binom{0}{0} &amp; &amp; &amp; &amp; \\ &amp; &amp; &amp; \binom{1}{0} &amp; &amp; \binom{1}{1} &amp; &amp; &amp; \\ &amp; &amp; \binom{2}{0} &amp; &amp; \binom{2}{1} &amp; &amp; \binom{2}{2} &amp; &amp; \\ &amp; \binom{3}{0} &amp; &amp; \binom{3}{1} &amp; &amp; \binom{3}{2} &amp; &amp; \binom{3}{3} &amp; \\ \binom{4}{0} &amp; &amp; \binom{4}{1} &amp; &amp; \binom{4}{2} &amp; &amp; \binom{4}{3} &amp; &amp; \binom{4}{4} \\ &amp; &amp; &amp; &amp; \vdots &amp; &amp; &amp; &amp; \end{array} \]</span></p>
+<p>Энэ тэгшитгэл нь эхний хэдэн мөрөнд <span class="math inline">\(\binom{n}{k}\)</span>-ийн утгуудыг тооцоолбол тодорхой харагдаж байна. Гэхдээ үүнийг ижилтгэлүүдээс нотлох нь зохистой.</p>
+<p><span class="math display">\[ \forall n \ge 0, \quad \binom{n}{0} = \binom{n}{n} = 1 \qquad (4.21) \]</span> <span class="math display">\[ \forall n \ge 2 \text{ ба } 1 \le k \le n-1, \quad \binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}. \qquad (4.22) \]</span></p>
+<p>Тэгшитгэл (4.22) нь <strong>Пасхалийн ижилтгэл</strong> бөгөөд бид 4.4-р хэсгийн (4.18) тэгшитгэлд мөн таарсан. Мэдээж, (4.22) тэгшитгэл нь (4.20)-той нийцэж байна. Одоо бидэнд Биномын теоремд орох бүх хэсгүүд байна. Үнэндээ, биномын коэффициентүүд нь Биномын теорем дахь коэффициентүүдийн үүрэгтэй байдагтай холбоотойгоор ийм нэртэй болсон.</p>
+<p><strong>ТЕОРЕМ 4.9</strong> &gt; <strong>Биномын теорем</strong> &gt; <span class="math inline">\(a, b \in \mathbb{R}\)</span> ба <span class="math inline">\(n \in \mathbb{Z}^+\)</span> байг. Тэгвэл, &gt; <span class="math display">\[ (a+b)^n = \sum_{i=0}^{n} \binom{n}{i} a^{n-i} b^i. \]</span></p>
+<p><strong>Нотолгоо</strong> Хангалттай олон суурь тохиолдлууд, тухайлбал <span class="math inline">\(n = 0, 1, 2, 3, 4\)</span> нь (4.19) дээр баталгаажсан. Одоо бид индукцийн алхам руу шилжинэ. <span class="math inline">\(k \ge 1\)</span> ба <span class="math inline">\((a+b)^k = \sum_{i=0}^k \binom{k}{i} a^{k-i} b^i\)</span> гэж үзье. (Зорилго: <span class="math inline">\((a+b)^{k+1} = \sum_{j=0}^{k+1} \binom{k+1}{j} a^{k+1-j} b^j\)</span>.) Ажиглавал, <span class="math display">\[ \begin{aligned} (a+b)^{k+1} &amp;= (a+b)(a+b)^k \\ &amp;= (a+b) \sum_{i=0}^k \binom{k}{i} a^{k-i} b^i \quad \text{--- Индукцийн таамаглалаар} \\ &amp;= \sum_{i=0}^k \binom{k}{i} a^{k+1-i} b^i + \sum_{i=0}^k \binom{k}{i} a^{k-i} b^{i+1} \\ &amp;= \sum_{j=0}^k \binom{k}{j} a^{k+1-j} b^j + \sum_{j=1}^{k+1} \binom{k}{j-1} a^{k+1-j} b^j \\ &amp;= \left( a^{k+1} + \sum_{j=1}^k \binom{k}{j} a^{k+1-j} b^j \right) + \left( \sum_{j=1}^k \binom{k}{j-1} a^{k+1-j} b^j + b^{k+1} \right) \\ &amp;= a^{k+1} + \left( \sum_{j=1}^k \left[ \binom{k}{j} + \binom{k}{j-1} \right] a^{k+1-j} b^j \right) + b^{k+1} \\ &amp;= a^{k+1} + \left( \sum_{j=1}^k \binom{k+1}{j} a^{k+1-j} b^j \right) + b^{k+1} \\ &amp;= \sum_{j=0}^{k+1} \binom{k+1}{j} a^{k+1-j} b^j. \end{aligned} \]</span> <span class="math inline">\(\square\)</span></p>
+<p>Пасхалийн ижилтгэлийг индукцийн алхамын өмнөхөөс өмнөх тэгшитгэлд ашигласан. Энэ тохиолдолд 4.4-р хэсгийн (4.18) тэгшитгэлээр илэрхийлэгдсэн Пасхалийн ижилтгэлийн хэлбэр нь илүү тохиромжтой байж магадгүй. Үлдсэн нийлбэрүүдэд Пасхалийн ижилтгэлийг индексүүдэд хэрэглэж болохын тулд <span class="math inline">\(a^{k+1}\)</span> ба <span class="math inline">\(b^{k+1}\)</span> гишүүдийг салгах шаардлагатайг анхаарна уу. Энэ нь Пасхалийн гурвалжны ирмэг дээрх 1-үүдийг дотоод тоонуудын тодорхойлолтоос тусад нь зааж өгөх шаардлагатай байдагтай адил юм. Биномын теоремын хэрэглээний нэг нь алгебрийн илэрхийллийг задлахад оршино.</p>
+<p><strong>ЖИШЭЭ 4.29</strong> &gt; Дараах илэрхийлэл тус бүрийг задлахад Биномын теоремыг ашигла. &gt; <strong>(a)</strong> <span class="math inline">\((x+y)^6\)</span>-г задла. &gt; <strong>Бодолт.</strong> Бид Теорем 4.9-д <span class="math inline">\(a=x, b=y\)</span>, ба <span class="math inline">\(n=6\)</span> гэж авна. &gt; <span class="math display">\[ \begin{aligned} (x+y)^6 &amp;= \sum_{i=0}^6 \binom{6}{i} x^{6-i} y^i \\ &amp;= \binom{6}{0} x^6 + \binom{6}{1} x^5 y^1 + \binom{6}{2} x^4 y^2 + \binom{6}{3} x^3 y^3 \\ &amp;\quad + \binom{6}{4} x^2 y^4 + \binom{6}{5} x^1 y^5 + \binom{6}{6} y^6 \\ &amp;= x^6 + 6x^5 y + 15x^4 y^2 + 20x^3 y^3 + 15x^2 y^4 + 6x y^5 + y^6. \end{aligned} \]</span> &gt; <strong>(b)</strong> <span class="math inline">\((2x+3y)^5\)</span>-г задла. &gt; <strong>Бодолт.</strong> Бид Теорем 4.9-д <span class="math inline">\(a=2x, b=3y\)</span>, ба <span class="math inline">\(n=5\)</span> гэж авна. &gt; <span class="math display">\[ \begin{aligned} (2x+3y)^5 &amp;= \sum_{i=0}^5 \binom{5}{i} (2x)^{5-i} (3y)^i \\ &amp;= \binom{5}{0} (2x)^5 + \binom{5}{1} (2x)^4 (3y) + \binom{5}{2} (2x)^3 (3y)^2 \\ &amp;\quad + \binom{5}{3} (2x)^2 (3y)^3 + \binom{5}{4} (2x) (3y)^4 + \binom{5}{5} (3y)^5 \\ &amp;= 2^5 x^5 + 5 \cdot 2^4 \cdot 3 x^4 y + 10 \cdot 2^3 \cdot 3^2 x^3 y^2 \\ &amp;\quad + 10 \cdot 2^2 \cdot 3^3 x^2 y^3 + 5 \cdot 2 \cdot 3^4 x y^4 + 3^5 y^5 \\ &amp;= 32x^5 + 240x^4 y + 720x^3 y^2 + 1080x^2 y^3 + 810x y^4 + 243y^5. \end{aligned} \]</span> &gt; <strong>(c)</strong> <span class="math inline">\((x+1)^n\)</span>-г задла. &gt; <strong>Бодолт.</strong> Бид Теорем 4.9-д <span class="math inline">\(a=x\)</span> ба <span class="math inline">\(b=1\)</span> гэж авна. &gt; <span class="math display">\[ \begin{aligned} (x+1)^n &amp;= \sum_{i=0}^n \binom{n}{i} x^{n-i} 1^i = \sum_{i=0}^n \binom{n}{i} x^{n-i} \\ &amp;= x^n + n x^{n-1} + \binom{n}{2} x^{n-2} + \dots + n x + 1. \end{aligned} \]</span> &gt; <strong>(d)</strong> <span class="math inline">\((x-y)^n\)</span>-г задла. &gt; <strong>Бодолт.</strong> Бид Теорем 4.9-д <span class="math inline">\(a=x\)</span> ба <span class="math inline">\(b=-y\)</span> гэж авна. &gt; <span class="math display">\[ \begin{aligned} (x-y)^n &amp;= (x+(-y))^n = \sum_{i=0}^n \binom{n}{i} x^{n-i} (-y)^i \\ &amp;= \sum_{i=0}^n (-1)^i \binom{n}{i} x^{n-i} y^i \\ &amp;= x^n - n x^{n-1} y + \binom{n}{2} x^{n-2} y^2 - \binom{n}{3} x^{n-3} y^3 + \dots \\ &amp;\quad + (-1)^n \binom{n}{n} x^{n-n} y^n + (-1)^n y^n. \end{aligned} \]</span> &gt; Эхний гишүүн эерэг коэффициенттэй, дараа нь тэмдэгүүд ээлжлэн солигддог болохыг анхаарна уу. Мэдээж, сүүлчийн гишүүний тэмдэг нь <span class="math inline">\(n\)</span>-ийн тэгш эсвэл сондгой байдлаас хамаарна. <span class="math inline">\(\blacksquare\)</span></p>
+<p>Биномын теоремыг ашиглаж болох өөр нэг арга бол бүрэн задагдаагүй олон гишүүнтээс бага зэрэг хүчин чармайлт гаргаж тодорхой коэффициент олох явдал юм.</p>
+<p><strong>ЖИШЭЭ 4.30</strong> &gt; <span class="math inline">\((1+2x)^{50}\)</span>-ийн <span class="math inline">\(x^{40}\)</span>-ийн коэффициентийг ол. &gt; <strong>Бодолт.</strong> Биномын теоремоор, &gt; <span class="math display">\[ (1+2x)^{50} = \sum_{i=0}^{50} \binom{50}{i} 1^{50-i} (2x)^i = \sum_{i=0}^{50} \binom{50}{i} 2^i x^i. \]</span> &gt; Улмаар <span class="math inline">\(x^{40}\)</span>-ийн коэффициент (<span class="math inline">\(i=40\)</span> үед) нь &gt; <span class="math display">\[ \binom{50}{40} 2^{40} \]</span> &gt; байна. <span class="math inline">\(\blacksquare\)</span></p>
+<p>Олон гишүүнтийг бүрэн задлахгүйгээр тодорхой коэффициентийг хурдан гаргаж авах чадвар нь 7.3-р хэсэгт олон гишүүнтийг тоолох бодлого шийдвэрлэхэд ашигладаг тул маш их хэрэгтэй байдаг. Математика дахь <code>expand</code> функц болон Maple дахь <code>expand</code> ба <code>coeff</code> функцууд мөн тус болж магадгүй. Бидний эцсийн хэрэглээнд Биномын теоремыг зарим сайхан ижилтгэлүүдийг хурдан нотлоход ашиглаж болохыг харж байна.</p>
+<p><strong>ЖИШЭЭ 4.31</strong> &gt; Дараах ижилтгэл тус бүрийг батал. &gt; <strong>(a)</strong> <span class="math inline">\(\forall n \ge 0, \quad \sum_{i=0}^n \binom{n}{i} = 2^n.\)</span> &gt; <strong>Нотолгоо</strong> &gt; Теорем 4.9-өөр, &gt; <span class="math display">\[ 2^n = (1+1)^n = \sum_{i=0}^n \binom{n}{i} 1^{n-i} 1^i = \sum_{i=0}^n \binom{n}{i}. \quad \square \]</span> &gt; <strong>(b)</strong> <span class="math inline">\(\forall n \ge 0, \quad \sum_{i=0}^n \binom{n}{i} 2^i = 3^n.\)</span> &gt; <strong>Нотолгоо</strong> &gt; Теорем 4.9-өөр, &gt; <span class="math display">\[ 3^n = (1+2)^n = \sum_{i=0}^n \binom{n}{i} 1^{n-i} 2^i = \sum_{i=0}^n \binom{n}{i} 2^i. \quad \square \]</span> &gt; <strong>(c)</strong> <span class="math inline">\(\forall n \ge 1, \quad \sum_{i=0}^n (-1)^i \binom{n}{i} = 0.\)</span> &gt; <strong>Нотолгоо</strong> &gt; Теорем 4.9-өөр, &gt; <span class="math display">\[ 0 = (1-1)^n = \sum_{i=0}^n \binom{n}{i} 1^{n-i} (-1)^i = \sum_{i=0}^n (-1)^i \binom{n}{i}. \quad \square \]</span></p>
+<section id="хэсэг-даалгаврууд" class="level3">
+<h3 class="anchored" data-anchor-id="хэсэг-даалгаврууд">4.6 ХЭСЭГ Даалгаврууд</h3>
+<p>Дараах дасгал бүрийг гараар гүйцэтгэж болно. Тооцоолол шаарддаг заримыг нь Mathematica эсвэл Maple зэрэг бэлгэдлийн тооцоолуурын тусламжтайгаар хийж болно. Гэхдээ үр дүнг гараар хийсэн тооцоололтой харьцуулах хэрэгтэй.</p>
+<ol type="1">
+<li><strong>Зургаан өнцөгтийн ижилтгэл.</strong> <span class="math inline">\(n, k \in \mathbb{Z}\)</span> ба <span class="math inline">\(1 \le k \le n-1\)</span> байг. Харуул: <span class="math inline">\(\binom{n-1}{k-1} \binom{n}{k+1} \binom{n+1}{k} = \binom{n-1}{k} \binom{n}{k-1} \binom{n+1}{k+1}\)</span>. Эдгээр биномын коэффициентүүд Пасхалийн гурвалжинд зургаан өнцөгт үүсгэдэг.</li>
+<li><strong>Хоёр дахь эрэмбийн Пасхалийн ижилтгэл.</strong> <span class="math inline">\(n, k \in \mathbb{Z}\)</span> ба <span class="math inline">\(2 \le k \le n-2\)</span> байг. Харуул: <span class="math inline">\(\binom{n-2}{k-2} + 2\binom{n-2}{k-1} + \binom{n-2}{k} = \binom{n}{k}\)</span>. Энэ ижилтгэл дэх биномын коэффициентүүд ямар дүрс үүсгэдэг вэ?</li>
+</ol>
+<p>3-22-р дасгалуудад өгөгдсөн илэрхийллийг задлахад Биномын теоремыг ашиглаж, бусад шаардлагатай тооцооллыг гүйцэтгэ.</p>
+<ol start="3" type="1">
+<li><span class="math inline">\((x+y)^5\)</span>.</li>
+<li><span class="math inline">\((x+y)^7\)</span>.</li>
+<li><span class="math inline">\((3x+y)^5\)</span>.</li>
+<li><span class="math inline">\((x+2y)^4\)</span>.</li>
+<li><span class="math inline">\((2x-y)^6\)</span>.</li>
+<li><span class="math inline">\((x-3y)^4\)</span>.</li>
+<li><span class="math inline">\((x-1)^4\)</span>.</li>
+<li><span class="math inline">\((x+2)^6\)</span>.</li>
+<li><strong>(a)</strong> <span class="math inline">\((x + \frac{1}{x})^5\)</span>-г задла. <strong>(b)</strong> <span class="math inline">\(x^5\)</span>-ийн коэффициент хэд вэ?</li>
+<li><strong>(a)</strong> <span class="math inline">\((x - \frac{1}{x})^5\)</span>-г задла. <strong>(b)</strong> <span class="math inline">\(x^6\)</span>-ийн коэффициент хэд вэ?</li>
+<li><span class="math inline">\((x^2+y^2)^4\)</span>.</li>
+<li><span class="math inline">\((x^2+y^2)^5\)</span>.</li>
+<li><span class="math inline">\((3x^2+y)^5\)</span>.</li>
+<li><span class="math inline">\((x^3+2y^2)^4\)</span>.</li>
+<li><strong>(a)</strong> <span class="math inline">\((x^2+1)^n\)</span>-г задла. <strong>(b)</strong> <span class="math inline">\(x^8\)</span>-ийн коэффициент хэд вэ?</li>
+<li><strong>(a)</strong> <span class="math inline">\((x^2-y^2)^n\)</span>-г задла. <strong>(b)</strong> <span class="math inline">\(y^{10}\)</span>-ийн коэффициент хэд вэ?</li>
+<li><span class="math inline">\((n-1)^n\)</span>.</li>
+<li><span class="math inline">\((n+1)^n\)</span>. *21. <span class="math inline">\(p(n) = (1+\frac{1}{n})^n\)</span> илэрхийлэл нь <span class="math inline">\(n\)</span> ихсэх тусам Эйлерийн тоо <span class="math inline">\(e \approx 2.718\)</span>-ийн илүү сайн ойролцооллыг өгдөг.
+<ol type="a">
+<li><span class="math inline">\(p(100), p(1000)\)</span>, ба <span class="math inline">\(p(10000)\)</span>-г тооцоолж, ойролцоолол хэрхэн сайжирч байгааг ажигла. <span class="math inline">\(p(n)\)</span>-ийн задаргааг илэрхийл.</li>
+<li><span class="math inline">\(\frac{1}{e}\)</span>-ийн урвуу <span class="math inline">\(q(n) = (1-\frac{1}{n})^n\)</span> илэрхийлэл нь <span class="math inline">\(n\)</span> ихсэх тусам <span class="math inline">\(1/e \approx 0.3679\)</span>-ийн илүү сайн ойролцооллыг өгдөг.</li>
+<li><span class="math inline">\(q(100), q(200)\)</span>, ба <span class="math inline">\(q(300)\)</span>-г тооцоолж, ойролцоолол хэрхэн сайжирч байгааг ажигла. <span class="math inline">\(q(n)\)</span>-ийн задаргааг илэрхийл. *22. <span class="math inline">\(\frac{1}{e}\)</span>-ийн урвуу <span class="math inline">\(q(n) = (1-\frac{1}{n})^n\)</span> илэрхийлэл нь <span class="math inline">\(n\)</span> ихсэх тусам <span class="math inline">\(1/e \approx 0.3679\)</span>-ийн илүү сайн ойролцооллыг өгдөг.</li>
+<li><span class="math inline">\(q(100), q(200)\)</span>, ба <span class="math inline">\(q(300)\)</span>-г тооцоолж, ойролцоолол хэрхэн сайжирч байгааг ажигла. <span class="math inline">\(q(n)\)</span>-ийн задаргааг илэрхийл.</li>
+</ol></li>
+<li><span class="math inline">\((3x+2y)^{100}\)</span> дахь <span class="math inline">\(x^{60}y^{40}\)</span>-ийн коэффициентийг ол.</li>
+<li><span class="math inline">\((x-2y)^{200}\)</span> дахь <span class="math inline">\(x^{49}y^2\)</span>-ийн коэффициентийг ол.</li>
+<li><span class="math inline">\((2x^2+y^4)^{400}\)</span> дахь <span class="math inline">\(x^{20}y^{170}\)</span>-ийн коэффициентийг ол.</li>
+<li><span class="math inline">\((x^3-2y^2)^{300}\)</span> дахь <span class="math inline">\(x^{40}y^{40}\)</span>-ийн коэффициентийг ол.</li>
+<li><span class="math inline">\((x^2+y^2)^{30}\)</span> дахь <span class="math inline">\(x^{20}y^{50}\)</span>-ийн коэффициентийг ол.</li>
+<li><span class="math inline">\((x^2+y^2)^{50}\)</span> дахь <span class="math inline">\(x^{35}y^{15}\)</span>-ийн коэффициентийг ол.</li>
+<li><span class="math inline">\(a, b \in \mathbb{N}\)</span> байг. Тоглоом нь зоос шидэхээс бүрдэнэ. Хэрэв толгой гарвал <span class="math inline">\(a\)</span> доллар хожно. Хэрэв сүүл гарвал <span class="math inline">\(b\)</span> доллар хожигдоно. Зоосыг 10 удаа шидэх үед яг <span class="math inline">\(w\)</span> доллар хожих магадлал нь <span class="math inline">\((x^a+x^{-b})^{10}\)</span>-ийн задаргаа дахь <span class="math inline">\(x^w\)</span>-ийн коэффициентээр <span class="math inline">\(\frac{1}{2^{10}}\)</span> дахин үржүүлсэнтэй тэнцүү байна. Дараах тохиолдол бүрд 4 доллар хожих магадлалыг тодорхойл.
+<ol type="a">
+<li><span class="math inline">\(a=1, b=-1\)</span>.</li>
+<li><span class="math inline">\(a=2, b=-2\)</span>.</li>
+<li><span class="math inline">\(a=3, b=-1\)</span>.</li>
+</ol></li>
+<li><span class="math inline">\(a, b \in \mathbb{N}\)</span> байг. Вендинг машин 36¢ ба 7¢-ийн марк гаргадаг. Нэг хүн доллар хийгээд, 36¢-ийн марк авах эсвэл 7¢-ийн марк авахын тулд санамсаргүй байдлаар 12 удаа товчлуур дардаг. Хэрэв төгсгөлд нь тэрээр өөрчлөлтөө буцааж авах ба 12 удаа товчлуур дарах үед 36¢-ийн марк авах магадлал нь <span class="math inline">\((x^a+x^b)^{12}\)</span>-ийн задаргаа дахь <span class="math inline">\(x^s\)</span>-ийн коэффициентээр <span class="math inline">\(\frac{1}{2^{12}}\)</span> дахин үржүүлсэнтэй тэнцүү байна. Дараах тохиолдол бүрд 36¢-ийн марк авах магадлалыг тодорхойл.
+<ol type="a">
+<li><span class="math inline">\(s=68¢\)</span>.</li>
+<li><span class="math inline">\(s=60¢\)</span>.</li>
+</ol></li>
+</ol>
+<p>31-42-р дасгалуудад өгөгдсөн ижилтгэлүүдийг батлахад Биномын теоремыг ашигла.</p>
+<ol start="31" type="1">
+<li><span class="math inline">\(\sum_{i=0}^n \binom{n}{i} 8^i = 9^n\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=0}^n \binom{n}{i} 2^{n-i} 3^i = 5^n\)</span>.</li>
+<li>Арван хоёр тоо нь “<span class="math inline">\(0, \dots, 9, a, b, c\)</span>” гэсэн “цифрүүдийг” ашигладаг тул ийм тоонуудыг хэдэн “үсэг” (<span class="math inline">\(a\)</span> эсвэл <span class="math inline">\(b\)</span>)-тэй байгаагаар нь ангилах нь зүйн хэрэг юм. <span class="math inline">\(0 \le i \le n\)</span> байх <span class="math inline">\(n\)</span> урттай бүх тоонуудын хувьд яг <span class="math inline">\(i\)</span> “үсэг” агуулсан <span class="math inline">\(\binom{n}{i} 10^{n-i} 2^i\)</span> тоо байна. Бүх <span class="math inline">\(0 \le i \le n\)</span>-ийн хувьд нийлбэрийг авах үед <span class="math inline">\(n\)</span> урттай <span class="math inline">\(12^n\)</span> боломжит суурь 12 тоо байгааг бид харж байна. Илүү хялбар томьёог 12-оор өгсөн. <span class="math inline">\(\sum_{i=0}^n \binom{n}{i} 10^{n-i} 2^i = 12^n\)</span> гэдгийг батал.</li>
+<li>ДНХ (дезоксирибонуклеины хүчил) хэлхээ нь цитозин (C), гуанин (G), тимин (T), эсвэл аденин (A) зэрэг дөрвөн азотын суурьаас нэгээс бүрддэг. Шинжлэх ухаанчид суурь T-ийн тоогоор нуклеотидын хэлхээг ангилах тодорхой ангиллыг судалж байна. <span class="math inline">\(0 \le i \le n\)</span> байх <span class="math inline">\(n\)</span> урттай хэлхээний хувьд яг <span class="math inline">\(i\)</span> T агуулсан <span class="math inline">\(\binom{n}{i} 3^{n-i}\)</span> хэлхээ байна. Бүх <span class="math inline">\(0 \le i \le n\)</span>-ийн хувьд нийлбэрийг авах үед <span class="math inline">\(n\)</span> урттай <span class="math inline">\(4^n\)</span> боломжит ДНХ-ийн дараалал байгааг бид харж байна. Илүү хялбар томьёог <span class="math inline">\(4^n\)</span>-ээр өгсөн. <span class="math inline">\(\sum_{i=0}^n \binom{n}{i} 3^{n-i} = 4^n\)</span> гэдгийг батал.</li>
+<li><span class="math inline">\(\sum_{i=0}^n \binom{n}{i} 5^{n-i} 3^i = 2^{3n}\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=0}^n \binom{n}{i} 2^2 3^{n-i} = 7^n\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=0}^n (-1)^i \binom{n}{i} 3^{n-i} = 2^n\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=0}^n (-1)^i \binom{n}{i} 2^{n-i} 3^i = (-1)^n\)</span>.</li>
+<li><ol type="a">
+<li><span class="math inline">\(6 = 2+4\)</span> гэдгийг ашиглан <span class="math inline">\(\sum_{i=0}^n \binom{n}{i} 2^{n+i} = 6^n\)</span> гэдгийг батал.</li>
+<li>Энэ ижилтгэл нь <span class="math inline">\(2^n\)</span> дахин энгийн ямар ижилтгэл вэ?</li>
+</ol></li>
+<li><ol type="a">
+<li><span class="math inline">\(-2 = 2-4\)</span> гэдгийг ашиглан <span class="math inline">\(\sum_{i=0}^n (-1)^i \binom{n}{i} 2^{n+i} = (-2)^n\)</span> гэдгийг батал.</li>
+<li>Энэ ижилтгэл нь <span class="math inline">\(2^n\)</span> дахин энгийн ямар ижилтгэл вэ?</li>
+</ol></li>
+<li><span class="math inline">\(\sum_{i=0}^n (-1)^i \binom{n}{i} \binom{i}{3} = \binom{n}{3} 2^{n-3}\)</span>.</li>
+<li><span class="math inline">\(\sum_{i=0}^n \binom{n}{i} \binom{i}{2} = \binom{n}{2} 2^{n-2}\)</span>.</li>
+</ol>
+<p><em>43. <span class="math inline">\(a\)</span> ба <span class="math inline">\(b\)</span> нь хоёулаа тэг биш бүхэл тоо, <span class="math inline">\(n\)</span> нь эерэг бүхэл тоо байг. Хэрэв <span class="math inline">\(\gcd(a, b) = 1\)</span> бол <span class="math inline">\(\gcd(a, b^n) = 1\)</span> гэдгийг харуул. Заавар: Хэрэв <span class="math inline">\(by = 1 - ax\)</span> гэж бичиж чадвал <span class="math inline">\(b^n y^n\)</span>-ийг хэрхэн бичих вэ? </em>44. Теорем 4.4-ийг батал. Заавар: Дараах алхмуудыг дага. (1) Дараахыг ажигла. <span class="math display">\[ (i+1)^{m+1} - i^{m+1} = 1 + \left[ \sum_{j=1}^{m-1} \binom{m+1}{j} i^j \right] + (m+1)i^m. \qquad (4.23) \]</span> (2) (4.23) тэгшитгэлийн хоёр талыг <span class="math inline">\(i=1\)</span>-ээс <span class="math inline">\(n\)</span> хүртэл нийлбэрлэ, зүүн тал нь <span class="math inline">\(-1 + (n+1)^{m+1}\)</span>-г өгч, баруун тал нь <span class="math display">\[ n + \left[ \sum_{i=1}^n \left( \sum_{j=1}^{m-1} \binom{m+1}{j} i^j \right) \right] + (m+1) \sum_{i=1}^n i^m \]</span> -г өгдгийг ажигла. (3) <span class="math inline">\(\sum_{i=1}^n i^m\)</span>-ийн хувьд гарсан тэгшитгэлийг бод.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./4-5.html" class="pagination-link" aria-label="4.5 Хүчтэй индукц">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">4.5 Хүчтэй индукц</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./4-7.html" class="pagination-link" aria-label="4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД">
+        <span class="nav-page-text"><span class="chapter-title">4-Р БҮЛГИЙН ДАВТЛАГА БОДЛОГУУД</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
