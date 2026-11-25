@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./3-3.html" rel="next">
+<link href="./3-1.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3.html">Тооны онолын үндэс</a></li><li class="breadcrumb-item"><a href="./3-2.html"><span class="chapter-title">Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#том-анхны-тоонуудыг-компьютерээр-хайх-нь" id="toc-том-анхны-тоонуудыг-компьютерээр-хайх-нь" class="nav-link active" data-scroll-target="#том-анхны-тоонуудыг-компьютерээр-хайх-нь">Том анхны тоонуудыг компьютерээр хайх нь</a></li>
+  <li><a href="#бүхэл-тоог-хуваах-нь-integer-division" id="toc-бүхэл-тоог-хуваах-нь-integer-division" class="nav-link" data-scroll-target="#бүхэл-тоог-хуваах-нь-integer-division">Бүхэл тоог хуваах нь (Integer Division)</a></li>
+  <li><a href="#тоог-бүхэлчлэх-rounding-numbers" id="toc-тоог-бүхэлчлэх-rounding-numbers" class="nav-link" data-scroll-target="#тоог-бүхэлчлэх-rounding-numbers">Тоог бүхэлчлэх (Rounding Numbers)</a></li>
+  <li><a href="#bmod-ын-хэрэглээнүүд" id="toc-bmod-ын-хэрэглээнүүд" class="nav-link" data-scroll-target="#bmod-ын-хэрэглээнүүд"><span class="math inline">\(\bmod\)</span>-ын хэрэглээнүүд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3.html">Тооны онолын үндэс</a></li><li class="breadcrumb-item"><a href="./3-2.html"><span class="chapter-title">Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Энэ номд бид бүхэл тоон олонлогийг аксиоматик аргаар байгуулаагүй тул Хавсралт А-д жагсаасан үндсэн чанаруудыг баталгаагүйгээр хүлээн зөвшөөрч ашиглахыг зөвшөөрсөн билээ. Жишээлбэл, үүнд бүхэл тоонуудын нийлбэр ба үржвэр нь бүхэл тоо байдаг чанар багтана. Энэ хэсэгт бид тийм ч энгийн биш боловч туйлын чухал нэгэн чанарын зарим мөрдөлгөөг судлах бөгөөд энэ чанарыг мөн баталгаагүйгээр хүлээн зөвшөөрнө.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.4: Бүхэл тоонуудын Бүрэн эрэмбэлэгдэх зарчим (Well-Ordering Principle)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Сөрөг биш бүхэл тоонуудын хоосон биш дэд олонлог бүр хамгийн бага элементтэй байна.</p>
+</div>
+</div>
+<p>Харьцангуй энгийн жишээнүүдийг авч үзэх үед Бүрэн эрэмбэлэгдэх зарчим нь тийм ч тустай бус мэт санагдаж магадгүй юм.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(S = \{s : s = 15x + 25y, \text{ энд } x, y \in \mathbb{Z} \text{ ба } 15x + 25y &gt; 0\}\)</span> байг. Мэдээж <span class="math inline">\(S\)</span> нь сөрөг биш бүхэл тоонуудын хоосон биш дэд олонлог юм. Тиймээс Бүрэн эрэмбэлэгдэх зарчим нь <span class="math inline">\(S\)</span> олонлогт хамгийн бага элемент оршино гэдгийг батална. Гэсэн хэдий ч энэ тохиолдолд <span class="math inline">\(S\)</span>-ийн хамгийн бага элемент нь <span class="math inline">\(5\)</span> болохыг шууд харахад хэцүү биш. Нэгдүгээрт, <span class="math inline">\(5 = 15(2) + 25(-1)\)</span> тул <span class="math inline">\(5 \in S\)</span>. Хоёрдугаарт, <span class="math inline">\(S\)</span>-ийн дурын элементийг: <span class="math display">\[s = 15x + 25y = 5(3x + 5y)\]</span> буюу <span class="math inline">\(5\)</span>-ын хуваагдагч хэлбэрээр бичиж болно. <span class="math inline">\(1, 2, 3, 4\)</span> тоонуудын аль нь ч <span class="math inline">\(5\)</span>-д хуваагдахгүй тул <span class="math inline">\(5\)</span>-аас бага ямар ч элемент <span class="math inline">\(S\)</span> олонлогт байхгүй. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Бүрэн эрэмбэлэгдэх зарчмын хүч чадал нь илүү нарийн хэлбэрээр илэрдэг. Жишээлбэл, энэ зарчим нь <span class="math inline">\(2\)</span>-оос эхлэн бүх бүхэл тоо анхны хуваагчтай байдгийг батлах боломжийг бидэнд олгодог.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.5: Анхны хуваагч орших тухай
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(1\)</span>-ээс их бүхэл тоо бүр анхны хуваагчтай байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Эсрэгээс нь сэтгэе. <span class="math inline">\(S\)</span> нь анхны хуваагчгүй <span class="math inline">\(1\)</span>-ээс их бүхэл тоонуудын олонлог байг. Бидний таамаглалаар <span class="math inline">\(S\)</span> нь хоосон биш тул Бүрэн эрэмбэлэгдэх зарчим ёсоор түүнд хамгийн бага элемент <span class="math inline">\(n \in S\)</span> олдоно. <span class="math inline">\(n\)</span> нь өөрийгөө хуваадаг тул <span class="math inline">\(n\)</span> анхны тоо байх боломжгүй. Тиймээс <span class="math inline">\(n\)</span> нь зохиомол тоо байх ёстой. Иймд бид <span class="math inline">\(1 &lt; r &lt; n\)</span> ба <span class="math inline">\(1 &lt; s &lt; n\)</span> байх ямар нэгэн <span class="math inline">\(r\)</span> ба <span class="math inline">\(s\)</span> бүхэл тоонуудын хувьд <span class="math inline">\(n = rs\)</span> гэж бичиж чадна. (3.1-р хэсгийн Дасгал 31-ийг үзнэ үү.) Тухайлбал, <span class="math inline">\(r &gt; 1\)</span> бөгөөд <span class="math inline">\(r\)</span> нь <span class="math inline">\(S\)</span>-ийн хамгийн бага элемент болох <span class="math inline">\(n\)</span>-ээс бага байна. Иймд <span class="math inline">\(r \notin S\)</span>. Өөрөөр хэлбэл, <span class="math inline">\(r\)</span> нь ямар нэгэн анхны <span class="math inline">\(p\)</span> тоонд хуваагдах ёстой. <span class="math inline">\(t \in \mathbb{Z}\)</span> байх <span class="math inline">\(r = pt\)</span> гэж бичье. Тиймээс <span class="math inline">\(n = rs = pts\)</span> болно. Өөрөөр хэлбэл, <span class="math inline">\(n\)</span> нь <span class="math inline">\(p\)</span> анхны тоонд хуваагдана. Энэ нь зөрчил юм. <span class="math inline">\(\square\)</span></p>
+<p>Теорем 3.5-ын баталгаа нь эсрэгээс нь батлах аргын хүч чадлыг мөн харуулж байна. Энэ хүч чадал нь Теорем 3.5-ыг ашигласан дараагийн баталгаанд мөн тод харагдана.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Анхны тоо төгсгөлгүй олон бий.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Эсрэгээс нь сэтгэе. Тэгвэл төгсгөлөг тооны л анхны тоо байх ёстой тул бид бүх анхны тоонуудын бүрэн жагсаалтыг <span class="math inline">\(p_1, p_2, \dots, p_m\)</span> гэж бичиж чадна. <span class="math inline">\(n = p_1 \cdot p_2 \cdots p_m\)</span> үржвэрийг зохиож, <span class="math inline">\(n + 1\)</span> бүхэл тоог авч үзье. Теорем 3.5 ёсоор <span class="math inline">\(n + 1\)</span>-д ямар нэгэн анхны хуваагч орших ёстой. Иймд <span class="math inline">\(n + 1\)</span> нь бидний (бүрэн гэж үзсэн) жагсаалтын ямар нэгэн анхны тоонд, тухайлбал <span class="math inline">\(p_k\)</span>-д хуваагдах ёстой. Гэвч <span class="math inline">\(n\)</span> нь <span class="math inline">\(p_k\)</span>-д хуваагдана. Тиймээс <span class="math inline">\(n\)</span> ба <span class="math inline">\(n + 1\)</span> нь <span class="math inline">\(p_k\)</span> гэсэн ерөнхий анхны үржигдэхүүнтэй болж байна. Лемм 3.3 ёсоор <span class="math inline">\(\gcd(n, n + 1) = 1\)</span> байдаг тул энэ нь зөрчил юм. <span class="math inline">\(\square\)</span></p>
+<section id="том-анхны-тоонуудыг-компьютерээр-хайх-нь" class="level3">
+<h3 class="anchored" data-anchor-id="том-анхны-тоонуудыг-компьютерээр-хайх-нь">Том анхны тоонуудыг компьютерээр хайх нь</h3>
+<p>Анхны тоонуудын жагсаалтад төгсгөл байхгүй хэдий ч <em>мэдэгдэж буй</em> анхны тоонуудын жагсаалтад хязгаар бий. 2007 оны 1-р сарын байдлаар мэдэгдэж байсан хамгийн том анхны тоо нь <span class="math inline">\(2^{32582657} - 1\)</span> байв. Гэсэн хэдий ч тэрхүү утга хүртэлх бүх анхны тоог бүрэн тодорхойлж дуусаагүй байна. <span class="math inline">\(2^{32582657} - 1\)</span> анхны тоо нь аравтын бичлэгт <span class="math inline">\(9,808,358\)</span> оронтой бөгөөд Францын санваартан, математик сонирхогч Марен Мерсенний (1588–1648) нэрээр нэрлэгдсэн онцгой ангиллын анхны тооны жишээ юм.</p>
+<p>Ямар нэгэн бүхэл <span class="math inline">\(n\)</span> тооны хувьд <span class="math inline">\(2^n - 1\)</span> хэлбэртэй анхны тоог <strong>Мерсенний анхны тоо</strong> (Mersenne prime) гэнэ. Эхний таван Мерсенний анхны тоо нь <span class="math inline">\(n = 2, 3, 5, 7, 13\)</span> үеийн <span class="math inline">\(2^n - 1\)</span> тоонууд юм. Бид дасгалуудаас харах болно: <span class="math inline">\(2^n - 1\)</span> анхны тоо байхын тулд <span class="math inline">\(n\)</span> илтгэгч нь өөрөө анхны тоо байх ёстой. Гэвч <span class="math inline">\(2^{11} - 1 = 23 \cdot 89\)</span> зохиомол тоо тул энэ нөхцөл хүрэлцээтэй биш юм. <em>Great Internet Mersenne Prime Search</em> (GIMPS) нь илүү том Мерсенний анхны тоонуудыг олох дэлхий нийтийн хүчин чармайлт юм. GIMPS-ийн веб хуудаснаас (<code>http://www.mersenne.org/prime.htm</code>) программ хангамж татаж авснаар хүн бүр өөрийн хувийн компьютерээ энэхүү эрэл хайгуулд нэгтгэх боломжтой. Анхны арван сая оронтой анхны тоог олсон хүнд <em>Electronic Frontier Foundation</em> байгууллагаас $100,000 ам.долларын шагнал амласан байдаг.</p>
+</section>
+<section id="бүхэл-тоог-хуваах-нь-integer-division" class="level3">
+<h3 class="anchored" data-anchor-id="бүхэл-тоог-хуваах-нь-integer-division">Бүхэл тоог хуваах нь (Integer Division)</h3>
+<p>Бүрэн эрэмбэлэгдэх зарчмын өөр нэгэн ашигтай хэрэглээг авч үзэхийн тулд бид бага сургуульд заадаг бүхэл тооны хуваах үйлдлийг эргэн саная. Жишээлбэл, <span class="math inline">\(124 \div 9\)</span> бодлого нь: <span class="math display">\[
+\begin{array}{r}
+13 \\
+9 \overline{) \, 124} \\
+\underline{-\phantom{1}9\phantom{4}} \\
+34 \\
+\underline{-\phantom{1}27} \\
+7
+\end{array}
+\]</span> буюу <span class="math inline">\(13\)</span> ногдож <span class="math inline">\(7\)</span> үлдэнэ гэсэн хариу өгдөг. Үүнийг Хуваах алгоритмаар албан ёсоор томьёолдог.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.7: Хуваах алгоритм (Division Algorithm)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Өгөгдсөн дурын бүхэл <span class="math inline">\(n\)</span> тоо болон дурын эерэг бүхэл <span class="math inline">\(d\)</span> тооны хувьд дараах нөхцөлүүдийг хангах цор ганц <span class="math inline">\(q\)</span> ба <span class="math inline">\(r\)</span> бүхэл тоонууд оршино:</p>
+<p><strong>(i)</strong> <span class="math inline">\(n = dq + r\)</span>, мөн <span class="math inline">\(\quad\)</span> <strong>(ii)</strong> <span class="math inline">\(0 \le r &lt; d\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 3.8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Теорем 3.7-д <span class="math inline">\(n\)</span>-ийг <span class="math inline">\(d\)</span>-д хуваахад гарах <span class="math inline">\(q\)</span>-г <strong>ногдвор</strong> (quotient), <span class="math inline">\(r\)</span>-ийг <strong>үлдэгдэл</strong> (remainder) гэж нэрлэнэ. Бид мөн дараах байдлаар бичнэ: <span class="math display">\[q = n \operatorname{div} d \quad \text{ба} \quad r = n \bmod d.\]</span></p>
+</div>
+</div>
+<p>Ихэнх программчлалын хэлэнд <span class="math inline">\(\operatorname{div}\)</span> болон <span class="math inline">\(\bmod\)</span> операторууд ямар нэгэн хэлбэрээр байдаг. <em>Mathematica</em> программд Хуваах алгоритмаас гарах <span class="math inline">\(q\)</span> ба <span class="math inline">\(r\)</span> утгуудыг харгалзан <code>Quotient[n,d]</code> болон <code>Mod[n,d]</code> функцүүд буцаадаг. C++ хэлэнд <code>n/d</code> ба <code>n%d</code> ашиглагддаг бол <em>Maple</em> программд <code>iquo(n,d)</code> болон <code>irem(n,d)</code> функцүүдийг ашиглаж болно. Гэсэн хэдий ч <span class="math inline">\(n\)</span> сөрөг байх үед эдгээр операторуудын ажиллагаа нь харгалзан <span class="math inline">\(\operatorname{div}\)</span> болон <span class="math inline">\(\bmod\)</span>-той үргэлж таардаггүй. Энэ тохиолдолд <code>n%d</code> ба <code>irem(n,d)</code> нь сөрөг утга авч болно. Иймд тооцоололд ашиглахдаа тэдгээрийн нарийн тодорхойлолтыг сайтар ойлгох шаардлагатай.</p>
+<p>Теорем 3.7-г батлахаасаа өмнө бид хэдэн жишээ авч үзье.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>(а)</strong> Хэрэв <span class="math inline">\(n = 124\)</span> ба <span class="math inline">\(d = 9\)</span> бол <span class="math inline">\(q = 13\)</span> ба <span class="math inline">\(r = 7\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(124 = 9(13) + 7\)</span>. Тиймээс <span class="math inline">\(124 \operatorname{div} 9 = 13\)</span> ба <span class="math inline">\(124 \bmod 9 = 7\)</span>.</p>
+<p><strong>(б)</strong> Хэрэв <span class="math inline">\(n = 60\)</span> ба <span class="math inline">\(d = 5\)</span> бол <span class="math inline">\(q = 12\)</span> ба <span class="math inline">\(r = 0\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(60 = 5(12) + 0\)</span>. Тиймээс <span class="math inline">\(60 \operatorname{div} 5 = 12\)</span> ба <span class="math inline">\(60 \bmod 5 = 0\)</span>.</p>
+<p><strong>(в)</strong> Хэрэв <span class="math inline">\(n = -53\)</span> ба <span class="math inline">\(d = 7\)</span> бол <span class="math inline">\(q = -8\)</span> ба <span class="math inline">\(r = 3\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(-53 = 7(-8) + 3\)</span>. Тиймээс <span class="math inline">\(-53 \operatorname{div} 7 = -8\)</span> ба <span class="math inline">\(-53 \bmod 7 = 3\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p><strong>Теорем 3.7-ийн баталгаа.</strong> <span class="math inline">\(q\)</span> ба <span class="math inline">\(r\)</span> оршин байх болон цор ганц байхыг хоёуланг нь харуулах ёстой. Эхлээд оршин байхыг авч үзье.</p>
+<p><span class="math inline">\(S = \{s : s = n - dk, \text{ энд } k \in \mathbb{Z} \text{ ба } n - dk \ge 0\}\)</span> байг. Бид <span class="math inline">\(S\)</span> олонлогийг хоосон биш гэж баталж чадна: хэрэв <span class="math inline">\(n \ge 0\)</span> бол <span class="math inline">\(n - d \cdot 0 = n\)</span> нь <span class="math inline">\(S\)</span>-д оршино; хэрэв <span class="math inline">\(n &lt; 0\)</span> бол <span class="math inline">\(n - dn = (d - 1)(-n)\)</span> нь <span class="math inline">\(S\)</span>-д оршино. <span class="math inline">\(S\)</span> нь хоосон биш тул Бүрэн эрэмбэлэгдэх зарчим ёсоор түүнд хамгийн бага элемент <span class="math inline">\(r\)</span> олдоно. Иймд ямар нэгэн <span class="math inline">\(q \in \mathbb{Z}\)</span> тооны хувьд <span class="math inline">\(r = n - dq\)</span> болно. Бид одоо <span class="math inline">\(q\)</span> ба <span class="math inline">\(r\)</span> нь шаардлагатай чанаруудыг хангаж байгааг харуулах хэрэгтэй. Мэдээж <span class="math inline">\(n = dq + r\)</span> ба <span class="math inline">\(r \ge 0\)</span> биелнэ. Иймд <span class="math inline">\(r &lt; d\)</span> гэдгийг харуулах л үлдлээ. Гэвч хэрэв <span class="math inline">\(r \ge d\)</span> бол <span class="math inline">\(n - d(q + 1) = n - dq - d = r - d \ge 0\)</span> болно. Энэ нь <span class="math inline">\(r - d\)</span>-г <span class="math inline">\(S\)</span> олонлогийн <span class="math inline">\(r\)</span>-ээс бага элемент болгох бөгөөд <span class="math inline">\(r\)</span> нь <span class="math inline">\(S\)</span>-ийн хамгийн бага элемент учраас энэ нь боломжгүй юм. <span class="math inline">\(r \ge d\)</span> гэсэн таамаглал зөрчилд хүргэсэн тул бид <span class="math inline">\(0 \le r &lt; d\)</span> гэж дүгнэнэ.</p>
+<p>Цор ганц байхыг батлахын тулд <span class="math inline">\(0 \le r_1 &lt; d\)</span> ба <span class="math inline">\(0 \le r_2 &lt; d\)</span> байх үед <span class="math inline">\(n = dq_1 + r_1 = dq_2 + r_2\)</span> гэж үзье. Өөрөөр хэлбэл, <span class="math inline">\((q_1, r_1)\)</span> ба <span class="math inline">\((q_2, r_2)\)</span> хосууд нь хоёулаа <span class="math inline">\(n\)</span>-ийг <span class="math inline">\(d\)</span>-д хуваасны үр дүн гэе. Ерөнхий чанарыг алдагдуулахгүйгээр <span class="math inline">\(r_2 \ge r_1\)</span> гэж үзэж болно. Өөрөөр хэлбэл, бид хосуудаа <span class="math inline">\((q_2, r_2)\)</span>-ийн хоёр дахь координат нь <span class="math inline">\((q_1, r_1)\)</span>-ийнхээс багагүй байхаар нэрлэж сонгож чадна. <span class="math inline">\(d(q_1 - q_2) = dq_1 - dq_2 = r_2 - r_1\)</span> тул <span class="math inline">\(d \mid (r_2 - r_1)\)</span> байна. Хэрэв <span class="math inline">\(r_2 \neq r_1\)</span> бол <span class="math inline">\(r_2 - r_1 &gt; 0\)</span> болно. Тэгвэл Теорем 3.1 ёсоор <span class="math inline">\(d \le r_2 - r_1 \le r_2\)</span> болох бөгөөд энэ нь <span class="math inline">\(r_2 &lt; d\)</span> гэсэн нөхцөлтэй зөрчилдөнө. Иймд <span class="math inline">\(r_2 = r_1\)</span> байх ёстой. Энэ нь <span class="math inline">\(dq_2 = dq_1\)</span> болоход хүргэх ба улмаар <span class="math inline">\(q_2 = q_1\)</span> болно. <span class="math inline">\(\square\)</span></p>
+<p>Хуваах алгоритм ёсоор <span class="math inline">\(n\)</span> бүхэл тоог эерэг <span class="math inline">\(d\)</span> бүхэл тоонд хуваахад гарах боломжит үлдэгдлүүд нь зөвхөн <span class="math inline">\(0, 1, \dots, d - 1\)</span> байна. Тухайлбал, <span class="math inline">\(d = 2\)</span> үед боломжит үлдэгдлүүд нь зөвхөн <span class="math inline">\(0\)</span> ба <span class="math inline">\(1\)</span> байна. Иймд Тодорхойлолт 3.1 нь бүхэл тоо <span class="math inline">\(2\)</span>-т хуваагддаггүй бол сондгой байна гэдгийг илэрхийлж байгаа нь одоо харагдаж байна.</p>
+<p>Ерөнхий тохиолдолд, Хуваах алгоритм нь <span class="math inline">\(d\)</span> бүхэл тоо <span class="math inline">\(n\)</span> бүхэл тоог хуваадаггүй тухай батламжуудыг батлах аргыг олгодог. Ийм чанар нь <span class="math inline">\(n \bmod d\)</span> нь тэгээс ялгаатай байх баримтаар тодорхойлогддог.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Дурын бүхэл <span class="math inline">\(n\)</span> тооны хувьд <span class="math inline">\(n^2 - 2\)</span> нь <span class="math inline">\(5\)</span>-д хуваагдахгүй болохыг харуул.</p>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(n\)</span>-ийг дурын бүхэл тоо гэе. Хуваах алгоритм ёсоор <span class="math inline">\(n\)</span> нь ямар нэгэн бүхэл <span class="math inline">\(k\)</span> тооны хувьд: <span class="math display">\[5k, \, 5k + 1, \, 5k + 2, \, 5k + 3, \quad \text{эсвэл} \quad 5k + 4\]</span> гэсэн хэлбэрүүдийн аль нэгийг авах ёстой. Өөрөөр хэлбэл, <span class="math inline">\(n\)</span>-ийг <span class="math inline">\(5\)</span>-д хуваахад <span class="math inline">\(0, 1, 2, 3\)</span>, эсвэл <span class="math inline">\(4\)</span> үлдэнэ. Энд <span class="math inline">\(k\)</span>-г ногдворыг тэмдэглэхэд ашиглаж байна. Бид <span class="math inline">\(n\)</span>-ийн боломжит хэлбэр бүрийг авч үзье.</p>
+<ul>
+<li><p><em>Тохиолдол 0:</em> Ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n = 5k\)</span>. <span class="math display">\[
+\begin{aligned}
+n^2 - 2 &amp;= 25k^2 - 2 \\
+        &amp;= 25k^2 - 5 + 3 \\
+        &amp;= 5(5k^2 - 1) + 3
+\end{aligned}
+\]</span> болохыг ажиглая. Өөрөөр хэлбэл, <span class="math inline">\((n^2 - 2) \bmod 5 = 3\)</span> бөгөөд <span class="math inline">\(0\)</span> биш.</p></li>
+<li><p><em>Тохиолдол 1:</em> Ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n = 5k + 1\)</span>. <span class="math display">\[
+\begin{aligned}
+n^2 - 2 &amp;= 25k^2 + 10k + 1 - 2 \\
+        &amp;= 25k^2 + 10k - 5 + 4 \\
+        &amp;= 5(5k^2 + 2k - 1) + 4.
+\end{aligned}
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\((n^2 - 2) \bmod 5 = 4\)</span> бөгөөд <span class="math inline">\(0\)</span> биш.</p></li>
+<li><p><em>Тохиолдол 2:</em> Ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n = 5k + 2\)</span>. <span class="math display">\[
+\begin{aligned}
+n^2 - 2 &amp;= 25k^2 + 20k + 4 - 2 \\
+        &amp;= 25k^2 + 20k + 2 \\
+        &amp;= 5(5k^2 + 4k) + 2.
+\end{aligned}
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\((n^2 - 2) \bmod 5 = 2\)</span> бөгөөд <span class="math inline">\(0\)</span> биш.</p></li>
+<li><p><em>Тохиолдол 3:</em> Ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n = 5k + 3\)</span>. <span class="math display">\[
+\begin{aligned}
+n^2 - 2 &amp;= 25k^2 + 30k + 9 - 2 \\
+        &amp;= 25k^2 + 30k + 5 + 2 \\
+        &amp;= 5(5k^2 + 6k + 1) + 2.
+\end{aligned}
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\((n^2 - 2) \bmod 5 = 2\)</span> бөгөөд <span class="math inline">\(0\)</span> биш.</p></li>
+<li><p><em>Тохиолдол 4:</em> Ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n = 5k + 4\)</span>. <span class="math display">\[
+\begin{aligned}
+n^2 - 2 &amp;= 25k^2 + 40k + 16 - 2 \\
+        &amp;= 25k^2 + 40k + 10 + 4 \\
+        &amp;= 5(5k^2 + 8k + 2) + 4.
+\end{aligned}
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\((n^2 - 2) \bmod 5 = 4\)</span> бөгөөд <span class="math inline">\(0\)</span> биш.</p></li>
+</ul>
+<p>Тохиолдол бүрд бид <span class="math inline">\(5 \nmid (n^2 - 2)\)</span> болохыг харлаа. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<p>Жишээ 3.12-т авсан аргыг мөн аливаа илэрхийлэл <span class="math inline">\(2\)</span>-т хуваагдахгүй болохыг харуулахад ашиглаж болно.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.13
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n^2 + n - 1\)</span> сондгой болохыг харуул.</p>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(n \in \mathbb{Z}\)</span> байг. Хуваах алгоритм ёсоор <span class="math inline">\(n\)</span> нь ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> тооны хувьд <span class="math inline">\(2k\)</span> эсвэл <span class="math inline">\(2k + 1\)</span> хэлбэртэй байх ёстой. (Өөрөөр хэлбэл, <span class="math inline">\(n\)</span> тэгш эсвэл сондгой байна.)</p>
+<ul>
+<li><p><em>Тохиолдол 0:</em> Ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n = 2k\)</span>. <span class="math display">\[
+\begin{aligned}
+n^2 + n - 1 &amp;= 4k^2 + 2k - 1 \\
+            &amp;= 4k^2 + 2k - 2 + 1 \\
+            &amp;= 2(2k^2 + k - 1) + 1.
+\end{aligned}
+\]</span> Иймд <span class="math inline">\((n^2 + n - 1) \bmod 2 = 1\)</span> бөгөөд <span class="math inline">\(0\)</span> биш. (Өөрөөр хэлбэл, <span class="math inline">\(n^2 + n - 1\)</span> сондгой.)</p></li>
+<li><p><em>Тохиолдол 1:</em> Ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n = 2k + 1\)</span>. <span class="math display">\[
+\begin{aligned}
+n^2 + n - 1 &amp;= 4k^2 + 4k + 1 + 2k + 1 - 1 \\
+            &amp;= 4k^2 + 6k + 1 \\
+            &amp;= 2(2k^2 + 3k) + 1.
+\end{aligned}
+\]</span> Иймд <span class="math inline">\((n^2 + n - 1) \bmod 2 = 1\)</span> бөгөөд <span class="math inline">\(0\)</span> биш. (Өөрөөр хэлбэл, <span class="math inline">\(n^2 + n - 1\)</span> сондгой.)</p></li>
+</ul>
+<p>Хоёр тохиолдолд хоёуланд нь <span class="math inline">\(n^2 + n - 1\)</span> сондгой байна. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+</section>
+<section id="тоог-бүхэлчлэх-rounding-numbers" class="level3">
+<h3 class="anchored" data-anchor-id="тоог-бүхэлчлэх-rounding-numbers">Тоог бүхэлчлэх (Rounding Numbers)</h3>
+<p>Бид дурын бодит тооны бутархай хэсгийг орхих хоёр аргыг авч үзье.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 3.9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(x\)</span> нь дурын бодит тоо байг.</p>
+<p><strong>(а)</strong> <span class="math inline">\(\lfloor x \rfloor\)</span> гэж тэмдэглэгдэх <span class="math inline">\(x\)</span>-ийн <strong>доод бүхэл</strong> (floor) нь <span class="math inline">\(n \le x\)</span> нөхцөлийг хангах хамгийн их бүхэл <span class="math inline">\(n\)</span> тоо юм.</p>
+<p><strong>(б)</strong> <span class="math inline">\(\lceil x \rceil\)</span> гэж тэмдэглэгдэх <span class="math inline">\(x\)</span>-ийн <strong>дээд бүхэл</strong> (ceiling) нь <span class="math inline">\(x \le n\)</span> нөхцөлийг хангах хамгийн бага бүхэл <span class="math inline">\(n\)</span> тоо юм.</p>
+</div>
+</div>
+<p><em>Mathematica</em> программд Тодорхойлолт 3.9 дэх функцүүдийг <code>Floor</code> ба <code>Ceiling</code> гэж тэмдэглэдэг. C++ болон <em>Maple</em> хэлэнд эдгээр нь <code>floor</code> ба <code>ceil</code> байна.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>(а)</strong> <span class="math inline">\(\lfloor 3.2 \rfloor = 3.\)</span> <span class="math inline">\(\qquad\)</span> <strong>(д)</strong> <span class="math inline">\(\lceil 3.2 \rceil = 4.\)</span></li>
+<li><strong>(б)</strong> <span class="math inline">\(\lfloor 5.8 \rfloor = 5.\)</span> <span class="math inline">\(\qquad\)</span> <strong>(е)</strong> <span class="math inline">\(\lceil 5.8 \rceil = 6.\)</span></li>
+<li><strong>(в)</strong> <span class="math inline">\(\lfloor -4.9 \rfloor = -5.\)</span> <span class="math inline">\(\quad\)</span> <strong>(ё)</strong> <span class="math inline">\(\lceil -4.9 \rceil = -4.\)</span></li>
+<li><strong>(г)</strong> <span class="math inline">\(\lfloor -6.3 \rfloor = -7.\)</span> <span class="math inline">\(\quad\)</span> <strong>(ж)</strong> <span class="math inline">\(\lceil -6.3 \rceil = -6.\)</span> <span class="math inline">\(\blacksquare\)</span></li>
+</ul>
+</div>
+</div>
+<p>Дараах теоремд өгөгдсөн доод болон дээд бүхлийн тодорхойломжууд нь тооцоололд шалгах гурван зүйл бүхий хяналтын жагсаалтыг олгодог. Теорем 3.8-ын баталгааг дасгалд үлдээв.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(x\)</span> нь дурын бодит тоо байг.</p>
+<p><strong>(а)</strong> <span class="math inline">\(\lfloor x \rfloor\)</span> нь дараах нөхцөлүүдийг хангах цор ганц <span class="math inline">\(n\)</span> утга мөн: <strong>(i)</strong> <span class="math inline">\(n \in \mathbb{Z}\)</span>, <strong>(ii)</strong> <span class="math inline">\(n \le x\)</span>, мөн <strong>(iii)</strong> <span class="math inline">\(x &lt; n + 1\)</span>.</p>
+<p><strong>(б)</strong> <span class="math inline">\(\lceil x \rceil\)</span> нь дараах нөхцөлүүдийг хангах цор ганц <span class="math inline">\(n\)</span> утга мөн: <strong>(i)</strong> <span class="math inline">\(n \in \mathbb{Z}\)</span>, <strong>(ii)</strong> <span class="math inline">\(x \le n\)</span>, мөн <strong>(iii)</strong> <span class="math inline">\(n - 1 &lt; x\)</span>.</p>
+</div>
+</div>
+<p>Бид <span class="math inline">\(\lfloor \frac{n}{2} \rfloor\)</span>-ийн дараах томьёог батлахдаа Теорем 3.8-ыг ашиглана.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\forall n \in \mathbb{Z}, \quad \left\lfloor \frac{n}{2} \right\rfloor = \begin{cases} \frac{n}{2} &amp; \text{хэрэв } n \text{ тэгш бол,} \\ \frac{n - 1}{2} &amp; \text{хэрэв } n \text{ сондгой бол.} \end{cases}\]</span></p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(n \in \mathbb{Z}\)</span> байг.</p>
+<ul>
+<li><em>Тохиолдол 1: <span class="math inline">\(n\)</span> тэгш.</em> Тэгвэл ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> тооны хувьд <span class="math inline">\(n = 2k\)</span> болно. Энд <span class="math inline">\(k = \frac{n}{2}\)</span> болохыг тэмдэглэе. Тэгвэл бидэнд <span class="math inline">\(k \in \mathbb{Z}\)</span>, <span class="math inline">\(k \le \frac{n}{2}\)</span> (үнэндээ тэнцүү), мөн <span class="math inline">\(\frac{n}{2} &lt; k + 1\)</span> биелнэ. Энэ тохиолдолд Теорем 3.8 ёсоор <span class="math inline">\(\lfloor \frac{n}{2} \rfloor = k = \frac{n}{2}\)</span> болно.</li>
+<li><em>Тохиолдол 2: <span class="math inline">\(n\)</span> сондгой.</em> Тэгвэл ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> тооны хувьд <span class="math inline">\(n = 2k + 1\)</span> болно. Энд <span class="math inline">\(k = \frac{n - 1}{2}\)</span> болохыг тэмдэглэе. Тэгвэл бидэнд <span class="math inline">\(k \in \mathbb{Z}\)</span>, <span class="math inline">\(k \le \frac{n}{2}\)</span>, мөн <span class="math inline">\(\frac{n}{2} &lt; k + 1\)</span> биелнэ. (Эдгээрийг шалгана уу.) Энэ тохиолдолд Теорем 3.8 ёсоор <span class="math inline">\(\lfloor \frac{n}{2} \rfloor = k = \frac{n - 1}{2}\)</span> болно. <span class="math inline">\(\square\)</span></li>
+</ul>
+<p>Хүлээгдэж байсанчлан <span class="math inline">\(\lceil \frac{n}{2} \rceil\)</span>-ийн хувьд үүнтэй ижил төстэй томьёо бий.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\forall n \in \mathbb{Z}, \quad \left\lceil \frac{n}{2} \right\rceil = \begin{cases} \frac{n}{2} &amp; \text{хэрэв } n \text{ тэгш бол,} \\ \frac{n + 1}{2} &amp; \text{хэрэв } n \text{ сондгой бол.} \end{cases}\]</span></p>
+</div>
+</div>
+<p>Теорем 3.9 ба 3.10-ын үр дүнгүүдийг нэгтгэснээр дараах томьёо гарна.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Мөрдөлгөө 3.11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[\forall n \in \mathbb{Z}, \quad \left\lfloor \frac{n}{2} \right\rfloor + \left\lceil \frac{n}{2} \right\rceil = n.\]</span></p>
+</div>
+</div>
+<p><strong>Мөрдөлгөө</strong> (corollary) гэдэг нь теорем юм. Гэсэн хэдий ч өмнөх теорем эсвэл теоремуудаас харьцангуй хялбархан мөрдөж гардаг теоремыг ихэвчлэн <em>мөрдөлгөө</em> гэж нэрлэдэг. Теорем 3.10 болон Мөрдөлгөө 3.11-ийн баталгааг дасгалд үлдээв.</p>
+<p>Доод болон дээд бүхэл функцүүдийн “сайн ааштай” чанарыг хэт үнэлэх хандлага гардаг. Дараах жишээ нь зарим буруу ойлголтыг арилгахад туслах ёстой.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.15
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\forall x, y \in \mathbb{R}, \, \lfloor x + y \rfloor = \lfloor x \rfloor + \lfloor y \rfloor\)</span> өгүүлбэрийг няцаа.</p>
+<p><strong>Няцаах жишээ.</strong> <span class="math inline">\(x = 1.5\)</span> ба <span class="math inline">\(y = 2.5\)</span> гэж авъя. Тэгвэл <span class="math inline">\(x + y = 4\)</span> болно. <span class="math inline">\(\lfloor x + y \rfloor = 4\)</span> байхад <span class="math inline">\(\lfloor x \rfloor + \lfloor y \rfloor = 1 + 2 = 3\)</span> болохыг ажиглая. Тиймээс <span class="math inline">\(\lfloor x + y \rfloor \neq \lfloor x \rfloor + \lfloor y \rfloor\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Доод бүхэл функц болон <span class="math inline">\(\div\)</span> үйлдлийн хооронд маш сайхан холбоо байдаг.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Дурын бүхэл <span class="math inline">\(n\)</span> болон эерэг бүхэл <span class="math inline">\(d\)</span> тоо өгөгдсөн үед <span class="math inline">\(\left\lfloor \frac{n}{d} \right\rfloor = n \operatorname{div} d\)</span> байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(n, d \in \mathbb{Z}\)</span> ба <span class="math inline">\(d &gt; 0\)</span> байг. Хуваах алгоритм ёсоор бид <span class="math inline">\(q = n \operatorname{div} d\)</span> ба <span class="math inline">\(0 \le r &lt; d\)</span> байхаар <span class="math inline">\(n = dq + r\)</span> гэж бичиж чадна. <span class="math inline">\(q \in \mathbb{Z}\)</span>, <span class="math inline">\(q = \frac{n}{d} - \frac{r}{d} \le \frac{n}{d}\)</span>, мөн <span class="math inline">\(q + 1 = \frac{n}{d} + \frac{d - r}{d} &gt; \frac{n}{d}\)</span> болохыг ажиглая. Теорем 3.8 ёсоор <span class="math inline">\(\left\lfloor \frac{n}{d} \right\rfloor = q = n \operatorname{div} d\)</span> болно. <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="bmod-ын-хэрэглээнүүд" class="level3">
+<h3 class="anchored"><span class="math inline">\(\bmod\)</span>-ын хэрэглээнүүд</h3>
+<p>Таних дугааруудын төгсгөлд ихэвчлэн үлдэгдэл олох <span class="math inline">\(\bmod\)</span> функцээр тодорхойлогддог <strong>шалгах цифр</strong> (check digit)-ийг залгадаг.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.16 (Шалгах цифрийн томьёонууд)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>(а)</strong> Борлуулалтад гарч буй бүх бараа бүтээгдэхүүнд 12 оронтой <strong>Бүтээгдэхүүний түгээмэл код</strong> (Universal Product Code — UPC) дугаар зүүдэг: <span class="math display">\[d_1 \quad d_2 \, d_3 \, d_4 \, d_5 \, d_6 \quad d_7 \, d_8 \, d_9 \, d_{10} \, d_{11} \quad d_{12}\]</span> Сүүлийн <span class="math inline">\(d_{12}\)</span> цифр нь шалгах цифр бөгөөд эхний арван нэгэн таних цифрээс дараах шаардлагын дагуу тодорхойлогдоно: <span class="math display">\[[3(d_1 + d_3 + d_5 + d_7 + d_9 + d_{11}) + d_2 + d_4 + d_6 + d_8 + d_{10} + d_{12}] \bmod 10 = 0.\]</span> Жишээлбэл, нэг шил <em>Gatorade</em> ундааны UPC дугаар нь <code>0 52000 33831 7</code> бөгөөд үнэхээр: <span class="math display">\[[3(0 + 2 + 0 + 3 + 8 + 1) + 5 + 0 + 0 + 3 + 3 + 7] = 60 \quad \text{ба} \quad 60 \bmod 10 = 0.\]</span></p>
+<p><strong>(б)</strong> Хэвлэгдсэн ном бүрд <strong>Олон улсын стандарт номын дугаар</strong> (ISBN) олгодог: <span class="math display">\[d_1 - d_2 \, d_3 \, d_4 \, d_5 \, d_6 \, d_7 \, d_8 \, d_9 - d_{10}\]</span> Сүүлийн <span class="math inline">\(d_{10}\)</span> цифр нь шалгах цифр бөгөөд дараах шаардлагаар тодорхойлогдоно: <span class="math display">\[[10d_1 + 9d_2 + 8d_3 + 7d_4 + 6d_5 + 5d_6 + 4d_7 + 3d_8 + 2d_9 + d_{10}] \bmod 11 = 0.\]</span> Хэрэв <span class="math inline">\(d_{10}\)</span>-ийн утга арав байх ёстой бол тэр цифрийн оронд <code>X</code> тэмдэгтийг ашиглана. Жишээлбэл, Х. А. Рей-ийн <em>Сониуч Жорж</em> номын ISBN нь <code>0-39515023-X</code> бөгөөд үнэхээр: <span class="math display">\[[10 \cdot 0 + 9 \cdot 3 + 8 \cdot 9 + 7 \cdot 5 + 6 \cdot 1 + 5 \cdot 5 + 4 \cdot 0 + 3 \cdot 2 + 2 \cdot 3 + 10] = 187\]</span> ба <span class="math inline">\(187 \bmod 11 = 0\)</span> байна. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Таних дугаарыг буруу уншсан эсвэл буруу оруулсан эсэхийг илрүүлэхийн тулд шалгах цифрийг ашиглаж болно.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.17 (Шалгах цифрээр алдаа илрүүлэх нь)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>(а)</strong> Хэрэв <em>Gatorade</em>-ийн UPC дугаарыг санамсаргүйгээр <code>0 25000 33831 7</code> гэж уншуулбал: <span class="math display">\[[3(0 + 5 + 0 + 3 + 8 + 1) + 2 + 0 + 0 + 3 + 3 + 7] = 65\]</span> болох бөгөөд <span class="math inline">\(65 \bmod 10 = 5 \neq 0\)</span> тул алдаа гарсныг харуулна.</p>
+<p><strong>(б)</strong> Хэрэв <em>Сониуч Жорж</em> номын ISBN-ийг санамсаргүйгээр <code>0-36515023-X</code> гэж шивбэл: <span class="math display">\[[10 \cdot 0 + 9 \cdot 3 + 8 \cdot 6 + 7 \cdot 5 + 6 \cdot 1 + 5 \cdot 5 + 4 \cdot 0 + 3 \cdot 2 + 2 \cdot 3 + 10] = 163\]</span> болох бөгөөд <span class="math inline">\(163 \bmod 11 = 9 \neq 0\)</span> тул алдаа гарсныг харуулна. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Шалгах цифртэй байх нь бүх алдааг илрүүлэх баталгаа болохгүй ч ихэнх түгээмэл алдааг нийтлэг байдлаар барьж чаддаг. Таних дугаарт гарч болох зарим энгийн алдаанууд илрэхгүй үлдэх тохиолдлуудыг дасгалуудад судалсан болно.</p>
+<p>Нэмэлт шалгах цифрүүд нь алдааг барихад тусалдаг өөр нэгэн хэрэглээ бол <strong>хоёртын шугаман кодууд</strong> (binary linear codes) юм. Эдгээр нь алдаа гарч болзошгүй үед мессеж дамжуулахад ашиглагддаг схемүүд бөгөөд алдааг илрүүлээд зогсохгүй зарим алдааг засварлаж чаддаг. Ийм системийг НАСА сансрын уудамд мессеж илгээх үед гарсан алдааг багасгахад, мөн CD бичигч төхөөрөмжүүд зураас болон бусад согогоос үүдэлтэй алдааг даван туулахад ашигладаг.</p>
+<p>Бидний энэ номд авч үзэх хоёртын шугаман кодууд нь дараах байдлаар байгуулагддаг. <span class="math inline">\(b_1 b_2 \dots b_k\)</span> хоёртын тэмдэгт мөрөөр кодлогдсон <strong>мессеж</strong> (message) өгөгдсөн үед хоёртын шугаман код нь мессежийн зарим хоёртын цифрүүдийн нийлбэрээр тодорхойлогддог <strong>тэгш-сондгойг шалгах цифрүүд</strong> (parity check digits) хэмээх нэмэлт цифрүүдийг залгаснаар <span class="math inline">\(b_1 b_2 \dots b_k b_{k+1} \dots b_n\)</span> <strong>кодын үг</strong> (code word)-ийг тодорхойлдог.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.18 (Хоёртын шугаман код байгуулах нь)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(b_1 b_2 b_3\)</span> мессежийг дараах томьёонуудын тусламжтайгаар шалгах цифрүүдийг тооцоолон <span class="math inline">\(b_1 b_2 b_3 b_4 b_5 b_6\)</span> кодын үг рүү хөрвүүлнэ: <span class="math display">\[
+\begin{aligned}
+b_4 &amp;= (b_1 + b_2) \bmod 2 \\
+b_5 &amp;= (b_1 + b_3) \bmod 2 \\
+b_6 &amp;= (b_1 + b_2 + b_3) \bmod 2
+\end{aligned}
+\]</span> Гурван оронтой найман боломжит хоёртын мессежээр тодорхойлогдох кодын үгсийг Хүснэгт 3.1-д харуулав.</p>
+<div id="tbl-3-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.1: Гурван оронтой мессежүүдэд зориулсан хоёртын шугаман код
+</figcaption>
+<div aria-describedby="tbl-3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Мессеж</th>
+<th style="text-align: center;">Кодын үг</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>000</code></td>
+<td style="text-align: center;"><code>000000</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>001</code></td>
+<td style="text-align: center;"><code>001011</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>010</code></td>
+<td style="text-align: center;"><code>010101</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>011</code></td>
+<td style="text-align: center;"><code>011110</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>100</code></td>
+<td style="text-align: center;"><code>100111</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>101</code></td>
+<td style="text-align: center;"><code>101100</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>110</code></td>
+<td style="text-align: center;"><code>110010</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>111</code></td>
+<td style="text-align: center;"><code>111001</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</div>
+</div>
+<p>Хоёртын шугаман кодын <strong>жин</strong> (weight) <span class="math inline">\(w\)</span> гэдэг нь тэг биш кодын үгэнд орж буй нэгүүдийн хамгийн цөөн тоо юм. Жишээлбэл, Хүснэгт 3.1-д харуулсан кодын жин <span class="math inline">\(w = 3\)</span> байна. Хэрэв хүлээн авсан <span class="math inline">\(c_1 c_2 \cdots c_n\)</span> кодын үгэнд хамгийн ихдээ <span class="math inline">\(\lfloor \frac{w - 1}{2} \rfloor\)</span> буруу цифр байвал тухайн кодын үгэнд харгалзах анхны <span class="math inline">\(b_1 b_2 \cdots b_k\)</span> мессежийг <strong>хамгийн ойрын хөршөөр код тайлах</strong> (nearest neighbor decoding) аргаар сэргээж болдог. Маш энгийнээр хэлбэл, бид <span class="math inline">\(c_1 c_2 \cdots c_n\)</span>-ээс хамгийн цөөн цифрээр ялгаатай <span class="math inline">\(b_1 b_2 \cdots b_n\)</span> кодын үгийн эхний <span class="math inline">\(k\)</span> цифрийг авдаг. Хамгийн ихдээ <span class="math inline">\(\lfloor \frac{w - 1}{2} \rfloor\)</span> алдаа гарсан гэсэн таамаглал нь <span class="math inline">\(c_1 c_2 \cdots c_n\)</span>-д хамгийн ойр орших хөрш <span class="math inline">\(b_1 b_2 \cdots b_n\)</span> цор ганц байх баталгааг өгдөг.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.19
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Жишээ 3.18-ийн хоёртын шугаман кодыг ашиглаж байгаа бөгөөд <code>010110</code> кодын үг хүлээн авсан гэе. Энэ нь Хүснэгт 3.1 дэх жинхэнэ кодын үг биш тул ямар нэгэн алдаа гарсан байна. Алдаа гарах магадлал маш бага гэж үзвэл хамгийн ихдээ <span class="math inline">\(\lfloor \frac{3 - 1}{2} \rfloor = 1\)</span> алдаа гарсан гэж тооцох нь үндэслэлтэй. Хамгийн ойрын хөршөөр код тайлах арга ёсоор үүнийг <code>011</code> мессежид харгалзах <code>011110</code> кодын үгийг ашиглан тайлах бөгөөд энэ тохиолдолд жинхэнэ мессеж нь хүлээн авсан алдаатай кодын үгийн эхний гурван цифр биш байсныг анхаарна уу. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Хоёртын шугаман кодууд нь мессежийг нууцлан дамжуулах зорилгоор бүтээгдээгүй. Шифрлэлтийн зорилгыг оронд нь <strong>шифр</strong> (cipher)-ээр шийдвэрлэдэг. Жишээлбэл, хоосон зайд <span class="math inline">\(0\)</span> гэсэн тоон утга оноосон Хүснэгт 3.2-т харуулсан үсэг-тооны харгалзааг ашиглан нууц текстэн мессеж илгээхийг хүсэж байна гэе. Маш энгийнээр хэлбэл, бид <span class="math inline">\(0\)</span>-ээс <span class="math inline">\(26\)</span> хүртэлх тоонуудыг хольж солихыг хүсэж байгаа бөгөөд ингэснээр тэдгээр тэмдэгтүүдээс бүрдсэн мессежийг амархан унших боломжгүй нууцлагдсан мессеж болгон хувиргаж чадна. <span class="math inline">\(x\)</span> тоо бүрд шинэ <span class="math inline">\(y\)</span> тоо оноож, улмаар тоонуудаа сэлгэх хамгийн энгийн арга бол <strong>шилжүүлэх шифр</strong> (shift cipher) юм. Ийм шифр нь ямар нэгэн бүхэл <span class="math inline">\(b\)</span> тооны хувьд: <span class="math display">\[y = (x + b) \bmod n \tag{3.3}\]</span> хэлбэртэй байдаг. Бидний тохиолдолд <span class="math inline">\(0\)</span>-ээс <span class="math inline">\(26\)</span> хүртэлх тоонуудыг сэлгэж байгаа тул <span class="math inline">\(n = 27\)</span> байна.</p>
+<div id="tbl-3-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.2: Үсгүүдийг тоо руу хөрвүүлэх нь
+</figcaption>
+<div aria-describedby="tbl-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">A</th>
+<th style="text-align: center;">B</th>
+<th style="text-align: center;">C</th>
+<th style="text-align: center;">D</th>
+<th style="text-align: center;">E</th>
+<th style="text-align: center;">F</th>
+<th style="text-align: center;">G</th>
+<th style="text-align: center;">H</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>I</strong></td>
+<td style="text-align: center;"><strong>J</strong></td>
+<td style="text-align: center;"><strong>K</strong></td>
+<td style="text-align: center;"><strong>L</strong></td>
+<td style="text-align: center;"><strong>M</strong></td>
+<td style="text-align: center;"><strong>N</strong></td>
+<td style="text-align: center;"><strong>O</strong></td>
+<td style="text-align: center;"><strong>P</strong></td>
+<td style="text-align: center;"><strong>Q</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">17</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;"><strong>S</strong></td>
+<td style="text-align: center;"><strong>T</strong></td>
+<td style="text-align: center;"><strong>U</strong></td>
+<td style="text-align: center;"><strong>V</strong></td>
+<td style="text-align: center;"><strong>W</strong></td>
+<td style="text-align: center;"><strong>X</strong></td>
+<td style="text-align: center;"><strong>Y</strong></td>
+<td style="text-align: center;"><strong>Z</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">26</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.20
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n = 27\)</span>, <span class="math inline">\(b = -1\)</span>, (3.3) тэгшитгэл болон Хүснэгт 3.2 дахь хөрвүүлэлтүүдийг ашиглавал: <span class="math display">\[\text{IBM IS UP}\]</span> гэсэн мессеж нь: <span class="math display">\[\text{HALZHRZTO.}\]</span> болон шифрлэгдэнэ. <span class="math inline">\(\blacksquare\)</span></p>
+<p>Мессежийн нууцлалыг тайлахдаа дараах томьёог ашиглана: <span class="math display">\[x = (y - b) \bmod n \tag{3.4}\]</span></p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.21
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n = 27\)</span>, <span class="math inline">\(b = -1\)</span>, (3.4) тэгшитгэл болон Хүснэгт 3.2 дахь хөрвүүлэлтүүдийг ашиглавал нууцлагдсан: <span class="math display">\[\text{RDKKZHSMNV}\]</span> гэсэн мессеж нь: <span class="math display">\[\text{SELL IT NOW.}\]</span> болон тайлагдана. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Шилжүүлэх шифрийн ерөнхийлөлүүдийг 3.6-р хэсэгт авч үзэх болно.</p>
+<hr>
+<section id="р-зүйлийн-дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">3.2-р зүйлийн дасгалууд</h2>
+<p><em>1-ээс 4 хүртэлх дасгалуудад өгөгдсөн <span class="math inline">\(S\)</span> олонлогийн хамгийн бага элементийг тодорхойл.</em></p>
+<ol type="1">
+<li><span class="math inline">\(S = \{s : s = 11 - 4n, \text{ энд } n \in \mathbb{Z} \text{ ба } 11 - 4n &gt; 0\}\)</span>.</li>
+<li><span class="math inline">\(S = \{s : s = 3n + 20, \text{ энд } n \in \mathbb{Z} \text{ ба } 3n + 20 &gt; 0\}\)</span>.</li>
+<li><span class="math inline">\(S = \{s : s = 12x + 20y, \text{ энд } x, y \in \mathbb{Z} \text{ ба } 12x + 20y &gt; 0\}\)</span>.</li>
+<li><span class="math inline">\(S = \{s : s = 15x + 21y, \text{ энд } x, y \in \mathbb{Z} \text{ ба } 15x + 21y &gt; 0\}\)</span>.</li>
+</ol>
+<p><em>5 ба 6-р дасгалуудын баталгаажуулалтыг хийхдээ тооны машин эсвэл математикийн программ хангамж ашигла. Mathematica программд <code>FactorInteger</code> ба <code>PrimeQ</code> функцүүдийг, Maple программд <code>ifactor</code> ба <code>isprime</code> функцүүдийг ашиглаж болно. Гэсэн хэдий ч Мерсенн (ойролцоогоор 1600 онд) тооны машин зохион бүтээгдэхээс олон жилийн өмнө эдгээр дасгалын үр дүнг мэддэг байжээ.</em></p>
+<ol start="5" type="1">
+<li><p><span class="math inline">\(2^n - 1\)</span> нь <span class="math inline">\(n = 17\)</span> ба <span class="math inline">\(19\)</span> үед Мерсенний анхны тоо болж, харин <span class="math inline">\(n = 23\)</span> ба <span class="math inline">\(29\)</span> үед анхны тоо биш болохыг шалга. <span class="math inline">\(2^{17} - 1\)</span>-ийг анхны тоо мөн эсэхийг гараар шалгахын тулд (зөвлөхгүй) 3.1-р хэсгийн Дасгал 33 ёсоор <span class="math inline">\(2\)</span>-оос <span class="math inline">\(359\)</span> хүртэлх анхны тоонуудад хуваагдах эсэхийг шалгаж болохыг тэмдэглэе. Мөн <span class="math inline">\(2^{23} - 1\)</span>-ийн анхны хуваагчдыг дараалан шалгаснаар <span class="math inline">\(2^{23} - 1\)</span>-ийн задаргааг олж болох боловч энэ нь гараар хийхэд нэлээд уйтгартай ажил юм.</p></li>
+<li><p><span class="math inline">\(2^{31} - 1\)</span> нь Мерсенний анхны тоо болж, харин <span class="math inline">\(2^{37} - 1\)</span> нь анхны тоо биш болохыг шалга. Эдгээр тоо нь харгалзан <span class="math inline">\(10\)</span> ба <span class="math inline">\(12\)</span> оронтой болохыг анхаарна уу. Иймд гараар шалгахыг зөвлөхгүй.</p></li>
+<li><p>Хамгийн багадаа <span class="math inline">\(10\)</span> сая оронтой анхны тоо оршин байна гэдгийг харуул.</p></li>
+<li><p>Хамгийн багадаа <span class="math inline">\(10\)</span> сая оронтой зохиомол тоо оршин байна гэдгийг харуул.</p></li>
+<li><p><span class="math inline">\(\forall x \in \mathbb{R}, \, \forall n \in \mathbb{Z}^+\)</span> хувьд: <span class="math display">\[x^n - 1 = (x - 1)(x^{n-1} + x^{n-2} + \dots + x + 1)\]</span> байдаг баримтыг ашиглан дараах өгүүлбэрүүдийг батал: <strong>(а)</strong> <span class="math inline">\(b \ge 3\)</span> ба <span class="math inline">\(n \ge 2\)</span> байх бүх <span class="math inline">\(b, n \in \mathbb{Z}^+\)</span> тоонуудын хувьд <span class="math inline">\(b^n - 1\)</span> нь зохиомол тоо байна. <strong>(б)</strong> Бүх <span class="math inline">\(n \in \mathbb{Z}^+\)</span> хувьд хэрэв <span class="math inline">\(2^n - 1\)</span> анхны тоо бол <span class="math inline">\(n\)</span> нь анхны тоо байна. <em>Зөвлөмж:</em> Шууд бус (эсрэгээс нь) батлах аргыг ашигла.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}^+\)</span> хувьд дараалсан <span class="math inline">\(n\)</span> ширхэг зохиомол тоо оршино гэдгийг харуул. <em>Зөвлөмж:</em> <span class="math inline">\((n + 1)! + 2, \, (n + 1)! + 3, \dots\)</span> тоонуудыг авч үз. Факториалыг 4.1-р хэсэгт тодорхойлсон болно.</p></li>
+<li><p>Дараах бүхэл тоог хуваах бодлогуудын ногдвор ба үлдэгдлийг ол: <strong>(а)</strong> <span class="math inline">\(127 \div 12\)</span>. <span class="math inline">\(\qquad\)</span> <strong>(б)</strong> <span class="math inline">\(216 \div 15\)</span>.</p></li>
+<li><p>Дараах бүхэл тоог хуваах бодлогуудын ногдвор ба үлдэгдлийг ол: <strong>(а)</strong> <span class="math inline">\(207 \div 8\)</span>. <span class="math inline">\(\qquad\)</span> <strong>(б)</strong> <span class="math inline">\(162 \div 11\)</span>.</p></li>
+<li><p>Дараах тохиолдол бүрд Хуваах алгоритмын (Теорем 3.7) дүгнэлтүүдийг шалга: <strong>(а)</strong> <span class="math inline">\(n = 45\)</span> ба <span class="math inline">\(d = 7\)</span>. <span class="math inline">\(\qquad\)</span> <strong>(б)</strong> <span class="math inline">\(n = -37\)</span> ба <span class="math inline">\(d = 4\)</span>.</p></li>
+<li><p>Дараах тохиолдол бүрд Хуваах алгоритмын (Теорем 3.7) дүгнэлтүүдийг шалга: <strong>(а)</strong> <span class="math inline">\(n = 17\)</span> ба <span class="math inline">\(d = 3\)</span>. <span class="math inline">\(\qquad\)</span> <strong>(б)</strong> <span class="math inline">\(n = -53\)</span> ба <span class="math inline">\(d = 10\)</span>.</p></li>
+<li><p><span class="math inline">\(73 \operatorname{div} 10\)</span> ба <span class="math inline">\(73 \bmod 10\)</span>-ийг тооцоол.</p></li>
+<li><p><span class="math inline">\(104 \operatorname{div} 6\)</span> ба <span class="math inline">\(104 \bmod 6\)</span>-г тооцоол.</p></li>
+<li><p>Дараах илэрхийллүүдийг тооцоол: <strong>(а)</strong> <span class="math inline">\(67 \operatorname{div} 13\)</span> ба <span class="math inline">\(67 \bmod 13\)</span>. <span class="math inline">\(\qquad\)</span> <strong>(б)</strong> <span class="math inline">\(-67 \operatorname{div} 13\)</span> ба <span class="math inline">\(-67 \bmod 13\)</span>.</p></li>
+<li><p>Дараах илэрхийллүүдийг тооцоол: <strong>(а)</strong> <span class="math inline">\(85 \operatorname{div} 12\)</span> ба <span class="math inline">\(85 \bmod 12\)</span>. <span class="math inline">\(\qquad\)</span> <strong>(б)</strong> <span class="math inline">\(-85 \operatorname{div} 12\)</span> ба <span class="math inline">\(-85 \bmod 12\)</span>.</p></li>
+<li><p><span class="math inline">\(165\)</span> хүнтэй бүлэг концерт үзэхээр төлөвлөжээ. Тэд бүгд нэг секторт хамт суухыг хүсэж байгаа бөгөөд эгнээ бүр <span class="math inline">\(18\)</span> суудалтай. Тэдэнд бүрэн дүүрэх хэдэн эгнээ хэрэгтэй вэ? Бүрэн дүүрэхгүй эгнээнд нэмж хэдэн суудал шаардлагатай вэ? Эдгээр асуултад <span class="math inline">\(\operatorname{div}\)</span> болон <span class="math inline">\(\bmod\)</span> ашиглан хариул.</p></li>
+<li><p>Нэгэн аав <span class="math inline">\(375\)</span> ширхэг чихрийг <span class="math inline">\(18\)</span> хүүхдэд <span class="math inline">\(18\)</span>-аас цөөн чихэр үлдтэл аль болох тэнцүү хувааж өгөхийг хүсжээ. Хүүхэд бүр хэдэн чихэр авах вэ? Аавд идэхээр хэдэн чихэр үлдэх вэ? Эдгээр асуултад <span class="math inline">\(\operatorname{div}\)</span> болон <span class="math inline">\(\bmod\)</span> ашиглан хариул.</p></li>
+<li><p><span class="math inline">\(\star\)</span> <span class="math inline">\(n, s \in \mathbb{Z}^+\)</span> ба <span class="math inline">\(s \ge 2\)</span> байг. Дараах алгоритм (<span class="math inline">\(\operatorname{div}\)</span> болон <span class="math inline">\(\bmod\)</span>-ийг ашигладаг) нь <span class="math inline">\(n\)</span> тооны <span class="math inline">\(s\)</span> суурьтай бичлэг <span class="math inline">\(a_k a_{k-1} \cdots a_0\)</span>-ийг өгнө:</p>
+<pre class="text"><code>k = -1 гэж авъя.
+While n &gt; 0:
+    k = k + 1 болгоно.
+    a_k = n mod s болгоно.
+    n = n div s болгоно.
+a_k a_{k-1} ... a_0-ийг буцаана.</code></pre>
+<p>Өгөгдсөн <span class="math inline">\(n\)</span> ба <span class="math inline">\(s\)</span> утгуудын хувьд алгоритмыг дагаж гүйцэтгэ: <strong>(а)</strong> <span class="math inline">\(n = 39\)</span> ба <span class="math inline">\(s = 2\)</span>. <span class="math inline">\(\qquad\)</span> <strong>(б)</strong> <span class="math inline">\(n = 87\)</span> ба <span class="math inline">\(s = 8\)</span>. Энэ алгоритмыг хэрэгжүүлэх программ бич. Хэрэглэгчээс <span class="math inline">\(n\)</span> ба <span class="math inline">\(s\)</span>-ийг оруулахыг хүсэж, <span class="math inline">\(a_k a_{k-1} \cdots a_0\)</span>-ийг массивт хадгал.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Бүхэл <span class="math inline">\(s \ge 2\)</span> тоо болон хоёр сөрөг биш бүхэл тооны <span class="math inline">\(s\)</span> суурьтай бичлэгүүд <span class="math inline">\(a_k a_{k-1} \cdots a_0\)</span> ба <span class="math inline">\(b_k b_{k-1} \cdots b_0\)</span> (хоёулаа өгөгдсөн <span class="math inline">\(k\)</span> урттай) өгөгдсөн үед дараах алгоритм нь тэдгээрийн нийлбэрийн <span class="math inline">\(s\)</span> суурьтай бичлэг <span class="math inline">\(c_{k+1} c_k c_{k-1} \cdots c_0\)</span>-ийг өгнө:</p>
+<pre class="text"><code>a_{k+1} = b_{k+1} = 0 гэж авъя.
+carry = 0 гэж авъя.
+For i = 0 to k + 1:
+    c_i = (carry + a_i + b_i) mod s болгоно.
+    carry = (carry + a_i + b_i) div s болгоно.
+c_{k+1} c_k c_{k-1} ... c_0-ийг буцаана.</code></pre>
+<p>Өгөгдсөн <span class="math inline">\(s\)</span> суурь болон <span class="math inline">\(s\)</span> сууриар илэрхийлэгдсэн бүхэл тоонуудын хувьд алгоритмыг дагаж гүйцэтгэ: <strong>(а)</strong> <span class="math inline">\(s = 2\)</span> суурьтай тооллын системд <code>10101</code> ба <code>01101</code>-ийг нэм. <strong>(б)</strong> <span class="math inline">\(s = 8\)</span> суурьтай тооллын системд <code>4316</code> ба <code>2570</code>-ийг нэм. Энэ алгоритмыг хэрэгжүүлэх программ бич. Хэрэглэгчээс <span class="math inline">\(s\)</span> болон нэмэгдэхүүнүүдийн <span class="math inline">\(s\)</span> суурьтай бичлэгүүдийг оруулахыг хүсэж, <span class="math inline">\(s\)</span> суурьтай бичлэг бүрийг массивт хадгал.</p></li>
+<li><p><span class="math inline">\(n \in \mathbb{Z}^+\)</span> байг. <span class="math inline">\(n^2 \operatorname{div} n\)</span> ба <span class="math inline">\(n^2 \bmod n\)</span>-ийг тодорхойл.</p></li>
+<li><p><span class="math inline">\(n \in \mathbb{Z}^+\)</span> байг. <span class="math inline">\(6n \operatorname{div} 3\)</span> ба <span class="math inline">\(6n \bmod 3\)</span>-ийг тодорхойл.</p></li>
+<li><p>Яагаад Бүрэн эрэмбэлэгдэх зарчим нь сөрөг биш бүхэл тоонуудын оронд бүх бүхэл тоонуудын дурын дэд олонлог дээр биелдэггүй вэ?</p></li>
+<li><p>Яагаад Хуваах алгоритмд <span class="math inline">\(d = 0\)</span> байхыг зөвшөөрдөггүй вэ?</p></li>
+<li><p><strong>Бүхэл тоонуудын өргөтгөсөн сайн эрэмбэлэгдэх зарчим.</strong> Өгөгдсөн бэхлэгдсэн бүхэл <span class="math inline">\(a\)</span> тооны хувьд <span class="math inline">\(a\)</span>-аас их буюу тэнцүү бүхэл тоонуудын олонлогийн хоосон биш дурын дэд олонлог хамгийн бага элементтэй байна гэдгийг харуул. <em>Зөвлөмж:</em> <span class="math inline">\(S\)</span> олонлогоос эхлэн <span class="math inline">\(S - a = \{s - a : s \in S\}\)</span> олонлогийг авч үз.</p></li>
+<li><p><strong>Өргөтгөсөн хамгийн их элементийн зарчим.</strong> Өгөгдсөн бэхлэгдсэн бүхэл <span class="math inline">\(b\)</span> тооны хувьд <span class="math inline">\(b\)</span>-ээс бага буюу тэнцүү бүхэл тоонуудын олонлогийн хоосон биш дурын дэд олонлог хамгийн их элементтэй байна гэдгийг харуул. <em>Зөвлөмж:</em> <span class="math inline">\(S\)</span> олонлогоос эхлэн <span class="math inline">\(b - S = \{b - s : s \in S\}\)</span> олонлогийг авч үз.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n^3 - n + 2\)</span> нь <span class="math inline">\(6\)</span>-д хуваагдахгүй болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(n^3 + 3n^2 + 2n + 1\)</span> нь <span class="math inline">\(6\)</span>-д хуваагдахгүй болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд хэрэв <span class="math inline">\(n\)</span> нь <span class="math inline">\(3\)</span>-т хуваагдахгүй бол <span class="math inline">\(n^2 \bmod 3 = 1\)</span> болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд хэрэв <span class="math inline">\(n\)</span> сондгой бол <span class="math inline">\(n^2 \bmod 8 = 1\)</span> болохыг харуул. <em>Зөвлөмж:</em> <span class="math inline">\(n = 4k + 1\)</span> ба <span class="math inline">\(n = 4k + 3\)</span> тохиолдлуудыг авч үз.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд хэрэв <span class="math inline">\(n\)</span> нь <span class="math inline">\(5\)</span>-д хуваагдахгүй бол <span class="math inline">\(n^4 - 1\)</span> нь <span class="math inline">\(5\)</span>-д хуваагдана гэдгийг харуул.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд хэрэв <span class="math inline">\(n\)</span> нь <span class="math inline">\(7\)</span>-д хуваагдахгүй бол <span class="math inline">\(n^6 - 1\)</span> нь <span class="math inline">\(7\)</span>-д хуваагдана гэдгийг харуул.</p></li>
+<li><p>Дараах утгуудыг ол: <strong>(а)</strong> <span class="math inline">\(\lfloor 4.4 \rfloor\)</span>. <span class="math inline">\(\quad\)</span> <strong>(б)</strong> <span class="math inline">\(\lfloor -4.4 \rfloor\)</span>. <span class="math inline">\(\quad\)</span> <strong>(в)</strong> <span class="math inline">\(\lceil 8.6 \rceil\)</span>. <span class="math inline">\(\quad\)</span> <strong>(г)</strong> <span class="math inline">\(\lceil -8.6 \rceil\)</span>.</p></li>
+<li><p>Дараах утгуудыг ол: <strong>(а)</strong> <span class="math inline">\(\lfloor 3.7 \rfloor\)</span>. <span class="math inline">\(\quad\)</span> <strong>(б)</strong> <span class="math inline">\(\lfloor -3.7 \rfloor\)</span>. <span class="math inline">\(\quad\)</span> <strong>(в)</strong> <span class="math inline">\(\lceil 6.2 \rceil\)</span>. <span class="math inline">\(\quad\)</span> <strong>(г)</strong> <span class="math inline">\(\lceil -6.2 \rceil\)</span>.</p></li>
+<li><p>Нэгэн компани лаазалсан шөлний <span class="math inline">\(c\)</span> ширхэг лаазыг үйлдвэрээс түгээлтийн төв рүү тээвэрлэх шаардлагатай болжээ. Компанийн хайрцаг бүр хамгийн ихдээ <span class="math inline">\(m\)</span> ширхэг лааз багтаадаг. Зардал хэмнэхийн тулд компани аль болох цөөн хайрцаг ашиглахыг хүсэж байна. <strong>(а)</strong> Хайрцаг бүр <span class="math inline">\(m = 32\)</span> хүртэлх лааз багтаадаг бол <span class="math inline">\(c = 500\)</span> лаазыг багтаахад шаардагдах хайрцгийн хамгийн цөөн тоо хэд вэ? <strong>(б)</strong> Ерөнхий тохиолдолд, хайрцаг бүр <span class="math inline">\(m\)</span> хүртэлх лааз багтаадаг бол <span class="math inline">\(c\)</span> лаазыг багтаахад шаардагдах хайрцгийн хамгийн цөөн тоо хэд вэ?</p></li>
+<li><p>Ачаа тээврийн компани агуулах руу хүргэх <span class="math inline">\(r\)</span> ширхэг хөргөгчтэй. Ачааны машин бүр хамгийн ихдээ <span class="math inline">\(m\)</span> ширхэг хөргөгч багтаадаг бөгөөд компани бүрэн дүүрээгүй бол ачааны машин явуулахгүй. <strong>(а)</strong> Хэрэв <span class="math inline">\(r = 250\)</span> хөргөгч байгаа бөгөөд машин бүр хамгийн ихдээ <span class="math inline">\(m = 36\)</span> хөргөгч багтаадаг бол агуулах руу илгээж болох бүрэн дүүрэн ачааны машины хамгийн олон тоо хэд вэ? <strong>(б)</strong> Ерөнхий тохиолдолд, хэрэв <span class="math inline">\(r\)</span> хөргөгч байгаа бөгөөд машин бүр хамгийн ихдээ <span class="math inline">\(m\)</span> хөргөгч багтаадаг бол агуулах руу илгээж болох бүрэн дүүрэн ачааны машины хамгийн олон тоо хэд вэ?</p></li>
+<li><p><span class="math inline">\(\forall x \in \mathbb{R}\)</span> ба <span class="math inline">\(n \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(\lfloor x + n \rfloor = \lfloor x \rfloor + n\)</span> болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\forall x \in \mathbb{R}\)</span> ба <span class="math inline">\(n \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(\lceil x + n \rceil = \lceil x \rceil + n\)</span> болохыг харуул.</p></li>
+<li><p>Теорем 3.10-ийг батал.</p></li>
+<li><p>Мөрдөлгөө 3.11-ийг батал.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд: <span class="math display">\[\left\lfloor \frac{n}{3} \right\rfloor = \begin{cases} \frac{n}{3} &amp; \text{хэрэв } 3 \mid n, \\ \frac{n - 1}{3} &amp; \text{хэрэв } n \bmod 3 = 1, \\ \frac{n - 2}{3} &amp; \text{хэрэв } n \bmod 3 = 2 \end{cases}\]</span> болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд: <span class="math display">\[2\left\lfloor \frac{n}{4} \right\rfloor = \begin{cases} \left\lfloor \frac{n}{2} \right\rfloor &amp; \text{хэрэв } n \bmod 4 = 0 \text{ эсвэл } 1, \\ \left\lfloor \frac{n}{2} \right\rfloor - 1 &amp; \text{хэрэв } n \bmod 4 = 2 \text{ эсвэл } 3 \end{cases}\]</span> болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\lfloor 2.1 \rfloor + \lfloor 3.2 \rfloor = \lfloor 5.3 \rfloor\)</span> ба <span class="math inline">\(\lfloor 4.6 \rfloor + \lfloor 6.7 \rfloor &lt; \lfloor 11.3 \rfloor\)</span> болохыг ажигла. Ерөнхий тохиолдолд, <span class="math inline">\(\forall x, y \in \mathbb{R}\)</span> хувьд <span class="math inline">\(\lfloor x \rfloor + \lfloor y \rfloor \le \lfloor x + y \rfloor\)</span> гэдгийг батал.</p></li>
+<li><p><span class="math inline">\(\lceil 3 \rceil + \lceil 4 \rceil = \lceil 7 \rceil\)</span> ба <span class="math inline">\(\lceil 2.8 \rceil + \lceil 4.7 \rceil = \lceil 7.5 \rceil\)</span> болохыг ажигла. Гэсэн хэдий ч <span class="math inline">\(\forall x, y \in \mathbb{R}, \, \lceil x \rceil + \lceil y \rceil = \lceil x + y \rceil\)</span> өгүүлбэрийг няцаа.</p></li>
+<li><p><span class="math inline">\(\forall x \in \mathbb{R}, \, \lfloor 2x \rfloor = 2\lfloor x \rfloor\)</span> өгүүлбэрийг батал эсвэл няцаа.</p></li>
+<li><p><span class="math inline">\(\forall x \in \mathbb{R}, \, \left\lfloor \frac{x}{2} \right\rfloor = \frac{1}{2}\lfloor x \rfloor\)</span> өгүүлбэрийг батал эсвэл няцаа.</p></li>
+<li><p><span class="math inline">\(\forall x \in \mathbb{R}\)</span> хувьд <span class="math inline">\(\lfloor x \rfloor = \lceil x \rceil\)</span> байх нь <span class="math inline">\(x \in \mathbb{Z}\)</span> байхтай зайлшгүй бөгөөд хүрэлцээтэй болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\forall x \in \mathbb{R} \setminus \mathbb{Z}\)</span> хувьд <span class="math inline">\(\lceil x \rceil = \lfloor x \rfloor + 1\)</span> болохыг харуул. <span class="math inline">\(x \in \mathbb{Z}\)</span> үед юугаараа ялгаатай вэ?</p></li>
+<li><p><span class="math inline">\(\forall x \in \mathbb{R}\)</span> хувьд <span class="math inline">\(\lfloor \lfloor x \rfloor \rfloor = \lfloor x \rfloor\)</span> болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\forall x \in \mathbb{R}\)</span> хувьд: <strong>(а)</strong> <span class="math inline">\(\lfloor -x \rfloor = -\lceil x \rceil\)</span>. <span class="math inline">\(\qquad\)</span> <strong>(б)</strong> <span class="math inline">\(\lceil -x \rceil = -\lfloor x \rfloor\)</span>.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(\left\lfloor \frac{n + 1}{2} \right\rfloor = \left\lceil \frac{n}{2} \right\rceil\)</span> болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\forall n \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(\left\lfloor \frac{n}{2} \right\rfloor + 1 = \left\lceil \frac{n + 1}{2} \right\rceil\)</span> болохыг харуул.</p></li>
+</ol>
+<p><em><span class="math inline">\(x \in \mathbb{R}\)</span> бүрийн хувьд тоймлох дараах дүрмийн дагуу <span class="math inline">\(\operatorname{round}(x)\)</span> бүхэл тоог тодорхойлъё. <span class="math inline">\(n \in \mathbb{Z}\)</span> ба <span class="math inline">\(0 \le f &lt; 1\)</span> байхаар <span class="math inline">\(x = n + f\)</span> гэж бичээд:</em> <span class="math display">\[\operatorname{round}(x) = \begin{cases} n &amp; \text{хэрэв } 0 \le f &lt; \frac{1}{2}, \\ n + 1 &amp; \text{хэрэв } \frac{1}{2} \le f &lt; 1 \end{cases}\]</span> <em>гэж тодорхойлно.</em></p>
+<ol start="55" type="1">
+<li><p><span class="math inline">\(\operatorname{round}(x)\)</span>-ийг доод бүхэл функцээр илэрхийл. Программчлалын хэлнүүд тоймлох функцээс илүү доод бүхэл функцтэй байх нь элбэг тул энэ чадвар их тустай.</p></li>
+<li><p><span class="math inline">\(\operatorname{round}(x)\)</span>-ийг дээд бүхэл функцээр илэрхийл. Дасгал 52 нь дээд бүхлийг доод бүхлээр илэрхийлэх тухай болохыг анхаарна уу.</p></li>
+<li><p><span class="math inline">\(\star\)</span> <span class="math inline">\((0, 1)\)</span> завсарт бүхэл тоо байхгүй гэдгийг харуул. <em>Зөвлөмж:</em> Бүрэн эрэмбэлэгдэх зарчим ёсоор хамгийн бага эерэг бүхэл тоо оршино. Хэрэв тэр нь <span class="math inline">\(1\)</span> биш бол түүний квадратыг авч үз.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Хавсралт А дахь Архимедийн зарчмыг ашиглан <span class="math inline">\(\forall x \in \mathbb{R}\)</span> хувьд <span class="math inline">\(n &lt; x\)</span> байх <span class="math inline">\(\exists n \in \mathbb{Z}\)</span> оршино гэдгийг харуул. <em>Зөвлөмж:</em> <span class="math inline">\(-x\)</span>-ийг авч үз.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Теорем 3.8-д заасан <span class="math inline">\(\lfloor x \rfloor\)</span> утгын цор ганц байх чанарыг батал. <em>Зөвлөмж:</em> <span class="math inline">\(n_1 \le x &lt; n_1 + 1\)</span> ба <span class="math inline">\(n_2 \le x &lt; n_2 + 1\)</span> байх <span class="math inline">\(n_1, n_2 \in \mathbb{Z}\)</span> гэж үз. Хасах үйлдлээр <span class="math inline">\(-1 &lt; n_1 - n_2 &lt; 1\)</span> болохыг гаргаж, Дасгал 57-г ашигла.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Теорем 3.8-д заасан <span class="math inline">\(\lfloor x \rfloor\)</span> утгын оршин байх чанарыг батал. <em>Зөвлөмж:</em> Хавсралт А дахь Архимедийн зарчим болон Дасгал 58 дахь түүний аналогийг ашиглан <span class="math inline">\(a &lt; x &lt; b\)</span> байх <span class="math inline">\(a, b \in \mathbb{Z}\)</span> тоонуудыг ол. Дасгал 28 дахь Өргөтгөсөн хамгийн их элементийн зарчмыг <span class="math inline">\(S = \{s : s \le x\}\)</span> олонлогт хэрэглэ.</p></li>
+<li><p><span class="math inline">\(\star\)</span> <span class="math inline">\(\forall n \in \mathbb{Z}^+\)</span> хувьд <span class="math inline">\(b\)</span> сондгой байхаар <span class="math inline">\(n = 2^a b\)</span> байх <span class="math inline">\(\exists a \in \mathbb{N}\)</span> ба <span class="math inline">\(b \in \mathbb{Z}^+\)</span> оршино гэдгийг харуул. <em>Зөвлөмж:</em> Бүрэн эрэмбэлэгдэх зарчмыг <span class="math inline">\(S = \{s : n = 2^r s, \text{ энд } r \in \mathbb{N} \text{ ба } s \in \mathbb{Z}^+\}\)</span> олонлогт хэрэглэ.</p></li>
+<li><p><span class="math inline">\(\star\)</span> <span class="math inline">\(a, b \in \mathbb{Z}\)</span> ба <span class="math inline">\(b &gt; 0\)</span> байг. Хавсралт А дахь Архимедийн зарчмыг ашиглахгүйгээр <span class="math inline">\(n &gt; \frac{a}{b}\)</span> байх <span class="math inline">\(\exists n \in \mathbb{Z}\)</span> оршино гэдгийг батал. <em>Зөвлөмж:</em> Бүрэн эрэмбэлэгдэх зарчмыг <span class="math inline">\(S = \{s : s = a - bn \ge 0 \text{ ба } n \in \mathbb{Z}^+\}\)</span> олонлогт хэрэглэ.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Тодорхойлолт 3.5-д тодорхойлогдсон бүхэл <span class="math inline">\(d\)</span> тоо үнэхээр оршин байдгийг харуул. <em>Зөвлөмж:</em> Дасгал 28 дахь Өргөтгөсөн хамгийн их элементийн зарчмыг хэрэглэ.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Тодорхойлолт 3.5-д тодорхойлогдсон бүхэл <span class="math inline">\(d\)</span> тоо үнэхээр цор ганц байдгийг харуул.</p></li>
+<li><p>Үйлдвэрлэгч болон тухайн бүтээгдэхүүн нь UPC дугаарын эхний арван нэгэн цифрийг тодорхойлдог. Улмаар шалгах цифрийн утга албадан тогтоогдоно. <em>Colgate</em> шүдний ооны <code>0 35000 74126 #</code> UPC дугаарт дутуу байгаа шалгах <code>#</code> цифрийг тооцоол.</p></li>
+<li><p>Кассчин <em>Tostitos Tortilla Chips</em>-ийн уутан дээрх <code>0 2#400 00932 4</code> UPC дугаарын нэг цифрийг уншиж чадахгүй байна. Гэсэн хэдий ч шалгах цифр нь байгаа тул тэр дутуу цифрийг үлдсэн арван нэгэн цифрээр тодорхойлох боломжтой. Дутуу <code>#</code> цифрийн утгыг ол.</p></li>
+<li><p>Кассчин <em>Corn Chex</em>-ийн <code>0 16000 81160 7</code> UPC дугаарыг санамсаргүйгээр <code>0 61000 81160 7</code> гэж оруулсан гэе. Энэ нь зэргэлдээх хоёр цифрийг (<code>16</code>-г <code>61</code> болгож) байрыг нь сольдог <strong>байр солих алдаа</strong> (transposition error) хэмээх түгээмэл алдаа юм. Кассын машин шалгах цифрийг эхний арван нэгэн цифртэй таарч байгаа эсэхийг шалгахаар программчлагдсан тул энэ алдаа илрэх үү?</p></li>
+<li><p>UPC дугаарыг ихэвчлэн зураасан кодоор уншуулдаг тул зураасан кодыг уруу нь харуулж уншуулбал унших алдаа гарна гэж бодож болох юм. Жишээлбэл, <em>Gerber Baby Food Carrots</em>-ийн <code>0 15000 00411 8</code> UPC дугаарыг алдаатайгаар <code>8 11400 00015 0</code> гэж оруулбал алдаа илрэх эсэхийг тодорхойл. Үнэндээ бүх цифрийг урвуулах алдаа гарах магадлал бага байдаг, учир нь эхний зургаан цифрийг зураасаар кодлох арга нь сүүлийн зургаан цифрийнхээс өөр байдаг. Иймээс сканнерууд урд болон хойд талаас нь уншиж байгааг ялгаж чаддаг.</p></li>
+<li><p>Хуучин номын дэлгүүрт кассчин Харпер Ли-ийн <em>Гургалдайг хөнөөх нь</em> номын <code>0-446#1078-6</code> ISBN дугаарын нэг цифр уншигдахгүй байгааг анзаарчээ. Гэсэн хэдий ч уншигдах есөн цифрээс тэр уншигдахгүй байгаа <code>#</code> цифрийн утгыг тодорхойлж чадна. Тэр цифрийг тодорхойл.</p></li>
+<li><p>Хэвлэлийн газар, зохиогч болон номын нэр нь ISBN дугаарын эхний есөн цифрийг тодорхойлдог. Улмаар шалгах цифрийн утга тогтоогдоно. Рэй Брэдберигийн <em>Фаренгейтийн 451 хэм</em> номын <code>0-34534296-#</code> ISBN дугаарт дутуу байгаа шалгах <code>#</code> цифрийг тооцоол.</p></li>
+<li><p>Баярын ачаалалтай үеэр завгүй кассчин Доктор Сьюзийн <em>Hop on Pop</em> номын <code>0-39480029-X</code> ISBN дугаарыг санамсаргүйгээр <code>0-39480079-6</code> гэж оруулжээ. Кассын машин шалгах цифрийн хүчинтэй эсэхийг шалгахаар программчлагдсан тул энэ алдаа илрэх үү? (Энд авч үзсэн шиг хоёр цифрийг зэрэг буруу оруулах нь ховор тохиолдох алдаа болохыг тэмдэглэе.)</p></li>
+<li><p>Байр солих алдаа гарч, Ж. К. Роулингийн <em>Харри Поттер ба Философийн чулуу</em> номын <code>0-59035340-3</code> ISBN дугаарыг алдаатайгаар <code>0-95035340-3</code> гэж оруулсан гэе. Өөрөөр хэлбэл, зэргэлдээх <code>59</code> хоёр цифрийг <code>95</code> болгож сольсон байна. Энэ алдаа илрэх үү?</p></li>
+<li><p><span class="math inline">\(\star\)</span> Хэрэв UPC дугаар дахь зэргэлдээх хоёр цифрийн байрыг сольсон бол тэдгээр цифрүүдийн зөрүү <span class="math inline">\(5\)</span>-тай тэнцүү биш байх үед л алдаа илэрнэ гэдгийг харуул. (Дасгал 67-г үзнэ үү.) Өөрөөр хэлбэл, маш цөөн тусгай байр солих алдаанаас бусад бүх алдаа илэрнэ.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Хэрэв ISBN дугаар дахь зэргэлдээх хоёр цифрийн байрыг сольсон бол алдаа үргэлж илэрнэ гэдгийг харуул. (Дасгал 72-ыг үзнэ үү.) Өөрөөр хэлбэл, байр солих алдаанууд <span class="math inline">\(100\%\)</span> илэрнэ.</p></li>
+<li><p>Эмнэлгийн өгөгдлийн сан өвчтөн бүрийн хүйс болон цусны бүлгийг кодлох шаардлагатай болжээ. Эхлээд эдгээр өгөгдлийг Хүснэгт 3.3-ын дагуу дөрвөн оронтой хоёртын мессеж <span class="math inline">\(b_1 b_2 b_3 b_4\)</span> болгон хөрвүүлнэ. Дөрвөн оронтой мессеж <span class="math inline">\(b_1 b_2 b_3 b_4\)</span> бүрийг мессежийн цифрүүдийн нийлбэрийг ашиглан дараах томьёонуудын дагуу долоон оронтой кодын үг <span class="math inline">\(b_1 b_2 b_3 b_4 b_5 b_6 b_7\)</span> болгон хувиргадаг хоёртын шугаман кодыг авч үзье: <span class="math display">\[
+\begin{aligned}
+b_5 &amp;= (b_1 + b_2) \bmod 2 \\
+b_6 &amp;= (b_2 + b_3) \bmod 2 \\
+b_7 &amp;= (b_3 + b_4) \bmod 2
+\end{aligned}
+\]</span></p>
+<div id="tbl-3-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;11.3: Хүйс ба цусны бүлгийг кодлох нь
+</figcaption>
+<div aria-describedby="tbl-3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Хүйс, Цусны бүлэг</th>
+<th style="text-align: center;">Мессеж</th>
+<th style="text-align: left;">Хүйс, Цусны бүлэг</th>
+<th style="text-align: center;">Мессеж</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Эмэгтэй, <span class="math inline">\(\text{O}^-\)</span></td>
+<td style="text-align: center;"><code>0000</code></td>
+<td style="text-align: left;">Эрэгтэй, <span class="math inline">\(\text{O}^-\)</span></td>
+<td style="text-align: center;"><code>1000</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Эмэгтэй, <span class="math inline">\(\text{O}^+\)</span></td>
+<td style="text-align: center;"><code>0001</code></td>
+<td style="text-align: left;">Эрэгтэй, <span class="math inline">\(\text{O}^+\)</span></td>
+<td style="text-align: center;"><code>1001</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Эмэгтэй, <span class="math inline">\(\text{B}^-\)</span></td>
+<td style="text-align: center;"><code>0010</code></td>
+<td style="text-align: left;">Эрэгтэй, <span class="math inline">\(\text{B}^-\)</span></td>
+<td style="text-align: center;"><code>1010</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Эмэгтэй, <span class="math inline">\(\text{B}^+\)</span></td>
+<td style="text-align: center;"><code>0011</code></td>
+<td style="text-align: left;">Эрэгтэй, <span class="math inline">\(\text{B}^+\)</span></td>
+<td style="text-align: center;"><code>1011</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Эмэгтэй, <span class="math inline">\(\text{A}^-\)</span></td>
+<td style="text-align: center;"><code>0100</code></td>
+<td style="text-align: left;">Эрэгтэй, <span class="math inline">\(\text{A}^-\)</span></td>
+<td style="text-align: center;"><code>1100</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Эмэгтэй, <span class="math inline">\(\text{A}^+\)</span></td>
+<td style="text-align: center;"><code>0101</code></td>
+<td style="text-align: left;">Эрэгтэй, <span class="math inline">\(\text{A}^+\)</span></td>
+<td style="text-align: center;"><code>1101</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Эмэгтэй, <span class="math inline">\(\text{AB}^-\)</span></td>
+<td style="text-align: center;"><code>0110</code></td>
+<td style="text-align: left;">Эрэгтэй, <span class="math inline">\(\text{AB}^-\)</span></td>
+<td style="text-align: center;"><code>1110</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Эмэгтэй, <span class="math inline">\(\text{AB}^+\)</span></td>
+<td style="text-align: center;"><code>0111</code></td>
+<td style="text-align: left;">Эрэгтэй, <span class="math inline">\(\text{AB}^+\)</span></td>
+<td style="text-align: center;"><code>1111</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>(а)</strong> “Эмэгтэй, <span class="math inline">\(\text{AB}^-\)</span>” нь ямар кодын үг рүү хөрвөх вэ? <strong>(б)</strong> Энэ кодын бүх утгыг харуулсан хүснэгтийг зохио. <strong>(в)</strong> Энэ кодын жин хэд вэ? <strong>(г)</strong> <code>0101111</code> кодын үгийг ямар хүйс, цусны бүлэг болгон тайлах ёстой вэ? <strong>(д)</strong> Хүснэгт дэх кодын үг биш бөгөөд түүнд хамгийн ойр орших хоёр ба түүнээс дээш кодын үг ижил зайд оршдог долоон оронтой үгийн жишээ гарга. Ийм үгийг хамгийн ойрын хөршөөр код тайлах аргаар тайлах боломжгүй.</p></li>
+<li><p>Арми хээрийн цэргүүддээ заримдаа алдаа гардаг холбооны сувгаар чиглэл мэдээлэх шаардлагатай болжээ. Зураг 3.4-ийн дагуу луужингийн чиглэл бүрд дөрвөн оронтой хоёртын мессеж <span class="math inline">\(b_1 b_2 b_3 b_4\)</span> харгалзана. Мессежийн цифрүүдийн нийлбэрийг ашиглан дөрвөн оронтой мессеж <span class="math inline">\(b_1 b_2 b_3 b_4\)</span> бүрийг дараах томьёонуудын дагуу долоон оронтой кодын үг <span class="math inline">\(b_1 b_2 b_3 b_4 b_5 b_6 b_7\)</span> болгон хувиргадаг хоёртын шугаман кодыг авч үзье: <span class="math display">\[
+\begin{aligned}
+b_5 &amp;= (b_1 + b_2 + b_3) \bmod 2 \\
+b_6 &amp;= (b_1 + b_2 + b_4) \bmod 2 \\
+b_7 &amp;= (b_1 + b_3 + b_4) \bmod 2
+\end{aligned}
+\]</span></p>
+<div id="fig-3-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig-3-4.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11.1: Чиглэлийг кодлох нь
+</figcaption>
+</figure>
+</div>
+<p><strong>(а)</strong> Баруун өмнөд SW чиглэлийн кодын үгийг тодорхойл. <strong>(б)</strong> Энэ кодын бүх утгыг харуулсан хүснэгтийг зохио. <strong>(в)</strong> Энэ кодын жин хэд вэ? <strong>(г)</strong> <code>1110100</code> кодын үгийг луужингийн аль чиглэл болгон тайлах вэ? <strong>(д)</strong> Хэрэв <code>0100101</code> тэмдэгт мөр хүлээн авсан бол хамгийн ойрын хөршөөр код тайлах аргыг ашиглан зорьсон луужингийн чиглэлийг тайл.</p></li>
+</ol>
+<p><em>77-оос 80 хүртэлх дасгалуудад Хүснэгт 3.2 (доор давтан харуулав) дахь үсэг-тооны хөрвүүлэлт болон <span class="math inline">\(n = 27\)</span> ба заасан шилжүүлэх утга <span class="math inline">\(b\)</span> бүхий шилжүүлэх шифрийг ашигла. Mathematica эсвэл Maple зэрэг программ хангамж ашиглах нь (оролтын жагсаалт дээр функцүүдийг үнэлэхэд) мөн ухаалаг хэрэг болно.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">A</th>
+<th style="text-align: center;">B</th>
+<th style="text-align: center;">C</th>
+<th style="text-align: center;">D</th>
+<th style="text-align: center;">E</th>
+<th style="text-align: center;">F</th>
+<th style="text-align: center;">G</th>
+<th style="text-align: center;">H</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>I</strong></td>
+<td style="text-align: center;"><strong>J</strong></td>
+<td style="text-align: center;"><strong>K</strong></td>
+<td style="text-align: center;"><strong>L</strong></td>
+<td style="text-align: center;"><strong>M</strong></td>
+<td style="text-align: center;"><strong>N</strong></td>
+<td style="text-align: center;"><strong>O</strong></td>
+<td style="text-align: center;"><strong>P</strong></td>
+<td style="text-align: center;"><strong>Q</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;">13</td>
+<td style="text-align: center;">14</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">17</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>R</strong></td>
+<td style="text-align: center;"><strong>S</strong></td>
+<td style="text-align: center;"><strong>T</strong></td>
+<td style="text-align: center;"><strong>U</strong></td>
+<td style="text-align: center;"><strong>V</strong></td>
+<td style="text-align: center;"><strong>W</strong></td>
+<td style="text-align: center;"><strong>X</strong></td>
+<td style="text-align: center;"><strong>Y</strong></td>
+<td style="text-align: center;"><strong>Z</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">18</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">21</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">23</td>
+<td style="text-align: center;">24</td>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">26</td>
+</tr>
+</tbody>
+</table>
+<ol start="77" type="1">
+<li>Нэгэн коллеж оюутны хичээл сонголтын бүртгэлийн өгөгдлийг шифрлэхийн тулд <span class="math inline">\(b = 8\)</span> бүхий шилжүүлэх шифр ашигладаг. Энэ коллежид <code>"DISCRETE MATH"</code> гэдэг хичээлийг хэрхэн шифрлэхийг тодорхойл.</li>
+<li>Хакеруудаас хамгаалахын тулд нэгэн интернэт үйлчилгээ үзүүлэгч хэрэглэгчдийнхээ нууц үгийг <span class="math inline">\(b = 3\)</span> бүхий шилжүүлэх шифрээр шифрлэдэг. Хэрэглэгчийн <code>"BINARY CODE"</code> нууц үг хэрхэн шифрлэгдэхийг тодорхойл.</li>
+<li>2001 оны 12-р сард <em>ImClone</em> компанийн гүйцэтгэх захирал Сэм Ваксал өөрийн найз, <em>ImClone</em>-ий хувьцаа эзэмшигч Марта Стюарт руу <code>"GT OXAR CBT"</code> гэсэн нууцлагдсан мессеж илгээсэн байж магадгүй юм. Ваксал <span class="math inline">\(b = 15\)</span> бүхий шилжүүлэх шифр ашигласан гэж үзээд тэр мессежийг тайл.</li>
+<li>1948 онд <em>Chicago Tribune</em> сонин талбар дээрх сурвалжлагчдаас нууцлагдсан мэдээ хүлээн авахдаа шилжүүлэх шифр ашигласан байж магадгүй юм. Сурвалжлагч <span class="math inline">\(b = 2\)</span> бүхий шилжүүлэх шифр ашигласан гэж үзээд түүний илгээсэн <code>"FGYG BYKPU"</code> мессежийг тайл.</li>
+</ol>
+<hr>
+
+
+</section>
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./3-1.html" class="pagination-link" aria-label="Хуваагчид">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Хуваагчид</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./3-3.html" class="pagination-link" aria-label="Евклидийн алгоритм ба лемм">
+        <span class="nav-page-text"><span class="chapter-title">Евклидийн алгоритм ба лемм</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

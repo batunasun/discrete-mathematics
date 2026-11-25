@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Иррационал тоонууд – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./3-6.html" rel="next">
+<link href="./3-4.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3.html">Тооны онолын үндэс</a></li><li class="breadcrumb-item"><a href="./3-5.html"><span class="chapter-title">Иррационал тоонууд</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#р-зүйлийн-дасгалууд" id="toc-р-зүйлийн-дасгалууд" class="nav-link active" data-scroll-target="#р-зүйлийн-дасгалууд">3.5-р зүйлийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3.html">Тооны онолын үндэс</a></li><li class="breadcrumb-item"><a href="./3-5.html"><span class="chapter-title">Иррационал тоонууд</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Иррационал тоонууд</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Бидний одоо судлах гэж буйчлан бүх бодит тоо рационал байдаггүй.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 3.11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Рационал биш бодит тоог <strong>иррационал тоо</strong> (irrational) гэнэ.</p>
+</div>
+</div>
+<p>Иррационал тоонууд шууд бус аргаар тодорхойлогддог тул иррационал тоонуудын тухай өгүүлбэрүүдийг шууд бус (эсрэгээс нь) баталгаагаар батлах хандлагатай байдаг. Бид одоо аливаа тоог иррационал болохыг батлах анхны баталгаагаа хийхэд бэлэн боллоо.</p>
+<p>Хэдийгээр <span class="math inline">\(\sqrt{2}\)</span> нь иррационал байдаг баримт орчин үед биднийг гайхшируулахгүй боловч Грекийн математикч Пифагорыг (МЭӨ 580–500 оны орчим) дагагчдын хувьд энэхүү нээлт нь жинхэнэ цочрол болж байв. Пифагорчууд тоонуудыг геометр утгаар буюу хэрчмүүдийн уртаар төсөөлдөг байжээ. Тэд дурын хоёр хэрчмийн уртын харьцааг хоёр бүхэл тооны харьцаагаар илэрхийлж болно гэдэгт итгэдэг байв. Гэсэн хэдий ч Пифагорын теоремоор квадратын диагоналын уртыг түүний талын уртад харьцуулсан харьцаагаар хэмжигддэг <span class="math inline">\(\sqrt{2}\)</span> тоог ийм хэлбэрээр илэрхийлэх боломжгүй юм. Пифагорчууд өөрсдийн итгэл үнэмшилд нь учирсан энэхүү цохилтод ихэд сандарч, эхэндээ үүнийг нууцлахыг оролджээ. Гэсэн хэдий ч энэ тухай мэдээлэл тархсан юм. Орчин үеийн баталгааг энд толилуулж байна.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.24
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\sqrt{2}\)</span> нь иррационал тоо мөн.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Эсрэгээс нь сэтгэе. Тэгвэл <span class="math inline">\(\sqrt{2}\)</span> нь рационал тоо болно. Өөрөөр хэлбэл, <span class="math inline">\(b \neq 0\)</span> байх ямар нэгэн <span class="math inline">\(a, b \in \mathbb{Z}\)</span> тоонуудын хувьд <span class="math inline">\(\sqrt{2} = \frac{a}{b}\)</span> байна. Цаашилбал, Теорем 3.22 ёсоор бид <span class="math inline">\(\frac{a}{b}\)</span>-ийг үл хураагдах хэлбэрт байхаар сонгож чадна. Тухайлбал, <span class="math inline">\(\gcd(a, b) = 1\)</span> байна. Бидэнд <span class="math inline">\(a = \sqrt{2}b\)</span> байгаа тул <span class="math inline">\(a^2 = 2b^2\)</span> болно. Өөрөөр хэлбэл, <span class="math inline">\(a^2\)</span> тэгш байна. (Өөрөөр хэлбэл, <span class="math inline">\(a^2\)</span> нь <span class="math inline">\(2\)</span>-т хуваагдана.) 3.1-р хэсгийн Дасгал 3 ёсоор <span class="math inline">\(a\)</span> нь тэгш байх ёстой. (Өөрөөр хэлбэл, <span class="math inline">\(a\)</span> нь <span class="math inline">\(2\)</span>-т хуваагдана.) Тиймээс ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> тооны хувьд <span class="math inline">\(a = 2k\)</span> болно. Эндээс <span class="math inline">\(2b^2 = a^2 = 4k^2\)</span> болох ба улмаар <span class="math inline">\(b^2 = 2k^2\)</span> болно. <span class="math inline">\(b^2\)</span> нь тэгш (<span class="math inline">\(2\)</span>-т хуваагддаг) тул <span class="math inline">\(b\)</span> мөн тэгш (<span class="math inline">\(2\)</span>-т хуваагддаг) байна. <span class="math inline">\(a\)</span> ба <span class="math inline">\(b\)</span> хоёулаа <span class="math inline">\(2\)</span>-т хуваагддаг гэдэг нь <span class="math inline">\(\frac{a}{b}\)</span>-ийг үл хураагдах хэлбэрт авсан бидний таамаглалтай зөрчилдөнө. Өөрөөр хэлбэл, <span class="math inline">\(\gcd(a, b) \ge 2\)</span> байх боломжгүй юм. <span class="math inline">\(\square\)</span></p>
+<p><span class="math inline">\(\sqrt{2}\)</span>-ийг иррационал гэдгийг мэдсэнээр <span class="math inline">\(\sqrt{2}\)</span>-ийг агуулсан бусад зарим тоонуудыг мөн иррационал болохыг харуулахад илүү хялбар болдог.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.31
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\frac{7 + \sqrt{2}}{5}\)</span> нь иррационал болохыг харуул.</p>
+<p><strong>Баталгаа.</strong> Эсрэгээс нь сэтгэе. Тэгвэл <span class="math inline">\(r = \frac{7 + \sqrt{2}}{5}\)</span> нь рационал тоо болно. Энгийн алгебрын үйлдлээр бид <span class="math inline">\(\sqrt{2} = 5r - 7\)</span> болохыг харна. Гэвч <span class="math inline">\(5r - 7 \in \mathbb{Q}\)</span> бөгөөд <span class="math inline">\(\sqrt{2} \notin \mathbb{Q}\)</span>. Энэ нь зөрчил юм. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<p>Жишээ 3.31-д бид Теорем 3.24-ийн давуу талыг хэрхэн ашигласныг анхаарна уу. Бид Теорем 3.24-ийн баталгаанд өгөгдсөн шиг нарийвчилсан үндэслэл хийх шаардлагагүй болсон. Үнэндээ Жишээ 3.31-ийн баталгаанд <span class="math inline">\(r\)</span> рационал тоог энгийн бутархай хэлбэрээр илэрхийлэх ч шаардлага гараагүй юм.</p>
+<p>Иррационал тооны дараагийн жишээний хувьд бид <strong>логарифм</strong> руу шилжье. <span class="math inline">\(b &gt; 1\)</span> ба <span class="math inline">\(x &gt; 0\)</span> байх бодит <span class="math inline">\(b, x\)</span>, ба <span class="math inline">\(y\)</span> тоонууд өгөгдсөн үед <span class="math inline">\(\log_b x = y\)</span> байх нь <span class="math inline">\(b^y = x\)</span> байхтай эквивалент гэдгийг эргэн саная. Энэхүү тодорхойлолт нь энд бидний зорилгод хангалттай бөгөөд бид логарифмыг 5.4-р хэсэгт илүү гүнзгий судлах болно.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.32
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\log_3 5\)</span> нь иррационал болохыг харуул.</p>
+<p><strong>Баталгаа.</strong> Эсрэгээс нь сэтгэе. Тэгвэл <span class="math inline">\(\log_3 5\)</span> нь рационал тоо болно. Өөрөөр хэлбэл, <span class="math inline">\(b \neq 0\)</span> байх ямар нэгэн <span class="math inline">\(a, b \in \mathbb{Z}\)</span> тоонуудын хувьд <span class="math inline">\(\log_3 5 = \frac{a}{b}\)</span> байна. Цаашилбал, (шаардлагатай бол <span class="math inline">\(a\)</span> ба <span class="math inline">\(b\)</span> хоёуланг нь <span class="math inline">\(-1\)</span>-ээр үржүүлж болох тул) бид <span class="math inline">\(b &gt; 0\)</span> гэж үзэж чадна. <span class="math inline">\(\log_3 5 &gt; 0\)</span> тул <span class="math inline">\(a &gt; 0\)</span> болно. Логарифмын тодорхойлолт ёсоор <span class="math inline">\(3^{\frac{a}{b}} = 5\)</span> байна. Энэ тэгшитгэлийн хоёр талыг <span class="math inline">\(b\)</span> зэрэгт дэвшүүлбэл <span class="math inline">\(3^a = 5^b\)</span> болно. <span class="math inline">\(a &gt; 0\)</span> тул бид <span class="math inline">\(3 \mid 5^b\)</span> болохыг харна. Тэгвэл Мөрдөлгөө 3.19 ёсоор <span class="math inline">\(3 \mid 5\)</span> болно. Энэ нь зөрчил юм. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<p>Бодит <span class="math inline">\(f(x)\)</span> функцийн <strong>язгуур</strong> (root) буюу <strong>тэг</strong> (zero) гэдэг нь <span class="math inline">\(f(r) = 0\)</span> байх <span class="math inline">\(r\)</span> утгыг хэлнэ. <em>Рационал</em> язгууруудын тухай дараах үр дүн нь тоонуудыг <em>иррационал</em> болохыг харуулахад тустай хэрэгсэл болдог.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.25: Рационал язгуурын теорем (Rational Roots Theorem)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n \in \mathbb{Z}^+\)</span> байг ба <span class="math display">\[f(x) = c_n x^n + c_{n-1} x^{n-1} + \dots + c_1 x + c_0\]</span> нь <span class="math inline">\(c_n \neq 0\)</span> байх бүхэл коэффициентүүдтэй <span class="math inline">\(c_n, c_{n-1}, \dots, c_1, c_0\)</span> олон гишүүнт байг. Хэрэв <span class="math inline">\(r\)</span> нь <span class="math inline">\(f\)</span>-ийн рационал язгуур бол (өөрөөр хэлбэл, <span class="math inline">\(r \in \mathbb{Q}\)</span> ба <span class="math inline">\(f(r) = 0\)</span>), <span class="math inline">\(a \mid c_0\)</span> ба <span class="math inline">\(b \mid c_n\)</span> биелэх ямар нэгэн <span class="math inline">\(a, b \in \mathbb{Z}\)</span> тоонуудын хувьд <span class="math inline">\(r = \frac{a}{b}\)</span> байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Ямар нэгэн рационал <span class="math inline">\(r\)</span> тооны хувьд <span class="math inline">\(f(r) = 0\)</span> гэж үзье. Теорем 3.22 ёсоор бид <span class="math inline">\(r = \frac{a}{b}\)</span>-ийг үл хураагдах хэлбэрээр бичихийн тулд <span class="math inline">\(b &gt; 0\)</span> ба <span class="math inline">\(\gcd(a, b) = 1\)</span> байх <span class="math inline">\(a, b \in \mathbb{Z}\)</span> тоонуудыг сонгож чадна. <span class="math display">\[c_n \frac{a^n}{b^n} + c_{n-1} \frac{a^{n-1}}{b^{n-1}} + \dots + c_1 \frac{a}{b} + c_0 = 0\]</span> тэгшитгэлийг: <span class="math display">\[c_n a^n + c_{n-1} b a^{n-1} + \dots + c_1 b^{n-1} a + c_0 b^n = 0\]</span> гэж бичиж болно. <span class="math display">\[c_0 b^n = -a(c_n a^{n-1} + c_{n-1} b a^{n-2} + \dots + c_1 b^{n-1})\]</span> тул <span class="math inline">\(a \mid c_0 b^n\)</span> болно. <span class="math inline">\(\gcd(a, b) = 1\)</span> тул Жишээ 3.26-ийн үр дүн ёсоор <span class="math inline">\(\gcd(a, b^n) = 1\)</span> болно. Тэгвэл Евклидийн лемм ёсоор <span class="math inline">\(a \mid c_0\)</span> болно. Үүнтэй адилаар: <span class="math display">\[c_n a^n = -b(c_{n-1} a^{n-1} + \dots + c_1 b^{n-2} a + c_0 b^{n-1})\]</span> тул <span class="math inline">\(b \mid c_n a^n\)</span> болох ба улмаар <span class="math inline">\(b \mid c_n\)</span> болно. <span class="math inline">\(\square\)</span></p>
+<p>Рационал язгуурын теоремын өгүүлбэрийг жишээн дээр ойлгох нь хамгийн тохиромжтой байж магадгүй юм.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.33
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math display">\[f(x) = 4x^4 + 3x^3 - 9x^2 - 6x + 2\]</span> олон гишүүнтийг авч үзье; энэ нь бүхэл коэффициентүүдтэй болох нь илэрхий байна. Сул гишүүн <span class="math inline">\(2\)</span>-ын хуваагчид нь: <span class="math display">\[1, \, -1, \, 2, \quad \text{ба} \quad -2 \tag{3.6}\]</span> байна. Ахлах коэффициент <span class="math inline">\(4\)</span>-ийн хуваагчид нь: <span class="math display">\[1, \, -1, \, 2, \, -2, \, 4, \quad \text{ба} \quad -4 \tag{3.7}\]</span> байна. Рационал язгуурын теорем ёсоор <span class="math inline">\(f\)</span>-ийн дурын рационал язгуур нь хүртвэр нь (3.6) жагсаалтаас, хуваарь нь (3.7) жагсаалтаас авсан энгийн бутархайн утга байх ёстой: <span class="math display">\[
+\begin{array}{cccccc}
+\frac{1}{1}, &amp; \frac{1}{-1}, &amp; \frac{1}{2}, &amp; \frac{1}{-2}, &amp; \frac{1}{4}, &amp; \frac{1}{-4}, \\[6pt]
+\frac{-1}{1}, &amp; \frac{-1}{-1}, &amp; \frac{-1}{2}, &amp; \frac{-1}{-2}, &amp; \frac{-1}{4}, &amp; \frac{-1}{-4}, \\[6pt]
+\frac{2}{1}, &amp; \frac{2}{-1}, &amp; \frac{2}{2}, &amp; \frac{2}{-2}, &amp; \frac{2}{4}, &amp; \frac{2}{-4}, \\[6pt]
+\frac{-2}{1}, &amp; \frac{-2}{-1}, &amp; \frac{-2}{2}, &amp; \frac{-2}{-2}, &amp; \frac{-2}{4}, &amp; \frac{-2}{-4}.
+\end{array}
+\]</span> Илэрхий давхардлуудыг хасвал <span class="math inline">\(f\)</span>-ийн боломжит рационал язгууруудын жагсаалт нь: <span class="math display">\[1, \quad -1, \quad \frac{1}{2}, \quad -\frac{1}{2}, \quad \frac{1}{4}, \quad -\frac{1}{4}, \quad 2, \quad -2\]</span> болно. Энэ жагсаалтын тоонуудыг зүгээр л <span class="math inline">\(f\)</span>-д орлуулснаар бид <span class="math inline">\(f\)</span>-ийн бүх рационал язгуурыг тодорхойлж чадна: <span class="math display">\[
+\begin{aligned}
+f(1) &amp;= -6 \neq 0 \\
+f(-1) &amp;= 0 \\
+f\left(\frac{1}{2}\right) &amp;= -\frac{21}{8} \neq 0 \\
+f\left(-\frac{1}{2}\right) &amp;= \frac{21}{8} \neq 0 \\
+f\left(\frac{1}{4}\right) &amp;= 0 \\
+f\left(-\frac{1}{4}\right) &amp;= \frac{93}{32} \neq 0 \\
+f(2) &amp;= 42 \neq 0 \\
+f(-2) &amp;= 18 \neq 0.
+\end{aligned}
+\]</span> <span class="math inline">\(-1\)</span> ба <span class="math inline">\(\frac{1}{4}\)</span> нь <span class="math inline">\(f\)</span>-ийн цорын ганц рационал язгуурууд болохыг бид харж байна. Улмаар <span class="math inline">\((x + 1)\)</span> ба <span class="math inline">\((4x - 1)\)</span> нь <span class="math inline">\(f(x)\)</span>-ийн үржигдэхүүнүүд байх ёстой. Тиймээс өнцгөөр хуваах аргыг ашиглан: <span class="math display">\[f(x) = (x + 1)(4x - 1)(x^2 - 2)\]</span> болохыг олж болно. Энэ тохиолдолд сүүлийн гишүүн болох <span class="math inline">\(x^2 - 2\)</span> нь <span class="math inline">\((x - \sqrt{2})(x + \sqrt{2})\)</span> болж хялбархан задарна. Эндээс <span class="math inline">\(f(x)\)</span>-ийн бүрэн задаргаа нь: <span class="math display">\[f(x) = (x + 1)(4x - 1)(x - \sqrt{2})(x + \sqrt{2})\]</span> болно. Иймд <span class="math inline">\(f\)</span>-ийн язгуурууд нь: <span class="math display">\[-1, \quad \frac{1}{4}, \quad \sqrt{2}, \quad \text{ба} \quad -\sqrt{2}\]</span> байна. <span class="math inline">\(\sqrt{2}\)</span> ба <span class="math inline">\(-\sqrt{2}\)</span> нь рационал язгууруудын жагсаалтад байхгүй тул тэдгээр нь иррационал язгуурууд байх ёстой. Мэдээж энэ тохиолдолд бид <span class="math inline">\(\sqrt{2}\)</span> ба <span class="math inline">\(-\sqrt{2}\)</span>-ийг иррационал гэдгийг аль хэдийн мэдэж байсан. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Иррационал тоонуудын тухай энэ хэсэгт рационал язгуурын тухай теоремыг оруулсан үндэслэлээ бид одоо тайлбарлаж чадна. Жишээ 3.31-д бид <span class="math inline">\(r = \frac{7 + \sqrt{2}}{5}\)</span>-ийг иррационал болохыг харуулсан. Энгийн алгебраас <span class="math inline">\(\sqrt{2} = 5r - 7\)</span> гэсэн чухал үр дүн гарсан билээ. Хэрэв бид цаашлаад энэ тэгшитгэлийн хоёр талыг квадрат зэрэгт дэвшүүлбэл <span class="math inline">\(2 = 25r^2 - 70r + 49\)</span> болно. Эндээс <span class="math inline">\(25r^2 - 70r + 47 = 0\)</span> болно. Өөрөөр хэлбэл, <span class="math inline">\(r\)</span> нь <span class="math inline">\(f(x) = 25x^2 - 70x + 47\)</span> олон гишүүнтийн язгуур юм. Рационал язгуурын теорем ёсоор <span class="math inline">\(\pm 1, \pm 47, \pm \frac{1}{5}, \pm \frac{47}{5}, \pm \frac{1}{25}\)</span>, ба <span class="math inline">\(\pm \frac{47}{25}\)</span> нь <span class="math inline">\(f\)</span>-ийн цорын ганц боломжит рационал язгуурууд болох тул эдгээр рационал тоонуудын аль нь ч <span class="math inline">\(f\)</span>-ийн язгуур биш гэдгийг энгийнээр шалгахад <span class="math inline">\(r\)</span> нь иррационал байх ёстой нь харагдана. Цаашилбал, <span class="math inline">\(f\)</span>-ийн нөгөө язгуур болох <span class="math inline">\(\frac{7 - \sqrt{2}}{5}\)</span> мөн иррационал байх ёстой. Энэхүү ерөнхий үндэслэлийн шугамыг олон жишээн дээр ашиглаж болно.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.34
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\sqrt{2} + \sqrt{3}\)</span> нь иррационал болохыг харуул.</p>
+<p>Эхлээд бид ноорог тооцоолол хийе. <span class="math inline">\(r = \sqrt{2} + \sqrt{3}\)</span> гэж авъя. Тэгвэл <span class="math inline">\(r^2 = 2 + 2\sqrt{6} + 3 = 5 + 2\sqrt{6}\)</span> болно. Эндээс <span class="math inline">\(r^2 - 5 = 2\sqrt{6}\)</span>. Тиймээс <span class="math inline">\(r^4 - 10r^2 + 25 = (r^2 - 5)^2 = (2\sqrt{6})^2 = 24\)</span>. Иймд <span class="math inline">\(r^4 - 10r^2 + 1 = 0\)</span> болно.</p>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(f(x) = x^4 - 10x^2 + 1\)</span> байг. Рационал язгуурын теорем ёсоор <span class="math inline">\(f\)</span>-ийн цорын ганц боломжит рационал язгуурууд нь <span class="math inline">\(\pm 1\)</span> байна. Мэдээж <span class="math inline">\(\sqrt{2} + \sqrt{3} &gt; 1 + 1 &gt; 1 &gt; -1\)</span> тул <span class="math inline">\(\sqrt{2} + \sqrt{3}\)</span> нь <span class="math inline">\(1\)</span> ч биш, <span class="math inline">\(-1\)</span> ч биш. <span class="math inline">\(f(\sqrt{2} + \sqrt{3}) = 0\)</span> тул <span class="math inline">\(\sqrt{2} + \sqrt{3}\)</span> нь иррационал байх ёстой. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<p>Теорем 3.24-т ашигласан баталгааны арга нь <span class="math inline">\(2\)</span> анхны тоо байдаг баримтаас хамаардаг. Улмаар тэр арга нь <span class="math inline">\(\sqrt{6}\)</span>-г иррационал болохыг батлахад шууд тохирдоггүй. Үүний оронд Жишээ 3.34-т авсан арга нь маш сайн ажилладаг.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.35
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\sqrt{6}\)</span> нь иррационал болохыг харуул.</p>
+<p><strong>Баталгаа.</strong> Мэдээж <span class="math inline">\(\sqrt{6}\)</span> нь <span class="math inline">\(f(x) = x^2 - 6\)</span> олон гишүүнтийн язгуур мөн. Рационал язгуурын теорем ёсоор <span class="math inline">\(f\)</span>-ийн цорын ганц боломжит рационал язгуурууд нь <span class="math inline">\(\pm 1, \pm 2, \pm 3, \pm 6\)</span> байна. Эдгээрийн аль нь ч <span class="math inline">\(f\)</span>-ийн язгуур биш тул <span class="math inline">\(\sqrt{6}\)</span> нь иррационал байх ёстой. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<p>Жишээ 3.34 ба 3.35 дээрх хэлбэрийн үндэслэлд автагддаг тоонууд нь онцгой ангиллыг үүсгэдэг.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 3.12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Хэрэв <span class="math inline">\(r\)</span> бодит тоо нь бүхэл коэффициентүүдтэй олон гишүүнтийн язгуур болдог бол түүнийг <strong>алгебрлаг тоо</strong> (algebraic) гэнэ.</p>
+</div>
+</div>
+<p>Рационал тоонууд алгебрлаг байдаг тухай баталгааг дасгалд үлдээсэн. Гэсэн хэдий ч бүх алгебрлаг тоо рационал байдаггүй. Жишээ 3.34-т бид <span class="math inline">\(\sqrt{2} + \sqrt{3}\)</span>-ийг алгебрлаг боловч рационал биш болохыг харуулсан.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 3.13
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Алгебрлаг биш бодит тоонуудыг <strong>трансцендент тоонууд</strong> (transcendental) гэнэ.</p>
+</div>
+</div>
+<p>Рационал тоонууд алгебрлаг байдаг тул бүх трансцендент тоонууд иррационал байх ёстой. Хэдийгээр баталгаа нь энэ номын хүрээнээс хальсан боловч <span class="math inline">\(\pi\)</span> болон <span class="math inline">\(e\)</span> тоонууд нь трансцендент бөгөөд улмаар иррационал тоонууд юм.</p>
+<hr>
+<section id="р-зүйлийн-дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">3.5-р зүйлийн дасгалууд</h2>
+<p><em>1-ээс 8 хүртэлх дасгалуудад Теорем 3.24-ийн баталгааг дуурайн хий.</em></p>
+<ol type="1">
+<li><span class="math inline">\(\sqrt{3}\)</span> нь иррационал болохыг харуул. <em>Зөвлөмж:</em> Танд <span class="math inline">\(p = 3\)</span> ба <span class="math inline">\(n = 2\)</span> үеийн Мөрдөлгөө 3.19 хэрэг болно.</li>
+<li><span class="math inline">\(\sqrt{5}\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\sqrt{13}\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(p\)</span> нь дурын анхны тоо байг. <span class="math inline">\(\sqrt{p}\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\sqrt[3]{2}\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\sqrt[3]{5}\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\sqrt[3]{7}\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\sqrt[4]{2}\)</span> нь иррационал болохыг харуул.</li>
+<li>Хэрэв хүн амын тоо тасралтгүй өсөж жил бүр хоёр дахин нэмэгдэж байгаа бол ямар нэгэн эхлэх хугацаанаас хойш <span class="math inline">\(t\)</span> жилийн дараах хүн амын хэмжээг хэмждэг <span class="math inline">\(p(t)\)</span> функц нь <span class="math inline">\(p(t) = a 2^t\)</span> хэлбэртэй байна (энд <span class="math inline">\(a\)</span> нь <span class="math inline">\(0\)</span> хугацаан дахь хүн амын тоо). Жишээлбэл, <span class="math inline">\(p(6) = 2p(5)\)</span> болохыг ажиглая. Хүн амын тоо гурав дахин өсөх хугацаа нь <span class="math inline">\(\log_2 3\)</span> болох нь харагддаг. Өөрөөр хэлбэл, <span class="math inline">\(\forall t \ge 0, \, p(t + \log_2 3) = 3p(t)\)</span> байна. (Үүнийг 5.4-р хэсгийн (5.5) томьёог ашиглан баталгаажуулж болно.) Гурав дахин өсөх хугацаа болох <span class="math inline">\(\log_2 3\)</span> нь иррационал болохыг харуул.</li>
+<li>Чулуулаг дахь цацраг идэвхт бодисын хэмжээ <span class="math inline">\(t\)</span> хугацаанд <span class="math inline">\(r(t) = a\left(\frac{1}{5}\right)^t\)</span> функцээр өгөгдсөн гэе (энд <span class="math inline">\(a = r(0)\)</span> тогтмол). Хагас задралын үе гэдэг нь цацраг идэвхт бодисын хэмжээ <span class="math inline">\(50\%\)</span>-иар буурахад шаардагдах хугацааны уртыг хэлнэ. Энэ тохиолдолд хагас задралын үе нь <span class="math inline">\(\log_5 2\)</span> болж таарна. Өөрөөр хэлбэл, <span class="math inline">\(\forall t \ge 0, \, r(t + \log_5 2) = \frac{1}{2}r(t)\)</span> байна. (Үүнийг 5.4-р хэсгийн (5.5) томьёог ашиглан баталгаажуулж болно.) Хагас задралын үе болох <span class="math inline">\(\log_5 2\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\log_3 7\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\log_7 5\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(\frac{\sqrt{2} + \sqrt{6}}{\sqrt{2} + \sqrt{3}}\)</span> нь иррационал уу? Яагаад?</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(\sqrt{13 + \sqrt{2} + \frac{7}{3 + \sqrt{2}}}\)</span> нь иррационал уу? Яагаад?</li>
+<li>Иррационал тоонуудын нийлбэр үргэлж иррационал байдаг уу? Тайлбарла.</li>
+<li>Иррационал тооны эсрэг тоо үргэлж иррационал байдаг уу? Тайлбарла.</li>
+</ol>
+<p><em>17-оос 22 хүртэлх дасгалуудад Жишээ 3.31-ийн баталгааг дуурайн хий. 1-ээс 8 хүртэлх дасгалын үр дүнг ашигла.</em></p>
+<ol start="17" type="1">
+<li><p>Хэрэв тэгш өнцөгтийн уртыг өргөнд нь харьцуулсан харьцаа <span class="math inline">\(\frac{1 + \sqrt{5}}{2}\)</span> бөгөөд тэр тэгш өнцөгтийн нэг төгсгөлөөс квадратыг огтолж авбал үлдсэн тэгш өнцөгт нь мөн л урт ба өргөний харьцаа нь <span class="math inline">\(\frac{1 + \sqrt{5}}{2}\)</span>-тэй тэнцүү байна. <span class="math inline">\(\frac{1 + \sqrt{5}}{2}\)</span> тоог <strong>алтан харьцаа</strong> (golden ratio) гэдэг. <span class="math inline">\(\frac{1 + \sqrt{5}}{2}\)</span> нь иррационал болохыг харуул.</p>
+<div id="fig-3-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig-3-5.png" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.1: Алтан харьцаа
+</figcaption>
+</figure>
+</div></li>
+<li><p><span class="math inline">\(s(n) = \left(\frac{2 + \sqrt{3}}{3}\right)^n + \left(\frac{2 - \sqrt{3}}{3}\right)^n\)</span> томьёо нь бүх эерэг бүхэл <span class="math inline">\(n\)</span> тооны хувьд рационал тоо үүсгэдэг. <span class="math inline">\(s(1), s(2)\)</span>, ба <span class="math inline">\(s(3)\)</span> утгуудыг тооцоолж, тэдгээрийг рационал болохыг ажигла. Гэсэн хэдий ч <span class="math inline">\(\frac{2 + \sqrt{3}}{3}\)</span> нь иррационал болохыг харуул. Мөн үүнийг <span class="math inline">\(s(1)\)</span>-ийн тооцоололтой хамтатган ашиглаж <span class="math inline">\(\frac{2 - \sqrt{3}}{3}\)</span>-ийг иррационал болохыг харуул.</p></li>
+<li><p>Зөв додекаэдр (арван хоёр талт) нь талсууд нь арван хоёр тэнцүү зөв таван өнцөгтөөс тогтох огторгуйн биет юм. <span class="math inline">\(s\)</span> талын урттай зөв додекаэдрийн эзлэхүүн <span class="math inline">\(V\)</span> нь <span class="math inline">\(V = \frac{15 + 7\sqrt{5}}{4} s^3\)</span> томьёогоор өгөгдөнө. <span class="math inline">\(\frac{15 + 7\sqrt{5}}{4}\)</span> нь иррационал болохыг харуул.</p>
+<div id="fig-3-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig-3-6.png" class="img-fluid figure-img" style="width:30.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.2: Зөв додекаэдр
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зөв икосаэдр (хорин талт) нь талсууд нь хорин тэнцүү зөв гурвалжнаас тогтох огторгуйн биет юм. <span class="math inline">\(s\)</span> талын урттай зөв икосаэдрийн эзлэхүүн <span class="math inline">\(V\)</span> нь <span class="math inline">\(V = \frac{5(3 + \sqrt{5})}{12} s^3\)</span> томьёогоор өгөгдөнө. <span class="math inline">\(\frac{5(3 + \sqrt{5})}{12}\)</span> нь иррационал болохыг харуул.</p>
+<div id="fig-3-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fig-3-7.png" class="img-fluid figure-img" style="width:30.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;14.3: Зөв икосаэдр
+</figcaption>
+</figure>
+</div></li>
+<li><p><span class="math inline">\(\frac{7 - \sqrt{2}}{3 + \sqrt{2}}\)</span> нь иррационал болохыг харуул.</p></li>
+<li><p><span class="math inline">\(3 - \sqrt[4]{2}\)</span> нь иррационал болохыг харуул. <em>Зөвлөмж:</em> Дасгал 8-ын үр дүнг ашигла.</p></li>
+</ol>
+<p><em>23-аас 30 хүртэлх дасгалуудад Рационал язгуурын теоремыг ашигла.</em></p>
+<ol start="23" type="1">
+<li><span class="math inline">\(\sqrt{10}\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\sqrt{35}\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(A = 45^\circ\)</span> ба <span class="math inline">\(B = 30^\circ\)</span> үед <span class="math inline">\(\cos(A - B) = \cos(A)\cos(B) + \sin(A)\sin(B)\)</span> адилтгалыг ашиглавал бид дараахыг гаргаж авна: <span class="math display">\[\cos(15^\circ) = \cos(45^\circ)\cos(30^\circ) + \sin(45^\circ)\sin(30^\circ) = \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{1}{2} = \frac{\sqrt{6} + \sqrt{2}}{4}.\]</span> <span class="math inline">\(\sqrt{6} + \sqrt{2}\)</span> нь иррационал болохыг харуул. Эндээс <span class="math inline">\(\cos(15^\circ)\)</span> нь иррационал гэж дүгнэ.</li>
+<li><span class="math inline">\(\sqrt{3} + \sqrt{5}\)</span> нь иррационал болохыг харуул. Дасгал 14-ийг санаж яваарай.</li>
+<li><span class="math inline">\(\theta = 22.5^\circ\)</span> үед <span class="math inline">\(\tan^2(\theta) = \frac{1 - \cos(2\theta)}{1 + \cos(2\theta)}\)</span> адилтгалыг ашиглавал бид дараахыг гаргаж авна: <span class="math display">\[\tan(22.5^\circ) = \sqrt{\frac{1 - \cos(45^\circ)}{1 + \cos(45^\circ)}} = \sqrt{\frac{1 - \frac{\sqrt{2}}{2}}{1 + \frac{\sqrt{2}}{2}}} = \sqrt{3 - 2\sqrt{2}}.\]</span> <span class="math inline">\(\sqrt{3 - 2\sqrt{2}}\)</span> нь иррационал болохыг харуул. Эндээс <span class="math inline">\(\tan(22.5^\circ)\)</span> нь иррационал гэж дүгнэ.</li>
+<li><span class="math inline">\(\theta = 15^\circ\)</span> үед <span class="math inline">\(\cos^2(\theta) = \frac{1 + \cos(2\theta)}{2}\)</span> адилтгалыг ашиглавал бид дараахыг гаргаж авна: <span class="math display">\[\cos(15^\circ) = \sqrt{\frac{1 + \cos(30^\circ)}{2}} = \sqrt{\frac{1 + \frac{\sqrt{3}}{2}}{2}} = \frac{\sqrt{2 + \sqrt{3}}}{2}.\]</span> <span class="math inline">\(\sqrt{2 + \sqrt{3}}\)</span> нь иррационал болохыг харуул. Эндээс <span class="math inline">\(\cos(15^\circ)\)</span> нь иррационал гэж дүгнээд, энэ үр дүн болон Дасгал 25-ын үүднээс Дасгал 13-ыг эргэн хар.</li>
+<li><span class="math inline">\(\frac{\sqrt[4]{3}}{\sqrt{2}}\)</span> нь иррационал болохыг харуул.</li>
+<li><span class="math inline">\(\frac{\sqrt{2}}{\sqrt[3]{5}}\)</span> нь иррационал болохыг харуул.</li>
+<li>1768 онд Францын математикч Иоганн Генрих Ламберт (1728–1777) <span class="math inline">\(\pi\)</span>-г иррационал болохыг баталжээ. <span class="math inline">\(\pi\)</span> иррационал байдаг баримтыг ашиглан <span class="math inline">\(\frac{\pi + 1}{2}\)</span>-ийг иррационал болохыг харуул.</li>
+<li>1737 онд Эйлер Эйлерийн тоо <span class="math inline">\(e\)</span>-г иррационал болохыг баталжээ. <span class="math inline">\(e\)</span> иррационал байдаг баримтыг ашиглан <span class="math inline">\(\frac{e - 1}{2}\)</span>-ийг иррационал болохыг харуул.</li>
+<li><span class="math inline">\(x \in \mathbb{R}\)</span> байг. Хэрэв <span class="math inline">\(x\)</span> иррационал бол <span class="math inline">\(\sqrt{x}\)</span> иррационал болохыг харуул.</li>
+<li>Эмхэтгэгдсэн олон гишүүнтийн (хувьсагчийн хамгийн өндөр зэргийн коэффициент нь <span class="math inline">\(1\)</span> байдаг олон гишүүнт) бүх рационал язгуурууд нь бүхэл тоонууд байдаг гэдгийг харуул.</li>
+<li>Рационал тоонууд нь алгебрлаг байдаг гэдгийг харуул.</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(\sqrt{1 + \sqrt{1 + \sqrt{1 + \dots}}}\)</span> нь алгебрлаг уу? Яагаад?</li>
+<li><span class="math inline">\(\star\)</span> Рационал коэффициентүүдтэй олон гишүүнтийн язгуурууд нь алгебрлаг байдаг гэдгийг харуул.</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(\forall a \in \mathbb{R}\)</span> хувьд хэрэв <span class="math inline">\(a\)</span> алгебрлаг бол <span class="math inline">\(\sqrt{a}\)</span> алгебрлаг болохыг харуул.</li>
+<li>Бүх иррационал тоо трансцендент байдаг уу? Яагаад?</li>
+<li>Хоёр трансцендент тооны нийлбэр заавал трансцендент байх уу? Яагаад?</li>
+<li><span class="math inline">\(\star\)</span> 1873 онд Францын математикч Шарль Эрмит (1822–1901) Эйлерийн тоо <span class="math inline">\(e\)</span>-г трансцендент болохыг баталжээ. <span class="math inline">\(e\)</span>-г трансцендент гэж өгөгдсөн үед <span class="math inline">\(2e\)</span> нь трансцендент байх ёстойг харуул.</li>
+<li><span class="math inline">\(\star\)</span> 1882 онд Германы математикч Фердинанд фон Линдеман (1852–1939) <span class="math inline">\(\pi\)</span>-г трансцендент болохыг баталжээ. <span class="math inline">\(\pi\)</span>-г трансцендент гэж өгөгдсөн үед <span class="math inline">\(\frac{\pi}{6}\)</span> нь трансцендент байх ёстойг харуул.</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./3-4.html" class="pagination-link" aria-label="Рационал тоонууд">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Рационал тоонууд</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./3-6.html" class="pagination-link" aria-label="Модулийн арифметик (Modular Arithmetic)">
+        <span class="nav-page-text"><span class="chapter-title">Модулийн арифметик (Modular Arithmetic)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

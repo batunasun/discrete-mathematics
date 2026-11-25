@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Евклидийн алгоритм ба лемм – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./3-4.html" rel="next">
+<link href="./3-2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3.html">Тооны онолын үндэс</a></li><li class="breadcrumb-item"><a href="./3-3.html"><span class="chapter-title">Евклидийн алгоритм ба лемм</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section: Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#евклидийн-алгоритм-euclids-algorithm" id="toc-евклидийн-алгоритм-euclids-algorithm" class="nav-link active" data-scroll-target="#евклидийн-алгоритм-euclids-algorithm">Евклидийн алгоритм (Euclid’s Algorithm)</a></li>
+  <li><a href="#үржигдэхүүн-болгон-задлах-тухай-леммүүд" id="toc-үржигдэхүүн-болгон-задлах-тухай-леммүүд" class="nav-link" data-scroll-target="#үржигдэхүүн-болгон-задлах-тухай-леммүүд">Үржигдэхүүн болгон задлах тухай леммүүд</a></li>
+  <li><a href="#р-зүйлийн-дасгалууд" id="toc-р-зүйлийн-дасгалууд" class="nav-link" data-scroll-target="#р-зүйлийн-дасгалууд">3.3-р зүйлийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./3.html">Тооны онолын үндэс</a></li><li class="breadcrumb-item"><a href="./3-3.html"><span class="chapter-title">Евклидийн алгоритм ба лемм</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Евклидийн алгоритм ба лемм</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Тооны онолд (мөн ерөнхийдөө математикт) хамгийн анхны агуу хувь нэмэр оруулагчдын нэг нь Грекийн математикч Александрийн Евклид (МЭӨ 300 оны орчим) байв. Хэдийгээр түүний алдарт <em>Эхлэл</em> (<em>Elements</em>) бүтээл нь геометрт оруулсан хувь нэмрээрээ илүү алдартай боловч тооны онолын чухал теоремуудыг мөн агуулдаг. Жишээлбэл, үүнд анхны тоо төгсгөлгүй олон байдаг тухай бидний баталгаанд (Теорем 3.6) ашигласан ухаалаг нотолгоо багтсан байдаг. Энэ хэсэгт Евклидийн <em>Эхлэл</em> зохиолын VII дэвтэрт орсон хоёр чухал үр дүнд анхаарлаа хандуулна. Эхнийх нь хамгийн их ерөнхий хуваагчийг олох болон бусад зүйлд тустай алгоритм юм. Хоёр дахь нь үржигдэхүүн болгон задлах тухай үр дүнгүүдэд суурь болох техникийн лемм юм.</p>
+<p>Хамгийн их ерөнхий хуваагчийг олох Евклидийн алгоритмыг хэлэлцэхээсээ өмнө хамгийн их ерөнхий хуваагчийг илэрхийлж болох нэгэн маш ашигтай хэлбэрийг мэдэж авах хэрэгтэй. (3.5)-ын баруун гар талын хэлбэрийг <span class="math inline">\(m\)</span> ба <span class="math inline">\(n\)</span>-ийн <strong>шугаман комбинац</strong> (linear combination) гэж нэрлэдгийг тэмдэглэе.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.13: ХИЕХ-ийг шугаман комбинацаар илэрхийлэх нь
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зэрэг тэгтэй тэнцүү биш <span class="math inline">\(m\)</span> ба <span class="math inline">\(n\)</span> бүхэл тоонууд өгөгдсөн үед: <span class="math display">\[\gcd(m, n) = mx + ny \tag{3.5}\]</span> биелэх <span class="math inline">\(x\)</span> ба <span class="math inline">\(y\)</span> бүхэл тоонууд оршино.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(S = \{t : t = mu + nv, \text{ энд } u, v \in \mathbb{Z} \text{ ба } mu + nv &gt; 0\}\)</span> байг. <span class="math inline">\(m \cdot m + n \cdot n &gt; 0\)</span> тул <span class="math inline">\(S\)</span> нь хоосон биш. Бүрэн эрэмбэлэгдэх зарчим ёсоор <span class="math inline">\(S\)</span> олонлогт хамгийн бага элемент <span class="math inline">\(d\)</span> олдоно. Иймд ямар нэгэн <span class="math inline">\(x, y \in \mathbb{Z}\)</span> тоонуудын хувьд <span class="math inline">\(d = mx + ny\)</span> бөгөөд <span class="math inline">\(d &gt; 0\)</span> байна. Бидний зорилго бол <span class="math inline">\(d = \gcd(m, n)\)</span> гэдгийг харуулах явдал юм. Эхлээд бид <span class="math inline">\(d \mid m\)</span> болохыг харуулъя.</p>
+<p>Хуваах алгоритм ёсоор <span class="math inline">\(m = dq + r\)</span> ба <span class="math inline">\(0 \le r &lt; d\)</span> байх <span class="math inline">\(q\)</span> ба <span class="math inline">\(r\)</span> бүхэл тоонууд оршино. <span class="math display">\[r = m - dq = m - (mx + ny)q = m(1 - qx) + n(-qy)\]</span> болохыг ажиглая. Хэрэв <span class="math inline">\(r &gt; 0\)</span> байсан бол <span class="math inline">\(r \in S\)</span> болох ба <span class="math inline">\(r\)</span> нь <span class="math inline">\(S\)</span>-ийн хамгийн бага элемент болох <span class="math inline">\(d\)</span>-ээс бага болно. Иймд <span class="math inline">\(r = 0\)</span> байх ёстой. Өөрөөр хэлбэл, <span class="math inline">\(m = dq\)</span> бөгөөд <span class="math inline">\(d \mid m\)</span> байна. Яг үүнтэй төстэй үндэслэлээр <span class="math inline">\(d \mid n\)</span> болохыг харуулж чадна.</p>
+<p>Одоо <span class="math inline">\(d\)</span> нь ерөнхий хуваагчид дотроос <em>хамгийн их</em> нь болохыг харуулах үлдлээ. Тиймээс <span class="math inline">\(c\)</span> нь <span class="math inline">\(c \mid m\)</span> ба <span class="math inline">\(c \mid n\)</span> байх бүхэл тоо гэж үзье. Иймд ямар нэгэн <span class="math inline">\(a, b \in \mathbb{Z}\)</span> тоонуудын хувьд <span class="math inline">\(m = ac\)</span> ба <span class="math inline">\(n = bc\)</span> болно. Эндээс: <span class="math display">\[d = mx + ny = acx + bcy = (ax + by)c\]</span> болно. Тиймээс <span class="math inline">\(c \mid d\)</span>. Теорем 3.1 ёсоор <span class="math inline">\(c \le d\)</span> болно. Ийнхүү <span class="math inline">\(\gcd(m, n) = d = mx + ny\)</span>. <span class="math inline">\(\square\)</span></p>
+<p>Теорем 3.13-ын дараах шууд мөрдөлгөөний баталгааг дасгалд үлдээсэн болно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Мөрдөлгөө 3.14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(m\)</span> ба <span class="math inline">\(n\)</span> хоёр бүхэл тоо харилцан анхны байх нь <span class="math inline">\(mx + ny = 1\)</span> биелэх <span class="math inline">\(x\)</span> ба <span class="math inline">\(y\)</span> бүхэл тоонууд оршихтой зайлшгүй бөгөөд хүрэлцээтэй.</p>
+</div>
+</div>
+<p>Теорем 3.13 ба Мөрдөлгөө 3.14-ийн үр дүнгүүдийг дараах жишээгээр харуулав.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.22
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>(а)</strong> <span class="math inline">\(\gcd(18, 30) = 6\)</span>, бөгөөд <span class="math inline">\(6 = 18(-3) + 30(2)\)</span> болохыг ажиглая.</p>
+<p><strong>(б)</strong> <span class="math inline">\(14\)</span> ба <span class="math inline">\(9\)</span> нь харилцан анхны, бөгөөд <span class="math inline">\(14(2) + 9(-3) = 1\)</span> болохыг ажиглая. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Жишээ 3.22-т үзүүлсэн шугаман комбинацуудыг шалгахад хялбар боловч тэдгээрийг хэрхэн олох вэ?</p>
+<section id="евклидийн-алгоритм-euclids-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="евклидийн-алгоритм-euclids-algorithm">Евклидийн алгоритм (Euclid’s Algorithm)</h3>
+<p>Алгоритм гэдэг нь хүссэн үр дүнд хүргэх төгсгөлөг тооны энгийн заавруудын жагсаалт гэдгийг эргэн саная. Зөвхөн хамгийн их ерөнхий хуваагчийг төдийгүй Теорем 3.13-т амласан <span class="math inline">\(x\)</span> ба <span class="math inline">\(y\)</span> бүхэл тоонуудыг олох <strong>Евклидийн алгоритм</strong> хэмээх арга үнэхээр оршдог. Гэсэн хэдий ч энэ алгоритм хэрхэн ажилладгийг харахын тулд бид эхлээд хамгийн их ерөнхий хуваагчийг тооцоолоход анхаарлаа хандуулъя.</p>
+<p>Эхлээд <span class="math inline">\(\gcd(m, n) = \gcd(|m|, |n|)\)</span> тул <span class="math inline">\(m\)</span> ба <span class="math inline">\(n\)</span> хоёулаа сөрөг биш байх үед <span class="math inline">\(\gcd(m, n)\)</span>-ийг тооцоолох аргатай байхад л хангалттай гэдгийг ажиглая. Евклидийн ашигласан шийдвэрлэх үр дүн бол Хуваах алгоритмын хэрэглээ юм.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.15: ХИЕХ-ийг бууруулах нь (GCD Reduction)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n \ge m &gt; 0\)</span> байх <span class="math inline">\(n\)</span> ба <span class="math inline">\(m\)</span> бүхэл тоонууд байг. <span class="math inline">\(0 \le r &lt; m\)</span> байх <span class="math inline">\(q, r \in \mathbb{Z}\)</span> тоонуудын хувьд <span class="math inline">\(n = mq + r\)</span> гэж бичье. Тэгвэл: <span class="math display">\[\gcd(n, m) = \gcd(m, r).\]</span></p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(\gcd(n, m) = \gcd(m, r)\)</span> гэдэг нь <span class="math inline">\((n, m)\)</span> болон <span class="math inline">\((m, r)\)</span> хосууд ижил ерөнхий хуваагчдын олонлогтой байдаг баримтын шууд мөрдөлгөө бөгөөд бид үүнийг одоо батална.</p>
+<ul>
+<li><span class="math inline">\((\rightarrow)\)</span> <span class="math inline">\(c\)</span> нь <span class="math inline">\(n\)</span> ба <span class="math inline">\(m\)</span>-ийн ерөнхий хуваагч гэж үзье. Өөрөөр хэлбэл, ямар нэгэн <span class="math inline">\(k\)</span> ба <span class="math inline">\(l\)</span> бүхэл тоонуудын хувьд <span class="math inline">\(n = ck\)</span> ба <span class="math inline">\(m = cl\)</span> байна. <span class="math display">\[r = n - mq = ck - clq = c(k - lq)\]</span> болохыг ажиглая. Иймд <span class="math inline">\(c \mid r\)</span> бөгөөд <span class="math inline">\(c \mid m\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(c\)</span> нь <span class="math inline">\(m\)</span> ба <span class="math inline">\(r\)</span>-ийн ерөнхий хуваагч мөн.</li>
+<li><span class="math inline">\((\leftarrow)\)</span> <span class="math inline">\(c\)</span> нь <span class="math inline">\(m\)</span> ба <span class="math inline">\(r\)</span>-ийн ерөнхий хуваагч гэж үзье. Өөрөөр хэлбэл, ямар нэгэн <span class="math inline">\(k\)</span> ба <span class="math inline">\(l\)</span> бүхэл тоонуудын хувьд <span class="math inline">\(m = ck\)</span> ба <span class="math inline">\(r = cl\)</span> байна. <span class="math display">\[n = mq + r = ckq + cl = c(kq + l)\]</span> болохыг ажиглая. Иймд <span class="math inline">\(c \mid n\)</span> бөгөөд <span class="math inline">\(c \mid m\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(c\)</span> нь <span class="math inline">\(n\)</span> ба <span class="math inline">\(m\)</span>-ийн ерөнхий хуваагч мөн. <span class="math inline">\(\square\)</span></li>
+</ul>
+<p>Теорем 3.15-ын гол санаа нь <span class="math inline">\((n, m)\)</span> хосын ХИЕХ-ийг тооцоолох бодлогыг илүү бага <span class="math inline">\((m, r)\)</span> хосын ХИЕХ-ийг тооцоолох бодлогоор солих боломжийг олгодогт оршино. Ийм бууруулалтын дарааллаар бид ерөнхий бодлогыг шийдэхэд хялбар хамаагүй жижиг бодлого руу шилжүүлж чадна. Тухайлбал, эдгээр бууруулалт нь эцэстээ бүхэл тоонуудын аль нэг нь <span class="math inline">\(0\)</span> байх хос руу хүргэнэ. Тэр цэг дээр Жишээ 3.8-ийн үр дүн тооцооллыг дуусгана: <span class="math display">\[\text{Хэрэв } k \text{ нь эерэг бүхэл тоо бол } \gcd(k, 0) = k.\]</span> Бид Евклидийн алгоритмыг хэд хэдэн жишээн дээр харуулъя.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.23
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\gcd(48, 18)\)</span>-ийг тооцоол.</p>
+<p><strong>Бодолт.</strong> Бид Теорем 3.15-ыг давтан хэрэглэнэ: <span class="math display">\[
+\begin{aligned}
+\gcd(48, 18) &amp;= \gcd(18, 12) &amp;&amp; \text{учир нь } 48 = (18)2 + 12 \\
+             &amp;= \gcd(12, 6)  &amp;&amp; \text{учир нь } 18 = (12)1 + 6 \\
+             &amp;= \gcd(6, 0)   &amp;&amp; \text{учир нь } 12 = (6)2 + 0 \\
+             &amp;= 6            &amp;&amp; \text{Жишээ 3.8 ёсоор.} \quad \blacksquare
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+<p>Евклидийн алгоритмын үндсэн процедурыг Алгоритм 3.1-д харуулав. Францын математикч Габриэль Ламе (1795–1870) <span class="math inline">\(n \ge m &gt; 0\)</span> үед <span class="math inline">\(\gcd(n, m)\)</span>-ийг тооцоолоход хамгийн ихдээ <span class="math inline">\(5m\)</span> алхам (энд <span class="math inline">\(m\)</span> нь оронгийн тоо) шаардагдана гэдгийг баталжээ. Евклидийн алгоритмын өөр нэг мөрдөлгөө нь <span class="math inline">\(\gcd(n, m)\)</span>-ийг <span class="math inline">\(n\)</span> ба <span class="math inline">\(m\)</span>-ийн шугаман комбинац хэлбэрээр бичих бүхэл коэффициентүүдийг олох боломжийг олгодог бөгөөд үүнийг дараах хоёр жишээгээр харуулъя.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 3.1: <span class="math inline">\(\gcd(n, m)\)</span>-ийг олох Евклидийн алгоритм
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n, m \in \mathbb{Z}^+\)</span> ба <span class="math inline">\(n \ge m\)</span> байг.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>While m &gt; 0:
+    r = n mod m болгоно.
+    n = m болгоно.
+    m = r болгоно.
+n-ийг буцаана.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.24
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\gcd(630, 96)\)</span>-г олж, түүнийг <span class="math inline">\(x, y \in \mathbb{Z}\)</span> байх <span class="math inline">\(630x + 96y\)</span> хэлбэрээр бич.</p>
+<p><strong>Бодолт.</strong> Эхний алхмууд нь Жишээ 3.23-т ашигласантай ижил байна:</p>
+<p><span class="math display">\[\begin{aligned}
+\gcd(630, 96) &amp;= \gcd(96, 54) &amp;&amp; \text{учир нь } 630 = (96)6 + 54 \\
+              &amp;= \gcd(54, 42) &amp;&amp; \text{учир нь } 96 = (54)1 + 42 \\
+              &amp;= \gcd(42, 12) &amp;&amp; \text{учир нь } 54 = (42)1 + 12 \\
+              &amp;= \gcd(12, 6)  &amp;&amp; \text{учир нь } 42 = (12)3 + 6 \\
+              &amp;= \gcd(6, 0)   &amp;&amp; \text{учир нь } 12 = (6)2 + 0 \\
+              &amp;= 6            &amp;&amp; \text{Жишээ 3.8 ёсоор.}
+\end{aligned}\]</span></p>
+<p>Нэмэлт багахан үйлдэл хийснээр эдгээр тооцооллыг <span class="math inline">\(x\)</span> ба <span class="math inline">\(y\)</span>-ийг олоход ашиглаж болно. Хамгийн их ерөнхий хуваагч болох <span class="math inline">\(6\)</span> нь бидний тооцоололд гарсан хамгийн сүүлийн тэг биш үлдэгдэл гэдгийг анхаарна уу. Тэрхүү сүүлийн тэг биш үлдэгдэл хүртэл бидэнд дараах тэгшитгэлүүд байна:</p>
+<p><span class="math display">\[\begin{aligned}
+54 &amp;= 630 - (96)6 \\
+42 &amp;= 96 - (54)1 \\
+12 &amp;= 54 - (42)1 \\
+6  &amp;= 42 - (12)3.
+\end{aligned}\]</span> Хамгийн сүүлийн мөрөөс эхлэн ухрааж орлуулбал бид дараахыг гаргаж авна: <span class="math display">\[
+\begin{aligned}
+6 &amp;= 42 - (12)3 \\
+  &amp;= 42 - (54 - 1(42))3 = (54)(-3) + (42)(4) \\
+  &amp;= (54)(-3) + (96 - 1(54))(4) = (96)(4) + (54)(-7) \\
+  &amp;= (96)(4) + (630 - 6(96))(-7) = (630)(-7) + (96)(46).
+\end{aligned}
+\]</span> Өөрөөр хэлбэл, <span class="math inline">\(x = -7\)</span> ба <span class="math inline">\(y = 46\)</span> үед <span class="math inline">\(\gcd(630, 96) = 6 = 630x + 96y\)</span> болно. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.25
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\gcd(102, 30)\)</span>-ийг олж, түүнийг <span class="math inline">\(x, y \in \mathbb{Z}\)</span> байх <span class="math inline">\(102x + 30y\)</span> хэлбэрээр бич.</p>
+<p><strong>Бодолт.</strong> <span class="math display">\[
+\begin{aligned}
+\gcd(102, 30) &amp;= \gcd(30, 12) &amp;&amp; \text{учир нь } 102 = (30)3 + 12, &amp;&amp; \text{тиймээс } 12 = 102 - (30)3 \\
+              &amp;= \gcd(12, 6)  &amp;&amp; \text{учир нь } 30 = (12)2 + 6,  &amp;&amp; \text{тиймээс } 6 = 30 - (12)2 \\
+              &amp;= \gcd(6, 0)   &amp;&amp; \text{учир нь } 12 = (6)2 + 0 \\
+              &amp;= 6            &amp;&amp; \text{Жишээ 3.8 ёсоор.}
+\end{aligned}
+\]</span> Иймд: <span class="math display">\[6 = 30 - (12)2 = 30 - (102 - 3(30))2 = (102)(-2) + (30)(7).\]</span> Өөрөөр хэлбэл, <span class="math inline">\(x = -2\)</span> ба <span class="math inline">\(y = 7\)</span> үед <span class="math inline">\(\gcd(102, 30) = 6 = 102x + 30y\)</span> болно. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Жишээ 3.24 ба 3.25-д <span class="math inline">\(d = \gcd(m, n) = mx + ny\)</span> байх <span class="math inline">\(d, x\)</span>, ба <span class="math inline">\(y\)</span>-ийг олоход ашигласан процедурыг <strong>Өргөтгөсөн Евклидийн алгоритм</strong> (Extended Euclidean Algorithm) гэж нэрлэдэг. <em>Mathematica</em> болон <em>Maple</em> программуудад энэ даалгаврыг гүйцэтгэхэд зориулсан харгалзан <code>ExtendedGCD</code> болон <code>igcdex</code> функцүүд байдаг.</p>
+</section>
+<section id="үржигдэхүүн-болгон-задлах-тухай-леммүүд" class="level3">
+<h3 class="anchored" data-anchor-id="үржигдэхүүн-болгон-задлах-тухай-леммүүд">Үржигдэхүүн болгон задлах тухай леммүүд</h3>
+<p>Бид энэ хэсгийг дараагийн хэсгүүдэд шаардагдах үржигдэхүүн болгон задлах тухай зарим чухал үр дүнгүүдээр өндөрлөе. Эдгээр нь бүгд Евклидийн лемм хэмээх суурь үр дүнгээс эхтэй. Нийтлэг агуулга нь бүхэл тоо аливаа үржвэрийг хуваадаг бол уг бүхэл тоо тэр үржвэрийн аль нэг үржигдэхүүнийг хуваах нөхцөлийг тодорхойлох явдал юм. Жишээлбэл, <span class="math inline">\(6 \mid (9 \cdot 10)\)</span> боловч <span class="math inline">\(6 \nmid 9\)</span> ба <span class="math inline">\(6 \nmid 10\)</span> байхад, <span class="math inline">\(5 \mid (9 \cdot 10)\)</span> бөгөөд хэдийгээр <span class="math inline">\(5 \nmid 9\)</span> боловч <span class="math inline">\(5 \mid 10\)</span> гэдэг нь үнэн юм.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 3.16: Евклидийн лемм (Euclid’s Lemma)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(m, n\)</span>, ба <span class="math inline">\(c\)</span> нь бүхэл тоонууд байг. Хэрэв <span class="math inline">\(c \mid mn\)</span> ба <span class="math inline">\(\gcd(c, m) = 1\)</span> бол <span class="math inline">\(c \mid n\)</span> байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(c \mid mn\)</span> ба <span class="math inline">\(\gcd(c, m) = 1\)</span> гэж үзье. Тэгвэл ямар нэгэн <span class="math inline">\(k \in \mathbb{Z}\)</span> тооны хувьд <span class="math inline">\(mn = ck\)</span> болно. Мөрдөлгөө 3.14 ёсоор <span class="math inline">\(cx + my = 1\)</span> биелэх <span class="math inline">\(x, y \in \mathbb{Z}\)</span> тоонууд оршино. <span class="math display">\[n = (cx + my)n = cnx + mny = cnx + cky = c(nx + ky)\]</span> болохыг ажиглая. Тиймээс <span class="math inline">\(c \mid n\)</span>. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Мөрдөлгөө 3.17
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(m, n\)</span>, ба <span class="math inline">\(p\)</span> нь бүхэл тоонууд бөгөөд <span class="math inline">\(p\)</span> нь анхны тоо байг. Хэрэв <span class="math inline">\(p \mid mn\)</span> бол <span class="math inline">\(p \mid m\)</span> эсвэл <span class="math inline">\(p \mid n\)</span> байна.</p>
+</div>
+</div>
+<p>Мөрдөлгөө 3.17-ийн баталгааг дасгалд үлдээв. Дараагийн мөрдөлгөө нь индукцийн аргаар батлахад аяндаа зохицдог. 4.3-р хэсэгт индукцийг танилцуулсны дараа тэрхүү дасгалуудад баталгааг нь хийхийг шаардах болно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Мөрдөлгөө 3.18
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(m_1, m_2, \dots, m_n\)</span>, ба <span class="math inline">\(p\)</span> нь бүхэл тоонууд бөгөөд <span class="math inline">\(p\)</span> нь анхны тоо байг. Хэрэв <span class="math inline">\(p \mid (m_1 \cdot m_2 \cdots m_n)\)</span> бол ямар нэгэн <span class="math inline">\(1 \le i \le n\)</span>-ийн хувьд <span class="math inline">\(p \mid m_i\)</span> байна.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Мөрдөлгөө 3.19
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(m, n\)</span>, ба <span class="math inline">\(p\)</span> нь бүхэл тоонууд бөгөөд <span class="math inline">\(n &gt; 0\)</span> ба <span class="math inline">\(p\)</span> нь анхны тоо байг. Хэрэв <span class="math inline">\(p \mid m^n\)</span> бол <span class="math inline">\(p \mid m\)</span> байна.</p>
+</div>
+</div>
+<p>Бид сүүлийн жишээнийхээ баталгаанд Мөрдөлгөө 3.19-ийг хэрэглэнэ. Өөр нэгэн баталгааг 4.5-р хэсгийн дасгалуудад тоймлон харуулсан болно.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 3.26
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(a, b\)</span>, ба <span class="math inline">\(n\)</span> нь бүхэл тоонууд бөгөөд <span class="math inline">\(n &gt; 0\)</span> байг. Хэрэв <span class="math inline">\(\gcd(a, b) = 1\)</span> бол <span class="math inline">\(\gcd(a, b^n) = 1\)</span> болохыг харуул.</p>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(\gcd(a, b) = 1\)</span> гэж үзье. <span class="math inline">\(d = \gcd(a, b^n)\)</span> гэе. Зөрчилд хүрэхийн тулд эсрэгээс нь <span class="math inline">\(d &gt; 1\)</span> гэж үзье. Теорем 3.5 ёсоор бидэнд <span class="math inline">\(p \mid d\)</span> байх анхны <span class="math inline">\(p\)</span> тоо олдоно. Тиймээс <span class="math inline">\(p \mid a\)</span> ба <span class="math inline">\(p \mid b^n\)</span> болно. Мөрдөлгөө 3.19 ёсоор <span class="math inline">\(p \mid b\)</span> болно. Иймд <span class="math inline">\(p \mid \gcd(a, b)\)</span> болж байна. Өөрөөр хэлбэл <span class="math inline">\(p \mid 1\)</span> болох бөгөөд <span class="math inline">\(p\)</span> нь анхны тоо тул энэ нь боломжгүй юм. Иймд <span class="math inline">\(d = 1\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="р-зүйлийн-дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">3.3-р зүйлийн дасгалууд</h2>
+<p><em>1-ээс 4 хүртэлх дасгалуудад турших ба алдаа гаргах (сонгон шалгах) аргаар өгөгдсөн тэгшитгэлийг хангах <span class="math inline">\(x\)</span> ба <span class="math inline">\(y\)</span> бүхэл тоонуудыг ол.</em></p>
+<ol type="1">
+<li><span class="math inline">\(\gcd(65, 25) = 65x + 25y\)</span>.</li>
+<li><span class="math inline">\(\gcd(39, 9) = 39x + 9y\)</span>.</li>
+<li><span class="math inline">\(15x + 11y = 1\)</span>.</li>
+<li><span class="math inline">\(27x + 8y = 1\)</span>.</li>
+</ol>
+<p><em>5-аас 18 хүртэлх дасгалуудад Евклидийн алгоритмыг ашигла.</em></p>
+<ol start="5" type="1">
+<li><span class="math inline">\(\gcd(110, 44)\)</span>-ийг ол.</li>
+<li><span class="math inline">\(\gcd(1452, 252)\)</span>-г ол.</li>
+<li><span class="math inline">\(\gcd(296, 112)\)</span>-г ол.</li>
+<li><span class="math inline">\(\gcd(204, 30)\)</span>-ийг ол.</li>
+<li><span class="math inline">\(\gcd(63, 25)\)</span>-ийг олж, Алгоритм 3.1 дэх <span class="math inline">\(n\)</span> ба <span class="math inline">\(m\)</span>-ийн утгуудын явцын хүснэгтийг хөтөл.</li>
+<li><span class="math inline">\(\gcd(70, 27)\)</span>-г олж, Алгоритм 3.1 дэх <span class="math inline">\(n\)</span> ба <span class="math inline">\(m\)</span>-ийн утгуудын явцын хүснэгтийг хөтөл.</li>
+<li><span class="math inline">\(\gcd(14, 8)\)</span>-ийг олж, түүнийг <span class="math inline">\(x, y \in \mathbb{Z}\)</span> байх <span class="math inline">\(14x + 8y\)</span> хэлбэрээр бич.</li>
+<li><span class="math inline">\(\gcd(56, 42)\)</span>-ийг олж, түүнийг <span class="math inline">\(x, y \in \mathbb{Z}\)</span> байх <span class="math inline">\(56x + 42y\)</span> хэлбэрээр бич.</li>
+<li><span class="math inline">\(\gcd(50, 35)\)</span>-ийг олж, түүнийг <span class="math inline">\(x, y \in \mathbb{Z}\)</span> байх <span class="math inline">\(50x + 35y\)</span> хэлбэрээр бич.</li>
+<li><span class="math inline">\(\gcd(108, 45)\)</span>-ийг олж, түүнийг <span class="math inline">\(x, y \in \mathbb{Z}\)</span> байх <span class="math inline">\(108x + 45y\)</span> хэлбэрээр бич.</li>
+<li><span class="math inline">\(\gcd(81, 60)\)</span>-ийг олж, түүнийг <span class="math inline">\(x, y \in \mathbb{Z}\)</span> байх <span class="math inline">\(81x + 60y\)</span> хэлбэрээр бич.</li>
+<li><span class="math inline">\(\gcd(259, 77)\)</span>-г олж, түүнийг <span class="math inline">\(x, y \in \mathbb{Z}\)</span> байх <span class="math inline">\(259x + 77y\)</span> хэлбэрээр бич.</li>
+<li><span class="math inline">\(55x + 12y = 1\)</span> байх <span class="math inline">\(x, y \in \mathbb{Z}\)</span> тоонуудыг ол.</li>
+<li><span class="math inline">\(45x + 14y = 1\)</span> байх <span class="math inline">\(x, y \in \mathbb{Z}\)</span> тоонуудыг ол.</li>
+<li>Теорем 3.13 дахь <span class="math inline">\(x\)</span> ба <span class="math inline">\(y\)</span> бүхэл тоонууд цор ганц уу? Яагаад?</li>
+<li>Мөрдөлгөө 3.14-ийг батал. Хоёр чиглэлийг хоёуланг нь батлах ёстойг санаарай.</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(\gcd(10, 6) = 2\)</span> тул Теорем 3.13 ёсоор <span class="math inline">\(10x + 6y = 2\)</span> байх <span class="math inline">\(x, y \in \mathbb{Z}\)</span> тоонууд оршино. Үнэндээ: <span class="math display">\[10(-1) + 6(2) = 2, \quad 10(5) + 6(-8) = 2, \quad 10(11) + 6(-18) = 2, \quad \dots.\]</span> Дурын <span class="math inline">\(k \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(10(-1 + 6k) + 6(2 - 10k) = 2\)</span> биелдэг тул энэ тохиолдолд <span class="math inline">\((x, y)\)</span> хосын төгсгөлгүй олон сонголт байгааг ажиглая. Ерөнхий тохиолдолд, <span class="math inline">\(m\)</span> ба <span class="math inline">\(n\)</span>-ийг тэгээс ялгаатай дурын хос бүхэл тоонууд гэе. <span class="math inline">\(mx + ny = \gcd(m, n)\)</span> байх <span class="math inline">\(x\)</span> ба <span class="math inline">\(y\)</span> бүхэл тоон хосууд төгсгөлгүй олон оршино гэдгийг харуул.</li>
+<li><span class="math inline">\(\star\)</span> Жишээ 3.24-т бид <span class="math inline">\(\gcd(630, 96) = 6\)</span> бөгөөд цаашлаад <span class="math inline">\(x = -7\)</span> ба <span class="math inline">\(y = 46\)</span> үед <span class="math inline">\(6 = 630x + 96y\)</span> болохыг харсан. Теорем 3.13-аар баталгаажсан эдгээр бүхэл тоонууд энэ жишээнд харилцан анхны болохыг ажиглая. Өөрөөр хэлбэл <span class="math inline">\(\gcd(-7, 46) = 1\)</span>. Ерөнхий тохиолдолд, тэгээс ялгаатай дурын хос <span class="math inline">\(m\)</span> ба <span class="math inline">\(n\)</span> бүхэл тоонуудын хувьд Теорем 3.13 дахь <span class="math inline">\(x\)</span> ба <span class="math inline">\(y\)</span> бүхэл тоонууд харилцан анхны болохыг батал.</li>
+<li>Мөрдөлгөө 3.17-д <span class="math inline">\(p\)</span>-ийг анхны тоо байхыг шаардахгүй бол уг өгүүлбэр үнэн хэвээр үлдэх үү? Яагаад?</li>
+<li>Мөрдөлгөө 3.17-г батал.</li>
+<li>Мөрдөлгөө 3.18-ийг ашиглан Мөрдөлгөө 3.19-ийг батал.</li>
+<li>Жишээ 3.26 дахь өгүүлбэрийн урвууг батал.</li>
+<li><span class="math inline">\(\star\)</span> Ерөнхий тохиолдолд <span class="math inline">\(\gcd(a, b) \neq \gcd(a^m, b^n)\)</span> гэдгийг ажиглая; учир нь жишээлбэл <span class="math inline">\(\gcd(42, 18) = 6\)</span> байхад <span class="math inline">\(\gcd(42^2, 18^3) = 36\)</span> байна. Гэсэн хэдий ч <span class="math inline">\(a\)</span> ба <span class="math inline">\(b\)</span>-ийг зэрэг тэгтэй тэнцүү биш бүхэл тоонууд, <span class="math inline">\(m\)</span> ба <span class="math inline">\(n\)</span>-ийг эерэг бүхэл тоонууд гэвэл <span class="math inline">\(\gcd(a, b)\)</span> ба <span class="math inline">\(\gcd(a^m, b^n)\)</span> нь ижил анхны хуваагчидтай болохыг харуул.</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(2^4 \mid (40 \cdot 6)\)</span> боловч <span class="math inline">\(2^4 \nmid 40\)</span> ба <span class="math inline">\(2^4 \nmid 6\)</span> хэдий ч бидэнд <span class="math inline">\(2^3 \mid 40\)</span> ба <span class="math inline">\(2^1 \mid 6\)</span> (<span class="math inline">\(2^3 2^1 = 2^4\)</span> гэдгийг тэмдэглэе) байгааг ажиглая. Ерөнхий тохиолдолд, <span class="math inline">\(m, n, p, k \in \mathbb{Z}\)</span> ба <span class="math inline">\(p\)</span> анхны тоо, <span class="math inline">\(k \ge 0\)</span> байг. <span class="math inline">\(p^k \mid mn\)</span> гэж үзье. <span class="math inline">\(a + b = k\)</span>, <span class="math inline">\(p^a \mid m\)</span>, ба <span class="math inline">\(p^b \mid n\)</span> байх <span class="math inline">\(a, b \in \mathbb{N}\)</span> оршино гэдгийг харуул. <em>Зөвлөмж:</em> 3.2-р хэсгийн Дасгал 28-ыг ашиглан <span class="math inline">\(p^a \mid m\)</span> байхаар <span class="math inline">\(a\)</span>-г аль болох ихээр сонго. <span class="math inline">\(p^{k-a} \mid \left(\frac{m}{p^a} n\right)\)</span> баримтад Евклидийн леммийг хэрэглэ.</li>
+<li><span class="math inline">\(m\)</span> ба <span class="math inline">\(n\)</span> нь бүхэл тоонууд бөгөөд <span class="math inline">\(m \neq 0\)</span> байг. <span class="math inline">\(\gcd(m, n) = \gcd(m, n - m)\)</span> болохыг харуул.</li>
+<li>Зэрэг тэгтэй тэнцүү биш <span class="math inline">\(m\)</span> ба <span class="math inline">\(n\)</span> бүхэл тоонуудын хувьд: <span class="math display">\[\gcd(m, n) = \min\{t : t = mu + nv, \text{ энд } u, v \in \mathbb{Z} \text{ ба } mu + nv &gt; 0\}\]</span> байдаг нь яагаад Теорем 3.13-ын баталгааны мөрдөлгөө болохыг тайлбарла.</li>
+</ol>
+<p><em>31-ээс 33 хүртэлх дасгалуудын өгүүлбэрүүдийг батлахдаа Дасгал 30 дахь баримтыг ашигла.</em></p>
+<ol start="31" type="1">
+<li>Зэрэг тэгтэй тэнцүү биш бүх <span class="math inline">\(m, n \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(\gcd(m, n) = \gcd(n, m)\)</span> болохыг харуул.</li>
+<li>Зэрэг тэгтэй тэнцүү биш бүх <span class="math inline">\(m, n \in \mathbb{Z}\)</span> хувьд <span class="math inline">\(\gcd(m, -n) = \gcd(m, n)\)</span> болохыг харуул.</li>
+<li>Бүх <span class="math inline">\(k \in \mathbb{Z}^+\)</span> хувьд <span class="math inline">\(\gcd(k, 0) = k\)</span> болохыг харуул.</li>
+<li>Теорем 3.15-ыг батал.</li>
+<li><span class="math inline">\(m, n \in \mathbb{Z}^+\)</span> өгөгдсөн үед Теорем 3.13-ыг ашиглан: <span class="math inline">\(\forall c \in \mathbb{Z}\)</span>, хэрэв <span class="math inline">\(c \mid m\)</span> ба <span class="math inline">\(c \mid n\)</span> бол <span class="math inline">\(c \mid \gcd(m, n)\)</span> болохыг харуул.</li>
+<li><span class="math inline">\(d = \gcd(m, n)\)</span> байг. <span class="math inline">\(m = ad\)</span> ба <span class="math inline">\(n = bd\)</span> байх <span class="math inline">\(\gcd(a, b) = 1\)</span> нөхцөлийг хангах <span class="math inline">\(\exists a, b \in \mathbb{Z}\)</span> оршино гэдгийг харуул.</li>
+<li>Дурын бүхэл <span class="math inline">\(n\)</span> тооны хувьд <span class="math inline">\(5n + 3\)</span> ба <span class="math inline">\(7n + 4\)</span> бүхэл тоонууд харилцан анхны болохыг харуул.</li>
+<li>Дурын бүхэл <span class="math inline">\(n\)</span> тооны хувьд <span class="math inline">\(5 - 2n\)</span> ба <span class="math inline">\(n - 3\)</span> бүхэл тоонууд харилцан анхны болохыг харуул.</li>
+<li>Матриц гэдэг нь бодит тоонуудын тэгш өнцөгт хүснэгт юм. <span class="math inline">\(2 \times 2\)</span> хэмжээтэй <span class="math inline">\(\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\)</span> матрицын <strong>тодорхойлогч</strong> (determinant)-ийг <span class="math inline">\(ad - bc\)</span> утгаар тодорхойлдог. Энэ тодорхойлогчийн абсолют утга нь Декартын хавтгай дахь <span class="math inline">\((0, 0), (a, b), (c, d)\)</span>, ба <span class="math inline">\((a + c, b + d)\)</span> оройнуудтай параллелограммын талбайтай тэнцүү байдаг. <strong>(а)</strong> <span class="math inline">\((0, 0), (3, 5), (1, 2)\)</span>, ба <span class="math inline">\((4, 7)\)</span> оройнуудтай параллелограммын талбай <span class="math inline">\(1\)</span> болохыг батал. <strong>(б)</strong> Хэрэв бүхэл тоон элементүүдтэй <span class="math inline">\(2 \times 2\)</span> матрицын тодорхойлогч <span class="math inline">\(1\)</span>-тэй тэнцүү бол мөр бүрийн хоёр бүхэл тоо харилцан анхны байх ёстойг харуул. Мөн багануудын хувьд ч энэ нь үнэн байна. <strong>(в)</strong> Үүний урвуу өгүүлбэр үнэн үү?</li>
+<li>Хэрэв худалдааны автомат машин зөвхөн <span class="math inline">\(6\text{¢}\)</span> ба <span class="math inline">\(15\text{¢}\)</span>-ийн үнэтэй маркууд гаргадаг бол энэ машинаас гарах маркуудаар <span class="math inline">\(1, \dots, 5, 7, \dots, 11, 13, 14, 16, 17, 19, 20, \dots\)</span> мөнгөн дүнгүүдийг бүрдүүлэх боломжгүй. Ерөнхий тохиолдолд, худалдааны машин <span class="math inline">\(a\text{¢}\)</span> ба <span class="math inline">\(b\text{¢}\)</span>-ийн үнэтэй маркууд гаргадаг гэж үзье. <strong>(а)</strong> Хэрэв <span class="math inline">\(a\)</span> ба <span class="math inline">\(b\)</span> харилцан анхны биш бол энэ машины маркуудаар бүрдүүлэх боломжгүй мөнгөн дүнгүүд төгсгөлгүй олон байна гэдгийг харуул. <strong>(б)</strong> Хэрэв <span class="math inline">\(4\text{¢}\)</span>-ийн үнэтэй маркууд мөн байсан бол ямар мөнгөн дүнгүүдийг бүрдүүлэх боломжгүй байх вэ?</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./3-2.html" class="pagination-link" aria-label="Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./3-4.html" class="pagination-link" aria-label="Рационал тоонууд">
+        <span class="nav-page-text"><span class="chapter-title">Рационал тоонууд</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
