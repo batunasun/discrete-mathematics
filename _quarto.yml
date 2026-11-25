@@ -60,6 +60,15 @@ book:
         - 8-6.qmd
         #- appendix.qmd
 
+    - part: 9.qmd
+      chapters:
+        - 9-1.qmd
+        - 9-2.qmd
+        - 9-3.qmd
+        - 9-4.qmd
+        - 9-5.qmd
+        - 9-6.qmd
+
 format:
   html:
     toc-title: "Дэд гарчиг"
