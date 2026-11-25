@@ -33,11 +33,12 @@ book:
     - part: 3.qmd
       chapters:
         - 3-1.qmd
-        #- 3-2.qmd
-        #- 3-3.qmd
-        #- 3-4.qmd
-        #- 3-5.qmd
-        #- 3-6.qmd
+        - 3-2.qmd
+        - 3-3.qmd
+        - 3-4.qmd
+        - 3-5.qmd
+        - 3-6.qmd
+        - 3-7.qmd
 
     - part: 4.qmd
       chapters:
