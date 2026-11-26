@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>quarto-input2afcdc978d942c2 – Дискрет математик</title>
+<title>Графын шинж чанарууд – Дискрет математик</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -264,7 +264,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./9.html">9.html</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./9.html">Графын шинж чанарууд</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -505,15 +505,15 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./9.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text" id="quarto-sidebar-section-6-label">9.html</span></a>
-            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section: 9.html">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">Графын шинж чанарууд</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section: Графын шинж чанарууд">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
             </button> 
       </div>
       <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Графын шинж чанарууд</span></a>
+  <a href="./9-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Холбоост чанар (Connectivity)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -552,12 +552,32 @@ ul.task-list li input[type="checkbox"] {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Графын шинж чанарууд</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<p><strong>8-Р БҮЛЭГТ</strong>, бид графын оройн тоо болон хамгийн их зэрэг зэрэг үндсэн инвариантуудтай танилцсан билээ. Эдгээр инвариант нь тоон утгууд байдаг. Гэсэн хэдий ч илүү ерөнхий утгаар авч үзвэл инвариантуудад граф холбоост эсэх гэх мэт глобал шинж чанарууд мөн багтана.</p>
+<p>Энэ бүлэгт бид графын шинж чанаруудыг илүү гүнзгий судлах бөгөөд юуны түрүүнд <strong>холбоост чанар</strong> (connectivity)-аас эхэлнэ. Зөвхөн граф холбоост эсэхээс гадна холбоост чанар нь графын зарим хэсгийг устгахад тухайн граф холбоост биш болоход хэр ойрхон байгааг хэмждэг. Графаар зарим бүрэлдэхүүн хэсэг нь эвдэрч гэмтэж болзошгүй сүлжээг загварчлах үед энэ нь онцгой сонирхол татдаг. Дараа нь бид граф тодорхой төрлийн тусгай циклүүдийг агуулж байгаа эсэхийг авч үзнэ. <strong>Эйлерийн цикл</strong> гэдэг нь ирмэг бүрийг яг нэг удаа дайран өнгөрдөг цикл юм. <strong>Гамильтоны цикл</strong> гэдэг нь орой бүрийг яг нэг удаа дайран өнгөрдөг цикл юм. Ийм циклүүд нь хорооллын бүх гудамжны цасыг цэвэрлэх эсвэл хаяг бүр дээр хүргэлт хийх зэрэг асуудалд чухал ач холбогдолтой.</p>
+<p>Бүлгийн сүүлийн хоёр хэсэг нь графын онол төдийгүй ерөнхий математикийн хамгийн алдартай теоремуудын нэг болох <strong>Дөрвөн өнгөний теорем</strong>-д хөтөлнө. Нэгдүгээрт, ямар графыг хавтгай дээр ирмэгүүдийг нь огтлолцуулахгүйгээр зурж болохыг тодорхойлно. Ийм графуудыг <strong>хавтгай граф</strong> (planar) гэнэ. Хоёрдугаарт, хөрш оройнууд нь өөр өөр өнгөтэй байхаар графын оройнуудыг будахад шаардагдах хамгийн цөөн өнгөний тоог олох ерөнхий бодлогыг авч үзнэ. Хавтгай графуудад хэзээ ч дөрвөөс олон өнгө шаардагддаггүй гэдэг нь тэрхүү алдарт үр дүн юм.</p>
+<p>Граф хавтгай эсэхийг тодорхойлох нь электрон хэлхээний зураг төсөлд чухал ач холбогдолтой. Харин графыг будахад шаардагдах хамгийн цөөн өнгөний тоог олох нь хуваарь төлөвлөлтийн бодлогуудад өргөн хэрэглэгддэг. Хавтгай графуудад хамгийн ихдээ дөрвөн өнгө шаардагддаг гэдэг нь газрын зураг дээрх муж, улсуудыг будахад хэзээ ч дөрвөөс олон өнгө хэрэг болдоггүй гэсэн үг юм.</p>
 
 
 
@@ -1093,8 +1113,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./9-1.html" class="pagination-link" aria-label="Графын шинж чанарууд">
-        <span class="nav-page-text"><span class="chapter-title">Графын шинж чанарууд</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./9-1.html" class="pagination-link" aria-label="Холбоост чанар (Connectivity)">
+        <span class="nav-page-text"><span class="chapter-title">Холбоост чанар (Connectivity)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
