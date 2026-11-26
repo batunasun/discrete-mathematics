@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9.5-р зүйлийн дасгалууд – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./9-5.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./9.html">9.html</a></li><li class="breadcrumb-item"><a href="./9-6.html"><span class="chapter-title">9.5-р зүйлийн дасгалууд</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">3. Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: 3. Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1. Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2. Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3. Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4. Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5. Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6. Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">9.html</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section: 9.html">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Графын шинж чанарууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Эйлерийн цикл (Euler Circuits)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Гамильтоны цикл (Hamiltonian Cycles)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Хавтгай граф (Planar Graphs)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өнгөний тоо (Chromatic Number)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-6.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">9.5-р зүйлийн дасгалууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./9.html">9.html</a></li><li class="breadcrumb-item"><a href="./9-6.html"><span class="chapter-title">9.5-р зүйлийн дасгалууд</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">9.5-р зүйлийн дасгалууд</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<ol type="1">
+<li><p>Зураг дээрх тэмдэглэгээнүүдээр өгөгдсөн оноолт нь тухайн графын будалт болж чадах уу?[cite: 303]</p>
+<p><img src="images/ch09/ex-9-5-1.png" id="fig-ex-9-5-1" class="img-fluid" style="width:20.0%" alt="Дасгал 1-ийн граф">[cite: 303]</p></li>
+<li><p>Зураг дээрх тэмдэглэгээнүүдээр өгөгдсөн оноолт нь тухайн графын будалт болж чадах уу?[cite: 303]</p>
+<p><img src="images/ch09/ex-9-5-2.png" id="fig-ex-9-5-2" class="img-fluid" style="width:20.0%" alt="Дасгал 2-ын граф">[cite: 303]</p></li>
+</ol>
+<p><em>Дараагийн дасгалууд нь доорх зураг дээрх графуудад хамаарна[cite: 304].</em></p>
+<p><img src="images/ch09/ex-9-5-3-8.png" id="fig-ex-9-5-3-8" class="img-fluid" style="width:75.0%" alt="Дасгал 5–8-ын графууд (a)–(d)">[cite: 304]</p>
+<p><em>3-аас 8 хүртэлх дасгалуудад заасан графын өнгөний тоог олж, үр дүнгээ батал[cite: 304].</em></p>
+<ol start="3" type="1">
+<li><p>Дасгал 1-ийн граф. <span class="math inline">\(\qquad\)</span> 4. Дасгал 2-ын граф[cite: 304].</p></li>
+<li><p>Граф (a). <span class="math inline">\(\qquad\)</span> 6. Граф (b)[cite: 304].</p></li>
+<li><p>Граф (c). <span class="math inline">\(\qquad\)</span> 8. Граф (d)[cite: 304].</p></li>
+<li><p>Теорем 9.19-ийг батал: <span class="math inline">\(G\)</span> нь хоёр туйлт граф байх нь <span class="math inline">\(\chi(G) \le 2\)</span> байхтай зайлшгүй бөгөөд хүрэлцээтэй[cite: 304].</p></li>
+<li><p>Теорем 9.20-ийг батал: <span class="math inline">\(\chi(G + H) = \max\{\chi(G), \chi(H)\}\)</span>[cite: 304].</p></li>
+<li><p><span class="math inline">\(\star\)</span> Жишээ 9.29-д баталсанчлан Грётшийн граф <span class="math inline">\(4\)</span> өнгөний тоотой болохыг батал[cite: 304].</p></li>
+<li><p><span class="math inline">\(\star\)</span> Зураг дээрх графыг <span class="math inline">\(3\)</span>-будагддаггүй болохыг харуул[cite: 304]:</p>
+<p><img src="images/ch09/ex-9-5-12.png" id="fig-ex-9-5-12" class="img-fluid" style="width:25.0%" alt="Дасгал 12-ын граф">[cite: 304]</p></li>
+<li><p>Грётшийн графаас дурын нэг оройг устгахад <span class="math inline">\(3\)</span> өнгөний тоотой граф үлдэхийг харуул[cite: 304].</p></li>
+<li><p><span class="math display">\[\chi(C_n) = \begin{cases} 2 &amp; \text{хэрэв } n \text{ тэгш бол,} \\ 3 &amp; \text{хэрэв } n \text{ сондгой бол} \end{cases}\]</span> болохыг харуул[cite: 304].</p></li>
+<li><p>Хэл, соёлын тэнхимийн зургаан хичээлийн (Герман хэл, Түүх, Энэтхэг-Хятад судлал, Япон хэл, Кувейт судлал, Латин хэл) давтлагын бүлгүүдийн хуваарийг гаргах шаардлагатай болжээ. Доорх хүснэгтэд <code>X</code> тэмдэглэгээ нь тухайн мөр ба баганад харгалзах хоёр өөр хичээлд ерөнхий оюутан байгааг илэрхийлнэ[cite: 304].</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Гер.</th>
+<th style="text-align: center;">Түүх</th>
+<th style="text-align: center;">Энэтхэг-Хят.</th>
+<th style="text-align: center;">Япон</th>
+<th style="text-align: center;">Кув.</th>
+<th style="text-align: center;">Лат.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Гер.</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Түүх</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Энэтхэг-Хят.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Япон</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Кув.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Лат.</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Бүлэг бүр нэг цаг хуралдах шаардлагатай гэж үзээд эдгээр давтлагыг аль болох цөөн цагт багтаан зохион байгуулах хуваарь гарга. Таны хуваарь хамгийн сайн боломжит хувилбар болохыг батал[cite: 304].</p></li>
+<li><p>Сенатын найман хороо — Төсвийн хуваарилалт (A), Төсөв (B), Худалдаа (C), Эрчим хүч (D), Байгаль орчин (E), Гадаад харилцаа (F), Дотоодын аюулгүй байдал ба Засгийн газрын хэрэг эрхлэх (G), Эрүүл мэнд (H) — хурлын хуваариа гаргах шаардлагатай болжээ. Доорх хүснэгтэд <code>X</code> тэмдэглэгээ нь тухайн мөр ба баганад харгалзах хоёр өөр хороонд ерөнхий гишүүн байгааг илэрхийлнэ[cite: 304, 305].</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">A</th>
+<th style="text-align: center;">B</th>
+<th style="text-align: center;">C</th>
+<th style="text-align: center;">D</th>
+<th style="text-align: center;">E</th>
+<th style="text-align: center;">F</th>
+<th style="text-align: center;">G</th>
+<th style="text-align: center;">H</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>A</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>B</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>C</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>D</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>E</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>F</strong></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>G</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>H</strong></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Хороо бүр нэг цаг хуралдах шаардлагатай гэж үзээд эдгээр хурлыг аль болох цөөн цагт багтаан зохион байгуулах хуваарь гарга. Таны хуваарь хамгийн сайн боломжит хувилбар болохыг батал[cite: 305].</p></li>
+<li><p><span class="math inline">\(C_5\)</span> нь “цор ганц” <span class="math inline">\(3\)</span>-будагддаг болохыг батал. Өөрөөр хэлбэл, дурын хоёр будалтын хувьд нэг будалтын өнгөний ангиудыг нөгөө будалтын өнгөний ангиуд руу буулгадаг <span class="math inline">\(C_5\)</span>-ийн автоморфизм оршино[cite: 305].</p></li>
+<li><p>Тэгш <span class="math inline">\(n\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(C_n\)</span> нь “цор ганц” <span class="math inline">\(2\)</span>-будагддаг болохыг батал. Дасгал 17-г үзнэ үү[cite: 305].</p></li>
+<li><p>Зураг дээрх графыг цор ганц <span class="math inline">\(3\)</span>-будагддаг биш болохыг харуул[cite: 305]:</p>
+<p><img src="images/ch09/ex-9-5-19.png" id="fig-ex-9-5-19" class="img-fluid" style="width:18.0%" alt="Дасгал 19-ийн граф">[cite: 305]</p></li>
+<li><p><span class="math inline">\(K_{2,1} + K_{2,1}\)</span> нь цор ганц <span class="math inline">\(2\)</span>-будагддаг биш болохыг харуул[cite: 305].</p></li>
+</ol>
+<p><em>21-ээс 26 хүртэлх дасгалуудад заасан графын өнгөний тоог баталгаатайгаар тодорхойл[cite: 305].</em></p>
+<ol start="21" type="1">
+<li>Петерсений граф. <span class="math inline">\(\qquad\)</span> 22. Октаэдр[cite: 305].</li>
+<li><span class="math inline">\(\star\)</span> Икосаэдр. <span class="math inline">\(\qquad\)</span> 24. Додекаэдр[cite: 305].</li>
+<li><span class="math inline">\(\star\)</span> <img src="images/ch09/ex-9-5-25.png" id="fig-ex-9-5-25" class="img-fluid" style="width:25.0%" alt="Дасгал 25-ын граф">[cite: 305]</li>
+<li><span class="math inline">\(\star\)</span> <img src="images/ch09/ex-9-5-26.png" id="fig-ex-9-5-26" class="img-fluid" style="width:25.0%" alt="Дасгал 26-гийн граф">[cite: 305]</li>
+<li>Теорем 9.22-ыг батал[cite: 305].</li>
+<li><span class="math inline">\(\chi(G)\)</span> нь <span class="math inline">\(G\)</span>-ээс <span class="math inline">\(K_n\)</span> рүү буулгах графын буулгалт орших <span class="math inline">\(n\)</span>-ийн хамгийн бага утга болохыг батал[cite: 305].</li>
+<li>Бид химийн бодисуудыг хэд хэдэн шүүгээнд хадгалах шаардлагатай болсон бөгөөд аюултай химийн урвал үүсгэж болзошгүй хоёр бодисыг нэг шүүгээнд хийхгүй байхыг анхаарах ёстой. Хэрэв хүчлүүдийг цайруулагч эсвэл сульфидүүдтэй холивол хорт хий ялгарна[cite: 305, 306]. Хэрэв хүчлүүд устөрөгчийн хэт исэлтэй (пероксид) хүрэлцвэл дэлбэрэлт үүсэж болзошгүй[cite: 306]. Цайруулагчийг аммиактай холиход мөн хорт хий ялгарна[cite: 306]. Тайлбарласан аюулууд дээр үндэслэн эдгээр химийн бодисыг хадгалахад шаардагдах шүүгээний хамгийн цөөн тоо хэд вэ? Хариултаа графын будалт ашиглан үндэслэ[cite: 306].</li>
+<li>Математикийн зуслангийн бүлгийн удирдагч охидыг баталгаа бодох бүлгүүдэд хуваах шаардлагатай болжээ[cite: 306]. Гэсэн хэдий ч зарим охид хоорондоо таардаггүй тул тусдаа бүлэгт байх ёстой[cite: 306]. Бетти нь Мэри, Эми, Салли, Синди нартай таардаггүй[cite: 306]. Венди нь Синди, Салли, Келли нарт дургүй[cite: 306]. Салли нь Эми, Келли хоёрыг тэвчиж чаддаггүй[cite: 306]. Мөн зуслан эхэлснээс хойш Мэри, Эми хоёр муудалцсан хэвээр байгаа[cite: 306]. Эдгээр охидыг хамгийн цөөндөө хэдэн бүлэгт хувааж болох вэ? Хариултаа графын будалт ашиглан үндэслэ[cite: 306].</li>
+</ol>
+<p><em>Дараагийн дасгалууд нь доорх зураг дээрх графуудад хамаарна[cite: 306].</em></p>
+<p><img src="images/ch09/ex-9-5-31-34.png" id="fig-ex-9-5-31-34" class="img-fluid" style="width:75.0%" alt="Дасгал 31–34-ийн графууд (e)–(h)">[cite: 306]</p>
+<p><em>31-ээс 34 хүртэлх дасгалуудад оройнуудын <span class="math inline">\(1, 2, \dots\)</span> эрэмбийг ашиглан заасан граф дээр Шуналхай будах алгоритмыг хэрэглэ[cite: 306].</em></p>
+<ol start="31" type="1">
+<li><p>Граф (e). <span class="math inline">\(\qquad\)</span> 32. Граф (f)[cite: 306].</p></li>
+<li><p>Граф (g). <span class="math inline">\(\qquad\)</span> 34. Граф (h)[cite: 306].</p></li>
+<li><p><span class="math inline">\(G\)</span> ба <span class="math inline">\(H\)</span> хоёр туйлт графууд байх нь <span class="math inline">\(G \times H\)</span> хоёр туйлт граф байхтай зайлшгүй бөгөөд хүрэлцээтэй болохыг харуул. <em>Зөвлөмж:</em> Хоёр туйлт граф болон графын үржвэрийн будалтын үр дүнгүүдийг ашигла[cite: 306].</p></li>
+<li><p><span class="math inline">\(\chi(G) \le 4\)</span> гэдгээс <span class="math inline">\(G\)</span> хавтгай граф гэж мөрдөн гарах уу? <em>Зөвлөмж:</em> <span class="math inline">\(2\)</span>-будагддаг графуудыг авч үз[cite: 306].</p></li>
+<li><p><strong>Дугуй граф</strong> (wheel) <span class="math inline">\(W_n\)</span> нь <span class="math inline">\(C_{n-1}\)</span> цикл дээр шинэ <span class="math inline">\(n\)</span> орой нэмж, түүнийг <span class="math inline">\(C_{n-1}\)</span>-ийн <span class="math inline">\(1, 2, \dots, n - 1\)</span> орой тус бүртэй холбож гарган авсан граф юм (<span class="math inline">\(W_4 = K_4\)</span> болохыг тэмдэглэе)[cite: 306]. <strong>(а)</strong> <span class="math inline">\(W_5\)</span>-ийг зур[cite: 306]. <strong>(б)</strong> <span class="math inline">\(n\)</span> тэгш бол <span class="math inline">\(W_n\)</span>-ийн өнгөний тоо <span class="math inline">\(4\)</span>, харин <span class="math inline">\(n\)</span> сондгой бол <span class="math inline">\(3\)</span> байдгийг батал[cite: 306].</p></li>
+<li><p><strong><span class="math inline">\(n\)</span>-призм</strong> гэдэг нь <span class="math inline">\(C_n \times P_2\)</span> граф юм (<span class="math inline">\(4\)</span>-призм нь <span class="math inline">\(Q_3\)</span> куб болохыг тэмдэглэе)[cite: 306]. <strong>(а)</strong> <span class="math inline">\(3\)</span>-призмийг зур[cite: 306]. <strong>(б)</strong> <span class="math inline">\(n\)</span> тэгш бол <span class="math inline">\(n\)</span>-призмийн өнгөний тоо <span class="math inline">\(2\)</span>, харин <span class="math inline">\(n\)</span> сондгой бол <span class="math inline">\(3\)</span> байдгийг батал[cite: 306].</p></li>
+<li><p><span class="math inline">\(G\)</span> граф хамгийн их зэрэгтэй цор ганц оройтой бөгөөд <span class="math inline">\(d_2\)</span> нь <span class="math inline">\(G\)</span> дэх хоёр дахь хамгийн өндөр зэрэг байг. <span class="math inline">\(\chi(G) \le d_2 + 1\)</span> болохыг харуул[cite: 306].</p></li>
+<li><p><span class="math inline">\(G\)</span> граф харгалзан <span class="math inline">\(d_1\)</span> ба <span class="math inline">\(d_2\)</span> зэрэгтэй хөрш <span class="math inline">\(v_1\)</span> ба <span class="math inline">\(v_2\)</span> оройнуудтай бөгөөд <span class="math inline">\(v \notin \{v_1, v_2\}\)</span> байх бүх <span class="math inline">\(v\)</span> оройн хувьд <span class="math inline">\(d_1 \ge d_2 &gt; \deg(v)\)</span> биелдэг гэе. <span class="math inline">\(\chi(G) \le d_2\)</span> болохыг харуул[cite: 306].</p></li>
+<li><p><span class="math inline">\(\star\)</span> Өгөгдсөн <span class="math inline">\(G\)</span> графын хөрш биш хоёр оройг нэг орой болгон нэгтгэх замаар <span class="math inline">\(G'\)</span> графыг гарган авсан гэж үзье[cite: 306]. <strong>(а)</strong> <span class="math inline">\(\chi(G) \le \chi(G')\)</span> болохыг харуул[cite: 306]. <strong>(б)</strong> <span class="math inline">\(\chi(G) &lt; \chi(G')\)</span> байх жишээ гарга[cite: 306].</p></li>
+<li><p><span class="math inline">\(\star\)</span> Өгөгдсөн <span class="math inline">\(G\)</span> графын хөрш биш хоёр оройг нэг орой болгон нэгтгэх замаар <span class="math inline">\(G'\)</span> графыг гарган авсан гэж үзье[cite: 307]. <strong>(а)</strong> <span class="math inline">\(\chi(G') \le \chi(G) + 1\)</span> болохыг харуул[cite: 307]. <strong>(б)</strong> <span class="math inline">\(\chi(G') &lt; \chi(G) + 1\)</span> байх жишээ гарга[cite: 307].</p></li>
+<li><p><span class="math inline">\(G\)</span> нь <span class="math inline">\(\kappa(G) = 1\)</span> байх нэгэн төрлийн граф тохиолдолд Бруксийн теоремыг батал. <em>Зөвлөмж:</em> <span class="math inline">\(G \setminus \{v\}\)</span>-ийн компонент <span class="math inline">\(H\)</span> бүрийн хувьд <span class="math inline">\(H \cup \{v\}\)</span>-ээр өдөөгдсөн дэд графыг оновчтой буд[cite: 307].</p></li>
+<li><p>Шуналхай будах алгоритм нь оновчтой будалт гаргаж өгдөг оройнуудын ямар нэгэн эрэмбэ үргэлж оршдог гэдгийг харуул. <em>Зөвлөмж:</em> <span class="math inline">\(c = \chi(G)\)</span> гэж авъя[cite: 307]. <span class="math inline">\(|A_1| \le \dots \le |A_c|\)</span> байх ба <span class="math inline">\(A_1\)</span> нь боломжит хамгийн бага, <span class="math inline">\(A_2\)</span> нь өгөгдсөн <span class="math inline">\(A_1\)</span>-ийн хувьд боломжит хамгийн бага, <span class="math inline">\(A_3\)</span> нь өгөгдсөн <span class="math inline">\(A_2\)</span>-ын хувьд боломжит хамгийн бага гэх мэтээр <span class="math inline">\(c\)</span> өнгө болон <span class="math inline">\(A_1, \dots, A_c\)</span> өнгөний ангиудтай будалтыг сонго[cite: 307]. <span class="math inline">\(i\)</span> бүрийн хувьд <span class="math inline">\(A_i\)</span>-ийн орой бүр нь <span class="math inline">\(j &gt; i\)</span> байх <span class="math inline">\(j\)</span> өнгө бүртэй хөрш байх ёстойг нотол (эсрэг тохиолдолд <span class="math inline">\(A_i\)</span>-г улам багасгаж болох байсан)[cite: 307]. Оройнуудыг <span class="math inline">\(A_c, \dots, A_1\)</span> дарааллаар эрэмбэл[cite: 307].</p></li>
+<li><p>Зураг дээр нэгэн дүүргийн сонгуулийн тойргуудыг харуулжээ[cite: 307].</p>
+<p><img src="images/ch09/ex-9-5-45.png" id="fig-ex-9-5-45" class="img-fluid" style="width:30.0%" alt="Сонгуулийн тойргуудын газрын зураг">[cite: 307]</p>
+<p>Дүүргийн комиссарууд сонгуулийн тойргуудыг өнгөөр тод ялгасан энэ газрын зургийн өнгөт зургийг товхимолд оруулахыг хүсжээ[cite: 307]. Нэмэлт өнгө бүр товхимол хэвлэх зардлыг өсгөдөг тул тэд шаардагдах өнгөний тоог хамгийн бага байлгахыг хүсэж байна[cite: 307]. Ашиглаж болох хамгийн цөөн өнгөний тоо хэд вэ?[cite: 307]</p></li>
+<li><p>Зураг дээр томоохон хотын нэгэн хэсгийн цагдаагийн хэсгүүдийг харуулжээ[cite: 307].</p>
+<p><img src="images/ch09/ex-9-5-46.png" id="fig-ex-9-5-46" class="img-fluid" style="width:30.0%" alt="Цагдаагийн хэсгүүдийн газрын зураг">[cite: 307]</p>
+<p>Хотын дарга хэсгүүдийн хилийг ялгасан өнгөтэйгөөр аль болох цөөн өнгө ашиглан энэ газрын зургийн өнгөт хувилбарыг бүтээхийг хүсжээ[cite: 307]. Хэдэн өнгө шаардагдах вэ?[cite: 307]</p></li>
+<li><p>АНУ-ын эх газрын 48 муж улсын газрын зургийг ол[cite: 307]. <strong>(а)</strong> Хөрш ямар ч хоёр муж ижил өнгөтэй байхгүйгээр газрын зургийг аль болох цөөн өнгөөр будсан будалтыг ол[cite: 307]. <strong>(б)</strong> Хэдэн өнгө шаардагдсан бэ?[cite: 307] <strong>(в)</strong> Үүнээс цөөн өнгө хүрэлцэхгүй гэдгийг батал[cite: 307].</p></li>
+<li><p>Африк тивийн 54 улсын газрын зургийг ол[cite: 307]. <strong>(а)</strong> Хөрш ямар ч хоёр улс ижил өнгөтэй байхгүйгээр газрын зургийг аль болох цөөн өнгөөр будсан будалтыг ол[cite: 307]. <strong>(б)</strong> Хэдэн өнгө шаардагдсан бэ?[cite: 307] <strong>(в)</strong> Үүнээс цөөн өнгө хүрэлцэхгүй гэдгийг батал[cite: 307].</p></li>
+</ol>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./9-5.html" class="pagination-link" aria-label="Өнгөний тоо (Chromatic Number)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Өнгөний тоо (Chromatic Number)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

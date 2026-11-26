@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Хавтгай граф (Planar Graphs) – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./9-5.html" rel="next">
+<link href="./9-3.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./9.html">9.html</a></li><li class="breadcrumb-item"><a href="./9-4.html"><span class="chapter-title">Хавтгай граф (Planar Graphs)</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">3. Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: 3. Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1. Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2. Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3. Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4. Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5. Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6. Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">9.html</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section: 9.html">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Графын шинж чанарууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Эйлерийн цикл (Euler Circuits)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Гамильтоны цикл (Hamiltonian Cycles)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-4.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Хавтгай граф (Planar Graphs)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өнгөний тоо (Chromatic Number)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.5-р зүйлийн дасгалууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#огтлолцлын-тоо-crossing-number" id="toc-огтлолцлын-тоо-crossing-number" class="nav-link active" data-scroll-target="#огтлолцлын-тоо-crossing-number">Огтлолцлын тоо (Crossing Number)</a></li>
+  <li><a href="#р-зүйлийн-дасгалууд" id="toc-р-зүйлийн-дасгалууд" class="nav-link" data-scroll-target="#р-зүйлийн-дасгалууд">9.4-р зүйлийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./9.html">9.html</a></li><li class="breadcrumb-item"><a href="./9-4.html"><span class="chapter-title">Хавтгай граф (Planar Graphs)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Хавтгай граф (Planar Graphs)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Хэрэв граф нь электрон хэлхээний хавтангийн (circuit board) зохион байгуулалтыг илэрхийлж байвал ирмэгүүдийн огтлолцол нь суурилуулахад төвөгтэй утсан холболтуудыг тусгадаг. Бидний хүсэж буй зохион байгуулалт бол ямар ч огтлолцолгүй байршил юм. Ерөнхий тохиолдолд, бид битүү цахилгаан хэлхээг утас огтлолцуулахгүйгээр хэрэгжүүлэхийг илүүд үздэг.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.16
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг 9.5-ын зүүн гар талд байгаа битүү цахилгаан хэлхээ нь батерей болон хэд хэдэн эсэргүүцлээс бүрдэнэ. Зангилаа цэгээр тэмдэглэгдээгүй утасны огтлолцол нь бидний зайлсхийхийг хүсэж буй утсан огтлолцол юм. Зураг 9.5-ын баруун гар талд утаснуудыг ирмэгээр төлөөлүүлэн энэхүү хэлхээг загварчилсан графыг харуулав. Зураг 9.6-ийн баруун гар талд харуулсны дагуу тухайн графыг ямар ч ирмэгийн огтлолцолгүйгээр өөрөөр зурж болох тул уг хэлхээг мөн Зураг 9.6-ийн зүүн гар талд харуулсан шиг утас огтлолцуулахгүйгээр угсарч болно.</p>
+<div id="fig-fig-9-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-9-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/fig-9-5.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-9-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.1: Утасны огтлолцолтой цахилгаан хэлхээ
+</figcaption>
+</figure>
+</div>
+<p><img src="images/ch09/fig-9-6.png" id="fig-fig-9-6" class="img-fluid" style="width:65.0%" alt="Утасны огтлолцолгүй цахилгаан хэлхээ"> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Жишээ 9.16 шиг хэрэглээнүүд нь огтлолцолгүйгээр зурж болох графуудыг судлах бидний сэдлийг төрүүлдэг.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 9.6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>(а)</strong> Ялгаатай ирмэгүүдийн дүрсүүд нь төгсгөлийн оройнуудаасаа гадна огтлолцохгүй байхаар зурсан графын дүрслэлийг тухайн графын <strong>хавтгай шигтгээ</strong> (planar embedding) гэнэ. Өөрөөр хэлбэл, ямар ч огтлолцол байхгүй байна.</p>
+<p><strong>(б)</strong> Хэрэв граф нь хавтгай шигтгээтэй бол түүнийг <strong>хавтгай граф</strong> (planar) гэнэ.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.17
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг дээр графын хавтгай шигтгээг харуулав.</p>
+<p><img src="images/ch09/ex-9-17.png" id="fig-ex-9-17" class="img-fluid" style="width:28.0%" alt="Графын хавтгай шигтгээ"> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Графын аль нэг зураглал хавтгай шигтгээ биш байх нь тухайн графыг хавтгай биш гэсэн үг биш юм. Хэдийгээр Зураг 9.5 дахь граф огтлолцолтой зурагдсан боловч Зураг 9.6 дахь огтлолцолгүй өөр зураглал нь түүнийг хавтгай граф болохыг харуулж байна. Жишээ 8.21-д бид <span class="math inline">\(K_4\)</span>-ийн хоёр өөр зураглалыг (нэг нь огтлолцолтой, нөгөө нь огтлолцолгүй) харсан билээ:</p>
+<div id="fig-k4-planar" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-k4-planar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/k4-planar.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-k4-planar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.2: K4 графын хоёр өөр зураглал
+</figcaption>
+</figure>
+</div>
+<p>Огтлолцолгүй зураглал оршдог баримт нь <span class="math inline">\(K_4\)</span>-ийг хавтгай граф болохыг харуулна. Дараа нь <span class="math inline">\(K_5\)</span>-ийн хавтгай шигтгээг олохыг оролдож болох боловч Жишээ 9.18-ийн үр дүнгээс илүү сайжруулах боломжгүй юм.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.18
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(K_5\)</span>-ийг ганц огтлолцолтойгоор зурж болно.</p>
+<div id="fig-ex-9-18" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-18.png" class="img-fluid figure-img" style="width:28.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.3: Нэг огтлолцолтой K5 граф
+</figcaption>
+</figure>
+</div>
+<p>Гэсэн хэдий ч зүгээр л хэсэг хугацаанд оролдоод хавтгай шигтгээ олж чадахгүй байх нь <span class="math inline">\(K_5\)</span>-ийг хавтгай биш гэдгийг батлахгүй. Бид илүү хүчтэй хэрэгслүүд боловсруулсны дараа энэ хэсэгт (Өгүүлбэр 9.15) <span class="math inline">\(K_5\)</span>-д хавтгай шигтгээ оршихгүй гэдгийг батлах болно. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.19
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг 9.7-ийн зүүн гар талд байгаа бүдүүвч нь гурван байшинг гурван төрлийн инженерийн шугам сүлжээ (ус, хий, цахилгаан) тус бүрд холбох хэрэгцээг тусгажээ. Гэсэн хэдий ч аюулгүй байдлын үүднээс эдгээр шугамуудыг огтлолцуулахгүй байх нь зүйтэй. <span class="math inline">\(K_{3,3}\)</span> граф нь энэхүү шугам сүлжээний бодлогыг загварчилдаг тул Зураг 9.7-ийн баруун гар тал дахь <span class="math inline">\(K_{3,3}\)</span>-ийн зураглал нь эдгээр холболтын сайн зохион байгуулалтыг харуулж байна. Энэ нь зөвхөн ганц огтлолцолтой. Өгүүлбэр 9.17-д бид <span class="math inline">\(K_{3,3}\)</span>-ийг хавтгай биш болохыг батлах бөгөөд улмаар энд шаардагдах шугам сүлжээний холболтууд нь хамгийн багадаа нэг огтлолцолтой байхаас өөр аргагүй гэдэг нь мөрдөн гарна.</p>
+<p><img src="images/ch09/fig-9-7.png" id="fig-fig-9-7" class="img-fluid" style="width:65.0%" alt="Гурван шугам сүлжээг гурван байшинтай холбох нь"> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p><span class="math inline">\(K_5\)</span> ба <span class="math inline">\(K_{3,3}\)</span>-ийг хавтгай биш гэдгийг батлахад ашиглах арга хэрэгслүүдийг дараах ойлголтууд дээр тулгуурлан байгуулна.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 9.7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G = (V_G, E_G)\)</span> графын хавтгай шигтгээ өгөгдсөн үед:</p>
+<p><strong>(а)</strong> Шигтгээний дүрсийн гүйцээлтийн максимал холбоост дэд олонлогийг <strong>муж</strong> (region) гэнэ.</p>
+<p><strong>(б)</strong> Бид мужуудын олонлогийг тэмдэглэхдээ <span class="math inline">\(R_G\)</span> эсвэл зүгээр л <span class="math inline">\(R\)</span>-ийг ашиглана.</p>
+<p><strong>(в)</strong> Оройн олонлог нь <span class="math inline">\(R_G\)</span> бөгөөд ирмэгийн олонлог нь <span class="math inline">\(E_G\)</span> байх ба <span class="math inline">\(e\)</span> ирмэг бүрийн төгсгөлийн оройнуудыг шигтгээнд <span class="math inline">\(e\)</span>-ийн дүрсийг хилийнхээ хэсэг болгон хуваалцдаг мужуудаар авч байгуулсан графыг <strong>хосмог граф</strong> (dual graph) гээд <span class="math inline">\(D(G)\)</span> гэж тэмдэглэнэ.</p>
+</div>
+</div>
+<p>Хэдийгээр мужууд болон хосмог граф нь зөвхөн графаас төдийгүй шигтгээнээс хамаардаг боловч тодорхой нэг шигтгээ нь хам сэдэвт үргэлж бэхлэгдсэн байдаг тул тэмдэглэгээнд тусгах шаардлагагүй. Үнэндээ хосмог графын изоморфизмын төрөл нь сонгосон шигтгээнээс хамаарч болно (Дасгал 13-ыг үзнэ үү).</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.20
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Жишээ 9.17-д зурсан <span class="math inline">\(G\)</span> графын мужуудыг энд <span class="math inline">\(A, B, C, D, E, F, O\)</span> гэж тэмдэглэв.</p>
+<div id="fig-ex-9-20" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-20.png" class="img-fluid figure-img" style="width:30.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.4: G графын мужууд
+</figcaption>
+</figure>
+</div>
+<p><span class="math inline">\(O\)</span> нь цор ганц хязгааргүй (гадаад) муж болохыг анхаарна уу. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Өгөгдсөн шигтгээн дээр үндэслэн графын хосмог графыг зурах стандарт аргыг дараах жишээнд харуулав.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.21
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Бид Жишээ 9.17 дэх <span class="math inline">\(G\)</span> графын хосмог графыг байгуулъя. Зураг 9.8-д <span class="math inline">\(G\)</span>-ийн муж бүрийн дотор хоосон цэгээр төлөөлүүлсэн оройг байрлуулж, хилийнхээ хэсэг болгон ирмэг хуваалцдаг мужуудыг тасархай шугамаар холбосон байна:</p>
+<div id="fig-fig-9-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-9-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/fig-9-8.png" class="img-fluid figure-img" style="width:30.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-9-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.5: Граф ба түүний хосмог граф
+</figcaption>
+</figure>
+</div>
+<p>Тасархай ирмэг бүр яг нэг бүтэн ирмэгийг огтолж байгаа бөгөөд эсрэгээрээ мөн адил болохыг анхаарна уу. Дараа нь хосмог граф <span class="math inline">\(D(G)\)</span>-ийг ердийн аргаар бүтэн орой, бүтэн ирмэгүүдтэйгээр дангаар нь зурж болно:</p>
+<p><img src="images/ch09/ex-9-21b.png" id="fig-ex-9-21b" class="img-fluid" style="width:28.0%" alt="Хосмог граф D(G)"> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Хавтгай шигтгээтэй дурын <span class="math inline">\(G\)</span> графын хувьд <span class="math inline">\(D(G)\)</span> нь үргэлж хавтгай граф байх бөгөөд <span class="math inline">\(D(D(G)) \cong G\)</span> гэдгийг анхаарна уу. Жишээлбэл, Зураг 9.8 дахь тасархай графын хосмог граф нь тэр зураг дээрх бүтэн граф болж харагдаж байна.</p>
+<p>Хавтгай шигтгээтэй <span class="math inline">\(G = (V, E)\)</span> граф нь зөвхөн оройн олонлог <span class="math inline">\(V\)</span> болон ирмэгийн олонлог <span class="math inline">\(E\)</span>-тэй төдийгүй мужуудын олонлог <span class="math inline">\(R\)</span>-тэй байдаг. <span class="math inline">\(|V|, |E|\)</span>, ба <span class="math inline">\(|R|\)</span> гурван тоо нь хоёрыг нь мэдэж байвал гурав дахь утга нь автоматаар тодорхойлогддог тийм холбоотой болж таардаг.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 9.13: Эйлерийн томьёо (Euler’s Formula)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Холбоост <span class="math inline">\(G = (V, E)\)</span> графын дурын хавтгай шигтгээ өгөгдсөн үед: <span class="math display">\[|V| - |E| + |R| = 2\]</span> биелнэ.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Бид <span class="math inline">\(n = |V|\)</span> дээр индукцээр батална. Хэрэв <span class="math inline">\(n = 1\)</span> бол бүх ирмэг гогцоо байх ёстой бөгөөд энэ тохиолдолд <span class="math inline">\(|R| = |E| + 1\)</span> гэдгийг нотлоход хялбар (Дасгал 14-ийг үзнэ үү). Иймд <span class="math inline">\(n \ge 1\)</span> гэж аваад <span class="math inline">\(n\)</span> оройтой бүх графын хувьд Эйлерийн томьёо биелнэ гэж үзье. <span class="math inline">\(G = (V, E)\)</span> нь хавтгай шигтгээтэй, <span class="math inline">\(n + 1\)</span> оройтой граф байг. <span class="math inline">\(G\)</span> нь холбоост тул <span class="math inline">\(e \mapsto \{u, v\}\)</span> байх гогцоо биш ямар нэгэн <span class="math inline">\(e\)</span> ирмэг оршино. <span class="math inline">\(G\)</span>-ээс <span class="math inline">\(e\)</span>-ийг устгаж, <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span>-г нэг <span class="math inline">\(v'\)</span> орой болгон адилтгах (нэгтгэх) замаар <span class="math inline">\(G' = (V', E')\)</span> шинэ граф байгуулъя:</p>
+<div id="fig-thm-9-13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-thm-9-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/thm-9-13.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-thm-9-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.6: e ирмэгийг агшааж G’ граф байгуулах нь
+</figcaption>
+</figure>
+</div>
+<p><span class="math inline">\(G\)</span>-ийн хавтгай шигтгээг (зурагт харуулсны дагуу) <span class="math inline">\(|R'| = |R|\)</span> байхаар <span class="math inline">\(G'\)</span>-ийн хавтгай шигтгээ рүү хялбархан хувиргаж болно. <span class="math inline">\(|V'| = |V| - 1 = n\)</span> тул индукцийн таамаглалаар <span class="math inline">\(|V'| - |E'| + |R'| = 2\)</span> болно. <span class="math inline">\(|E'| = |E| - 1\)</span> тул орлуулбал <span class="math inline">\(|V| - |E| + |R| = 2\)</span> гарна. <span class="math inline">\(\square\)</span></p>
+<p>Теорем 9.13-аас харахад бэхлэгдсэн графын хувьд дурын хавтгай шигтгээ дэх мужуудын тоо үргэлж ижил байна. Тодруулбал, тэр тоо нь <span class="math inline">\(|E| - |V| + 2\)</span> бөгөөд зөвхөн <span class="math inline">\(|V|\)</span> ба <span class="math inline">\(|E|\)</span>-ээс хамаарах функц юм.</p>
+<p>Граф олон ирмэгтэй байх тусам түүнд хавтгай шигтгээ орших магадлал багасна. Үнэндээ хавтгай энгийн граф дахь ирмэгийн тоонд оройн тооноос хамаарсан дээд зааг байдаг.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Мөрдөлгөө 9.14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(|V| \ge 3\)</span> байх дурын хавтгай энгийн <span class="math inline">\(G = (V, E)\)</span> граф өгөгдсөн үед: <span class="math display">\[|E| \le 3|V| - 6\]</span> биелнэ.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Холбоост биш граф нь түүний компонентуудыг нэмэлт ирмэгүүдээр холбож гарган авсан холбоост графаас цөөн ирмэгтэй байдаг тул <span class="math inline">\(G\)</span>-г холбоост гэж үзэхэд хангалттай. Хосмог граф <span class="math inline">\(D(G)\)</span> нь <span class="math inline">\(R\)</span> оройн олонлог, <span class="math inline">\(E\)</span> ирмэгийн олонлогтой тул Теорем 8.10 ёсоор: <span class="math display">\[\sum_{r \in R} \deg(r) = 2|E|\]</span> байна. <span class="math inline">\(G\)</span> нь энгийн граф тул зөвхөн нэг эсвэл хоёр ирмэгээр хязгаарлагдсан муж байхгүй. Өөрөөр хэлбэл, <span class="math inline">\(r \in R\)</span> бүрийн хувьд <span class="math inline">\(\deg(r) \ge 3\)</span> байна. Иймд <span class="math inline">\(3|R| \le 2|E|\)</span> болно. Тэгвэл Теорем 9.13 ёсоор: <span class="math display">\[2 = |V| - |E| + |R| \le |V| - |E| + \frac{2}{3}|E| = |V| - \frac{1}{3}|E|.\]</span> Иймээс <span class="math inline">\(6 \le 3|V| - |E|\)</span> болох ба батлах зүйл мөрдөн гарна. <span class="math inline">\(\square\)</span></p>
+<p>Мөрдөлгөө 9.14-ийг ашиглан дараах үр дүнгийн энгийн баталгааг өгч болно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Өгүүлбэр 9.15
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(K_5\)</span> нь хавтгай граф биш.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(|V| = 5\)</span> ба <span class="math inline">\(|E| = 10\)</span> утгууд нь Мөрдөлгөө 9.14 дэх тэнцэтгэл бишийг хангахгүй. <span class="math inline">\(\square\)</span></p>
+<p>Гурвалжингүй графуудын хувьд хавтгай энгийн граф дахь ирмэгийн тооны зааг улам бүр багасдаг.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Мөрдөлгөө 9.16
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(|V| \ge 3\)</span> бөгөөд гурвалжингүй (өөрөөр хэлбэл, <span class="math inline">\(3\)</span>-циклгүй) дурын хавтгай энгийн <span class="math inline">\(G = (V, E)\)</span> граф өгөгдсөн үед: <span class="math display">\[|E| \le 2|V| - 4\]</span> биелнэ.</p>
+</div>
+</div>
+<p>Мөрдөлгөө 9.16 нь тухайлбал хавтгай энгийн хоёр туйлт графуудад хэрэглэгдэнэ. Түүний баталгааг дасгалд үлдээсэн болно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Өгүүлбэр 9.17
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(K_{3,3}\)</span> нь хавтгай граф биш.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(|V| = 6\)</span> ба <span class="math inline">\(|E| = 9\)</span> утгууд нь Мөрдөлгөө 9.16 дахь тэнцэтгэл бишийг хангахгүй. <span class="math inline">\(\square\)</span></p>
+<p>Мөрдөлгөө 9.14 ба 9.16-г ашигласнаар <span class="math inline">\(K_5\)</span> ба <span class="math inline">\(K_{3,3}\)</span> нь хавтгай биш болох үр дүн харьцангуй хялбар гарч ирлээ. Эдгээр үр дүнгийн ач холбогдол нь хавтгай графуудын гайхалтай тодорхойломжид гүйцэтгэх үүрэгт оршино. Үүнийг танилцуулахын тулд өөр нэгэн ойлголт оруулах шаардлагатай.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 9.8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G = (V, E)\)</span> нь граф байг.</p>
+<p><strong>(а)</strong> Өгөгдсөн <span class="math inline">\(e \in E\)</span> ирмэгийн хувьд хэрэв <span class="math inline">\(V' = V \cup \{w\}\)</span> (энд <span class="math inline">\(w\)</span> нь <span class="math inline">\(V\)</span>-д байхгүй шинэ орой) ба <span class="math inline">\(E' = (E \setminus \{e\}) \cup \{e', e''\}\)</span> (энд <span class="math inline">\(e' \mapsto \{u, w\}\)</span> ба <span class="math inline">\(e'' \mapsto \{w, v\}\)</span> нь <span class="math inline">\(E\)</span>-д байхгүй шинэ ирмэгүүд) байвал <span class="math inline">\(G' = (V', E')\)</span> шинэ графыг <span class="math inline">\(e = \{u, v\}\)</span> ирмэгийг <strong>хуваах</strong> (subdividing) замаар гарган авсан гэнэ. Өөрөөр хэлбэл, <span class="math inline">\(e\)</span> ирмэгийг шинэ <span class="math inline">\(w\)</span> оройгоор хуваасан байна.</p>
+<p><strong>(б)</strong> Хэрэв <span class="math inline">\(G'\)</span> графыг <span class="math inline">\(G\)</span>-ээс ирмэг хуваах үйлдлийн (хоосон байж болох) дарааллаар гарган авсан бол <span class="math inline">\(G'\)</span>-ийг <span class="math inline">\(G\)</span>-ийн <strong>хуваалт</strong> (subdivision) буюу <strong><span class="math inline">\(G\)</span>-хуваалт</strong> гэнэ. Мөн <span class="math inline">\(G'\)</span> ба <span class="math inline">\(G''\)</span> хоёулаа <span class="math inline">\(G\)</span>-хуваалт байх ямар нэгэн <span class="math inline">\(G\)</span> граф оршиж байвал <span class="math inline">\(G'\)</span> ба <span class="math inline">\(G''\)</span> хоёр графыг <strong>гомеоморф</strong> (homeomorphic) гэнэ.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.22
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг дээр ирмэг хуваах үйлдлийн дарааллыг харуулав:</p>
+<p><img src="images/ch09/ex-9-22.png" id="fig-ex-9-22" class="img-fluid" style="width:50.0%" alt="Ирмэг хуваах үйлдлийн дараалал"> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Польшийн математикч Казимир Куратовскийн (1896–1980) нээсэн дараах үр дүн нь хоёр төрлийн хориотой дэд графаар хавтгай графуудыг тодорхойлдог.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 9.18: Куратовскийн теорем (Kuratowski’s Theorem)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Граф хавтгай биш байх нь түүнд <span class="math inline">\(K_5\)</span> эсвэл <span class="math inline">\(K_{3,3}\)</span>-ийн хуваалт болох дэд граф агуулагдахтай зайлшгүй бөгөөд хүрэлцээтэй. Эквивалентээр, <span class="math inline">\(G\)</span> хавтгай биш байх нь <span class="math inline">\(G\)</span>-д <span class="math inline">\(K_5\)</span> эсвэл <span class="math inline">\(K_{3,3}\)</span>-тэй гомеоморф дэд граф агуулагдахтай зайлшгүй бөгөөд хүрэлцээтэй.</p>
+</div>
+</div>
+<p><span class="math inline">\(K_5\)</span> эсвэл <span class="math inline">\(K_{3,3}\)</span>-ийн аль нэгнийх нь хуваалтыг агуулсан дурын граф хавтгай биш болохыг харуулах шууд баталгааг дасгалд үлдээсэн. Харин үүний урвуу өгүүлбэрийн баталгаа нь хамаагүй төвөгтэй тул энэ номд оруулаагүй болно. Сонирхсон уншигч баталгааг жишээлбэл <code>[9]</code>-өөс олж болно. Энд бид Куратовскийн теоремын хэрэглээн дээр анхаарлаа хандуулъя.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.23
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Петерсений граф нь хавтгай граф биш. Доорх зүүн гар талын зураг бол Жишээ 8.23 дахь Петерсений графын хоёр дахь зураглал юм:</p>
+<div id="fig-ex-9-23" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-23.png" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.7: Петерсений граф дахь K3,3-хуваалт
+</figcaption>
+</figure>
+</div>
+<p>Хэдийгээр Петерсений граф гурвалжингүй боловч Мөрдөлгөө 9.16 энд тус болохгүй, учир нь үнэхээр <span class="math inline">\(|E| = 15 \le 16 = 2|V| - 4\)</span> байна. Гэсэн хэдий ч Петерсений графт <span class="math inline">\(K_{3,3}\)</span>-хуваалт (дээр тодоор харуулсан) агуулагдаж байгаа тул Куратовскийн теорем асуудлыг шийднэ. Өөрөөр хэлбэл, <span class="math inline">\(G - \{v\}\)</span> нь дээрх баруун гар талын зурагт <span class="math inline">\(K_{3,3}\)</span>-хуваалт болж харагдаж байна. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Мөрдөлгөө 9.14 ба 9.16 нь графуудыг хавтгай биш гэж батлахад ерөнхий тохиолдолд тийм ч тустай биш. Тэдгээр мөрдөлгөөнүүд нь Куратовскийн теоремд шаардагдах <span class="math inline">\(K_5\)</span> ба <span class="math inline">\(K_{3,3}\)</span>-ийг хавтгай биш гэдгийг харуулахад хувь нэмрээ оруулсан юм. Ерөнхий тохиолдолд графыг хавтгай биш гэж харуулахын тулд Куратовскийн теоремын тусламжийг эрэх хэрэгтэй.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.24
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Доорх зүүн гар талд зурсан граф нь найман станцтай цахилгаан сүлжээний зохион байгуулалт юм:</p>
+<div id="fig-ex-9-24" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-24.png" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.8: Найман станцтай сүлжээ ба K5-хуваалт
+</figcaption>
+</figure>
+</div>
+<p>Энэ сүлжээг ямар ч кабелийн огтлолцолгүйгээр байрлуулахыг хүсэж байгаа хэдий ч энэ граф нь хавтгай граф биш. Хоёр тодруулсан ирмэгийг устгаж гарган авсан дэд граф нь дээрх баруун гар талын зурагт <span class="math inline">\(K_5\)</span>-ийн хуваалт болж харагдаж байна (шалгаж үзнэ үү). <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Хавтгай графуудын тухай <strong>Дөрвөн өнгөний теорем</strong> хэмээх чухал үр дүнг 9.5-р хэсэгт хэлэлцэх болно.</p>
+<section id="огтлолцлын-тоо-crossing-number" class="level3">
+<h3 class="anchored" data-anchor-id="огтлолцлын-тоо-crossing-number">Огтлолцлын тоо (Crossing Number)</h3>
+<p>Хавтгай шигтгээ хийх боломжгүй үед графыг аль болох цөөн огтлолцолтойгоор зурахыг эрэлхийлэх нь зүй ёсны хэрэг юм.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 9.9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G\)</span> графын зураглал дахь огтлолцлын боломжит хамгийн цөөн тоог <span class="math inline">\(G\)</span>-ийн <strong>огтлолцлын тоо</strong> (crossing number) гээд <span class="math inline">\(\nu(G)\)</span> гэж тэмдэглэнэ.</p>
+</div>
+</div>
+<p><span class="math inline">\(G\)</span> граф хавтгай байх нь <span class="math inline">\(\nu(G) = 0\)</span> байхтай зайлшгүй бөгөөд хүрэлцээтэй. <span class="math inline">\(K_5\)</span> ба <span class="math inline">\(K_{3,3}\)</span> нь хавтгай биш бөгөөд Жишээ 9.18 ба 9.19-д тэдгээрийн нэг огтлолцолтой зураглалыг харуулсан тул <span class="math inline">\(\nu(K_5) = \nu(K_{3,3}) = 1\)</span> гэдэг нь мөрдөн гарна. Сүлжээ эсвэл хэлхээний зураг төсөл зэрэг хэрэглээнд утасны огтлолцлын тоог хамгийн бага байлгах шаардлагатай үед харгалзах графын огтлолцлын тоонд хүрдэг шигтгээг хайдаг.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.25
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Жишээ 9.24 дэх цахилгаан сүлжээний зохион байгуулалт нь <span class="math inline">\(1\)</span> огтлолцлын тоотой. Огтлолцлын тоо хамгийн багадаа <span class="math inline">\(1\)</span> гэдгийг Жишээ 9.24-т энэхүү сүлжээг загварчилсан граф хавтгай биш болохыг харуулснаар тогтоосон. Харин сүлжээг зөвхөн ганц огтлолцолтойгоор байрлуулж болохыг доорх зурагт харуулав:</p>
+<p><img src="images/ch09/ex-9-25.png" id="fig-ex-9-25" class="img-fluid" style="width:30.0%" alt="Нэг огтлолцолтой цахилгаан сүлжээ"> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="р-зүйлийн-дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">9.4-р зүйлийн дасгалууд</h2>
+<ol type="1">
+<li><p>Зураг дээрх компьютерын сүлжээний бүтцийг кабелийн огтлолцолгүйгээр байрлуулж болохыг харуул:</p>
+<div id="fig-ex-9-4-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-1.png" class="img-fluid figure-img" style="width:42.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.9: Дасгал 1-ийн компьютерын сүлжээ
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зураг дээр <span class="math inline">\(\circ\)</span> тэмдэглэгээгээр цахилгаан станцыг заасан цахилгаан сүлжээний төлөвлөгөөг харуулжээ. Энэ цахилгаан сүлжээнд кабелийн огтлолцолгүй байршил оршино гэдгийг харуул:</p>
+<div id="fig-ex-9-4-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-2.png" class="img-fluid figure-img" style="width:25.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.10: Дасгал 2-ын цахилгаан сүлжээ
+</figcaption>
+</figure>
+</div></li>
+<li><p>Хувийн компьютерын эд ангиудыг холбох үед компьютерын ард орооцолдсон кабелиуд үүсэх нь элбэг байдаг. Зураг дээрх компьютерын систем дэх холболтуудыг огтлолцолгүйгээр гүйцэтгэж болохыг харуул:</p>
+<div id="fig-ex-9-4-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-3.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.11: Дасгал 3-ын компьютерын систем
+</figcaption>
+</figure>
+</div></li>
+<li><p>Гурван барилгаас бүрдэх зуслан баригдаж байна. Дөрвөн төрлийн инженерийн шугам сүлжээ байгаа боловч барилга бүрийг шугам сүлжээ бүрд холбох шаардлагагүй. Доорх бүдүүвчид харуулсан шаардлагатай холболтуудыг кабелийн огтлолцолгүйгээр гүйцэтгэж болохыг харуул:</p>
+<div id="fig-ex-9-4-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-4.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.12: Дасгал 4-ийн зуслангийн шугам сүлжээ
+</figcaption>
+</figure>
+</div></li>
+<li><p>Огтлолцолгүй зураглал гаргах замаар <span class="math inline">\(K_{2,3}\)</span>-ийг хавтгай граф болохыг харуул.</p></li>
+<li><p><strong>Хоёр шугам сүлжээний бодлого.</strong> Хэрэв <span class="math inline">\(2\)</span> шугам сүлжээ болон дурын <span class="math inline">\(n\)</span> ширхэг байшин байвал байшин бүрийг шугам сүлжээ тус бүрд ямар ч кабелийн огтлолцолгүйгээр холбож болно. Дурын <span class="math inline">\(n \in \mathbb{Z}^+\)</span> хувьд <span class="math inline">\(K_{2,n}\)</span> нь хавтгай граф болохыг харуул.</p></li>
+<li><p>Зураг дээрх графын шигтгээний хосмог графыг зур:</p>
+<div id="fig-ex-9-4-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-7.png" class="img-fluid figure-img" style="width:25.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.13: Дасгал 7-ийн граф
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зураг дээрх графын шигтгээний хосмог графыг зур:</p>
+<div id="fig-ex-9-4-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-8.png" class="img-fluid figure-img" style="width:28.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.14: Дасгал 8-ийн граф
+</figcaption>
+</figure>
+</div></li>
+<li><p>8.3-р хэсгийн Дасгал 15 ба 16-д куб болон октаэдр нь хавтгай графууд болохыг харуулсан. Кубын хосмог граф нь октаэдр бөгөөд эсрэгээрээ мөн үнэн болохыг харуул.</p></li>
+<li><p>8.3-р хэсгийн Дасгал 14 ба 18-д додекаэдр болон икосаэдр нь хавтгай графууд болохыг харуулсан. Додекаэдрийн графын хосмог граф нь икосаэдрийн граф бөгөөд эсрэгээрээ мөн үнэн болохыг харуул.</p></li>
+<li><p><span class="math inline">\(R\)</span> мужуудтай <span class="math inline">\(G = (V, E)\)</span> графын хавтгай шигтгээ өгөгдсөн үед хэрэв <span class="math inline">\(|V| = 10\)</span> ба <span class="math inline">\(|E| = 16\)</span> бол <span class="math inline">\(|R|\)</span>-ийг ол.</p></li>
+<li><p><span class="math inline">\(R\)</span> мужуудтай <span class="math inline">\(G = (V, E)\)</span> графын хавтгай шигтгээ өгөгдсөн үед хэрэв <span class="math inline">\(|V| = 14\)</span> ба <span class="math inline">\(|R| = 10\)</span> бол <span class="math inline">\(|E|\)</span>-ийг ол.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Изоморф биш хосмог графууд үүсгэдэг хоёр хавтгай шигтгээ бүхий хавтгай <span class="math inline">\(G\)</span> графын жишээ гарга.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Эйлерийн томьёог ашиглахгүйгээр <span class="math inline">\(|V| = 1\)</span> байх <span class="math inline">\(G = (V, E)\)</span> графын дурын хавтгай шигтгээний хувьд <span class="math inline">\(|R| = |E| + 1\)</span> болохыг батал. <em>Зөвлөмж:</em> <span class="math inline">\(|E|\)</span> дээр индукц хий. Шинэ ирмэг бүр нэг мужийг хоёр хэсэгт хуваах ёстой.</p></li>
+<li><p><span class="math inline">\(c\)</span> ширхэг компоненттой хавтгай графын хувьд Эйлерийн томьёоны тохирох хувилбар ямар байх вэ?</p></li>
+<li><p><span class="math inline">\(\star\)</span> <span class="math inline">\(n \ge 1\)</span> ба <span class="math inline">\(n - m + r = 2\)</span> байх <span class="math inline">\(\forall n, m, r \in \mathbb{N}\)</span> хувьд <span class="math inline">\(|V| = n\)</span>, <span class="math inline">\(|E| = m\)</span>, ба <span class="math inline">\(|R| = r\)</span> байх холбоост хавтгай <span class="math inline">\(G\)</span> граф оршино гэдгийг харуул.</p></li>
+<li><p>Куратовскийн теоремын хялбар чиглэлийг батал. Өөрөөр хэлбэл, <span class="math inline">\(K_5\)</span> эсвэл <span class="math inline">\(K_{3,3}\)</span>-ийн аль нэгнийх нь хуваалтыг агуулсан дурын граф хавтгай биш болохыг харуул. <em>Зөвлөмж:</em> Хавтгай графуудын хуваалтууд нь хавтгай граф байна.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Мөрдөлгөө 9.16-г батал.</p></li>
+<li><p>Бүх <span class="math inline">\(n \ge 5\)</span> хувьд <span class="math inline">\(K_n\)</span> нь хавтгай граф биш болохыг харуул.</p></li>
+<li><p>Бүх <span class="math inline">\(m, n \in \mathbb{Z}^+\)</span> хувьд <span class="math inline">\(K_{m,n}\)</span> хавтгай граф байх нь <span class="math inline">\(\min\{m, n\} \le 2\)</span> байхтай зайлшгүй бөгөөд хүрэлцээтэй болохыг харуул.</p></li>
+<li><p>Зураг дээрх цахилгаан хэлхээг утасны огтлолцолгүйгээр угсарч болох эсэхийг тодорхойл. Хариултаа үндэслэ:</p>
+<div id="fig-ex-9-4-21" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-21.png" class="img-fluid figure-img" style="width:35.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.15: Дасгал 21-ийн цахилгаан хэлхээ
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зураг дээрх цахилгаан хэлхээг утасны огтлолцолгүйгээр угсарч болох эсэхийг тодорхойл. Хариултаа үндэслэ:</p>
+<div id="fig-ex-9-4-22" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-22.png" class="img-fluid figure-img" style="width:32.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.16: Дасгал 22-ийн цахилгаан хэлхээ
+</figcaption>
+</figure>
+</div></li>
+</ol>
+<p><em>Дараагийн дасгалууд нь доорх зураг дээрх графуудад хамаарна.</em></p>
+<div id="fig-ex-9-4-23-30" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-23-30-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-23-30.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-23-30-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.17: Дасгал 23–30-ийн графууд (a)–(h)
+</figcaption>
+</figure>
+</div>
+<p><em>23-аас 30 хүртэлх дасгалуудад заасан графыг хавтгай граф мөн гэдгийг батал эсвэл няцаа.</em></p>
+<ol start="23" type="1">
+<li><p>Граф (a). <span class="math inline">\(\qquad\)</span> 24. Граф (b).</p></li>
+<li><p>Граф (c). <span class="math inline">\(\qquad\)</span> 26. Граф (d).</p></li>
+<li><p>Граф (e). <span class="math inline">\(\qquad\)</span> 28. Граф (f).</p></li>
+<li><p>Граф (g). <span class="math inline">\(\qquad\)</span> 30. Граф (h).</p></li>
+<li><p><span class="math inline">\(5\)</span> оройтой бүх хавтгай биш энгийн графуудыг ол.</p></li>
+<li><p><span class="math inline">\(K_5\)</span> эсвэл <span class="math inline">\(K_{3,3}\)</span>-ийг илэрхийгээр агуулаагүй (хуваалтуудыг зөвшөөрнө) <span class="math inline">\(6\)</span> оройтой бүх хавтгай биш энгийн графуудыг ол.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Дурын хавтгай энгийн <span class="math inline">\(G\)</span> графт хамгийн ихдээ <span class="math inline">\(5\)</span> зэрэгтэй орой оршино гэдгийг харуул. Өөрөөр хэлбэл, <span class="math inline">\(\delta(G) \le 5\)</span>. <em>Зөвлөмж:</em> Эсрэгээс нь батлах аргад Мөрдөлгөө 9.14-ийг ашигла.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Гурвалжингүй дурын хавтгай <span class="math inline">\(G\)</span> графт хамгийн ихдээ <span class="math inline">\(3\)</span> зэрэгтэй орой оршино гэдгийг харуул. Өөрөөр хэлбэл, <span class="math inline">\(\delta(G) \le 3\)</span>.</p></li>
+<li><p>Мөрдөлгөө 9.14 дэх заагууд нь сайжруулах боломжгүй хамгийн сайн зааг болохыг харуул. Өөрөөр хэлбэл, <span class="math inline">\(n \in \mathbb{Z}^+\)</span> бүрийн хувьд <span class="math inline">\(|V| = n\)</span> ба <span class="math inline">\(|E| = 3n - 6\)</span> байх хавтгай энгийн <span class="math inline">\(G = (V, E)\)</span> графын жишээ гарга (<span class="math inline">\(n \ge 3\)</span>). <em>Зөвлөмж:</em> <span class="math inline">\(C_{n-2}\)</span> дээр дотор талд нь нэг, гадна талд нь нэг цэг нэм.</p></li>
+<li><p>Мөрдөлгөө 9.16 дахь заагууд нь сайжруулах боломжгүй хамгийн сайн зааг болохыг харуул. Өөрөөр хэлбэл, <span class="math inline">\(n \in \mathbb{Z}^+\)</span> бүрийн хувьд <span class="math inline">\(|V| = n\)</span> ба <span class="math inline">\(|E| = 2n - 4\)</span> байх гурвалжингүй хавтгай энгийн <span class="math inline">\(G = (V, E)\)</span> графын жишээ гарга (<span class="math inline">\(n \ge 4\)</span>).</p></li>
+<li><p>Зураг дээрх граф нь цахилгаан станцууд цикл үүсгэн холбогдсон цахилгаан сүлжээг төлөөлнө. Гадна талын циклд ашигласан кабелиудаас гадна цахилгаан станцуудыг тойрон гарах боломжийг олгох үүднээс өөр кабелиудыг нэмж оруулсан байна. Ингэснээр аль нэг станц гэмтсэн ч циклийн зохион байгуулалтыг хадгалах боломжтой юм.</p>
+<div id="fig-ex-9-4-37" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-37-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-37.png" class="img-fluid figure-img" style="width:25.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-37-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.18: Дасгал 37-ийн цахилгаан сүлжээний граф
+</figcaption>
+</figure>
+</div>
+<p>Энэ граф хавтгай боловч түүн дээр ямар нэгэн ирмэг нэмж гарган авсан дурын энгийн граф хавтгай биш болохыг батал.</p></li>
+<li><p>Зураг дээрх граф нь компьютерын сүлжээг загварчилжээ. Энэ сүлжээнд холбооны кабелиуд огтлолцохгүй байх зохион байгуулалтыг хайж байна. Үүнийг хийх боломжтой юу?</p>
+<div id="fig-ex-9-4-38" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-38-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-38.png" class="img-fluid figure-img" style="width:28.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-38-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.19: Дасгал 38-ын компьютерын сүлжээний граф
+</figcaption>
+</figure>
+</div>
+<p>Өөрөөр хэлбэл, зураг дээрх графыг хавтгай граф мөн гэдгийг батал эсвэл няцаа.</p></li>
+</ol>
+<p><em>39-өөс 46 хүртэлх дасгалуудад заасан графын огтлолцлын тоог олж, үр дүнгээ үндэслэ.</em></p>
+<ol start="39" type="1">
+<li><p>Граф (a). <span class="math inline">\(\qquad\)</span> 40. Граф (b).</p></li>
+<li><p>Граф (c). <span class="math inline">\(\qquad\)</span> 42. Граф (d).</p></li>
+<li><p>Граф (e). <span class="math inline">\(\qquad\)</span> 44. Граф (f).</p></li>
+<li><p>Граф (g). <span class="math inline">\(\qquad\)</span> 46. Граф (h).</p></li>
+<li><p>Петерсений графын огтлолцлын тоо хамгийн ихдээ <span class="math inline">\(2\)</span> болохыг батал.</p></li>
+<li><p>Зураг дээрх графын огтлолцлын тоо хамгийн ихдээ <span class="math inline">\(3\)</span> болохыг батал:</p>
+<div id="fig-ex-9-4-48" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-48-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-48.png" class="img-fluid figure-img" style="width:25.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-48-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.20: Дасгал 48-ын граф
+</figcaption>
+</figure>
+</div></li>
+<li><p><span class="math inline">\(\nu(K_6) = 3\)</span>. <span class="math inline">\(3\)</span> огтлолцолтой <span class="math inline">\(K_6\)</span>-ийн зураглалыг ол.</p></li>
+<li><p><span class="math inline">\(\nu(K_{4,4}) = 4\)</span>. <span class="math inline">\(4\)</span> огтлолцолтой <span class="math inline">\(K_{4,4}\)</span>-ийн зураглалыг ол.</p></li>
+<li><p><span class="math inline">\(\nu(Q_4) = 8\)</span>. <span class="math inline">\(8\)</span> огтлолцолтой <span class="math inline">\(Q_4\)</span>-ийн зураглалыг ол.</p></li>
+<li><p><span class="math inline">\(\forall n \ge 2\)</span>, <span class="math inline">\(\nu(K_{3,n}) = n - 2\)</span>. <span class="math inline">\(n - 2\)</span> огтлолцолтой <span class="math inline">\(K_{3,n}\)</span>-ийн зураглалыг ол.</p></li>
+<li><p>Төлөвлөж буй цахилгаан сүлжээний зураг дээрх зохион байгуулалт нь хэт олон кабелийн огтлолцолтой тул тохиромжгүй байна.</p>
+<div id="fig-ex-9-4-53" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-4-53-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-4-53.png" class="img-fluid figure-img" style="width:25.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-4-53-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;33.21: Дасгал 53-ын цахилгаан сүлжээ
+</figcaption>
+</figure>
+</div>
+<p>Аль болох цөөн огтлолцолтой зохион байгуулалтыг олж, түүнээс цөөн огтлолцолд хүрэх боломжгүй гэдгийг батал.</p></li>
+<li><p>Дасгал 38-д зурсан граф нь утасны хоёр огтлолцолтойгоор байрлуулсан компьютерын сүлжээг загварчилдаг. Тэр сүлжээний утасны огтлолцлын боломжит хамгийн цөөн тоог тодорхойлж, үр дүнгээ батал.</p></li>
+<li><p>Дараах өгүүлбэрийг батал эсвэл няцаа: <em>Эйлерийн графын хуваалт нь Эйлерийн граф байна.</em></p></li>
+<li><p>Дараах өгүүлбэрийг батал эсвэл няцаа: <em>Гамильтоны графын хуваалт нь Гамильтоны граф байна.</em></p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./9-3.html" class="pagination-link" aria-label="Гамильтоны цикл (Hamiltonian Cycles)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Гамильтоны цикл (Hamiltonian Cycles)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./9-5.html" class="pagination-link" aria-label="Өнгөний тоо (Chromatic Number)">
+        <span class="nav-page-text"><span class="chapter-title">Өнгөний тоо (Chromatic Number)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

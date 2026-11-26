@@ -1,0 +1,1864 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Гамильтоны цикл (Hamiltonian Cycles) – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./9-4.html" rel="next">
+<link href="./9-2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./9.html">9.html</a></li><li class="breadcrumb-item"><a href="./9-3.html"><span class="chapter-title">Гамильтоны цикл (Hamiltonian Cycles)</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">3. Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: 3. Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1. Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2. Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3. Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4. Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5. Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6. Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">9.html</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section: 9.html">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Графын шинж чанарууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Эйлерийн цикл (Euler Circuits)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-3.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Гамильтоны цикл (Hamiltonian Cycles)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Хавтгай граф (Planar Graphs)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өнгөний тоо (Chromatic Number)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.5-р зүйлийн дасгалууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#гамильтоны-циклийг-хэрхэн-олох-вэ" id="toc-гамильтоны-циклийг-хэрхэн-олох-вэ" class="nav-link active" data-scroll-target="#гамильтоны-циклийг-хэрхэн-олох-вэ">Гамильтоны циклийг хэрхэн олох вэ?</a></li>
+  <li><a href="#р-зүйлийн-дасгалууд" id="toc-р-зүйлийн-дасгалууд" class="nav-link" data-scroll-target="#р-зүйлийн-дасгалууд">9.3-р зүйлийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./9.html">9.html</a></li><li class="breadcrumb-item"><a href="./9-3.html"><span class="chapter-title">Гамильтоны цикл (Hamiltonian Cycles)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Гамильтоны цикл (Hamiltonian Cycles)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>9.2-р хэсэгт бидний гол сонирхол ирмэг бүрийг яг нэг удаа хамарсан цикл олоход чиглэж байв. Хэрэв бидний граф гудамжны цасыг цэвэрлэх шаардлагатай хорооллыг төлөөлж байвал энэ зорилго яг тохирно. Харин хорооллын айлуудад шуудан хүргэх шаардлагатай бол бидний анхаарал өөр тийш чиглэнэ. Хэрэв хаяг бүрийг оройгоор төлөөлүүлбэл орой бүрийг яг нэг удаа хамарсан цикл олох нь бидний сонирхол болно.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг дээрх хорооллоор шуудангийн хайрцаг бүр дээр яг нэг удаа очиж, эхэлсэн газраа буцаж ирдэг шуудан хүргэлтийн маршрутыг ол.</p>
+<div id="fig-ex-9-8a" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-8a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-8a.png" class="img-fluid figure-img" style="width:32.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-8a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.1: Шуудангийн хайрцгуудтай хороолол
+</figcaption>
+</figure>
+</div>
+<p><strong>Бодолт.</strong> Оройнууд нь шуудангийн хайрцгуудтай харгалзах ба ирмэгүүд нь гудамжуудыг тусгасан хорооллын загвар графыг байгуулъя:</p>
+<div id="fig-ex-9-8b" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-8b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-8b.png" class="img-fluid figure-img" style="width:32.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-8b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.2: Хорооллын загвар граф
+</figcaption>
+</figure>
+</div>
+<p>Зураг 9.2-ын зүүн гар талд байгаа энэ графын хуулбар дээр бид хүссэн шинж чанар бүхий циклийн дагуух ирмэгүүдийг дараалуулан дугаарласан бөгөөд энэ нь орой бүр дээр яг нэг удаа очно:</p>
+<div id="fig-fig-9-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-9-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/fig-9-2.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-9-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.3: Шуудан хүргэлтийн маршрут зохиох нь
+</figcaption>
+</figure>
+</div>
+<p>Ийм циклийг хэрхэн олох тухай Жишээ 9.9-ийн дараа авч үзнэ. Энд бид энэхүү цикл нь Зураг 9.2-ын баруун гар талд дугаарласны дагуу өгөгдсөн хорооллоор явах хүссэн шуудангийн маршруттай харгалзаж, шуудангийн хайрцаг бүр дээр яг нэг удаа очиж байгааг ажиглахад л хангалттай. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Жишээ 9.8-д ашигласан тусгай цикл нь чухал төрлийн цикл юм.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 9.4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G\)</span> нь граф эсвэл чиглэлтэй граф байг. <span class="math inline">\(G\)</span> доторх орой бүрийг хамарсан циклийг (харгалзан замыг) <strong>Гамильтоны цикл</strong> (Hamiltonian cycle) (харгалзан <strong>Гамильтоны зам</strong> — Hamiltonian path) гэнэ. Тодорхойлолт ёсоор, Гамильтоны циклийн эхлэл ба төгсгөлийн орой хоёр удаа хамрагдахаас бусад тохиолдолд орой бүр яг нэг удаа хамрагдах ёстой. Хэрэв <span class="math inline">\(G\)</span> нь Гамильтоны цикл агуулдаг бол <span class="math inline">\(G\)</span>-г <strong>Гамильтоны граф</strong> (Hamiltonian) гэнэ.</p>
+</div>
+</div>
+<p>Гамильтоны циклийг анх судалсан (хэдийгээр <em>хамгийн анхных</em> нь биш боловч) Ирландын математикч Уильям Роуэн Гамильтоны (1805–1865) нэрээр нэрлэжээ.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг дээрх графын оройнуудыг Гамильтоны циклийн дагуу дараалуулан дугаарласан байна.</p>
+<p><img src="images/ch09/ex-9-9.png" id="fig-ex-9-9" class="img-fluid" style="width:25.0%" alt="Гамильтоны циклтэй граф"> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<section id="гамильтоны-циклийг-хэрхэн-олох-вэ" class="level3">
+<h3 class="anchored" data-anchor-id="гамильтоны-циклийг-хэрхэн-олох-вэ">Гамильтоны циклийг хэрхэн олох вэ?</h3>
+<p>Гамильтоны цикл нь эцсийн дүндээ бүх оройг дайран өнгөрдөг тул хэрэв графт Гамильтоны цикл оршдог бол түүнийг сонгосон дурын эхлэх цэгээс олж болно. Тэндээсээ орой бүрийг яг нэг удаа дайрахыг оролдон графаар алхаж эхэлнэ. Хэрэв ямар нэгэн цэг дээр бидний алхалтыг Гамильтоны цикл болгон гүйцээх ямар ч боломжгүй болсныг мэдвэл чиглэлийн өөр сонголт нь илүү сайн үр дүнд хүргэнэ гэж найдаж буй өмнөх байрлал руугаа ухарч болно. Хэрэв бид энэ үйл явцад системтэй хандаж, таарсан замын салаа бүрээс боломжит бүх чиглэлийг судалбал энэхүү бүрэн шавхах арга нь Гамильтоны цикл орших үед үргэлж түүнийг олно. Энэ аргыг <strong>ухрах хайлт</strong> (backtrack searching) гэж нэрлэдэг бөгөөд 10.2-р хэсэгт хэлэлцэх болно. Тэнд бид энэ арга нь жижиг жишээнүүдээс бусад тохиолдолд туйлын үр ашиггүй, улмаар хэрэглэх боломжгүй болохыг харах болно.</p>
+<p>Өмнө нь Эйлерийн теоремыг судалсан тул Гамильтоны графуудыг тодорхойлох Эйлерийн теоремын аналогийг хүлээж болох юм. Гэсэн хэдий ч тийм тодорхойломж одоогоор мэдэгдээгүй байна. Түүнчлэн графаас Гамильтоны цикл олох үр ашигтай алгоритм мөн мэдэгдээгүй байна. 10-р бүлэгт алгоритмын үр ашгийг хэлэлцэх үед бид энэ асуудлыг дахин сөхөж илүү гүнзгий судлах болно. Энд бид Гамильтоны цикл олох ерөнхий бодлого нэлээд хэцүү гэдгийг ойлгох хэрэгтэй. Тиймээс бид голчлон гараар шинжлэх боломжтой жижиг бодлогууд дээр анхаарлаа төвлөрүүлнэ. Нэмж дурдахад бид Гамильтоны цикл орших нөхцөлийг тодорхойлж болох тусгай нөхцөлүүдийг судална. Жишээлбэл, Гамильтоны чанар болон холбоост чанарын хооронд хамаарал бий.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 9.9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G\)</span> нь дурын граф байг. Хэрэв <span class="math inline">\(G\)</span> нь Гамильтоны граф бол <span class="math inline">\(\kappa(G) \ge 2\)</span> байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Гамильтоны цикл нь <span class="math inline">\(G\)</span>-ийн бүх оройг хамарсан <span class="math inline">\(C_n\)</span> циклтэй изоморф дэд граф юм. Тэгвэл 9.1-р хэсгийн Дасгал 24-ийн үр дүн ёсоор <span class="math inline">\(\kappa(G) \ge \kappa(C_n)\)</span> болно. Теорем 9.1 ёсоор <span class="math inline">\(\kappa(C_n) = 2\)</span> тул батлах зүйл мөрдөн гарна. <span class="math inline">\(\square\)</span></p>
+<p>Теорем 9.9-ийн эсрэг-урвуу өгүүлбэр нь дурын <span class="math inline">\(G\)</span> графын хувьд: <span class="math display">\[\text{хэрэв } \kappa(G) \le 1 \text{ бол } G \text{ нь Гамильтоны граф биш}\]</span> гэж өгүүлдэг. Үүнийг графт Гамильтоны цикл оршихгүй гэдгийг харуулахад ашиглаж болно.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг дээрх <span class="math inline">\(G\)</span> граф нь компьютерын сүлжээг төлөөлнө.</p>
+<div id="fig-ex-9-10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-10.png" class="img-fluid figure-img" style="width:30.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.4: Компьютерын сүлжээний граф G
+</figcaption>
+</figure>
+</div>
+<p>Ийм сүлжээнд Гамильтоны цикл орших нь зэрэгцээ (parallel) алгоритм ашиглаж буй программчинд давуу тал олгож болох юм. Тэр тохиолдолд Гамильтоны цикл нь угсрах шугамтай адил компьютер бүр процессыг дараагийн компьютер руу дамжуулах маршрутыг гаргаж чадна. Гэсэн хэдий ч <span class="math inline">\(\kappa(G) = 1\)</span> тул энэ <span class="math inline">\(G\)</span> граф нь Гамильтоны граф биш. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Графт Гамильтоны цикл оршихгүй гэдгийг харуулахад Жишээ 9.10-д ашигласан арга нь тийм ч ерөнхий хэрэглээтэй биш. Дараах теорем нь илүү тустай хэрэгслүүдийг олгоно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 9.10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Хэрэв <span class="math inline">\(C\)</span> нь <span class="math inline">\(G = (V, E)\)</span> граф дахь Гамильтоны цикл бол:</p>
+<p><strong>(i)</strong> <span class="math inline">\(C\)</span> нь орой бүртэй инцидент яг хоёр ирмэгийг хамарна, мөн</p>
+<p><strong>(ii)</strong> <span class="math inline">\(C\)</span>-д <span class="math inline">\(|V|\)</span>-ээс цөөн оройтой цикл болох ямар ч дэд граф байхгүй.</p>
+<p><em><span class="math inline">\(G\)</span> нь чиглэлтэй граф байх тохиолдолд <span class="math inline">\(v\)</span> орой бүрийн хувьд <span class="math inline">\(C\)</span> нь төгсгөл нь <span class="math inline">\(v\)</span> байх яг нэг ирмэг, эхлэл нь <span class="math inline">\(v\)</span> байх яг нэг ирмэгийг хамарсан байх ёстой.</em></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг дээрх <span class="math inline">\(G\)</span> графт Гамильтоны цикл оршихгүй гэдгийг харуул.</p>
+<div id="fig-ex-9-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-11.png" class="img-fluid figure-img" style="width:22.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.5: Гамильтоны циклгүй граф G
+</figcaption>
+</figure>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(G\)</span>-д <span class="math inline">\(C\)</span> Гамильтоны цикл оршдог гэж үзье. Зураг дээр тодоор харуулсан ирмэгүүд нь тус бүр <span class="math inline">\(2\)</span> зэрэгтэй оройтой инцидент тул <span class="math inline">\(C\)</span>-д заавал багтах ёстой. Гэсэн хэдий ч энэхүү тодруулсан дэд графыг хоёр шалтгааны улмаас Гамильтоны цикл болгон гүйцээх боломжгүй. Нэгдүгээрт, түүнд (тодруулсан) зэрэг нь <span class="math inline">\(3\)</span> байх орой агуулагдаж байна. Хоёрдугаарт, түүнд <span class="math inline">\(4\)</span>-цикл агуулагдаж байна. Мэдээж эдгээр шалтгааны аль нэг нь дангаараа <span class="math inline">\(C\)</span> оршин байхтай зөрчилдөхөд хангалттай. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<p>Гамильтоны цикл оршихгүй гэдгийг харуулах аргуудыг харсан тул одоо оршихыг баталгаажуулах хүрэлцээтэй нөхцөлүүдийг авч үзье. <span class="math inline">\(G\)</span> графын хамгийн бага зэрэг <span class="math inline">\(\delta(G)\)</span> дээр Гамильтоны чанарыг нөхцөлдүүлэх зааг байдаг.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 9.11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(|V| \ge 3\)</span> байх дурын энгийн <span class="math inline">\(G = (V, E)\)</span> графын хувьд хэрэв <span class="math inline">\(\delta(G) \ge \frac{|V|}{2}\)</span> бол <span class="math inline">\(G\)</span> нь Гамильтоны граф байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Эсрэгээс нь сэтгэе. <span class="math inline">\(\delta(H) \ge \frac{n}{2}\)</span> боловч Гамильтоны циклгүй энгийн <span class="math inline">\(H\)</span> граф орших оройн хамгийн цөөн тоог <span class="math inline">\(n\)</span> гэе. Цаашилбал, <span class="math inline">\(n\)</span> оройтой, <span class="math inline">\(\delta(H) \ge \frac{n}{2}\)</span> бөгөөд Гамильтоны циклгүй бүх энгийн <span class="math inline">\(H\)</span> графууд дотроос хамгийн олон ирмэгтэй <span class="math inline">\(G = (V, E)\)</span> графыг сонгон авъя. Улмаар <span class="math inline">\(G\)</span> дээр дурын шинэ ирмэг нэмэхэд <span class="math inline">\(G\)</span> нь Гамильтоны циклтэй болно.</p>
+<p><span class="math inline">\(v_1\)</span> ба <span class="math inline">\(v_n\)</span>-ийг <span class="math inline">\(G\)</span> дэх хөрш биш хоёр орой гэж аваад, <span class="math inline">\(e_n \mapsto \{v_n, v_1\}\)</span> ирмэгийг нэмснээр <span class="math inline">\(G\)</span>-ээс үүсэх граф дахь Гамильтоны циклийн оройнуудын эрэмбийг <span class="math inline">\(v_1, v_2, \dots, v_n, v_1\)</span> гэе. Иймд <span class="math inline">\(v_1, v_2, \dots, v_n\)</span> нь <span class="math inline">\(G\)</span> дэх Гамильтоны зам болно.</p>
+<p>Бид <span class="math inline">\(G\)</span> дотор <span class="math inline">\(e_k \mapsto \{v_k, v_n\}\)</span> ба <span class="math inline">\(e_{k+1} \mapsto \{v_{k+1}, v_1\}\)</span> ирмэгүүд орших <span class="math inline">\(k\)</span> индекс олдоно гэж батална.</p>
+<div id="fig-thm-9-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-thm-9-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/thm-9-11.png" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-thm-9-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.6: k индексийг олох бүдүүвч
+</figcaption>
+</figure>
+</div>
+<p>Ингэснээр: <span class="math display">\[v_1, v_2, \dots, v_k, v_n, v_{n-1}, \dots, v_{k+1}, v_1\]</span> жагсаалт нь <span class="math inline">\(G\)</span> дотор Гамильтоны цикл өгнө. <span class="math display">\[K = \{k : 1 \le k \le n - 1 \text{ ба } e \mapsto \{v_n, v_k\} \text{ байх } \exists e \in E\} \quad \text{ба}\]</span> <span class="math display">\[K' = \{k : 1 \le k \le n - 1 \text{ ба } e \mapsto \{v_1, v_{k+1}\} \text{ байх } \exists e \in E\}\]</span> гэе. <span class="math inline">\(|K \cup K'| \le n - 1\)</span>, <span class="math inline">\(|K| \ge \deg(v_n) \ge \frac{n}{2}\)</span>, ба <span class="math inline">\(|K'| \ge \deg(v_1) \ge \frac{n}{2}\)</span> болохыг тэмдэглэе. Эндээс: <span class="math display">\[|K \cap K'| = |K| + |K'| - |K \cup K'| \ge \frac{n}{2} + \frac{n}{2} - (n - 1) = 1.\]</span> <span class="math inline">\(|K \cap K'| \ge 1\)</span> тул <span class="math inline">\(K\)</span> ба <span class="math inline">\(K'\)</span> олонлогуудад ерөнхий <span class="math inline">\(k\)</span> утга заавал оршино. Энэ <span class="math inline">\(k\)</span> нь <span class="math inline">\(G\)</span> дотор Гамильтоны цикл байгуулах боломжийг олгох хүссэн индекс юм. Ийнхүү бид зөрчилд хүрлээ. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(\delta(G) = 4 = \frac{|V|}{2}\)</span> тул зураг дээрх <span class="math inline">\(G = (V, E)\)</span> граф Гамильтоны граф болох нь Теорем 9.11-ээс мөрдөн гарна.</p>
+<div id="fig-ex-9-12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-12.png" class="img-fluid figure-img" style="width:25.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.7: Теорем 9.11-ийн нөхцөлийг хангах граф
+</figcaption>
+</figure>
+</div>
+<p>Мэдээж энэ тохиолдолд Гамильтоны циклийг олоход хэцүү биш, жишээлбэл: <span class="math display">\[A, B, C, D, H, G, E, F, A. \quad \blacksquare\]</span></p>
+</div>
+</div>
+<p>Жишээ 9.11 дэх <span class="math inline">\(G = (V, E)\)</span> граф нь Гамильтоны биш бөгөөд <span class="math inline">\(\delta(G) = \frac{|V|}{2} - 1\)</span> нөхцөлийг хангадаг тул Теорем 9.11-ийн үр дүн нь сайжруулах боломжгүй хамгийн сайн зааг юм.</p>
+<p><span class="math inline">\(n\)</span>-кубүүд <span class="math inline">\(Q_n\)</span> нь харьцангуй бага хамгийн бага зэрэгтэй бөгөөд том <span class="math inline">\(n\)</span>-ийн хувьд дүрслэн харахад хэцүү боловч тэдгээрийг Гамильтоны граф болохыг харуулахад харьцангуй хялбар байдаг.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.13
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n \ge 2\)</span> бүхэл тоо бүрийн хувьд <span class="math inline">\(n\)</span>-куб <span class="math inline">\(Q_n\)</span> нь Гамильтоны граф байна.</p>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(2\)</span>-куб <span class="math inline">\(Q_2 \cong C_4\)</span> нь Гамильтоны циклтэй гэдэг нь тодорхой. Бид <span class="math inline">\(n\)</span> дээр индукцээр батална. <span class="math inline">\(n \ge 2\)</span> бөгөөд <span class="math inline">\(Q_n\)</span> нь Гамильтоны циклтэй гэж үзье. Бид <span class="math inline">\(Q_{n+1}\)</span>-ийг <span class="math inline">\(Q_n \times P_2\)</span>-той адилтгана. <span class="math inline">\(\{1, 2\}\)</span> нь <span class="math inline">\(P_2\)</span>-ийн оройн олонлог байг ба <span class="math inline">\(C\)</span> нь <span class="math inline">\(Q_n\)</span>-ийн Гамильтоны цикл байг. <span class="math inline">\(C\)</span> нь <span class="math inline">\(u\)</span> оройгоос эхэлж, <span class="math inline">\(u\)</span> руу буцаж ирэхийн өмнөх <span class="math inline">\(C\)</span> дээрх хамгийн сүүлийн орой нь <span class="math inline">\(v\)</span> байг. <span class="math inline">\(P\)</span> гэж <span class="math inline">\(C \setminus \{\{v, u\}\}\)</span>-ийн дагуух <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> хүрэх замыг тэмдэглээд, <span class="math inline">\(Q\)</span> гэж <span class="math inline">\(P\)</span>-ийн урвуу замыг тэмдэглэе. <span class="math inline">\(n = 2\)</span> байх тохиолдлыг Зураг 9.3-т харуулав. Тэгвэл: <span class="math display">\[P \times \{1\}, \, \{(v, 1), (v, 2)\}, \, Q \times \{2\}, \, \{(u, 2), (u, 1)\}\]</span> цикл нь <span class="math inline">\(Q_{n+1}\)</span>-ийн хүссэн Гамильтоны циклийг өгнө.</p>
+<p><img src="images/ch09/fig-9-3.png" id="fig-fig-9-3" class="img-fluid" style="width:60.0%" alt="Q2 дахь Гамильтоны замаас Q3 дахь Гамильтоны цикл байгуулах нь"> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Ердийн графууд дахь Гамильтоны циклийн орших эсэх дээр анхаарлаа төвлөрүүлсний дараа одоо бид анхаарлаа чиглэлтэй графууд руу хандуулъя. Чиглэлтэй графыг халз тулааны цуврал тэмцээний үр дүнг тусгахад ашиглаж болно. Тэр тохиолдолд Гамильтоны замууд сонирхол татахыг бид харах болно.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 9.5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Суурь чиглэлгүй граф нь бүрэн граф байдаг чиглэлтэй графыг <strong>тэмцээн</strong> (tournament) гэнэ.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг дээрх чиглэлтэй граф нь тэмцээн мөн.</p>
+<div id="fig-ex-9-14" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-14.png" class="img-fluid figure-img" style="width:25.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.8: Теннисний тэмцээний чиглэлтэй граф
+</figcaption>
+</figure>
+</div>
+<p>Түүний суурь граф нь <span class="math inline">\(K_4\)</span> юм. Энэ тохиолдолд тэмцээн нь Хүснэгт 9.1 дэх теннисний тэмцээний үр дүнг тусгасан байна. Жишээлбэл, Андрегаас Борис руу чиглэсэн ирмэг нь тэдний <code>(1а)</code> тоглолтод Андре Борисыг ялсныг илэрхийлнэ.</p>
+<table class="caption-top table">
+<caption>Теннисний тэмцээн {#tbl-9-1} <span class="math inline">\(\blacksquare\)</span></caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Тоглолт</th>
+<th style="text-align: left;">Үр дүн</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1a</td>
+<td style="text-align: left;">Андре Борисыг ялав</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1b</td>
+<td style="text-align: left;">Пит Рожерыг ялав</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2a</td>
+<td style="text-align: left;">Андре Питийг ялав</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2b</td>
+<td style="text-align: left;">Рожер Борисыг ялав</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3a</td>
+<td style="text-align: left;">Андре Рожерыг ялав</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3b</td>
+<td style="text-align: left;">Борис Питийг ялав</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>Ерөнхий тохиолдолд, <span class="math inline">\(K_n\)</span> дээрх тэмцээн нь боломжит бүх хос тоглогчид хоорондоо тоглосон теннисний тэмцээний үр дүнг тусгаж болно. <span class="math inline">\((u, v)\)</span> ирмэг нь <span class="math inline">\(u\)</span> тоглогч <span class="math inline">\(v\)</span> тоглогчийг ялсан үед л оршино. Теннисний тэмцээний төгсгөлд тоглогчдыг эрэмбэлэх нэг аргыг Гамильтоны замаар гаргаж болно. Гэсэн хэдий ч энэ нь үргэлж хамгийн сайн арга биш байж магадгүй юм. Тойргийн журмаар явагдсан тэмцээний үр дүн ерөнхий тохиолдолд тодорхой нэг аваргыг тодруулж чаддаггүйг бид дасгалуудаас харах болно.</p>
+<p>Жишээ 9.14 дэх тэмцээнд: <span class="math display">\[\text{Андре, Борис, Пит, Рожер}\]</span> зам нь Гамильтоны зам бөгөөд эдгээр теннисчдийн чансааны эрэмбэ гэж үзэж болно. Ийм зам оршдог баримт нь тэмцээнүүдийн хувьд ерөнхий тохиолдолд үнэн байдаг.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 9.12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Тэмцээн бүр Гамильтоны замтай байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Бид тэмцээний оройн тоо <span class="math inline">\(n\)</span> дээр индукцээр батална. <span class="math inline">\(n = 2\)</span> оройтой аливаа тэмцээн Гамильтоны замтай гэдгийг харахад хялбар. Иймээс <span class="math inline">\(n \ge 2\)</span> гэж аваад <span class="math inline">\(n\)</span> оройтой дурын тэмцээн Гамильтоны замтай гэж үзье. <span class="math inline">\(K = (V, E)\)</span> нь <span class="math inline">\(n + 1\)</span> оройтой тэмцээн байг ба <span class="math inline">\(v_{n+1}\)</span> нь <span class="math inline">\(K\)</span>-ийн нэг орой байг. <span class="math inline">\(K \setminus \{v_{n+1}\}\)</span> нь <span class="math inline">\(n\)</span> оройтой тэмцээн тул <span class="math inline">\(v_1, v_2, \dots, v_n\)</span> Гамильтоны замтай байна. Хэрэв <span class="math inline">\((v_n, v_{n+1}) \in E\)</span> бол <span class="math inline">\(v_1, v_2, \dots, v_n, v_{n+1}\)</span> нь <span class="math inline">\(K\)</span> доторх Гамильтоны зам болно. Хэрэв <span class="math inline">\((v_{n+1}, v_1) \in E\)</span> бол <span class="math inline">\(v_{n+1}, v_1, v_2, \dots, v_n\)</span> нь <span class="math inline">\(K\)</span> доторх Гамильтоны зам болно. Эсрэг тохиолдолд <span class="math inline">\((v_{n+1}, v_n)\)</span> ба <span class="math inline">\((v_1, v_{n+1})\)</span> хоёулаа <span class="math inline">\(E\)</span>-д орших ба бид <span class="math inline">\((v_k, v_{n+1})\)</span> ба <span class="math inline">\((v_{n+1}, v_{k+1})\)</span> хоёулаа <span class="math inline">\(E\)</span>-д орших <span class="math inline">\(n\)</span>-ээс бага хамгийн бага индексийг <span class="math inline">\(k\)</span> гэж авч чадна. Өөрөөр хэлбэл, <span class="math inline">\(k\)</span> нь <span class="math inline">\(1 \le i \le k\)</span> бүрийн хувьд <span class="math inline">\((v_i, v_{n+1}) \in E\)</span> биелэх хамгийн их индекс юм. Зураг 9.4-ийг үзнэ үү. <span class="math inline">\((v_n, v_{n+1}) \notin E\)</span> тул <span class="math inline">\(k &lt; n\)</span> байна.</p>
+<div id="fig-fig-9-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-9-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/fig-9-4.png" class="img-fluid figure-img" style="width:45.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-9-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.9: Гамильтоны зам олох нь
+</figcaption>
+</figure>
+</div>
+<p>Тэгвэл <span class="math inline">\(K\)</span>-ийн Гамильтоны зам нь <span class="math inline">\(v_1, \dots, v_k, v_{n+1}, v_{k+1}, \dots, v_n\)</span> болно. <span class="math inline">\(\square\)</span></p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 9.15
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Теорем 9.12 ёсоор зураг дээрх тэмцээн Гамильтоны замтай байх ёстой.</p>
+<div id="fig-ex-9-15" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-15.png" class="img-fluid figure-img" style="width:25.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.10: 5 оройтой тэмцээн
+</figcaption>
+</figure>
+</div>
+<p>Түүнчлэн Теорем 9.12-ын баталгаа нь бидэнд тэр замыг олоход тусалж чадна. Бид <span class="math inline">\(1, 2, 3, 4\)</span> оройнуудаар өдөөгдсөн дэд тэмцээн дээр <span class="math inline">\(1, 2, 3, 4\)</span> Гамильтоны замыг олсон гэж үзье. Тэгвэл Теорем 9.12-ын баталгаа нь <span class="math inline">\(5\)</span>-р оройг хэрхэн хавчуулж <span class="math inline">\(1, 2, 5, 3, 4\)</span> Гамильтоны замыг гарган авахыг бидэнд зааж өгнө. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="р-зүйлийн-дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">9.3-р зүйлийн дасгалууд</h2>
+<p><em>Дараагийн дасгалууд нь доорх зураг дээрх графуудад хамаарна.</em></p>
+<div id="fig-ex-9-3-1-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-1-4.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.11: Дасгал 1, 2, 9, 10-ын графууд (a)–(d)
+</figcaption>
+</figure>
+</div>
+<p><em>1-ээс 6 хүртэлх дасгалуудад заасан графаас Гамильтоны циклийг олж тодруул.</em></p>
+<ol type="1">
+<li><p>Граф (a). <span class="math inline">\(\qquad\)</span> 2. Граф (b).</p></li>
+<li><p>Тетраэдрийн граф. <span class="math inline">\(\qquad\)</span> 4. Октаэдрийн граф.</p></li>
+<li><p>Додекаэдрийн граф. <span class="math inline">\(\qquad\)</span> 6. Икосаэдрийн граф.</p></li>
+<li><p>Шуудан зөөгч зураг дээрх хорооллын шуудангийн хайрцаг бүрд захидал хүргэх шаардлагатай болжээ. Тэрээр хороололд нэг ижил байрлалаас орж, гарахыг хүсэж байгаа бөгөөд үр ашигтай байхын тулд захидал хүргэсэн шуудангийн хайрцгийн хажуугаар дахин өнгөрөхийг хүсэхгүй байна.</p>
+<div id="fig-ex-9-3-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-7.png" class="img-fluid figure-img" style="width:32.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.12: Шуудан зөөгчийн хороолол
+</figcaption>
+</figure>
+</div>
+<p>Шуудангийн хайрцаг бүр дээр яг нэг удаа очих шуудангийн маршрутыг ол.</p></li>
+<li><p>UPS-ийн ачааны машин зураг дээрх хорооллын тэмдэглэсэн цэг бүрд хүргэлт хийх шаардлагатай болжээ. Аль болох хурдан байхын тулд ачааны машин хүргэлт хийсэн байршлын хажуугаар дахин өнгөрөх ёсгүй.</p>
+<div id="fig-ex-9-3-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-8.png" class="img-fluid figure-img" style="width:32.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.13: UPS хүргэлтийн хороолол
+</figcaption>
+</figure>
+</div>
+<p>Нэг ижил байрлалаас эхэлж, тэндээ дуусдаг бөгөөд хүргэлтийн байршил бүр дээр яг нэг удаа очдог маршрутыг UPS-ийн ачааны машинд зориулж ол.</p></li>
+</ol>
+<p><em>9-өөс 14 хүртэлх дасгалуудад заасан графт Гамильтоны цикл оршихгүй гэдгийг харуул.</em></p>
+<ol start="9" type="1">
+<li><p>Граф (c). <span class="math inline">\(\qquad\)</span> 10. Граф (d).</p></li>
+<li><p><span class="math inline">\(K_{3,2}\)</span>. <span class="math inline">\(\qquad\)</span> 12. <span class="math inline">\(P_n\)</span>.</p></li>
+<li><p>Зураг дээрх граф:</p>
+<div id="fig-ex-9-3-13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-13.png" class="img-fluid figure-img" style="width:18.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.14: Дасгал 13-ын граф
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зураг дээрх граф:</p>
+<div id="fig-ex-9-3-14" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-14.png" class="img-fluid figure-img" style="width:18.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.15: Дасгал 14-ийн граф
+</figcaption>
+</figure>
+</div></li>
+</ol>
+<p><em>Дараагийн дасгалууд нь доорх зураг дээрх графуудад хамаарна.</em></p>
+<div id="fig-ex-9-3-15-18" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-15-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-15-18.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-15-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.16: Дасгал 15–18-ын графууд (e)–(h)
+</figcaption>
+</figure>
+</div>
+<p><em>15-аас 18 хүртэлх дасгалуудад заасан граф Гамильтоны циклтэй эсэхийг тодорхойл. Хариултаа үндэслэ.</em></p>
+<ol start="15" type="1">
+<li><p>Граф (e). <span class="math inline">\(\qquad\)</span> 16. Граф (f).</p></li>
+<li><p>Граф (g). <span class="math inline">\(\qquad\)</span> 18. Граф (h).</p></li>
+<li><p>Худалдааны төлөөлөгч Нью-Йорк мужийн Сиракьюс хотод төвтэй бөгөөд түүний борлуулалтын бүс нутагт доорх хүснэгтэд хоёр талын нислэгийн хуваарийг нь харуулсан жижиг агаарын тээврийн компанийн үйлчилдэг хотууд багтдаг.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Бингемтон</th>
+<th style="text-align: center;">Буффало</th>
+<th style="text-align: center;">Итака</th>
+<th style="text-align: center;">Рочестер</th>
+<th style="text-align: center;">Сиракьюс</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Бингемтон</strong></td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Тийм</td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Тийм</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Буффало</strong></td>
+<td style="text-align: center;">Тийм</td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Тийм</td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Тийм</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Итака</strong></td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Тийм</td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Тийм</td>
+<td style="text-align: center;">Үгүй</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Рочестер</strong></td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Тийм</td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Тийм</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Сиракьюс</strong></td>
+<td style="text-align: center;">Тийм</td>
+<td style="text-align: center;">Тийм</td>
+<td style="text-align: center;">Үгүй</td>
+<td style="text-align: center;">Тийм</td>
+<td style="text-align: center;">Үгүй</td>
+</tr>
+</tbody>
+</table>
+<p>Энэ худалдааны төлөөлөгч гэр рүүгээ шууд буцаж ирэхээсээ өмнө бүс нутгийнхаа хот бүрээр яг нэг удаа зочилдог ганц аялалд энэ агаарын тээврийн компанийг ашиглах боломжтой юу? Хариултаа үндэслэ.</p></li>
+<li><p>Алдартай амралтын бүс дэх найман арлын хоорондох гатлага онгоцны үйлчилгээг доорх зурагт харуулав.</p>
+<div id="fig-ex-9-3-20" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-20.png" class="img-fluid figure-img" style="width:35.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.17: Найман арлын хоорондох гатлага онгоцны сүлжээ
+</figcaption>
+</figure>
+</div>
+<p>Эдгээр арлаар аялж буй жуулчин арал бүр дээр яг нэг удаа очиж, эхэлсэн цэгтээ шууд буцаж ирдэг гатлага онгоцны дараалсан аялал хийх боломжтой юу? Хариултаа үндэслэ.</p></li>
+<li><p><span class="math inline">\(K_{m,n}\)</span> нь Гамильтоны граф байх <span class="math inline">\((m, n)\)</span> хосуудыг тодорхойл.</p></li>
+<li><p>Петерсений граф нь <span class="math inline">\(n = 5, 6, 8, 9\)</span> урттай циклүүдийг агуулдаг болохыг харуул. Дасгал 31-ийг үзнэ үү.</p></li>
+</ol>
+<p><em>23-аас 26 хүртэлх дасгалуудад Гамильтоны циклийг оройнууд дээр нь тодорхой эрэмбэ заагаагүй цикл болох дэд граф гэж үзнэ. Өөрөөр хэлбэл, бид Гамильтоны циклүүдийг ирмэгийн олонлогоор нь ялгана. Тохиолдол бүрд өгөгдсөн графт хэдэн ялгаатай Гамильтоны цикл байгааг тодорхойл.</em></p>
+<ol start="23" type="1">
+<li><div id="fig-ex-9-3-23" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-23.png" class="img-fluid figure-img" style="width:22.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.18: Дасгал 23-ын граф
+</figcaption>
+</figure>
+</div></li>
+<li><div id="fig-ex-9-3-24" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-24.png" class="img-fluid figure-img" style="width:22.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.19: Дасгал 24-ийн граф
+</figcaption>
+</figure>
+</div></li>
+<li><p><span class="math inline">\(K_n\)</span>. <span class="math inline">\(\qquad\)</span> 26. <span class="math inline">\(K_{n,n}\)</span>.</p></li>
+<li><p><span class="math inline">\(G\)</span> нь дурын граф байг. Теорем 9.9 нь хэрэв <span class="math inline">\(G\)</span> Гамильтоны циклтэй бол <span class="math inline">\(\kappa(G) \ge 2\)</span> гэж өгүүлдэг. Хэрэв <span class="math inline">\(\kappa(G) \ge k\)</span> бол <span class="math inline">\(G\)</span> нь Гамильтоны граф байх ямар ч <span class="math inline">\(k\)</span> бүхэл тоо оршихгүй гэдгийг харуул.</p></li>
+<li><p><span class="math inline">\(K_n\)</span>-ээс дурын <span class="math inline">\(k\)</span> ширхэг ирмэгийг устгахад Гамильтоны граф үүсэх <span class="math inline">\(k\)</span>-ийн боломжит хамгийн их утга хэд вэ?</p></li>
+<li><p><span class="math inline">\(n \ge 3\)</span> байг ба <span class="math inline">\(G\)</span> нь <span class="math inline">\(n\)</span> оройтой дурын граф байг. Хэрэв <span class="math inline">\(\kappa(G) \ge \frac{n}{2}\)</span> бол <span class="math inline">\(G\)</span> нь Гамильтоны граф болохыг харуул.</p></li>
+<li><p>Теорем 9.11-д <span class="math inline">\(G\)</span>-г энгийн граф гэж үзэх нь зайлшгүй шаардлагатай болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Дараах өгүүлбэрийг батал эсвэл няцаа: <em>Петерсений граф нь Гамильтоны граф мөн.</em> <em>Зөвлөмж:</em> 8.3-р хэсгийн Дасгал 32-ыг ашигла.</p></li>
+<li><p>Дараах өгүүлбэрийг батал эсвэл няцаа: <em>Зураг дээрх граф нь Гамильтоны граф мөн.</em></p>
+<div id="fig-ex-9-3-32" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-32-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-32.png" class="img-fluid figure-img" style="width:22.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-32-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.20: Дасгал 32-ын граф
+</figcaption>
+</figure>
+</div></li>
+<li><p>Бүх <span class="math inline">\(n \ge 2\)</span> бүхэл тооны хувьд <span class="math inline">\(C_n \times P_2\)</span> нь Гамильтоны граф болохыг харуул.</p></li>
+<li><p>Бүх <span class="math inline">\(n \ge 2\)</span> бүхэл тооны хувьд <span class="math inline">\(P_n \times P_2\)</span> нь Гамильтоны граф болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Бүх <span class="math inline">\(n \ge 2\)</span> бүхэл тооны хувьд <span class="math inline">\(C_n \times P_3\)</span> нь Гамильтоны граф болохыг харуул.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Бүх <span class="math inline">\(n \ge 2\)</span> бүхэл тооны хувьд <span class="math inline">\(C_3 \times P_n\)</span> нь Гамильтоны граф болохыг харуул.</p></li>
+<li><p>Зураг дээрх чиглэлтэй графаас Гамильтоны циклийг ол:</p>
+<div id="fig-ex-9-3-37" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-37-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-37.png" class="img-fluid figure-img" style="width:25.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-37-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.21: Дасгал 37-ийн чиглэлтэй граф
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зураг дээрх чиглэлтэй графаас Гамильтоны замыг ол:</p>
+<div id="fig-ex-9-3-38" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-38-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-38.png" class="img-fluid figure-img" style="width:20.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-38-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.22: Дасгал 38-ын чиглэлтэй граф
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зураг дээрх тэмцээнээс Гамильтоны замыг ол:</p>
+<div id="fig-ex-9-3-39" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-39-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-39.png" class="img-fluid figure-img" style="width:20.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-39-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.23: Дасгал 39-ийн тэмцээн
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зураг дээрх тэмцээнээс Гамильтоны замыг ол:</p>
+<div id="fig-ex-9-3-40" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-40.png" class="img-fluid figure-img" style="width:22.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-40-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.24: Дасгал 40-ийн тэмцээн
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зураг дээрх чиглэлтэй графыг Гамильтоны граф биш болохыг харуул:</p>
+<div id="fig-ex-9-3-41" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-41.png" class="img-fluid figure-img" style="width:22.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.25: Дасгал 41-ийн чиглэлтэй граф
+</figcaption>
+</figure>
+</div></li>
+<li><p>Зураг дээрх чиглэлтэй графыг Гамильтоны граф биш болохыг харуул:</p>
+<div id="fig-ex-9-3-42" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-9-3-42-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch09/ex-9-3-42.png" class="img-fluid figure-img" style="width:20.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-9-3-42-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;32.26: Дасгал 42-ийн чиглэлтэй граф
+</figcaption>
+</figure>
+</div></li>
+<li><p>Таван сургууль тус бүр шилдэг шатарчнаа Дүүргийн түргэн тоглолтын шатрын тэмцээнд илгээжээ. Энэ тэмцээн нь тойргийн журмаар явагддаг бүтэн өдрийн арга хэмжээ юм. Тэмцээний хуваарь болон үр дүнг Хүснэгт 9.2-т харуулав. Эдгээр үр дүнгээс үндэслэн зохион байгуулагчид оролцогчдыг нэгдүгээр байраас тавдугаар байр хүртэл эрэмбэлэх шаардлагатай болжээ. Цорын ганц хязгаарлалт нь тоглогч бүр өөрийнхөө яг дээр эрэмбэлэгдсэн тоглогчид хожигдсон байх ёстой.</p>
+<div id="tbl-9-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-9-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;32.1: Шатрын тэмцээн
+</figcaption>
+<div aria-describedby="tbl-9-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Цаг</th>
+<th style="text-align: left;">Үр дүн</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">9:00</td>
+<td style="text-align: left;">Энн Дэнийг ялав<br>Боб Кэриг ялав</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">10:00</td>
+<td style="text-align: left;">Энн Бобыг ялав<br>Кэри Эдийг ялав</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">11:00</td>
+<td style="text-align: left;">Энн Эдийг ялав<br>Дэн Бобыг ялав</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">12:00</td>
+<td style="text-align: left;">ҮДИЙН ХООЛ</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">13:00</td>
+<td style="text-align: left;">Энн Кэриг ялав<br>Дэн Эдийг ялав</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">14:00</td>
+<td style="text-align: left;">Боб Эдийг ялав<br>Кэри Дэнийг ялав</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">15:00</td>
+<td style="text-align: left;">ШАГНАЛ ГАРДУУЛАХ</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>(а)</strong> Эннээс өөр хэн нэгнийг нийлбэр дүнгээр аваргаар зарлах боломжтой юу? <strong>(б)</strong> 10:00 цагийн тоглолтод Эд Эннийг ялсан гэж үзье. Эдийг аваргаар зарлаж болох уу? <strong>(в)</strong> Хэрэв Эд Эннийг ялсан бол оролцогч тус бүр аваргаар зарлагдах боломжтой байх уу?</p></li>
+<li><p><em>Knotty Oaks</em> теннисний клуб 60-аас дээш насны эмэгтэй гишүүддээ зориулан 3 өдрийн тойргийн журмаар явагдах теннисний тэмцээн зохион байгуулжээ. Тоглолтуудын үр дүнг Хүснэгт 9.3-т харуулав. Шагналын хороо одоо тоглогчдыг нэгдүгээр байраас дөрөвдүгээр байр хүртэл эрэмбэлэхдээ эмэгтэй бүр өөрийнхөө яг доор эрэмбэлэгдсэн эмэгтэйг ялсан байхаар зарлах шаардлагатай болжээ.</p>
+<div id="tbl-9-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-9-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;32.2: Теннисний тэмцээн
+</figcaption>
+<div aria-describedby="tbl-9-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Өдөр</th>
+<th style="text-align: left;">Үр дүн</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Өдөр 1</td>
+<td style="text-align: left;">Бет Алисыг ялав<br>Сейл Диг ялав</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Өдөр 2</td>
+<td style="text-align: left;">Алис Сейлийг ялав<br>Ди Бетийг ялав</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Өдөр 3</td>
+<td style="text-align: left;">Алис Диг ялав<br>Сейл Бетийг ялав</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>(а)</strong> Ди аваргаар зарлагдах эрэмбийг ол. <strong>(б)</strong> Тоглогч бүр аваргаар зарлагдах боломжтой юу? <strong>(в)</strong> Хэрэв Бет аваргаар зарлагдвал Ди хамгийн сүүлийн байранд орж болох уу?</p></li>
+<li><p><span class="math inline">\(\star\)</span> Тэмцээн бүрд бусад бүх орой нь түүнээс хамгийн ихдээ <span class="math inline">\(2\)</span> зайд орших нэг орой заавал байдаг гэдгийг харуул.</p></li>
+<li><p>Гамильтоны циклгүй тэмцээний жишээ гарга.</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./9-2.html" class="pagination-link" aria-label="Эйлерийн цикл (Euler Circuits)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Эйлерийн цикл (Euler Circuits)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./9-4.html" class="pagination-link" aria-label="Хавтгай граф (Planar Graphs)">
+        <span class="nav-page-text"><span class="chapter-title">Хавтгай граф (Planar Graphs)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
