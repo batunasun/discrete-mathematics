@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>quarto-input9eb022faa79572a0 – Дискрет математик</title>
+<title>Мод ба Алгоритмууд – Дискрет математик</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -81,6 +81,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.css">
 </head>
@@ -264,7 +293,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">10.html</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">Мод ба Алгоритмууд</a></li></ol></nav>
         <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -546,15 +575,15 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./10.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text" id="quarto-sidebar-section-7-label">10.html</span></a>
-            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section: 10.html">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">Мод ба Алгоритмууд</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section: Мод ба Алгоритмууд">
               <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
             </button> 
       </div>
       <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Мод ба Алгоритмууд</span></a>
+  <a href="./10-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Мод (Trees)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -593,12 +622,31 @@ ul.task-list li input[type="checkbox"] {
         
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Мод ба Алгоритмууд</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<p>Холбоост бөгөөд ямар ч цикл агуулдаггүй графууд нь графын нэгэн чухал тусгай ангийг бүрдүүлдэг. Ийм графуудыг <strong>мод</strong> (trees) гэнэ. Модны үндсэн шинж чанарууд болон хэрэглээг судалсны дараа бид өргөнөөр хайх мод (breadth-first search trees) болон гүнээр хайх мод (depth-first search trees) олох алгоритмуудыг авч үзнэ. Эдгээр алгоритм нь модыг тойрон гарах системтэй арга замыг олгоод зогсохгүй ерөнхий графуудын хувьд ашигтай бүрхэгч моднуудыг (spanning trees) гаргаж өгдөг. Тухайлбал, гүнээр хайх алгоритм нь <strong>ухрах хайлт</strong> (backtrack searching) хэмээх хайлтын ерөнхий техникийн үндэс болдог.</p>
+<p>Графын ирмэгүүдэд жин оноосон тохиолдолд бид боломжит хамгийн бага нийт жинтэй бүрхэгч модыг олох Крускалын алгоритм болон Примийн алгоритмыг судална. Бидний Дейкстрад талархах ёстой өөр нэгэн алгоритм нь бэхлэгдсэн нэг оройгоос бусад аль ч орой хүрэх хамгийн богино замыг олох боломжийг олгодог. Хэрэв граф нь ирмэг бүр нь тухайн холболтын зардлаар жинлэгдсэн компьютерын сүлжээг төлөөлж байвал <strong>хамгийн бага бүрхэгч мод</strong> (minimum spanning tree) нь боломжит хамгийн хямд холбоост сүлжээг илэрхийлнэ. Харин оронд нь ирмэг бүр тухайн холбоосоор дамжих хугацааны хоцрогдлоор жинлэгдсэн бол заасан оройгоос эхэлсэн <strong>хамгийн богино замын мод</strong> нь харгалзах компьютерээс хамгийн хурдан хариу өгөх хугацаатай сүлжээг илэрхийлнэ.</p>
+<p>Сүүлийн хоёр хэсэгт алгоритмын шинжилгээний ерөнхий судалгааг эхлүүлнэ. Үүний тулд бид голчлон өгөгдсөн массиваас утга хайх болон массивыг эрэмбэлэх алгоритмууд дээр анхаарлаа төвлөрүүлнэ. Алгоритмуудын нарийн төвөгтэй байдал, үр ашгийг судлах нь функцийн өсөлт, тухайлбал <strong>их-<span class="math inline">\(O\)</span> тэмдэглэгээ</strong> (big-<span class="math inline">\(O\)</span> notation)-г судлахад хүргэнэ. Эцэст нь алгоритмын шийдвэрийн моднуудыг авч үзсэнээр мод нь алгоритмуудад дүн шинжилгээ хийхэд хэрхэн үнэ цэнтэй хэрэгсэл болдгийг харах болно.</p>
 
 
 
@@ -1134,8 +1182,8 @@ ul.task-list li input[type="checkbox"] {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./10-1.html" class="pagination-link" aria-label="Мод ба Алгоритмууд">
-        <span class="nav-page-text"><span class="chapter-title">Мод ба Алгоритмууд</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./10-1.html" class="pagination-link" aria-label="Мод (Trees)">
+        <span class="nav-page-text"><span class="chapter-title">Мод (Trees)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
