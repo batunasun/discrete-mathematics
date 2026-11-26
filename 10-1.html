@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Мод ба Алгоритмууд – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10-2.html" rel="next">
+<link href="./10.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">10.html</a></li><li class="breadcrumb-item"><a href="./10-1.html"><span class="chapter-title">Мод ба Алгоритмууд</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">3. Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: 3. Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1. Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2. Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3. Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4. Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5. Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6. Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">9. Графын шинж чанарууд</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: 9. Графын шинж чанарууд">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.1 Холбоост чанар (Connectivity)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.2 Эйлерийн цикл (Euler Circuits)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.3 Гамильтоны цикл (Hamiltonian Cycles)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.4 Хавтгай граф (Planar Graphs)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.5 Өнгөний тоо (Chromatic Number)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">10.html</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section: 10.html">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-1.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Мод ба Алгоритмууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Хайлтын мод (Search Trees)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Жинлэгдсэн мод (Weighted Trees)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10.4 Алгоритмын шинжилгээ (1-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10.5 Алгоритмын шинжилгээ (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#мод-trees" id="toc-мод-trees" class="nav-link active" data-scroll-target="#мод-trees">Мод (Trees)</a>
+  <ul class="collapse">
+  <li><a href="#бүрхэгч-мод-spanning-trees" id="toc-бүрхэгч-мод-spanning-trees" class="nav-link" data-scroll-target="#бүрхэгч-мод-spanning-trees">Бүрхэгч мод (Spanning Trees)</a></li>
+  <li><a href="#үндэстэй-мод-rooted-trees" id="toc-үндэстэй-мод-rooted-trees" class="nav-link" data-scroll-target="#үндэстэй-мод-rooted-trees">Үндэстэй мод (Rooted Trees)</a></li>
+  </ul></li>
+  <li><a href="#р-зүйлийн-дасгалууд" id="toc-р-зүйлийн-дасгалууд" class="nav-link" data-scroll-target="#р-зүйлийн-дасгалууд">10.1-р зүйлийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">10.html</a></li><li class="breadcrumb-item"><a href="./10-1.html"><span class="chapter-title">Мод ба Алгоритмууд</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Мод ба Алгоритмууд</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Холбоост бөгөөд ямар ч цикл агуулдаггүй графууд нь графын нэгэн чухал тусгай ангийг бүрдүүлдэг. Ийм графуудыг <strong>мод</strong> (trees) гэнэ. Модны үндсэн шинж чанарууд болон хэрэглээг судалсны дараа бид өргөнөөр хайх мод (breadth-first search trees) болон гүнээр хайх мод (depth-first search trees) олох алгоритмуудыг авч үзнэ. Эдгээр алгоритм нь модыг тойрон гарах системтэй арга замыг олгоод зогсохгүй ерөнхий графуудын хувьд ашигтай бүрхэгч моднуудыг (spanning trees) гаргаж өгдөг. Тухайлбал, гүнээр хайх алгоритм нь <strong>ухрах хайлт</strong> (backtrack searching) хэмээх хайлтын ерөнхий техникийн үндэс болдог.</p>
+<p>Графын ирмэгүүдэд жин оноосон тохиолдолд бид боломжит хамгийн бага нийт жинтэй бүрхэгч модыг олох Крускалын алгоритм болон Примийн алгоритмыг судална. Бидний Дейкстрад талархах ёстой өөр нэгэн алгоритм нь бэхлэгдсэн нэг оройгоос бусад аль ч орой хүрэх хамгийн богино замыг олох боломжийг олгодог. Хэрэв граф нь ирмэг бүр нь тухайн холболтын зардлаар жинлэгдсэн компьютерын сүлжээг төлөөлж байвал <strong>хамгийн бага бүрхэгч мод</strong> (minimum spanning tree) нь боломжит хамгийн хямд холбоост сүлжээг илэрхийлнэ. Харин оронд нь ирмэг бүр тухайн холбоосоор дамжих хугацааны хоцрогдлоор жинлэгдсэн бол заасан оройгоос эхэлсэн <strong>хамгийн богино замын мод</strong> нь харгалзах компьютерээс хамгийн хурдан хариу өгөх хугацаатай сүлжээг илэрхийлнэ.</p>
+<p>Сүүлийн хоёр хэсэгт алгоритмын шинжилгээний ерөнхий судалгааг эхлүүлнэ. Үүний тулд бид голчлон өгөгдсөн массиваас утга хайх болон массивыг эрэмбэлэх алгоритмууд дээр анхаарлаа төвлөрүүлнэ. Алгоритмуудын нарийн төвөгтэй байдал, үр ашгийг судлах нь функцийн өсөлт, тухайлбал <strong>их-<span class="math inline">\(O\)</span> тэмдэглэгээ</strong> (big-<span class="math inline">\(O\)</span> notation)-г судлахад хүргэнэ. Эцэст нь алгоритмын шийдвэрийн моднуудыг авч үзсэнээр мод нь алгоритмуудад дүн шинжилгээ хийхэд хэрхэн үнэ цэнтэй хэрэгсэл болдгийг харах болно.</p>
+<hr>
+<section id="мод-trees" class="level2">
+<h2 class="anchored" data-anchor-id="мод-trees">Мод (Trees)</h2>
+<p>5.1-р хэсэгт бид ургийн модоор илэрхийлэгдэх “…-ийн эцэг мөн” харьцааг авч үзсэн. 6.1-р хэсэгт тоолох бодлогуудыг шинжлэхдээ модны бүдүүвч ашигласан. 8 болон 9-р бүлгүүдэд судалсан зүйлсийнхээ үүднээс харвал эдгээр бүдүүвч нь графын жишээнүүд юм. Үнэндээ тэдгээр нь тусгай бөгөөд туйлын ашигтай төрлийн графын жишээнүүд билээ. Холбоост бөгөөд ямар ч цикл агуулдаггүй графыг <strong>мод</strong> (tree) гэнэ. Илүү ерөнхий тохиолдолд, ямар ч цикл агуулдаггүй графыг <strong>ой</strong> (forest) гэх ба ойн компонент бүр нь мод байна. Энэ хэсэгт мод болон ойн графын онолын шинж чанарууд, мөн зарим хэрэглээг судлах болно.</p>
+<p>Замууд нь модны харьцангуй энгийн ангийг бүрдүүлдэг. Өөрөөр хэлбэл, <span class="math inline">\(n \ge 1\)</span> бүрийн хувьд <span class="math inline">\(P_n\)</span> зам нь мод мөн. Түүнчлэн өөр олон төрлийн мод (болон ой) оршдог.</p>
+<div id="fig-fig-10-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-1.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.1: Мод ба ой
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>(а)</strong> Зураг 10.1-ийн зүүн гар талын хайрцагт зурсан граф нь мод юм. Энэ граф холбоост бөгөөд ямар ч цикл агуулаагүйг бид харж болно.</p>
+<p><strong>(б)</strong> Зураг 10.1-ийн баруун гар талын хайрцагт зурсан граф нь хоёр модноос тогтох ой юм. Энэ граф ямар ч цикл агуулаагүй бөгөөд хоёр компоненттой. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Ойтой ажиллах үед унжсан оройг (<span class="math inline">\(1\)</span> зэрэгтэй орой) ихэвчлэн <strong>навч</strong> (leaf) гэж нэрлэдэг. Хамгийн багадаа <span class="math inline">\(2\)</span> зэрэгтэй оройнуудыг <strong>дотоод орой</strong> (internal vertices) гэнэ. Жишээ 10.1(а)-д <span class="math inline">\(3, 6, 7\)</span> оройнууд навч бол (б)-д <span class="math inline">\(2, 3, 5, 6, 7\)</span> оройнууд навч байна.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.2 (Химийн бүтцүүд)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ерөнхий тохиолдолд графуудыг молекулуудыг загварчлахад ашиглаж болно; бид атом бүрийг оройгоор, химийн холбоо бүрийг ирмэгээр төлөөлүүлнэ. Зураг 10.2-т харгалзах граф нь мод болох этаны (<span class="math inline">\(\text{C}_2\text{H}_6\)</span>) химийн бүтцийг харуулав.</p>
+<div id="fig-fig-10-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-2.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.2: Этан (C2H6) ба түүнд харгалзах мод
+</figcaption>
+</figure>
+</div>
+<p>Зураг 10.3-т граф нь мод биш болох бензолыг (<span class="math inline">\(\text{C}_6\text{H}_6\)</span>) харуулав. Энэ граф нь нүүрстөрөгчийн атомуудад харгалзах оройнууд дээр цикл агуулахаас гадна давхар холбоог илэрхийлсэн зарим давхар ирмэгүүдийг агуулна.</p>
+<div id="fig-fig-10-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-3.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.3: Бензол (C6H6) ба түүнд харгалзах граф
+</figcaption>
+</figure>
+</div>
+<p>Этан ба бензол нь зөвхөн устөрөгч (<span class="math inline">\(\text{H}\)</span>) болон нүүрстөрөгч (<span class="math inline">\(\text{C}\)</span>)-ийн атомуудаас тогтох молекулууд буюу <strong>нүүрсустөрөгчдийн</strong> (hydrocarbons) жишээ юм. Эдгээрийн нэг чухал дэд олонлог нь ямар нэгэн эерэг бүхэл <span class="math inline">\(n\)</span> тооны хувьд <span class="math inline">\(\text{C}_n\text{H}_{2n+2}\)</span> химийн томьёотой <strong>ханасан нүүрсустөрөгчид</strong> (saturated hydrocarbons) юм. Тэдгээрийн бүтэц үргэлж мод болох графуудтай харгалздаг тул бид энд онцлон авч үзэж байна.</p>
+<p>Хэдийгээр этан нь <span class="math inline">\(\text{C}_2\text{H}_6\)</span> томьёотой цорын ганц нүүрсустөрөгч боловч ерөнхий тохиолдолд дан ганц химийн томьёо нь химийн бүтцийг тодорхойлдоггүй. Жишээлбэл, Зураг 10.4-т харуулсанчлан гурван өөр пентан (<span class="math inline">\(\text{C}_5\text{H}_{12}\)</span>) байдаг.</p>
+<div id="fig-fig-10-4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-4.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.4: Пентаны (C5H12) гурван изомер
+</figcaption>
+</figure>
+</div>
+<p>Ерөнхий тохиолдолд, бэхлэгдсэн томьёотой холбоотой өөр өөр бүтцүүдийг түүний <strong>изомерууд</strong> (isomers) гэж нэрлэдэг бөгөөд тус бүр өөрийн хими, физикийн шинж чанартай байдаг. Ханасан нүүрсустөрөгч <span class="math inline">\(\text{C}_n\text{H}_{2n+2}\)</span>-ийн изомерийн бүтэц нь <span class="math inline">\(n\)</span> нүүрстөрөгчийн атомаар өдөөгдсөн дэд модоор тодорхойлогдоно.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Тэрхүү дэд мод нь хамгийн их зэрэг нь <span class="math inline">\(4\)</span>-өөс хэтрэхгүй мод байх ёстой. Тэгвэл бүхэл мод нь нүүрстөрөгчийн атомууд нь тус бүр <span class="math inline">\(4\)</span> зэрэгтэй дотоод оройн олонлогийг, харин устөрөгчийн атомууд нь навчны олонлогийг бүрдүүлдэг цор ганц мод болно. Жишээлбэл, <span class="math inline">\(n = 4\)</span> үед <span class="math inline">\(\text{C}_4\text{H}_{10}\)</span>-ийн бутан ба изобутан изомерууд нь харгалзан <span class="math inline">\(P_4\)</span> ба <span class="math inline">\(K_{1,3}\)</span> нүүрстөрөгчийн моднуудтай харгалзана. Ерөнхий тохиолдолд, <span class="math inline">\(\text{C}_n\text{H}_{2n+2}\)</span>-ийн боломжит изомеруудын тоо нь хамгийн их зэрэг нь <span class="math inline">\(4\)</span>-өөс хэтрэхгүй <span class="math inline">\(n\)</span> оройтой изоморф биш моднуудын тоо юм. Энэ тоог тодорхойлох бодлогыг Английн математикч Артур Кэли (1821–1895) судалжээ. 1875 онд тэрээр <span class="math inline">\(n \le 13\)</span> тохиолдолд <span class="math inline">\(n\)</span> оройтой ийм модны тоог тодорхойлсон. Дасгалуудад бид эдгээр утгын заримыг авч үзэх болно. Гэсэн хэдий ч одоогоор тохиромжтой ерөнхий томьёо мэдэгдээгүй байна. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Графыг Зураг 10.5-д харуулсан метроны систем гэх мэт тээврийн сүлжээг төлөөлүүлэхэд ашиглаж болдгийг бид харсан. Тэр жишээнд үүсэх граф нь мод юм. Мөн энэ тодорхой метроны систем доторх аль ч хоёр буудлын хооронд цор ганц зам байгааг бид нүдээрээ харж чадна. Энэ бол моднуудад илэрдэг ерөнхий шинж чанар юм.</p>
+<div id="fig-fig-10-5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-5.png" class="img-fluid figure-img" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.5: Хотын метроны систем
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G\)</span> нь граф байг. Хэрэв <span class="math inline">\(G\)</span> нь мод бол <span class="math inline">\(G\)</span>-ийн дурын хос оройн хооронд цор ганц зам оршино.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(G\)</span> нь мод байг, мөн <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span> нь <span class="math inline">\(G\)</span>-ийн хоёр орой байг. Зөрчилд хүрэхийн тулд <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> хүрэх ялгаатай хоёр зам <span class="math inline">\(P\)</span> ба <span class="math inline">\(Q\)</span> оршино гэж үзье. <span class="math inline">\(P\)</span> ба <span class="math inline">\(Q\)</span> нь <span class="math inline">\(u\)</span>-ийн дараах ямар нэгэн цэг дээр ялгаатай байх ёстой тул <span class="math inline">\(Q\)</span>-д байхгүй <span class="math inline">\(P\)</span> дээрх хамгийн эхний оройг <span class="math inline">\(y\)</span> гэе. Иймд <span class="math inline">\(P\)</span> дээрх <span class="math inline">\(y\)</span>-ийн яг өмнөх <span class="math inline">\(x\)</span> орой нь <span class="math inline">\(Q\)</span> дээр мөн орших ёстой. Зураг 10.6-г үзнэ үү.</p>
+<div id="fig-fig-10-6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-6.png" class="img-fluid figure-img" style="width:40.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.6: Мод доторх ялгаатай гэж таамагласан замууд
+</figcaption>
+</figure>
+</div>
+<p><span class="math inline">\(P\)</span> ба <span class="math inline">\(Q\)</span> нь <span class="math inline">\(x\)</span> оройн дараа өөр болж салсан боловч хоёулаа <span class="math inline">\(v\)</span> орой дээр төгсдөг тул <span class="math inline">\(x\)</span> (болон <span class="math inline">\(y\)</span>)-ийн дараа орших бөгөөд <span class="math inline">\(P\)</span> ба <span class="math inline">\(Q\)</span>-д ерөнхий байх <span class="math inline">\(P\)</span> дээрх хамгийн эхний оройг <span class="math inline">\(z\)</span> гэе. <span class="math inline">\(x\)</span> ба <span class="math inline">\(z\)</span>-ийн хооронд яг дотор нь орших <span class="math inline">\(P\)</span>-ийн хэсэг нь <span class="math inline">\(Q\)</span>-той ямар ч ерөнхий зүйлгүй болохыг тэмдэглэе. Тиймээс <span class="math inline">\(P\)</span>-ийн дагуу <span class="math inline">\(x\)</span>-ээс <span class="math inline">\(z\)</span> хүрч, дараа нь <span class="math inline">\(Q\)</span>-ийн дагуу <span class="math inline">\(z\)</span>-ээс <span class="math inline">\(x\)</span> руу ухарч явах алхалт нь <span class="math inline">\(G\)</span> дотор цикл үүсгэнэ (Зураг 10.6-д тодоор харуулсан). Энэ нь <span class="math inline">\(G\)</span>-г мод гэсэн баримттай зөрчилдөнө. <span class="math inline">\(\square\)</span></p>
+<p>Теорем 10.1-ийн урвуу өгүүлбэр мөн биелдэг тухай баталгааг дасгалд үлдээв. Энд бид модны навчны тооны доод заагийг тогтооё. Энэ нь өмнө авч үзсэн жишээнүүд дээр биелж байгааг харж болно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Хоёр ба түүнээс олон оройтой мод бүр хамгийн багадаа хоёр навчтай байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(T\)</span> нь мод байг ба <span class="math inline">\(P\)</span> нь <span class="math inline">\(T\)</span> дэх боломжит хамгийн урт зам байг. <span class="math inline">\(P\)</span>-ийн эхлэл ба төгсгөлийн оройнууд ялгаатай байх ёстой бөгөөд навч байх ёстой. Эсрэг тохиолдолд <span class="math inline">\(P\)</span>-г илүү урт болгон сунгаж болох байсан. <span class="math inline">\(\square\)</span></p>
+<p><span class="math inline">\(n \ge 2\)</span> үед <span class="math inline">\(P_n\)</span> нь яг хоёр навчтай байдаг тул Теорем 10.2-ын үр дүн нь боломжит хамгийн хүчтэй зааг юм. Нэмж дурдахад <span class="math inline">\(P_n\)</span> модны ирмэгийн тоо нь оройн тооноосоо нэгээр цөөн байгааг ажиглая. Энэ үр дүн нь моднуудын хувьд ерөнхий тохиолдолд үнэн байдаг.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G = (V, E)\)</span> нь граф байг. Хэрэв <span class="math inline">\(G\)</span> нь мод бол <span class="math display">\[|E| = |V| - 1\]</span> байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Бид <span class="math inline">\(n \ge 1\)</span> бүрийн хувьд <span class="math inline">\(n\)</span> оройтой мод бүр <span class="math inline">\(n - 1\)</span> ирмэгтэй байдгийг индукцээр батална. Нэг оройтой мод бүр ирмэггүй байх ёстой тул батлах үр дүн <span class="math inline">\(n = 1\)</span> үед биелнэ. Иймд <span class="math inline">\(n \ge 1\)</span> гэж аваад <span class="math inline">\(n\)</span> оройтой мод бүр <span class="math inline">\(n - 1\)</span> ирмэгтэй гэж үзье. <span class="math inline">\(G = (V, E)\)</span> нь <span class="math inline">\(|V| = n + 1\)</span> байх мод байг. <span class="math inline">\(n + 1 \ge 2\)</span> тул Теорем 10.2 ёсоор <span class="math inline">\(G\)</span>-д ямар нэгэн <span class="math inline">\(v\)</span> навч оршино. <span class="math inline">\(e\)</span> нь <span class="math inline">\(v\)</span>-тэй инцидент ганц ирмэг байг ба <span class="math inline">\(G' = (V \setminus \{v\}, E \setminus \{e\})\)</span> нь <span class="math inline">\(n\)</span> оройтой мод болохыг ажиглая. Индукцийн таамаглалаар: <span class="math display">\[|V| - 1 = |V \setminus \{v\}| = |E \setminus \{e\}| - 1 = |E| - 1 - 1.\]</span> Тиймээс <span class="math inline">\(|V| = |E| - 1\)</span> буюу <span class="math inline">\(|E| = |V| - 1\)</span> болно. <span class="math inline">\(\square\)</span></p>
+<p>Холбоост графуудын хувьд Теорем 10.3-ын урвуу өгүүлбэр биелдэг тухай баталгааг дасгалд үлдээсэн болно.</p>
+<section id="бүрхэгч-мод-spanning-trees" class="level3">
+<h3 class="anchored" data-anchor-id="бүрхэгч-мод-spanning-trees">Бүрхэгч мод (Spanning Trees)</h3>
+<p>Мод нь графын тусгай төрөл хэдий ч ерөнхий графуудыг судлахад мөн адил тустай байдаг. Нэг ёсондоо мод нь илүү том графын тулгуур яс (skeleton) болж чаддаг. <span class="math inline">\(G = (V, E)\)</span> графын <strong>бүрхэгч мод</strong> (spanning tree) гэдэг нь тухайн нэг <span class="math inline">\(V\)</span> оройн олонлог дээрх мод болох <span class="math inline">\(H = (V, F)\)</span> дэд графыг хэлнэ. Үүнийг ирмэгийн олонлог <span class="math inline">\(F\)</span>-ээр нь цор ганц аргаар тодорхойлж болно. Илүү ерөнхий тохиолдолд, <span class="math inline">\(G\)</span> графын дэд графыг <span class="math inline">\(G\)</span>-ийн компонент бүртэй огтлолцох огтлолцол нь тухайн компонентын бүрхэгч мод болж байвал <strong>бүрхэгч ой</strong> (spanning forest) гэнэ.</p>
+<p>Зураг 10.7-гийн зүүн гар талын хайрцагт зурсан графын бүрхэгч модыг тэнд тодоор харуулсан байна. Зураг 10.7-гийн баруун гар талын хайрцагт тэндэх графын бүрхэгч ойг тодоор харуулав. Тэр граф нь холбоост биш тул бүрхэгч модтой байх боломжгүй. Гэсэн хэдий ч холбоост граф бүр хамгийн багадаа нэг бүрхэгч модтой байдаг.</p>
+<div id="fig-fig-10-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-7.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.7: Тодоор харуулсан бүрхэгч мод ба бүрхэгч ой
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G = (V, E)\)</span> нь граф байг. Хэрэв <span class="math inline">\(G\)</span> нь холбоост бол <span class="math inline">\(G\)</span> нь бүрхэгч модтой байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Бид графын оройн тоо <span class="math inline">\(n\)</span> дээр гүйцэд индукцээр батална. Зөвхөн нэг оройтой дурын графын бүрхэгч модонд ямар ч ирмэг шаардагдахгүй. Иймд <span class="math inline">\(n \ge 1\)</span> гэж аваад <span class="math inline">\(n\)</span> болон түүнээс цөөн оройтой дурын холбоост граф бүрхэгч модтой гэж үзье. <span class="math inline">\(G\)</span> нь <span class="math inline">\(n + 1\)</span> оройтой дурын холбоост граф байг ба <span class="math inline">\(G\)</span>-ийн нэг <span class="math inline">\(v\)</span> оройг сонгон авъя. <span class="math inline">\(G \setminus \{v\}\)</span>-ийн компонент бүр нь <span class="math inline">\(n\)</span> болон түүнээс цөөн оройтой тул тус бүр бүрхэгч модтой байна. <span class="math inline">\(F_0\)</span> гэж тэдгээрийн ирмэгүүдийн нэгдлийг тэмдэглэе. <span class="math inline">\(G \setminus \{v\}\)</span>-ийн компонент бүр <span class="math inline">\(v\)</span>-ийн ямар нэгэн хөршийг агуулах ёстой тул бид <span class="math inline">\(F_0\)</span> дээр <span class="math inline">\(v\)</span>-ээс тэр хөрш рүү татсан нэг ирмэгийг нэмж чадна. Ингэж үүсэх <span class="math inline">\(F\)</span> олонлогийн ирмэгүүд нь <span class="math inline">\(G\)</span>-ийн бүрхэгч модыг үүсгэнэ. <em>(Яагаад цикл үүсэхгүй болохыг бодож үзнэ үү.)</em> <span class="math inline">\(\square\)</span></p>
+<p>Теорем 10.4-ийн урвуу өгүүлбэр биелдэг тухай баталгаа болон дараах мөрдөлгөөний баталгааг дасгалд үлдээсэн болно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Мөрдөлгөө 10.5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Граф бүр бүрхэгч ойтой байна.</p>
+</div>
+</div>
+<p>Холбоост граф нь нэгээс олон бүрхэгч модтой байж болно. Дараагийн хоёр хэсэгт бид тодорхой төрлийн бүрхэгч моднуудыг гарган авдаг алгоритмуудыг авч үзнэ.</p>
+</section>
+<section id="үндэстэй-мод-rooted-trees" class="level3">
+<h3 class="anchored" data-anchor-id="үндэстэй-мод-rooted-trees">Үндэстэй мод (Rooted Trees)</h3>
+<p>Компьютер дахь хавтас буюу файлын систем нь нэмэлт бүтэц бүхий модны хэлбэртэй байдаг. Жишээлбэл, хамгийн дээд түвшний хавтасыг <strong>үндсэн хавтас</strong> (root directory) гэж нэрлэдэг. Хавтас дотор хавтаснууд байрлах үед тухайн хавтасны яг дээр орших хавтасыг түүний <strong>эцэг хавтас</strong> (parent directory) гэнэ. Ийм файлын системийн нэг хэсгийн жишээг Зураг 10.8-д харуулав. Тодорхойлолт 10.1 ба 10.2-оос бид компьютерын файлын системийг дүрслэхэд ашигладаг нэр томьёо нь үндэстэй модны нэр томьёотой яг таарч байгааг харах болно.</p>
+<div id="fig-fig-10-8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-8.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.8: Файлын систем дэх файл ба хавтаснууд
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 10.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Үндэстэй мод</strong> (rooted tree) гэдэг нь <span class="math inline">\((T, v)\)</span> хосыг хэлэх бөгөөд энд <span class="math inline">\(T\)</span> нь мод, харин <span class="math inline">\(v\)</span> нь <span class="math inline">\(T\)</span>-ийн орой юм. Энэ онцгойлон авсан <span class="math inline">\(v\)</span> оройг <span class="math inline">\(T\)</span>-ийн <strong>үндэс</strong> (root) гэнэ.</p>
+</div>
+</div>
+<p>Зураг 10.8 дахь файлын мод нь <code>C:\</code> үндэстэй үндэстэй модны бүтэцтэй байна. Үндэстэй модны энэ хэрэглээнд файлууд нь үргэлж навч байдаг бол дотоод оройнууд нь үргэлж хавтаснууд байдгийг анхаарна уу. Гэсэн хэдий ч хоосон хавтас мөн навч болж чадна.</p>
+<div id="fig-fig-10-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-9.png" class="img-fluid figure-img" style="width:35.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.9: Үндэстэй мод
+</figcaption>
+</figure>
+</div>
+<p>Зураг 10.9-д <span class="math inline">\(v_1\)</span> оройг үндсээр нь сонгосон граф нь үндэстэй модны жишээ юм. Үндэстэй модны зураглалд бусад оройнуудыг үндэснээс доош салбарлуулан зурснаар үндэсний онцгой байр суурийг харуулдаг. Бид үндсийг ихэвчлэн хамгийн дээд талын орой болгон зурах болно. Ийм тохиролцоотойгоор үндэстэй модтой холбоотой олон төрлийн нэр томьёо гарч ирдэг.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 10.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(T\)</span> нь <span class="math inline">\(v\)</span> үндэстэй үндэстэй мод байг.</p>
+<p><strong>(а)</strong> <span class="math inline">\(T\)</span> дэх <span class="math inline">\(u\)</span> оройн <strong>түвшин</strong> (level) гэдэг нь түүний <span class="math inline">\(v\)</span>-ээс алслагдсан зай буюу <span class="math inline">\(\operatorname{dist}(v, u)\)</span>-г хэлнэ.</p>
+<p><strong>(б)</strong> <span class="math inline">\(T\)</span> дэх <span class="math inline">\(u\)</span> оройн <strong>хүү</strong> (child) гэдэг нь <span class="math inline">\(u\)</span>-ийн түвшнээс их түвшинд орших <span class="math inline">\(u\)</span>-ийн хөрш оройг хэлнэ; түүний түвшин үргэлж нэгээр их байна.</p>
+<p><strong>(в)</strong> <span class="math inline">\(T\)</span> дэх <span class="math inline">\(u\)</span> оройн <strong>эцэг</strong> (parent) гэдэг нь <span class="math inline">\(u\)</span>-ийн түвшнээс бага түвшинд орших <span class="math inline">\(u\)</span>-ийн цор ганц хөрш оройг хэлнэ; түүний түвшин үргэлж нэгээр бага байна. Үндэс <span class="math inline">\(v\)</span> нь <span class="math inline">\(T\)</span> доторх эцэггүй цорын ганц орой юм.</p>
+<p><strong>(г)</strong> <span class="math inline">\(T\)</span>-ийн <strong>өндөр</strong> (height) гэдэг нь түүний оройнуудын түвшнүүд дотроос хамгийн их утгыг хэлнэ.</p>
+<p><strong>(д)</strong> Хэрэв <span class="math inline">\(T\)</span>-ийн орой бүр хамгийн ихдээ <span class="math inline">\(m\)</span> хүүтэй бол <span class="math inline">\(T\)</span>-г <strong><span class="math inline">\(m\)</span>-ар мод</strong> (<span class="math inline">\(m\)</span>-ary tree) гэнэ. Хэрэв дотоод орой бүр яг <span class="math inline">\(m\)</span> хүүтэй бол <span class="math inline">\(T\)</span>-г <strong>бүрэн <span class="math inline">\(m\)</span>-ар мод</strong> (full <span class="math inline">\(m\)</span>-ary tree) гэнэ. <span class="math inline">\(2\)</span>-ар модыг мөн <strong>хоёртын мод</strong> (binary tree) гэж нэрлэдэг.</p>
+<p><strong>(е)</strong> Хэрэв <span class="math inline">\(T\)</span> нь <span class="math inline">\(h\)</span> өндөртэй бөгөөд түүний бүх навч <span class="math inline">\(h\)</span> эсвэл <span class="math inline">\(h - 1\)</span> түвшинд оршдог бол <span class="math inline">\(T\)</span>-г <strong>тэнцвэржүүлсэн</strong> (balanced) гэнэ.</p>
+</div>
+</div>
+<p>Зураг 10.8-д харуулсан файлын системд <code>Windows NT</code> хавтас нь <code>Program Files</code> эцэгтэй бөгөөд <code>Accessories</code> ба <code>dialer.exe</code> гэсэн хүүхдүүдтэй байна. Энэ тохиолдолд нэг хүү нь хавтас буюу дотоод орой бол нөгөө нь файл буюу навч юм.</p>
+<p>Зураг 10.9-д харуулсан <span class="math inline">\((T, v_1)\)</span> үндэстэй модыг авч үзье. <span class="math inline">\(\operatorname{dist}(v_1, v_2) = 1\)</span> тул <span class="math inline">\(v_2\)</span> орой <span class="math inline">\(1\)</span>-р түвшинд, харин <span class="math inline">\(\operatorname{dist}(v_1, v_6) = 3\)</span> тул <span class="math inline">\(v_6\)</span> орой <span class="math inline">\(3\)</span>-р түвшинд байна. <span class="math inline">\(v_2\)</span> орой нь <span class="math inline">\(v_3\)</span> ба <span class="math inline">\(v_5\)</span> хүүхдүүдтэй ба <span class="math inline">\(v_2\)</span>-ийн эцэг нь <span class="math inline">\(v_1\)</span> юм. <span class="math inline">\(T\)</span>-ийн өндөр нь <span class="math inline">\(3\)</span> бөгөөд <span class="math inline">\(T\)</span> нь бүрэн ч биш, тэнцвэржүүлсэн ч биш хоёртын мод юм. Зураг 10.10-д <span class="math inline">\(2\)</span> өндөртэй бүрэн бөгөөд тэнцвэржүүлсэн үндэстэй <span class="math inline">\(3\)</span>-ар <span class="math inline">\((T', v_1)\)</span> модыг харуулав.</p>
+<div id="fig-fig-10-10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-10.png" class="img-fluid figure-img" style="width:35.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.10: Бүрэн бөгөөд тэнцвэржүүлсэн үндэстэй 3-ар мод
+</figcaption>
+</figure>
+</div>
+<p>Хэрэв <span class="math inline">\(m\)</span>-ар мод бүрэн бол оройнуудын тодорхой хэсэг нь дотоод орой байх ёстой бөгөөд үлдсэн хэсэг нь мэдээж навч байна.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(T\)</span> нь <span class="math inline">\(n\)</span> оройтой, <span class="math inline">\(l\)</span> навчтай, <span class="math inline">\(i\)</span> дотоод оройтой бүрэн <span class="math inline">\(m\)</span>-ар үндэстэй мод байг. Тэгвэл:</p>
+<p><strong>(а)</strong> <span class="math inline">\(n = i + l\)</span>, мөн</p>
+<p><strong>(б)</strong> <span class="math inline">\(n = mi + 1\)</span>.</p>
+</div>
+</div>
+<p>Теорем 10.6-аас харахад бүрэн <span class="math inline">\(m\)</span>-ар модны <span class="math inline">\(n, l\)</span>, ба <span class="math inline">\(i\)</span> гурван утгын хоёрыг нь мэдвэл гурав дахь нь тодорхойлогдоно. Теорем 10.6-ийн баталгаа болон түүний зарим ашигтай мөрдөлгөөнүүдийн баталгааг дасгалд үлдээв. Дараагийн теорем нь 10.4 ба 10.5-р хэсгүүдэд хийх алгоритмын шинжилгээнд чухал үүрэг гүйцэтгэнэ.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(T\)</span> нь <span class="math inline">\(h\)</span> өндөртэй, <span class="math inline">\(l\)</span> навчтай <span class="math inline">\(m\)</span>-ар үндэстэй мод байг. Тэгвэл:</p>
+<p><strong>(а)</strong> <span class="math inline">\(l \le m^h\)</span>, мөн</p>
+<p><strong>(б)</strong> <span class="math inline">\(h \ge \lceil \log_m l \rceil\)</span>.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Бид <span class="math inline">\(h\)</span> дээр индукцээр батална. Хэрэв <span class="math inline">\(h = 0\)</span> бол <span class="math inline">\(l = 1\)</span> болох ба <span class="math inline">\(m\)</span>-ийн дурын сонголтын хувьд батлах үр дүнгүүд дээр тэнцэтгэл биелнэ. Иймд <span class="math inline">\(h \ge 1\)</span> гэж аваад <span class="math inline">\(T\)</span> нь <span class="math inline">\(h\)</span> өндөртэй, <span class="math inline">\(l\)</span> навчтай <span class="math inline">\(m\)</span>-ар мод бөгөөд батлах үр дүнгүүд нь бага өндөртэй бүх модны хувьд биелнэ гэж үзье. <span class="math inline">\(v_0\)</span> нь <span class="math inline">\(T\)</span>-ийн үндэс байг ба <span class="math inline">\(v_1, \dots, v_d\)</span> нь түүний хүүхдүүд байг. <span class="math inline">\(d \le m\)</span> болохыг тэмдэглэе.</p>
+<div id="fig-thm-10-7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-thm-10-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/thm-10-7.png" class="img-fluid figure-img" style="width:40.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-thm-10-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.11: v0 үндэсний дэд моднууд
+</figcaption>
+</figure>
+</div>
+<p>Хэрэв бид <span class="math inline">\(v_0\)</span>-ийг устгавал <span class="math inline">\(d\)</span> ширхэг үндэстэй мод үлдэнэ. <span class="math inline">\(1 \le j \le d\)</span> бүрийн хувьд <span class="math inline">\(T_j\)</span> нь <span class="math inline">\(v_j\)</span> үндэстэй, <span class="math inline">\(h_j\)</span> өндөртэй, <span class="math inline">\(l_j\)</span> навчтай мод байг. Тэгвэл <span class="math inline">\(h_j &lt; h\)</span> тул индукцийн таамаглал <span class="math inline">\(T_j\)</span> дээр биелнэ. Эндээс: <span class="math display">\[l = l_1 + \dots + l_d \le m^{h_1} + \dots + m^{h_d} \le d \cdot m^{h-1} \le m^h.\]</span> Суурь <span class="math inline">\(m\)</span>-ээр логарифм авбал <span class="math inline">\(\log_m l \le h\)</span> болно. <span class="math inline">\(h \in \mathbb{Z}\)</span> тул <span class="math inline">\(\lceil \log_m l \rceil \le h\)</span> гэдэг нь мөрдөн гарна. <span class="math inline">\(\square\)</span></p>
+<p>Практикт үндэстэй моднууд нь дотоод орой бүрийн хүүхдүүдийн эрэмбээр өгөгдсөн нэмэлт бүтэцтэй байх нь элбэг.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 10.3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>(а)</strong> Дотоод орой бүрийн хүүхдүүдийн олонлог нь эрэмбэлэгдсэн байдаг үндэстэй модыг <strong>эрэмбэлэгдсэн үндэстэй мод</strong> (ordered rooted tree) гэнэ.</p>
+<p><strong>(б)</strong> Дотоод оройн хүү бүрийг <strong>зүүн хүү</strong> (left child) эсвэл <strong>баруун хүү</strong> (right child) гэж тодорхойлсон хоёртын модыг <strong>эрэмбэлэгдсэн хоёртын мод</strong> (ordered binary tree) гэнэ. Түүнчлэн дотоод орой бүр дээр харгалзах <strong>зүүн дэд мод</strong> (харгалзан <strong>баруун дэд мод</strong>) нь түүний зүүн хүү (харгалзан баруун хүү) дээр үндэслэсэн дэд мод юм.</p>
+</div>
+</div>
+<p>Хэрэв бид дотоод орой бүрийн хүүхдүүдийн олонлог дээрх эрэмбийг жишээлбэл оройнуудын индексийн жам ёсны эрэмбээр авбал Зураг 10.10-т харуулсан үндэстэй модыг илүү нарийн утгаар эрэмбэлэгдсэн үндэстэй мод гэж үзэж болно. Энэ эрэмбэ нь Зураг 10.10 дахь оройнуудын зүүнээс баруун тийш байрласан байршилтай тохирч байгааг анхаарна уу. Үнэндээ эрэмбэлэгдсэн үндэстэй модыг зурах тогтсон журам нь хүүхдүүдийг зүүнээс баруун тийш дараалуулан байрлуулах явдал юм.</p>
+<p>Эрэмбэлэгдсэн хоёртын модыг зурах журам нь зүүн хүүг эцгийнх нь зүүн талд, баруун хүүг баруун талд нь байрлуулах явдал юм. Улмаар Зураг 10.9 дахь хоёртын модыг эрэмбэлэгдсэн хоёртын модны бүтэцтэй болгох нэгээс олон арга бий. Энэ хоёр хувилбарыг Зураг 10.11-д харуулсан бөгөөд тэдгээр нь <span class="math inline">\(v_6\)</span> оройг эцэг <span class="math inline">\(v_5\)</span>-ийн зүүн хүү эсвэл баруун хүү гэж үзэх сонголтоороо ялгагдана.</p>
+<div id="fig-fig-10-11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-11.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.12: Хоёр өөр эрэмбэлэгдсэн хоёртын мод
+</figcaption>
+</figure>
+</div>
+<p>Эрэмбэлэгдсэн хоёртын модыг таних түлхүүрээр индекслэгдсэн зүйлсийг хадгалах болон тэдгээрийг хайхад тохиромжтой өгөгдлийн бүтэц тодорхойлоход ашиглаж болно. <strong>Хоёртын хайлтын мод</strong> (binary search tree) гэдэг нь орой бүр дэх түлхүүр нь түүний зүүн дэд модны бүх түлхүүрээс их бөгөөд баруун дэд модны бүх түлхүүрээс бага байдаг эрэмбэлэгдсэн хоёртын мод юм. Өгөгдсөн зүйлсийн жагсаалтад зориулсан хоёртын хайлтын модыг бид дараах рекурсив байгуулалтаар байгуулна. Жагсаалтын хамгийн эхний зүйлийг үндэс орой болгоно. Дараагийн зүйл бүрийг ээлжлэн одоо байгуулагдсан байгаа хоёртын хайлтын модонд нэмэхдээ эхлээд үндэс дээр анхаарлаа төвлөрүүлнэ. Хэрэв шинэ зүйлийн түлхүүр нь үндэсний түлхүүртэй ижил байвал энэ нь модонд аль хэдийн орсон зүйлийн давхардал тул нэмэх шаардлагагүй. Хэрэв түүний түлхүүр нь үндэсний түлхүүрээс бага бол бид анхаарлаа үндэсний зүүн хүү рүү шилжүүлнэ. Хэрэв түүний түлхүүр нь үндэсний түлхүүрээс их бол анхаарлаа үндэсний баруун хүү рүү шилжүүлнэ. Энэ харьцуулалтын дараа хэрэв бид модонд хараахан үүсээгүй байгаа (хүү) оройг авч үзэх гэж байгаа бол модонд тэр шинэ байрлалыг үүсгэн шинэ зүйлээ нэмнэ. Эсрэг тохиолдолд бид модны илүү өндөр түвшний орой дээр очсон байх ба одоо тэр оройг үндэстэй адилаар авч үзэн, шинэ зүйл олдох эсвэл нэмэгдэх хүртэл харьцуулалтаа давтана. Энэ үйл явцыг дараагийн жишээнд харуулав.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Сэтгүүлийн өгүүлэлд ямар үгс орж байгааг бүртгэхийг хүсэж байна гэе. Үгсийн ердийн толь бичгийн эрэмбээр үг бүр өөрийнхөө түлхүүр болж чадна. Гэсэн хэдий ч өгүүлэл дэх үгс цагаан толгойн дарааллаар орсон байх албагүй нь мэдээж. Жишээлбэл, эхний өгүүлбэр нь: <span class="math display">\[\text{"Discrete mathematics is my favorite course."}\]</span> байг. Түүний зургаан үгийг Зураг 10.12-т харуулсан алхмуудаар харгалзах хоёртын хайлтын модонд оруулна. (3)-р алхмын дараа <em>my</em> үгийг эхлээд <em>discrete</em>-тэй, дараа нь <em>mathematics</em>-тай харьцуулна. <em>my</em> нь <em>mathematics</em>-аас их бөгөөд (3)-р алхамд <em>mathematics</em> нь баруун хүүгүй байгаа тул (4)-р алхамд <em>my</em>-г <em>mathematics</em>-ийн баруун хүү болгон нэмнэ.</p>
+<div id="fig-fig-10-12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-12.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.13: Хоёртын хайлтын мод байгуулах нь
+</figcaption>
+</figure>
+</div>
+<p>Хэрэв бид энэ модноос ямар нэгэн үг (жишээлбэл <em>cat</em>) хайхыг хүсвэл үндсэндээ ижил процедурыг хэрэглэнэ. <em>cat</em> үгийг эхлээд <em>discrete</em>-тэй, дараа нь <em>course</em>-тай харьцуулна. <em>cat</em> нь <em>course</em>-аас бага бөгөөд <em>course</em> нь зүүн хүүгүй тул бид <em>cat</em> үг энэ модонд байхгүй гэж дүгнэнэ. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Эрэмбэлэгдсэн үндэстэй моднуудыг хоёр хэмжээст хар-цагаан зургийг кодлоход ашиглаж болно. Өгөгдсөн зургийн <strong>квадрат мод</strong> (quadtree) гэдэг нь зургийг гадуур нь квадрат хүрээгээр хүрээлж, зураг доторх нүднүүдийг рекурсив байдлаар дөрвөн мөч (quadrant) болгон хувааж байгуулсан эрэмбэлэгдсэн бүрэн <span class="math inline">\(4\)</span>-ар мод юм. Бүхэлдээ хар ч биш, бүхэлдээ цагаан ч биш өнгөтэй нүд бүр өөрөө дахин дөрвөн мөч болж хуваагдах ба бүх нүд нэг өнгийн болтол энэ үйл явцыг давтана. Хуваагдсан нүд бүрийг үүссэн дөрвөн мөчийнхөө эцэг болгож тодорхойлох ба мөчүүдийн эрэмбийг Зураг 10.13-т харуулсан дугаарлах журмын дагуу өгнө. Энэ процедурыг Жишээ 10.4-т харуулав.</p>
+<div id="fig-fig-10-13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-13.png" class="img-fluid figure-img" style="width:15.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.14: Квадрат мод дахь мөчүүдийн эрэмбэ
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг 10.14-ийн зүүн гар талд харуулсан зураг нь мушгиа хэлбэрийн дүрс эсвэл ямар нэгэн энгийн фонтоор бичсэн <code>"J"</code> үсгийг илэрхийлж болох юм. Шаардлагатай мөч хуваалтуудыг Зураг 10.14-ийн баруун гар талд харуулав.</p>
+<div id="fig-fig-10-14" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-14.png" class="img-fluid figure-img" style="width:55.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;36.15: Зураг ба түүнд харгалзах хуваалт
+</figcaption>
+</figure>
+</div>
+<p>Энэ зургийн квадрат модыг Зураг 10.15-д харуулсан бөгөөд энд <span class="math inline">\(B\)</span> нь хар квадратыг, <span class="math inline">\(W\)</span> нь цагаан квадратыг төлөөлнө. Квадрат бүрийн хэмжээ болон байрлал нь мод дахь харгалзах навчны түвшин болон байрлалын эрэмбээр тодорхойлогдоно.</p>
+<p><img src="images/ch10/fig-10-15.png" id="fig-fig-10-15" class="img-fluid" style="width:55.0%" alt="“J” үсгийн квадрат мод"> <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Квадрат модонд илүү өндөр түвшнүүд нь харгалзах зургийн илүү нарийвчилсан хэсгүүдийг илэрхийлдэг болохыг анхаарна уу. Улмаар квадрат модыг ямар нэгэн бэхлэгдсэн түвшнээс дээш тайрснаар өгөгдсөн зургийн илүү бүдүүн (нягтрал багатай) хувилбарыг гарган авч болно. Өөрөөр хэлбэл, ямар нэгэн бэхлэгдсэн түвшнээс доош орших бүх оройг устгаж, дотоод оройноос навч болж хувирсан орой бүрийг ямар нэгэн дүрмийн дагуу <span class="math inline">\(B\)</span> эсвэл <span class="math inline">\(W\)</span>-ээр орлуулж болно. Энэ дүрмийг хүүхдүүдийнх нь олонхоор тодорхойлж болох эсвэл жишээлбэл тийм бүх оройг зүгээр л <span class="math inline">\(W\)</span>-ээр сольж болно. Жишээлбэл, бид Зураг 10.14 дахь <code>"J"</code> үсгийн жижиг хувилбарыг хэвлэхийг хүсэж, нарийвчлалын түвшинг бууруулахаар шийдсэн гэе. Бид Зураг 10.15 дахь квадрат модны <span class="math inline">\(2\)</span>-р түвшнээс доош орших бүх оройг устгаж болно. <span class="math inline">\(2\)</span>-р түвшинд үүссэн шинэ навч дээр тухайн оройн хуучин хүүхдүүдийн олонх дээр үндэслэн <span class="math inline">\(W\)</span>-ийг орлуулан тавьж болно. Ингэж үүсэх <code>"J"</code> үсгийн бүдүүн хувилбарыг Зураг 10.16-д харуулав[cite: 325].</p>
+<p><img src="images/ch10/fig-10-16.png" id="fig-fig-10-16" class="img-fluid" style="width:22.0%" alt="Зураг 10.14 дэх “J” үсгийн бүдүүн хувилбар">[cite: 325]</p>
+<hr>
+</section>
+</section>
+<section id="р-зүйлийн-дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">10.1-р зүйлийн дасгалууд</h2>
+<ol type="1">
+<li><p>Зураг дээрх граф мод мөн үү[cite: 325]?</p>
+<p><img src="images/ch10/ex-10-1-1.png" id="fig-ex-10-1-1" class="img-fluid" style="width:18.0%" alt="Дасгал 1-ийн граф">[cite: 325]</p></li>
+<li><p>Зураг дээрх граф мод мөн үү[cite: 325]?</p>
+<p><img src="images/ch10/ex-10-1-2.png" id="fig-ex-10-1-2" class="img-fluid" style="width:18.0%" alt="Дасгал 2-ын граф">[cite: 325]</p></li>
+<li><p><span class="math inline">\((m, n)\)</span> хосуудын ямар утгуудын хувьд <span class="math inline">\(K_{m,n}\)</span> граф мод байх вэ[cite: 325]?</p></li>
+<li><p><span class="math inline">\(n \in \mathbb{Z}^+\)</span> хувьд хоосон граф <span class="math inline">\(\Phi_n\)</span> нь ой мөн үү[cite: 325]?</p></li>
+<li><p>Нүүрсустөрөгч этилен (<span class="math inline">\(\text{C}_2\text{H}_4\)</span>)-ийг гадил болон бусад жимсний боловсролтыг түргэсгэхэд ашигладаг[cite: 325]. Түүний химийн бүтцийг зурагт харуулав[cite: 325].</p>
+<p><img src="images/ch10/ex-10-1-5.png" id="fig-ex-10-1-5" class="img-fluid" style="width:20.0%" alt="Этилений (C2H4) химийн бүтэц">[cite: 325]</p>
+<p>Үүнд харгалзах граф мод мөн үү[cite: 325]?</p></li>
+<li><p>Аммиак (<span class="math inline">\(\text{NH}_3\)</span>) нь цэвэрлэгээний бодис бөгөөд бордоо үйлдвэрлэхэд мөн ашиглагддаг[cite: 325]. Түүний химийн бүтцийг зурагт харуулав[cite: 325].</p>
+<p><img src="images/ch10/ex-10-1-6.png" id="fig-ex-10-1-6" class="img-fluid" style="width:18.0%" alt="Аммиакийн (NH3) химийн бүтэц">[cite: 325]</p>
+<p>Үүнд харгалзах граф мод мөн үү[cite: 325]?</p></li>
+<li><p>Гогцоо ирмэгтэй граф мод байж чадах уу[cite: 325]?</p></li>
+<li><p>Давхар ирмэгтэй граф мод байж чадах уу[cite: 325]?</p></li>
+<li><p><span class="math inline">\(T\)</span> нь мод байг. <span class="math inline">\(T \times \Phi_n\)</span> нь ой мөн үү[cite: 325]?</p></li>
+<li><p><span class="math inline">\(G\)</span> ба <span class="math inline">\(H\)</span> графууд дээр ямар нөхцөл тавигдахад <span class="math inline">\(G \times H\)</span> нь ой болох вэ[cite: 325]?</p></li>
+<li><p>Гексануудыг цавуу болон бэх бэлтгэхэд ашигладаг бөгөөд уусгагчийн үүрэг мөн гүйцэтгэдэг[cite: 325]. Гексаны (<span class="math inline">\(\text{C}_6\text{H}_{14}\)</span>) боломжит изомеруудын тоог ол[cite: 325].</p></li>
+<li><p>Гептануудыг хими цэвэрлэгээ болон пестицидэд ашигладаг[cite: 325]. Гептаны (<span class="math inline">\(\text{C}_7\text{H}_{16}\)</span>) боломжит изомеруудын тоог ол[cite: 325].</p></li>
+<li><p>Зураг дээр нэгэн хотын автобусны системийг харуулжээ[cite: 325]. Энэ нь тус бүр нь зам болох хоёр автобусны чиглэлээс бүрдэнэ[cite: 325].</p>
+<p><img src="images/ch10/ex-10-1-13.png" id="fig-ex-10-1-13" class="img-fluid" style="width:50.0%" alt="Хотын автобусны систем">[cite: 326]</p>
+<p>Энэхүү автобусны системийг төлөөлж буй графыг авч үзье[cite: 326]. <strong>(а)</strong> Фернээс (Fern) Маркет (Market) хүрэх цор ганц зам бий юу[cite: 326]? <strong>(б)</strong> Хоукоос (Hawk) Парк (Park) хүрэх цор ганц зам бий юу[cite: 326]? <strong>(в)</strong> Энэ граф мод биш тул ерөнхий тохиолдолд түүн доторх замууд цор ганц биш[cite: 326]. Гэсэн хэдий ч энэ хотын аль ч хоёр буудлын хооронд цор ганц <em>хамгийн богино</em> зам орших уу[cite: 326]? Үүний тулд манай графын бүх ирмэгийг ижил урттай гэж үзнэ[cite: 326]. Хариултаа тайлбарла[cite: 326].</p></li>
+<li><p>Зураг дээр тодорхой нэгэн хорооллын замуудыг харуулжээ[cite: 326].</p>
+<p><img src="images/ch10/ex-10-1-14.png" id="fig-ex-10-1-14" class="img-fluid" style="width:35.0%" alt="Хорооллын замууд">[cite: 326]</p>
+<p>Уулзваруудыг (мухар гудамжны төгсгөлүүдийг оролцуулан) оройгоор, тэдгээрийг холбосон гудамжуудыг ирмэгээр төлөөлүүлсэн графыг авч үзье[cite: 326]. <strong>(а)</strong> Энэ граф мод болохыг ажигла[cite: 326]. Энэ хороололд орших дурын хос уулзварын хооронд цор ганц зам байх ёстой юу[cite: 326]? <strong>(б)</strong> Модны ямар шинж чанар нь мухар гудамжны төгсгөлүүдийг илэрхийлж байна вэ[cite: 326]? <strong>(в)</strong> Модны ямар шинж чанар нь уулзваруудыг илэрхийлж байна вэ[cite: 326]?</p></li>
+<li><p><span class="math inline">\(\star\)</span> Теорем 10.1-ийн урвууг батал[cite: 326].</p></li>
+<li><p><span class="math inline">\(\star\)</span> Холбоост графуудын хувьд Теорем 10.3-ын урвууг батал[cite: 326].</p></li>
+<li><p><span class="math inline">\(\star\)</span> <span class="math inline">\(G\)</span> нь гогцоогүй дурын граф байг[cite: 326]. <span class="math inline">\(G\)</span> нь цор ганц бүрхэгч модтой байх нь <span class="math inline">\(G\)</span> мод байхтай зайлшгүй бөгөөд хүрэлцээтэй болохыг харуул[cite: 326].</p></li>
+<li><p><span class="math inline">\(4, 4, 2, 2, 1, 1\)</span> зэргийн дараалалтай бүх моднуудыг ол[cite: 326].</p></li>
+<li><p><span class="math inline">\(G = (V, E)\)</span> нь дурын граф байг[cite: 326]. Хэрэв <span class="math inline">\(G\)</span> нь холбоост бөгөөд <span class="math inline">\(|E| = |V| - 1\)</span> бол <span class="math inline">\(G\)</span> нь мод болохыг харуул[cite: 326]. <em>Зөвлөмж:</em> Бүрхэгч модыг авч үз[cite: 326].</p></li>
+<li><p><span class="math inline">\(\star\)</span> Теорем 10.3-ыг ашиглан Теорем 10.2-ыг батал[cite: 326]. <em>Зөвлөмж:</em> Зэргийн дарааллыг авч үз[cite: 326].</p></li>
+<li><p><span class="math inline">\(\star\)</span> Мод яг хоёр навчтай байх нь тэр зам байхтай зайлшгүй бөгөөд хүрэлцээтэй болохыг харуул[cite: 326].</p></li>
+<li><p>Яг <span class="math inline">\(3\)</span> навчтай дурын модны зэргийн дараалал ямар байх вэ[cite: 326]?</p></li>
+<li><p><span class="math inline">\(n\)</span> оройтой, <span class="math inline">\(c\)</span> компоненттой ойд хэдэн ирмэг байх вэ[cite: 326]?</p></li>
+<li><p><span class="math inline">\(c\)</span> компоненттой бөгөөд тусгаарлагдсан оройгүй ой хамгийн багадаа <span class="math inline">\(2c\)</span> навчтай байх ёстойг харуул[cite: 327].</p></li>
+<li><p><span class="math inline">\(n\)</span> оройтой ямар моднууд <span class="math inline">\(n - 1\)</span> навчтай байдаг вэ[cite: 327]?</p></li>
+<li><p><span class="math inline">\(n\)</span> оройтой ямар моднууд <span class="math inline">\(n - 2\)</span> навчтай байдаг вэ[cite: 327]?</p></li>
+<li><p><span class="math inline">\(\star\)</span> Эйлерийн томьёог ашиглан Теорем 10.3-ыг батал[cite: 327].</p></li>
+<li><p><span class="math inline">\(\star\)</span> <span class="math inline">\(\delta(G) \ge 2\)</span> байх дурын <span class="math inline">\(G\)</span> граф цикл агуулсан байх ёстойг батал[cite: 327]. <em>Зөвлөмж:</em> Теорем 10.3-ыг ашигла[cite: 327].</p></li>
+<li><p><span class="math inline">\(n\)</span> оройтой модонд замтай изоморф байх хэдэн ялгаатай дэд граф орших вэ[cite: 327]?</p></li>
+<li><p>Моднууд нь хоёр туйлт граф болохыг батал[cite: 327].</p></li>
+<li><p><span class="math inline">\(C_n\)</span>-ийн бүрхэгч модыг ол[cite: 327].</p></li>
+<li><p><span class="math inline">\(K_n\)</span>-ийн бүрхэгч модыг ол[cite: 327].</p></li>
+<li><p><span class="math inline">\(Q_n\)</span>-ийн бүрхэгч модыг ол[cite: 327].</p></li>
+<li><p><span class="math inline">\(K_{m,n}\)</span>-ийн бүрхэгч модыг ол[cite: 327].</p></li>
+<li><p>Теорем 10.4-ийн урвууг батал[cite: 327].</p></li>
+<li><p>Мөрдөлгөө 10.5-ыг батал[cite: 327].</p></li>
+</ol>
+<p><img src="images/ch10/fig-10-17.png" id="fig-fig-10-17" class="img-fluid" style="width:22.0%" alt="Дасгал 37–40-ийн мод">[cite: 327]</p>
+<ol start="37" type="1">
+<li><p>Зураг 10.17 дахь модны үндсээр <span class="math inline">\(1\)</span>-ийг авъя[cite: 327]. <strong>(а)</strong> <span class="math inline">\(2\)</span>-ын хүүхдүүдийг жагсаа[cite: 327]. <strong>(б)</strong> <span class="math inline">\(5\)</span>-ын эцэг нь аль орой вэ[cite: 327]? <strong>(в)</strong> <span class="math inline">\(3\)</span>-ын түвшин хэд вэ[cite: 327]? <strong>(г)</strong> Энэ үндэстэй модны өндөр хэд вэ[cite: 327]? <strong>(д)</strong> Энэ нь хоёртын мод мөн үү[cite: 327]? <strong>(е)</strong> Энэ нь тэнцвэржүүлсэн үү[cite: 327]?</p></li>
+<li><p>Зураг 10.17 дахь модны үндсээр <span class="math inline">\(7\)</span>-г авъя[cite: 327]. <strong>(а)</strong> <span class="math inline">\(2\)</span>-ын хүүхдүүдийг жагсаа[cite: 327]. <strong>(б)</strong> <span class="math inline">\(5\)</span>-ын эцэг нь аль орой вэ[cite: 327]? <strong>(в)</strong> <span class="math inline">\(3\)</span>-ын түвшин хэд вэ[cite: 327]? <strong>(г)</strong> Энэ үндэстэй модны өндөр хэд вэ[cite: 327]? <strong>(д)</strong> Энэ нь хоёртын мод мөн үү[cite: 327]? <strong>(е)</strong> Энэ нь тэнцвэржүүлсэн үү[cite: 327]?</p></li>
+<li><p>Зураг 10.17 дахь модны үндсээр <span class="math inline">\(2\)</span>-ыг авъя[cite: 327]. <strong>(а)</strong> <span class="math inline">\(1\)</span>-ийн хүүхдүүдийг жагсаа[cite: 327]. <strong>(б)</strong> <span class="math inline">\(3\)</span>-ын эцэг нь аль орой вэ[cite: 327]? <strong>(в)</strong> <span class="math inline">\(4\)</span>-ийн түвшин хэд вэ[cite: 327]? <strong>(г)</strong> Энэ үндэстэй модны өндөр хэд вэ[cite: 327]? <strong>(д)</strong> Энэ нь хоёртын мод мөн үү[cite: 327]? <strong>(е)</strong> Энэ нь бүрэн мод мөн үү[cite: 327]?</p></li>
+<li><p>Зураг 10.17 дахь модны үндсээр <span class="math inline">\(6\)</span>-г авъя[cite: 327]. <strong>(а)</strong> <span class="math inline">\(2\)</span>-ын хүүхдүүдийг жагсаа[cite: 327]. <strong>(б)</strong> <span class="math inline">\(1\)</span>-ийн эцэг нь аль орой вэ[cite: 327]? <strong>(в)</strong> <span class="math inline">\(3\)</span>-ын түвшин хэд вэ[cite: 327]? <strong>(г)</strong> Энэ үндэстэй модны өндөр хэд вэ[cite: 327]? <strong>(д)</strong> Энэ нь хоёртын мод мөн үү[cite: 327]? <strong>(е)</strong> Энэ нь бүрэн мод мөн үү[cite: 327]?</p></li>
+<li><p>Билли Кризи дуунуудаа олоход хялбар болгохын тулд доорх файлын системийн дагуу CD дээр зарим хөгжмийн файлуудыг хадгалжээ[cite: 327]:</p>
+<pre class="text"><code>◇ CD Drive (E:)
+  △ Country
+    □ Black.mpg
+    □ Reba.mpg
+  △ Hip Hop
+    □ Fifty.mpg
+    □ JLo.mpg
+  △ Rock
+    △ Classic Rock
+      □ Lola.mpg
+      □ Satisf.mpg
+      □ USSR.mpg
+    △ Modern Rock
+      □ GrnDay.mpg</code></pre>
+<p>Энэ бүтцэд харгалзах модыг авч үзье[cite: 328]. <strong>(а)</strong> <code>Lola.mpg</code> нь <code>Rock</code>-ийн хүү мөн үү[cite: 328]? <strong>(б)</strong> Энэ жишээн дэх “… хавтсыг агуулж байна” гэсэн харьцаа нь мод дээрх “…-ийн эцэг мөн” эсвэл “…-ийн хүү мөн” харьцаануудын аль нэгтэй харгалзана[cite: 328]. Аль нь вэ[cite: 328]? <strong>(в)</strong> Энэ жишээн дэх хөгжмийн (<code>.mpg</code>) файлууд нь модны ямар шинж чанартай харгалзах вэ[cite: 328]? <strong>(г)</strong> Модны өндөр хэд вэ[cite: 328]? <strong>(д)</strong> Мод тэнцвэржүүлсэн үү[cite: 328]?</p></li>
+<li><p>Зураг дээр нэгэн гэр бүлийн амьд сэрүүн эрэгтэй гишүүдийн олонлогийн ургийн модыг харуулав (5.1-р хэсгийн Жишээ 5.5-д мөн авч үзсэн)[cite: 328].</p>
+<p><img src="images/ch10/ex-10-1-42.png" id="fig-ex-10-1-42" class="img-fluid" style="width:70.0%" alt="Гэр бүлийн ургийн мод">[cite: 328]</p>
+<p><strong>(а)</strong> Гэр бүлийн нэгэн адил моднуудад хүүгийн хүүг <strong>ач</strong> (grandchild) гэж нэрлэдэг[cite: 328]. Питер хэдэн ачтай вэ[cite: 328]? <strong>(б)</strong> Энэ жишээн дэх хүүхэдтэй эрчүүд нь модны ямар шинж чанартай харгалзах вэ[cite: 328]? <strong>(в)</strong> Мод <span class="math inline">\(3\)</span>-ар уу? <span class="math inline">\(4\)</span>-ар уу[cite: 328]? <strong>(г)</strong> Мод тэнцвэржүүлсэн үү[cite: 328]?</p></li>
+<li><p>Хэрэв мод нь тодорхой нэг оройг үндэс болгон авахад тэнцвэржүүлсэн байвал аль ч оройг үндэс болгон авсан тэнцвэржүүлсэн байх ёстой юу[cite: 328]?</p></li>
+<li><p>Хэрэв мод нь тодорхой нэг оройг үндэс болгон авахад бүрэн <span class="math inline">\(m\)</span>-ар мод байвал аль ч оройг үндэс болгон авсан бүрэн <span class="math inline">\(m\)</span>-ар мод байх ёстой юу[cite: 328]?</p></li>
+<li><p>Дараах өгүүлбэрийг батал эсвэл няцаа: <em>Мод бүрд үндэс болгон сонгоход модыг тэнцвэржүүлсэн болгодог орой оршино[cite: 328].</em></p></li>
+<li><p>Дараах өгүүлбэрийг батал эсвэл няцаа: <em>Мод бүрд үндэс болгон сонгоход модыг бүрэн болгодог орой оршино[cite: 328].</em></p></li>
+</ol>
+<p><em>47-оос 50 хүртэлх дасгалуудад <span class="math inline">\(T\)</span> нь өгөгдсөн бүрэн <span class="math inline">\(m\)</span>-ар мод байг[cite: 329]. <span class="math inline">\(n\)</span>-ээр оройн тоо, <span class="math inline">\(l\)</span>-ээр навчны тоо, <span class="math inline">\(i\)</span>-ээр дотоод оройн тоог тэмдэглэе[cite: 329].</em></p>
+<ol start="47" type="1">
+<li><span class="math inline">\(\star\)</span> Теорем 10.6-г батал[cite: 329]. <span class="math inline">\(\qquad\)</span> 48. <span class="math inline">\(i\)</span> ба <span class="math inline">\(l\)</span>-ийг <span class="math inline">\(n\)</span> ба <span class="math inline">\(m\)</span>-ээр илэрхийл[cite: 329].</li>
+<li><span class="math inline">\(n\)</span> ба <span class="math inline">\(i\)</span>-ийг <span class="math inline">\(l\)</span> ба <span class="math inline">\(m\)</span>-ээр илэрхийл[cite: 329]. <span class="math inline">\(\qquad\)</span> 50. <span class="math inline">\(n\)</span> ба <span class="math inline">\(l\)</span>-ийг <span class="math inline">\(i\)</span> ба <span class="math inline">\(m\)</span>-ээр илэрхийл[cite: 329].</li>
+<li>Бет Роббинс эмээгээсээ эхлэн гэр бүлийнхээ эмэгтэйчүүдээс бүрдэх ургийн мод зуржээ[cite: 329]. Ингэхдээ тэрээр ээж бүр яг гурван охинтой бөгөөд яг арван эмэгтэй ээж болсон болохыг анзаарчээ[cite: 329]. Бетийн гэр бүлд хэдэн эмэгтэй байгаа вэ[cite: 329]?</li>
+<li>Лютер Фут ааваасаа эхлэн гэр бүлийнхээ эрэгтэйчүүдээс бүрдэх ургийн мод байгуулахыг оролдож байна[cite: 329]. Хэрэв яг найман эрэгтэй хүүгүй бөгөөд аав бүр яг хоёр хүүтэй бол Футын гэр бүлд хэдэн эрэгтэй байгаа вэ[cite: 329]?</li>
+<li><span class="math inline">\(T\)</span> нь <span class="math inline">\(h\)</span> өндөртэй бүрэн <span class="math inline">\(m\)</span>-ар мод бөгөөд түүний бүх <span class="math inline">\(l\)</span> навч нь <span class="math inline">\(h\)</span> түвшинд оршдог байг[cite: 329]. <span class="math inline">\(l = m^h\)</span> болохыг харуул[cite: 329].</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(T\)</span> нь <span class="math inline">\(h\)</span> өндөртэй, <span class="math inline">\(l\)</span> навчтай бүрэн бөгөөд тэнцвэржүүлсэн <span class="math inline">\(m\)</span>-ар мод байг[cite: 329]. <span class="math inline">\(h = \lceil \log_m l \rceil\)</span> болохыг харуул[cite: 329].</li>
+</ol>
+<p><em>55-аас 58 хүртэлх дасгалуудад өгөгдсөн өгүүлбэрийн үгсэд зориулсан хоёртын хайлтын модыг байгуул[cite: 329]. Үгсийг харьцуулахдаа ердийн толь бичгийн эрэмбийг ашигла[cite: 329].</em></p>
+<ol start="55" type="1">
+<li><code>All students take calculus.</code> <span class="math inline">\(\qquad\)</span> 56. <code>Long live the king.</code>[cite: 329]</li>
+<li><code>Eat, drink, and be merry.</code> <span class="math inline">\(\qquad\)</span> 58. <code>Three is the magic number.</code>[cite: 329]</li>
+</ol>
+<p><em>59-өөс 62 хүртэлх дасгалуудад өгөгдсөн зурагт зориулсан квадрат модыг байгуул[cite: 329]. Торны шугамууд нь лавлагаа болгож зурсан зураас бөгөөд зургийн өөрийнх нь хэсэг биш болохыг анхаарна уу[cite: 329].</em></p>
+<p><img src="images/ch10/ex-10-1-59-62.png" id="fig-ex-10-1-59-62" class="img-fluid" style="width:65.0%" alt="Дасгал 59–62-ын зургууд">[cite: 329]</p>
+<ol start="59" type="1">
+<li>Зураг 59. <span class="math inline">\(\qquad\)</span> 60. Зураг 60[cite: 329].</li>
+<li>Зураг 61. <span class="math inline">\(\qquad\)</span> 62. Зураг 62[cite: 329].</li>
+</ol>
+<p><em>63-аас 66 хүртэлх дасгалуудад өгөгдсөн квадрат модонд харгалзах зургийг зур[cite: 329]. Тохиолдол бүрд зураг нь нэг үсгийг илэрхийлнэ[cite: 329].</em></p>
+<ol start="63" type="1">
+<li><img src="images/ch10/ex-10-1-63.png" id="fig-ex-10-1-63" class="img-fluid" style="width:60.0%" alt="Дасгал 63-ын квадрат мод">[cite: 329]</li>
+<li><img src="images/ch10/ex-10-1-64.png" id="fig-ex-10-1-64" class="img-fluid" style="width:60.0%" alt="Дасгал 64-ийн квадрат мод">[cite: 329]</li>
+<li><img src="images/ch10/ex-10-1-65.png" id="fig-ex-10-1-65" class="img-fluid" style="width:65.0%" alt="Дасгал 65-ын квадрат мод">[cite: 330]</li>
+<li><img src="images/ch10/ex-10-1-66.png" id="fig-ex-10-1-66" class="img-fluid" style="width:60.0%" alt="Дасгал 66-гийн квадрат мод">[cite: 330]</li>
+</ol>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Бид энд оптик изомеруудын хоорондох боломжит ялгааг орхигдуулсан болно. Эдгээр нь нүүрстөрөгчийн атомуудаар тодорхойлогдсон бэхлэгдсэн дэд модыг модны зарим хэсгийн давхцахгүй толин тусгалаар ялгагдах өөр өөр аргаар байгуулж болох үед ханасан нүүрсустөрөгчдийн дунд үүсдэг. Ялгаатай оптик изомерууд нь өөр өөр чиглэлтэй холбооны өнцөгтэй боловч ихэнх физик шинж чанараараа ижил байдаг.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./10.html" class="pagination-link" aria-label="10.html">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">10.html</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-2.html" class="pagination-link" aria-label="Хайлтын мод (Search Trees)">
+        <span class="nav-page-text"><span class="chapter-title">Хайлтын мод (Search Trees)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

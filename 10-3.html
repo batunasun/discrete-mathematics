@@ -1,0 +1,2028 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Жинлэгдсэн мод (Weighted Trees) – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10-4.html" rel="next">
+<link href="./10-2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">10.html</a></li><li class="breadcrumb-item"><a href="./10-3.html"><span class="chapter-title">Жинлэгдсэн мод (Weighted Trees)</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">3. Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: 3. Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1. Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2. Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3. Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4. Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5. Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6. Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">9. Графын шинж чанарууд</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: 9. Графын шинж чанарууд">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.1 Холбоост чанар (Connectivity)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.2 Эйлерийн цикл (Euler Circuits)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.3 Гамильтоны цикл (Hamiltonian Cycles)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.4 Хавтгай граф (Planar Graphs)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.5 Өнгөний тоо (Chromatic Number)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">10.html</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section: 10.html">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Мод ба Алгоритмууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Хайлтын мод (Search Trees)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-3.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Жинлэгдсэн мод (Weighted Trees)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10.4 Алгоритмын шинжилгээ (1-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10.5 Алгоритмын шинжилгээ (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#хамгийн-бага-бүрхэгч-мод-minimum-spanning-trees" id="toc-хамгийн-бага-бүрхэгч-мод-minimum-spanning-trees" class="nav-link active" data-scroll-target="#хамгийн-бага-бүрхэгч-мод-minimum-spanning-trees">Хамгийн бага бүрхэгч мод (Minimum Spanning Trees)</a></li>
+  <li><a href="#хамгийн-богино-замын-мод-shortest-path-trees" id="toc-хамгийн-богино-замын-мод-shortest-path-trees" class="nav-link" data-scroll-target="#хамгийн-богино-замын-мод-shortest-path-trees">Хамгийн богино замын мод (Shortest Path Trees)</a></li>
+  <li><a href="#р-зүйлийн-дасгалууд" id="toc-р-зүйлийн-дасгалууд" class="nav-link" data-scroll-target="#р-зүйлийн-дасгалууд">10.3-р зүйлийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">10.html</a></li><li class="breadcrumb-item"><a href="./10-3.html"><span class="chapter-title">Жинлэгдсэн мод (Weighted Trees)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Жинлэгдсэн мод (Weighted Trees)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Өмнөх хэсгүүдэд бид холбоост графуудын бүрхэгч моднуудыг авч үзсэн бөгөөд ерөнхий тохиолдолд бүрхэгч модны олон сонголт байдгийг харсан. Гэсэн хэдий ч зарим ирмэгүүд бусдаасаа илүү “үнэтэй” эсвэл “хүнд жинтэй” байхыг заасан нэмэлт бүтэц байвал зарим сонголтыг бусдаасаа илүү дээр гэж үзэж болно.</p>
+<p>Ирмэг бүрд нь тухайн ирмэгийн <strong>жин</strong> (weight) гэж нэрлэгдэх эерэг бодит тоо оноосон <span class="math inline">\(G = (V, E)\)</span> графыг <strong>жинлэгдсэн граф</strong> (weighted graph) гэнэ. Албан ёсоор энэхүү оноолтыг <span class="math inline">\(\omega : E \to \mathbb{R}^+\)</span> функцээр өгнө. Бидний авч үзэх жишээнүүдэд графын зураглал дээрх ирмэгүүд дээр жингүүдийг тэмдэглэгээ болгон бичиж харуулна. Бидний авч үзэх бүх жишээнд жингүүд нь эерэг бүхэл тоонууд байна.</p>
+<div id="fig-fig-10-20" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-20.png" class="img-fluid figure-img" style="width:35.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.1: Жинлэгдсэн граф (сүлжээ байгуулж буй компанийн хувьд)
+</figcaption>
+</figure>
+</div>
+<section id="хамгийн-бага-бүрхэгч-мод-minimum-spanning-trees" class="level3">
+<h3 class="anchored" data-anchor-id="хамгийн-бага-бүрхэгч-мод-minimum-spanning-trees">Хамгийн бага бүрхэгч мод (Minimum Spanning Trees)</h3>
+<p>Зураг 10.21-д бүх барилгуудынхаа хооронд компьютерын сүлжээ байгуулах шаардлагатай томоохон компанийн зохион байгуулалтыг харуулав. Зураг 10.20 дахь графын оройнууд нь Зураг 10.21-ийн барилгуудыг төлөөлж, ирмэг бүр нь хоёр барилгын хоорондох боломжит шууд холбоосыг илэрхийлж, ирмэг бүрд оноосон жин нь тэрхүү холбоосыг барих зардлыг мянган доллараар илэрхийлж байна гэж үзье. Бүх барилга хоорондоо харилцах боломжтой байхын тулд сүлжээн дэх холбоосууд нь (хамгийн багадаа) графын бүрхэгч модны ирмэгүүдтэй харгалзах ёстой. Ийнхүү хамгийн бага нийт жинтэй (зардалтай) бүрхэгч модыг сонгосноор боломжит хамгийн хямд сүлжээг гарган авна.</p>
+<div id="fig-fig-10-21" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-21.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.2: Компанийн барилгуудын газрын зураг
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 10.5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G\)</span> нь жинлэгдсэн граф байг.</p>
+<p><strong>(а)</strong> Дэд граф дахь ирмэгүүдийн жингүүдийн нийлбэрийг тухайн <strong>дэд графын жин</strong> (weight of a subgraph) гэнэ.</p>
+<p><strong>(б)</strong> Бүх бүрхэгч моднууд дотроос хамгийн бага жинтэй бүрхэгч модыг <span class="math inline">\(G\)</span>-ийн <strong>хамгийн бага бүрхэгч мод</strong> (minimum spanning tree) гэнэ.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг 10.20 дахь жинлэгдсэн графын хувьд тодоор харуулсан <span class="math inline">\(2, 3, 4, 6, 7, 9, 12\)</span> жинтэй ирмэгүүд нь хамгийн бага бүрхэгч модыг үүсгэнэ. Энэ нь <span class="math inline">\(43\)</span> жинтэй бөгөөд тухайн графын өөр ямар ч бүрхэгч мод үүнээс бага жинтэй байж чадахгүй. Улмаар Зураг 10.21-д зохион байгуулалтыг нь харуулсан компани компьютерын сүлжээгээ байгуулахын тулд хамгийн багадаа <span class="math inline">\(\$43,000\)</span> зарцуулах шаардлагатай болно. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Өмнөх хэлэлцүүлэг нь хамгийн бага бүрхэгч модны ач холбогдлыг харууллаа. Улмаар түүнийг олох аргатай байх нь зүй ёсны хэрэг юм. Бид одоо хамгийн бага бүрхэгч модыг олох хоёр алгоритмыг танилцуулна. Хоёуланг нь танилцуулсны дараа тэдгээр нь үргэлж хамгийн бага бүрхэгч модыг олдог тухай баталгааг өгөх болно.</p>
+<p>Бидний эхний алгоритмыг Алгоритм 10.3-т харуулсан бөгөөд Америкийн математикч Жозеф Бернард Крускалын (1928–) нэрээр нэрлэжээ. <strong>Крускалын алгоритм</strong>-д цикл үүсгэхгүй байх боломжит хамгийн бага жинтэй ирмэгийг нэмэх алхмыг бүрхэгч мод байгуулагдаж дуустал давтан гүйцэтгэнэ. Завсрын үе шатуудад одоогийн байдлаар сонгогдсон ирмэгүүд нь мод биш байж болох ойг үүсгэдэг болохыг анхаарна уу.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.3: Крускалын алгоритм (Kruskal’s Algorithm)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G = (V, E)\)</span> нь <span class="math inline">\(n &gt; 1\)</span> оройтой жинлэгдсэн холбоост граф байг.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>F = {e} гэж авъя, энд e нь боломжит хамгийн бага жинтэй гогцоо биш ирмэг.
+While |F| &lt; n - 1:
+    F ∪ {e} нь цикл агуулахгүй байх E \ F доторх бүх ирмэгүүдээс
+    боломжит хамгийн бага жинтэй ирмэгийг e гэе.
+    F = F ∪ {e} болгоно.
+T = (V, F)-ийг буцаана.</code></pre>
+</div>
+</div>
+<p>Крускалын алгоритмыг хэрэгжүүлэх аль ч үе шатанд дараагийн удаад сонгогдох боломжтой ирмэгүүдийн жин тэнцүү байвал тэдгээрийн аль нэгийг нь сонгоход хангалттай. Гэсэн хэдий ч хэрэв ирмэгийн олонлог дээр нэмэлтээр ямар нэгэн эрэмбэ өгөгдсөн бол үе шат бүрд цор ганц сонголт хийхийн тулд тэрхүү эрэмбийг ашиглаж болно. Жишээлбэл, ирмэгүүдийг жингийнх нь үл буурах эрэмбээр урьдчилан эрэмбэлэх нь тустай байж болно. Тиймээс 10.5-р хэсэгт хэлэлцэх зүйлсийг үл буурах эрэмбээр эрэмбэлэх алгоритмуудыг энд ашиглаж болно. Энэ хэсэгт авч үзэх бүх модны алгоритмд нэгдмэл байхын тулд бид ижил жинтэй ирмэгүүдийг ялгахдаа Тэмдэглэл 10.1-д хэлэлцсэний дагуу оройнуудын өгөгдсөн анхны эрэмбээр тодорхойлогдох лексикографик эрэмбийг ашиглах болно.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг 10.22 дахь граф нь цахилгаан эрчим хүчээр хангах шаардлагатай орон сууцны цогцолборыг төлөөлнө. Орой бүр орон сууцны барилгыг, ирмэг бүр барилгуудын хоорондох боломжит шууд цахилгаан кабелийг, харин ирмэгт оноосон жин нь тэрхүү холболтыг байгуулах зардлыг илэрхийлнэ. Улмаар бүх орон сууцны барилгыг холбосон хамгийн хямд цахилгаан сүлжээ нь хамгийн бага бүрхэгч модоор илэрхийлэгдэнэ.</p>
+<div id="fig-fig-10-22" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-22.png" class="img-fluid figure-img" style="width:30.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.3: Зардал бүхий цахилгаан сүлжээний боломжит холболтууд
+</figcaption>
+</figure>
+</div>
+<p>Крускалын алгоритмыг ашиглан Зураг 10.22 дахь графын хамгийн бага бүрхэгч модыг ол. Бүрхэгч модны ирмэгийн олонлог <span class="math inline">\(F\)</span>-ийг алгоритмаар гарган авсан дарааллаар нь жагсааж, бүрхэгч модыг тодруул.</p>
+<p><strong>Бодолт.</strong> Хамгийн бага бүрхэгч модны ирмэгийн олонлог нь: <span class="math display">\[F = \{\{v_1, v_2\}, \{v_3, v_8\}, \{v_5, v_6\}, \{v_7, v_8\}, \{v_3, v_6\}, \{v_4, v_7\}, \{v_2, v_3\}\}\]</span> болох бөгөөд доорх баруун гар талын зурагт тодоор харуулав:</p>
+<div id="fig-ex-10-12" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-10-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/ex-10-12.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.4: Крускалын алгоритмын явц ба эцсийн хамгийн бага бүрхэгч мод
+</figcaption>
+</figure>
+</div>
+<p>Зүүн гар талын зураг нь <span class="math inline">\(1\)</span> эсвэл <span class="math inline">\(2\)</span> жинтэй бүх ирмэгийг сонгосны дараах үе шатыг харуулж байна. Энэ цэг дээр <span class="math inline">\(3\)</span> жинтэй ирмэг болон <span class="math inline">\(4\)</span> жинтэй ирмэгийг сонгох боломжгүй, учир нь тус бүр нь өмнө сонгосон ирмэгүүдтэй нийлж цикл үүсгэнэ. Улмаар дараа нь <span class="math inline">\(5\)</span> жинтэй ирмэг сонгогдоно. Үүний дараа <span class="math inline">\(6\)</span> жинтэй хоёр ирмэг байгаа хэдий ч тэдгээрийн зөвхөн нэгийг нь л манай модонд нэмэх боломжтой болохыг анхаарна уу.</p>
+<p>Бидний бүрхэгч модны жин <span class="math inline">\(17\)</span> бөгөөд энэ нь орон сууцны цогцолборын цахилгаан сүлжээний боломжит хамгийн хямд зардлыг илэрхийлнэ. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Уншигч одоо Зураг 10.20 дахь графын тодруулсан хэсэг нь Крускалын алгоритмаар гарган авсан хамгийн бага бүрхэгч мод болохыг шалгаж болно.</p>
+<p>Бүрхэгч мод олох бидний хоёр дахь алгоритмыг Алгоритм 10.4-т харуулсан бөгөөд Америкийн математикч Роберт Клей Примийн (1921–) нэрээр нэрлэжээ. <strong>Примийн алгоритм</strong>-д бид алхам бүрд боломжит хамгийн бага жинтэй ирмэгийг нэмдэг. Гэсэн хэдий ч Крускалын алгоритмаас ялгаатай нь энд сонгогдсон ирмэгүүдийн олонлог үргэлж мод үүсгэж байх илүү хатуу шаардлага тавигддаг нь бидний боломжит сонголтуудыг улам хязгаарладаг. Энэ үйл явц нь өсөж буй энэхүү мод бүрхэгч мод болтол үргэлжилнэ.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.4: Примийн алгоритм (Prim’s Algorithm)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G = (V, E)\)</span> нь <span class="math inline">\(n &gt; 1\)</span> оройтой жинлэгдсэн холбоост граф байг.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>F = {e} гэж авъя, энд e нь боломжит хамгийн бага жинтэй гогцоо биш ирмэг.
+While |F| &lt; n - 1:
+    F-ийн аль нэг ирмэгийн төгсгөлийн оройг F-ийн ямар ч ирмэгийн
+    төгсгөлийн орой биш оройтой холбосон E \ F доторх бүх ирмэгүүдээс
+    боломжит хамгийн бага жинтэй ирмэгийг e гэе.
+    F = F ∪ {e} болгоно.
+T = (V, F)-ийг буцаана.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.13
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг 10.23 дахь граф нь Жишээ 10.12-т авч үзсэн тэрхүү орон сууцны цогцолборыг дахин төлөөлж байгаа боловч одоо жинлэгдсэн ирмэгүүд нь боломжит хийн шугамын холболтууд болон тэдгээрийн зардлыг илэрхийлнэ. Иймд энд хамгийн бага бүрхэгч мод нь орон сууцны барилгуудыг холбох хийн шугамын боломжит хамгийн хямд системийг илэрхийлнэ.</p>
+<div id="fig-fig-10-23" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-23.png" class="img-fluid figure-img" style="width:30.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.5: Зардал бүхий хийн шугамын боломжит холболтууд
+</figcaption>
+</figure>
+</div>
+<p>Примийн алгоритмыг ашиглан Зураг 10.23 дахь графын хамгийн бага бүрхэгч модыг ол. Бүрхэгч модны ирмэгийн олонлог <span class="math inline">\(F\)</span>-ийг алгоритмаар гарган авсан дарааллаар нь жагсааж, хамгийн бага бүрхэгч модыг тодруул.</p>
+<p><strong>Бодолт.</strong> Бүрхэгч модны ирмэгийн олонлог нь: <span class="math display">\[F = \{\{v_2, v_5\}, \{v_1, v_2\}, \{v_1, v_4\}, \{v_2, v_3\}, \{v_3, v_8\}, \{v_6, v_8\}, \{v_7, v_8\}\}\]</span> болох бөгөөд доорх баруун гар талын зурагт тодоор харуулав:</p>
+<div id="fig-ex-10-13" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-10-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/ex-10-13.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.6: Примийн алгоритмын явц ба эцсийн хамгийн бага бүрхэгч мод
+</figcaption>
+</figure>
+</div>
+<p>Зүүн гар талын зураг нь <span class="math inline">\(1, 3, 2, 7, 5\)</span> жинтэй ирмэгүүдийг (энэ дарааллаар) сонгосны дараах үе шатыг харуулж байна. Илүү өндөр жинтэй зарим ирмэгүүдийг сонгосны дараа яг энэ цэг дээр <span class="math inline">\(2\)</span> жинтэй үлдсэн хоёр ирмэг нэмэгдэнэ.</p>
+<p>Бидний бүрхэгч модны жин <span class="math inline">\(22\)</span> бөгөөд энэ нь орон сууцны цогцолборт хийн шугам тавих боломжит хамгийн хямд зардлыг илэрхийлнэ. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Уншигч Зураг 10.20 дахь хамгийн бага бүрхэгч мод нь мөн Примийн алгоритмаар гарган авсан мод болохыг шалгаж болно. Крускалын алгоритм болон Примийн алгоритмын үр дүнгүүд ерөнхий тохиолдолд хоорондоо тохирдог тухай баталгааг дасгалд үлдээсэн. Энд бид хоёр алгоритмын зөв ажиллах баталгааг өгье.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G\)</span> нь дурын жинлэгдсэн холбоост граф байг. Крускалын алгоритм болон Примийн алгоритм тус бүр <span class="math inline">\(G\)</span>-ийн хамгийн бага бүрхэгч модыг гарган авна.</p>
+</div>
+</div>
+<p>Хоёр алгоритмын баталгаа үндсэндээ ижил тул тэдгээрийг зэрэгцүүлэн толилуулж байна. Гэсэн хэдий ч эхний уншилтаар зөвхөн нэг алгоритм дээр, хоёр дахь уншилтаар нөгөө дээр нь анхаарлаа төвлөрүүлэх нь хамгийн сайн байж болох юм.</p>
+<p><strong>Теорем 10.8-ын баталгаа.</strong> Крускалын алгоритм эсвэл Примийн алгоритмаар гарган авсан <span class="math inline">\(G\)</span>-ийн бүрхэгч модыг <span class="math inline">\(T\)</span> гэе. Тодорхой нөхцөлүүдийг хангах <span class="math inline">\(G\)</span>-ийн хамгийн бага бүрхэгч мод <span class="math inline">\(T'\)</span>-ийг сонгон авъя. Крускалын алгоритмын хувьд <span class="math inline">\(T\)</span>-тэй хамгийн олон ерөнхий ирмэгтэй <span class="math inline">\(T'\)</span>-ийг сонгоно. Примийн алгоритмын хувьд алгоритмаар сонгогдсон ирмэгүүдийн боломжит хамгийн урт эхлэл дараалал <span class="math inline">\(S : e_1, e_2, \dots, e_k\)</span>-г агуулсан <span class="math inline">\(T'\)</span>-ийг сонгоно. Зөрчилд хүрэхийн тулд <span class="math inline">\(T' \neq T\)</span> гэж үзье.</p>
+<p><span class="math inline">\(T'\)</span>-д байхгүй боловч <span class="math inline">\(T\)</span>-д зориулж сонгогдсон хамгийн эхний ирмэгийг <span class="math inline">\(e\)</span> гэе. Примийн алгоритмын хувьд <span class="math inline">\(e = e_{k+1}\)</span> болохыг тэмдэглэе. Аль ч тохиолдолд <span class="math inline">\(T' \cup \{e\}\)</span> нь <span class="math inline">\(C\)</span> циклийг агуулна. Тодорхой нөхцөлүүдийг хангах <span class="math inline">\(e'\)</span> ирмэгийг <span class="math inline">\(C\)</span>-ээс сонгон авъя. Крускалын алгоритмын хувьд <span class="math inline">\(T\)</span>-д байхгүй <span class="math inline">\(e'\)</span>-ийг сонгоно. Примийн алгоритмын хувьд <span class="math inline">\(S\)</span>-д байхгүй боловч <span class="math inline">\(S\)</span>-д яг нэг төгсгөлийн оройтой <span class="math inline">\(e'\)</span>-ийг сонгоно. Аль ч тохиолдолд <span class="math inline">\(e'\)</span> нь <span class="math inline">\(T'\)</span>-д орших бөгөөд <span class="math inline">\((T' \setminus \{e'\}) \cup \{e\}\)</span> нь <span class="math inline">\(G\)</span>-ийн бүрхэгч мод болно. <span class="math inline">\(e\)</span> ба <span class="math inline">\(e'\)</span>-ийн жингүүдийг харьцуулснаар бид хүссэн зөрчилдөө хүрнэ.</p>
+<p>Хэрэв <span class="math inline">\(\omega(e') &lt; \omega(e)\)</span> бол <span class="math inline">\(T\)</span>-ийн хувьд <span class="math inline">\(e\)</span>-ийн оронд <span class="math inline">\(e'\)</span> сонгогдох байсан. Хэрэв <span class="math inline">\(\omega(e') &gt; \omega(e)\)</span> бол <span class="math inline">\((T' \setminus \{e'\}) \cup \{e\}\)</span> нь <span class="math inline">\(T'\)</span>-ээс бага жинтэй болно. Иймд <span class="math inline">\(\omega(e') = \omega(e)\)</span> гэж үзэхэд хангалттай. Крускалын алгоритмын хувьд <span class="math inline">\((T' \setminus \{e'\}) \cup \{e\}\)</span> нь <span class="math inline">\(T'\)</span>-ийг бодвол <span class="math inline">\(T\)</span>-тэй илүү олон ерөнхий ирмэгтэй байна. Примийн алгоритмын хувьд <span class="math inline">\((T' \setminus \{e'\}) \cup \{e\}\)</span> нь алгоритмаар сонгогдсон ирмэгүүдийн илүү урт эхлэл дарааллыг агуулна. <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="хамгийн-богино-замын-мод-shortest-path-trees" class="level3">
+<h3 class="anchored" data-anchor-id="хамгийн-богино-замын-мод-shortest-path-trees">Хамгийн богино замын мод (Shortest Path Trees)</h3>
+<p>Хүснэгт 10.1 дэх хотууд нь Нью-Йоркт төвтэй томоохон корпорацын салбаруудын байршил юм. Тэнд байгаа зардлууд нь эдгээр хосуудын хоорондох шууд нислэгийн тийзний үнэ болно.</p>
+<div id="tbl-10-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;38.1: Томоохон хотуудын хоорондох нислэгийн үнэ
+</figcaption>
+<div aria-describedby="tbl-10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Чикаго</th>
+<th style="text-align: center;">Хонолулу</th>
+<th style="text-align: center;">Хьюстон</th>
+<th style="text-align: center;">Лос-Анжелес</th>
+<th style="text-align: center;">Лондон</th>
+<th style="text-align: center;">Нью-Йорк</th>
+<th style="text-align: center;">Ром</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Чикаго</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$400\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$200\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$200\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$400\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$100\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Хонолулу</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$400\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$300\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Хьюстон</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$200\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$100\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$400\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Лос-Анжелес</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$200\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$300\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$100\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$400\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Лондон</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$400\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$300\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$100\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Нью-Йорк</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$100\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$400\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$400\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$300\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$500\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Ром</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$100\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$500\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Зураг 10.24-т бид Хүснэгт 10.1-ийн мэдээллийг жинлэгдсэн графаар дүрслэн харуулав. Түүний оройнууд нь салбаруудын байршлыг төлөөлнө. Ирмэг бүр болон түүний жин нь харгалзан хос хотын хоорондох шууд нислэг орших эсэх болон зардлыг илэрхийлнэ. Нью-Йорк дахь корпорацын удирдагч корпорацын салбар байршил тус бүр рүү хүрэх хамгийн хямд замыг мэдэхийг хүсэж магадгүй юм. Энэ тохиолдолд бидний жинлэгдсэн графын хувьд хамгийн бага бүрхэгч мод бус, харин үүнтэй төстэй өөр нэгэн бүтэц хэрэгтэй болно.</p>
+<div id="fig-fig-10-24" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-24.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.7: Хотуудын хоорондох зорчих зардал
+</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 10.6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G = (V, E)\)</span> нь жинлэгдсэн граф байг.</p>
+<p><strong>(а)</strong> <span class="math inline">\(G\)</span> доторх <span class="math inline">\(u\)</span> ба <span class="math inline">\(v\)</span> хоёр оройн хоорондох <strong>жинлэгдсэн зай</strong> (weighted distance), тэмдэглэгээ нь <span class="math inline">\(\operatorname{Dist}_G(u, v)\)</span>, гэдэг нь <span class="math inline">\(G\)</span> доторх <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> хүрэх замын боломжит хамгийн бага жинг хэлнэ. Хэрэв <span class="math inline">\(G\)</span> дотор <span class="math inline">\(u\)</span>-ээс <span class="math inline">\(v\)</span> хүрэх зам байхгүй бол бид <span class="math inline">\(\operatorname{Dist}_G(u, v) = \infty\)</span> гэж онооно. Хам сэдэвт ойлгомжтой үед доод индексийг орхиж болно. Тодорхойлолт 8.4(е)-д ердийн зайг жижиг <span class="math inline">\(d\)</span>-ээр тэмдэглэсэн бол энд жинлэгдсэн зайг том <span class="math inline">\(D\)</span> үсгээр тэмдэглэснийг анхаарна уу.</p>
+<p><strong>(б)</strong> <span class="math inline">\(G\)</span> дотор <span class="math inline">\(v\)</span> оройг зааж өгсөн гэе. <span class="math inline">\(G\)</span> доторх <span class="math inline">\(w\)</span> орой бүрийн хувьд <span class="math inline">\(T\)</span> доторх <span class="math inline">\(v\)</span>-ээс <span class="math inline">\(w\)</span> хүрэх зам нь <span class="math inline">\(G\)</span> доторх <span class="math inline">\(v\)</span>-ээс <span class="math inline">\(w\)</span> хүрэх бүх замууд дотроос хамгийн бага жинтэй байдаг бүрхэгч мод <span class="math inline">\(T\)</span>-г <span class="math inline">\(G\)</span>-ийн <span class="math inline">\(v\)</span>-ээс эхэлсэн <strong>хамгийн богино замын мод</strong> (shortest path tree) гэнэ.</p>
+</div>
+</div>
+<p>Хамгийн богино замын мод нь заавал хамгийн бага бүрхэгч мод байх албагүй. Тэдгээр нь ялгаатай байдаг графын жишээг дасгалуудад шаардсан болно.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг 10.24 дэх жинлэгдсэн графын хувьд тодоор харуулсан ирмэгүүд нь Нью-Йоркоос эхэлсэн хамгийн богино замын модыг үүсгэнэ. Улмаар салбар байршил бүрийн хувьд Нью-Йоркоос тэр байршил руу нисэх хамгийн хямд зам нь тодруулсан замыг дагана. Жишээлбэл, Нью-Йоркоос Лос-Анжелес руу шууд нисэхээс илүү Нью-Йоркоос Чикагогоор дамжин Лос-Анжелес руу нисэх нь хямд байна. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Хамгийн богино замын модны ач холбогдлыг харсан тул одоо Голландын компьютер судлаач Эдсгер В. Дейкстрагийн (1930–2002) нээсэн түүнийг олох алгоритмыг авч үзье. <strong>Дейкстрагийн алгоритм</strong>-ыг Алгоритм 10.5-д харуулсан бөгөөд түүний зөв ажиллах баталгааг энэ хэсгийн төгсгөлд өгсөн болно.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.5: Дейкстрагийн алгоритм (Dijkstra’s Algorithm)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G\)</span> нь <span class="math inline">\(n &gt; 1\)</span> оройтой жинлэгдсэн холбоост граф бөгөөд <span class="math inline">\(v\)</span> нь <span class="math inline">\(G\)</span>-ийн орой байг.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>F = {e} гэж авъя, энд e нь v-тэй инцидент боломжит хамгийн бага жинтэй гогцоо биш ирмэг.
+While |F| &lt; n - 1:
+    Нэг төгсгөл t нь F-ийн аль нэг ирмэгийн төгсгөлийн орой, нөгөө төгсгөл нь
+    тийм биш бөгөөд Dist_T(v, t) + ω(e) нь аль болох бага байх e ирмэгийг авъя.
+    F = F ∪ {e} болгоно.
+T = (V, F)-ийг буцаана.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.15
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Зураг 10.25 дахь граф нь Жишээ 10.12-т авч үзсэн орон сууцны цогцолборыг дахин төлөөлж байгаа боловч одоо ирмэгүүд нь боломжит ус дамжуулах шугамуудыг, харин жингүүд нь барилгуудын хооронд ус шахах харьцангуй хүндрэлийг илэрхийлнэ. <span class="math inline">\(v_1\)</span> оройгоор төлөөлүүлсэн орон сууцны барилгын доор том насосны станц суурилуулжээ. Иймд тэндээс бусад барилгууд руу ус шахах шаардлагатай. Улмаар барилга бүрийн усны даралтын алдагдал хамгийн бага байх систем нь хамгийн богино замын модоор илэрхийлэгдэнэ.</p>
+<div id="fig-fig-10-25" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-25-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-25.png" class="img-fluid figure-img" style="width:30.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-25-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.8: Даралтын алдагдал бүхий ус дамжуулах шугамын боломжит холболтууд
+</figcaption>
+</figure>
+</div>
+<p>Зураг 10.25 дахь графын хувьд Дейкстрагийн алгоритмыг ашиглан <span class="math inline">\(v_1\)</span> оройгоос эхэлсэн хамгийн богино замын модыг ол. Хамгийн богино замын мод дахь ирмэгүүдийн олонлог <span class="math inline">\(F\)</span> болон оройнууд <span class="math inline">\(W\)</span>-ийг алгоритмд нэмэгдсэн дарааллаар нь жагсааж, хамгийн богино замын модыг тодруул.</p>
+<p><strong>Бодолт.</strong> Хамгийн богино замын модны ирмэгийн олонлог нь: <span class="math display">\[F = \{\{v_1, v_4\}, \{v_1, v_2\}, \{v_2, v_5\}, \{v_4, v_7\}, \{v_7, v_8\}, \{v_2, v_3\}, \{v_6, v_8\}\}\]</span> болох бөгөөд доорх баруун гар талын зурагт тодоор харуулав. Оройнууд нь <span class="math inline">\(v_1, v_4, v_2, v_5, v_7, v_8, v_3, v_6\)</span> дарааллаар таарна.</p>
+<div id="fig-ex-10-15" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-10-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/ex-10-15.png" class="img-fluid figure-img" style="width:60.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.9: Дейкстрагийн алгоритмын явц ба эцсийн хамгийн богино замын мод
+</figcaption>
+</figure>
+</div>
+<p>Зүүн гар талын зураг нь эхний гурван ирмэгийг сонгосны дараах үе шатыг харуулж байна. Хоосон тойргоор <span class="math inline">\(\circ\)</span> дүрсэлсэн гурван орой нь <span class="math inline">\(3\)</span> жинтэй ирмэгүүдийн аль нэгнийх нь дагуу нэмэгдэх боломжтой нэр дэвшигч оройнууд юм. <span class="math inline">\(v_7\)</span> орой нь <span class="math inline">\(\{v_4, v_7\}\)</span> ирмэг болон <span class="math inline">\(v_4\)</span>-өөс <span class="math inline">\(v_1\)</span> хүрэх тодруулсан замын хамт <span class="math inline">\(v_1\)</span>-д хамгийн ойр орших тул дараа нь <span class="math inline">\(\{v_4, v_7\}\)</span> ирмэгтэй хамт нэмэгдэнэ.</p>
+<p>Аль ус дамжуулах шугамыг тавихаа тодорхойлохын тулд хамгийн богино замын модыг ашигласнаар бид орон сууцны барилга бүр өгөгдсөн насосны станцаас боломжит хамгийн өндөр усны даралтыг хүлээн авах баталгааг гаргаж чадна. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Уншигч Зураг 10.24 дэх графын тодруулсан хэсэг нь Дейкстрагийн алгоритмаар гарган авсан Нью-Йоркоос эхэлсэн хамгийн богино замын мод болохыг шалгаж болно. Бид одоо Дейкстрагийн алгоритм үргэлж амжилттай ажилладаг болохыг баталъя.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(G\)</span> нь жинлэгдсэн холбоост граф бөгөөд <span class="math inline">\(v\)</span> нь <span class="math inline">\(G\)</span>-ийн орой байг. Дейкстрагийн алгоритм нь <span class="math inline">\(G\)</span>-ийн <span class="math inline">\(v\)</span>-ээс эхэлсэн хамгийн богино замын модыг гарган авна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(T\)</span> мод өсөхийн хэрээр <span class="math inline">\(F\)</span> доторх ирмэгүүдийн төгсгөлийн оройнуудын олонлогийг <span class="math inline">\(W\)</span> гэе. Бид алгоритмын үе шат бүрд <span class="math inline">\(T = (W, F)\)</span> доторх <span class="math inline">\(v\)</span>-ээс <span class="math inline">\(W\)</span>-ийн оройнууд хүрэх замууд нь <span class="math inline">\(G\)</span> дотор хамгийн бага жинтэй байдгийг индукцээр батална. Мэдээж энэ нь <span class="math inline">\(W = \{v\}\)</span> үед биелнэ. Иймд алгоритм <span class="math inline">\(T\)</span> дээр <span class="math inline">\(t \in W\)</span> ба <span class="math inline">\(u \in V \setminus W\)</span> байх <span class="math inline">\(e \mapsto \{t, u\}\)</span> шинэ ирмэгийг нэмж буй тохиолдлыг авч үзье.</p>
+<p>Зөрчилд хүрэхийн тулд <span class="math inline">\(G\)</span> дотор <span class="math inline">\(v\)</span>-ээс <span class="math inline">\(u\)</span> хүрэх зай нь <span class="math inline">\(\operatorname{Dist}_T(v, t) + \omega(e)\)</span>-ээс бага гэж үзье. <span class="math inline">\(P\)</span> нь <span class="math inline">\(G\)</span> доторх <span class="math inline">\(v\)</span>-ээс <span class="math inline">\(u\)</span> хүрэх хамгийн бага жинтэй замууд дотроос <span class="math inline">\(T\)</span>-тэй хамгийн олон ерөнхий ирмэгтэй зам байг. Улмаар <span class="math inline">\(P\)</span>-д орших боловч <span class="math inline">\(T\)</span>-д байхгүй <span class="math inline">\(e'\)</span> ирмэг заавал орших ёстой бөгөөд:</p>
+<p><strong>(i)</strong> <span class="math inline">\(e' \mapsto \{t', u'\}\)</span>, <strong>(ii)</strong> <span class="math inline">\(P\)</span> ба <span class="math inline">\(T\)</span> нь <span class="math inline">\(v\)</span>-ээс <span class="math inline">\(t'\)</span> хүртэл давхцах боловч дараагийн орой дээр зөрнө, мөн <strong>(iii)</strong> <span class="math inline">\(u' \notin W\)</span> байна.</p>
+<div id="fig-thm-10-9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-thm-10-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/thm-10-9.png" class="img-fluid figure-img" style="width:32.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-thm-10-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.10: Дейкстрагийн алгоритмын баталгааны бүдүүвч
+</figcaption>
+</figure>
+</div>
+<p>Алгоритм <span class="math inline">\(e\)</span>-г сонгосон тул <span class="math inline">\(\operatorname{Dist}_T(v, t) + \omega(e) \le \operatorname{Dist}_T(v, t') + \omega(e')\)</span> байна. Өөрөөр хэлбэл, <span class="math inline">\(\operatorname{Dist}_T(v, t') + \operatorname{Dist}_T(t', t) + \omega(e) \le \operatorname{Dist}_T(v, t') + \omega(e')\)</span>. Тиймээс: <span class="math display">\[\operatorname{Dist}_T(t', t) + \omega(e) - \omega(e') \le 0. \tag{10.3}\]</span> <span class="math inline">\(P\)</span> нь <span class="math inline">\(\operatorname{Dist}_T(v, t) + \omega(e)\)</span>-ээс бага жинтэй тул бидэнд: <span class="math display">\[\operatorname{Dist}_T(v, t') + \omega(e') + \operatorname{Dist}_P(u', u) &lt; \operatorname{Dist}_T(v, t') + \operatorname{Dist}_T(t', t) + \omega(e)\]</span> байна. Эндээс: <span class="math display">\[\operatorname{Dist}_P(u', u) &lt; \operatorname{Dist}_T(t', t) + \omega(e) - \omega(e'). \tag{10.4}\]</span> <span class="math inline">\(\operatorname{Dist}_P(u', u) \ge 0\)</span> тул (10.3) ба (10.4) тэнцэтгэл бишүүд хоорондоо зөрчилдөнө. <span class="math inline">\(\square\)</span></p>
+<hr>
+</section>
+<section id="р-зүйлийн-дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">10.3-р зүйлийн дасгалууд</h2>
+<p><em>Дараагийн дасгалуудад доорх зураг дээрх графуудыг ашиглана.</em></p>
+<div id="fig-ex-10-3-1-16" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ex-10-3-1-16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/ex-10-3-1-16.png" class="img-fluid figure-img" style="width:75.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-3-1-16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;38.11: Дасгал 1–16-гийн жинлэгдсэн графууд (a)–(h)
+</figcaption>
+</figure>
+</div>
+<p><em>1-ээс 8 хүртэлх дасгалуудад орон сууцны хороололд хийн шугамын сүлжээ байгуулах шаардлагатай болжээ. Заасан граф дахь оройнууд нь хорооллын орон сууцнуудыг, ирмэг бүр нь боломжит хийн шугамын холболтыг, харин түүний жин нь тэрхүү холболтыг хийх зардлыг арван мянган доллараар илэрхийлнэ. Улмаар хийн шугамын боломжит хамгийн хямд сүлжээ нь хамгийн бага бүрхэгч модтой харгалзана.</em></p>
+<p><strong>(а)</strong> <em>Крускалын алгоритмыг ашиглан заасан графын хамгийн бага бүрхэгч модыг олж тодруул.</em> <strong>(б)</strong> <em>Орон сууцны хорооллын хийн шугамын сүлжээний боломжит хамгийн хямд зардал хэд вэ?</em></p>
+<ol type="1">
+<li>Граф (a). <span class="math inline">\(\qquad\)</span> 2. Граф (b).</li>
+<li>Граф (c). <span class="math inline">\(\qquad\)</span> 4. Граф (d).</li>
+<li>Граф (e). <span class="math inline">\(\qquad\)</span> 6. Граф (f).</li>
+<li>Граф (g). <span class="math inline">\(\qquad\)</span> 8. Граф (h).</li>
+</ol>
+<p><em>9-өөс 16 хүртэлх дасгалуудад орон сууцны цогцолборт цахилгаан сүлжээ байгуулах шаардлагатай болжээ. Заасан граф дахь оройнууд нь цогцолборын орон сууцнуудыг, ирмэг бүр нь боломжит цахилгаан шугамын холболтыг, харин түүний жин нь тэрхүү шугамыг татах зардлыг арван мянган доллараар илэрхийлнэ. Улмаар орон сууцны цогцолборын боломжит хамгийн хямд цахилгаан сүлжээ нь хамгийн бага бүрхэгч модтой харгалзана.</em></p>
+<p><strong>(а)</strong> <em>Примийн алгоритмыг ашиглан заасан графын хамгийн бага бүрхэгч модыг олж тодруул. Мөн алгоритмд нэмэгдсэн дарааллаар нь ирмэгүүдийн жинг жагсаан бич.</em> <strong>(б)</strong> <em>Орон сууцны цогцолборын цахилгаан сүлжээний боломжит хамгийн хямд зардал хэд вэ?</em></p>
+<ol start="9" type="1">
+<li><p>Граф (b). <span class="math inline">\(\qquad\)</span> 10. Граф (a).</p></li>
+<li><p>Граф (d). <span class="math inline">\(\qquad\)</span> 12. Граф (c).</p></li>
+<li><p>Граф (f). <span class="math inline">\(\qquad\)</span> 14. Граф (e).</p></li>
+<li><p>Граф (h). <span class="math inline">\(\qquad\)</span> 16. Граф (g).</p></li>
+<li><p>Хамгийн бага бүрхэгч мод нь хамгийн бага жинтэй ирмэгийг үргэлж агуулдаг уу? Хариултаа үндэслэ.</p></li>
+<li><p><span class="math inline">\(G\)</span> нь бүх жингүүд нь ялгаатай жинлэгдсэн граф байг. <span class="math inline">\(C\)</span> нь <span class="math inline">\(G\)</span> доторх цикл гэе. <span class="math inline">\(C\)</span>-ийн хамгийн их жинтэй ирмэг нь <span class="math inline">\(G\)</span>-ийн хамгийн бага бүрхэгч модонд орох боломжтой юу? Хариултаа үндэслэ.</p></li>
+<li><p><span class="math inline">\(\star\)</span> <span class="math inline">\(G\)</span> нь бүх жингүүд нь ялгаатай жинлэгдсэн граф гэж үзье. <span class="math inline">\(G\)</span> нь цор ганц хамгийн бага бүрхэгч модтой байх ёстой гэсэн өгүүлбэрийг батал эсвэл няцаа.</p></li>
+<li><p><span class="math inline">\(G\)</span> нь жинлэгдсэн граф байг ба <span class="math inline">\(G\)</span>-ийн бүх жин дээр ямар нэгэн бэхлэгдсэн тогтмол тоо нэмэх эсвэл <span class="math inline">\(G\)</span>-ийн бүх жинг ямар нэгэн бэхлэгдсэн эерэг тогтмол тоогоор үржүүлэх замаар жинлэгдсэн <span class="math inline">\(G'\)</span> графыг байгуулъя. Дэд графын хувьд мод нь <span class="math inline">\(G\)</span>-ийн хамгийн бага бүрхэгч мод байх нь <span class="math inline">\(G'\)</span>-ийн хамгийн бага бүрхэгч мод байхтай зайлшгүй бөгөөд хүрэлцээтэй болохыг харуул.</p></li>
+<li><p>Нэгэн коллеж кампус дээрээ дотоод хяналтын телевизийн сүлжээ байгуулахыг хүсжээ. Доорх хүснэгтэд кампусын хос барилгуудыг холбоход гүйцэтгэгчийн тогтоосон зардлыг харуулав:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Бартл</th>
+<th style="text-align: center;">Эванс</th>
+<th style="text-align: center;">Гилд</th>
+<th style="text-align: center;">Майлс</th>
+<th style="text-align: center;">Пайн</th>
+<th style="text-align: center;">Тафт</th>
+<th style="text-align: center;">Уоллер</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Бартл</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$5000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$3000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Эванс</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$5000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$5000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$2000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Гилд</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$3000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$5000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$2000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$9000\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Майлс</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$2000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$4000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$3500\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Пайн</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$2000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$4000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$6000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$4500\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Тафт</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$9000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$6000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Уоллер</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$3500\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$4500\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+<p>Бүх барилгад үйлчлэх телевизийн сүлжээ байгуулах хамгийн хямд зардлыг ол.</p></li>
+<li><p>Шинэ зуны зуслан барилга тус бүрээ цахилгаан эрчим хүчээр хангах шаардлагатай болжээ. Доорх хүснэгтэд энэ зуны зуслангийн хос барилгуудыг холбох зардлыг харуулав:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Хурлын танхим</th>
+<th style="text-align: center;">Цайны газар</th>
+<th style="text-align: center;">Зөвлөхүүд</th>
+<th style="text-align: center;">Дотуур байр 1</th>
+<th style="text-align: center;">Дотуур байр 2</th>
+<th style="text-align: center;">Дотуур байр 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Хурлын танхим</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$4000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$5000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$5000\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Цайны газар</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$4000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$3000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$3000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Зөвлөхүүд</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$5000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$3000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$4000\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Дотуур байр 1</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$3000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$2000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$3000\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Дотуур байр 2</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$4000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$2000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$2000\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Дотуур байр 3</strong></td>
+<td style="text-align: center;"><span class="math inline">\(\$5000\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(\$3000\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(\$2000\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+<p>Зуслангийн бүх барилгыг цахилгаанаар хангах хамгийн хямд зардлыг ол.</p></li>
+<li><p>Жинлэгдсэн холбоост графын ирмэгүүд эрэмбэлэгдсэн бөгөөд жин тэнцсэн үед бага дугаартай ирмэгийг сонгодог бол Крускалын алгоритм болон Примийн алгоритм хоёулаа ижил мод гарган авна гэдгийг батал.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Жинлэгдсэн холбоост <span class="math inline">\(G = (V, E)\)</span> графын дурын хамгийн бага бүрхэгч мод <span class="math inline">\(T\)</span> өгөгдсөн үед Примийн алгоритм <span class="math inline">\(T\)</span>-г гарган авахаар <span class="math inline">\(E\)</span>-ийн ямар нэгэн эрэмбэ оршино гэдгийг батал.</p></li>
+</ol>
+<p><em>25-аас 32 хүртэлх дасгалуудад шинэ аж үйлдвэрийн паркт ус дамжуулах шугамын сүлжээ байгуулах шаардлагатай болжээ. Заасан граф дахь оройнууд нь парк дахь бизнесийн талбайнуудыг, ирмэг бүр нь боломжит ус дамжуулах шугамын холболтыг, харин түүний жин нь төгсгөлийн оройнуудын хооронд ус шахах үеийн усны даралтын алдагдлыг (квадрат инч тутамд фунтээр) илэрхийлнэ. Заасан орой нь паркт үйлчлэхээр барьсан усны цамхгийн байршлыг төлөөлнө. Улмаар заасан усны цамхгийн байршлаас эхэлсэн хамгийн богино замын мод нь бизнесийн талбай тус бүрийн усны даралтын боломжит хамгийн бага алдагдалтай сүлжээг илэрхийлнэ.</em></p>
+<p><strong>(а)</strong> <em>Дейкстрагийн алгоритмыг ашиглан заасан граф болон оройн хувьд хамгийн богино замын модыг олж тодруул.</em> <strong>(б)</strong> <em>Аж үйлдвэрийн парк дахь бизнесийн талбайд учрах усны даралтын хамгийн их алдагдал хэд вэ?</em></p>
+<ol start="25" type="1">
+<li><p>Граф (a), <span class="math inline">\(v\)</span> оройгоос. <span class="math inline">\(\qquad\)</span> 26. Граф (b), <span class="math inline">\(v_1\)</span> оройгоос.</p></li>
+<li><p>Граф (c), <span class="math inline">\(v\)</span> оройгоос. <span class="math inline">\(\qquad\)</span> 28. Граф (d), <span class="math inline">\(v\)</span> оройгоос.</p></li>
+<li><p>Граф (e), <span class="math inline">\(v_1\)</span> оройгоос. <span class="math inline">\(\qquad\)</span> 30. Граф (f), <span class="math inline">\(v_1\)</span> оройгоос.</p></li>
+<li><p>Граф (g), <span class="math inline">\(v\)</span> оройгоос. <span class="math inline">\(\qquad\)</span> 32. Граф (h), <span class="math inline">\(v\)</span> оройгоос.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Дараах өгүүлбэрийг батал эсвэл няцаа: <em>Хэрэв дурын графын бүх ирмэгт <span class="math inline">\(1\)</span> жин оноосон бол Дейкстрагийн алгоритм үргэлж гүнээр хайх модыг гарган авна.</em></p></li>
+<li><p><span class="math inline">\(\star\)</span> Дараах өгүүлбэрийг батал эсвэл няцаа: <em>Хэрэв дурын графын бүх ирмэгт <span class="math inline">\(1\)</span> жин оноосон бол Дейкстрагийн алгоритм үргэлж өргөнөөр хайх модыг гарган авна.</em></p></li>
+<li><p><span class="math inline">\(v\)</span> оройгоос эхэлсэн хамгийн богино замын мод нь хамгийн бага бүрхэгч мод биш байх жинлэгдсэн <span class="math inline">\(G\)</span> граф болон сонгосон <span class="math inline">\(v\)</span> оройн жишээ гарга.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Дейкстрагийн алгоритмыг хамгийн урт замын мод олохоор өөрчилж болох уу? Тайлбарла.</p></li>
+<li><p>Гогцоогүй графт Дейкстрагийн алгоритм хамгийн бага жинтэй ирмэгийг үргэлж сонгодог уу? Хариултаа үндэслэ.</p></li>
+<li><p>Дейкстрагийн алгоритм хамгийн их жинтэй ирмэгийг хэзээ нэгэн цагт сонгох уу? Хариултаа үндэслэ.</p></li>
+<li><p><span class="math inline">\(G\)</span> нь жинлэгдсэн граф байг ба <span class="math inline">\(G\)</span>-ийн бүх жинг ямар нэгэн бэхлэгдсэн эерэг тогтмол тоогоор үржүүлэх замаар жинлэгдсэн <span class="math inline">\(G'\)</span> графыг байгуулъя. <span class="math inline">\(v\)</span> нь дурын орой байг. Дэд графын хувьд мод нь <span class="math inline">\(G\)</span>-ийн хувьд хамгийн богино замын мод байх нь <span class="math inline">\(G'\)</span>-ийн хувьд хамгийн богино замын мод байхтай зайлшгүй бөгөөд хүрэлцээтэй гэсэн өгүүлбэрийг батал эсвэл няцаа.</p></li>
+<li><p><span class="math inline">\(G\)</span> нь жинлэгдсэн граф байг ба <span class="math inline">\(G\)</span>-ийн бүх жин дээр ямар нэгэн бэхлэгдсэн эерэг тогтмол тоо нэмэх замаар жинлэгдсэн <span class="math inline">\(G'\)</span> графыг байгуулъя. <span class="math inline">\(v\)</span> нь дурын орой байг. Дэд графын хувьд мод нь <span class="math inline">\(G\)</span>-ийн хувьд хамгийн богино замын мод байх нь <span class="math inline">\(G'\)</span>-ийн хувьд хамгийн богино замын мод байхтай зайлшгүй бөгөөд хүрэлцээтэй гэсэн өгүүлбэрийг батал эсвэл няцаа.</p></li>
+<li><p>Алслагдсан хотод үйлчилдэг гал унтраах анги хотын айл бүр рүү очих хариу өгөх хугацааг хамгийн бага байлгах шаардлагатай болжээ. Айлуудын олонх нь чанар муутай шороон зам дээр байрладаг тул галын дарга хотын тодорхой гол цэгүүд рүү очиход ашиглах маршрутыг урьдчилан төлөвлөхийг хүсжээ. Дарга зам бүрээр галын машинаар явж, гол цэгүүдийн хооронд зорчиход зарцуулах хугацааг (минутаар) хэмжиж, дараах хүснэгтэд бүртгэжээ:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Станц</th>
+<th style="text-align: center;">Адамс</th>
+<th style="text-align: center;">Жонсон</th>
+<th style="text-align: center;">Кеннеди</th>
+<th style="text-align: center;">Линкольн</th>
+<th style="text-align: center;">Никсон</th>
+<th style="text-align: center;">Полк</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Станц</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(8\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(7\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Адамс</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(7\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Жонсон</strong></td>
+<td style="text-align: center;"><span class="math inline">\(8\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Кеннеди</strong></td>
+<td style="text-align: center;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(7\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(10\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Линкольн</strong></td>
+<td style="text-align: center;"><span class="math inline">\(7\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(10\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Никсон</strong></td>
+<td style="text-align: center;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(6\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(12\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Полк</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(12\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+<p>Гал унтраах станцаас хотын гол цэг тус бүр рүү хүрэх боломжит хамгийн бага хариу өгөх хугацааг ол.</p></li>
+<li><p>Кампусын пиццаны газар коллежийн дотуур байр тус бүр рүү хамгийн хурдан хүргэлт хийдэг гэж мэдэгджээ. Хүргэлтийн хугацааг багасгахын тулд дотуур байр тус бүр рүү хүрэх хамгийн богино маршрутыг урьдчилан төлөвлөдөг. Доорх хүснэгтэд кампусын байршлуудын хооронд зорчих хугацааг минутаар жагсаав:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;">Дэлгүүр</th>
+<th style="text-align: center;">Колумбиа</th>
+<th style="text-align: center;">Элвелл</th>
+<th style="text-align: center;">Лайкоминг</th>
+<th style="text-align: center;">Смит</th>
+<th style="text-align: center;">Уэллс</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Дэлгүүр</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Колумбиа</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(4\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Элвелл</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Лайкоминг</strong></td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(5\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Смит</strong></td>
+<td style="text-align: center;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(3\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Уэллс</strong></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(4\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(1\)</span></td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;"><span class="math inline">\(2\)</span></td>
+<td style="text-align: center;">—</td>
+</tr>
+</tbody>
+</table>
+<p>Пиццаны газраас кампусын дотуур байр тус бүр рүү хүргэх боломжит хамгийн бага хугацааг ол.</p></li>
+<li><p>Харгалзах хоёр хамгийн богино замын мод нь дэд графын хувьд ялгаатай байх <span class="math inline">\(G\)</span> граф болон <span class="math inline">\(v_1, v_2\)</span> хоёр оройн жишээ гарга.</p></li>
+<li><p>Өгөгдсөн <span class="math inline">\(G\)</span> граф болон <span class="math inline">\(v\)</span> оройн хувьд хамгийн богино замын мод үргэлж цор ганц байх уу? Хэрэв жингүүд нь ялгаатай бол яах вэ? Хариултаа үндэслэ.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Өгөгдсөн холбоост <span class="math inline">\(G = (V, E)\)</span> графын хамгийн бага бүрхэгч мод гарган авах боломжит алгоритмыг доор харуулав:</p>
+<pre class="text"><code>F = E гэж авъя.
+While (V, F) дэд граф цикл агуулж байх хугацаанд:
+    Цикл доторх хамгийн их жинтэй ирмэгийг e гэе.
+    F-ээс e-г устгана.
+T = (V, F)-ийг буцаана.</code></pre>
+<p><span class="math inline">\(T\)</span> нь үргэлж хамгийн бага бүрхэгч мод байх уу? Хариултаа үндэслэ.</p></li>
+<li><p><span class="math inline">\(\star\)</span> Өгөгдсөн холбоост <span class="math inline">\(G = (V, E)\)</span> графын хамгийн богино замын мод гарган авах боломжит алгоритмыг доор харуулав:</p>
+<pre class="text"><code>F = ∅ гэж авъя.
+v нь G-ийн нэг орой байг.
+S = {v} гэж авъя.
+While V \ S дотор u орой орших хугацаанд:
+    v-ээс u хүрэх хамгийн богино P замыг ол.
+    P-ийн ирмэгүүдийг F-д нэм.
+    P-ийн оройнуудыг S-д нэм.
+T = (V, F)-ийг буцаана.</code></pre>
+<p><span class="math inline">\(T\)</span> нь үргэлж хамгийн богино замын мод байх уу? Хариултаа үндэслэ.</p></li>
+<li><p>Нэгэн ангийн армийн командлагч цахим холбоо найдваргүй тул хээрийн ангиуд руугаа элчээр мэдээ илгээх шаардлагатай болжээ. Хэрэв тэр хос анги бүрийн хооронд зорчих хугацааг мэдэж байгаа бөгөөд мэдээ илгээх боломжит хамгийн хурдан маршрутуудыг тодорхойлохыг хүсэж байвал ямар төрлийн мод тохирох вэ — хамгийн бага бүрхэгч мод уу эсвэл хамгийн богино замын мод уу? Тайлбарла.</p></li>
+<li><p>Нэгэн фермер саравчиндаа эрчим хүчний эх үүсвэртэй бөгөөд фермийнхээ хэд хэдэн байршилд цахилгаан хүргэх шаардлагатай болжээ. Тэрээр хос байршил бүрийг холбоход шаардагдах кабелийн хэмжээг тодорхойлсон бөгөөд бүх байршлыг цахилгаанаар хангахын тулд боломжит хамгийн бага хэмжээний кабель ашиглахыг хүсэж байна. Ямар төрлийн мод тохирох вэ — хамгийн бага бүрхэгч мод уу эсвэл хамгийн богино замын мод уу? Тайлбарла.</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-2.html" class="pagination-link" aria-label="Хайлтын мод (Search Trees)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Хайлтын мод (Search Trees)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-4.html" class="pagination-link" aria-label="10.4 Алгоритмын шинжилгээ (1-р хэсэг)">
+        <span class="nav-page-text"><span class="chapter-title">10.4 Алгоритмын шинжилгээ (1-р хэсэг)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

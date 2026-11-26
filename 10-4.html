@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10.4 Алгоритмын шинжилгээ (1-р хэсэг) – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10-5.html" rel="next">
+<link href="./10-3.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">10.html</a></li><li class="breadcrumb-item"><a href="./10-4.html"><span class="chapter-title">10.4 Алгоритмын шинжилгээ (1-р хэсэг)</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">3. Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: 3. Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1. Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2. Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3. Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4. Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5. Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6. Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">9. Графын шинж чанарууд</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: 9. Графын шинж чанарууд">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.1 Холбоост чанар (Connectivity)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.2 Эйлерийн цикл (Euler Circuits)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.3 Гамильтоны цикл (Hamiltonian Cycles)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.4 Хавтгай граф (Planar Graphs)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.5 Өнгөний тоо (Chromatic Number)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">10.html</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section: 10.html">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Мод ба Алгоритмууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Хайлтын мод (Search Trees)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Жинлэгдсэн мод (Weighted Trees)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-4.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">10.4 Алгоритмын шинжилгээ (1-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10.5 Алгоритмын шинжилгээ (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#хайлтын-алгоритмууд-search-algorithms" id="toc-хайлтын-алгоритмууд-search-algorithms" class="nav-link active" data-scroll-target="#хайлтын-алгоритмууд-search-algorithms">Хайлтын алгоритмууд (Search Algorithms)</a></li>
+  <li><a href="#алгоритмын-нарийн-төвөгтэй-байдал-complexity-of-algorithms" id="toc-алгоритмын-нарийн-төвөгтэй-байдал-complexity-of-algorithms" class="nav-link" data-scroll-target="#алгоритмын-нарийн-төвөгтэй-байдал-complexity-of-algorithms">Алгоритмын нарийн төвөгтэй байдал (Complexity of Algorithms)</a></li>
+  <li><a href="#функцийн-өсөлт-growth-of-functions" id="toc-функцийн-өсөлт-growth-of-functions" class="nav-link" data-scroll-target="#функцийн-өсөлт-growth-of-functions">Функцийн өсөлт (Growth of Functions)</a></li>
+  <li><a href="#алгоритмын-эрэмбэ-order-of-algorithms" id="toc-алгоритмын-эрэмбэ-order-of-algorithms" class="nav-link" data-scroll-target="#алгоритмын-эрэмбэ-order-of-algorithms">Алгоритмын эрэмбэ (Order of Algorithms)</a></li>
+  <li><a href="#qmd-ийн-төгсгөл-өмнөх-хэсгийн-төгсгөлөөс-шууд-залгана" id="toc-qmd-ийн-төгсгөл-өмнөх-хэсгийн-төгсгөлөөс-шууд-залгана" class="nav-link" data-scroll-target="#qmd-ийн-төгсгөл-өмнөх-хэсгийн-төгсгөлөөс-шууд-залгана">1. <code>10-4.qmd</code>-ийн төгсгөл (Өмнөх хэсгийн төгсгөлөөс шууд залгана)</a></li>
+  <li><a href="#р-зүйлийн-дасгалууд" id="toc-р-зүйлийн-дасгалууд" class="nav-link" data-scroll-target="#р-зүйлийн-дасгалууд">10.4-р зүйлийн дасгалууд</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">10.html</a></li><li class="breadcrumb-item"><a href="./10-4.html"><span class="chapter-title">10.4 Алгоритмын шинжилгээ (1-р хэсэг)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">10.4 Алгоритмын шинжилгээ (1-р хэсэг)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Өмнөх хоёр хэсэгт бид мод олох төрөл бүрийн алгоритмуудыг авч үзсэн[cite: 357]. Тодорхой нэг алгоритмын үнэ цэнийг бүрэн үнэлэхийн тулд түүний үр ашгийг, ялангуяа ижил даалгаврыг гүйцэтгэдэг бусад алгоритмуудтай харьцуулан ойлгох шаардлагатай[cite: 357]. Мод олох алгоритмуудын үр ашгийн нарийвчилсан судалгаа нь бидний энэ номд авч үзэх хүрээнээс илүү нарийн тул сонирхсон уншигч <code>[1]</code> эсвэл <code>[5]</code>-аас үзэж болно[cite: 357]. Үүний оронд бидний зорилго бол алгоритмын үр ашигт дүн шинжилгээ хийх суурь ойлголт өгөх явдал юм[cite: 357]. Улмаар бид үүнд сайн суурь болох зарим үндсэн жишээнүүдийг судлах болно[cite: 357]. Энэ хэсэгт бид массиваас утга хайх алгоритмууд дээр анхаарлаа төвлөрүүлж судалгаагаа эхлүүлнэ[cite: 357]. Дараагийн хэсэгт массивыг эрэмбэлэх алгоритмуудыг авч үзнэ[cite: 357].</p>
+<section id="хайлтын-алгоритмууд-search-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="хайлтын-алгоритмууд-search-algorithms">Хайлтын алгоритмууд (Search Algorithms)</h3>
+<p>Программчлалын нийтлэг хэрэгцээ бол өгөгдлийн сан гэх мэт өгөгдлийн цуглуулгаас тодорхой нэг зүйлийг хайх явдал юм[cite: 357]. Магадгүй тодорхой ДНХ-ийн шинж тэмдэгтэй сэжигтнийг хайж байгаа эсвэл дэлгүүр тодорхой бараа агуулахад байгаа эсэхийг мэдэхийг хүсэж байж болно[cite: 357]. Хэлэлцүүлгээ хялбарчлахын тулд хайж буй өгөгдлүүд массивт тоо хэлбэрээр хадгалагдсан гэж үзье[cite: 357].</p>
+<p>Бидний авч үзэх хоёр алгоритмын эхнийх нь маш жам ёсны арга барилыг ашигладаг[cite: 357]. Энэ нь массиваар өгөгдсөн эрэмбийн дагуу гүйж, явах замдаа элемент бүрийг шалгадаг[cite: 357]. Үүнийг <strong>Дараалсан хайлт</strong> (Sequential Search) гэж нэрлэдэг бөгөөд Алгоритм 10.6-д харуулав[cite: 357].</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.6: Дараалсан хайлт (Sequential Search)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n\)</span> урттай <span class="math inline">\(A\)</span> массиваас индексийг нь хайж буй бодит тоо <span class="math inline">\(x\)</span> байг[cite: 358]. <span class="math inline">\(x\)</span>-ийн индексийг <code>location</code> хэмээх хувьсагчид буцаана[cite: 358]. Хэрэв <span class="math inline">\(x\)</span> нь <span class="math inline">\(A\)</span> дотор байхгүй бол алгоритм <code>location = 0</code> гэж буцаана[cite: 358].</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>location = 0 гэж авъя.
+i = 1 гэж авъя.
+While location = 0 ба i ≤ n:
+    Хэрэв A[i] = x бол
+        location = i болгоно.
+    Эсрэг тохиолдолд
+        i = i + 1 болгоно.
+location-ийг буцаана.
+</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.16
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(x = 4\)</span>, <span class="math inline">\(A = [6, 1, 4, 7, 3]\)</span>, ба <span class="math inline">\(n = 5\)</span> өгөгдсөн үед Дараалсан хайлт нь дараах хүснэгтэд жагсаасан утгуудаар гүйж:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(i\)</span></th>
+<th><code>location</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><code>location = 3</code> гэж буцаана. Өөрөөр хэлбэл, <span class="math inline">\(4 = A[3]\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Бидний хоёр дахь хайлтын алгоритм нь илүү нарийн арга барилыг ашигладаг бөгөөд массив дахь элементүүд үл буурах эрэмбээр өгөгдсөн байхыг шаарддаг. (Эрэмбэлэх алгоритмуудыг 10.5-р хэсэгт судална.) Маш энгийнээр хэлбэл, бид массивын авч үзэж буй хэсгийг хоёр хэсэгт хувааж, зөвхөн хүссэн утгыг агуулж болзошгүй хэсэг дээр хайлтаа үргэлжлүүлэх үйл явцыг давтдаг. Энэ алгоритмыг <strong>Хоёртын хайлт</strong> (Binary Search) гэж нэрлэдэг бөгөөд Алгоритм 10.7-д харуулав.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.7: Хоёртын хайлт (Binary Search)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n\)</span> урттай <em>эрэмбэлэгдсэн</em> <span class="math inline">\(A\)</span> массиваас индексийг нь хайж буй бодит тоо <span class="math inline">\(x\)</span> байг. <span class="math inline">\(x\)</span>-ийн индексийг <code>location</code> хэмээх хувьсагчид буцаана. Хэрэв <span class="math inline">\(x\)</span> нь <span class="math inline">\(A\)</span> дотор байхгүй бол алгоритм <code>location = 0</code> гэж буцаана. <code>low</code> ба <code>high</code> хувьсагчид нь бидний авч үзэж буй <span class="math inline">\(A\)</span>-ийн хэсгийн харгалзан эхний болон сүүлийн элементүүдийн индексийг хадгална.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>location = 0 гэж авъя.
+low = 1 гэж авъя.
+high = n гэж авъя.
+While low &lt; high:
+    mid = ⌊(low + high) / 2⌋ гэж авъя.
+    Хэрэв A[mid] &lt; x бол
+        low = mid + 1 болгоно.
+    Эсрэг тохиолдолд
+        high = mid болгоно.
+Хэрэв A[low] = x бол
+    location = low болгоно.
+location-ийг буцаана.
+</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.17
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(x = 3\)</span>, <span class="math inline">\(A = [0, 2, 2, 3, 4, 6, 6, 7, 8, 8]\)</span>, ба <span class="math inline">\(n = 10\)</span> өгөгдсөн үед Хоёртын хайлт нь дараах үе шатуудаар дамжина:</p>
+<pre class="text"><code>l=1                 m=5                 h=10
+ 0    2    2    3    4    6    6    7    8    8
+
+l=1       m=3       h=5
+ 0    2    2    3    4
+
+              l=m=4 h=5
+               3    4
+
+              l=h=4
+               3
+</code></pre>
+<p>болон <code>location = 4</code> гэж буцаана. Өөрөөр хэлбэл, <span class="math inline">\(3 = A[4]\)</span>. Бидний үзүүлэнд <span class="math inline">\(l, m\)</span>, ба <span class="math inline">\(h\)</span> үсгүүдийг харгалзан <code>low</code>, <code>mid</code>, ба <code>high</code> хувьсагчдын утга болгон ашигласан. Мөн мөр бүрд бид массивын зөвхөн тухайн агшинд авч үзэж буй <code>low</code> индексээс <code>high</code> индекс хүртэлх хэсгийг харууллаа. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+</section>
+<section id="алгоритмын-нарийн-төвөгтэй-байдал-complexity-of-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="алгоритмын-нарийн-төвөгтэй-байдал-complexity-of-algorithms">Алгоритмын нарийн төвөгтэй байдал (Complexity of Algorithms)</h3>
+<p><span class="math inline">\(n\)</span> хэмжээтэй эрэмбэлэгдсэн массив өгөгдсөн үед тодорхой нэг утгын байрлалыг тодорхойлоход Дараалсан хайлт болон Хоёртын хайлтын аль алиныг нь ашиглаж болно. Хэдийгээр Хоёртын хайлт нь хэрэгжүүлэхэд илүү төвөгтэй мэт санагдаж болох ч энэ хоёрын илүү үр ашигтай нь юм. Энэ батламжийг нарийвчлалтай болгохын тулд бид үр ашгийн хэмжүүрээ тодорхойлох шаардлагатай.</p>
+<p>Энэ номд бид зөвхөн алгоритмын <strong>хугацааны нарийн төвөгтэй байдал</strong> (time complexity)-ыг авч үзнэ. Өөрөөр хэлбэл, алгоритм ажиллахад зарцуулах хугацааны уртыг сонирхож байна. Алгоритмыг хэрэгжүүлж буй программын ашиглах санах ойн хэмжээг сонирхох <strong>орон зайн нарийн төвөгтэй байдал</strong> (space complexity)-ын ойлголтыг мөн авч үзэж болох юм. Гэсэн хэдий ч бид зөвхөн хугацааг л авч үзнэ.</p>
+<p>Ажиллах хугацаа нь компьютер бүрд харилцан адилгүй байдаг тул бид үнэндээ алгоритмыг ажиллуулахад шаардагдах үйлдлийн тоон дээр анхаарлаа төвлөрүүлдэг. Улмаар тодорхой нэг хам сэдвийн хүрээнд яг ямар үйлдлүүдийг тоолохыг зааж өгөх ёстой. Авч үзэж болох үйлдлүүдэд нэмэх (<span class="math inline">\(+\)</span>), үржүүлэх (<span class="math inline">\(\cdot\)</span>) зэрэг арифметик үйлдлүүд; <span class="math inline">\(&lt;, &gt;\)</span>, ба <span class="math inline">\(=\)</span> зэрэг харьцуулалтууд болон бусад үйлдлүүд багтана.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 10.7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Алгоритмын <strong>хамгийн муу тохиолдлын нарийн төвөгтэй байдал</strong> (worst-case complexity) гэдэг нь алгоритмд өгөх оролтын хэмжээ <span class="math inline">\(n\)</span>-ээс хамаарах <span class="math inline">\(f(n)\)</span> функц юм. <span class="math inline">\(n\)</span> бүрийн хувьд <span class="math inline">\(f(n)\)</span>-ийн утга нь <span class="math inline">\(n\)</span> хэмжээтэй оролт дээр алгоритмыг ажиллуулахад гүйцэтгэгдэх үйлдлийн хамгийн олон тоо байна.</p>
+</div>
+</div>
+<p>Алгоритмын хувьд авч үзэж болох өөр нэг төрлийн нарийн төвөгтэй байдал бол <strong>дундаж тохиолдлын нарийн төвөгтэй байдал</strong> (average-case complexity) юм. Энэ нь <span class="math inline">\(n\)</span> бүрийн хувьд <span class="math inline">\(n\)</span> хэмжээтэй боломжит бүх оролтыг авч үзэхэд гүйцэтгэгдэх үйлдлийн дундаж тоогоор тодорхойлогдоно. Энэ хэмжүүр нь санамсаргүй байдлаар сонгосон оролтын хувьд хүлээгдэж буй ажиллах хугацааны талаар илүү сайн ойлголт өгч чадна. Гэсэн хэдий ч үүнийг тооцоолоход ерөнхийдөө төвөгтэй байдаг тул бид анхаарлаа хамгийн муу тохиолдлын шинжилгээнд төвлөрүүлнэ. Ингэснээр бид боломжит хамгийн урт ажиллах хугацааны талаар ойлголттой болно.</p>
+<p>Хайлтын алгоритмуудын хувьд бид оролтын хэмжээг хайлт хийж буй массивын урт <span class="math inline">\(n\)</span>-ээр авна. Мөн бидний авч үзэх цорын ганц үйлдэл бол массивын элементийг өөр нэг утгатай (магадгүй массивын өөр нэг элементтэй) харьцуулах үйлдэл юм. Хайлтын алгоритм ажиллахад зарцуулах хугацаа нь харьцуулалтын тоотой шууд пропорционал байдгийг харуулж болох тул энэ нь үндэслэлтэй юм.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.18
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Дараалсан хайлтын хамгийн муу тохиолдлын нарийн төвөгтэй байдал нь <span class="math inline">\(n\)</span> байна.</p>
+<p><strong>Баталгаа.</strong> <code>while</code> давталтаар гүйх бүрд <span class="math inline">\(A[i] = x\)</span> харьцуулалт нэг удаа хийгдэнэ. Хэрэв хүссэн <span class="math inline">\(x\)</span> утга <span class="math inline">\(k\)</span>-р байрлалд байгаа бол гүйцэтгэгдэх харьцуулалтын тоо нь:</p>
+<p><span class="math display">\[\underbrace{1 + 1 + \dots + 1}_{k \text{ удаа}} = k \le n\]</span></p>
+<p>байна. Мэдээж хамгийн муу тохиолдол нь <span class="math inline">\(k = n\)</span> үед гарна. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.19
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Хоёртын хайлтын хамгийн муу тохиолдлын нарийн төвөгтэй байдал нь <span class="math inline">\(1 + \lceil \log_2 n \rceil\)</span> байна.</p>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(n \ge 1\)</span> бүрийн хувьд <span class="math inline">\(n\)</span> урттай массив дээр Хоёртын хайлт хийхэд шаардагдах харьцуулалтын хамгийн олон тоог <span class="math inline">\(c_n\)</span> гэе (хамгийн сүүлийн <span class="math inline">\(A[\text{low}] = x\)</span> харьцуулалтыг оруулан тооцно). Тэгвэл <span class="math inline">\(c_1 = 1\)</span> байна. <code>while</code> давталт дотор хамгийн муу тохиолдолд бид <span class="math inline">\(k = \text{high} - \text{low} + 1\)</span> урттай <span class="math inline">\(A\)</span>-ийн хэсгийг авч үзэхээс <span class="math inline">\(\left\lceil \frac{k}{2} \right\rceil\)</span> урттай хэсгийг авч үзэх рүү шилжинэ. Иймд <span class="math inline">\(\forall n \ge 2\)</span>, <span class="math inline">\(c_n = 1 + c_{\lceil \frac{n}{2} \rceil}\)</span> байна. Эндээс бид <span class="math inline">\(\forall n \ge 1\)</span>, <span class="math inline">\(c_n = 1 + \lceil \log_2 n \rceil\)</span> гэдгийг гүйцэд индукцээр батална.</p>
+<p>Суурь алхам хялбар тул бид шууд индукцийн алхам руу шилжье. <span class="math inline">\(k \ge 1\)</span> бөгөөд <span class="math inline">\(1 \le i \le k\)</span> бүрийн хувьд <span class="math inline">\(c_i = 1 + \lceil \log_2 i \rceil\)</span> биелнэ гэж үзье. Тэгвэл:</p>
+<p><span class="math display">\[\begin{aligned}
+c_{k+1} &amp;= 1 + c_{\lceil \frac{k+1}{2} \rceil} \\
+        &amp;= 1 + 1 + \left\lceil \log_2 \left\lceil \frac{k + 1}{2} \right\rceil \right\rceil \\
+        &amp;= \begin{cases} 2 + \left\lceil \log_2 \left(\frac{k+2}{2}\right) \right\rceil = 1 + \lceil \log_2(k + 2) \rceil &amp; \text{хэрэв } k \text{ тэгш бол,} \\ 2 + \left\lceil \log_2 \left(\frac{k+1}{2}\right) \right\rceil = 1 + \lceil \log_2(k + 1) \rceil &amp; \text{хэрэв } k \text{ сондгой бол} \end{cases} \\
+        &amp;= 1 + \lceil \log_2(k + 1) \rceil
+\end{aligned}\]</span></p>
+<p>болохыг ажиглая. Хамгийн сүүлийн тэнцэтгэл нь Дасгал 9-өөс мөрдөн гарна. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<p>Дараалсан хайлт болон Хоёртын хайлтын харьцангуй үр ашгийг тэдгээрийн хамгийн муу тохиолдлын нарийн төвөгтэй байдал болох харгалзан <span class="math inline">\(n\)</span> ба <span class="math inline">\(1 + \lceil \log_2 n \rceil\)</span>-ийг харьцуулах замаар жишиж үзье. Бид утгуудын хүснэгтээс:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(n\)</span></th>
+<th><span class="math inline">\(1 + \lceil \log_2 n \rceil\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(2\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10\)</span></td>
+<td><span class="math inline">\(5\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(100\)</span></td>
+<td><span class="math inline">\(8\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(10^6\)</span></td>
+<td><span class="math inline">\(21\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>болон Зураг 10.26 дахь графикаас (зургийг хялбарчлах үүднээс дээд бүхэл функцийг орхисон) эцсийн дүндээ <span class="math inline">\(n\)</span> нь <span class="math inline">\(1 + \lceil \log_2 n \rceil\)</span>-ээс илүү хурдан томорч байгааг харж чадна. Энэ нь биднийг Хоёртын хайлт нь Дараалсан хайлтаас илүү үр ашигтай гэж дүгнэхэд хүргэдэг. Гэсэн хэдий ч бид эхлээд нэг функц нөгөөгөөсөө илүү хурдан томрох ойлголтыг тодруулах хэрэгтэй.</p>
+<p>{#fig-fig-10-26 width=35%}</p>
+</section>
+<section id="функцийн-өсөлт-growth-of-functions" class="level3">
+<h3 class="anchored" data-anchor-id="функцийн-өсөлт-growth-of-functions">Функцийн өсөлт (Growth of Functions)</h3>
+<p>Зураг 10.26 дахь график нь <span class="math inline">\(y = x\)</span> функц <span class="math inline">\(y = 1 + \log_2(x)\)</span> функцээс илүү хурдан өсөж байгааг харуулж байна. Энэ өгүүлбэрийг <strong>их-<span class="math inline">\(O\)</span> тэмдэглэгээ</strong> (big-<span class="math inline">\(O\)</span> notation)-г оруулж ирснээр нарийвчлалтай болгоно.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 10.8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Бодит <span class="math inline">\(g(x)\)</span> функц өгөгдсөн үед <span class="math inline">\(O(g(x))\)</span> гэж тэмдэглэгдэх <strong><span class="math inline">\(g(x)\)</span>-ийн их-<span class="math inline">\(O\)</span></strong> (big-<span class="math inline">\(O\)</span> of <span class="math inline">\(g(x)\)</span>) гэдэг нь:</p>
+<p><span class="math display">\[\forall x &gt; d, \quad |f(x)| \le C|g(x)|\]</span></p>
+<p>нөхцөлийг хангах эерэг тогтмолууд <span class="math inline">\(C\)</span> ба <span class="math inline">\(d\)</span> орших бодит <span class="math inline">\(f(x)\)</span> функцүүдийн олонлогийг хэлнэ. Ямар нэгэн бэхлэгдсэн тогтмол <span class="math inline">\(d\)</span>-ээс их бүх <span class="math inline">\(x\)</span>-ийн хувьд <span class="math inline">\(|f(x)| \le C|g(x)|\)</span> тэнцэтгэл биш биелдэг гэдгийг <em>том <span class="math inline">\(x\)</span>-ийн хувьд</em> буюу <em>эцсийн дүндээ</em> биелнэ гэж хэлж болно.</p>
+</div>
+</div>
+<p>Зураг 10.26 нь <span class="math inline">\(1 + \log_2(x) \in O(x)\)</span> гэдгийг (<span class="math inline">\(C = 1\)</span> ба <span class="math inline">\(d = 2\)</span> авбал) харуулж байна. Ерөнхий тохиолдолд, <span class="math inline">\(f(x) \in O(g(x))\)</span> гэдэг батламж нь “<span class="math inline">\(f(x)\)</span> нь <span class="math inline">\(g(x)\)</span>-ээс хурдан өсөхгүй” буюу “<span class="math inline">\(g(x)\)</span> нь хамгийн багадаа <span class="math inline">\(f(x)\)</span>-тэй адил хурдан өснө” гэсэн өгүүлбэрийн нарийн утга юм. Эквивалентээр, бид <span class="math inline">\(f(x)\)</span>-ийн өсөлтийн хурд нь <span class="math inline">\(g(x)\)</span>-ийн өсөлтийн хурднаас хурдан биш буюу <span class="math inline">\(g(x)\)</span>-ийн өсөлтийн хурд нь <span class="math inline">\(f(x)\)</span>-ийн өсөлтийн хурднаас удаан биш гэж хэлнэ.</p>
+<p><span class="math inline">\(O(g(x))\)</span> нь олонлог тул дэд олонлогийн <span class="math inline">\(\subseteq\)</span> харьцаа нь хоёр функцийн өсөлтийн хурдыг харьцуулах өөр нэгэн тохиромжтой аргыг олгодог. Энэ нь баталгааг нь дасгалд үлдээсэн дараах леммд тусгагдсан болно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Лемм 10.10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> нь бодит функцүүд байг. Тэгвэл:</p>
+<p><span class="math display">\[f(x) \in O(g(x)) \quad \text{байх нь} \quad O(f(x)) \subseteq O(g(x)) \quad \text{байхтай зайлшгүй бөгөөд хүрэлцээтэй.}\]</span></p>
+</div>
+</div>
+<p>Хүлээгдэж байсанчлан <span class="math inline">\(x\)</span>-ийн илүү өндөр зэрэг нь бага зэргээсээ хамгийн багадаа адил хурдан өсдөг.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Лемм 10.11
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(r_1 \le r_2\)</span> байх <span class="math inline">\(r_1, r_2 \in \mathbb{Q}\)</span> байг. Тэгвэл:</p>
+<p><span class="math display">\[\forall x &gt; 1, \quad x^{r_1} \le x^{r_2}.\]</span></p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(b &gt; 0\)</span> байх ямар нэгэн <span class="math inline">\(m_1, m_2, b \in \mathbb{Z}\)</span> тоонуудын хувьд <span class="math inline">\(r_1 = \frac{m_1}{b}\)</span> ба <span class="math inline">\(r_2 = \frac{m_2}{b}\)</span> гэж бичье. Бэхлэгдсэн дурын <span class="math inline">\(x \ge 1\)</span> хувьд <span class="math inline">\(\forall n \in \mathbb{N}, \, x^n \ge 1\)</span> гэдгийг индукцээр батлахад хялбар. Улмаар <span class="math inline">\(x^{m_2 - m_1} \ge 1\)</span> болох ба хоёр талыг <span class="math inline">\(x^{m_1}\)</span>-ээр үржүүлбэл <span class="math inline">\(x^{m_1} \le x^{m_2}\)</span> болно. <span class="math inline">\(b\)</span>-р зэргийн язгуур авбал <span class="math inline">\(x^{r_1} = x^{\frac{m_1}{b}} \le x^{\frac{m_2}{b}} = x^{r_2}\)</span> болно. <span class="math inline">\(\square\)</span></p>
+<p>Хэрэв <span class="math inline">\(r_1, r_2 \in \mathbb{Q}\)</span> ба <span class="math inline">\(r_1 \le r_2\)</span> бол Лемм 10.11 болон Тодорхойлолт 10.8-аас (<span class="math inline">\(C = 1\)</span> ба <span class="math inline">\(d = 1\)</span> авбал) <span class="math inline">\(x^{r_1} \in O(x^{r_2})\)</span> гэдэг нь мөрдөн гарна. Бид <span class="math inline">\(O(x^{r_1}) \subseteq O(x^{r_2})\)</span> гэж бичиж болох энэ үр дүн Зураг 10.27 дахь графикуудад тусгагдсан байна. Цаашилбал, Лемм 10.11-ийг олон гишүүнтийн өсөлтийн тухай ерөнхий үр дүнг батлахад ашиглаж болно.</p>
+<p>{#fig-fig-10-27 width=35%}</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.12
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(m \in \mathbb{N}\)</span> байг ба <span class="math inline">\(f(x) = c_m x^m + c_{m-1} x^{m-1} + \dots + c_0\)</span> нь хамгийн ихдээ <span class="math inline">\(m\)</span> зэрэгтэй олон гишүүнт байг. Тэгвэл <span class="math inline">\(f(x) \in O(x^m)\)</span> байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(x &gt; 1\)</span> үед:</p>
+<p><span class="math display">\[\begin{aligned}
+|f(x)| &amp;\le |c_m||x|^m + |c_{m-1}||x|^{m-1} + \dots + |c_0| \\
+       &amp;\le |c_m|x^m + |c_{m-1}|x^m + \dots + |c_0|x^m \\
+       &amp;= (|c_m| + |c_{m-1}| + \dots + |c_0|)x^m.
+\end{aligned}\]</span></p>
+<p>Эхний тэнцэтгэл биш нь Гурвалжны тэнцэтгэл бишээс (2.5-р хэсгийн Дасгал 37), харин хоёр дахь нь Лемм 10.11-ээс мөрдөн гарна. <span class="math inline">\(d = 1\)</span> ба <span class="math inline">\(C = |c_m| + |c_{m-1}| + \dots + |c_0|\)</span> гэж авбал <span class="math inline">\(\forall x &gt; d, \, |f(x)| \le C|x^m|\)</span> болохыг ажиглая. <span class="math inline">\(\square\)</span></p>
+<p>Их-<span class="math inline">\(O\)</span> тэмдэглэгээ нь функцүүдийн харьцангуй өсөлтийн хурдыг харьцуулах аргыг олгодогтой адил <strong>их-<span class="math inline">\(\Theta\)</span> тэмдэглэгээ</strong> (big-<span class="math inline">\(\Theta\)</span> notation) нь хоёр функц ижил өсөлтийн хурдтай гэдгийг хэлэх боломжийг олгодог.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 10.9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Бодит <span class="math inline">\(g(x)\)</span> функц өгөгдсөн үед <span class="math inline">\(\Theta(g(x))\)</span> гэж тэмдэглэгдэх <strong><span class="math inline">\(g(x)\)</span>-ийн их-<span class="math inline">\(\Theta\)</span></strong> (big-<span class="math inline">\(\Theta\)</span> of <span class="math inline">\(g(x)\)</span>) гэдэг нь <span class="math inline">\(f(x) \in O(g(x))\)</span> ба <span class="math inline">\(g(x) \in O(f(x))\)</span> байх бодит <span class="math inline">\(f(x)\)</span> функцүүдийн олонлогийг хэлнэ. Эквивалентээр, <span class="math inline">\(f(x) \in \Theta(g(x))\)</span> байх нь:</p>
+<p><span class="math display">\[\forall x &gt; d, \quad C_1|g(x)| \le |f(x)| \le C_2|g(x)|\]</span></p>
+<p>нөхцөлийг хангах эерэг тогтмолууд <span class="math inline">\(C_1, C_2\)</span>, ба <span class="math inline">\(d\)</span> оршихтай зайлшгүй бөгөөд хүрэлцээтэй. Энэ тохиолдолд бид <span class="math inline">\(f(x)\)</span> нь <span class="math inline">\(g(x)\)</span>-тэй <strong>ижил эрэмбэтэй</strong> (same order or order of growth) гэж хэлнэ.</p>
+</div>
+</div>
+<p>Дараах леммийн баталгааг дасгалд үлдээсэн болно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Лемм 10.13
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> нь бодит функцүүд байг. Тэгвэл:</p>
+<p><span class="math display">\[f(x) \in \Theta(g(x)) \quad \text{байх нь} \quad \Theta(f(x)) = \Theta(g(x)) \quad \text{байхтай, мөн} \quad O(f(x)) = O(g(x)) \quad \text{байхтай зайлшгүй бөгөөд хүрэлцээтэй.}\]</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.20
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(3x^2 + 5x + 2 \in \Theta(x^2)\)</span>. Үүнийг хоёр баримтыг тогтоосноор үндэслэнэ:</p>
+<p><strong>(i)</strong> <span class="math inline">\(3x^2 + 5x + 2 \in O(x^2)\)</span>. Энэ нь Теорем 10.12-оос мөрдөн гарах боловч <span class="math inline">\(\forall x &gt; 1, \, |3x^2 + 5x + 2| \le 10|x^2|\)</span> тул шууд харж болно.</p>
+<p><strong>(ii)</strong> <span class="math inline">\(x^2 \in O(3x^2 + 5x + 2)\)</span>. <span class="math inline">\(\forall x &gt; 0, \, |x^2| \le |3x^2 + 5x + 2|\)</span> тул энэ нь биелнэ. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Жишээ 10.20-ийн үр дүн Зураг 10.28-д тусгагдсан байна. <span class="math inline">\(x^2\)</span> болон <span class="math inline">\(3x^2 + 5x + 2\)</span> нь ижил өсөлтийн эрэмбэтэй гэдгийг <span class="math inline">\(O(x^2) = O(3x^2 + 5x + 2)\)</span> гэж бичиж мөн илэрхийлж болно.</p>
+<p>{#fig-fig-10-28 width=35%}</p>
+<p>Ерөнхий тохиолдолд ижил зэрэгтэй олон гишүүнтүүд ижил өсөлтийн эрэмбэтэй байдаг. Үнэндээ <span class="math inline">\(f(x) \in O(g(x))\)</span>-ийг тодорхойлж буй <span class="math inline">\(|f(x)| \le C|g(x)|\)</span> тэнцэтгэл бишид <span class="math inline">\(C\)</span> тогтмолыг зөвшөөрсөн явдал болон <span class="math inline">\(C = 1\)</span> байхыг шаардаагүй явдал нь ижил зэрэгтэй олон гишүүнтүүдийн өсөлтийн хурдыг адилтгах боломжийг бидэнд олгодог. Үнэндээ Зураг 10.27 дахь өсөлтийн хурдыг хамгийн тод ялгаж буй зүйл бол зэрэг юм.</p>
+<p>Бид нэг <span class="math inline">\(f(x)\)</span> функц нөгөө <span class="math inline">\(g(x)\)</span> функцээс эрс удаан өсөлтийн хурдтай байх тохиолдлуудыг сонирхож байна. Үүний тулд бидэнд яг <span class="math inline">\(f(x) \in O(g(x))\)</span> боловч <span class="math inline">\(g(x) \notin O(f(x))\)</span> байх шаардлагатай. Функцийн өсөлтийн хурд дээрх эрс тэнцэтгэл биш <span class="math inline">\(&lt;\)</span>-тэй төстэй энэ харьцуулалт нь жинхэнэ дэд олонлогийн <span class="math inline">\(\subset\)</span> харьцаагаар илэрхийлэгдэх нь гайхах зүйл биш юм. Дараах леммийн баталгааг дасгалд үлдээв.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Лемм 10.14
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(f\)</span> ба <span class="math inline">\(g\)</span> нь бодит функцүүд байг. Тэгвэл:</p>
+<p><span class="math display">\[f(x) \in O(g(x)) \text{ ба } g(x) \notin O(f(x)) \quad \text{байх нь} \quad O(f(x)) \subset O(g(x)) \quad \text{байхтай зайлшгүй бөгөөд хүрэлцээтэй.}\]</span></p>
+</div>
+</div>
+<p>Дараах лемм нь Лемм 10.11-тэй хамтдаа <span class="math inline">\(x\)</span>-ийн эрс их зэргүүд эрс хурдан өсөлттэй болохыг дүгнэх боломжийг бидэнд олгоно.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Лемм 10.15
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(r_1 &lt; r_2\)</span> байх <span class="math inline">\(r_1, r_2 \in \mathbb{Q}\)</span> байг. Тэгвэл <span class="math inline">\(x^{r_2} \notin O(x^{r_1})\)</span> байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> Эсрэгээс нь сэтгэж, <span class="math inline">\(\forall x &gt; d, \, |x^{r_2}| \le C|x^{r_1}|\)</span> байх эерэг тогтмолууд <span class="math inline">\(C\)</span> ба <span class="math inline">\(d\)</span> оршино гэж үзье. Энэ нь <span class="math inline">\(C\)</span>-ийн илүү том утгын хувьд ч үнэн хэвээр байх тул бид <span class="math inline">\(C &gt; \frac{d^{r_2 - r_1}}{2}\)</span> гэж үзэж чадна. Тэгвэл <span class="math inline">\((2C)^{\frac{1}{r_2 - r_1}} &gt; d\)</span> болохыг тэмдэглэе. <span class="math inline">\(x &gt; d\)</span> үед <span class="math inline">\(\frac{x^{r_2}}{x^{r_1}} \le C\)</span> буюу <span class="math inline">\(x^{r_2 - r_1} \le C\)</span> байна. Энд <span class="math inline">\(x = (2C)^{\frac{1}{r_2 - r_1}}\)</span>-ийг орлуулбал <span class="math inline">\(2C \le C\)</span> болох бөгөөд энэ нь зөрчил юм. <span class="math inline">\(\square\)</span></p>
+</section>
+<section id="алгоритмын-эрэмбэ-order-of-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="алгоритмын-эрэмбэ-order-of-algorithms">Алгоритмын эрэмбэ (Order of Algorithms)</h3>
+<p>Бидний сонирхол нь алгоритмуудын хамгийн муу тохиолдлын нарийн төвөгтэй байдлыг харьцуулахад оршиж байгаа тул бид анхаарлаа <span class="math inline">\(\mathbb{Z}^+\)</span> (эсвэл түүний зарим дэд олонлог) дээрх функцүүд дээр хязгаарлая.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Тодорхойлолт 10.10
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(g(n)\)</span> нь функц байг. Хэрэв алгоритмын хамгийн муу тохиолдлын нарийн төвөгтэй байдал <span class="math inline">\(f(n)\)</span> нь <span class="math inline">\(O(g(n))\)</span> (харгалзан <span class="math inline">\(\Theta(g(n))\)</span>) олонлогт оршдог бол тухайн алгоритмыг <strong><span class="math inline">\(O(g(n))\)</span></strong> (харгалзан <strong><span class="math inline">\(\Theta(g(n))\)</span></strong>) алгоритм гэнэ.</p>
+</div>
+</div>
+<p>Жишээ 10.18-аас харахад Дараалсан хайлт нь <span class="math inline">\(O(n)\)</span> (цаашлаад <span class="math inline">\(\Theta(n)\)</span>), харин Жишээ 10.19-өөс харахад Хоёртын хайлт нь <span class="math inline">\(O(1 + \lceil \log_2 n \rceil)\)</span> (цаашлаад <span class="math inline">\(\Theta(1 + \lceil \log_2 n \rceil)\)</span>) болно. Үнэндээ дасгалуудад <span class="math inline">\(O(1 + \lceil \log_2 n \rceil) = O(\log_2 n)\)</span> гэж тогтоогдсон тул бид Хоёртын хайлтыг илүү товчоор <span class="math inline">\(O(\log_2 n)\)</span> (цаашлаад <span class="math inline">\(\Theta(\log_2 n)\)</span>) гэж хэлж чадна.</p>
+<p>Ерөнхий тохиолдолд алгоритмыг <span class="math inline">\(O(f(n))\)</span> гэж батлах болон <span class="math inline">\(\Theta(f(n))\)</span> гэж батлах хоёрын хооронд чухал ялгаа бий. Хэрэв том <span class="math inline">\(n\)</span>-ийн хувьд <span class="math inline">\(n\)</span> хэмжээтэй ямар ч оролтод <span class="math inline">\(f(n)\)</span>-ийн ямар нэгэн бэхлэгдсэн үржвэрээс олон үйлдэл шаардагдахгүй бол алгоритм нь <span class="math inline">\(O(f(n))\)</span> байна. Цаашлаад алгоритмыг <span class="math inline">\(\Theta(f(n))\)</span> гэж батлахын тулд том <span class="math inline">\(n\)</span>-ийн хувьд үйлдлийн тоо нь хамгийн багадаа <span class="math inline">\(f(n)\)</span>-ийн ямар нэгэн бэхлэгдсэн үржвэртэй тэнцүү байх <span class="math inline">\(n\)</span> хэмжээтэй ямар нэгэн оролт орших ёстой. Жишээлбэл, Дараалсан хайлтыг <span class="math inline">\(O(n^2)\)</span> гэдэг нь үнэн боловч <span class="math inline">\(\Theta(n^2)\)</span> гэдэг нь худал юм.</p>
+<p>Дараах теорем нь олон стандарт алгоритмын хамгийн муу тохиолдлын нарийн төвөгтэй байдлын харьцангуй өсөлтийн хурдыг харьцуулна.</p>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.16
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(b &gt; 1\)</span> байх <span class="math inline">\(b \in \mathbb{R}\)</span> ба <span class="math inline">\(r &gt; 2\)</span> байх <span class="math inline">\(r \in \mathbb{Q}\)</span> байг.</p>
+<p><span class="math display">\[O(1) \subset O(\log_b n) \subset O(n) \subset O(n \log_b n) \subset O(n^2) \subset O(n^r) \subset O(b^n) \subset O(n!).\]</span></p>
+</div>
+</div>
+<p>Теорем 10.16-ийн баталгааны зарим хэсгийг дасгалд үлдээсэн. Энд бид Теорем 10.16-ийн нэгэн тусгай тохиолдлыг баталъя.</p>
+<p><strong><code>10-4.qmd</code></strong> файлыг бүрэн дуусгаж (Жишээ 10.21, Хүснэгт 10.2 болон 1–52-р дасгалууд), мөн <strong>10.5-р зүйл: Алгоритмын шинжилгээ (2-р хэсэг) (<code>10-5.qmd</code>)</strong>-ийн онолын хэсгийг (Шийдвэрийн мод, Оруулан эрэмбэлэх, Нэгтгэн эрэмбэлэх алгоритмууд, Теорем 10.17, Хүснэгт 10.3 ба 1–4-р дасгалууд) таны Quarto номын стандартын дагуу орчуулж бэлтгэлээ.</p>
+</section>
+<section id="qmd-ийн-төгсгөл-өмнөх-хэсгийн-төгсгөлөөс-шууд-залгана" class="level3">
+<h3 class="anchored" data-anchor-id="qmd-ийн-төгсгөл-өмнөх-хэсгийн-төгсгөлөөс-шууд-залгана">1. <code>10-4.qmd</code>-ийн төгсгөл (Өмнөх хэсгийн төгсгөлөөс шууд залгана)</h3>
+<p>```markdown ::: {.callout-tip icon=false} ## Жишээ 10.21 <span class="math inline">\(O(n^2) \subset O(3^n)\)</span> болохыг харуул[cite: 362].</p>
+<p><strong>Баталгаа.</strong> Эхлээд бид <span class="math inline">\(n^2 \in O(3^n)\)</span> болохыг харуулах ёстой[cite: 362]. Үүнийг <span class="math inline">\(\forall n \ge 1, \, n^2 \le 3^n\)</span> гэж индукцээр баталж гүйцэтгэнэ[cite: 362]. <span class="math inline">\(1^2 \le 3^1\)</span> ба <span class="math inline">\(2^2 \le 3^2\)</span> тул <span class="math inline">\(k \ge 2\)</span> ба <span class="math inline">\(k^2 \le 3^k\)</span> гэж үзье[cite: 362]. Эндээс: <span class="math display">\[(k + 1)^2 = k^2 + 2k + 1 \le k^2 + k^2 + k^2 = 3k^2 \le 3 \cdot 3^k = 3^{k+1}\]</span> болно[cite: 362]. Иймд <span class="math inline">\(n^2 \in O(3^n)\)</span>[cite: 362].</p>
+<p>Хоёрдугаарт, бид <span class="math inline">\(3^n \notin O(n^2)\)</span> болохыг харуулах ёстой[cite: 362]. Тиймээс эсрэгээс нь сэтгэж, <span class="math inline">\(\forall n &gt; d, \, 3^n \le C n^2\)</span> байх <span class="math inline">\(C\)</span> ба <span class="math inline">\(d\)</span> тогтмолууд оршино гэж үзье[cite: 362]. <span class="math inline">\(N\)</span> нь <span class="math inline">\(C\)</span> болон <span class="math inline">\(d\)</span> хоёулангаас нь их бүхэл тоо байг[cite: 362]. Тэгвэл тухайлбал <span class="math inline">\(3^N \le C N^2\)</span> болно[cite: 362]. Гэвч 4.3-р хэсгийн Дасгал 6 болон <span class="math inline">\(N\)</span>-ийн сонголтоос харахад <span class="math inline">\(3^N \ge N^3 &gt; C N^2\)</span> болно[cite: 362]. Энэ нь зөрчил юм[cite: 362]. Иймд <span class="math inline">\(3^n \notin O(n^2)\)</span>[cite: 362]. <span class="math inline">\(\square\)</span> :::</p>
+<p>Ямар нэгэн <span class="math inline">\(b &gt; 1\)</span>-ийн хувьд <span class="math inline">\(\Theta(\log_b n)\)</span> байх алгоритмыг <strong>логарифм</strong> (logarithmic), ямар нэгэн <span class="math inline">\(m \in \mathbb{Z}^+\)</span>-ийн хувьд <span class="math inline">\(\Theta(n^m)\)</span> байх алгоритмыг <strong>олон гишүүнт</strong> (polynomial), харин ямар нэгэн <span class="math inline">\(b &gt; 1\)</span>-ийн хувьд <span class="math inline">\(\Theta(b^n)\)</span> байх алгоритмыг <strong>илтгэгч</strong> (exponential) алгоритм гэнэ[cite: 362]. Олон гишүүнт алгоритмаар шийдэгдэж чадах бодлогуудыг <strong><span class="math inline">\(\text{P}\)</span> ангид</strong> харьяалагдана гэнэ[cite: 362]. Санал болгосон шийдлийн зөв эсэхийг олон гишүүнт алгоритмаар шалгаж болох бодлогуудыг детерминист бус олон гишүүнт алгоритмуудын анги буюу <strong><span class="math inline">\(\text{NP}\)</span> ангид</strong> харьяалагдана гэнэ[cite: 362]. Хэдийгээр <span class="math inline">\(\text{P} \subseteq \text{NP}\)</span> гэдэг нь мэдэгдэж байгаа боловч <span class="math inline">\(\text{P} = \text{NP}\)</span> мөн эсэхийг тодорхойлох нь компьютерын шинжлэх ухааны шийдэгдээгүй алдартай тулгамдсан асуудал юм[cite: 362]. Түүнчлэн <strong><span class="math inline">\(\text{NP}\)</span>-бүрэн</strong> (<span class="math inline">\(\text{NP}\)</span>-complete) гэж нэрлэгдэх бодлогуудын анги байдаг бөгөөд эдгээр нь <span class="math inline">\(\text{P}\)</span> ангид ордог эсэх нь тодорхойгүй боловч тэр ангийн аль нэг бодлогыг <span class="math inline">\(\text{P}\)</span> ангид ордог гэж баталж чадвал тэр ангийн бүх бодлого <span class="math inline">\(\text{P}\)</span> ангид ордог болох нь батлагдах онцлогтой[cite: 362]. 10.2-р хэсгийн төгсгөлд тайлбарласан худалдааны төлөөлөгчийн бодлого нь магадгүй <span class="math inline">\(\text{NP}\)</span>-бүрэн бодлогын хамгийн алдартай жишээ юм[cite: 362]. Сонирхсон уншигч дэлгэрэнгүй хэлэлцүүлгийг <code>[1]</code> эсвэл <code>[5]</code>-аас үзэж болно[cite: 362].</p>
+<p>Теорем 10.16 дахь төрөл бүрийн нарийн төвөгтэй байдалтай холбоотой ажиллах хугацааны харьцангуй ялгааг мэдрэхийн тулд компьютер <span class="math inline">\(4\)</span> гигагерц (<span class="math inline">\(4\text{ GHz}\)</span>) хурдтай гэж үзье[cite: 362]. Энэ нь онолын хувьд ийм машин секундэд ойролцоогоор <span class="math inline">\(4\)</span> тэрбум заавар (үйлдэл) гүйцэтгэж чадна гэсэн үг юм[cite: 362]. Хэрэв заавар бүрийг алгоритмын нарийн төвөгтэй байдалд тоологдож буй үйлдэлтэй харгалзуулж үзвэл Хүснэгт 10.2-т <span class="math inline">\(n = 100\)</span> болон <span class="math inline">\(n = 100,000\)</span> хэмжээтэй оролтын үед Теорем 10.16 дахь янз бүрийн нарийн төвөгтэй байдлуудад харгалзах харьцангуй ажиллах хугацааг тусгасан болно[cite: 362]. Тухайлбал, олон гишүүнт алгоритм нь илтгэгч алгоритмаас асар их давуу талтай болохыг бид харж байна[cite: 362].</p>
+<table class="caption-top table">
+<caption><span class="math inline">\(4\text{-GHz}\)</span> машин дээрх зарим нарийн төвөгтэй байдлын ажиллах хугацаа {#tbl-10-2}[cite: 362]</caption>
+<colgroup>
+<col style="width: 38%">
+<col style="width: 30%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Зааврын тоо</th>
+<th style="text-align: left;"><span class="math inline">\(n = 100\)</span> үеийн ажиллах хугацаа</th>
+<th style="text-align: left;"><span class="math inline">\(n = 100,000\)</span> үеийн ажиллах хугацаа</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(\log_2 n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0.0000000017\)</span> секунд</td>
+<td style="text-align: left;"><span class="math inline">\(0.0000000042\)</span> секунд</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0.000000025\)</span> секунд</td>
+<td style="text-align: left;"><span class="math inline">\(0.000025\)</span> секунд</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(n \log_2 n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0.00000017\)</span> секунд</td>
+<td style="text-align: left;"><span class="math inline">\(0.00042\)</span> секунд</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(n^2\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0.0000025\)</span> секунд</td>
+<td style="text-align: left;"><span class="math inline">\(2.5\)</span> секунд</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(n^3\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(0.00025\)</span> секунд</td>
+<td style="text-align: left;"><span class="math inline">\(250,000\)</span> секунд <span class="math inline">\(\approx 2.9\)</span> хоног</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(2^n\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(3.2 \times 10^{20}\)</span> секунд <span class="math inline">\(\approx 1.0 \times 10^{13}\)</span> жил</td>
+<td style="text-align: left;"><span class="math inline">\(2.5 \times 10^{30093}\)</span> секунд <span class="math inline">\(\approx 7.9 \times 10^{30085}\)</span> жил</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(n!\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(2.3 \times 10^{148}\)</span> секунд <span class="math inline">\(\approx 7.4 \times 10^{140}\)</span> жил</td>
+<td style="text-align: left;"><span class="math inline">\(7.1 \times 10^{456563}\)</span> секунд <span class="math inline">\(\approx 2.2 \times 10^{456556}\)</span> жил</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="р-зүйлийн-дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">10.4-р зүйлийн дасгалууд</h2>
+<p><em>1-ээс 4 хүртэлх дасгалуудад өгөгдсөн <span class="math inline">\(A\)</span> массиваас заасан <span class="math inline">\(x\)</span> утгыг Хоёртын хайлтаар хайх үеийн гол төлөвүүдийг харуул[cite: 363].</em></p>
+<ol type="1">
+<li><span class="math inline">\(x = 5\)</span> ба <span class="math inline">\(A = [1, 3, 4, 5, 7, 8]\)</span>. <span class="math inline">\(\qquad\)</span> 2. <span class="math inline">\(x = 4\)</span> ба <span class="math inline">\(A = [0, 1, 4, 6, 7, 8, 9]\)</span>.</li>
+<li><span class="math inline">\(x = 3\)</span> ба <span class="math inline">\(A = [0, 1, 2, 4, 5, 7, 8]\)</span>. <span class="math inline">\(\qquad\)</span> 4. <span class="math inline">\(x = 6\)</span> ба <span class="math inline">\(A = [1, 2, 4, 5, 8, 9]\)</span>[cite: 363].</li>
+<li>Хэрэв <span class="math inline">\(A\)</span> массив нь <span class="math inline">\(x\)</span> утгыг нэгээс олон байрлалд агуулж байвал Дараалсан хайлт аль байрлалыг буцаах вэ[cite: 363]?</li>
+<li>Хэрэв эрэмбэлэгдсэн <span class="math inline">\(A\)</span> массив нь <span class="math inline">\(x\)</span> утгыг нэгээс олон байрлалд агуулж байвал Хоёртын хайлт аль байрлалыг буцаах вэ[cite: 363]?</li>
+<li>Компьютер <span class="math inline">\(2\text{ GHz}\)</span> хурдтай гэе. Өөрөөр хэлбэл, секундэд <span class="math inline">\(2\)</span> тэрбум заавар гүйцэтгэж чадна[cite: 363]. <strong>(а)</strong> Хоёртын хайлтад зөвхөн харьцуулалтууд л хугацаа зарцуулдаг заавар гэж үзье. Энэ компьютер нэг сая элементтэй массиваас Хоёртын хайлтаар утга олоход зарцуулах боломжит хамгийн урт хугацаа хэд вэ[cite: 363]? <strong>(б)</strong> Энэ компьютер <span class="math inline">\(n^2\)</span> хамгийн муу тохиолдлын нарийн төвөгтэй байдалтай алгоритмыг <span class="math inline">\(n = 10^6\)</span> хэмжээтэй оролт дээр ажиллуулахад зарцуулах боломжит хамгийн урт хугацаа хэд вэ[cite: 363]?</li>
+<li>Компьютер <span class="math inline">\(3\text{ GHz}\)</span> хурдтай гэе. Өөрөөр хэлбэл, секундэд <span class="math inline">\(3\)</span> тэрбум заавар гүйцэтгэж чадна[cite: 363]. <strong>(а)</strong> Дараалсан хайлтад зөвхөн харьцуулалтууд л хугацаа зарцуулдаг заавар гэж үзье. Энэ компьютер нэг сая элементтэй массиваас Дараалсан хайлтаар утга олоход зарцуулах боломжит хамгийн урт хугацаа хэд вэ[cite: 363]? <strong>(б)</strong> Энэ компьютер <span class="math inline">\(n^{\frac{3}{2}} \lfloor \log_2 n \rfloor\)</span> хамгийн муу тохиолдлын нарийн төвөгтэй байдалтай алгоритмыг <span class="math inline">\(n = 10^6\)</span> хэмжээтэй оролт дээр ажиллуулахад зарцуулах боломжит хамгийн урт хугацаа хэд вэ[cite: 363]?</li>
+<li><span class="math inline">\(\star\)</span> Хэрэв <span class="math inline">\(k\)</span> тэгш бол <span class="math inline">\(\lceil \log_2(k + 2) \rceil = \lceil \log_2(k + 1) \rceil\)</span> болохыг харуул[cite: 363].</li>
+<li><span class="math inline">\(\forall x \in \mathbb{R}^+\)</span> хувьд <span class="math inline">\(1 + \log_2 x \le 1 + \lceil \log_2 x \rceil &lt; 2 + \log_2 x\)</span> болохыг харуул[cite: 363].</li>
+<li><span class="math inline">\(n\)</span> урттай өгөгдсөн <span class="math inline">\(A\)</span> массивын хамгийн их элементийн байрлалыг олдог <strong>Maximum</strong> нэртэй (аль болох үр ашигтай) алгоритм бич[cite: 363]. Хамгийн их утга олон байрлалд тохиолдсон ч зөвхөн нэг байрлалыг буцаана. Массивын элементүүд урьдчилан эрэмбэлэгдсэн байх албагүйг анхаарна уу[cite: 363].</li>
+<li><span class="math inline">\(n\)</span> урттай өгөгдсөн <span class="math inline">\(A\)</span> массив дотор өгөгдсөн <span class="math inline">\(x\)</span> утга хэдэн удаа орсныг тоолдог <strong>Count</strong> нэртэй (аль болох үр ашигтай) алгоритм бич[cite: 363]. Массивын элементүүд урьдчилан эрэмбэлэгдсэн байх албагүйг анхаарна уу[cite: 363].</li>
+<li><strong>Maximum</strong> алгоритмын хамгийн муу тохиолдлын нарийн төвөгтэй байдлыг тодорхойл[cite: 363].</li>
+<li><strong>Count</strong> алгоритмын хамгийн муу тохиолдлын нарийн төвөгтэй байдлыг тодорхойл[cite: 363].</li>
+</ol>
+<p><em>15-аас 18 хүртэлх дасгалуудад <span class="math inline">\(g(x)\)</span> нь дурын бодит функц байг[cite: 363].</em></p>
+<ol start="15" type="1">
+<li><span class="math inline">\(g(x) \in O(g(x))\)</span> болохыг харуул. <span class="math inline">\(\qquad\)</span> 16. <span class="math inline">\(0 \in O(g(x))\)</span> болохыг харуул[cite: 363].</li>
+<li><span class="math inline">\(c \neq 0\)</span> байг. <span class="math inline">\(O(cg(x)) = O(g(x))\)</span> болохыг харуул. <span class="math inline">\(\qquad\)</span> 18. Лемм 10.10-ыг батал[cite: 363].</li>
+</ol>
+<p><em>19-өөс 22 хүртэлх дасгалуудад өгөгдсөн батламж үнэн эсвэл худал болохыг шийд[cite: 364].</em></p>
+<ol start="19" type="1">
+<li><span class="math inline">\(x^{\frac{3}{5}} \in O(x^{\frac{2}{3}})\)</span>. <span class="math inline">\(\qquad\)</span> 20. <span class="math inline">\(x^2 + 5x + 7 \in O(x^2)\)</span>[cite: 364].</li>
+<li><span class="math inline">\(O(x^3 + x^2) \subseteq O(x^4)\)</span>. <span class="math inline">\(\qquad\)</span> 22. <span class="math inline">\(O\left(\frac{1}{10}x^3 - x\right) \subseteq O(x^2)\)</span>[cite: 364].</li>
+<li><span class="math inline">\(f_1(x), f_2(x) \in O(g(x))\)</span> гэж үзье. <span class="math inline">\(f_1(x) + f_2(x) \in O(g(x))\)</span> болохыг харуул[cite: 364].</li>
+<li><span class="math inline">\(f_1(x) \in O(g_1(x))\)</span> ба <span class="math inline">\(f_2(x) \in O(g_2(x))\)</span> гэж үзье. <span class="math inline">\(f_1(x) f_2(x) \in O(g_1(x) g_2(x))\)</span> болохыг харуул[cite: 364].</li>
+<li>Хэрэв <span class="math inline">\(f(x) \in O(g(x))\)</span> бол <span class="math inline">\(f(x) + g(x) \in O(g(x))\)</span> болохыг харуул[cite: 364].</li>
+<li>Хэрэв <span class="math inline">\(O(f(x)) = O(1)\)</span> бол <span class="math inline">\(O(f(x)g(x)) = O(g(x))\)</span> болохыг харуул[cite: 364].</li>
+<li><span class="math inline">\(c \in \mathbb{R}\)</span> байг ба <span class="math inline">\(1 \in O(g(x))\)</span> гэж үзье. <span class="math inline">\(c + g(x) \in O(g(x))\)</span> болохыг харуул[cite: 364].</li>
+<li><span class="math inline">\(1 \in O(g(x))\)</span> гэж үзье. <span class="math inline">\(O(\lceil g(x) \rceil) = O(g(x))\)</span> болохыг харуул[cite: 364].</li>
+<li>Сар бүрийн хүүгийн түвшин <span class="math inline">\(i\)</span> бүхий дансанд <span class="math inline">\(P\)</span> доллар хадгалуулсан гэе[cite: 364]. Хэрэв данс <strong>энгийн хүү</strong> тооцдог бол <span class="math inline">\(n\)</span> сарын дараа дансанд байх мөнгөний хэмжээ <span class="math inline">\(P(1 + in)\)</span> болно[cite: 364]. Хэрэв данс <strong>нийлмэл хүү</strong> (compound interest) тооцдог бол <span class="math inline">\(n\)</span> сарын дараа дансанд байх мөнгөний хэмжээ <span class="math inline">\(P(1 + i)^n\)</span> болно[cite: 364]. <span class="math inline">\((1 + i)^n\)</span> нь <span class="math inline">\((1 + in)\)</span>-ээс илүү өндөр өсөлтийн хурдтай тул ерөнхий тохиолдолд хөрөнгө оруулагчид нийлмэл хүү нь ашигтай байдаг[cite: 364]. Гэсэн хэдий ч банк <span class="math inline">\(2\%\)</span>-ийн (<span class="math inline">\(i = 0.02\)</span>) нийлмэл хүү эсвэл <span class="math inline">\(4\%\)</span>-ийн (<span class="math inline">\(i = 0.04\)</span>) энгийн хүү санал болгож байгаа тул хүүгийн түвшин нь тэнцүү биш гэж үзье[cite: 364]. <strong>(а)</strong> <span class="math inline">\(5\)</span> жилийн хөрөнгө оруулалтад аль хувилбар нь илүү дээр вэ[cite: 364]? <strong>(б)</strong> <span class="math inline">\(6\)</span> жилийн хөрөнгө оруулалтад аль хувилбар нь илүү дээр вэ[cite: 364]? <strong>(в)</strong> Нийлмэл хүүгийн хувилбар илүү сайн сонголт болох сарын хамгийн цөөн тоог ол[cite: 364].</li>
+<li>Шинээр ажилд орсон ажилтан ажил олгогчтойгоо цалингийн талаар тохиролцож байгаа бөгөөд ажил олгогч цалингийн хоёр хувилбар санал болгожээ[cite: 364]. 1-р хувилбараар түүний <span class="math inline">\(n\)</span>-р жилийн цалин <span class="math inline">\(1000(20\sqrt{n + 2})\)</span> болно[cite: 364]. 2-р хувилбараар түүний <span class="math inline">\(n\)</span>-р жилийн цалин <span class="math inline">\(1000(16n - 1)\)</span> болно[cite: 364]. 2-р хувилбар нь 1-р хувилбараас илүү өндөр өсөлтийн хурдтай болохыг анхаарна уу[cite: 364]. <strong>(а)</strong> Хоёр дахь жилийн цалин аль хувилбараар илүү сайн бэ[cite: 364]? <strong>(б)</strong> Дөрөв дэх жилийн цалин аль хувилбараар илүү сайн бэ[cite: 364]? <strong>(в)</strong> Хэрэв энэ шинэ ажилтан өөр ажилд шилжихээсээ өмнө энэ ажил дээрээ яг <span class="math inline">\(4\)</span> жил ажиллахаар төлөвлөж байгаа бол аль хувилбар нь түүнд илүү ашигтай вэ[cite: 364]?</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(O(1 + \lceil \log_2 n \rceil) = O(\log_2 n)\)</span> болохыг харуул[cite: 364].</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(O(n + n \log_2 n) = O(n \log_2 n)\)</span> болохыг харуул[cite: 364].</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(O\left(\frac{n}{2} \log_2 \frac{n}{2}\right) = O(n \log_2 n)\)</span> болохыг харуул[cite: 364].</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(O(100 + 3 \cdot 2^n) = O(2^n)\)</span> болохыг харуул[cite: 364].</li>
+<li>Тодорхойлолт 10.9 дэх батламжийг батал[cite: 364]. Өөрөөр хэлбэл, <span class="math inline">\(f(x) \in O(g(x))\)</span> ба <span class="math inline">\(g(x) \in O(f(x))\)</span> байх нь <span class="math inline">\(\forall x &gt; d, \, C_1|g(x)| \le |f(x)| \le C_2|g(x)|\)</span> биелэх эерэг тогтмолууд <span class="math inline">\(C_1, C_2\)</span>, ба <span class="math inline">\(d\)</span> оршихтай зайлшгүй бөгөөд хүрэлцээтэй болохыг харуул[cite: 364].</li>
+<li><span class="math inline">\(f(x) \in \Theta(g(x))\)</span> байх нь <span class="math inline">\(g(x) \in \Theta(f(x))\)</span> байхтай зайлшгүй бөгөөд хүрэлцээтэй болохыг харуул[cite: 364].</li>
+<li>Лемм 10.13-ыг батал. <span class="math inline">\(\qquad\)</span> 38. Лемм 10.14-ийг батал[cite: 364].</li>
+</ol>
+<p><em>39-өөс 42 хүртэлх дасгалуудад өгөгдсөн батламж үнэн эсвэл худал болохыг шийд[cite: 364].</em></p>
+<ol start="39" type="1">
+<li><span class="math inline">\(n \log_2 n \in O(n)\)</span>. <span class="math inline">\(\qquad\)</span> 40. <span class="math inline">\(n^4 \in O(2^n)\)</span>[cite: 364].</li>
+<li><span class="math inline">\(O(\log_2 n) = O(\log_2(n^2))\)</span>. <span class="math inline">\(\qquad\)</span> 42. <span class="math inline">\(O(n^2) \subseteq O((\log_2 n)^2)\)</span>[cite: 364].</li>
+<li>Нэгэн программист тоонуудын жагсаалтыг эрэмбэлэх хоёр программ бичжээ[cite: 365]. Эхнийх нь <span class="math inline">\(64\lfloor \log_2 n \rfloor + 108n + 18\)</span> үйлдэл, харин нөгөө нь <span class="math inline">\(2n^2 + 4n + 8\)</span> үйлдэл ашигладаг[cite: 365]. Тэрээр тодорхой хэрэглээнд аль программ илүү хурдан болохыг тодорхойлохыг оролдож байгаа бөгөөд <span class="math inline">\(n = 55\)</span> элементтэй жагсаалтыг эрэмбэлэхэд хоёр программ ижил тооны үйлдэл ашиглаж байгааг анзаарчээ[cite: 365]. <strong>(а)</strong> <span class="math inline">\(55\)</span>-аас цөөн элементтэй жагсаалтыг эрэмбэлэхэд аль нь илүү хурдан бэ[cite: 365]? <strong>(б)</strong> <span class="math inline">\(55\)</span>-аас олон элементтэй жагсаалтыг эрэмбэлэхэд аль нь илүү хурдан бэ[cite: 365]? <strong>(в)</strong> Аль программ нь бага өсөлтийн эрэмбэтэй вэ[cite: 365]?</li>
+<li>Нэгэн программист эрэмбэлэгдээгүй тоонуудын жагсаалтаас (<span class="math inline">\(n \ge 21\)</span> урттай) медиан утгыг олох хоёр программ бичжээ[cite: 365]. Эхнийх нь <span class="math inline">\(n^3 - 20n^2 - 6n + 1\)</span> үйлдэл, харин нөгөө нь <span class="math inline">\(80n^2 + 64n - 3\)</span> үйлдэл ашигладаг[cite: 365]. Тэрээр тодорхой хэрэглээнд аль программ илүү хурдан болохыг тодорхойлохыг оролдож байна[cite: 365]. <strong>(а)</strong> Хамгийн ихдээ <span class="math inline">\(100\)</span> элементтэй жагсаалтын хувьд аль нь илүү хурдан бэ[cite: 365]? <strong>(б)</strong> Хоёр дахь программ илүү хурдан байх жагсаалтын хамгийн бага урт хэд вэ[cite: 365]? <strong>(в)</strong> Аль программ нь бага өсөлтийн эрэмбэтэй вэ[cite: 365]?</li>
+<li><span class="math inline">\(\forall b &gt; 1\)</span>, <span class="math inline">\(O(\log_b n) = O(\log_2 n)\)</span> болохыг харуул[cite: 365]. <em>Зөвлөмж:</em> <span class="math inline">\(\log_b n = \frac{\log_2 n}{\log_2 b}\)</span>[cite: 365].</li>
+<li><span class="math inline">\(\forall b &gt; 1\)</span>, <span class="math inline">\(O(b^n) = O(2^n)\)</span> гэдэг нь үнэн үү[cite: 365]?</li>
+<li><span class="math inline">\(O(1) \subset O(\log_2 n)\)</span> болохыг харуул[cite: 365].</li>
+<li><span class="math inline">\(O(\log_2 n) \subset O(n)\)</span> болохыг харуул[cite: 365]. <em>Зөвлөмж:</em> <span class="math inline">\(\log_2 n \le n\)</span> байх нь <span class="math inline">\(n \le 2^n\)</span> байхтай зайлшгүй бөгөөд хүрэлцээтэй тул индукц ашигла[cite: 365].</li>
+<li><span class="math inline">\(O(n) \subset O(n \log_2 n)\)</span> болохыг харуул[cite: 365]. <em>Зөвлөмж:</em> Дасгал 47-ийн бодолтыг ашигла[cite: 365].</li>
+<li><span class="math inline">\(O(n \log_2 n) \subset O(n^2)\)</span> болохыг харуул[cite: 365]. <em>Зөвлөмж:</em> Дасгал 48-ын бодолтыг ашигла[cite: 365].</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(O(n^2) \subset O(2^n)\)</span> болохыг харуул[cite: 365]. <em>Зөвлөмж:</em> Индукц ашигла[cite: 365].</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(O(2^n) \subset O(n!)\)</span> болохыг харуул[cite: 365]. <em>Зөвлөмж:</em> Индукц ашигла[cite: 365].</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-3.html" class="pagination-link" aria-label="Жинлэгдсэн мод (Weighted Trees)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Жинлэгдсэн мод (Weighted Trees)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-5.html" class="pagination-link" aria-label="10.5 Алгоритмын шинжилгээ (2-р хэсэг)">
+        <span class="nav-page-text"><span class="chapter-title">10.5 Алгоритмын шинжилгээ (2-р хэсэг)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="mn" xml:lang="mn"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10.5 Алгоритмын шинжилгээ (2-р хэсэг) – Дискрет математик</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10-6.html" rel="next">
+<link href="./10-4.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-b3dafd8cc5e5d05e6459be86de5c37a4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-06d6bd6e489181030889a02c125f20ad.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
+        setTimeout(() => {
+          window.scrollTo(0, scrollY);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">10.html</a></li><li class="breadcrumb-item"><a href="./10-5.html"><span class="chapter-title">10.5 Алгоритмын шинжилгээ (2-р хэсэг)</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./images/must-logo.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Дискрет математик</a> 
+        <div class="sidebar-tools-main">
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Өмнөх үг</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./0.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">0.Тоонуудыг дүрслэх нь</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">1. Хэллэг ба Олонлог</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section: 1. Хэллэг ба Олонлог">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.1 Өгүүлбэрийн хэлбэр ба логик квивалентууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">1.5 Хүчинтэй аргументууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-2-label">2. Энгийн баталгааны арга</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-controls="quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section: 2. Энгийн баталгааны арга">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-2" aria-labelledby="quarto-sidebar-section-2-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.1 Шууд үзүүлэх арга (Direct Demonstration)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.2 Ерөнхий үзүүлэх арга (1-р хэсэг) (General Demonstration (Part 1))</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.3 Ерөнхий баталгаажуулалт (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.4 Шууд бус аргументууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2.5 Тохиолдолд хуваах (Splitting into Cases)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">2-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-3-label">3. Тооны онолын үндэс</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-controls="quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section: 3. Тооны онолын үндэс">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-3" aria-labelledby="quarto-sidebar-section-3-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.1. Хуваагчид</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.2. Бүрэн эрэмбэлэгдэх зарчмын мөрдөлгөөнүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.3. Евклидийн алгоритм ба лемм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.4. Рационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.5. Иррационал тоонууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3.6. Модулийн арифметик (Modular Arithmetic)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">3-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-4-label">4. Бүхэл тоон индек</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-controls="quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section: 4. Бүхэл тоон индек">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-4" aria-labelledby="quarto-sidebar-section-4-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.1 Дараалал, Индексжүүлэлт, ба Рекурс</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.2 Сигма тэмдэглэгээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.3 Математик индукц, танилцуулга</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.4 Индукц ба Нийлбэрүүд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.5 Хүчтэй индукц</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4.6 Биномын теорем</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4-7.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">4-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-5-label">8. Графын онол</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-controls="quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section: 8. Графын онол">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-5" aria-labelledby="quarto-sidebar-section-5-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.1.Сэдэл ба Оршил</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.2. Матриц ба тусгай графууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.3 Изоморфизм</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.4 Инвариантууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8.5 Чиглэгдсэн графууд ба Марковын гинжин хэлхээ</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">8-р бүлгийн бодлого</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-6-label">9. Графын шинж чанарууд</span></a>
+            <button type="button" class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-controls="quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section: 9. Графын шинж чанарууд">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-6" aria-labelledby="quarto-sidebar-section-6-label" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.1 Холбоост чанар (Connectivity)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.2 Эйлерийн цикл (Euler Circuits)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.3 Гамильтоны цикл (Hamiltonian Cycles)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.4 Хавтгай граф (Planar Graphs)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-5.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9.5 Өнгөний тоо (Chromatic Number)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">9-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text" id="quarto-sidebar-section-7-label">10.html</span></a>
+            <button type="button" class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-controls="quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section: 10.html">
+              <i class="bi bi-chevron-right ms-2" aria-hidden="true"></i>
+            </button> 
+      </div>
+      <ul id="quarto-sidebar-section-7" aria-labelledby="quarto-sidebar-section-7-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-1.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Мод ба Алгоритмууд</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-2.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Хайлтын мод (Search Trees)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-3.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Жинлэгдсэн мод (Weighted Trees)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-4.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10.4 Алгоритмын шинжилгээ (1-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-5.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">10.5 Алгоритмын шинжилгээ (2-р хэсэг)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-6.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">10-р бүлгийн тойм бодлогууд</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Дэд гарчиг</h2>
+   
+  <ul>
+  <li><a href="#шийдвэрийн-мод-decision-trees" id="toc-шийдвэрийн-мод-decision-trees" class="nav-link active" data-scroll-target="#шийдвэрийн-мод-decision-trees">Шийдвэрийн мод (Decision Trees)</a></li>
+  <li><a href="#эрэмбэлэх-алгоритмууд-sorting-algorithms" id="toc-эрэмбэлэх-алгоритмууд-sorting-algorithms" class="nav-link" data-scroll-target="#эрэмбэлэх-алгоритмууд-sorting-algorithms">Эрэмбэлэх алгоритмууд (Sorting Algorithms)</a></li>
+  <li><a href="#р-зүйлийн-дасгалууд" id="toc-р-зүйлийн-дасгалууд" class="nav-link" data-scroll-target="#р-зүйлийн-дасгалууд">10.5-р зүйлийн дасгалууд</a>
+  <ul class="collapse">
+  <li><a href="#qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана" id="toc-qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана" class="nav-link" data-scroll-target="#qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана">1. <code>10-5.qmd</code>-ийн төгсгөл (Өмнөх 4-р дасгалын доороос шууд залгана)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10.html">10.html</a></li><li class="breadcrumb-item"><a href="./10-5.html"><span class="chapter-title">10.5 Алгоритмын шинжилгээ (2-р хэсэг)</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">10.5 Алгоритмын шинжилгээ (2-р хэсэг)</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>10.1-р хэсэгт бид мод болон тэдгээрийн хэрэглээг судалсан[cite: 365]. 10.2 болон 10.3-р хэсгүүдэд холбоост графуудаас бүрхэгч мод олдог төрөл бүрийн алгоритмуудыг авч үзсэн[cite: 365]. 10.5-р хэсэгт алгоритмын шинжилгээ рүү анхаарлаа шилжүүлснээр бид нэг бүтэн тойрог хийж, одоо алгоритмуудыг судлахад модыг ашиглах болно[cite: 365].</p>
+<section id="шийдвэрийн-мод-decision-trees" class="level3">
+<h3 class="anchored" data-anchor-id="шийдвэрийн-мод-decision-trees">Шийдвэрийн мод (Decision Trees)</h3>
+<p>Алгоритмд дүн шинжилгээ хийхэд ашигладаг нэг хэрэгсэл бол <strong>шийдвэрийн мод</strong> (decision tree) юм[cite: 365]. Ийм мод нь алгоритм ажиллах явцад хийгдсэн төрөл бүрийн шийдвэр гаргах шалгалтууд дээр үндэслэн алгоритмын дагаж болох замуудыг тусгадаг[cite: 365]. Энд бид шийдвэр гаргах шалгалтууд нь харьцуулалт байдаг хоёртын шийдвэрийн моднууд дээр анхаарлаа төвлөрүүлнэ[cite: 365]. Модны оройнууд нь алгоритм ажиллаж байх үеийн төлөвүүдийг бүртгэнэ[cite: 365]. Харьцуулалт хийгдэж буй оройнууд нь харьцуулалтын үр дүнгээр (үнэн эсвэл худал) ялгагдах хүүхдүүдтэй холбогдоно[cite: 365].</p>
+<p>Дараалсан хайлтын шийдвэрийн модны дүрслэлийг Зураг 10.29-д харуулав[cite: 365, 366]. <span class="math inline">\(1 \le i \le n\)</span> бүрийн хувьд <span class="math inline">\(A[i] = x\)</span> эсэхийг шалгаж буй дотоод орой оршино[cite: 365]. Навчнууд нь <span class="math inline">\(x\)</span>-ийн байрлалын боломжит буцаах утгуудыг илэрхийлнэ[cite: 365]. Энэ модны өндөр нь <span class="math inline">\(n\)</span> байна[cite: 365].</p>
+<p><img src="images/ch10/fig-10-29.png" id="fig-fig-10-29" class="img-fluid" style="width:65.0%" alt="Дараалсан хайлтын шийдвэрийн мод">[cite: 366]</p>
+<p>Хоёртын хайлтын шийдвэрийн модыг (<span class="math inline">\(3\)</span> урттай массивууд дээр хязгаарласан) Зураг 10.30-д дүрсэлсэн[cite: 366]. Тэнд оройнууд нь мөн адил хийгдсэн харьцуулалтууд болон алгоритмаар буцаагдах байрлалуудыг тусгасан байна[cite: 366]. Энэ тохиолдолд оройнууд нь тухайн үе шатанд авч үзэж буй массивын зөвхөн тэр хэсгийг харуулна[cite: 366]. Энэ модны өндөр нь <span class="math inline">\(3 = 1 + \lceil \log_2 3 \rceil\)</span> байна[cite: 366].</p>
+<p><img src="images/ch10/fig-10-30.png" id="fig-fig-10-30" class="img-fluid" style="width:65.0%" alt="Хоёртын хайлтын шийдвэрийн мод (n = 3 үед)">[cite: 366]</p>
+<p>Зураг 10.29 ба 10.30-д модны өндөр нь алгоритмын хамгийн муу тохиолдлын нарийн төвөгтэй байдалтай тэнцүү байгааг анхаарна уу[cite: 366]. Алгоритмын хамгийн муу тохиолдол нь үндэснээс эхэлсэн хамгийн урт замтай харгалздаг тул энэ нь ерөнхий тохиолдолд үнэн байна[cite: 366].</p>
+<p>Шийдвэрийн модны дотоод оройнууд нь шийдвэр гаргаж буй алгоритмын завсрын төлөвүүдийг илэрхийлдэг бол навчнууд нь эцсийн боломжит үр дүнгүүдийг төлөөлдөг[cite: 366]. <span class="math inline">\(n\)</span> урттай массиваас <span class="math inline">\(x\)</span> утгыг хайхад <span class="math inline">\(n + 1\)</span> боломжит үр дүн гарна[cite: 366]. Хэрэв <span class="math inline">\(x\)</span> олдвол <span class="math inline">\(1\)</span>-ээс <span class="math inline">\(n\)</span> хүртэлх ямар нэгэн индексийг буцаана[cite: 366]. Хэрэв <span class="math inline">\(x\)</span> олдохгүй бол <span class="math inline">\(0\)</span>-ийг буцаана[cite: 366]. Иймд дурын хайлтын алгоритмын шийдвэрийн мод хамгийн багадаа <span class="math inline">\(n + 1\)</span> навчтай байх ёстой[cite: 366]. Теорем 10.7 ёсоор энэ модны өндөр хамгийн багадаа <span class="math inline">\(\lceil \log_2(n + 1) \rceil\)</span> байх ёстой[cite: 366]. Өөрөөр хэлбэл, хайлтын алгоритмын боломжит хамгийн бага нарийн төвөгтэй байдал нь <span class="math inline">\(\Theta(\lceil \log_2(n + 1) \rceil) = \Theta(\log_2 n)\)</span> байна[cite: 366]. Тиймээс Хоёртын хайлт нь боломжит хамгийн бага нарийн төвөгтэй байдалтай[cite: 366]. Энэ утгаараа үүнээс илүү үр ашигтай өөр ямар ч хайлтын алгоритм байхгүй[cite: 366].</p>
+</section>
+<section id="эрэмбэлэх-алгоритмууд-sorting-algorithms" class="level3">
+<h3 class="anchored" data-anchor-id="эрэмбэлэх-алгоритмууд-sorting-algorithms">Эрэмбэлэх алгоритмууд (Sorting Algorithms)</h3>
+<p>Бид алгоритмын шинжилгээний судалгаагаа өөр нэгэн ангиллын алгоритмууд руу шилжүүлэн үргэлжлүүлье[cite: 367]. Энд бид өгөгдсөн массивын элементүүдийг үл буурах эрэмбээр байрлуулахыг сонирхож байна[cite: 367]. Хэрэв бид массиваас элемент хайх шаардлага байнга гардаг бол энэ нь бидэнд гарцаагүй сонирхолтой байх болно[cite: 367]. Жишээлбэл, бид дараа нь файлуудаа илүү хялбар олохын тулд тэдгээрийг ихэвчлэн цагаан толгойн дарааллаар эрэмбэлдэг[cite: 367]. Үүнтэй адилаар өгөгдлийн сан дахь бүртгэлүүдийг ямар нэгэн таних дугаарын дагуу эрэмбэлж болно[cite: 367]. Энэ нь бүртгэлүүд рүү илүү хурдан хандах тохиромжтой арга замыг олгоно[cite: 367]. Хэдийгээр эрэмбэлэгдэх түлхүүрүүд нь тоо бус текст байж болох ч аливаа төрлийн түлхүүрт тоон утга оноож болох тул тоонуудыг эрэмбэлдэг алгоритмуудыг авч үзэхэд л хангалттай[cite: 367].</p>
+<p>Бидний эхний эрэмбэлэх алгоритм нь массиваар дараалан гүйх замаар үүнийг хийдэг[cite: 367]. Элемент бүрийг өмнө нь аль хэдийн эрэмбэлэгдсэн хэсэгтэй харьцуулан өөрийнх нь зөв байрлалд оруулж тавина[cite: 367]. Үүнийг <strong>Оруулан эрэмбэлэх</strong> (Insertion Sort) гэж нэрлэдэг бөгөөд Алгоритм 10.8-д харуулав[cite: 367].</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.22
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(A = [3, 1, 5, 6, 4, 2]\)</span> өгөгдсөн үед Оруулан эрэмбэлэх алгоритмыг гүйцэтгэхэд массивын гол төлөвүүд (хамгийн гадна талын <code>for</code> давталт дээр үндэслэсэн) дараах байдалтай байна:</p>
+<pre class="text"><code>   i = 2
+3    1    5    6    4    2
+&lt;----'
+
+        i = 3
+1    3    5    6    4    2
+          o
+
+             i = 4
+1    3    5    6    4    2
+               o
+
+                  i = 5
+1    3    5    6    4    2
+               &lt;----'
+
+                       i = 6
+1    3    4    5    6    2
+     &lt;-------------------'
+
+1    2    3    4    5    6   (төгсгөл)
+</code></pre>
+<p><span class="math inline">\(i\)</span> бүрийн хувьд сумнууд нь <span class="math inline">\(i\)</span>-р байрлалаас тухайн элементийг шилжүүлэн тавих байрлал руу чиглэсэн болно. <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<p>Хайлтын алгоритмуудын нэгэн адил эрэмбэлэх алгоритмуудад сонирхох үйлдлүүд нь массивын элементүүдийг оролцуулсан харьцуулалтууд юм. Мөн оролтын хэмжээг массивын уртаар авч үзнэ. Эрэмбэлэх алгоритмын хамгийн муу тохиолдлын нарийн төвөгтэй байдлыг тодорхойлоход яг эдгээр хүчин зүйлсийг ашигладаг.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.23
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Оруулан эрэмбэлэх алгоритмын хамгийн муу тохиолдлын нарийн төвөгтэй байдал нь <span class="math inline">\(\frac{n(n - 1)}{2}\)</span> байна.</p>
+<p><strong>Баталгаа.</strong> Хамгийн муу гүйцэтгэл нь <span class="math inline">\(A\)</span> массив анхнаасаа эрэмбэлэгдсэн байх үед гардаг гэдгийг санаарай. <span class="math inline">\(i\)</span>-ийн утга бүрийн хувьд <code>while</code> давталтад хамгийн ихдээ <span class="math inline">\(i - 1\)</span> удаа <span class="math inline">\(A[j] &lt; A[i]\)</span> харьцуулалт хийгдэнэ.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.8: Оруулан эрэмбэлэх (Insertion Sort)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Үл буурах эрэмбээр эрэмбэлэх шаардлагатай <span class="math inline">\(n\)</span> урттай <span class="math inline">\(A\)</span> массив байг. <span class="math inline">\(i\)</span> хувьсагч нь өмнө нь эрэмбэлэгдсэн <span class="math inline">\(A[1, \dots, i - 1]\)</span> хэсэгтэй харьцуулан зөв байрлалд нь оруулах массивын элементийн индекс бөгөөд <span class="math inline">\(j\)</span> нь энэ зөв байрлалыг хайж тэрхүү хэсгээр гүйнэ.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>For i = 2 to n:
+    j = 1 гэж авъя.
+    While j &lt; i ба A[j] &lt; A[i]:
+        j = j + 1 болгоно.
+    Хэрэв j &lt; i бол:
+        temp = A[i] гэж авъя.
+        For k = i down to j + 1:
+            A[k] = A[k - 1] болгоно.
+        A[j] = temp болгоно.
+A-г буцаана.
+</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(i &lt; i\)</span> шалгалт тэр цэгт хүрэхээс өмнө худал болдог тул <span class="math inline">\(A[i] &lt; A[i]\)</span> харьцуулалт хэзээ ч хийгдэхгүй болохыг анхаарна уу. Гүйцэтгэгдэх харьцуулалтын тоо хамгийн ихдээ:</p>
+<p><span class="math display">\[\sum_{i=2}^n \left(\sum_{j=1}^{i-1} 1\right) = \sum_{i=2}^n (i - 1) = \frac{n(n - 1)}{2}\]</span></p>
+<p>байна. Оролт үл буурах эрэмбээр эхлэх үед энэ тоонд хүрдэг. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<p>Оруулан эрэмбэлэх алгоритмын (<span class="math inline">\(n = 3\)</span> урттай массивууд дээрх) шийдвэрийн модны дүрслэлийг Зураг 10.31-д харуулав. Тэр модны өндөр нь <span class="math inline">\(3 = \frac{3(2)}{2}\)</span> байна.</p>
+<p>{#fig-fig-10-31 width=65%}</p>
+<p>Бидний хоёр дахь эрэмбэлэх алгоритм нь өгөгдсөн массивыг голоор нь хоёр хуваах замаар ажилладаг. Энэ нь хагас тус бүрийг эрэмбэлж, дараа нь эрэмбэлэгдсэн хоёр хагасыг буцаан нэг эрэмбэлэгдсэн массив болгон нэгтгэдэг. Энэхүү рекурсив алгоритмыг <strong>Нэгтгэн эрэмбэлэх</strong> (Merge Sort) гэж нэрлэдэг бөгөөд Алгоритм 10.9-д харуулав.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.9: Нэгтгэн эрэмбэлэх (Merge Sort)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Үл буурах эрэмбээр эрэмбэлэх шаардлагатай <span class="math inline">\(n\)</span> урттай <span class="math inline">\(A\)</span> массив байг. <span class="math inline">\(A_1\)</span> ба <span class="math inline">\(A_2\)</span> массивуудыг харгалзан <span class="math inline">\(A\)</span>-ийн эхний болон хоёр дахь хагасыг энэ ижил алгоритмаар эрэмбэлсний дараа хадгалахад ашиглана.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>Хэрэв n ≤ 1 бол:
+    A-г буцаана.
+Эсрэг тохиолдолд:
+    A_1 = Merge_Sort(A[1, ..., ⌊n/2⌋], ⌊n/2⌋) гэж авъя.
+    A_2 = Merge_Sort(A[⌊n/2⌋ + 1, ..., n], ⌈n/2⌉) гэж авъя.
+    Merge(A_1, ⌊n/2⌋, A_2, ⌈n/2⌉)-г буцаана.
+</code></pre>
+</div>
+</div>
+<p>Энэ алгоритм нь үндсэндээ Алгоритм 10.10-д үзүүлсэн <strong>Merge</strong> хэмээх алгоритм дээр суурилдаг. Тэр алгоритм нь эрэмбэлэгдсэн хоёр массивыг нэг эрэмбэлэгдсэн массив болгон нэгтгэдэг.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.24
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(A = [3, 1, 5, 6, 4, 2]\)</span> өгөгдсөн үед Нэгтгэн эрэмбэлэх алгоритмын хэрэгжилтийг Зураг 10.32-т харуулав. Тасархай шугамаас дээш орших мод нь зөвхөн <span class="math inline">\(1\)</span> урттай хэсгүүд үлдтэл массивыг хэрхэн давтан хувааж байгааг харуулна. Тасархай шугамаас доош орших мод нь массивыг эцсийн байдлаар эрэмбэлэхийн тулд хэсгүүдийг хэрхэн буцаан нэгтгэж байгааг харуулна. Эдгээр нь шийдвэрийн мод биш болохыг анхаарна уу.</p>
+<p>{#fig-fig-10-32 width=55%} <span class="math inline">\(\blacksquare\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.10: Нэгтгэх (Merge)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(n_1\)</span> урттай эрэмбэлэгдсэн <span class="math inline">\(A_1\)</span> массив болон <span class="math inline">\(n_2\)</span> урттай эрэмбэлэгдсэн <span class="math inline">\(A_2\)</span> массив өгөгдсөн үед энэ алгоритм <span class="math inline">\(n_1 + n_2\)</span> урттай эрэмбэлэгдсэн <span class="math inline">\(A\)</span> массивыг гарган авна.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>i_1 = i_2 = i = 1 гэж авъя.
+While i_1 ≤ n_1 ба i_2 ≤ n_2:
+    Хэрэв A_1[i_1] &lt; A_2[i_2] бол:
+        A[i] = A_1[i_1] болгоно.
+        i_1 = i_1 + 1 болгоно.
+    Эсрэг тохиолдолд:
+        A[i] = A_2[i_2] болгоно.
+        i_2 = i_2 + 1 болгоно.
+    i = i + 1 болгоно.
+Хэрэв i_1 &gt; n_1 бол:
+    While i_2 ≤ n_2:
+        A[i] = A_2[i_2] болгоно.
+        i = i + 1 ба i_2 = i_2 + 1 болгоно.
+Хэрэв i_2 &gt; n_2 бол:
+    While i_1 ≤ n_1:
+        A[i] = A_1[i_1] болгоно.
+        i = i + 1 ба i_1 = i_1 + 1 болгоно.
+n_1 + n_2 урттай A массивыг буцаана.
+</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Жишээ 10.25
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Нэгтгэн эрэмбэлэх алгоритм нь <span class="math inline">\(O(n \log_2 n)\)</span> байна.</p>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(n\)</span> урттай массивыг Нэгтгэн эрэмбэлэхэд шаардагдах харьцуулалтын хамгийн олон тоог <span class="math inline">\(c_n\)</span> гэе. Тэгвэл <span class="math inline">\(c_0 = c_1 = 0\)</span> ба <span class="math inline">\(c_2 = 1\)</span> байна. <span class="math inline">\(n\)</span> урттай массивын Нэгтгэн эрэмбэлэх үйлдлийг дараах байдлаар гүйцэтгэнэ:</p>
+<ol type="1">
+<li><span class="math inline">\(\left\lfloor \frac{n}{2} \right\rfloor\)</span> урттай массивыг нэгтгэн эрэмбэлэх,</li>
+<li><span class="math inline">\(\left\lceil \frac{n}{2} \right\rceil\)</span> урттай массивыг нэгтгэн эрэмбэлэх, мөн</li>
+<li>нэгтгэх үйлдэлд <span class="math inline">\(n - 1\)</span> харьцуулалт гүйцэтгэх.</li>
+</ol>
+<p>Иймд <span class="math inline">\(\forall n \ge 2\)</span>, <span class="math inline">\(c_n = c_{\lfloor \frac{n}{2} \rfloor} + c_{\lceil \frac{n}{2} \rceil} + (n - 1)\)</span> байна. Одоо <span class="math inline">\(\forall n \ge 1\)</span>, <span class="math inline">\(c_n \le 2n \log_2 n\)</span> болохыг гүйцэд индукцээр харуулж болно. Үүнийг Дасгал 37-д үлдээв. <span class="math inline">\(\square\)</span></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Теорем 10.17
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Эрэмбэлэх алгоритм бүрийн хамгийн муу тохиолдлын нарийн төвөгтэй байдал нь хамгийн багадаа <span class="math inline">\(\frac{n}{2} \log_2 \frac{n}{2}\)</span> байна.</p>
+</div>
+</div>
+<p><strong>Баталгаа.</strong> <span class="math inline">\(n\)</span> урттай массивын <span class="math inline">\(n!\)</span> боломжит сэлгэмэл байдаг тул дурын эрэмбэлэх алгоритмын шийдвэрийн мод хамгийн багадаа <span class="math inline">\(n!\)</span> навчтай байх ёстой. Тэгвэл Теорем 10.7 ёсоор энэ модны өндөр хамгийн багадаа <span class="math inline">\(\lceil \log_2 n! \rceil\)</span> байх ёстойг бидэнд хэлнэ. Улмаар хамгийн муу тохиолдлын нарийн төвөгтэй байдал нь хамгийн багадаа:</p>
+<p><span class="math display">\[\begin{aligned}
+\lceil \log_2 n! \rceil &amp;\ge \log_2 n! = \sum_{i=1}^n \log_2 i \\
+&amp;\ge \sum_{i=\lceil \frac{n}{2} \rceil}^n \log_2 i = \log_2 \left\lceil \frac{n}{2} \right\rceil + \dots + \log_2 n \\
+&amp;\ge \left(n - \left\lceil \frac{n}{2} \right\rceil + 1\right) \log_2 \left\lceil \frac{n}{2} \right\rceil = \left(\left\lfloor \frac{n}{2} \right\rfloor + 1\right) \log_2 \left\lceil \frac{n}{2} \right\rceil \\
+&amp;\ge \left\lceil \frac{n}{2} \right\rceil \log_2 \left\lceil \frac{n}{2} \right\rceil \\
+&amp;\ge \frac{n}{2} \log_2 \frac{n}{2}
+\end{aligned}\]</span></p>
+<p>байна. <span class="math inline">\(\square\)</span></p>
+<p>10.4-р хэсгийн Дасгал 33 нь <span class="math inline">\(O\left(\frac{n}{2} \log_2 \frac{n}{2}\right) = O(n \log_2 n)\)</span> гэдгийг өгдөг тул Нэгтгэн эрэмбэлэх алгоритм нь <span class="math inline">\(\Theta(n \log_2 n)\)</span> болох нь мөрдөн гарна. Түүнчлэн их-<span class="math inline">\(\Theta\)</span>-ийн утгаар ямар ч эрэмбэлэх алгоритм Нэгтгэн эрэмбэлэх алгоритмаас илүү үр ашигтай байж чадахгүй. Гэсэн хэдий ч бид орон зайн нарийн төвөгтэй байдлыг бус зөвхөн хугацааны нарийн төвөгтэй байдлыг авч үзсэн гэдгийг санаарай. Нэгтгэн эрэмбэлэх алгоритмын рекурсив шинж чанар нь процедур өөрийгөө дуудах бүрд илүү их санах ой ашиглахыг шаарддаг. Нөгөөтэйгүүр Оруулан эрэмбэлэх алгоритм нь <strong>байран дээр нь эрэмбэлэх</strong> (in-place sort) алгоритм юм. Өөрөөр хэлбэл, эрэмбэлэх гэж буй <span class="math inline">\(A\)</span> массивын элементүүдийг <span class="math inline">\(A\)</span> дотор нь өөр дээр нь хольж солихоос бус, рекурсив Нэгтгэн эрэмбэлэх алгоритмд шаардагддаг шиг <span class="math inline">\(A\)</span>-ийн дэд массивуудын хуулбарыг үүсгэх шаардлагагүй байдаг.</p>
+<p>Дасгалуудад бид гурван нэмэлт эрэмбэлэх алгоритмыг танилцуулна: <strong>Хөөсөн эрэмбэлэлт</strong> (Bubble Sort), <strong>Сонгон эрэмбэлэлт</strong> (Selection Sort), болон <strong>Хурдан эрэмбэлэлт</strong> (Quick Sort). Эдгээрийг оролцуулан энэ хэсэгт авч үзсэн эрэмбэлэх алгоритмуудын хугацааны нарийн төвөгтэй байдлыг Хүснэгт 10.3-т жагсаасан бөгөөд тэр хүснэгт дэх дутуу утгуудыг дасгалуудад үлдээсэн болно. Эрэмбэлэх шаардлагатай санамсаргүй массив дээр хүлээгдэж буй ажиллах хугацааны талаар ойлголт өгөхийн тулд Хүснэгт 10.3-т батлагдаагүй дундаж тохиолдлын нарийн төвөгтэй байдлуудыг оруулсан болно. Мөн Хурдан эрэмбэлэлтийн дундаж тохиолдлын нарийн төвөгтэй байдал нь түүний нэрийг зөвтгөхөд тусалдаг.</p>
+<div id="tbl-10-3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-10-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;40.1: Эрэмбэлэх алгоритмуудын хугацааны нарийн төвөгтэй байдал
+</figcaption>
+<div aria-describedby="tbl-10-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Эрэмбэлэх алгоритм</th>
+<th>Оруулан эрэмбэлэх</th>
+<th>Хөөсөн</th>
+<th>Сонгон</th>
+<th>Нэгтгэн эрэмбэлэх</th>
+<th>Хурдан</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Хамгийн муу тохиолдол</strong></td>
+<td><span class="math inline">\(\Theta(n^2)\)</span></td>
+<td></td>
+<td></td>
+<td><span class="math inline">\(\Theta(n \log_2 n)\)</span></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Дундаж тохиолдол</strong></td>
+<td><span class="math inline">\(\Theta(n^2)\)</span></td>
+<td><span class="math inline">\(\Theta(n^2)\)</span></td>
+<td><span class="math inline">\(\Theta(n^2)\)</span></td>
+<td><span class="math inline">\(\Theta(n \log_2 n)\)</span></td>
+<td><span class="math inline">\(\Theta(n \log_2 n)\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<hr>
+</section>
+<section id="р-зүйлийн-дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">10.5-р зүйлийн дасгалууд</h2>
+<ol type="1">
+<li><p><span class="math inline">\(4\)</span> урттай массивуудын хувьд Хоёртын хайлтын шийдвэрийн модыг байгуул.</p></li>
+<li><p><span class="math inline">\(5\)</span> урттай массивуудын хувьд Хоёртын хайлтын шийдвэрийн модыг байгуул.</p></li>
+<li><p><span class="math inline">\(n = 4\)</span> үед <strong>Maximum</strong> алгоритмын (10.4-р хэсгийн Дасгал 11) шийдвэрийн модыг байгуул.</p></li>
+<li><p><span class="math inline">\(n = 3\)</span> үед <strong>Count</strong> алгоритмын (10.4-р хэсгийн Дасгал 12) шийдвэрийн модыг байгуул.</p></li>
+</ol>
+<p><strong><code>10-5.qmd</code></strong> файлын төгсгөл (Алгоритм 10.11–10.14 болон 5–46-р дасгалууд) болон <strong>10-р бүлгийн тойм бодлогууд</strong> (1–57-р бодлогууд)-ыг таны Quarto номын стандартад яг тааруулан орчуулж бэлтгэлээ. Ингэснээр сурах бичгийн <strong>10-р бүлэг</strong> болон үндсэн агуулга бүрэн дууслаа.</p>
+<section id="qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана" class="level3">
+<h3 class="anchored" data-anchor-id="qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана">1. <code>10-5.qmd</code>-ийн төгсгөл (Өмнөх 4-р дасгалын доороос шууд залгана)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>*5-аас 8 хүртэлх дасгалуудад өгөгдсөн $A$ массивын хувьд Оруулан эрэмбэлэх алгоритмын гол төлөвүүдийг харуул.*</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>$A = <span class="co">[</span><span class="ot">7, 5, 3, 1</span><span class="co">]</span>$. $\qquad$ 6. $A = <span class="co">[</span><span class="ot">3, 8, 4, 1, 2, 6, 5, 7</span><span class="co">]</span>$.</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>$A = <span class="co">[</span><span class="ot">4, 2, 6, 1, 5, 3</span><span class="co">]</span>$. $\qquad$ 8. $A = <span class="co">[</span><span class="ot">3, 8, 6, 1, 4</span><span class="co">]</span>$.</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>$2$ урттай массивуудын хувьд Оруулан эрэмбэлэх алгоритмын шийдвэрийн модыг байгуул.</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>$4$ урттай массивуудын хувьд $A<span class="co">[</span><span class="ot">4</span><span class="co">]</span>$ нь хамгийн бага утга байх тохиолдолд Оруулан эрэмбэлэх алгоритмын шийдвэрийн модны хэсгийг байгуул.</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>*11-ээс 14 хүртэлх дасгалуудад өгөгдсөн $A$ массивын хувьд Нэгтгэн эрэмбэлэх алгоритм нь эхлээд массивыг хэрхэн хэсгүүдэд хувааж, дараа нь хэсгүүдийг хэрхэн эрэмбээр нь буцаан нэгтгэж байгааг харуулсан модны бүдүүвч байгуул.*</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ss">11. </span>$A = <span class="co">[</span><span class="ot">7, 5, 3, 1</span><span class="co">]</span>$. $\qquad$ 12. $A = <span class="co">[</span><span class="ot">3, 8, 4, 1, 2, 6, 5, 7</span><span class="co">]</span>$.</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ss">13. </span>$A = <span class="co">[</span><span class="ot">4, 2, 6, 1, 5, 3</span><span class="co">]</span>$. $\qquad$ 14. $A = <span class="co">[</span><span class="ot">3, 8, 6, 1, 4</span><span class="co">]</span>$.</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>**Хөөсөн эрэмбэлэлт** (Bubble Sort) эрэмбэлэх алгоритмыг Алгоритм 10.11-д харуулав. *15-аас 18 хүртэлх дасгалуудад өгөгдсөн $A$ массивын хувьд Хөөсөн эрэмбэлэлтийн гол төлөвүүдийг харуул.*</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Алгоритм 10.11: Хөөсөн эрэмбэлэлт (Bubble Sort)</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>$i$ хувьсагч нь $A<span class="co">[</span><span class="ot">i + 1, \dots, n</span><span class="co">]</span>$ хэсэг аль хэдийн байрлалаа эзэлсэн гэсэн таамаглал дээр үндэслэн тодорхойлох элементийн индекс бөгөөд $j$ нь $i$-р байрлалд тохирох утгыг шүүж дээшлүүлэхийн тулд бага индексүүдээр гүйнэ.</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>**Алгоритм.**</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="in">For i = n down to 2:</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="in">    For j = 1 to i - 1:</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="in">        Хэрэв A[j] &gt; A[j + 1] бол:</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="in">            temp = A[j + 1] гэж авъя.</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="in">            A[j + 1] = A[j] болгоно.</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="in">            A[j] = temp болгоно.</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="in">A-г буцаана.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>:::</p>
+<ol start="15" type="1">
+<li><span class="math inline">\(A = [4, 2, 6, 1, 5, 3]\)</span>. <span class="math inline">\(\qquad\)</span> 16. <span class="math inline">\(A = [5, 8, 1, 3, 6]\)</span>.</li>
+<li><span class="math inline">\(A = [7, 5, 4, 2, 1]\)</span>. <span class="math inline">\(\qquad\)</span> 18. <span class="math inline">\(A = [8, 6, 5, 3, 2, 1]\)</span>.</li>
+</ol>
+<p><strong>Сонгон эрэмбэлэлт</strong> (Selection Sort) эрэмбэлэх алгоритмыг Алгоритм 10.12-т харуулав. <em>19-өөс 22 хүртэлх дасгалуудад өгөгдсөн <span class="math inline">\(A\)</span> массивын хувьд Сонгон эрэмбэлэлтийн гол төлөвүүдийг харуул.</em></p>
+<ol start="19" type="1">
+<li><span class="math inline">\(A = [3, 8, 6, 1, 4]\)</span>.</li>
+</ol>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.12: Сонгон эрэмбэлэлт (Selection Sort)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(i\)</span> хувьсагч нь <span class="math inline">\(A[1, \dots, i - 1]\)</span> хэсэг аль хэдийн эрэмбэлэгдсэн гэсэн таамаглал дээр үндэслэн тодорхойлох элементийн индекс бөгөөд <span class="math inline">\(j\)</span> нь <span class="math inline">\(i\)</span>-р байрлалд тохирох утгыг олохоор дээд индексүүдээр гүйнэ. <code>min</code> хувьсагч нь <span class="math inline">\(i\)</span>-р байрлалд одоогоор хамгийн сайн нэр дэвшиж буй элементийн индексийг хадгална.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>For i = 1 to n - 1:
+    min = i гэж авъя.
+    For j = i + 1 to n:
+        Хэрэв A[j] &lt; A[min] бол:
+            min = j болгоно.
+    Хэрэв min ≠ i бол:
+        temp = A[i] гэж авъя.
+        A[i] = A[min] болгоно.
+        A[min] = temp болгоно.
+A-г буцаана.
+</code></pre>
+</div>
+</div>
+<ol start="20" type="1">
+<li><span class="math inline">\(A = [2, 8, 3, 1, 5, 4]\)</span>. <span class="math inline">\(\qquad\)</span> 21. <span class="math inline">\(A = [6, 5, 4, 3, 2, 1]\)</span>.</li>
+<li><span class="math inline">\(A = [7, 5, 4, 2, 1]\)</span>.</li>
+<li>Хөөсөн эрэмбэлэлтийн хамгийн муу тохиолдлын нарийн төвөгтэй байдлыг тодорхойл.</li>
+<li>Сонгон эрэмбэлэлтийн хамгийн муу тохиолдлын нарийн төвөгтэй байдлыг тодорхойл.</li>
+<li><span class="math inline">\(n = 3\)</span> үед Хөөсөн эрэмбэлэлтийн шийдвэрийн модыг байгуул.</li>
+<li><span class="math inline">\(n = 2\)</span> үед Хөөсөн эрэмбэлэлтийн шийдвэрийн модыг байгуул.</li>
+<li><span class="math inline">\(n = 2\)</span> үед Сонгон эрэмбэлэлтийн шийдвэрийн модыг байгуул.</li>
+<li><span class="math inline">\(n = 3\)</span> үед Сонгон эрэмбэлэлтийн шийдвэрийн модыг байгуул.</li>
+<li>Хөөсөн эрэмбэлэлт нь их-<span class="math inline">\(\Theta\)</span>-ийн утгаар хамгийн үр ашигтай эрэмбэлэх алгоритм мөн үү?</li>
+<li>Сонгон эрэмбэлэлт нь их-<span class="math inline">\(\Theta\)</span>-ийн утгаар хамгийн үр ашигтай эрэмбэлэх алгоритм мөн үү?</li>
+<li>Бридж хөзөр тоглох үед тоглогч гартаа байгаа хөзрүүдээ эрэмбэлдэг аргатай ижил ажилладаг тул заримдаа <strong>Бридж эрэмбэлэлт</strong> (Bridge Sort) гэж нэрлэдэг эрэмбэлэх алгоритм бий. Эхлээд тэрээр хамгийн том хөзрөө гарынхаа хамгийн баруун захын байрлалд шилжүүлнэ. Дараа нь хоёр дахь том хөзрөө баруун захаас хоёр дахь байрлалд шилжүүлэх гэх мэтээр үргэлжилнэ. Энэ арга нь энэ хэсэгт авч үзсэн эрэмбэлэх алгоритмуудын нэгтэй давхцдаг. Аль нь вэ?</li>
+<li>Нэгэн ажилтан Смит (Smith) хэмээх өвчтөний эмнэлгийн картыг олох шаардлагатай болжээ. Тэрээр “S” үсэгтэй шургуулга дээр очоод татаж нээнэ. Эхлээд тэр шургуулганы голын орчмоос нэг хавтас сугалан үзэхэд Ширс (Shears) гэдэг өвчтөний карт байв. Тиймээс тэр шургуулганы дөрөвний гурвын орчим руу ухарч үзэхэд Стивенс (Stevens) гэдэг өвчтөний карт таарчээ. Дараа нь тэр урагшлан хайх гэх мэтээр үргэлжлүүлнэ. Энэ арга барил нь 10.4-р хэсэгт авч үзсэн хайлтын алгоритмуудын нэгтэй төстэй. Аль нь вэ?</li>
+</ol>
+<p><em>33-аас 36 хүртэлх дасгалуудад хэрэв <span class="math inline">\(A\)</span> массивт давхардсан элементүүд байвал заасан эрэмбэлэх алгоритм нь тэдгээрийг анхны эрэмбээр нь үргэлж үлдээх эсэхийг тодорхойл. Хэрэв үгүй бол тайлбарла.</em></p>
+<ol start="33" type="1">
+<li>Оруулан эрэмбэлэх. <span class="math inline">\(\qquad\)</span> 34. Нэгтгэн эрэмбэлэх.</li>
+<li>Хөөсөн эрэмбэлэлт. <span class="math inline">\(\qquad\)</span> 36. Сонгон эрэмбэлэлт.</li>
+<li><span class="math inline">\(\star\)</span> <span class="math inline">\(n\)</span> урттай массивыг Нэгтгэн эрэмбэлэхэд шаардагдах харьцуулалтын хамгийн олон тоог <span class="math inline">\(c_n\)</span> гэе. <span class="math inline">\(\forall n \ge 1, \, c_n \le 2n \log_2 n\)</span> болохыг харуулснаар Жишээ 10.25-ын баталгааг гүйцээ. <em>Зөвлөмж:</em> <span class="math inline">\(\forall n \ge 1, \, 2^{c_n} \le 2^{2n \log_2 n} = n^{2n}\)</span> болохыг гүйцэд индукцээр батал.</li>
+<li><span class="math inline">\(\star\)</span> Аливаа бэхлэгдсэн <span class="math inline">\(k\)</span>-ийн хувьд <span class="math inline">\(n\)</span> урттай массиваас хамгийн эхний <span class="math inline">\(k\)</span> элементийг олох нь <span class="math inline">\(O(n)\)</span> байдаг атлаа эрэмбэлэх нь <span class="math inline">\(O(n \log_2 n)\)</span> байдгийг ажигла. Энэ яагаад боломжтой болохыг тайлбарла.</li>
+<li><strong>Maximum</strong> алгоритм (10.4-р хэсгийн Дасгал 11) нь <span class="math inline">\(\Theta(n)\)</span> болохыг харуул.</li>
+<li><strong>Count</strong> алгоритм (10.4-р хэсгийн Дасгал 12) нь <span class="math inline">\(\Theta(n)\)</span> болохыг харуул.</li>
+</ol>
+<p><strong>Хурдан эрэмбэлэлт</strong> (Quick Sort) эрэмбэлэх алгоритмыг Алгоритм 10.13-т харуулав. Энэ нь үндсэндээ Алгоритм 10.14-т үзүүлсэн <strong>Split</strong> (Хуваах) алгоритм дээр суурилдаг.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.13: Хурдан эрэмбэлэлт (Quick Sort)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Үл буурах эрэмбээр эрэмбэлэх шаардлагатай <span class="math inline">\(n\)</span> урттай <span class="math inline">\(A\)</span> массив байг. <code>mid</code> хувьсагч нь массивыг хоёр хэсэгт хувааж,</p>
+<p><span class="math display">\[A[1], \dots, A[\text{mid} - 1] &lt; A[\text{mid}] \le A[\text{mid} + 1], \dots, A[n]\]</span></p>
+<p>байхаар хэсэгчлэн эрэмбэлдэг <code>Split</code> функцээр сонгогдсон байрлал байна.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>Хэрэв n ≤ 1 бол:
+    A-г буцаана.
+Эсрэг тохиолдолд:
+    (A, mid) = Split(A, n) гэж авъя.
+    A[1, ..., mid - 1] = Quick_Sort(A[1, ..., mid - 1], mid - 1) болгоно.
+    A[mid + 1, ..., n] = Quick_Sort(A[mid + 1, ..., n], n - mid) болгоно.
+    A-г буцаана.
+</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.14: Хуваах (Split)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(A[1]\)</span> элементийг массив бүрэн эрэмбэлэгдэх үед очих <code>mid</code> индекс бүхий байрлалд нь шилжүүлэх замаар дахин эрэмбэлэх шаардлагатай <span class="math inline">\(n\)</span> урттай <span class="math inline">\(A\)</span> массив байг. Энэ функц <span class="math inline">\(A\)</span>-г дахин эрэмбэлж дуусахад <code>mid</code> байрлалын өмнө <span class="math inline">\(A[\text{mid}]\)</span>-ээс их элемент байхгүй, харин <code>mid</code> байрлалын ард <span class="math inline">\(A[\text{mid}]\)</span>-ээс бага элемент байхгүй байхыг хүснэ.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>mid = 1 гэж авъя.
+For i = 2 to n:
+    Хэрэв A[i] &lt; A[1] бол:
+        mid = mid + 1 болгоно.
+        temp = A[mid]; A[mid] = A[i]; A[i] = temp болгоно.
+temp = A[mid]; A[mid] = A[1]; A[1] = temp болгоно.
+(A, mid)-ийг буцаана.
+</code></pre>
+</div>
+</div>
+<p><em>41-ээс 44 хүртэлх дасгалуудад өгөгдсөн <span class="math inline">\(A\)</span> массивын хувьд Хурдан эрэмбэлэлтийн гол төлөвүүдийг харуул. Тухайлбал, <code>Split</code> дуудагдах бүрд буцаагдсан <code>mid</code> утгыг бич. Мөн <code>Quick_Sort</code>-ийн дуудлагуудыг <span class="math inline">\(1\)</span> урттай дэд массивууд хүртэл нь дагаж хий.</em></p>
+<ol start="41" type="1">
+<li><span class="math inline">\(A = [3, 5, 6, 1, 4]\)</span>. <span class="math inline">\(\qquad\)</span> 42. <span class="math inline">\(A = [2, 1, 4, 3, 6, 5]\)</span>.</li>
+<li><span class="math inline">\(A = [1, 2, 3, 4]\)</span>. <span class="math inline">\(\qquad\)</span> 44. <span class="math inline">\(A = [2, 7, 1, 3, 5]\)</span>.</li>
+<li>Хурдан эрэмбэлэлтийн хамгийн муу тохиолдлын нарийн төвөгтэй байдлыг тодорхойл. Энэ нь өгөгдсөн <span class="math inline">\(A\)</span> массив анхнаасаа үл буурах эрэмбээр эхлэх үед гардаг болохыг тэмдэглэе. Өөрөөр хэлбэл, <code>Split</code>-ийн дуудлага бүр <code>mid = 1</code> утга буцаана. Дасгал 43 бол энэ хамгийн муу тохиолдлын жишээ юм. <em>Анхааруулга:</em> Хамгийн муу тохиолдлын нарийн төвөгтэй байдал нь үргэлж дундаж тохиолдлын нарийн төвөгтэй байдалтай ижил эрэмбэтэй байдаггүй.</li>
+<li><span class="math inline">\(\star\)</span> Хэрэв <code>Split</code>-ийн дуудлага бүр <code>mid = 2</code> утга буцаадаг бол Хурдан эрэмбэлэлтэд хийгдэх харьцуулалтын тоог тодорхойл. Дасгал 42 бол энэ тохиолдлын жишээ болохыг тэмдэглэе.</li>
+</ol>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-4.html" class="pagination-link" aria-label="10.4 Алгоритмын шинжилгээ (1-р хэсэг)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">10.4 Алгоритмын шинжилгээ (1-р хэсэг)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-6.html" class="pagination-link" aria-label="10-р бүлгийн тойм бодлогууд">
+        <span class="nav-page-text"><span class="chapter-title">10-р бүлгийн тойм бодлогууд</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
