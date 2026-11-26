@@ -2,14 +2,14 @@ import fitz  # PyMuPDF
 import os
 
 pdf_path = "book.pdf"
-out_dir = "ch09_pages"
+out_dir = "ch10_pages"
 os.makedirs(out_dir, exist_ok=True)
 
 doc = fitz.open(pdf_path)
 
 # Номын 497-р хуудас нь PDF дээр ойролцоогоор 579-р хуудас (индекс 578) дээр эхэлнэ
-start_page = 505  
-end_page = 567    
+start_page = 567  
+end_page = 635   
 
 for i in range(start_page, min(end_page, len(doc))):
     page = doc[i]

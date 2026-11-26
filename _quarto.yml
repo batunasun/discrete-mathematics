@@ -68,6 +68,15 @@ book:
         - 9-4.qmd
         - 9-5.qmd
         - 9-6.qmd
+            
+    - part: 10.qmd
+      chapters:
+        - 10-1.qmd
+        - 10-2.qmd
+        - 10-3.qmd
+        - 10-4.qmd
+        - 10-5.qmd
+        - 10-6.qmd
 
 format:
   html:
