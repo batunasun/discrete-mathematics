@@ -2,6 +2,11 @@ project:
   type: book
 
 lang: mn
+language:
+  crossref-fig-title: "Зураг"
+
+crossref:
+  chapters: false
 
 book:
   title: "Дискрет математик"
@@ -12,7 +17,7 @@ book:
     logo: images/must-logo.png
   cover-image: images/cover.png
   #favicon: images/must-logo.png
-    
+      
   chapters:
     - index.qmd
     - 0.qmd
