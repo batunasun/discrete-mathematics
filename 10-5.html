@@ -26,41 +26,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -660,10 +625,7 @@ window.Quarto = {
   <ul>
   <li><a href="#шийдвэрийн-мод-decision-trees" id="toc-шийдвэрийн-мод-decision-trees" class="nav-link active" data-scroll-target="#шийдвэрийн-мод-decision-trees">Шийдвэрийн мод (Decision Trees)</a></li>
   <li><a href="#эрэмбэлэх-алгоритмууд-sorting-algorithms" id="toc-эрэмбэлэх-алгоритмууд-sorting-algorithms" class="nav-link" data-scroll-target="#эрэмбэлэх-алгоритмууд-sorting-algorithms">Эрэмбэлэх алгоритмууд (Sorting Algorithms)</a></li>
-  <li><a href="#р-зүйлийн-дасгалууд" id="toc-р-зүйлийн-дасгалууд" class="nav-link" data-scroll-target="#р-зүйлийн-дасгалууд">10.5-р зүйлийн дасгалууд</a>
-  <ul class="collapse">
-  <li><a href="#qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана" id="toc-qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана" class="nav-link" data-scroll-target="#qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана">1. <code>10-5.qmd</code>-ийн төгсгөл (Өмнөх 4-р дасгалын доороос шууд залгана)</a></li>
-  </ul></li>
+  <li><a href="#дасгалууд" id="toc-дасгалууд" class="nav-link" data-scroll-target="#дасгалууд">10.5 Дасгалууд</a></li>
   </ul>
 </nav>
     </div>
@@ -690,21 +652,39 @@ window.Quarto = {
 </header>
 
 
-<p>10.1-р хэсэгт бид мод болон тэдгээрийн хэрэглээг судалсан[cite: 365]. 10.2 болон 10.3-р хэсгүүдэд холбоост графуудаас бүрхэгч мод олдог төрөл бүрийн алгоритмуудыг авч үзсэн[cite: 365]. 10.5-р хэсэгт алгоритмын шинжилгээ рүү анхаарлаа шилжүүлснээр бид нэг бүтэн тойрог хийж, одоо алгоритмуудыг судлахад модыг ашиглах болно[cite: 365].</p>
+<p>10.1-р хэсэгт бид мод болон тэдгээрийн хэрэглээг судалсан. 10.2 болон 10.3-р хэсгүүдэд холбоост графуудаас бүрхэгч мод олдог төрөл бүрийн алгоритмуудыг авч үзсэн. 10.5-р хэсэгт алгоритмын шинжилгээ рүү анхаарлаа шилжүүлснээр бид нэг бүтэн тойрог хийж, одоо алгоритмуудыг судлахад модыг ашиглах болно.</p>
 <section id="шийдвэрийн-мод-decision-trees" class="level3">
 <h3 class="anchored" data-anchor-id="шийдвэрийн-мод-decision-trees">Шийдвэрийн мод (Decision Trees)</h3>
-<p>Алгоритмд дүн шинжилгээ хийхэд ашигладаг нэг хэрэгсэл бол <strong>шийдвэрийн мод</strong> (decision tree) юм[cite: 365]. Ийм мод нь алгоритм ажиллах явцад хийгдсэн төрөл бүрийн шийдвэр гаргах шалгалтууд дээр үндэслэн алгоритмын дагаж болох замуудыг тусгадаг[cite: 365]. Энд бид шийдвэр гаргах шалгалтууд нь харьцуулалт байдаг хоёртын шийдвэрийн моднууд дээр анхаарлаа төвлөрүүлнэ[cite: 365]. Модны оройнууд нь алгоритм ажиллаж байх үеийн төлөвүүдийг бүртгэнэ[cite: 365]. Харьцуулалт хийгдэж буй оройнууд нь харьцуулалтын үр дүнгээр (үнэн эсвэл худал) ялгагдах хүүхдүүдтэй холбогдоно[cite: 365].</p>
-<p>Дараалсан хайлтын шийдвэрийн модны дүрслэлийг Зураг 10.29-д харуулав[cite: 365, 366]. <span class="math inline">\(1 \le i \le n\)</span> бүрийн хувьд <span class="math inline">\(A[i] = x\)</span> эсэхийг шалгаж буй дотоод орой оршино[cite: 365]. Навчнууд нь <span class="math inline">\(x\)</span>-ийн байрлалын боломжит буцаах утгуудыг илэрхийлнэ[cite: 365]. Энэ модны өндөр нь <span class="math inline">\(n\)</span> байна[cite: 365].</p>
-<p><img src="images/ch10/fig-10-29.png" id="fig-fig-10-29" class="img-fluid" style="width:65.0%" alt="Дараалсан хайлтын шийдвэрийн мод">[cite: 366]</p>
-<p>Хоёртын хайлтын шийдвэрийн модыг (<span class="math inline">\(3\)</span> урттай массивууд дээр хязгаарласан) Зураг 10.30-д дүрсэлсэн[cite: 366]. Тэнд оройнууд нь мөн адил хийгдсэн харьцуулалтууд болон алгоритмаар буцаагдах байрлалуудыг тусгасан байна[cite: 366]. Энэ тохиолдолд оройнууд нь тухайн үе шатанд авч үзэж буй массивын зөвхөн тэр хэсгийг харуулна[cite: 366]. Энэ модны өндөр нь <span class="math inline">\(3 = 1 + \lceil \log_2 3 \rceil\)</span> байна[cite: 366].</p>
-<p><img src="images/ch10/fig-10-30.png" id="fig-fig-10-30" class="img-fluid" style="width:65.0%" alt="Хоёртын хайлтын шийдвэрийн мод (n = 3 үед)">[cite: 366]</p>
-<p>Зураг 10.29 ба 10.30-д модны өндөр нь алгоритмын хамгийн муу тохиолдлын нарийн төвөгтэй байдалтай тэнцүү байгааг анхаарна уу[cite: 366]. Алгоритмын хамгийн муу тохиолдол нь үндэснээс эхэлсэн хамгийн урт замтай харгалздаг тул энэ нь ерөнхий тохиолдолд үнэн байна[cite: 366].</p>
-<p>Шийдвэрийн модны дотоод оройнууд нь шийдвэр гаргаж буй алгоритмын завсрын төлөвүүдийг илэрхийлдэг бол навчнууд нь эцсийн боломжит үр дүнгүүдийг төлөөлдөг[cite: 366]. <span class="math inline">\(n\)</span> урттай массиваас <span class="math inline">\(x\)</span> утгыг хайхад <span class="math inline">\(n + 1\)</span> боломжит үр дүн гарна[cite: 366]. Хэрэв <span class="math inline">\(x\)</span> олдвол <span class="math inline">\(1\)</span>-ээс <span class="math inline">\(n\)</span> хүртэлх ямар нэгэн индексийг буцаана[cite: 366]. Хэрэв <span class="math inline">\(x\)</span> олдохгүй бол <span class="math inline">\(0\)</span>-ийг буцаана[cite: 366]. Иймд дурын хайлтын алгоритмын шийдвэрийн мод хамгийн багадаа <span class="math inline">\(n + 1\)</span> навчтай байх ёстой[cite: 366]. Теорем 10.7 ёсоор энэ модны өндөр хамгийн багадаа <span class="math inline">\(\lceil \log_2(n + 1) \rceil\)</span> байх ёстой[cite: 366]. Өөрөөр хэлбэл, хайлтын алгоритмын боломжит хамгийн бага нарийн төвөгтэй байдал нь <span class="math inline">\(\Theta(\lceil \log_2(n + 1) \rceil) = \Theta(\log_2 n)\)</span> байна[cite: 366]. Тиймээс Хоёртын хайлт нь боломжит хамгийн бага нарийн төвөгтэй байдалтай[cite: 366]. Энэ утгаараа үүнээс илүү үр ашигтай өөр ямар ч хайлтын алгоритм байхгүй[cite: 366].</p>
+<p>Алгоритмд дүн шинжилгээ хийхэд ашигладаг нэг хэрэгсэл бол <strong>шийдвэрийн мод</strong> (decision tree) юм. Ийм мод нь алгоритм ажиллах явцад хийгдсэн төрөл бүрийн шийдвэр гаргах шалгалтууд дээр үндэслэн алгоритмын дагаж болох замуудыг тусгадаг. Энд бид шийдвэр гаргах шалгалтууд нь харьцуулалт байдаг хоёртын шийдвэрийн моднууд дээр анхаарлаа төвлөрүүлнэ. Модны оройнууд нь алгоритм ажиллаж байх үеийн төлөвүүдийг бүртгэнэ. Харьцуулалт хийгдэж буй оройнууд нь харьцуулалтын үр дүнгээр (үнэн эсвэл худал) ялгагдах хүүхдүүдтэй холбогдоно.</p>
+<p>Дараалсан хайлтын шийдвэрийн модны дүрслэлийг Зураг 10.29-д харуулав. <span class="math inline">\(1 \le i \le n\)</span> бүрийн хувьд <span class="math inline">\(A[i] = x\)</span> эсэхийг шалгаж буй дотоод орой оршино. Навчнууд нь <span class="math inline">\(x\)</span>-ийн байрлалын боломжит буцаах утгуудыг илэрхийлнэ. Энэ модны өндөр нь <span class="math inline">\(n\)</span> байна.</p>
+<div id="fig-fig-10-29" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-29-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-29.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-29-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Зураг&nbsp;1: Дараалсан хайлтын шийдвэрийн мод
+</figcaption>
+</figure>
+</div>
+<p>Хоёртын хайлтын шийдвэрийн модыг (<span class="math inline">\(3\)</span> урттай массивууд дээр хязгаарласан) Зураг 10.30-д дүрсэлсэн. Тэнд оройнууд нь мөн адил хийгдсэн харьцуулалтууд болон алгоритмаар буцаагдах байрлалуудыг тусгасан байна. Энэ тохиолдолд оройнууд нь тухайн үе шатанд авч үзэж буй массивын зөвхөн тэр хэсгийг харуулна. Энэ модны өндөр нь <span class="math inline">\(3 = 1 + \lceil \log_2 3 \rceil\)</span> байна.</p>
+<div id="fig-fig-10-30" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig-10-30-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/ch10/fig-10-30.png" class="img-fluid figure-img" style="width:65.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-30-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Зураг&nbsp;2: Хоёртын хайлтын шийдвэрийн мод (n = 3 үед)
+</figcaption>
+</figure>
+</div>
+<p>Зураг 10.29 ба 10.30-д модны өндөр нь алгоритмын хамгийн муу тохиолдлын нарийн төвөгтэй байдалтай тэнцүү байгааг анхаарна уу. Алгоритмын хамгийн муу тохиолдол нь үндэснээс эхэлсэн хамгийн урт замтай харгалздаг тул энэ нь ерөнхий тохиолдолд үнэн байна.</p>
+<p>Шийдвэрийн модны дотоод оройнууд нь шийдвэр гаргаж буй алгоритмын завсрын төлөвүүдийг илэрхийлдэг бол навчнууд нь эцсийн боломжит үр дүнгүүдийг төлөөлдөг. <span class="math inline">\(n\)</span> урттай массиваас <span class="math inline">\(x\)</span> утгыг хайхад <span class="math inline">\(n + 1\)</span> боломжит үр дүн гарна. Хэрэв <span class="math inline">\(x\)</span> олдвол <span class="math inline">\(1\)</span>-ээс <span class="math inline">\(n\)</span> хүртэлх ямар нэгэн индексийг буцаана. Хэрэв <span class="math inline">\(x\)</span> олдохгүй бол <span class="math inline">\(0\)</span>-ийг буцаана. Иймд дурын хайлтын алгоритмын шийдвэрийн мод хамгийн багадаа <span class="math inline">\(n + 1\)</span> навчтай байх ёстой. Теорем 10.7 ёсоор энэ модны өндөр хамгийн багадаа <span class="math inline">\(\lceil \log_2(n + 1) \rceil\)</span> байх ёстой. Өөрөөр хэлбэл, хайлтын алгоритмын боломжит хамгийн бага нарийн төвөгтэй байдал нь <span class="math inline">\(\Theta(\lceil \log_2(n + 1) \rceil) = \Theta(\log_2 n)\)</span> байна. Тиймээс Хоёртын хайлт нь боломжит хамгийн бага нарийн төвөгтэй байдалтай. Энэ утгаараа үүнээс илүү үр ашигтай өөр ямар ч хайлтын алгоритм байхгүй.</p>
 </section>
 <section id="эрэмбэлэх-алгоритмууд-sorting-algorithms" class="level3">
 <h3 class="anchored" data-anchor-id="эрэмбэлэх-алгоритмууд-sorting-algorithms">Эрэмбэлэх алгоритмууд (Sorting Algorithms)</h3>
-<p>Бид алгоритмын шинжилгээний судалгаагаа өөр нэгэн ангиллын алгоритмууд руу шилжүүлэн үргэлжлүүлье[cite: 367]. Энд бид өгөгдсөн массивын элементүүдийг үл буурах эрэмбээр байрлуулахыг сонирхож байна[cite: 367]. Хэрэв бид массиваас элемент хайх шаардлага байнга гардаг бол энэ нь бидэнд гарцаагүй сонирхолтой байх болно[cite: 367]. Жишээлбэл, бид дараа нь файлуудаа илүү хялбар олохын тулд тэдгээрийг ихэвчлэн цагаан толгойн дарааллаар эрэмбэлдэг[cite: 367]. Үүнтэй адилаар өгөгдлийн сан дахь бүртгэлүүдийг ямар нэгэн таних дугаарын дагуу эрэмбэлж болно[cite: 367]. Энэ нь бүртгэлүүд рүү илүү хурдан хандах тохиромжтой арга замыг олгоно[cite: 367]. Хэдийгээр эрэмбэлэгдэх түлхүүрүүд нь тоо бус текст байж болох ч аливаа төрлийн түлхүүрт тоон утга оноож болох тул тоонуудыг эрэмбэлдэг алгоритмуудыг авч үзэхэд л хангалттай[cite: 367].</p>
-<p>Бидний эхний эрэмбэлэх алгоритм нь массиваар дараалан гүйх замаар үүнийг хийдэг[cite: 367]. Элемент бүрийг өмнө нь аль хэдийн эрэмбэлэгдсэн хэсэгтэй харьцуулан өөрийнх нь зөв байрлалд оруулж тавина[cite: 367]. Үүнийг <strong>Оруулан эрэмбэлэх</strong> (Insertion Sort) гэж нэрлэдэг бөгөөд Алгоритм 10.8-д харуулав[cite: 367].</p>
+<p>Бид алгоритмын шинжилгээний судалгаагаа өөр нэгэн ангиллын алгоритмууд руу шилжүүлэн үргэлжлүүлье. Энд бид өгөгдсөн массивын элементүүдийг үл буурах эрэмбээр байрлуулахыг сонирхож байна. Хэрэв бид массиваас элемент хайх шаардлага байнга гардаг бол энэ нь бидэнд гарцаагүй сонирхолтой байх болно. Жишээлбэл, бид дараа нь файлуудаа илүү хялбар олохын тулд тэдгээрийг ихэвчлэн цагаан толгойн дарааллаар эрэмбэлдэг. Үүнтэй адилаар өгөгдлийн сан дахь бүртгэлүүдийг ямар нэгэн таних дугаарын дагуу эрэмбэлж болно. Энэ нь бүртгэлүүд рүү илүү хурдан хандах тохиромжтой арга замыг олгоно. Хэдийгээр эрэмбэлэгдэх түлхүүрүүд нь тоо бус текст байж болох ч аливаа төрлийн түлхүүрт тоон утга оноож болох тул тоонуудыг эрэмбэлдэг алгоритмуудыг авч үзэхэд л хангалттай.</p>
+<p>Бидний эхний эрэмбэлэх алгоритм нь массиваар дараалан гүйх замаар үүнийг хийдэг. Элемент бүрийг өмнө нь аль хэдийн эрэмбэлэгдсэн хэсэгтэй харьцуулан өөрийнх нь зөв байрлалд оруулж тавина. Үүнийг <strong>Оруулан эрэмбэлэх</strong> (Insertion Sort) гэж нэрлэдэг бөгөөд Алгоритм 10.8-д харуулав.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -949,45 +929,49 @@ Table&nbsp;1: Эрэмбэлэх алгоритмуудын хугацааны �
 </div>
 <hr>
 </section>
-<section id="р-зүйлийн-дасгалууд" class="level2">
-<h2 class="anchored" data-anchor-id="р-зүйлийн-дасгалууд">10.5-р зүйлийн дасгалууд</h2>
+<section id="дасгалууд" class="level2">
+<h2 class="anchored" data-anchor-id="дасгалууд">10.5 Дасгалууд</h2>
 <ol type="1">
 <li><p><span class="math inline">\(4\)</span> урттай массивуудын хувьд Хоёртын хайлтын шийдвэрийн модыг байгуул.</p></li>
 <li><p><span class="math inline">\(5\)</span> урттай массивуудын хувьд Хоёртын хайлтын шийдвэрийн модыг байгуул.</p></li>
 <li><p><span class="math inline">\(n = 4\)</span> үед <strong>Maximum</strong> алгоритмын (10.4-р хэсгийн Дасгал 11) шийдвэрийн модыг байгуул.</p></li>
 <li><p><span class="math inline">\(n = 3\)</span> үед <strong>Count</strong> алгоритмын (10.4-р хэсгийн Дасгал 12) шийдвэрийн модыг байгуул.</p></li>
 </ol>
-<p><strong><code>10-5.qmd</code></strong> файлын төгсгөл (Алгоритм 10.11–10.14 болон 5–46-р дасгалууд) болон <strong>10-р бүлгийн тойм бодлогууд</strong> (1–57-р бодлогууд)-ыг таны Quarto номын стандартад яг тааруулан орчуулж бэлтгэлээ. Ингэснээр сурах бичгийн <strong>10-р бүлэг</strong> болон үндсэн агуулга бүрэн дууслаа.</p>
-<section id="qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана" class="level3">
-<h3 class="anchored" data-anchor-id="qmd-ийн-төгсгөл-өмнөх-4-р-дасгалын-доороос-шууд-залгана">1. <code>10-5.qmd</code>-ийн төгсгөл (Өмнөх 4-р дасгалын доороос шууд залгана)</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>*5-аас 8 хүртэлх дасгалуудад өгөгдсөн $A$ массивын хувьд Оруулан эрэмбэлэх алгоритмын гол төлөвүүдийг харуул.*</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>$A = <span class="co">[</span><span class="ot">7, 5, 3, 1</span><span class="co">]</span>$. $\qquad$ 6. $A = <span class="co">[</span><span class="ot">3, 8, 4, 1, 2, 6, 5, 7</span><span class="co">]</span>$.</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>$A = <span class="co">[</span><span class="ot">4, 2, 6, 1, 5, 3</span><span class="co">]</span>$. $\qquad$ 8. $A = <span class="co">[</span><span class="ot">3, 8, 6, 1, 4</span><span class="co">]</span>$.</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>$2$ урттай массивуудын хувьд Оруулан эрэмбэлэх алгоритмын шийдвэрийн модыг байгуул.</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>$4$ урттай массивуудын хувьд $A<span class="co">[</span><span class="ot">4</span><span class="co">]</span>$ нь хамгийн бага утга байх тохиолдолд Оруулан эрэмбэлэх алгоритмын шийдвэрийн модны хэсгийг байгуул.</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>*11-ээс 14 хүртэлх дасгалуудад өгөгдсөн $A$ массивын хувьд Нэгтгэн эрэмбэлэх алгоритм нь эхлээд массивыг хэрхэн хэсгүүдэд хувааж, дараа нь хэсгүүдийг хэрхэн эрэмбээр нь буцаан нэгтгэж байгааг харуулсан модны бүдүүвч байгуул.*</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ss">11. </span>$A = <span class="co">[</span><span class="ot">7, 5, 3, 1</span><span class="co">]</span>$. $\qquad$ 12. $A = <span class="co">[</span><span class="ot">3, 8, 4, 1, 2, 6, 5, 7</span><span class="co">]</span>$.</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ss">13. </span>$A = <span class="co">[</span><span class="ot">4, 2, 6, 1, 5, 3</span><span class="co">]</span>$. $\qquad$ 14. $A = <span class="co">[</span><span class="ot">3, 8, 6, 1, 4</span><span class="co">]</span>$.</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>**Хөөсөн эрэмбэлэлт** (Bubble Sort) эрэмбэлэх алгоритмыг Алгоритм 10.11-д харуулав. *15-аас 18 хүртэлх дасгалуудад өгөгдсөн $A$ массивын хувьд Хөөсөн эрэмбэлэлтийн гол төлөвүүдийг харуул.*</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Алгоритм 10.11: Хөөсөн эрэмбэлэлт (Bubble Sort)</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>$i$ хувьсагч нь $A<span class="co">[</span><span class="ot">i + 1, \dots, n</span><span class="co">]</span>$ хэсэг аль хэдийн байрлалаа эзэлсэн гэсэн таамаглал дээр үндэслэн тодорхойлох элементийн индекс бөгөөд $j$ нь $i$-р байрлалд тохирох утгыг шүүж дээшлүүлэхийн тулд бага индексүүдээр гүйнэ.</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>**Алгоритм.**</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="in">For i = n down to 2:</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="in">    For j = 1 to i - 1:</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="in">        Хэрэв A[j] &gt; A[j + 1] бол:</span></span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="in">            temp = A[j + 1] гэж авъя.</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="in">            A[j + 1] = A[j] болгоно.</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="in">            A[j] = temp болгоно.</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="in">A-г буцаана.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>:::</p>
+<p><em>5-аас 8 хүртэлх дасгалуудад өгөгдсөн <span class="math inline">\(A\)</span> массивын хувьд Оруулан эрэмбэлэх алгоритмын гол төлөвүүдийг харуул.</em></p>
+<ol start="5" type="1">
+<li><span class="math inline">\(A = [7, 5, 3, 1]\)</span>. <span class="math inline">\(\qquad\)</span> 6. <span class="math inline">\(A = [3, 8, 4, 1, 2, 6, 5, 7]\)</span>.</li>
+<li><span class="math inline">\(A = [4, 2, 6, 1, 5, 3]\)</span>. <span class="math inline">\(\qquad\)</span> 8. <span class="math inline">\(A = [3, 8, 6, 1, 4]\)</span>.</li>
+<li><span class="math inline">\(2\)</span> урттай массивуудын хувьд Оруулан эрэмбэлэх алгоритмын шийдвэрийн модыг байгуул.</li>
+<li><span class="math inline">\(4\)</span> урттай массивуудын хувьд <span class="math inline">\(A[4]\)</span> нь хамгийн бага утга байх тохиолдолд Оруулан эрэмбэлэх алгоритмын шийдвэрийн модны хэсгийг байгуул.</li>
+</ol>
+<p><em>11-ээс 14 хүртэлх дасгалуудад өгөгдсөн <span class="math inline">\(A\)</span> массивын хувьд Нэгтгэн эрэмбэлэх алгоритм нь эхлээд массивыг хэрхэн хэсгүүдэд хувааж, дараа нь хэсгүүдийг хэрхэн эрэмбээр нь буцаан нэгтгэж байгааг харуулсан модны бүдүүвч байгуул.</em></p>
+<ol start="11" type="1">
+<li><span class="math inline">\(A = [7, 5, 3, 1]\)</span>. <span class="math inline">\(\qquad\)</span> 12. <span class="math inline">\(A = [3, 8, 4, 1, 2, 6, 5, 7]\)</span>.</li>
+<li><span class="math inline">\(A = [4, 2, 6, 1, 5, 3]\)</span>. <span class="math inline">\(\qquad\)</span> 14. <span class="math inline">\(A = [3, 8, 6, 1, 4]\)</span>.</li>
+</ol>
+<p><strong>Хөөсөн эрэмбэлэлт</strong> (Bubble Sort) эрэмбэлэх алгоритмыг Алгоритм 10.11-д харуулав. <em>15-аас 18 хүртэлх дасгалуудад өгөгдсөн <span class="math inline">\(A\)</span> массивын хувьд Хөөсөн эрэмбэлэлтийн гол төлөвүүдийг харуул.</em></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Алгоритм 10.11: Хөөсөн эрэмбэлэлт (Bubble Sort)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><span class="math inline">\(i\)</span> хувьсагч нь <span class="math inline">\(A[i + 1, \dots, n]\)</span> хэсэг аль хэдийн байрлалаа эзэлсэн гэсэн таамаглал дээр үндэслэн тодорхойлох элементийн индекс бөгөөд <span class="math inline">\(j\)</span> нь <span class="math inline">\(i\)</span>-р байрлалд тохирох утгыг шүүж дээшлүүлэхийн тулд бага индексүүдээр гүйнэ.</p>
+<p><strong>Алгоритм.</strong></p>
+<pre class="text"><code>For i = n down to 2:
+    For j = 1 to i - 1:
+        Хэрэв A[j] &gt; A[j + 1] бол:
+            temp = A[j + 1] гэж авъя.
+            A[j + 1] = A[j] болгоно.
+            A[j] = temp болгоно.
+A-г буцаана.
+</code></pre>
+</div>
+</div>
 <ol start="15" type="1">
 <li><span class="math inline">\(A = [4, 2, 6, 1, 5, 3]\)</span>. <span class="math inline">\(\qquad\)</span> 16. <span class="math inline">\(A = [5, 8, 1, 3, 6]\)</span>.</li>
 <li><span class="math inline">\(A = [7, 5, 4, 2, 1]\)</span>. <span class="math inline">\(\qquad\)</span> 18. <span class="math inline">\(A = [8, 6, 5, 3, 2, 1]\)</span>.</li>
@@ -1100,7 +1084,6 @@ temp = A[mid]; A[mid] = A[1]; A[1] = temp болгоно.
 </ol>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
