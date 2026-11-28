@@ -696,14 +696,10 @@ T = (V, F)-ийг буцаана.</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Зураг дээрх графын оройнуудын <span class="math inline">\(v_1, v_2, v_3, v_4, v_5, v_6\)</span> эрэмбэ өгөгдсөн үед <span class="math inline">\(v_1\)</span> оройгоос эхлэн Өргөнөөр хайх алгоритмыг гүйцэтгэ.</p>
-<div id="fig-ex-10-5" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-5.png" class="img-fluid figure-img" style="width:25.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;1: Жишээ 10.5-ын мод
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-5.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 10.5-ын мод</figcaption>
 </figure>
 </div>
 <p>Тэмдэглэгдсэн оройнуудын жагсаалт <span class="math inline">\(M\)</span>, тогтоосон (эрэмбэлэгдсэн) оройнуудын жагсаалт <span class="math inline">\(L\)</span>, болон ирмэгүүдийн олонлог <span class="math inline">\(F\)</span>-ийн утгуудын явцын хүснэгтийг хөтөл.</p>
@@ -807,26 +803,18 @@ T = (V, F)-ийг буцаана.</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Зураг дээрх графын оройнуудын <span class="math inline">\(v_1, v_2, v_3, v_4, v_5, v_6, v_7\)</span> анхны эрэмбэ өгөгдсөн үед <span class="math inline">\(v_1\)</span> оройгоос эхлэн Өргөнөөр хайх алгоритмыг ашиглаж өргөнөөр хайх модыг ол.</p>
-<div id="fig-ex-10-6a" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-6a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-6a.png" class="img-fluid figure-img" style="width:22.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-6a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;2: Жишээ 10.6-гийн граф
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-6a.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 10.6-гийн граф</figcaption>
 </figure>
 </div>
 <p>Үүсэх өргөнөөр хайх модны ирмэгийн олонлог <span class="math inline">\(F\)</span>-ийг тодруулж, оройнууд дээр тогтоосон шинэ эрэмбэ <span class="math inline">\(L\)</span>-ийг бич.</p>
 <p><strong>Бодолт.</strong> Оройн жагсаалтын эцсийн утга нь: <span class="math display">\[L = [v_1, v_2, v_6, v_3, v_4, v_5, v_7]\]</span> болох бөгөөд өргөнөөр хайх модыг баруун гар талын зурагт тодоор харуулав:</p>
-<div id="fig-ex-10-6b" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-6b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-6b.png" class="img-fluid figure-img" style="width:50.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-6b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;3: Өргөнөөр хайх явц ба эцсийн бүрхэгч мод
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-6b.png" class="img-fluid figure-img"></p>
+<figcaption>Өргөнөөр хайх явц ба эцсийн бүрхэгч мод</figcaption>
 </figure>
 </div>
 <p>Зүүн гар талын зураг нь хамгийн гадна талын <code>while</code> давталтад <span class="math inline">\(|F| = 2\)</span> үед орж буй агшныг харуулж байна. Тэнд <span class="math inline">\(F\)</span>-ийг тодоор харуулсан бөгөөд зөвхөн <span class="math inline">\(M\)</span> доторх оройнуудыг харлуулж, <span class="math inline">\(L = [v_1, v_2, v_6]\)</span> болсон байна. Тэр цэг дээр бид <span class="math inline">\(t = v_2\)</span> болгож, <span class="math inline">\(v_2\)</span>-ыг <span class="math inline">\(M\)</span>-д нэмэн, <span class="math inline">\(v_3, v_4, v_5\)</span>-ийг <span class="math inline">\(L\)</span>-д нэмж, тэдгээр оройг <span class="math inline">\(v_2\)</span>-той холбосон ирмэгүүдийг <span class="math inline">\(F\)</span>-д нэмнэ. <span class="math inline">\(\blacksquare\)</span></p>
@@ -882,7 +870,7 @@ T = (V, F)-ийг буцаана.</code></pre>
 <img src="images/ch10/ex-10-7.png" class="img-fluid figure-img" style="width:25.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;4: Жишээ 10.7-гийн мод
+Зураг&nbsp;1: Жишээ 10.7-гийн мод
 </figcaption>
 </figure>
 </div>
@@ -993,14 +981,10 @@ T = (V, F)-ийг буцаана.</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Зураг дээрх графын оройнуудын <span class="math inline">\(v_1, v_2, v_3, v_4, v_5, v_6, v_7\)</span> анхны эрэмбэ өгөгдсөн үед <span class="math inline">\(v_1\)</span> оройгоос эхлэн Гүнээр хайх алгоритмыг ашиглаж гүнээр хайх модыг ол.</p>
-<div id="fig-ex-10-8a" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-8a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-8a.png" class="img-fluid figure-img" style="width:22.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-8a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;5: Жишээ 10.8-ын граф
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-8a.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 10.8-ын граф</figcaption>
 </figure>
 </div>
 <p>Үүсэх гүнээр хайх модны ирмэгийн олонлог <span class="math inline">\(F\)</span>-ийг тодруулж, оройнууд дээр тогтоосон шинэ эрэмбэ <span class="math inline">\(L\)</span>-ийг бич.</p>
@@ -1011,7 +995,7 @@ T = (V, F)-ийг буцаана.</code></pre>
 <img src="images/ch10/ex-10-8b.png" class="img-fluid figure-img" style="width:50.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-8b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;6: Гүнээр хайх явц ба эцсийн бүрхэгч мод
+Зураг&nbsp;2: Гүнээр хайх явц ба эцсийн бүрхэгч мод
 </figcaption>
 </figure>
 </div>
@@ -1028,7 +1012,7 @@ T = (V, F)-ийг буцаана.</code></pre>
 <img src="images/ch10/fig-10-18.png" class="img-fluid figure-img" style="width:85.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;7: (a + b * (c - 1)) ÷ 2 илэрхийллийг төлөөлөх мод
+Зураг&nbsp;3: (a + b * (c - 1)) ÷ 2 илэрхийллийг төлөөлөх мод
 </figcaption>
 </figure>
 </div>
@@ -1040,7 +1024,7 @@ T = (V, F)-ийг буцаана.</code></pre>
 <img src="images/ch10/fig-10-19.png" class="img-fluid figure-img" style="width:50.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig-10-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;8: Постфикс бичлэгийг тооцоолох нь
+Зураг&nbsp;4: Постфикс бичлэгийг тооцоолох нь
 </figcaption>
 </figure>
 </div>
@@ -1074,14 +1058,10 @@ T = (V, F)-ийг буцаана.</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p>Жишээ 10.3-аас гарсан хоёртын хайлтын модыг дундын эрэмбээр тойроход:</p>
-<div id="fig-ex-10-9" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-9.png" class="img-fluid figure-img" style="width:30.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;9: Хоёртын хайлтын модыг дундын эрэмбээр тойрох
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-9.png" class="img-fluid figure-img"></p>
+<figcaption>Хоёртын хайлтын модыг дундын эрэмбээр тойрох</figcaption>
 </figure>
 </div>
 <p>дараах жагсаалт гарна: <span class="math display">\[\text{course, discrete, favorite, is, mathematics, my.}\]</span> Хоёртын хайлтын модыг байгуулахад толь бичгийн эрэмбийг ашигласан тул гарах жагсаалт мөн толь бичгийн дарааллаар байгааг анхаарна уу. <span class="math inline">\(\blacksquare\)</span></p>
@@ -1100,48 +1080,32 @@ T = (V, F)-ийг буцаана.</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <p><strong>(а)</strong> Зураг дээрх <span class="math inline">\(G\)</span> графаас:</p>
-<div id="fig-ex-10-10a-1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-10a-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-10a-1.png" class="img-fluid figure-img" style="width:18.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-10a-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;10: Жишээ 10.10(а)-гийн G граф
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-10a-1.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 10.10(а)-гийн G граф</figcaption>
 </figure>
 </div>
 <p>бидний хайлт хийх зураг дээрх <span class="math inline">\(H\)</span> граф гарна:</p>
-<div id="fig-ex-10-10a-2" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-10a-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-10a-2.png" class="img-fluid figure-img" style="width:70.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-10a-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;11: Хайлтын мод H (a)
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-10a-2.png" class="img-fluid figure-img"></p>
+<figcaption>Хайлтын мод H (a)</figcaption>
 </figure>
 </div>
 <p>Энэ тохиолдолд <span class="math inline">\(H\)</span> дээр <span class="math inline">\(a\)</span>-аас эхэлсэн Гүнээр хайх алгоритм нь биднийг <span class="math inline">\(G\)</span>-ийн Гамильтоны цикл болох <span class="math inline">\(abcda\)</span> эсвэл <span class="math inline">\(abecda\)</span> оройг олоход хүргэнэ.</p>
 <p><strong>(б)</strong> Зураг дээрх <span class="math inline">\(G\)</span> графаас:</p>
-<div id="fig-ex-10-10b-1" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-10b-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-10b-1.png" class="img-fluid figure-img" style="width:18.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-10b-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;12: Жишээ 10.10(б)-гийн G граф
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-10b-1.png" class="img-fluid figure-img"></p>
+<figcaption>Жишээ 10.10(б)-гийн G граф</figcaption>
 </figure>
 </div>
 <p>бидний хайлт хийх зураг дээрх <span class="math inline">\(H\)</span> граф гарна:</p>
-<div id="fig-ex-10-10b-2" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-10b-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-10b-2.png" class="img-fluid figure-img" style="width:75.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-10b-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;13: Хайлтын мод H (b)
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-10b-2.png" class="img-fluid figure-img" style="width:75.0%"></p>
+<figcaption>Хайлтын мод H (b)</figcaption>
 </figure>
 </div>
 <p>Энэ тохиолдолд <span class="math inline">\(H\)</span> дээр <span class="math inline">\(a\)</span>-аас эхэлсэн Гүнээр хайх алгоритм нь Гамильтоны циклд харгалзах ямар ч орой ололгүйгээр дуусна. Тэгвэл бид <span class="math inline">\(G\)</span>-г Гамильтоны граф биш гэж дүгнэж чадна. <span class="math inline">\(\blacksquare\)</span></p>
@@ -1160,7 +1124,7 @@ T = (V, F)-ийг буцаана.</code></pre>
 <img src="images/ch10/ex-10-2-1-16.png" class="img-fluid figure-img" style="width:75.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-2-1-16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;14: Дасгал 1–16-гийн графууд (a)–(h)
+Зураг&nbsp;5: Дасгал 1–16-гийн графууд (a)–(h)
 </figcaption>
 </figure>
 </div>
@@ -1220,26 +1184,18 @@ T = (V, F)-ийг буцаана.</code></pre>
 <li><p>Дараах префикс илэрхийллийн утгыг тооцоол: <span class="math display">\[- \quad 5 \quad \div \quad + \quad 8 \quad 6 \quad 7\]</span></p></li>
 <li><p>Дараах префикс илэрхийллийн утгыг тооцоол: <span class="math display">\[* \quad - \quad 5 \quad + \quad 2 \quad 1 \quad 3\]</span></p></li>
 <li><p>Америкийн лигийн Зүүн дивизионы багуудын байр эзэлсэн эрэмбийг ашиглан гишүүн багуудыг дараах хоёртын хайлтын модонд оруулжээ:</p>
-<div id="fig-ex-10-2-41" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-2-41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-2-41.png" class="img-fluid figure-img" style="width:50.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-2-41-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;15: Дасгал 41-ийн хоёртын хайлтын мод
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-2-41.png" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption>Дасгал 41-ийн хоёртын хайлтын мод</figcaption>
 </figure>
 </div>
 <p>Америкийн лигийн Зүүн дивизионы багуудын байр эзэлсэн эрэмбийг тодорхойлохын тулд хоёртын хайлтын модыг дундын эрэмбээр тойр.</p></li>
 <li><p>Европын аяллын хөтөлбөрийн эрэмбийг ашиглан онцлох хотуудыг дараах хоёртын хайлтын модонд оруулжээ:</p>
-<div id="fig-ex-10-2-42" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ex-10-2-42-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/ch10/ex-10-2-42.png" class="img-fluid figure-img" style="width:45.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-2-42-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;16: Дасгал 42-ын хоёртын хайлтын мод
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ch10/ex-10-2-42.png" class="img-fluid figure-img" style="width:45.0%"></p>
+<figcaption>Дасгал 42-ын хоёртын хайлтын мод</figcaption>
 </figure>
 </div>
 <p>Европын аяллын хөтөлбөрийг (хотуудын эрэмбийг) тодорхойлохын тулд хоёртын хайлтын модыг дундын эрэмбээр тойр.</p></li>
@@ -1251,7 +1207,7 @@ T = (V, F)-ийг буцаана.</code></pre>
 <img src="images/ch10/ex-10-2-43-50.png" class="img-fluid figure-img" style="width:75.0%">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ex-10-2-43-50-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Зураг&nbsp;17: Дасгал 43–50-ийн графууд (i)–(l)
+Зураг&nbsp;6: Дасгал 43–50-ийн графууд (i)–(l)
 </figcaption>
 </figure>
 </div>
